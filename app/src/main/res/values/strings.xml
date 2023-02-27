@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Yapi</string>
+    <string name="delete_group_title">Do you want to Delete \nGroup?</string>
+    <string name="delete_group_des">This can not be undone in future. Lorem \nipsom dolor sit amet.</string>
+<string name="delete_group_text">Delete Group</string>
+    <string name="leave_group_title">Do you want to Leave \nGroup?</string>
+    <string name="leave_group_des">This conversation will be archived, and you \nwill not get any new messages.</string>
+    <string name="leave_group">Leave Group</string>
+    <string name="cancel_txt">Cancel</string>
+
+    <string name="check_internet_connection">Please check internet connection</string>
+</resources>
