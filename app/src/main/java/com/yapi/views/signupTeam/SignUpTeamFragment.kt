@@ -19,7 +19,7 @@ class SignUpTeamFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         dataBinding = SignupTeamLayoutBinding.inflate(LayoutInflater.from(requireActivity()))
         initUI()
         return dataBinding.root

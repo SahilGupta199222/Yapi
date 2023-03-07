@@ -26,6 +26,12 @@ class SignUpFragment : Fragment() {
 
     private fun init() {
         binding.apply {
+
+        }
+        onClick()
+    }
+    private fun onClick(){
+        binding.apply {
             btnSignUp.setOnClickListener {
                 findNavController().navigate(R.id.action_signUpFragment2_to_signUpCodeFragment)
             }
