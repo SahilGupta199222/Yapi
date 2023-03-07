@@ -30,4 +30,9 @@
 
 
 <string name="join_now">Join Now</string>
+    <string name="stemp_size">Step 1 of 3</string>
+    <string name="company_name_title">What’s the name of your \nteam or company</string>
+    <string name="company_name_description">This will be the name of your yapi \nworkspace- choose something that your \nteam will recognise</string>
+<string name="comany_name">Team or Company name</string>
+    <string name="create_team_checkbox_text">Let anyone with an <b><font color='3d3d3d'>@Qbistro.com</font></b> \nemail address join this workspace.</string>
 </resources>
