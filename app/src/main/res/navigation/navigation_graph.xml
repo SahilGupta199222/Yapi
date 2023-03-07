@@ -2,7 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_graph"
+<<<<<<< HEAD
     app:startDestination="@id/menuFragment">
+=======
+    app:startDestination="@id/firstStepCreateTeam">
+>>>>>>> 23e65a1bfec9443f63d95199430126dc026c5ef3
     <fragment
         android:id="@+id/signUpFragment2"
         android:name="com.yapi.views.signup.SignUpFragment"
@@ -27,6 +31,7 @@
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.yapi.views.sign_in.SignInFragment"
+<<<<<<< HEAD
         android:label="SignInFragment" >
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment2"
@@ -36,4 +41,11 @@
         android:id="@+id/menuFragment"
         android:name="com.yapi.views.menu_screen.MenuFragment"
         android:label="MenuFragment" />
+=======
+        android:label="SignInFragment" />
+
+    <fragment android:id="@+id/firstStepCreateTeam"
+        android:label="FirstStepCreateTeam"
+        android:name="com.yapi.views.create_team.first_step_create_team.FirstStepCreateFragment"/>
+>>>>>>> 23e65a1bfec9443f63d95199430126dc026c5ef3
 </navigation>

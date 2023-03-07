@@ -49,7 +49,7 @@ init()
                         )
                     )
                     rvGroupListMenu.visibility = View.VISIBLE
-                    setGroupListAdapter()
+                    //setGroupListAdapter()
                 } else {
                     imgArrowGroupMenu.setImageDrawable(
                         ContextCompat.getDrawable(
@@ -70,7 +70,7 @@ init()
                         )
                     )
                     rvJobsListMenu.visibility = View.VISIBLE
-                    setJobsListAdapter()
+                    //setJobsListAdapter()
                 } else {
                     imgArrowJobsMenu.setImageDrawable(
                         ContextCompat.getDrawable(
@@ -91,7 +91,7 @@ init()
                         )
                     )
                     rvCustomersListMenu.visibility = View.VISIBLE
-                    setCustomerListAdapter()
+                   // setCustomerListAdapter()
                 } else {
                     imgArrowCustomersMenu.setImageDrawable(
                         ContextCompat.getDrawable(
