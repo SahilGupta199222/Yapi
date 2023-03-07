@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/signupLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:src="@drawable/signup_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvSignupTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/create_workspace"
+            android:textColor="#3D3D3D"
+            android:textSize="@dimen/_18ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signupLogo" />
+
+        <TextView
+            android:id="@+id/tvSignupDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center_horizontal"
+            android:text="@string/signup_description"
+            android:textColor="#B8B8B8"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSignupTitle" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/craeteTeamBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="@drawable/rounded_background"
+            android:backgroundTint="@color/blue_color"
+            android:padding="@dimen/_7sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSignupDescription">
+
+            <TextView
+                android:id="@+id/tvButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/create_team"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_14sdp"
+                android:src="@drawable/arrow_forward"
+                app:layout_constraintStart_toEndOf="@+id/tvButton" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tvORText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OR"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/craeteTeamBtn" />
+
+        <View
+            android:id="@+id/viewFirstOR"
+            android:layout_width="0dp"
+            android:background="@color/white"
+            android:layout_marginStart="@dimen/_15sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvORText"
+            app:layout_constraintTop_toTopOf="@+id/tvORText"
+           app:layout_constraintBottom_toBottomOf="@+id/tvORText"
+            android:layout_height="@dimen/_1sdp"/>
+
+        <View
+            android:id="@+id/viewSecondOR"
+            android:layout_width="0dp"
+            android:background="@color/white"
+            android:layout_marginEnd="@dimen/_15sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toEndOf="@+id/tvORText"
+            app:layout_constraintTop_toTopOf="@+id/tvORText"
+            app:layout_constraintBottom_toBottomOf="@+id/tvORText"
+            android:layout_height="@dimen/_1sdp"/>
+
+
+
+        <TextView
+            android:id="@+id/tvacceptInvitationTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="@string/accept_invitation"
+            android:textColor="#3D3D3D"
+            android:textSize="@dimen/_18ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvORText" />
+
+        <!--<TextView
+            android:id="@+id/tvSignupDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:gravity="center_horizontal"
+            android:text="@string/signup_description"
+            android:textColor="#B8B8B8"
+            android:textSize="@dimen/_14ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSignupTitle" />
+-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

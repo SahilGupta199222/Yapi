@@ -9,4 +9,10 @@
     <string name="cancel_txt">Cancel</string>
 
     <string name="check_internet_connection">Please check internet connection</string>
+    <string name="create_workspace">Create a new Workspace</string>
+    <string name="signup_description">Yapi team is - a place where they can talk \nand work together. To create a new team \nclick on the button</string>
+
+<string name="create_team">Create a team</string>
+    <string name="accept_invitation">Accept Invitation</string>
+
 </resources>
