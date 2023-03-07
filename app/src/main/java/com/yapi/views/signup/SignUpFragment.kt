@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.yapi.R
 import com.yapi.databinding.FragmentSignUpBinding
 
@@ -25,7 +26,9 @@ class SignUpFragment : Fragment() {
 
     private fun init() {
         binding.apply {
-
+            btnSignUp.setOnClickListener {
+                findNavController().navigate(R.id.action_signUpFragment2_to_signUpCodeFragment)
+            }
         }
     }
 }
