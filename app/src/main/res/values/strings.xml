@@ -12,7 +12,7 @@
     <string name="create_workspace">Create a new Workspace</string>
     <string name="signup_description">Yapi team is - a place where they can talk \nand work together. To create a new team \nclick on the button</string>
 
-<string name="create_team">Create a team</string>
+    <string name="create_team">Create a team</string>
     <string name="accept_invitation">Accept Invitation</string>
 
     <string name="signup_info">We suggest using the email address you use\nat work</string>
@@ -29,5 +29,12 @@
     <string name="don_t_have_an_account_sign_up">Don’t have an account? Sign up</string>
 
 
-<string name="join_now">Join Now</string>
+    <string name="join_now">Join Now</string>
+    <string name="search">Search</string>
+    <string name="yapibot">yapibot</string>
+    <string name="groups">GROUPS</string>
+    <string name="add_new_groups">ADD NEW GROUPS</string>
+    <string name="jobs">JOBS</string>
+    <string name="customers">CUSTOMERS</string>
+    <string name="team">TEAM</string>
 </resources>
