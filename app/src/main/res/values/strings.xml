@@ -2,7 +2,7 @@
     <string name="app_name">Yapi</string>
     <string name="delete_group_title">Do you want to Delete \nGroup?</string>
     <string name="delete_group_des">This can not be undone in future. Lorem \nipsom dolor sit amet.</string>
-<string name="delete_group_text">Delete Group</string>
+    <string name="delete_group_text">Delete Group</string>
     <string name="leave_group_title">Do you want to Leave \nGroup?</string>
     <string name="leave_group_des">This conversation will be archived, and you \nwill not get any new messages.</string>
     <string name="leave_group">Leave Group</string>
@@ -14,5 +14,11 @@
 
 <string name="create_team">Create a team</string>
     <string name="accept_invitation">Accept Invitation</string>
+
+    <string name="signup_info">We suggest using the email address you use\nat work</string>
+    <string name="emailAddress"> EMAIL ADDRESS</string>
+    <string name="enterEmail">Enter Email Address</string>
+    <string name="ccontinue">Continue</string>
+
 
 </resources>
