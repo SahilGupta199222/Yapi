@@ -178,7 +178,7 @@
                     android:layout_gravity="bottom"
                     android:layout_marginStart="@dimen/startMainMargin"
                     android:layout_marginEnd="@dimen/startMainMargin"
-                    android:onClick="@{() -> vModel.onClick(mView)}"
+                    android:onClick="@{(mView) -> vModel.onClick(mView)}"
                     android:background="@drawable/rounded_background"
                     android:backgroundTint="@color/blueColor"
                     android:fontFamily="@font/larsseit_bold"
