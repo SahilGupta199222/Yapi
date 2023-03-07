@@ -29,7 +29,7 @@
     <string name="don_t_have_an_account_sign_up">Don’t have an account? Sign up</string>
 
 
-<<<<<<< HEAD
+
     <string name="join_now">Join Now</string>
     <string name="search">Search</string>
     <string name="yapibot">yapibot</string>
@@ -38,12 +38,29 @@
     <string name="jobs">JOBS</string>
     <string name="customers">CUSTOMERS</string>
     <string name="team">TEAM</string>
-=======
-<string name="join_now">Join Now</string>
+
+
     <string name="stemp_size">Step 1 of 3</string>
     <string name="company_name_title">What’s the name of your \nteam or company</string>
     <string name="company_name_description">This will be the name of your yapi \nworkspace- choose something that your \nteam will recognise</string>
-<string name="comany_name">Team or Company name</string>
+    <string name="comany_name">Team or Company name</string>
     <string name="create_team_checkbox_text">Let anyone with an <b><font color='3d3d3d'>@Qbistro.com</font></b> \nemail address join this workspace.</string>
->>>>>>> 23e65a1bfec9443f63d95199430126dc026c5ef3
+
+
+    <string name="company_name_second_title">What\'s your team working on \nright now?</string>
+    <string name="company_name_second_step_description">This could be anything: a project, campaign, \nevent or the deal.</string>
+    <string name="enter_name">Enter a name</string>
+    <string name="what_working_on">What are you working on?</string>
+    <string name="second_stemp_size">Step 2 of 3</string>
+
+
+    <string name="third_stemp_size">Step 3 of 3</string>
+
+    <string name="add_your_team_mates">Add your team mates</string>
+    <string name="third_step_description">To give slack a spin, add a few coworkers \nthat you talk to regularly.
+</string>
+    <string name="members_email_title">Member’s Email</string>
+    <string name="enter_email">Enter email</string>
+    <string name="add_member_text">Add member</string>
+    <string name="skip_this_step">Skip this step</string>
 </resources>
