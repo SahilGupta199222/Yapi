@@ -8,11 +8,11 @@
 
     <dimen name="iconSize">@dimen/_16sdp</dimen>
 
-    <dimen name="normalTextSize">@dimen/_12sdp</dimen>
-    <dimen name="normalSmallTextSize">@dimen/_11sdp</dimen>
-    <dimen name="smallTextSize">@dimen/_10sdp</dimen>
+    <dimen name="normalTextSize">@dimen/_12ssp</dimen>
+    <dimen name="normalSmallTextSize">@dimen/_11ssp</dimen>
+    <dimen name="smallTextSize">@dimen/_10ssp</dimen>
     <dimen name="IconTextSize">@dimen/_25sdp</dimen>
-    <dimen name="titleTextSize">@dimen/_22sdp</dimen>
+    <dimen name="titleTextSize">@dimen/_22ssp</dimen>
 
     <dimen name="startPaddingNormal">@dimen/_10ssp</dimen>
     <dimen name="unSeenCountSize">@dimen/_16ssp</dimen>
@@ -29,7 +29,7 @@
 
     <dimen name="startMainMargin">@dimen/_18sdp</dimen>
     <dimen name="topMarginTitle">@dimen/_45sdp</dimen>
-    <dimen name="mobileTitleTextSize">@dimen/_18sdp</dimen>
+    <dimen name="mobileTitleTextSize">@dimen/_18ssp</dimen>
 
 
 </resources>
