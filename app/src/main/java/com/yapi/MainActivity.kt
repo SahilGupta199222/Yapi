@@ -35,10 +35,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun initUI() {
 
-        val navHostFragment =
+      /*  val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
         val navController = navHostFragment.navController
-        navController.navigate(R.id.signupTeam)
+        navController.navigate(R.id.signupTeam)*/
       //  findNavController(R.id.signupTeam)
         dataBinding.apply {
             vModel = viewModel
