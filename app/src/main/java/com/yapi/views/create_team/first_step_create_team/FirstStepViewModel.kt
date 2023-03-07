@@ -16,7 +16,7 @@ class FirstStepViewModel() : ViewModel() {
             R.id.btnFirstCreateTeam -> {
                 Log.e("Hello_Text==","Helloo")
                // showMessage("Hello")
-          //  view.findNavController().navigate(R.id.action_firstStepCreateTeam_to_secondStepCreateTeam)
+            view.findNavController().navigate(R.id.action_firstStepCreateTeam_to_secondStepCreateTeam)
             }
         }
     }
