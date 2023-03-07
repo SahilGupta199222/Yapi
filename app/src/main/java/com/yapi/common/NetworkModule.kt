@@ -23,14 +23,14 @@ object NetworkModule {
             this.addInterceptor(Interceptor { chain ->
                 val original = chain.request()
                 val request = original.newBuilder()
-                    .header("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjNjZTIzMTFhNjdjNzA4NTc0MzlmNTQzIiwiaWF0IjoxNjc1MDYxMjUxfQ.-XFkdhmagEV-4V31HWuQ39nK2rsfmVaNUceoA5Zlyrw")
+                   // .header("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjNjZTIzMTFhNjdjNzA4NTc0MzlmNTQzIiwiaWF0IjoxNjc1MDYxMjUxfQ.-XFkdhmagEV-4V31HWuQ39nK2rsfmVaNUceoA5Zlyrw")
                     .method(original.method, original.body)
                     .build()
                 chain.proceed(request)
             })
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(20,TimeUnit.SECONDS)
-                .writeTimeout(25,TimeUnit.SECONDS)
+                .connectTimeout(120, TimeUnit.SECONDS)
+                .readTimeout(100,TimeUnit.SECONDS)
+                .writeTimeout(120,TimeUnit.SECONDS)
         }.build()
     }
 

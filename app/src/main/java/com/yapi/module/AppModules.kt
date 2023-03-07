@@ -32,6 +32,13 @@ class AppModules {
     @Named("abed")
     fun getDataValue():String
     {
-        return "New Good Morning111"
+        return "Hello Sir"
+    }
+
+    @Provides
+    @Singleton
+    fun checkUserStatus():Int
+    {
+        return 20
     }
 }

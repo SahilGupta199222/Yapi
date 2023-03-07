@@ -11,10 +11,17 @@ import javax.inject.Named
 @HiltViewModel
 class DataViewModel @Inject constructor(
     @Named("abed") private var nameValue: String,
+    private var checkValue:Int,
     private var repository: Repository,
 ) : ViewModel() {
+    init {
+        Log.e("wdwjdhjhdwhjdw===",checkValue.toString())
+
+    }
 
     fun getCategoryMethod() {
+        var token="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjNjZTIzMTFhNjdjNzA4NTc0MzlmNTQzIiwiaWF0IjoxNjc1MDYxMjUxfQ.-XFkdhmagEV-4V31HWuQ39nK2rsfmVaNUceoA5Zlyrw"
+
         repository.makeCall(false,
             requestProcessor = object : ApiProcessor<Response<GetCategorryResponse>> {
                 override fun onSuccess(success: Response<GetCategorryResponse>) {
@@ -26,7 +33,7 @@ class DataViewModel @Inject constructor(
                 }
 
                 override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<GetCategorryResponse> {
-                     return retrofitApi.getCategory("30.8987", "76.7179", "1", "20", "")
+                     return retrofitApi.getCategory(token,"30.8987", "76.7179", "1", "20", "")
                 }
             })
     }

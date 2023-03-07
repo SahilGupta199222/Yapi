@@ -1,4 +1,4 @@
-package com.yapi.module
+package com.yapi.views.leaveGroup
 
 import android.os.Bundle
 import android.view.LayoutInflater

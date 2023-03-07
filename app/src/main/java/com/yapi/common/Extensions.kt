@@ -5,6 +5,8 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import com.yapi.MainActivity
+import com.yapi.R
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -41,4 +43,11 @@ fun Activity.isNetworkConnected(): Boolean {
     return cm!!.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
 }
 
+fun getTextSizeValue(text1:Float)
+{
+    var text=10
+    var showText="ssp"
+    var newTextSize="_$text$showText"
+//  MainActivity.activity.get().resources.getDimension(com.intuit.ssp.R.dimen._10ssp)
+}
 

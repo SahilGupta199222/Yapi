@@ -10,12 +10,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.yapi.common.*
 import com.yapi.databinding.ActivityMainBinding
-import com.yapi.module.DeleteGroupFragment
-import com.yapi.module.LeaveGroupFragment
+import com.yapi.views.leaveGroup.LeaveGroupFragment
 import com.yapi.pref.PreferenceFile
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 import javax.inject.Named
@@ -42,15 +39,16 @@ class MainActivity : AppCompatActivity() {
         var activity:WeakReference<Activity>?=null
     }
 
+   /* @Inject
+    lateinit  var checkUserStatus:Int*/
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dataBinding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(dataBinding.root)
         activity=WeakReference<Activity>(this)
+      //  Log.e("efwfwafefef===",checkUserStatus.toString())
         month = "02"
-        Log.e("efmekfmkefe===", ::nameValue.isInitialized.toString())
-        Log.e("fgwegggwgwe===", nameValue)
-
         initUI()
     }
 
@@ -61,8 +59,8 @@ class MainActivity : AppCompatActivity() {
 
     private  fun initUI() {
 
-      //  supportFragmentManager.beginTransaction().replace(R.id.frameLayout,DeleteGroupFragment()).commit()
-        //supportFragmentManager.beginTransaction().replace(R.id.frameLayout,LeaveGroupFragment()).commit()
+        //supportFragmentManager.beginTransaction().replace(R.id.frameLayout,DeleteGroupFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.frameLayout, LeaveGroupFragment()).commit()
 
 
         dataBinding.apply {
