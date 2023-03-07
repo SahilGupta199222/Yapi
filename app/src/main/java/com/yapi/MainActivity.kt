@@ -8,6 +8,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.yapi.common.*
 import com.yapi.databinding.ActivityMainBinding
 import com.yapi.views.leaveGroup.LeaveGroupFragment
@@ -33,6 +35,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun initUI() {
 
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
+        val navController = navHostFragment.navController
+        navController.navigate(R.id.signupTeam)
+      //  findNavController(R.id.signupTeam)
         dataBinding.apply {
             vModel = viewModel
         }

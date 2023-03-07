@@ -8,12 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="blue_color">#3D97F2</color>
-
     <color name="darkGrey">#3d3d3d</color>
     <color name="darkLiteGrey">#b8b8b8</color>
     <color name="liteGrey">#F5F5F5</color>
     <color name="blueColor">#3d97f2</color>
-
+<color name="dark_blue">#00C2FF</color>
 
 </resources>

@@ -19,6 +19,7 @@
     <string name="emailAddress"> EMAIL ADDRESS</string>
     <string name="enterEmail">Enter Email Address</string>
     <string name="ccontinue">Continue</string>
+    <string name="these_invitation_for">These invitations are for \nsulaman.abir@gmail.com</string>
 
-
+<string name="join_now">Join Now</string>
 </resources>
