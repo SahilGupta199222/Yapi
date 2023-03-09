@@ -64,7 +64,7 @@
         android:textSize="@dimen/normalTextSize"
         android:paddingStart="@dimen/startPaddingNormal"
         android:singleLine="true"
-        android:textColor="@color/darkGrey"
+        android:textColor="@color/darkLiteGrey"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imgProfilePicRvCustomerList"

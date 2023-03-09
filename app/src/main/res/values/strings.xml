@@ -29,12 +29,11 @@
     <string name="don_t_have_an_account_sign_up">Don’t have an account? Sign up</string>
 
 
-
     <string name="join_now">Join Now</string>
     <string name="search">Search</string>
     <string name="yapibot">yapibot</string>
     <string name="groups">GROUPS</string>
-    <string name="add_new_groups">ADD NEW GROUPS</string>
+    <string name="createGroup">CREATE GROUPS</string>
     <string name="jobs">JOBS</string>
     <string name="customers">CUSTOMERS</string>
     <string name="team">TEAM</string>
@@ -63,4 +62,5 @@
     <string name="enter_email">Enter email</string>
     <string name="add_member_text">Add member</string>
     <string name="skip_this_step">Skip this step</string>
+    <string name="settings">SETTINGS</string>
 </resources>

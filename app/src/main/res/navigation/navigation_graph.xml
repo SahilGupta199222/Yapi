@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/signInFragment">
+    app:startDestination="@id/chatEmptyFragment">
 
     <fragment
         android:id="@+id/signUpFragment2"
@@ -64,5 +64,16 @@
     <fragment android:id="@+id/thirdStepCreateTeam"
         android:label="ThirdStepCreateTeam"
         android:name="com.yapi.views.create_team.third_step_create_team.ThirdStepCreateFragment">
+        <action
+            android:id="@+id/action_thirdStepCreateTeam_to_chatEmptyFragment"
+            app:destination="@id/chatEmptyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatEmptyFragment"
+        android:name="com.yapi.views.chat_empty.ChatEmptyFragment"
+        android:label="ChatEmptyFragment" >
+        <action
+            android:id="@+id/action_chatEmptyFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
     </fragment>
 </navigation>
