@@ -252,10 +252,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/startMainMargin"
                     android:layout_marginBottom="@dimen/bottomMarggin"
+                    android:onClick="@{vModel::onClick}"
                     android:textSize="@dimen/normalTextSize"
                     android:fontFamily="@font/larsseit_regular"
                     android:gravity="center"
-                    android:textColor="@color/medium_grey_color"
+                    android:textColor="@color/blueColor"
                     android:text="@string/signup_text" />
             </LinearLayout>
         </LinearLayout>
