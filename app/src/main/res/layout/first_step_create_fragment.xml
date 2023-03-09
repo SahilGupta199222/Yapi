@@ -38,7 +38,8 @@
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -144,8 +145,8 @@
 
                     <androidx.appcompat.widget.AppCompatCheckBox
                         android:id="@+id/firstTeamCheck"
-                        android:layout_width="@dimen/iconSize"
-                        android:layout_height="@dimen/iconSize"
+                        android:layout_width="@dimen/checkbox_size"
+                        android:layout_height="@dimen/checkbox_size"
                         android:layout_marginStart="@dimen/startMainMargin"
                         android:layout_marginTop="@dimen/_12sdp"
                         android:button="@drawable/create_team_checkbox"
@@ -158,6 +159,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_20sdp"
                         android:layout_marginEnd="@dimen/startMainMargin"
                         android:lineSpacingExtra="@dimen/line_spacing_extra"
                         android:text="@string/create_team_checkbox_text"
@@ -168,15 +170,18 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/bottomMarggin"
+                android:orientation="vertical"
+                android:layout_gravity="bottom"
+                android:gravity="bottom"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/firstTeamCheck">
+                app:layout_constraintStart_toStartOf="parent">
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnFirstCreateTeam"
@@ -185,14 +190,21 @@
                     android:layout_gravity="bottom"
                     android:layout_marginStart="@dimen/startMainMargin"
                     android:layout_marginEnd="@dimen/startMainMargin"
+
                     android:background="@drawable/rounded_background"
                     android:backgroundTint="@color/blueColor"
                     android:fontFamily="@font/larsseit_bold"
                     android:onClick="@{vModel::onClick}"
                     android:text="@string/ccontinue"
+                    android:textSize="@dimen/normalTextSize"
+
+                    android:paddingStart="@dimen/etHorizontalPadding"
+                    android:paddingTop="@dimen/etVerticalPadding"
+                    android:paddingEnd="@dimen/etHorizontalPadding"
+                    android:paddingBottom="@dimen/etVerticalPadding"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

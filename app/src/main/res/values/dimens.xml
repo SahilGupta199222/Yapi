@@ -32,4 +32,7 @@
     <dimen name="line_spacing_extra">@dimen/_5sdp</dimen>
 
     <dimen name="margin_from_signup">@dimen/_3sdp</dimen>
+    <dimen name="checkbox_size">@dimen/_16sdp</dimen>
+
+    <dimen name="arrow_size">@dimen/_22sdp</dimen>
 </resources>

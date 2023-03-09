@@ -214,6 +214,13 @@
             android:layout_marginTop="@dimen/topMargin"
             android:fontFamily="@font/larsseit_bold"
             android:textColor="@color/white"
+
+            android:textSize="@dimen/normalTextSize"
+
+            android:paddingStart="@dimen/etHorizontalPadding"
+            android:paddingTop="@dimen/etVerticalPadding"
+            android:paddingEnd="@dimen/etHorizontalPadding"
+            android:paddingBottom="@dimen/etVerticalPadding"
             android:onClick="@{vModel::onClick}"
             android:background="@drawable/btn_drawable_blue"
             android:layout_marginStart="@dimen/startMainMargin"

@@ -2,6 +2,7 @@ package com.yapi.views.create_team.first_step_create_team
 
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.databinding.adapters.TextViewBindingAdapter.AfterTextChanged
@@ -22,6 +23,8 @@ class FirstStepViewModel() : ViewModel() {
                // showMessage("Hello")
                 if(checkValidation()){
                     view.findNavController().navigate(R.id.action_firstStepCreateTeam_to_secondStepCreateTeam)
+                }else{
+                    Toast.makeText(view.context, "Please enter company name", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -32,7 +35,8 @@ class FirstStepViewModel() : ViewModel() {
         return if(teamName.get().toString().trim().isEmpty()) {
             false
         }else
-            checkBoxValue.get()
+            true
+//            checkBoxValue.get()
     }
 
     fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
