@@ -14,25 +14,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        >
+        app:layout_constraintBottom_toBottomOf="parent">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         android:layout_marginTop="@dimen/startMainMargin"
         android:layout_marginStart="@dimen/startMainMargin"
-        android:layout_marginEnd="@dimen/startMainMargin"
-        >
+        android:layout_marginEnd="@dimen/startMainMargin">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutToolBarMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            >
-
+            app:layout_constraintEnd_toEndOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgTempDrawableMenu"
@@ -207,8 +204,8 @@
                 />
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgArrowGroupMenu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/arrow_size"
+                android:layout_height="@dimen/arrow_size"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
                 app:layout_constraintTop_toTopOf="parent"
@@ -342,8 +339,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgArrowJobsMenu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/arrow_size"
+                android:layout_height="@dimen/arrow_size"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/topFiveMargin"
                 android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
@@ -433,8 +430,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgArrowCustomersMenu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/arrow_size"
+                android:layout_height="@dimen/arrow_size"
                 android:layout_gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -570,8 +567,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgArrowTeamMenu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/arrow_size"
+                android:layout_height="@dimen/arrow_size"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/topFiveMargin"
                 android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
@@ -709,8 +706,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgArrowLeadMenu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/arrow_size"
+                android:layout_height="@dimen/arrow_size"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -845,15 +842,14 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgArrowSettingsMenu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/arrow_size"
+                android:layout_height="@dimen/arrow_size"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/topFiveMargin"
                 android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
+                app:layout_constraintBottom_toBottomOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView

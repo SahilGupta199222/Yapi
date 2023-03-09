@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="vModel"
-            type="com.yapi.views.create_team.second_step_create_team.SecondStepViewModel" />
+            type="com.yapi.views.create_team.first_step_create_team.FirstStepViewModel" />
 
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -49,7 +52,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_25sdp"
                         android:fontFamily="@font/larsseit_bold"
-                        android:text="@string/second_stemp_size"
+                        android:text="@string/stemp_size"
                         android:textAllCaps="true"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12ssp"
@@ -64,9 +67,9 @@
                         android:layout_marginTop="@dimen/_15sdp"
                         android:fontFamily="@font/larsseit_bold"
                         android:gravity="center"
-                        android:text="@string/company_name_second_title"
-                        android:textColor="@color/darkGrey"
                         android:letterSpacing="0.03"
+                        android:text="@string/company_name_title"
+                        android:textColor="@color/darkGrey"
                         android:textSize="@dimen/mobileTitleTextSize"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +84,7 @@
                         android:gravity="center"
                         android:letterSpacing="0.07"
                         android:lineSpacingExtra="@dimen/line_spacing_extra"
-                        android:text="@string/company_name_second_step_description"
+                        android:text="@string/company_name_description"
                         android:textColor="@color/darkLiteGrey"
                         android:textSize="@dimen/_12ssp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +99,7 @@
                         android:layout_marginTop="@dimen/_20sdp"
                         android:fontFamily="@font/larsseit_medium"
                         android:gravity="center"
-                        android:text="@string/what_working_on"
+                        android:text="@string/comany_name"
                         android:textAllCaps="true"
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/_11ssp"
@@ -111,7 +114,7 @@
                         android:layout_marginEnd="@dimen/startMainMargin"
                         android:fontFamily="@font/larsseit_medium"
                         android:gravity="center"
-                        android:text="@={vModel.countFieldValue}"
+                        android:text="@{vModel.nameCountValue}"
                         android:textAllCaps="true"
                         android:textColor="@color/darkLiteGrey"
                         android:textSize="@dimen/_12ssp"
@@ -123,31 +126,54 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/startMainMargin"
+                        android:layout_marginTop="@dimen/_2sdp"
                         android:layout_marginEnd="@dimen/startMainMargin"
                         android:background="@drawable/et_drawable"
-                        android:hint="@string/enter_name"
+                        android:fontFamily="@font/larsseit_regular"
+                        android:hint="Enter team or company name"
+                        android:maxLength="50"
+                        android:onTextChanged="@{vModel.onTextChanged}"
                         android:paddingStart="@dimen/etHorizontalPadding"
                         android:paddingTop="@dimen/etVerticalPadding"
                         android:paddingEnd="@dimen/etHorizontalPadding"
-                        android:text="@={vModel.teamNameValue}"
-                        android:layout_marginBottom="@dimen/_20sdp"
                         android:paddingBottom="@dimen/etVerticalPadding"
-                        android:maxLength="50"
-                        android:onTextChanged="@{vModel::onTextChanged}"
-                        android:fontFamily="@font/larsseit_regular"
-                        android:layout_marginTop="@dimen/_2sdp"
+                        android:text="@={vModel.teamName}"
                         android:textSize="@dimen/normalTextSize"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tvteamField" />
 
+                    <androidx.appcompat.widget.AppCompatCheckBox
+                        android:id="@+id/firstTeamCheck"
+                        android:layout_width="@dimen/checkbox_size"
+                        android:layout_height="@dimen/checkbox_size"
+                        android:layout_marginStart="@dimen/startMainMargin"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:button="@drawable/create_team_checkbox"
+                        android:checked="@={vModel.checkBoxValue}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/etTeamName" />
 
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/startMainMargin"
+                        android:lineSpacingExtra="@dimen/line_spacing_extra"
+                        android:text="@string/create_team_checkbox_text"
+                        android:textColor="#8F8F8F"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintStart_toEndOf="@+id/firstTeamCheck"
+                        app:layout_constraintTop_toBottomOf="@+id/etTeamName" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/bottomMarggin"
                 android:orientation="vertical"
@@ -156,29 +182,32 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/firstTeamCheck">
+               >
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnSecondCreateTeam"
+                    android:id="@+id/btnFirstCreateTeam"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:layout_marginStart="@dimen/startMainMargin"
                     android:layout_marginEnd="@dimen/startMainMargin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="@{vModel::onClick}"
+
                     android:background="@drawable/rounded_background"
                     android:backgroundTint="@color/blueColor"
                     android:fontFamily="@font/larsseit_bold"
+                    android:onClick="@{vModel::onClick}"
                     android:text="@string/ccontinue"
                     android:textSize="@dimen/normalTextSize"
+
                     android:paddingStart="@dimen/etHorizontalPadding"
                     android:paddingTop="@dimen/etVerticalPadding"
                     android:paddingEnd="@dimen/etHorizontalPadding"
                     android:paddingBottom="@dimen/etVerticalPadding"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
 
 </layout>

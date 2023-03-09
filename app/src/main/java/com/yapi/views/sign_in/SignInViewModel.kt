@@ -23,6 +23,9 @@ class SignInViewModel : ViewModel() {
                     view.findNavController().navigate(R.id.action_signInFragment_to_signUpFragment2)
                 }
             }
+            R.id.txtSignIn->{
+                view.findNavController().navigate(R.id.action_signInFragment_to_signUpFragment2)
+            }
         }
     }
 

@@ -111,6 +111,11 @@
             android:textAllCaps="true"
             android:layout_marginTop="@dimen/bottomMarggin"
             android:textSize="@dimen/normalTextSize"
+
+            android:paddingStart="@dimen/etHorizontalPadding"
+            android:paddingTop="@dimen/etVerticalPadding"
+            android:paddingEnd="@dimen/etHorizontalPadding"
+            android:paddingBottom="@dimen/etVerticalPadding"
             android:fontFamily="@font/larsseit_bold"
             android:textColor="@color/white"
             android:background="@drawable/btn_drawable_blue"
@@ -122,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/topFiveMargin"
             android:gravity="center"
-
+            
             android:fontFamily="@font/larsseit_regular"
             android:text="@string/cannot_find_code"
             android:textSize="@dimen/normalSmallTextSize"
