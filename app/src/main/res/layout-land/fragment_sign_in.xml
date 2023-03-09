@@ -244,9 +244,10 @@
                 android:layout_marginEnd="@dimen/startMainMargin"
                 android:layout_marginBottom="@dimen/bottomMarggin"
                 android:textSize="@dimen/normalTextSize"
+                android:layout_marginStart="@dimen/margin_from_signup"
                 android:fontFamily="@font/larsseit_regular"
                 android:gravity="center"
-                android:textColor="@color/medium_grey_color"
+                android:textColor="@color/blueColor"
                 android:text="@string/signup_text" />
         </LinearLayout>
     </LinearLayout>

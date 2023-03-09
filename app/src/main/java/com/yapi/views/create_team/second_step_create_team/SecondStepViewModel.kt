@@ -8,7 +8,6 @@ import com.yapi.R
 
 class SecondStepViewModel() : ViewModel() {
 
-
     fun onClick(view: View) {
         when (view.id) {
             R.id.btnSecondCreateTeam -> {
