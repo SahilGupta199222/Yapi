@@ -43,7 +43,7 @@
         android:layout_weight="1"
         android:layout_marginStart="@dimen/startPaddingNormal"
         android:layout_gravity="center"
-        android:textColor="@color/darkGrey"
+        android:textColor="@color/darkLiteGrey"
         android:fontFamily="@font/larsseit_medium"
         android:textSize="@dimen/normalTextSize"
         app:layout_constraintTop_toTopOf="parent"

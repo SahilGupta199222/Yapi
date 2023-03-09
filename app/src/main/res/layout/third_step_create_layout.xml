@@ -4,11 +4,8 @@
     <data>
         <variable
             name="vModel"
-            type="com.yapi.views.create_team.first_step_create_team.FirstStepViewModel" />
+            type="com.yapi.views.create_team.third_step_create_team.ThirdStepViewModel" />
 
-        <variable
-            name="mView"
-            type="android.view.View" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -180,7 +177,8 @@ android:fontFamily="@font/larsseit_regular"
                     android:layout_gravity="bottom"
                     android:layout_marginStart="@dimen/startMainMargin"
                     android:layout_marginEnd="@dimen/startMainMargin"
-android:layout_marginBottom="@dimen/_10sdp"
+                    android:onClick="@{vModel::onClick}"
+                    android:layout_marginBottom="@dimen/_10sdp"
                     android:background="@drawable/rounded_background"
                     android:backgroundTint="@color/blueColor"
                     android:fontFamily="@font/larsseit_bold"
