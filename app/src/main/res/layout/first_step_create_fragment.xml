@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<data>
-    <variable
-        name="vModel"
-        type="com.yapi.views.create_team.first_step_create_team.FirstStepViewModel" />
 
-    <variable
-        name="mView"
-        type="android.view.View" />
-</data>
+    <data>
+
+        <variable
+            name="vModel"
+            type="com.yapi.views.create_team.first_step_create_team.FirstStepViewModel" />
+
+    </data>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -66,9 +66,9 @@
                         android:layout_marginTop="@dimen/_15sdp"
                         android:fontFamily="@font/larsseit_bold"
                         android:gravity="center"
+                        android:letterSpacing="0.03"
                         android:text="@string/company_name_title"
                         android:textColor="@color/darkGrey"
-                        android:letterSpacing="0.03"
                         android:textSize="@dimen/mobileTitleTextSize"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +82,7 @@
                         android:fontFamily="@font/larsseit_regular"
                         android:gravity="center"
                         android:letterSpacing="0.07"
-                        android:lineSpacingExtra="@dimen/_5sdp"
+                        android:lineSpacingExtra="@dimen/line_spacing_extra"
                         android:text="@string/company_name_description"
                         android:textColor="@color/darkLiteGrey"
                         android:textSize="@dimen/_12ssp"
@@ -113,7 +113,7 @@
                         android:layout_marginEnd="@dimen/startMainMargin"
                         android:fontFamily="@font/larsseit_medium"
                         android:gravity="center"
-                        android:text="7/50"
+                        android:text="@{vModel.nameCountValue}"
                         android:textAllCaps="true"
                         android:textColor="@color/darkLiteGrey"
                         android:textSize="@dimen/_12ssp"
@@ -125,12 +125,18 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/startMainMargin"
+                        android:layout_marginTop="@dimen/_2sdp"
                         android:layout_marginEnd="@dimen/startMainMargin"
                         android:background="@drawable/et_drawable"
-                        android:hint="Enter team or company name"
-                        android:padding="@dimen/_10sdp"
                         android:fontFamily="@font/larsseit_regular"
-                        android:layout_marginTop="@dimen/_2sdp"
+                        android:hint="Enter team or company name"
+                        android:maxLength="50"
+                        android:onTextChanged="@{vModel.onTextChanged}"
+                        android:paddingStart="@dimen/etHorizontalPadding"
+                        android:paddingTop="@dimen/etVerticalPadding"
+                        android:paddingEnd="@dimen/etHorizontalPadding"
+                        android:paddingBottom="@dimen/etVerticalPadding"
+                        android:text="@={vModel.teamName}"
                         android:textSize="@dimen/normalTextSize"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -138,26 +144,27 @@
 
                     <androidx.appcompat.widget.AppCompatCheckBox
                         android:id="@+id/firstTeamCheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/iconSize"
+                        android:layout_height="@dimen/iconSize"
                         android:layout_marginStart="@dimen/startMainMargin"
-                        android:checked="false"
-                        android:layout_marginTop="@dimen/_6sdp"
-                        android:fontFamily="@font/larsseit_regular"
+                        android:layout_marginTop="@dimen/_12sdp"
+                        android:button="@drawable/create_team_checkbox"
+                        android:checked="@={vModel.checkBoxValue}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/etTeamName" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
-                        app:layout_constraintStart_toEndOf="@+id/firstTeamCheck"
-                        android:lineSpacingExtra="5dp"
-                        android:layout_marginTop="@dimen/_13sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/startMainMargin"
+                        android:lineSpacingExtra="@dimen/line_spacing_extra"
                         android:text="@string/create_team_checkbox_text"
                         android:textColor="#8F8F8F"
                         android:textSize="@dimen/_12ssp"
-                        android:layout_marginEnd="@dimen/startMainMargin"
-                        app:layout_constraintTop_toBottomOf="@+id/etTeamName"
-                        android:layout_height="wrap_content"/>
+                        app:layout_constraintStart_toEndOf="@+id/firstTeamCheck"
+                        app:layout_constraintTop_toBottomOf="@+id/etTeamName" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
 
@@ -178,10 +185,10 @@
                     android:layout_gravity="bottom"
                     android:layout_marginStart="@dimen/startMainMargin"
                     android:layout_marginEnd="@dimen/startMainMargin"
-                    android:onClick="@{(mView) -> vModel.onClick(mView)}"
                     android:background="@drawable/rounded_background"
                     android:backgroundTint="@color/blueColor"
                     android:fontFamily="@font/larsseit_bold"
+                    android:onClick="@{vModel::onClick}"
                     android:text="@string/ccontinue"
                     android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent" />

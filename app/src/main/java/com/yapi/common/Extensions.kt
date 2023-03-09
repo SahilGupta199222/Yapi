@@ -51,3 +51,6 @@ fun getTextSizeValue(text1:Float)
 //  MainActivity.activity.get().resources.getDimension(com.intuit.ssp.R.dimen._10ssp)
 }
 
+fun showToastMessage(message: String) {
+    Toast.makeText(MainActivity.activity!!.get(), message, Toast.LENGTH_SHORT).show()
+}

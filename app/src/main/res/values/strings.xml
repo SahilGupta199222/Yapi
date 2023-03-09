@@ -22,13 +22,13 @@
     <string name="these_invitation_for">These invitations are for \nsulaman.abir@gmail.com</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sign_in">Sign In</string>
-    <string name="signInInfo">Sign in to start the communications with your mates</string>
+    <string name="signInInfo">Sign in to start the communications with \nyour mates</string>
     <string name="email">EMAIL<font color="red">*</font></string>
     <string name="password">PASSWORD<font color="red">*</font></string>
     <string name="enterPassword">Enter Password</string>
-    <string name="don_t_have_an_account_sign_up">Don’t have an account? Sign up</string>
-
-
+    <!-- <string name="don_t_have_an_account_sign_up">Don’t have an account? Sign up</string>-->
+    <string name="don_t_have_an_account">Don’t have an account? </string>
+    <string name="signup_text"> Sign up</string>
 
     <string name="join_now">Join Now</string>
     <string name="search">Search</string>
@@ -63,4 +63,12 @@
     <string name="enter_email">Enter email</string>
     <string name="add_member_text">Add member</string>
     <string name="skip_this_step">Skip this step</string>
+
+    <string name="please_enter_email">Please enter email</string>
+    <string name="please_enter_password">Please enter password</string>
+
+    <string name="otp_screen_description">We\'ve sent a 6-character code to \n<font color="#3d3d3d">sulaman.abir@gmail.com</font>. The code expires \nshortly. Please enter it soon.</string>
+
+    <string name="cannot_find_code">Can’t find your code? Check spam folder!</string>
+    <string name="check_your_email_for_code">Check your email for a code</string>
 </resources>
