@@ -241,7 +241,7 @@
                     android:layout_marginStart="@dimen/startMainMargin"
                     android:layout_marginBottom="@dimen/bottomMarggin"
                     android:fontFamily="@font/larsseit_regular"
-                    android:gravity="center"
+
                     android:textColor="@color/medium_grey_color"
                     android:textSize="@dimen/normalTextSize"
                     android:text="@string/don_t_have_an_account" />
@@ -254,8 +254,8 @@
                     android:layout_marginBottom="@dimen/bottomMarggin"
                     android:textSize="@dimen/normalTextSize"
                     android:fontFamily="@font/larsseit_regular"
-                    android:gravity="center"
-                    android:textColor="@color/medium_grey_color"
+android:layout_marginStart="@dimen/margin_from_signup"
+                    android:textColor="@color/blueColor"
                     android:text="@string/signup_text" />
             </LinearLayout>
         </LinearLayout>
