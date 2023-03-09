@@ -1,4 +1,19 @@
 package com.yapi.views.create_team.third_step_create_team
 
-class ThirdStepViewModel {
+import android.util.Log
+import android.view.View
+import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
+import com.yapi.R
+
+class ThirdStepViewModel() : ViewModel() {
+
+
+    fun onClick(view: View) {
+        when (view.id) {
+            R.id.btnThirdCreateTeam -> {
+                view.findNavController().navigate(R.id.action_thirdStepCreateTeam_to_chatEmptyFragment)
+            }
+        }
+    }
 }

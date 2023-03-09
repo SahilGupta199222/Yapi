@@ -34,7 +34,7 @@
     <string name="search">Search</string>
     <string name="yapibot">yapibot</string>
     <string name="groups">GROUPS</string>
-    <string name="add_new_groups">ADD NEW GROUPS</string>
+    <string name="createGroup">CREATE GROUPS</string>
     <string name="jobs">JOBS</string>
     <string name="customers">CUSTOMERS</string>
     <string name="team">TEAM</string>
@@ -71,4 +71,5 @@
 
     <string name="cannot_find_code">Can’t find your code? Check spam folder!</string>
     <string name="check_your_email_for_code">Check your email for a code</string>
+    <string name="settings">SETTINGS</string>
 </resources>

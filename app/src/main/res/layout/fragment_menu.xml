@@ -33,6 +33,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             >
 
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgTempDrawableMenu"
+                android:layout_width="@dimen/iconSize"
+                android:layout_height="@dimen/iconSize"
+                android:src="@drawable/side_drawable_line"
+                android:layout_gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtTempLogoMenu"
                 android:layout_width="wrap_content"
@@ -40,17 +53,18 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/autoguard_regular"
                 android:text="@string/app_name"
+                android:layout_marginStart="@dimen/topFiveMargin"
                 android:textColor="@color/black"
                 android:textSize="@dimen/IconTextSize"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgTempDrawableMenu"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgLogoMenu"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/topFiveMargin"
                 android:src="@drawable/blue_chat_icon"
@@ -85,6 +99,10 @@
             android:layout_height="wrap_content"
             android:hint="@string/search"
             android:background="@null"
+            android:textSize="@dimen/normalTextSize"
+            android:fontFamily="@font/larsseit_regular"
+            android:textColorHint="@color/darkGrey"
+            android:textColor="@color/darkGrey"
             android:paddingStart="2sp"
             android:drawablePadding="@dimen/startPaddingNormal"
             android:paddingTop="@dimen/_10ssp"
@@ -164,7 +182,7 @@
                 android:gravity="start"
                 android:text="@string/groups"
                 android:textColor="@color/darkGrey"
-                android:textSize="@dimen/normalTextSize"
+                android:textSize="@dimen/smallTextSize"
                 app:layout_constraintStart_toEndOf="@+id/imgGroupsMenu"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -218,7 +236,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/topFiveMargin"
-            android:background="@drawable/round_lite_gray"
             android:clipToOutline="true"
             android:gravity="center"
             android:orientation="horizontal"
@@ -228,31 +245,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rvGroupListMenu">
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/imgAddIconNewGroupsMenu"
-                android:layout_width="@dimen/iconSize"
-                android:layout_height="@dimen/iconSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-
-                android:src="@drawable/ic_baseline_add_24"
+                android:fontFamily="@font/larsseit_bold"
+                android:text="@string/createGroup"
+                android:textColor="@color/blueColor"
+                android:textSize="@dimen/smallTextSize"
+                android:layout_marginStart="@dimen/_22sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/txtAddIconNewGroupsMenu"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/txtAddIconNewGroupsMenu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/iconSize"
+                android:layout_height="@dimen/iconSize"
+                android:src="@drawable/ic_baseline_add_24"
                 android:layout_gravity="center"
-                android:layout_marginStart="@dimen/startPaddingNormal"
-                android:fontFamily="@font/larsseit_bold"
-                android:text="@string/add_new_groups"
-                android:textColor="@color/darkGrey"
-                android:textSize="@dimen/normalTextSize"
+                android:layout_marginStart="@dimen/topFiveMargin"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imgAddIconNewGroupsMenu"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -301,7 +316,7 @@
                 android:gravity="start"
                 android:text="@string/jobs"
                 android:textColor="@color/darkGrey"
-                android:textSize="@dimen/normalTextSize"
+                android:textSize="@dimen/smallTextSize"
                 app:layout_constraintStart_toEndOf="@+id/imgJobsIconJobsMenu"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -338,15 +353,6 @@
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <View
-            android:id="@+id/viewLineBottomJobsMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_2sdp"
-            android:background="@color/liteGrey"
-            app:layout_constraintTop_toBottomOf="@+id/layoutJobsMenu"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvJobsListMenu"
             android:layout_width="match_parent"
@@ -356,9 +362,19 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="4"
             tools:listitem="@layout/rv_group_list"
-            app:layout_constraintTop_toBottomOf="@+id/viewLineBottomJobsMenu"
+            app:layout_constraintTop_toBottomOf="@+id/layoutJobsMenu"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
+
+        <View
+            android:id="@+id/viewLineBottomJobsMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_2sdp"
+            android:background="@color/liteGrey"
+            app:layout_constraintTop_toBottomOf="@+id/rvJobsListMenu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutCustomersMenu"
             android:layout_width="match_parent"
@@ -366,7 +382,7 @@
             android:orientation="horizontal"
             android:paddingTop="@dimen/_10ssp"
             android:paddingBottom="@dimen/_10ssp"
-            app:layout_constraintTop_toBottomOf="@+id/rvJobsListMenu"
+            app:layout_constraintTop_toBottomOf="@+id/viewLineBottomJobsMenu"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
@@ -393,10 +409,27 @@
                 android:text="@string/customers"
                 android:textColor="@color/darkGrey"
                 android:textAllCaps="true"
-                android:textSize="@dimen/normalTextSize"
+                android:textSize="@dimen/smallTextSize"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imgCustomersMenu"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtCountCustomersMenu"
+                android:layout_width="@dimen/unSeenCountSize"
+                android:layout_height="@dimen/unSeenCountSize"
+                android:paddingTop="@dimen/topPaddingUnSeenCountSize"
+                android:paddingStart="@dimen/startPaddingUnSeenCountSize"
+                android:layout_gravity="center"
+                android:background="@drawable/round_circle_blue"
+                android:clipToOutline="true"
+                android:fontFamily="@font/larsseit_bold"
+                android:text="5"
+                android:textColor="@color/white"
+                android:textSize="@dimen/unSeenCountTextSize"
+                app:layout_constraintEnd_toStartOf="@+id/imgArrowCustomersMenu"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgArrowCustomersMenu"
@@ -408,27 +441,25 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCustomersListMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="4"
-            tools:listitem="@layout/rv_customers_list_menu"
-            app:layout_constraintTop_toBottomOf="@+id/layoutCustomersMenu"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
+ <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCustomersListMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="4"
+        tools:listitem="@layout/rv_customers_list_menu"
+        app:layout_constraintTop_toBottomOf="@+id/layoutCustomersMenu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutAddNewCustomersMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/topFiveMargin"
-            android:background="@drawable/round_lite_gray"
             android:clipToOutline="true"
             android:gravity="center"
             android:orientation="horizontal"
@@ -438,32 +469,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rvCustomersListMenu">
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/imgAddNewCustomersMenu"
-                android:layout_width="@dimen/iconSize"
-                android:layout_height="@dimen/iconSize"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="@font/larsseit_bold"
+                android:gravity="start"
+                android:text="ADD CUSTOMERS"
+                android:textAllCaps="true"
+                android:textColor="@color/blueColor"
+                android:textSize="@dimen/smallTextSize"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_baseline_add_24"
+                android:layout_marginStart="@dimen/_22sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/txtAddNewCustomersMenu"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/txtAddNewCustomersMenu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/iconSize"
+                android:layout_height="@dimen/iconSize"
+                android:src="@drawable/ic_baseline_add_24"
                 android:layout_gravity="center"
-                android:layout_marginStart="@dimen/startPaddingNormal"
-                android:fontFamily="@font/larsseit_bold"
-                android:gravity="start"
-                android:text="Add Customers"
-                android:textAllCaps="true"
-                android:textColor="@color/darkGrey"
-                android:textSize="@dimen/normalTextSize"
+                android:layout_marginStart="@dimen/topFiveMargin"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imgAddNewCustomersMenu"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -512,7 +544,7 @@
                 android:text="@string/team"
                 android:textAllCaps="true"
                 android:textColor="@color/darkGrey"
-                android:textSize="@dimen/normalTextSize"
+                android:textSize="@dimen/smallTextSize"
                 app:layout_constraintStart_toEndOf="@+id/imgTeamIconMenu"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -548,14 +580,76 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTeamsListMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="4"
+            tools:listitem="@layout/rv_customers_list_menu"
+            app:layout_constraintTop_toBottomOf="@+id/layoutTeamMenu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutAddNewTeamsMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/topFiveMargin"
+            android:clipToOutline="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/_10ssp"
+            android:paddingBottom="@dimen/_10ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvTeamsListMenu">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/imgAddNewTeamsMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="@font/larsseit_bold"
+                android:gravity="start"
+                android:text="ADD TEAMS"
+                android:textAllCaps="true"
+                android:textColor="@color/blueColor"
+                android:textSize="@dimen/smallTextSize"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_22sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/txtAddNewTeamsMenu"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/txtAddNewTeamsMenu"
+                android:layout_width="@dimen/iconSize"
+                android:layout_height="@dimen/iconSize"
+                android:src="@drawable/ic_baseline_add_24"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/topFiveMargin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgAddNewTeamsMenu"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <View
             android:id="@+id/viewLineBottomTeamMenu"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/topFiveMargin"
             android:background="@color/liteGrey"
-            app:layout_constraintTop_toBottomOf="@+id/layoutTeamMenu"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/layoutAddNewTeamsMenu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutLeadMenu"
             android:layout_width="match_parent"
@@ -585,19 +679,36 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/startPaddingNormal"
                 android:layout_weight="1"
-                android:fontFamily="@font/larsseit_regular"
+                android:fontFamily="@font/larsseit_medium"
                 android:gravity="start"
                 android:text="Leads"
                 android:textColor="@color/darkGrey"
                 android:textAllCaps="true"
-                android:textSize="@dimen/normalTextSize"
+                android:textSize="@dimen/smallTextSize"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imgIconLeadMenu"
                 />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtCountLeadMenu"
+                android:layout_width="@dimen/unSeenCountSize"
+                android:layout_height="@dimen/unSeenCountSize"
+                android:paddingStart="@dimen/startPaddingUnSeenCountSize"
+                android:paddingTop="@dimen/topPaddingUnSeenCountSize"
+                android:layout_gravity="center"
+                android:background="@drawable/round_circle_blue"
+                android:clipToOutline="true"
+                android:fontFamily="@font/larsseit_bold"
+                android:text="5"
+                android:textColor="@color/white"
+                android:textSize="@dimen/unSeenCountTextSize"
+                app:layout_constraintEnd_toStartOf="@+id/imgArrowLeadMenu"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgArrowMenu"
+                android:id="@+id/imgArrowLeadMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -606,6 +717,169 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvLeadsListMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="4"
+            tools:listitem="@layout/rv_customers_list_menu"
+            app:layout_constraintTop_toBottomOf="@+id/layoutLeadMenu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutAddNewLeadsMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/topFiveMargin"
+            android:clipToOutline="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/_10ssp"
+            android:paddingBottom="@dimen/_10ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvLeadsListMenu">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/imgAddNewLeadsMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="@font/larsseit_bold"
+                android:gravity="start"
+                android:text="ADD LEADS"
+                android:textAllCaps="true"
+                android:textColor="@color/blueColor"
+                android:textSize="@dimen/smallTextSize"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_22sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/txtAddNewLeadsMenu"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/txtAddNewLeadsMenu"
+                android:layout_width="@dimen/iconSize"
+                android:layout_height="@dimen/iconSize"
+                android:src="@drawable/ic_baseline_add_24"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/topFiveMargin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imgAddNewLeadsMenu"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/viewLineBottomLeadMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_2sdp"
+            android:layout_marginTop="@dimen/topFiveMargin"
+            android:background="@color/liteGrey"
+            app:layout_constraintTop_toBottomOf="@+id/layoutAddNewLeadsMenu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutSettingsMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:paddingTop="@dimen/_8ssp"
+            android:paddingBottom="@dimen/_8ssp"
+            app:layout_constraintTop_toBottomOf="@+id/viewLineBottomLeadMenu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgSettingsIconSettingsMenu"
+                android:layout_width="@dimen/iconSize"
+                android:layout_height="@dimen/iconSize"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_baseline_settings_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtSettingsMenu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/startPaddingNormal"
+                android:layout_weight="1"
+                android:fontFamily="@font/larsseit_medium"
+                android:gravity="start"
+                android:text="@string/settings"
+                android:textColor="@color/darkGrey"
+                android:textSize="@dimen/smallTextSize"
+                app:layout_constraintStart_toEndOf="@+id/imgSettingsIconSettingsMenu"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtCountSettingsMenu"
+                android:layout_width="@dimen/unSeenCountSize"
+                android:layout_height="@dimen/unSeenCountSize"
+                android:paddingTop="@dimen/topPaddingUnSeenCountSize"
+                android:paddingStart="@dimen/startPaddingUnSeenCountSize"
+                android:layout_gravity="center"
+                android:background="@drawable/round_circle_blue"
+                android:clipToOutline="true"
+                android:fontFamily="@font/larsseit_bold"
+                android:text="5"
+                android:textColor="@color/white"
+                android:textSize="@dimen/unSeenCountTextSize"
+                app:layout_constraintEnd_toStartOf="@+id/imgArrowSettingsMenu"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgArrowSettingsMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/topFiveMargin"
+                android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSettingsListMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="4"
+            tools:listitem="@layout/rv_group_list"
+            app:layout_constraintTop_toBottomOf="@+id/layoutSettingsMenu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <View
+            android:id="@+id/viewLineBottomSettingsMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_2sdp"
+            android:background="@color/liteGrey"
+            android:layout_marginBottom="@dimen/_20sdp"
+            app:layout_constraintTop_toBottomOf="@+id/rvSettingsListMenu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

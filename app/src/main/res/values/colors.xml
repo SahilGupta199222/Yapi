@@ -14,4 +14,8 @@
     <color name="blueColor">#3d97f2</color>
 <color name="dark_blue">#00C2FF</color>
 <color name="medium_grey_color">#8F8F8F</color>
+
+    <color name="onlineStatusColor">#02d42e</color>
+    <color name="offlineStatusColor">#b8b8b8</color>
+
 </resources>
