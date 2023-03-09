@@ -213,6 +213,12 @@
             android:text="@string/sign_in"
             android:layout_marginTop="@dimen/topMargin"
             android:fontFamily="@font/larsseit_bold"
+            android:textSize="@dimen/normalTextSize"
+
+            android:paddingStart="@dimen/etHorizontalPadding"
+            android:paddingTop="@dimen/etVerticalPadding"
+            android:paddingEnd="@dimen/etHorizontalPadding"
+            android:paddingBottom="@dimen/etVerticalPadding"
             android:textColor="@color/white"
             android:onClick="@{vModel::onClick}"
             android:background="@drawable/btn_drawable_blue"

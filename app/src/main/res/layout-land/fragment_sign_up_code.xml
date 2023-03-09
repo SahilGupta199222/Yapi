@@ -45,6 +45,7 @@
             android:layout_marginTop="@dimen/startMainMargin"
             android:layout_marginEnd="@dimen/startMainMargin"
             android:background="@color/white"
+          android:paddingBottom="@dimen/_30sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +91,8 @@
                 app:bar_margin_left="@dimen/_12sdp"
                 app:bar_margin_right="@dimen/_12sdp"
                 app:bar_margin_bottom="@dimen/_6sdp"
-                app:bar_height="2dp"
+
+                app:bar_height="@dimen/_2sdp"
                 app:length="6"
                 app:otp_text_size="@dimen/normalTextSize"
                 app:otp_box_background="@drawable/round_otp_drawable"
@@ -111,6 +113,11 @@
             android:textAllCaps="true"
             android:layout_marginTop="@dimen/bottomMarggin"
             android:textSize="@dimen/normalTextSize"
+
+            android:paddingStart="@dimen/etHorizontalPadding"
+            android:paddingTop="@dimen/etVerticalPadding"
+            android:paddingEnd="@dimen/etHorizontalPadding"
+            android:paddingBottom="@dimen/etVerticalPadding"
             android:fontFamily="@font/larsseit_bold"
             android:textColor="@color/white"
             android:background="@drawable/btn_drawable_blue"
@@ -122,7 +129,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/topFiveMargin"
             android:gravity="center"
-
+            
             android:fontFamily="@font/larsseit_regular"
             android:text="@string/cannot_find_code"
             android:textSize="@dimen/normalSmallTextSize"
