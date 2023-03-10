@@ -112,8 +112,8 @@
         android:textAllCaps="true"
         app:layout_constraintTop_toBottomOf="@+id/imgProfilePicProfile"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtTempAboutProfile"
         android:layout_width="wrap_content"
@@ -166,8 +166,10 @@
         android:id="@+id/txtAboutDescriptionProfile"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:text="@string/about"
+    android:text="Dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu. Lobortis mattis aliquam faucibus purus in massa"
         android:textSize="@dimen/normalTextSize"
+
+
 
         android:textColor="@color/darkGrey"
         android:fontFamily="@font/larsseit_medium"
