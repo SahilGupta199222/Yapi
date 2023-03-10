@@ -170,7 +170,6 @@
         android:textSize="@dimen/normalTextSize"
 
 
-
         android:textColor="@color/darkGrey"
         android:fontFamily="@font/larsseit_medium"
         android:layout_marginTop="@dimen/_2sdp"
