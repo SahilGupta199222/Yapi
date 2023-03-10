@@ -152,11 +152,12 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/bottomMarggin"
                 android:orientation="vertical"
                 android:layout_gravity="bottom"
                 android:gravity="bottom"
+
+                android:layout_marginTop="@dimen/topTwentyFiveMargin"
+                android:layout_marginBottom="@dimen/topTwentyFiveMargin"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -165,8 +166,6 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnSecondCreateTeam"
                     android:layout_gravity="bottom"
-                    android:layout_marginStart="@dimen/startMainMargin"
-                    android:layout_marginEnd="@dimen/startMainMargin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="@{vModel::onClick}"
@@ -180,6 +179,8 @@
                     android:paddingEnd="@dimen/etHorizontalPadding"
                     android:paddingBottom="@dimen/etVerticalPadding"
                     android:textColor="@color/white"
+                    android:layout_marginStart="@dimen/_23sdp"
+                    android:layout_marginEnd="@dimen/_23sdp"
                     app:layout_constraintBottom_toBottomOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

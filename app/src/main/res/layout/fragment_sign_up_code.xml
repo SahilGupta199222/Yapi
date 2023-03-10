@@ -110,13 +110,14 @@
             android:layout_height="wrap_content"
             android:text="@string/ccontinue"
             android:textAllCaps="true"
-            android:layout_marginTop="@dimen/bottomMarggin"
             android:textSize="@dimen/normalTextSize"
             android:fontFamily="@font/larsseit_bold"
             android:textColor="@color/white"
             android:background="@drawable/btn_drawable_blue"
-            android:layout_marginStart="@dimen/startMainMargin"
-            android:layout_marginEnd="@dimen/startMainMargin"
+
+            android:layout_marginStart="@dimen/_23sdp"
+            android:layout_marginEnd="@dimen/_23sdp"
+            android:layout_marginTop="@dimen/topTwentyFiveMargin"
             />
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"

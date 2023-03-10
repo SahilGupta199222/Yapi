@@ -163,7 +163,18 @@
                 android:onClick="@{vModel::onClick}"
                 android:text="@string/ccontinue"
                 android:textAllCaps="true"
+                android:onClick="@{vModel::onClick}"
+                android:textSize="@dimen/normalTextSize"
+                android:fontFamily="@font/larsseit_bold"
                 android:textColor="@color/white"
+                android:background="@drawable/btn_drawable_blue"
+                android:layout_marginStart="@dimen/_23sdp"
+                android:layout_marginEnd="@dimen/_23sdp"
+                android:layout_marginTop="@dimen/topTwentyFiveMargin"
+                android:layout_marginBottom="@dimen/topTwentyFiveMargin"
+                />
+    </LinearLayout>
+</LinearLayout>
                 android:textSize="@dimen/normalTextSize" />
         </LinearLayout>
     </LinearLayout>

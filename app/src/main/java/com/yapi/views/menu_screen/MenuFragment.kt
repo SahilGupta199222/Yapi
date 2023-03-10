@@ -10,23 +10,24 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.yapi.R
 import com.yapi.databinding.FragmentMenuBinding
 
 class MenuFragment : Fragment() {
-    private lateinit var binding:FragmentMenuBinding
+    private lateinit var binding: FragmentMenuBinding
     private var groupListClicked = false
     private var jobListClicked = false
     private var customerListClicked = false
     private var teamListClicked = false
     private var leadListClicked = false
     private var settingListClicked = false
-    private var adapterGroupsList:AdapterGroupsList?=null
-    private var adapterJobsList:AdapterGroupsList?=null
-    private var adapterCustomerList:AdapterCustomerList?=null
-    private var adapterTeamList:AdapterCustomerList?=null
-    private var adapterLeadsList:AdapterCustomerList?=null
-    private var adapterSettingsList:AdapterSettingList?=null
+    private var adapterGroupsList: AdapterGroupsList? = null
+    private var adapterJobsList: AdapterGroupsList? = null
+    private var adapterCustomerList: AdapterCustomerList? = null
+    private var adapterTeamList: AdapterCustomerList? = null
+    private var adapterLeadsList: AdapterCustomerList? = null
+    private var adapterSettingsList: AdapterSettingList? = null
 
     val viewModel:MenuViewModel by viewModels()
     override fun onCreateView(
@@ -35,13 +36,16 @@ class MenuFragment : Fragment() {
     ): View {
         binding= FragmentMenuBinding.inflate(LayoutInflater.from(requireActivity()))
         binding.mViewmodel=viewModel
+        binding = FragmentMenuBinding.inflate(LayoutInflater.from(requireActivity()))
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        init()
             init()
     }
+
     private fun init() {
         binding.apply {
             layoutAddNewGroupsMenu.clipToOutline = true
@@ -52,6 +56,9 @@ class MenuFragment : Fragment() {
 
     private fun clickListener() {
         binding.apply {
+            imgTempDrawableMenu.setOnClickListener {
+                findNavController().popBackStack()
+            }
             layoutGroupsMenu.setOnClickListener {
                 groupListClicked = !groupListClicked
                 if (groupListClicked) {
@@ -195,106 +202,97 @@ class MenuFragment : Fragment() {
 
     private fun setSettingListAdapter() {
         val list = ArrayList<PojoSettingList>()
-            list.add(PojoSettingList("User Management",  false))
-            list.add(PojoSettingList("Workspaces Management",  false))
-        val fixImageHeight = requireContext().resources.getDimension(com.intuit.sdp.R.dimen._45sdp).toInt()
+        list.add(PojoSettingList("User Management", false))
+        list.add(PojoSettingList("Workspaces Management", false))
+        val fixImageHeight =
+            requireContext().resources.getDimension(com.intuit.sdp.R.dimen._45sdp).toInt()
         val rvHeight = fixImageHeight * list.size
         binding.rvSettingsListMenu.layoutParams.height = rvHeight
-        adapterSettingsList = AdapterSettingList(requireContext(), list,object :AdapterSettingList.Click{
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onSelected(position: Int) {
-                for(i in 0 until adapterSettingsList?.getListt()?.size!!){
-                    if(position==i){
-                        adapterSettingsList?.getListt()?.get(i)?.selectedStatus=true
+        adapterSettingsList =
+            AdapterSettingList(requireContext(), list, object : AdapterSettingList.Click {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onSelected(position: Int) {
+                    for (i in 0 until adapterSettingsList?.getListt()?.size!!) {
+                        adapterSettingsList?.getListt()?.get(i)?.selectedStatus = position == i
                     }
-                    else{
-                        adapterSettingsList?.getListt()?.get(i)?.selectedStatus=false
-                    }
+                    adapterSettingsList?.notifyDataSetChanged()
                 }
-                adapterSettingsList?.notifyDataSetChanged()
-            }
-        })
+            })
         binding.rvSettingsListMenu.adapter = adapterSettingsList
     }
+
     private fun setCustomerListAdapter() {
         val list = ArrayList<PojoCustomerList>()
         val tempOnlineList = listOf(true, false)
         for (i in 0 until 5) {
             list.add(PojoCustomerList("ab", "Customer${i + 34}", tempOnlineList.random(), i))
         }
-        val fixImageHeight = requireContext().resources.getDimension(com.intuit.sdp.R.dimen._45sdp).toInt()
+        val fixImageHeight =
+            requireContext().resources.getDimension(com.intuit.sdp.R.dimen._45sdp).toInt()
         val rvHeight = fixImageHeight * list.size
         binding.rvCustomersListMenu.layoutParams.height = rvHeight
 
-        adapterCustomerList = AdapterCustomerList(requireContext(), list,object :AdapterCustomerList.Click{
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onSeletect(position: Int) {
-                for(i in 0 until adapterCustomerList?.getListt()?.size!!){
-                    if(position==i){
-                        adapterCustomerList?.getListt()?.get(i)?.selectedStatus=true
+        adapterCustomerList =
+            AdapterCustomerList(requireContext(), list, object : AdapterCustomerList.Click {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onSeletect(position: Int) {
+                    for (i in 0 until adapterCustomerList?.getListt()?.size!!) {
+                        adapterCustomerList?.getListt()?.get(i)?.selectedStatus = position == i
                     }
-                    else{
-                        adapterCustomerList?.getListt()?.get(i)?.selectedStatus=false
-                    }
+                    adapterCustomerList?.notifyDataSetChanged()
                 }
-                adapterCustomerList?.notifyDataSetChanged()
-            }
-        })
+            })
         binding.rvCustomersListMenu.adapter = adapterCustomerList
     }
+
     private fun rvLeadsListMenu() {
         val list = ArrayList<PojoCustomerList>()
         val tempOnlineList = listOf(true, false)
         for (i in 0 until 5) {
             list.add(PojoCustomerList("ab", "Customer${i + 34}", tempOnlineList.random(), i))
         }
-        val fixImageHeight = requireContext().resources.getDimension(com.intuit.sdp.R.dimen._45sdp).toInt()
+        val fixImageHeight =
+            requireContext().resources.getDimension(com.intuit.sdp.R.dimen._45sdp).toInt()
         val rvHeight = fixImageHeight * list.size
         binding.rvLeadsListMenu.layoutParams.height = rvHeight
 
 
 
-        adapterLeadsList = AdapterCustomerList(requireContext(), list,object :AdapterCustomerList.Click{
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onSeletect(position: Int) {
-                for(i in 0 until adapterLeadsList?.getListt()?.size!!){
-                    if(position==i){
-                        adapterLeadsList?.getListt()?.get(i)?.selectedStatus=true
+        adapterLeadsList =
+            AdapterCustomerList(requireContext(), list, object : AdapterCustomerList.Click {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onSeletect(position: Int) {
+                    for (i in 0 until adapterLeadsList?.getListt()?.size!!) {
+                        adapterLeadsList?.getListt()?.get(i)?.selectedStatus = position == i
                     }
-                    else{
-                        adapterLeadsList?.getListt()?.get(i)?.selectedStatus=false
-                    }
+                    adapterLeadsList?.notifyDataSetChanged()
                 }
-                adapterLeadsList?.notifyDataSetChanged()
-            }
-        })
+            })
         binding.rvLeadsListMenu.adapter = adapterLeadsList
     }
+
     private fun setTeamListAdapter() {
         val list = ArrayList<PojoCustomerList>()
         val tempOnlineList = listOf(true, false)
         for (i in 0 until 5) {
             list.add(PojoCustomerList("ab", "Customer${i + 34}", tempOnlineList.random(), i))
         }
-        val fixImageHeight = requireContext().resources.getDimension(com.intuit.sdp.R.dimen._45sdp).toInt()
+        val fixImageHeight =
+            requireContext().resources.getDimension(com.intuit.sdp.R.dimen._45sdp).toInt()
         val rvHeight = fixImageHeight * list.size
         binding.rvTeamsListMenu.layoutParams.height = rvHeight
 
 
-        adapterTeamList = AdapterCustomerList(requireContext(), list,object :AdapterCustomerList.Click{
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onSeletect(position: Int) {
-                for(i in 0 until adapterTeamList?.getListt()?.size!!){
-                    if(position==i){
-                        adapterTeamList?.getListt()?.get(i)?.selectedStatus=true
+        adapterTeamList =
+            AdapterCustomerList(requireContext(), list, object : AdapterCustomerList.Click {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onSeletect(position: Int) {
+                    for (i in 0 until adapterTeamList?.getListt()?.size!!) {
+                        adapterTeamList?.getListt()?.get(i)?.selectedStatus = position == i
                     }
-                    else{
-                        adapterTeamList?.getListt()?.get(i)?.selectedStatus=false
-                    }
+                    adapterTeamList?.notifyDataSetChanged()
                 }
-                adapterTeamList?.notifyDataSetChanged()
-            }
-        })
+            })
         binding.rvTeamsListMenu.adapter = adapterTeamList
     }
 
@@ -309,21 +307,17 @@ class MenuFragment : Fragment() {
         val rvHeight = fixImageHeight * list.size
         binding.rvGroupListMenu.layoutParams.height = rvHeight
 
-         adapterGroupsList = AdapterGroupsList(requireContext(),true, list,object :AdapterGroupsList.Click{
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onSeletect(position: Int) {
-                for(i in 0 until adapterGroupsList?.getListt()?.size!!){
-                if(position==i){
-                     adapterGroupsList?.getListt()?.get(i)?.selected=true
+        adapterGroupsList =
+            AdapterGroupsList(requireContext(), true, list, object : AdapterGroupsList.Click {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onSeletect(position: Int) {
+                    for (i in 0 until adapterGroupsList?.getListt()?.size!!) {
+                        adapterGroupsList?.getListt()?.get(i)?.selected = position == i
+                    }
+                    Log.i("asdfjanskdf", "before notifiy list is\n${adapterGroupsList?.getListt()}")
+                    adapterGroupsList?.notifyDataSetChanged()
                 }
-                else{
-                    adapterGroupsList?.getListt()?.get(i)?.selected=false
-                }
-            }
-                Log.i("asdfjanskdf","before notifiy list is\n${adapterGroupsList?.getListt()}")
-                adapterGroupsList?.notifyDataSetChanged()
-            }
-        })
+            })
         binding.rvGroupListMenu.adapter = adapterGroupsList
     }
 
@@ -340,21 +334,17 @@ class MenuFragment : Fragment() {
 //        val adapter = AdapterJobsList(requireContext(), list)
 //        binding.rvJobsListMenu.adapter = adapter
 
-        adapterJobsList= AdapterGroupsList(requireContext(),false, list,object :AdapterGroupsList.Click{
-            @SuppressLint("NotifyDataSetChanged")
-            override fun onSeletect(position: Int) {
-                for(i in 0 until adapterJobsList?.getListt()?.size!!){
-                    if(position==i){
-                        adapterJobsList?.getListt()?.get(i)?.selected=true
+        adapterJobsList =
+            AdapterGroupsList(requireContext(), false, list, object : AdapterGroupsList.Click {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onSeletect(position: Int) {
+                    for (i in 0 until adapterJobsList?.getListt()?.size!!) {
+                        adapterJobsList?.getListt()?.get(i)?.selected = position == i
                     }
-                    else{
-                        adapterJobsList?.getListt()?.get(i)?.selected=false
-                    }
+                    Log.i("asdfjanskdf", "before notifiy list is\n${adapterJobsList?.getListt()}")
+                    adapterJobsList?.notifyDataSetChanged()
                 }
-                Log.i("asdfjanskdf","before notifiy list is\n${adapterJobsList?.getListt()}")
-                adapterJobsList?.notifyDataSetChanged()
-            }
-        })
+            })
         binding.rvJobsListMenu.adapter = adapterJobsList
 
     }

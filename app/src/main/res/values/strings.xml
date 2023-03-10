@@ -80,6 +80,29 @@
     <string name="account_infor">Account Infor</string>
     <string name="deactivate_your_account">Deactivate your account</string>
     <string name="delete_account">Delete Account</string>
+    <string name="profile_image">PROFILE IMAGE</string>
+    <string name="upload">UPLOAD</string>
+    <string name="uploadImageCondition">5.0mb size jpg, png, jpeg format image acepted</string>
+    <string name="name">NAME</string>
+    <string name="userName">USERNAME</string>
+    <string name="enterUserName">Enter User Name</string>
+    <string name="emaill">EMAIL</string>
+    <string name="phone_number">PHONE NUMBER</string>
+    <string name="about_yourself">ABOUT YOURSELF</string>
+    <string name="aboutSelf">Write about yourself</string>
+    <string name="done">Done</string>
+    <string name="de_active">De Active</string>
+    <string name="subTitleDeActiveAccountDilaog">If you deactivate your account, you won’t be able to receive messages. You can activate</string>
+    <string name="titleDeActiveAccountDialog">Do you want to\ndeactivate your account?</string>
+    <string name="group_image">GROUP IMAGE</string>
+    <string name="groupName">Group Name<font color="red">*</font></string>
+    <string name="_0_128">0/128</string>
+    <string name="enterGroupName">Enter a group name</string>
+    <string name="group_description">GROUP DESCRIPTION<font color="red">*</font></string>
+    <string name="maxLenthGroupDescription">0/256</string>
+    <string name="enter_a_description">Enter a description</string>
+    <string name="make_private">MAKE PRIVATE</string>
+    <string name="MakePrivateInfo">Private can only be viewed or joined by invitation.</string>
 
     <string name="view_profile">View Profile</string>
     <string name="settings_text">Settings</string>
