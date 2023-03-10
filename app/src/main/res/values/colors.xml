@@ -18,5 +18,5 @@
 
     <color name="onlineStatusColor">#02d42e</color>
     <color name="offlineStatusColor">#b8b8b8</color>
-
+    <color name="logout_red">#FF0000</color>
 </resources>

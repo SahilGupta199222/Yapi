@@ -5,7 +5,9 @@ import android.view.View
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import com.yapi.MainActivity
 import com.yapi.R
+import com.yapi.common.hideKeyboard
 
 class SecondStepViewModel() : ViewModel() {
 
@@ -17,6 +19,9 @@ class SecondStepViewModel() : ViewModel() {
                 Log.e("Hello_Text==","Helloo")
                 // showMessage("Hello")
                 view.findNavController().navigate(R.id.action_secondStepCreateTeam_to_thirdStepCreateTeam)
+            }
+            R.id.linearTopSecondStep,R.id.constrantsTopSecondStep->{
+                MainActivity.activity!!.get()!!.hideKeyboard()
             }
         }
     }

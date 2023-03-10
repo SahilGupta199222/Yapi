@@ -11,6 +11,8 @@
             type="android.view.View" />
     </data>
 <LinearLayout
+    android:id="@+id/linearTopSignup"
+    android:onClick="@{vModel::onClick}"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -46,6 +48,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
+                android:id="@+id/constarintsTopSignup"
+                android:onClick="@{vModel::onClick}"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/startMainMargin"
                 android:layout_marginTop="@dimen/startMainMargin"

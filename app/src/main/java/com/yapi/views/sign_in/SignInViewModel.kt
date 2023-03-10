@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.yapi.MainActivity
 import com.yapi.R
+import com.yapi.common.hideKeyboard
+import com.yapi.common.hideProgress
 import com.yapi.common.showToastMessage
 
 class SignInViewModel : ViewModel() {
@@ -25,6 +27,10 @@ class SignInViewModel : ViewModel() {
             }
             R.id.txtSignIn->{
                 view.findNavController().navigate(R.id.action_signInFragment_to_signUpFragment2)
+            }
+            R.id.linearTopSignIn,R.id.constraintsTopSignIN->{
+                //for hide keyboard
+                MainActivity.activity!!.get()!!.hideKeyboard()
             }
         }
     }

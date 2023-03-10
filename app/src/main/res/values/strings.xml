@@ -80,4 +80,8 @@
     <string name="account_infor">Account Infor</string>
     <string name="deactivate_your_account">Deactivate your account</string>
     <string name="delete_account">Delete Account</string>
+
+    <string name="view_profile">View Profile</string>
+    <string name="settings_text">Settings</string>
+    <string name="logout_text">Logout</string>
 </resources>

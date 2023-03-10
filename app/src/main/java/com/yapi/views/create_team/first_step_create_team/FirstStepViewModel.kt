@@ -8,7 +8,9 @@ import androidx.databinding.ObservableField
 import androidx.databinding.adapters.TextViewBindingAdapter.AfterTextChanged
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import com.yapi.MainActivity
 import com.yapi.R
+import com.yapi.common.hideKeyboard
 
 class FirstStepViewModel() : ViewModel() {
 
@@ -26,6 +28,9 @@ class FirstStepViewModel() : ViewModel() {
                 }else{
                     Toast.makeText(view.context, "Please enter company name", Toast.LENGTH_SHORT).show()
                 }
+            }
+            R.id.linearTopFirstStep,R.id.constraintsTopFirstStep->{
+                MainActivity.activity!!.get()!!.hideKeyboard()
             }
         }
     }

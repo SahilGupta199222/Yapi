@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardElevation="@dimen/_10sdp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp">
+
+        <ImageView
+            android:id="@+id/ivProfile_photo"
+            android:layout_width="@dimen/iconSize"
+            android:layout_height="@dimen/iconSize"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:src="@drawable/menu_popup_person"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/larsseit_medium"
+            android:text="@string/view_profile"
+            android:textColor="@color/darkGrey"
+            android:textSize="@dimen/normalTextSize"
+            app:layout_constraintStart_toEndOf="@+id/ivProfile_photo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/view_menu1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:background="#FAFAFA"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvProfile" />
+
+
+        <ImageView
+            android:id="@+id/ivmenuSetting"
+            android:layout_width="@dimen/iconSize"
+            android:layout_height="@dimen/iconSize"
+            android:src="@drawable/menu_settings"
+            app:layout_constraintStart_toStartOf="@+id/ivProfile_photo"
+            app:layout_constraintTop_toBottomOf="@+id/view_menu1" />
+
+        <TextView
+            android:id="@+id/tvmenuSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/larsseit_medium"
+            android:text="@string/settings_text"
+            android:textColor="@color/darkGrey"
+            android:textSize="@dimen/normalTextSize"
+            app:layout_constraintStart_toEndOf="@+id/ivmenuSetting"
+            app:layout_constraintTop_toBottomOf="@+id/view_menu1" />
+
+        <View
+            android:id="@+id/viewMenu2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:background="#FAFAFA"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvmenuSetting" />
+
+        <ImageView
+            android:id="@+id/ivmenulogout"
+            android:layout_width="@dimen/iconSize"
+            android:layout_height="@dimen/iconSize"
+            android:src="@drawable/menu_logout"
+            app:layout_constraintStart_toStartOf="@+id/ivProfile_photo"
+            app:layout_constraintTop_toBottomOf="@+id/viewMenu2" />
+
+        <TextView
+            android:id="@+id/tvmenuLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/larsseit_medium"
+            android:text="@string/logout_text"
+            android:textColor="@color/logout_red"
+            android:textSize="@dimen/normalTextSize"
+            app:layout_constraintStart_toEndOf="@+id/ivmenulogout"
+            app:layout_constraintTop_toBottomOf="@+id/viewMenu2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

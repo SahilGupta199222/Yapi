@@ -7,7 +7,9 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.yapi.MainActivity
 import com.yapi.R
+import com.yapi.common.hideKeyboard
 
 class SignupViewModel():ViewModel() {
 
@@ -19,6 +21,9 @@ class SignupViewModel():ViewModel() {
         {
             R.id.btnSignUp->{
                 view.findNavController().navigate(R.id.action_signUpFragment2_to_signUpCodeFragment)
+            }
+            R.id.linearTopSignup,R.id.constarintsTopSignup->{
+                MainActivity.activity!!.get()!!.hideKeyboard()
             }
         }
     }

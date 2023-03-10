@@ -11,10 +11,12 @@
             type="android.view.View" />
     </data>
 <LinearLayout
+    android:id="@+id/linearTopSignup"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_weight="100"
+    android:onClick="@{vModel::onClick}"
     android:background="@drawable/screen_background"
     tools:context=".views.signup.SignUpFragment">
     <LinearLayout
@@ -45,6 +47,8 @@
                 android:background="@color/white">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constarintsTopSignup"
+                android:onClick="@{vModel::onClick}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/startMainMargin"

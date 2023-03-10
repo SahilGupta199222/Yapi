@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import com.yapi.R
 import com.yapi.databinding.FragmentMenuBinding
 
@@ -27,11 +28,13 @@ class MenuFragment : Fragment() {
     private var adapterLeadsList:AdapterCustomerList?=null
     private var adapterSettingsList:AdapterSettingList?=null
 
+    val viewModel:MenuViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding= FragmentMenuBinding.inflate(LayoutInflater.from(requireActivity()))
+        binding.mViewmodel=viewModel
         return binding.root
     }
 

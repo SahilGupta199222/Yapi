@@ -11,10 +11,12 @@
             type="android.view.View" />
     </data>
 <LinearLayout
+    android:id="@+id/linearTopSignIn"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="100"
+    android:onClick="@{vModel::onClick}"
     android:background="@drawable/screen_background"
     tools:context=".views.sign_in.SignInFragment">
     <LinearLayout
@@ -41,16 +43,16 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/white"
-            android:layout_weight="65"
-            >
+            android:layout_weight="65">
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintsTopSignIN"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/startMainMargin"
                 android:paddingStart="@dimen/startMainMargin"
+                android:onClick="@{vModel::onClick}"
                 android:paddingEnd="@dimen/startMainMargin"
-                android:background="@color/white"
-                >
+                android:background="@color/white">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtTitleSignIn"

@@ -15,8 +15,10 @@
     </data>
 
     <LinearLayout
+        android:id="@+id/linearTopSignIn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:onClick="@{vModel::onClick}"
         android:background="@drawable/screen_background"
         android:orientation="vertical"
         android:weightSum="100"
@@ -50,8 +52,10 @@
                 android:background="@color/white">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintsTopSignIN"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="@{vModel::onClick}"
                     android:background="@color/white"
                     android:paddingStart="@dimen/startMainMargin"
                     android:paddingTop="@dimen/startMainMargin"

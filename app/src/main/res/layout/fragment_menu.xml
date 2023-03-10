@@ -2,6 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="mViewmodel"
+            type="com.yapi.views.menu_screen.MenuViewModel" />
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -84,6 +89,7 @@
                     android:layout_height="@dimen/_30sdp"
                     android:layout_alignParentEnd="true"
                     android:layout_gravity="end"
+                    android:onClick="@{mViewmodel::onClick}"
                     android:scaleType="centerCrop"
                     android:src="@drawable/demo_photo"
                     app:riv_corner_radius="8dp"
