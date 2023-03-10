@@ -81,8 +81,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imgLogoMenu"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                >
+                app:layout_constraintBottom_toBottomOf="parent">
+
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/imgProfilePicRvCustomerList"
                     android:layout_width="@dimen/_30sdp"
