@@ -16,7 +16,7 @@ class MenuViewModel():ViewModel() {
     {
         when(view.id)
         {
-           com.yapi.R.id.imgProfilePicRvCustomerList->{
+           com.yapi.R.id.imgProfilePicCustomerList->{
                 val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
                     .inflate(com.yapi.R.layout.menu_popup_options, null, false)
              //   val popUp = PopupWindow(mView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, false)
@@ -26,7 +26,7 @@ class MenuViewModel():ViewModel() {
                 popUp.isOutsideTouchable = true
 
                //Solution
-                popUp.showAsDropDown(view.findViewById(com.yapi.R.id.imgProfilePicRvCustomerList))
+                popUp.showAsDropDown(view.findViewById(com.yapi.R.id.imgProfilePicCustomerList))
             }
         }
     }
