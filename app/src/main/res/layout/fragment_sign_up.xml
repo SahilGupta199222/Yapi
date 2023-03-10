@@ -154,20 +154,14 @@
                 android:id="@+id/btnSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/startMainMargin"
-                android:layout_marginTop="@dimen/bottomMarggin"
-                android:layout_marginEnd="@dimen/startMainMargin"
-                android:layout_marginBottom="@dimen/bottomMarggin"
+
                 android:background="@drawable/btn_drawable_blue"
                 android:fontFamily="@font/larsseit_bold"
-                android:onClick="@{vModel::onClick}"
                 android:text="@string/ccontinue"
                 android:textAllCaps="true"
                 android:onClick="@{vModel::onClick}"
                 android:textSize="@dimen/normalTextSize"
-                android:fontFamily="@font/larsseit_bold"
                 android:textColor="@color/white"
-                android:background="@drawable/btn_drawable_blue"
                 android:layout_marginStart="@dimen/_23sdp"
                 android:layout_marginEnd="@dimen/_23sdp"
                 android:layout_marginTop="@dimen/topTwentyFiveMargin"
@@ -175,7 +169,7 @@
                 />
     </LinearLayout>
 </LinearLayout>
-                android:textSize="@dimen/normalTextSize" />
-        </LinearLayout>
-    </LinearLayout>
+
+
+
 </layout>
