@@ -143,15 +143,15 @@
                 android:layout_height="wrap_content"
                 android:text="@string/ccontinue"
                 android:textAllCaps="true"
-                android:layout_marginTop="@dimen/bottomMarggin"
                 android:onClick="@{vModel::onClick}"
                 android:textSize="@dimen/normalTextSize"
                 android:fontFamily="@font/larsseit_bold"
                 android:textColor="@color/white"
                 android:background="@drawable/btn_drawable_blue"
-                android:layout_marginStart="@dimen/startMainMargin"
-                android:layout_marginEnd="@dimen/startMainMargin"
-                android:layout_marginBottom="@dimen/bottomMarggin"
+                android:layout_marginStart="@dimen/_23sdp"
+                android:layout_marginEnd="@dimen/_23sdp"
+                android:layout_marginTop="@dimen/topTwentyFiveMargin"
+                android:layout_marginBottom="@dimen/topTwentyFiveMargin"
                 />
     </LinearLayout>
 </LinearLayout>

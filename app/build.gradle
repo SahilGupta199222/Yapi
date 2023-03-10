@@ -84,6 +84,9 @@ dependencies {
     // for round image
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
+    // for country code pick
+    implementation 'com.hbb20:ccp:2.6.1'
+
 
 }
 // Allow references to generated code
