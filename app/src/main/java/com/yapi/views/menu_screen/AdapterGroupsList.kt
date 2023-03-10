@@ -45,8 +45,8 @@ class MyViewHolder(view:View):RecyclerView.ViewHolder(view){
         }
         else{
             holder.count.visibility=View.GONE
-            holder.icon.setColorFilter(ContextCompat.getColor(context,R.color.darkLiteGrey))
-            holder.title.setTextColor(ContextCompat.getColor(context,R.color.darkLiteGrey))
+            holder.icon.setColorFilter(ContextCompat.getColor(context,R.color.medium_grey_color))
+            holder.title.setTextColor(ContextCompat.getColor(context,R.color.medium_grey_color))
 
         }
         if(list[position].selected){
