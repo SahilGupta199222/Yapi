@@ -99,7 +99,7 @@
         app:layout_constraintStart_toEndOf="@+id/txtTempDotProfile"
         />
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnEditProfile"
+        android:id="@+id/btnProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/btn_drawable_blue"
@@ -122,7 +122,7 @@
         android:textSize="@dimen/normalTextSize"
         android:fontFamily="@font/larsseit_bold"
         android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@+id/btnEditProfile"
+        app:layout_constraintTop_toBottomOf="@+id/btnProfile"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="@dimen/_15sdp"
         />
@@ -404,12 +404,21 @@
         android:layout_marginTop="@dimen/_15sdp"
         />
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutDeActiveProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/topFiveMargin"
+        app:layout_constraintTop_toBottomOf="@+id/txtTempDeActiveAccountProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutImgDeActiveProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/topFiveMargin"
         android:background="@drawable/round_lite_gray"
-        app:layout_constraintTop_toBottomOf="@+id/txtTempDeActiveAccountProfile"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         >
 
@@ -426,10 +435,9 @@
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtTempDeActiveLiteGreyProfile"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="@dimen/normalTextSize"
         android:textColor="@color/darkGrey"
@@ -438,17 +446,28 @@
         android:layout_marginStart="@dimen/topMargin"
         app:layout_constraintTop_toTopOf="@+id/layoutImgDeActiveProfile"
         app:layout_constraintBottom_toBottomOf="@+id/layoutImgDeActiveProfile"
-        app:layout_constraintStart_toEndOf="@+id/layoutImgRegionProfile"
+        app:layout_constraintStart_toEndOf="@+id/layoutImgDeActiveProfile"
+        app:layout_constraintEnd_toEndOf="parent"
         />
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutDeleteAccountProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/topFiveMargin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutDeActiveProfile"
+        >
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutImgDeleteAccountProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/topFiveMargin"
             android:background="@drawable/round_lite_gray"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layoutImgDeActiveProfile">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgTempDeleteAccountProfile"
@@ -462,21 +481,21 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtTempDeleteAccountLiteGreyProfile"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="@dimen/normalTextSize"
         android:textColor="@color/darkRed"
         android:fontFamily="@font/larsseit_medium"
         android:text="@string/delete_account"
         android:layout_marginStart="@dimen/topMargin"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/layoutImgDeleteAccountProfile"
         app:layout_constraintBottom_toBottomOf="@+id/layoutImgDeleteAccountProfile"
         app:layout_constraintStart_toEndOf="@+id/layoutImgDeleteAccountProfile"
         />
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

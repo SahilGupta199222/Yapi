@@ -28,6 +28,7 @@
     <dimen name="topMarginTitle">@dimen/_45sdp</dimen>
     <dimen name="mobileTitleTextSize">@dimen/_18ssp</dimen>
     <dimen name="topFiveMargin">@dimen/_5sdp</dimen>
+    <dimen name="topTwentyFiveMargin">@dimen/_25sdp</dimen>
 
     <dimen name="line_spacing_extra">@dimen/_5sdp</dimen>
 
