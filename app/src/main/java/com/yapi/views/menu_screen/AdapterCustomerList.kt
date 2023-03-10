@@ -44,7 +44,7 @@ class AdapterCustomerList(val context: Context, val list:ArrayList<PojoCustomerL
         else
         {
             holder.unSeenMsgCount.visibility=View.INVISIBLE
-            holder.userName.setTextColor(ContextCompat.getColor(context,R.color.darkLiteGrey))
+            holder.userName.setTextColor(ContextCompat.getColor(context,R.color.medium_grey_color))
         }
         if(list[position].selectedStatus){
             holder.selectedLine.visibility=View.VISIBLE

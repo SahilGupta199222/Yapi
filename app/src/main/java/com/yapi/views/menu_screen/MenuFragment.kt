@@ -22,10 +22,10 @@ class MenuFragment : Fragment() {
     private var settingListClicked = false
     private var adapterGroupsList:AdapterGroupsList?=null
     private var adapterJobsList:AdapterGroupsList?=null
-    private var adaterCustomerList:AdapterCustomerList?=null
-    private var adaterTeamList:AdapterCustomerList?=null
-    private var adaterLeadsList:AdapterCustomerList?=null
-    private var adaterSettingsList:AdapterCustomerList?=null
+    private var adapterCustomerList:AdapterCustomerList?=null
+    private var adapterTeamList:AdapterCustomerList?=null
+    private var adapterLeadsList:AdapterCustomerList?=null
+    private var adapterSettingsList:AdapterSettingList?=null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -191,29 +191,27 @@ init()
     }
 
     private fun setSettingListAdapter() {
-        val list = ArrayList<PojoCustomerList>()
-        val tempOnlineList = listOf(true, false)
-        for (i in 0 until 5) {
-            list.add(PojoCustomerList("ab", "Customer${i + 34}", tempOnlineList.random(), i))
-        }
+        val list = ArrayList<PojoSettingList>()
+            list.add(PojoSettingList("User Management",  false))
+            list.add(PojoSettingList("Workspaces Management",  false))
         val fixImageHeight = requireContext().resources.getDimension(com.intuit.sdp.R.dimen._45sdp).toInt()
         val rvHeight = fixImageHeight * list.size
         binding.rvSettingsListMenu.layoutParams.height = rvHeight
-        adaterSettingsList = AdapterCustomerList(requireContext(), list,object :AdapterCustomerList.Click{
+        adapterSettingsList = AdapterSettingList(requireContext(), list,object :AdapterSettingList.Click{
             @SuppressLint("NotifyDataSetChanged")
-            override fun onSeletect(position: Int) {
-                for(i in 0 until adaterSettingsList?.getListt()?.size!!){
+            override fun onSelected(position: Int) {
+                for(i in 0 until adapterSettingsList?.getListt()?.size!!){
                     if(position==i){
-                        adaterSettingsList?.getListt()?.get(i)?.selectedStatus=true
+                        adapterSettingsList?.getListt()?.get(i)?.selectedStatus=true
                     }
                     else{
-                        adaterSettingsList?.getListt()?.get(i)?.selectedStatus=false
+                        adapterSettingsList?.getListt()?.get(i)?.selectedStatus=false
                     }
                 }
-                adaterSettingsList?.notifyDataSetChanged()
+                adapterSettingsList?.notifyDataSetChanged()
             }
         })
-        binding.rvSettingsListMenu.adapter = adaterSettingsList
+        binding.rvSettingsListMenu.adapter = adapterSettingsList
     }
     private fun setCustomerListAdapter() {
         val list = ArrayList<PojoCustomerList>()
@@ -225,21 +223,21 @@ init()
         val rvHeight = fixImageHeight * list.size
         binding.rvCustomersListMenu.layoutParams.height = rvHeight
 
-        adaterCustomerList = AdapterCustomerList(requireContext(), list,object :AdapterCustomerList.Click{
+        adapterCustomerList = AdapterCustomerList(requireContext(), list,object :AdapterCustomerList.Click{
             @SuppressLint("NotifyDataSetChanged")
             override fun onSeletect(position: Int) {
-                for(i in 0 until adaterCustomerList?.getListt()?.size!!){
+                for(i in 0 until adapterCustomerList?.getListt()?.size!!){
                     if(position==i){
-                        adaterCustomerList?.getListt()?.get(i)?.selectedStatus=true
+                        adapterCustomerList?.getListt()?.get(i)?.selectedStatus=true
                     }
                     else{
-                        adaterCustomerList?.getListt()?.get(i)?.selectedStatus=false
+                        adapterCustomerList?.getListt()?.get(i)?.selectedStatus=false
                     }
                 }
-                adaterCustomerList?.notifyDataSetChanged()
+                adapterCustomerList?.notifyDataSetChanged()
             }
         })
-        binding.rvCustomersListMenu.adapter = adaterCustomerList
+        binding.rvCustomersListMenu.adapter = adapterCustomerList
     }
     private fun rvLeadsListMenu() {
         val list = ArrayList<PojoCustomerList>()
@@ -253,21 +251,21 @@ init()
 
 
 
-        adaterLeadsList = AdapterCustomerList(requireContext(), list,object :AdapterCustomerList.Click{
+        adapterLeadsList = AdapterCustomerList(requireContext(), list,object :AdapterCustomerList.Click{
             @SuppressLint("NotifyDataSetChanged")
             override fun onSeletect(position: Int) {
-                for(i in 0 until adaterLeadsList?.getListt()?.size!!){
+                for(i in 0 until adapterLeadsList?.getListt()?.size!!){
                     if(position==i){
-                        adaterLeadsList?.getListt()?.get(i)?.selectedStatus=true
+                        adapterLeadsList?.getListt()?.get(i)?.selectedStatus=true
                     }
                     else{
-                        adaterLeadsList?.getListt()?.get(i)?.selectedStatus=false
+                        adapterLeadsList?.getListt()?.get(i)?.selectedStatus=false
                     }
                 }
-                adaterLeadsList?.notifyDataSetChanged()
+                adapterLeadsList?.notifyDataSetChanged()
             }
         })
-        binding.rvLeadsListMenu.adapter = adaterLeadsList
+        binding.rvLeadsListMenu.adapter = adapterLeadsList
     }
     private fun setTeamListAdapter() {
         val list = ArrayList<PojoCustomerList>()
@@ -280,21 +278,21 @@ init()
         binding.rvTeamsListMenu.layoutParams.height = rvHeight
 
 
-        adaterTeamList = AdapterCustomerList(requireContext(), list,object :AdapterCustomerList.Click{
+        adapterTeamList = AdapterCustomerList(requireContext(), list,object :AdapterCustomerList.Click{
             @SuppressLint("NotifyDataSetChanged")
             override fun onSeletect(position: Int) {
-                for(i in 0 until adaterTeamList?.getListt()?.size!!){
+                for(i in 0 until adapterTeamList?.getListt()?.size!!){
                     if(position==i){
-                        adaterTeamList?.getListt()?.get(i)?.selectedStatus=true
+                        adapterTeamList?.getListt()?.get(i)?.selectedStatus=true
                     }
                     else{
-                        adaterTeamList?.getListt()?.get(i)?.selectedStatus=false
+                        adapterTeamList?.getListt()?.get(i)?.selectedStatus=false
                     }
                 }
-                adaterTeamList?.notifyDataSetChanged()
+                adapterTeamList?.notifyDataSetChanged()
             }
         })
-        binding.rvTeamsListMenu.adapter = adaterTeamList
+        binding.rvTeamsListMenu.adapter = adapterTeamList
     }
 
     private fun setGroupListAdapter() {
