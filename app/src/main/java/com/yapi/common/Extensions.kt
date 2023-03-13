@@ -16,6 +16,13 @@ fun Activity.hideKeyboard() {
         imm?.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
+fun Activity.isEmailValid(email: String): String {
+     if(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+         return ""
+     }else{
+         return "Email is not valid"
+     }
+}
 
 fun Activity.showMessage(message: String) {
     Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()

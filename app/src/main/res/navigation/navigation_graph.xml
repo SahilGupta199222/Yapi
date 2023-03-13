@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/signInFragment">
+    app:startDestination="@id/chatEmptyFragment">
 
     <fragment
         android:id="@+id/signUpFragment2"
@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_menuFragment_to_createGroupFragment"
             app:destination="@id/createGroupFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 
 
@@ -99,5 +102,37 @@
     <fragment
         android:id="@+id/addPeopleFragment"
         android:name="com.yapi.views.add_people.AddPeopleFragment"
-        android:label="AddPeopleFragment" />
+        android:label="AddPeopleFragment" >
+        <action
+            android:id="@+id/action_addPeopleFragment_to_addPeopleEmailFragment"
+            app:destination="@id/addPeopleEmailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.yapi.views.profile.ProfileFragment"
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.yapi.views.edit_profile.EditProfileFragment"
+        android:label="EditProfileFragment" />
+    <fragment
+        android:id="@+id/chipSetDemoFragment"
+        android:name="com.yapi.views.chipset_demo.ChipSetDemoFragment"
+        android:label="ChipSetDemoFragment" />
+    <fragment
+        android:id="@+id/addPeopleEmailFragment"
+        android:name="com.yapi.views.add_people_email.AddPeopleEmailFragment"
+        android:label="AddPeopleEmailFragment" >
+        <action
+            android:id="@+id/action_addPeopleEmailFragment_to_addPeopleEmailConfirmationFragment"
+            app:destination="@id/addPeopleEmailConfirmationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPeopleEmailConfirmationFragment"
+        android:name="com.yapi.views.add_people_email_confirmation.AddPeopleEmailConfirmationFragment"
+        android:label="AddPeopleEmailConfirmationFragment" />
 </navigation>

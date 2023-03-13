@@ -12,6 +12,9 @@ class ViewModelAddPeople : ViewModel() {
             R.id.imgCancelAddPeople -> {
                 view.findNavController().popBackStack()
             }
+            R.id.layoutSendEmailInvitationAddPeople->{
+                view.findNavController().navigate(R.id.action_addPeopleFragment_to_addPeopleEmailFragment)
+            }
         }
     }
 
