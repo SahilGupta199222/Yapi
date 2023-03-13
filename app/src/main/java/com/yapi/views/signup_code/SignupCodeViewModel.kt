@@ -2,6 +2,8 @@ package com.yapi.views.signup_code
 
 import android.view.View
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.hideKeyboard
@@ -12,6 +14,9 @@ class SignupCodeViewModel : ViewModel() {
         when (view.id) {
             R.id.linearTopSignupCode, R.id.constraintsTopSignupCode -> {
                 MainActivity.activity!!.get()!!.hideKeyboard()
+            }
+            R.id.btnSignUpCode->{
+                view.findNavController().navigate(R.id.action_signUpCodeFragment_to_signupTeam)
             }
         }
     }

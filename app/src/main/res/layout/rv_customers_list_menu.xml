@@ -63,6 +63,7 @@
         android:fontFamily="@font/larsseit_medium"
         android:textSize="@dimen/normalTextSize"
         android:paddingStart="@dimen/startPaddingNormal"
+        android:paddingEnd="@dimen/startPaddingNormal"
         android:singleLine="true"
         android:textColor="@color/medium_grey_color"
         app:layout_constraintTop_toTopOf="parent"

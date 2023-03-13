@@ -162,8 +162,7 @@
             android:paddingBottom="@dimen/_10ssp"
             app:layout_constraintTop_toBottomOf="@+id/layoutBoatMenu"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            >
+            app:layout_constraintEnd_toEndOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgGroupsMenu"
@@ -807,7 +806,7 @@
                 android:layout_width="@dimen/iconSize"
                 android:layout_height="@dimen/iconSize"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_baseline_settings_24"
+                android:src="@drawable/menu_setting_icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>

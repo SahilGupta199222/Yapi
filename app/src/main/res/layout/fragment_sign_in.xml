@@ -47,8 +47,10 @@
             <androidx.core.widget.NestedScrollView
                 android:id="@+id/nestedScrollViewSignIn"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="65"
+                android:fillViewport="true"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:background="@color/white">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -116,12 +118,13 @@
                             android:hint="@string/enterEmail"
                             android:inputType="textEmailAddress"
                             android:onTextChanged="@{vModel::onTextChanged}"
+                            android:afterTextChanged="@{vModel::AfterTextChanged}"
                             android:paddingStart="@dimen/etHorizontalPadding"
                             android:paddingTop="@dimen/etVerticalPadding"
                             android:paddingEnd="@dimen/etHorizontalPadding"
                             android:paddingBottom="@dimen/etVerticalPadding"
                             android:text="@={vModel.emailFieldValue}"
-                            android:textColor="@color/darkLiteGrey"
+                            android:textColor="@color/darkGrey"
                             android:textSize="@dimen/normalTextSize"
                             app:layout_constraintEnd_toStartOf="@+id/imgEmailValidSignIn"
                             app:layout_constraintStart_toStartOf="parent"
@@ -178,6 +181,7 @@
                         app:boxStrokeWidthFocused="0dp"
                         app:hintEnabled="false"
 
+                        android:layout_marginBottom="@dimen/_200sdp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/txtTempPasswordNameSignUp"
@@ -196,7 +200,7 @@
                             android:paddingEnd="@dimen/etHorizontalPadding"
                             android:paddingBottom="@dimen/etVerticalPadding"
                             android:text="@={vModel.passwordFieldValue}"
-                            android:textColor="@color/darkLiteGrey"
+                            android:textColor="@color/darkGrey"
                             android:textSize="@dimen/normalTextSize"
                             android:textStyle="normal"
                             tools:ignore="RtlSymmetry" />

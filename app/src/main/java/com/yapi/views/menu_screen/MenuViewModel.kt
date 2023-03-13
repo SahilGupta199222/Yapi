@@ -45,7 +45,7 @@ class MenuViewModel():ViewModel() {
                    dialog.show()
                }
             }
-            com.yapi.R.id.layoutAddNewGroupsMenu->{
+         R.id.layoutAddNewGroupsMenu->{
                 view.findNavController().navigate(com.yapi.R.id.action_menuFragment_to_createGroupFragment)
             }
         }

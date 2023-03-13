@@ -228,9 +228,17 @@ class MenuFragment : Fragment() {
     private fun setCustomerListAdapter() {
         val list = ArrayList<PojoCustomerList>()
         val tempOnlineList = listOf(true, false)
-        for (i in 0 until 5) {
+       /* for (i in 0 until 5) {
             list.add(PojoCustomerList("ab", "Customer${i + 34}", tempOnlineList.random(), i))
-        }
+        }*/
+
+        list.add(PojoCustomerList("ab", "Omar Press", tempOnlineList.random(), 1))
+        list.add(PojoCustomerList("ab", "Adison Septim...", tempOnlineList.random(), 1))
+        list.add(PojoCustomerList("ab", "Talan George", tempOnlineList.random(), 0))
+        list.add(PojoCustomerList("ab", "Madelyn Levin", tempOnlineList.random(), 1))
+        list.add(PojoCustomerList("ab", "Zaire Stanton", tempOnlineList.random(), 0))
+
+
         val fixImageHeight =
             requireContext().resources.getDimension(com.intuit.sdp.R.dimen._45sdp).toInt()
         val rvHeight = fixImageHeight * list.size
@@ -252,9 +260,16 @@ class MenuFragment : Fragment() {
     private fun rvLeadsListMenu() {
         val list = ArrayList<PojoCustomerList>()
         val tempOnlineList = listOf(true, false)
-        for (i in 0 until 5) {
+       /* for (i in 0 until 5) {
             list.add(PojoCustomerList("ab", "Customer${i + 34}", tempOnlineList.random(), i))
-        }
+        }*/
+
+        list.add(PojoCustomerList("ab", "Bardi", tempOnlineList.random(), 1))
+        list.add(PojoCustomerList("ab", "Lincoln Rosser", tempOnlineList.random(), 2))
+        list.add(PojoCustomerList("ab", "Jakob Vetrovs", tempOnlineList.random(), 2))
+        list.add(PojoCustomerList("ab", "John C Flood", tempOnlineList.random(), 0))
+
+
         val fixImageHeight =
             requireContext().resources.getDimension(com.intuit.sdp.R.dimen._45sdp).toInt()
         val rvHeight = fixImageHeight * list.size
@@ -278,9 +293,17 @@ class MenuFragment : Fragment() {
     private fun setTeamListAdapter() {
         val list = ArrayList<PojoCustomerList>()
         val tempOnlineList = listOf(true, false)
-        for (i in 0 until 5) {
+    /*    for (i in 0 until 5) {
             list.add(PojoCustomerList("ab", "Customer${i + 34}", tempOnlineList.random(), i))
-        }
+        }*/
+
+        list.add(PojoCustomerList("ab", "Omar Press", tempOnlineList.random(), 1))
+        list.add(PojoCustomerList("ab", "Adison Septim...", tempOnlineList.random(), 2))
+        list.add(PojoCustomerList("ab", "Talan George", tempOnlineList.random(), 1))
+        list.add(PojoCustomerList("ab", "Madelyn Levin", tempOnlineList.random(), 0))
+        list.add(PojoCustomerList("ab", "Zaire Stanton", tempOnlineList.random(), 0))
+
+
         val fixImageHeight =
             requireContext().resources.getDimension(com.intuit.sdp.R.dimen._45sdp).toInt()
         val rvHeight = fixImageHeight * list.size
@@ -302,9 +325,14 @@ class MenuFragment : Fragment() {
 
     private fun setGroupListAdapter() {
         val list = ArrayList<PojoGroupMembersList>()
-        for (i in 0 until 5) {
+       /* for (i in 0 until 5) {
             list.add(PojoGroupMembersList("Group ${i + 2}", i, false))
-        }
+        }*/
+        list.add(PojoGroupMembersList("Sales", 1, false))
+        list.add(PojoGroupMembersList("Human Resource", 2, false))
+        list.add(PojoGroupMembersList("Operations", 1, false))
+        list.add(PojoGroupMembersList("Reports", 2, false))
+        list.add(PojoGroupMembersList("Engineers", 2, false))
 
         val fixImageHeight =
             requireContext().resources.getDimension(com.intuit.sdp.R.dimen._36sdp).toInt()
@@ -327,9 +355,14 @@ class MenuFragment : Fragment() {
 
     private fun setJobsListAdapter() {
         val list = ArrayList<PojoGroupMembersList>()
-        for (i in 0 until 5) {
+       /* for (i in 0 until 5) {
             list.add(PojoGroupMembersList("Jobs ${i + 2}", i, false))
-        }
+        }*/
+
+        list.add(PojoGroupMembersList("Discount_SH1h73", 1, false))
+        list.add(PojoGroupMembersList("Palosi_39875", 2, false))
+        list.add(PojoGroupMembersList("Skiffington_h90", 1, false))
+
         val fixImageHeight =
             requireContext().resources.getDimension(com.intuit.sdp.R.dimen._36sdp).toInt()
         val rvHeight = fixImageHeight * list.size

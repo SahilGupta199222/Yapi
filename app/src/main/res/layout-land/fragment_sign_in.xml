@@ -116,6 +116,7 @@
                         android:textColor="@color/darkLiteGrey"
                         android:textSize="@dimen/normalTextSize"
                         android:onTextChanged="@{vModel::onTextChanged}"
+                        android:afterTextChanged="@{vModel::AfterTextChanged}"
                         app:layout_constraintEnd_toStartOf="@+id/imgEmailValidSignIn"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

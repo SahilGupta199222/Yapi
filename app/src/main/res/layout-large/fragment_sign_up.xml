@@ -116,6 +116,7 @@
                         android:inputType="textEmailAddress"
                         android:text="@={vModel.emailValueField}"
                         android:onTextChanged="@{vModel::onTextChanged}"
+                        android:afterTextChanged="@{vModel::AfterTextChanged}"
                         android:paddingStart="@dimen/etHorizontalPadding"
                         android:paddingTop="@dimen/etVerticalPadding"
                         android:paddingEnd="@dimen/etHorizontalPadding"

@@ -3,12 +3,14 @@ package com.yapi.common
 import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
+import android.text.TextUtils
+import android.util.Patterns
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.yapi.MainActivity
-import com.yapi.R
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 fun Activity.hideKeyboard() {
     this.currentFocus?.let { view ->
@@ -53,4 +55,12 @@ fun getTextSizeValue(text1:Float)
 
 fun showToastMessage(message: String) {
     Toast.makeText(MainActivity.activity!!.get(), message, Toast.LENGTH_SHORT).show()
+}
+
+fun isValidEmail(target: CharSequence?): Boolean {
+    return if (TextUtils.isEmpty(target)) {
+        false
+    } else {
+        Patterns.EMAIL_ADDRESS.matcher(target).matches()
+    }
 }

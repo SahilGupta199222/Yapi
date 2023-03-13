@@ -33,9 +33,9 @@ class SignUpCodeFragment : Fragment() {
 
     private fun onClick(){
         binding.apply{
-           btnSignUpCode.setOnClickListener {
+          /* btnSignUpCode.setOnClickListener {
                findNavController().navigate(R.id.action_signUpCodeFragment_to_signupTeam)
-           }
+           }*/
         }
     }
 }
