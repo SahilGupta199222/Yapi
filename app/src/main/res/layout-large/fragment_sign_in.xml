@@ -114,7 +114,7 @@
                         android:paddingEnd="@dimen/etHorizontalPadding"
                         android:paddingBottom="@dimen/etVerticalPadding"
                         android:text="@={vModel.emailFieldValue}"
-                        android:textColor="@color/darkLiteGrey"
+                        android:textColor="@color/darkGrey"
                         android:textSize="@dimen/normalTextSize"
                         android:onTextChanged="@{vModel::onTextChanged}"
                         android:afterTextChanged="@{vModel::AfterTextChanged}"
@@ -185,14 +185,13 @@
                         android:fontFamily="@font/larsseit_regular"
                         android:hint="@string/enterPassword"
                         android:inputType="textPassword"
-                        android:textColor="@color/darkLiteGrey"
+                        android:textColor="@color/darkGrey"
                         android:textSize="@dimen/normalTextSize"
                         android:text="@={vModel.passwordFieldValue}"
                         android:paddingStart="@dimen/etHorizontalPadding"
                         android:paddingTop="@dimen/etVerticalPadding"
                         android:paddingEnd="@dimen/etHorizontalPadding"
                         android:paddingBottom="@dimen/etVerticalPadding"
-                        android:textStyle="normal"
                         tools:ignore="RtlSymmetry" />
                 </com.google.android.material.textfield.TextInputLayout>
 
