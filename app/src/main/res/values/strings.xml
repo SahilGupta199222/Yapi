@@ -119,4 +119,7 @@
     <string name="delete_account_title">Do you want to Delete \nAccount?</string>
     <string name="delete_account_description">Do you really want to delete this account?\nThis process cannot be undone.</string>
     <string name="delete_text">Delete</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
+    <string name="you_have_invited_one_person">You have invited one person</string>
 </resources>

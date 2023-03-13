@@ -10,14 +10,14 @@ import com.yapi.R
 import com.yapi.databinding.FragmentAddPeopleBinding
 
 class AddPeopleFragment : Fragment() {
-    private lateinit var binding:FragmentAddPeopleBinding
-    private val viewModel:ViewModelAddPeople by viewModels()
+    private lateinit var binding: FragmentAddPeopleBinding
+    private val viewModel: ViewModelAddPeople by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View{
-        binding=FragmentAddPeopleBinding.inflate(LayoutInflater.from(requireActivity()))
-            return binding.root
+    ): View {
+        binding = FragmentAddPeopleBinding.inflate(LayoutInflater.from(requireActivity()))
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,7 +27,7 @@ class AddPeopleFragment : Fragment() {
 
     private fun init() {
         binding.apply {
-            vModel=viewModel
+            vModel = viewModel
         }
     }
 

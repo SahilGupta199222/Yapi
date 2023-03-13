@@ -73,8 +73,8 @@
                     android:layout_marginTop="@dimen/topFiveMargin"
                     android:background="@drawable/et_drawable"
                     android:drawableStart="@drawable/search"
-                    android:drawableTint="@color/drawableLiteGreyColor"
                     android:drawablePadding="@dimen/_20sdp"
+                    android:drawableTint="@color/drawableLiteGreyColor"
                     android:fontFamily="@font/larsseit_regular"
                     android:hint="@string/search_member_by_name"
                     android:inputType="textEmailAddress"
@@ -95,10 +95,10 @@
                     android:id="@+id/txtTempOrAddMember"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
                     android:fontFamily="@font/larsseit_regular"
                     android:gravity="center"
                     android:text="or"
-                    android:layout_marginTop="@dimen/_2sdp"
                     android:textColor="@color/darkLiteGrey"
                     android:textSize="@dimen/normalTextSize"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -109,9 +109,10 @@
                     android:id="@+id/layoutSendEmailInvitationAddPeople"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="@{vModel::onClick}"
+                    android:layout_marginTop="@dimen/_2sdp"
                     android:background="@drawable/lite_blue_drawable"
                     android:paddingStart="@dimen/etHorizontalPadding"
-                    android:layout_marginTop="@dimen/_2sdp"
                     android:paddingTop="@dimen/etVerticalPadding"
                     android:paddingEnd="@dimen/etHorizontalPadding"
                     android:paddingBottom="@dimen/etVerticalPadding"
@@ -145,106 +146,105 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layoutBusinessUnitAddPeople"
-                    android:layout_width="wrap_content"
-
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:paddingStart="@dimen/topFiveMargin"
-                    android:paddingEnd="@dimen/topFiveMargin"
-                    android:paddingTop="@dimen/_9sdp"
-                    android:paddingBottom="@dimen/_9sdp"
-                    android:layout_marginTop="@dimen/topFiveMargin"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/layoutRegionAddPeople"
-                    app:layout_constraintTop_toBottomOf="@+id/layoutSendEmailInvitationAddPeople">
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/txtTempBusinessUnitsAddPeople"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/business_nunits"
-                        android:textSize="@dimen/normalSmallTextSize"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        />
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/iconSize"
-                        android:layout_height="@dimen/iconSize"
-                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/txtTempBusinessUnitsAddPeople"
-
-/>                </androidx.constraintlayout.widget.ConstraintLayout>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layoutRegionAddPeople"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    app:layout_constraintTop_toTopOf="@+id/layoutBusinessUnitAddPeople"
-                    app:layout_constraintBottom_toBottomOf="@+id/layoutBusinessUnitAddPeople"
-
-                    android:paddingStart="@dimen/topFiveMargin"
-                    android:paddingEnd="@dimen/topFiveMargin"
-                    android:paddingTop="@dimen/_9sdp"
-                    android:paddingBottom="@dimen/_9sdp"
-                    app:layout_constraintStart_toEndOf="@+id/layoutBusinessUnitAddPeople"
-                    app:layout_constraintEnd_toStartOf="@+id/layoutJobTypeAddPeople"
-                    >
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/txtTempRegionAddPeople"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/region"
-                        android:textSize="@dimen/normalSmallTextSize"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        />
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/iconSize"
-                        android:layout_height="@dimen/iconSize"
-                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/txtTempRegionAddPeople"
-
-/>                </androidx.constraintlayout.widget.ConstraintLayout>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/layoutJobTypeAddPeople"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-                    app:layout_constraintTop_toTopOf="@+id/layoutBusinessUnitAddPeople"
-                    app:layout_constraintBottom_toBottomOf="@+id/layoutBusinessUnitAddPeople"
-
-                    android:paddingStart="@dimen/topFiveMargin"
-                    android:paddingEnd="@dimen/topFiveMargin"
-                    android:paddingTop="@dimen/_9sdp"
-                    android:paddingBottom="@dimen/_9sdp"
-                    app:layout_constraintStart_toEndOf="@+id/layoutRegionAddPeople"
+                    android:layout_marginTop="@dimen/topFiveMargin"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
-                    >
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/txtTempJobTypeAddPeople"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/job_ntype"
-                        android:textSize="@dimen/normalSmallTextSize"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        />
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/iconSize"
-                        android:layout_height="@dimen/iconSize"
-                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/txtTempJobTypeAddPeople"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutSendEmailInvitationAddPeople">
 
-/>                </androidx.constraintlayout.widget.ConstraintLayout>
+                    <LinearLayout
+                        android:id="@+id/layoutBusinessUnitAddPeople"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/topFiveMargin"
+                        android:paddingTop="@dimen/_9sdp"
+                        android:paddingEnd="@dimen/topFiveMargin"
+                        android:paddingBottom="@dimen/_9sdp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txtTempBusinessUnitsAddPeople"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/business_nunits"
+                            android:textSize="@dimen/normalSmallTextSize" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgTempArrowBusinessUnitsAddPeople"
+                            android:layout_width="@dimen/iconSize"
+                            android:layout_height="@dimen/iconSize"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutRegionAddPeople"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_weight="1"
+
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/topFiveMargin"
+                        android:paddingTop="@dimen/_9sdp"
+                        android:paddingEnd="@dimen/topFiveMargin"
+                        android:paddingBottom="@dimen/_9sdp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txtTempRegionAddPeople"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/region"
+                            android:textSize="@dimen/normalSmallTextSize" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/iconSize"
+                            android:layout_height="@dimen/iconSize"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/layoutJobTypeAddPeople"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/topFiveMargin"
+                        android:paddingTop="@dimen/_9sdp"
+                        android:paddingEnd="@dimen/topFiveMargin"
+                        android:paddingBottom="@dimen/_9sdp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txtTempJobTypeAddPeople"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/job_ntype"
+                            android:textSize="@dimen/normalSmallTextSize"
+
+                            />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/iconSize"
+                            android:layout_height="@dimen/iconSize"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

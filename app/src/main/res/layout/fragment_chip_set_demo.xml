@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/_18sdp"
+        tools:context=".views.chipset_demo.ChipSetDemoFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/chipLayoutChip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/et_drawable"
+            android:paddingStart="@dimen/etHorizontalPadding"
+            android:paddingEnd="@dimen/etHorizontalPadding"
+            android:paddingTop="@dimen/etVerticalPadding"
+            android:paddingBottom="@dimen/etVerticalPadding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:chipSpacing="@dimen/topFiveMargin"
+            android:visibility="gone"
+            android:textSize="@dimen/normalTextSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+        </com.google.android.material.chip.ChipGroup>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etChips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Add People"
+            android:layout_marginTop="@dimen/topFiveMargin"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/darkLiteGrey"
+            android:textSize="@dimen/normalTextSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutAddPeople"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:paddingStart="@dimen/etHorizontalPadding"
+            android:paddingEnd="@dimen/etHorizontalPadding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chipLayoutChip">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtUserNameChip"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:background="@drawable/round_circle_blue"
+                android:clipToOutline="true"
+                android:gravity="center"
+                android:text="A"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_20sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtTempAddPeopleChip"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/topMargin"
+                android:layout_marginTop="@dimen/topFiveMargin"
+                android:fontFamily="@font/larsseit_bold"
+                android:text="Add People"
+                android:textColor="@color/blueColor"
+                android:textSize="@dimen/normalTextSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txtUserNameChip"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtAddPeopleChip"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/larsseit_medium"
+                android:text="Damanpreet@gmail.com"
+                android:textColor="@color/darkLiteGrey"
+                android:textSize="@dimen/normalSmallTextSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/txtTempAddPeopleChip"
+                app:layout_constraintTop_toBottomOf="@+id/txtTempAddPeopleChip" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

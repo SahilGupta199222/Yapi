@@ -38,11 +38,12 @@ class MenuViewModel():ViewModel() {
 
               var constraintsProfile= mView.findViewById<ConstraintLayout>(R.id.constraintsProfile)
                constraintsProfile.setOnClickListener {
-                   var dialog=Dialog(MainActivity.activity!!.get()!!)
-                   dialog.getWindow()!!.setBackgroundDrawableResource(android.R.color.transparent);
-
-                   dialog.setContentView(R.layout.delete_profile_popup)
-                   dialog.show()
+                   popUp.dismiss()
+                   view.findNavController().navigate(R.id.action_menuFragment_to_profileFragment)
+//                   val dialog=Dialog(MainActivity.activity!!.get()!!)
+//                   dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent);
+//                   dialog.setContentView(R.layout.delete_profile_popup)
+//                   dialog.show()
                }
             }
          R.id.layoutAddNewGroupsMenu->{
