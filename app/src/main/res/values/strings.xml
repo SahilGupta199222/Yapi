@@ -107,4 +107,11 @@
     <string name="view_profile">View Profile</string>
     <string name="settings_text">Settings</string>
     <string name="logout_text">Logout</string>
+    <string name="search_member_by_name">Search member by name</string>
+    <string name="send_email_invitations">Send Email Invitations</string>
+    <string name="business_nunits">Business\nUnits</string>
+    <string name="job_ntype">Job\nType</string>
+    <string name="add_teammates">ADD TEAMMATES</string>
+    <string name="add_customers">ADD CUSTOMERS</string>
+    <string name="add_lead">ADD LEAD</string>
 </resources>

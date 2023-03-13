@@ -2,22 +2,14 @@ package com.yapi
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.widget.Button
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import com.yapi.common.*
+import androidx.appcompat.app.AppCompatDelegate
 import com.yapi.databinding.ActivityMainBinding
-import com.yapi.views.leaveGroup.LeaveGroupFragment
-import com.yapi.pref.PreferenceFile
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.ref.WeakReference
-import javax.inject.Inject
-import javax.inject.Named
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -29,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         dataBinding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(dataBinding.root)
         activity = WeakReference<Activity>(this)
-        initUI()
+            initUI()
     }
 
 
