@@ -107,4 +107,8 @@
     <string name="view_profile">View Profile</string>
     <string name="settings_text">Settings</string>
     <string name="logout_text">Logout</string>
+
+    <string name="delete_account_title">Do you want to Delete \nAccount?</string>
+    <string name="delete_account_description">Do you really want to delete this account?\nThis process cannot be undone.</string>
+    <string name="delete_text">Delete</string>
 </resources>
