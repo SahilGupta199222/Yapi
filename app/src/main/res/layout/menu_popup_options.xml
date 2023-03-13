@@ -32,7 +32,7 @@ android:layout_gravity="end"
 
         <TextView
             android:id="@+id/tvProfile"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:fontFamily="@font/larsseit_medium"
@@ -40,6 +40,7 @@ android:layout_gravity="end"
             android:textColor="@color/darkGrey"
             android:textSize="@dimen/normalTextSize"
             app:layout_constraintStart_toEndOf="@+id/ivProfile_photo"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
@@ -64,7 +65,7 @@ android:layout_gravity="end"
 
         <TextView
             android:id="@+id/tvmenuSetting"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:fontFamily="@font/larsseit_medium"
@@ -72,6 +73,7 @@ android:layout_gravity="end"
             android:layout_marginTop="@dimen/_10sdp"
             android:textColor="@color/darkGrey"
             android:textSize="@dimen/normalTextSize"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivmenuSetting"
             app:layout_constraintTop_toBottomOf="@+id/view_menu1" />
 
@@ -96,7 +98,7 @@ android:layout_gravity="end"
 
         <TextView
             android:id="@+id/tvmenuLogout"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
             android:fontFamily="@font/larsseit_medium"
@@ -104,6 +106,7 @@ android:layout_gravity="end"
             android:layout_marginTop="@dimen/_10sdp"
             android:textColor="@color/logout_red"
             android:textSize="@dimen/normalTextSize"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ivmenulogout"
             app:layout_constraintTop_toBottomOf="@+id/viewMenu2" />
 

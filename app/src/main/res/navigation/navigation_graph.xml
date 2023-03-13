@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/menuFragment">
+    app:startDestination="@id/chatEmptyFragment">
 
     <fragment
         android:id="@+id/signUpFragment2"
@@ -40,7 +41,11 @@
     <fragment
         android:id="@+id/menuFragment"
         android:name="com.yapi.views.menu_screen.MenuFragment"
-        android:label="MenuFragment" />
+        android:label="MenuFragment" >
+        <action
+            android:id="@+id/action_menuFragment_to_createGroupFragment"
+            app:destination="@id/createGroupFragment" />
+    </fragment>
 
 
     <fragment android:id="@+id/firstStepCreateTeam"
@@ -76,4 +81,16 @@
             android:id="@+id/action_chatEmptyFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/createGroupFragment"
+        android:name="com.yapi.views.create_group.CreateGroupFragment"
+        android:label="CreateGroupFragment" >
+        <action
+            android:id="@+id/action_createGroupFragment_to_addPeopleFragment"
+            app:destination="@id/addPeopleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPeopleFragment"
+        android:name="com.yapi.views.add_people.AddPeopleFragment"
+        android:label="AddPeopleFragment" />
 </navigation>

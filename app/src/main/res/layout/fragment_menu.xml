@@ -241,6 +241,7 @@
             android:layout_marginTop="@dimen/topFiveMargin"
             android:clipToOutline="true"
             android:gravity="center"
+            android:onClick="@{mViewmodel::onClick}"
             android:orientation="horizontal"
             android:paddingTop="@dimen/_10ssp"
             android:paddingBottom="@dimen/_10ssp"
@@ -479,7 +480,7 @@
 
                 android:fontFamily="@font/larsseit_bold"
                 android:gravity="start"
-                android:text="ADD CUSTOMERS"
+                android:text="@string/add_customers"
                 android:textAllCaps="true"
                 android:textColor="@color/blueColor"
                 android:textSize="@dimen/smallTextSize"
@@ -621,7 +622,7 @@
 
                 android:fontFamily="@font/larsseit_bold"
                 android:gravity="start"
-                android:text="ADD TEAMS"
+                android:text="@string/add_teammates"
                 android:textAllCaps="true"
                 android:textColor="@color/blueColor"
                 android:textSize="@dimen/smallTextSize"
@@ -756,7 +757,7 @@
 
                 android:fontFamily="@font/larsseit_bold"
                 android:gravity="start"
-                android:text="ADD LEADS"
+                android:text="@string/add_lead"
                 android:textAllCaps="true"
                 android:textColor="@color/blueColor"
                 android:textSize="@dimen/smallTextSize"
