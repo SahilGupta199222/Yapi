@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/transparent">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardviewDeleteProfile"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -33,8 +34,8 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivDeleteProfileLogo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/_84sdp"
+                android:layout_height="@dimen/_160sdp"
                 android:layout_marginTop="@dimen/_15sdp"
                 android:src="@drawable/delete_profile_logo"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +51,7 @@
                 android:gravity="center"
                 android:text="@string/delete_account_title"
                 android:textColor="@color/darkGrey"
-                android:textSize="@dimen/mobileTitleTextSize"
+                android:textSize="@dimen/titleTextSize"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ivDeleteProfileLogo" />
@@ -77,7 +78,7 @@
                 android:layout_marginTop="@dimen/_16sdp"
                 android:orientation="horizontal"
                 android:weightSum="2"
-               android:paddingBottom="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtTempTitleDescriptionSignUpCode">
@@ -97,6 +98,10 @@
                     style="?android:attr/borderlessButtonStyle"
                     android:textColor="@color/darkGrey"
                     android:textSize="@dimen/normalTextSize"
+                    android:paddingStart="@dimen/etHorizontalPadding"
+                    android:paddingTop="@dimen/etVerticalPadding"
+                    android:paddingEnd="@dimen/etHorizontalPadding"
+                    android:paddingBottom="@dimen/etVerticalPadding"
                     app:layout_constraintEnd_toStartOf="@+id/btnProfileDelete"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent" />
@@ -112,6 +117,10 @@
                     android:backgroundTint="@color/darkRed"
                     android:fontFamily="@font/larsseit_bold"
                     android:text="@string/delete_text"
+                    android:paddingStart="@dimen/etHorizontalPadding"
+                    android:paddingTop="@dimen/etVerticalPadding"
+                    android:paddingEnd="@dimen/etHorizontalPadding"
+                    android:paddingBottom="@dimen/etVerticalPadding"
                     android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textSize="@dimen/normalTextSize"

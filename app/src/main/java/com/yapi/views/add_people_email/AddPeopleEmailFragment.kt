@@ -18,17 +18,18 @@ import com.yapi.databinding.FragmentAddPeopleEmailBinding
 
 
 class AddPeopleEmailFragment : Fragment() {
-    private lateinit var binding:FragmentAddPeopleEmailBinding
-    private val viewModelAddPeopleEmail:ViewModelAddPeopleEmail by viewModels()
+    private lateinit var binding: FragmentAddPeopleEmailBinding
+    private val viewModelAddPeopleEmail: ViewModelAddPeopleEmail by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding=FragmentAddPeopleEmailBinding.inflate(LayoutInflater.from(requireActivity()))
-        binding.model=viewModelAddPeopleEmail
-     viewModelAddPeopleEmail.chipGroupAddPeopleEmail=   binding.chipGroupAddPeopleEmail
+        binding = FragmentAddPeopleEmailBinding.inflate(LayoutInflater.from(requireActivity()))
+        binding.model = viewModelAddPeopleEmail
+        viewModelAddPeopleEmail.chipGroupAddPeopleEmail = binding.chipGroupAddPeopleEmail
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
@@ -37,42 +38,45 @@ class AddPeopleEmailFragment : Fragment() {
     private fun init() {
         binding.apply {
             etChipAddPeopleEmail.doOnTextChanged { text, start, before, count ->
-                if(text?.isNotEmpty() == true ){
-                    layoutAddPeopleAddPeopleEmail.visibility=View.VISIBLE
-                    txtAddPeopleAddPeopleEmail.text=text
-                    txtUserNameAddPeopleEmail.text= text[0].toString()
-                }
-                else{
-                    layoutAddPeopleAddPeopleEmail.visibility=View.GONE
+                if (text?.isNotEmpty() == true) {
+                    layoutAddPeopleAddPeopleEmail.visibility = View.VISIBLE
+                    txtAddPeopleAddPeopleEmail.text = text
+                    txtUserNameAddPeopleEmail.text = text[0].toString()
+                } else {
+                    layoutAddPeopleAddPeopleEmail.visibility = View.GONE
                 }
             }
             layoutAddPeopleAddPeopleEmail.setOnClickListener {
-                if(etChipAddPeopleEmail.text?.isNotEmpty()==true ){
-                    val msg=requireActivity().isEmailValid(etChipAddPeopleEmail.text.toString())
-                    if(msg.isEmpty()) {
+                if (etChipAddPeopleEmail.text?.isNotEmpty() == true) {
+                    val msg = requireActivity().isEmailValid(etChipAddPeopleEmail.text.toString())
+                    if (msg.isEmpty()) {
                         addChipToGroup(requireContext(), etChipAddPeopleEmail.text.toString())
                         layoutAddPeopleAddPeopleEmail.visibility = View.GONE
                         etChipAddPeopleEmail.text?.clear()
-                    }
-                    else{
+                    } else {
                         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
         }
     }
+
     fun addChipToGroup(context: Context, person: String) {
         val chip = Chip(context)
         chip.text = person
-        chip.setTextColor(ContextCompat.getColor(context,R.color.blueColor))
-        chip.chipBackgroundColor= ColorStateList.valueOf(ContextCompat.getColor(context, R.color.liteBlueForDrawable))
-        chip.chipCornerRadius=context.resources.getDimension(com.intuit.sdp.R.dimen._5sdp)
-        chip.isCloseIconVisible=true
-        chip.closeIcon= ContextCompat.getDrawable(context, com.hbb20.R.drawable.abc_ic_clear_material)
+        chip.setTextColor(ContextCompat.getColor(context, R.color.blueColor))
+        chip.chipBackgroundColor =
+            ColorStateList.valueOf(ContextCompat.getColor(context, R.color.liteBlueForDrawable))
+        chip.chipCornerRadius = context.resources.getDimension(com.intuit.sdp.R.dimen._5sdp)
+        chip.isCloseIconVisible = true
+        chip.closeIcon =
+            ContextCompat.getDrawable(context, com.hbb20.R.drawable.abc_ic_clear_material)
         chip.isCheckable = false
-        chip.closeIconTint= ColorStateList.valueOf(ContextCompat.getColor(context,com.yapi.R.color.darkLiteGrey))
+        chip.closeIconTint =
+            ColorStateList.valueOf(ContextCompat.getColor(context, com.yapi.R.color.darkLiteGrey))
         binding.chipGroupAddPeopleEmail.addView(chip as View)
-        chip.setOnCloseIconClickListener { binding.chipGroupAddPeopleEmail.removeView(chip as View)
+        chip.setOnCloseIconClickListener {
+            binding.chipGroupAddPeopleEmail.removeView(chip as View)
         }
     }
 
