@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
 import com.yapi.MainActivity
 import com.yapi.R
 
@@ -30,6 +31,7 @@ class MenuViewModel():ViewModel() {
                 popUp.isTouchable = true
                 popUp.isFocusable = true
                 popUp.isOutsideTouchable = true
+               val btnViewProfile=
 
                //Solution
                 popUp.showAsDropDown(view.findViewById(com.yapi.R.id.imgProfilePicCustomerList))
@@ -42,6 +44,9 @@ class MenuViewModel():ViewModel() {
                    dialog.setContentView(R.layout.delete_profile_popup)
                    dialog.show()
                }
+            }
+            com.yapi.R.id.layoutAddNewGroupsMenu->{
+                view.findNavController().navigate(com.yapi.R.id.action_menuFragment_to_createGroupFragment)
             }
         }
     }

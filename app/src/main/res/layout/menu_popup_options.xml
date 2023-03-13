@@ -45,6 +45,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tvProfile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/larsseit_medium"
+            android:text="@string/view_profile"
+            android:textColor="@color/darkGrey"
+            android:textSize="@dimen/normalTextSize"
+            app:layout_constraintStart_toEndOf="@+id/ivProfile_photo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
                 <TextView
                     android:id="@+id/tvProfile"
                     android:layout_width="wrap_content"
@@ -86,6 +98,19 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tvmenuSetting"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/larsseit_medium"
+            android:text="@string/settings_text"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/darkGrey"
+            android:textSize="@dimen/normalTextSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivmenuSetting"
+            app:layout_constraintTop_toBottomOf="@+id/view_menu1" />
                 <TextView
                     android:id="@+id/tvmenuSetting"
                     android:layout_width="wrap_content"
@@ -130,6 +155,19 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tvmenuLogout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:fontFamily="@font/larsseit_medium"
+            android:text="@string/logout_text"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/logout_red"
+            android:textSize="@dimen/normalTextSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivmenulogout"
+            app:layout_constraintTop_toBottomOf="@+id/viewMenu2" />
                 <TextView
                     android:id="@+id/tvmenuLogout"
                     android:layout_width="wrap_content"
