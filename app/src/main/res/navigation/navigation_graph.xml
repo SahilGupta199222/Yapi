@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/chatEmptyFragment">
+    app:startDestination="@id/signInFragment">
 
     <fragment
         android:id="@+id/signUpFragment2"
@@ -81,6 +80,14 @@
             android:id="@+id/action_chatEmptyFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
     </fragment>
+
+    <fragment android:id="@+id/leaveGroupFragment"
+        android:name="com.yapi.views.leaveGroup.LeaveGroupFragment"
+        android:label="Leave Group"/>
+
+    <fragment android:id="@+id/deleteGroupFragment"
+        android:name="com.yapi.views.deleteGroup.DeleteGroupFragment"
+        android:label="Delete Group"/>
     <fragment
         android:id="@+id/createGroupFragment"
         android:name="com.yapi.views.create_group.CreateGroupFragment"

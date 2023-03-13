@@ -2,6 +2,7 @@ package com.yapi.views.menu_screen
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -36,6 +37,11 @@ class MenuFragment : Fragment() {
     ): View {
         binding= FragmentMenuBinding.inflate(LayoutInflater.from(requireActivity()))
         binding.mViewmodel=viewModel
+        val displayMetrics = DisplayMetrics()
+       requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+
+        var width = displayMetrics.widthPixels
+        viewModel.screenWidth=width
         return binding.root
     }
 
