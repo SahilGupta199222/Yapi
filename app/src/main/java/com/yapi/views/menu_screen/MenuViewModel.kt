@@ -5,8 +5,10 @@ import android.app.Dialog
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.PopupWindow
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
@@ -39,11 +41,16 @@ class MenuViewModel():ViewModel() {
               var constraintsProfile= mView.findViewById<ConstraintLayout>(R.id.constraintsProfile)
                constraintsProfile.setOnClickListener {
                    popUp.dismiss()
-                   view.findNavController().navigate(R.id.action_menuFragment_to_profileFragment)
-//                   val dialog=Dialog(MainActivity.activity!!.get()!!)
-//                   dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent);
-//                   dialog.setContentView(R.layout.delete_profile_popup)
-//                   dialog.show()
+                   //view.findNavController().navigate(R.id.action_menuFragment_to_profileFragment)
+                   view.findNavController().navigate(R.id.leaveGroupFragment)
+                   val dialog=Dialog(MainActivity.activity!!.get()!!)
+
+                   dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent);
+                   dialog.setContentView(R.layout.delete_profile_popup)
+
+                   dialog.show()
+                   var cardviewDeleteProfile=dialog.findViewById<CardView>(R.id.cardviewDeleteProfile)
+                   cardviewDeleteProfile.layoutParams.width=(screenWidth!!.toDouble()/1.1).toInt()
                }
             }
          R.id.layoutAddNewGroupsMenu->{
