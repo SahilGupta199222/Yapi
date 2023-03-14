@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.view.View
 import android.view.ViewGroup.LayoutParams
 import androidx.appcompat.widget.AppCompatButton
+import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.yapi.MainActivity
@@ -11,6 +12,8 @@ import com.yapi.R
 import com.yapi.common.hideKeyboard
 
 class ViewModelProfile : ViewModel() {
+
+    var screenWidth:Int?=0
     fun onClick(view: View) {
         when (view.id) {
             R.id.btnEditProfile -> {
@@ -54,6 +57,9 @@ class ViewModelProfile : ViewModel() {
         }
         dialog.setCancelable(false)
         dialog.show()
+
+        var cardviewDeleteProfile=dialog.findViewById<CardView>(R.id.cardviewDeleteProfile)
+        cardviewDeleteProfile.layoutParams.width=(screenWidth!!.toDouble()/1.1).toInt()
     }
     private fun deActiveAccountDialog(view:View){
         val dialog = Dialog(MainActivity.activity!!.get()!!)
@@ -72,5 +78,9 @@ class ViewModelProfile : ViewModel() {
 
         dialog.setCancelable(false)
         dialog.show()
+
+
+        var cardViewDeActiveProfile=dialog.findViewById<CardView>(R.id.cardViewDeActiveProfile)
+        cardViewDeActiveProfile.layoutParams.width=(screenWidth!!.toDouble()/1.1).toInt()
     }
 }

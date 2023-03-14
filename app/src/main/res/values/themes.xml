@@ -14,7 +14,17 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Color1SwitchStyle">
-        <item name="colorControlActivated">@color/blueColor</item>
+    <style name="ChipTextStyle_Selected">
+        <item name="android:textSize">@dimen/_12ssp</item>
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:paddingEnd">@dimen/_8sdp</item>
+        <item name="android:paddingStart">@dimen/_8sdp</item>
+        <item name="android:paddingTop">@dimen/_8sdp</item>
+        <item name="android:paddingBottom">@dimen/_8sdp</item>
+        <item name="android:paddingHorizontal">@dimen/_8sdp</item>
+        <item name="android:paddingVertical">@dimen/_8sdp</item>
+        <item name="itemVerticalPadding">@dimen/_5sdp</item>
+        <item name="chipSpacingVertical">@dimen/_minus10sdp</item>
     </style>
+
 </resources>

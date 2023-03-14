@@ -36,4 +36,6 @@
     <dimen name="checkbox_size">@dimen/_16sdp</dimen>
 
     <dimen name="arrow_size">@dimen/_22sdp</dimen>
+
+<dimen name="group_banner_height">@dimen/_100sdp</dimen>
 </resources>

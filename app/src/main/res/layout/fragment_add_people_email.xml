@@ -23,10 +23,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/btnBackAddPeopleEmail"
-        >
+        app:layout_constraintBottom_toTopOf="@+id/bottomConstarints">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/addEmailPeopleConstraints"
+        android:onClick="@{model::onClick}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -43,7 +44,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgBannerAddPeopleEmail"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_90sdp"
+            android:layout_height="@dimen/group_banner_height"
             android:layout_marginTop="@dimen/_15sdp"
 
             android:background="@drawable/add_people"

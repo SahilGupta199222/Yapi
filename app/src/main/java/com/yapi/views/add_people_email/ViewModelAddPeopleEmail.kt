@@ -8,7 +8,9 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.yapi.MainActivity
 import com.yapi.R
+import com.yapi.common.hideKeyboard
 
 class ViewModelAddPeopleEmail:ViewModel() {
     var chipGroupAddPeopleEmail:ChipGroup?=null
@@ -39,6 +41,9 @@ class ViewModelAddPeopleEmail:ViewModel() {
 
                         view.findNavController().popBackStack()
                     }
+                }
+                R.id.addEmailPeopleConstraints->{
+                    MainActivity.activity!!.get()!!.hideKeyboard()
                 }
             }
         }

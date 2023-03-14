@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
@@ -74,9 +75,11 @@ class AddPeopleEmailFragment : Fragment() {
         chip.closeIconSize=context.resources.getDimension(com.intuit.sdp.R.dimen._8sdp)
       var paddingValue= context.resources.getDimension(com.intuit.sdp.R.dimen._5sdp).toInt()
         chip.isCheckable = false
-        chip.setPadding(paddingValue,paddingValue,paddingValue,paddingValue)
         chip.closeIconTint =
             ColorStateList.valueOf(ContextCompat.getColor(context, com.yapi.R.color.darkLiteGrey))
+        //.setTextSize(13f)
+        chip.setTextAppearanceResource(R.style.ChipTextStyle_Selected);
+        chip.setPadding(paddingValue,paddingValue,paddingValue,paddingValue)
 
         binding.chipGroupAddPeopleEmail.addView(chip as View)
         chip.setOnCloseIconClickListener {
