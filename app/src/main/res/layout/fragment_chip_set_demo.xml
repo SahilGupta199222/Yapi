@@ -16,46 +16,46 @@
             android:layout_height="wrap_content"
             android:background="@drawable/et_drawable"
             android:paddingStart="@dimen/etHorizontalPadding"
-            android:paddingEnd="@dimen/etHorizontalPadding"
             android:paddingTop="@dimen/etVerticalPadding"
+            android:paddingEnd="@dimen/etHorizontalPadding"
             android:paddingBottom="@dimen/etVerticalPadding"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroup"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:chipSpacing="@dimen/topFiveMargin"
-            android:visibility="gone"
-            android:textSize="@dimen/normalTextSize"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-        </com.google.android.material.chip.ChipGroup>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etChips"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Add People"
-            android:layout_marginTop="@dimen/topFiveMargin"
-            android:background="@color/white"
-            android:textColor="@color/black"
-            android:textColorHint="@color/darkLiteGrey"
-            android:textSize="@dimen/normalTextSize"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/normalTextSize"
+                android:visibility="gone"
+                app:chipSpacing="@dimen/topFiveMargin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></com.google.android.material.chip.ChipGroup>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etChips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/topFiveMargin"
+                android:background="@color/white"
+                android:hint="Add People"
+                android:textColor="@color/black"
+                android:textColorHint="@color/darkLiteGrey"
+                android:textSize="@dimen/normalTextSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutAddPeople"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:paddingStart="@dimen/etHorizontalPadding"
             android:paddingEnd="@dimen/etHorizontalPadding"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chipLayoutChip">
@@ -102,6 +102,22 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+        <jp.wasabeef.richeditor.RichEditor
+            android:id="@+id/editor"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_49sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutAddPeople" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgItally"
+            android:layout_width="@dimen/iconSize"
+            android:layout_height="@dimen/iconSize"
+            android:src="@drawable/demo_photo"
+            app:layout_constraintTop_toBottomOf="@+id/editor"
+            app:layout_constraintStart_toStartOf="parent"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

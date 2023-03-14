@@ -54,6 +54,9 @@ class ChipSetDemoFragment : Fragment() {
                     chipGroup.visibility=View.VISIBLE
                 }
             }
+            imgItally.setOnClickListener {
+                editor.setItalic()
+            }
         }
     }
 

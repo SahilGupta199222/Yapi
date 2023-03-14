@@ -88,6 +88,9 @@ dependencies {
     // for country code pick
     implementation 'com.hbb20:ccp:2.6.1'
 
+    // richest edittext testing
+    implementation 'jp.wasabeef:richeditor-android:2.0.0'
+
 
 
 }
