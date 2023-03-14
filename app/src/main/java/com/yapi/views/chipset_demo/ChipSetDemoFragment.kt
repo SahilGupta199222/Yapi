@@ -56,6 +56,7 @@ class ChipSetDemoFragment : Fragment() {
             }
         }
     }
+
     fun addChipToGroup(context: Context, person: String) {
         val chip = Chip(context)
         chip.text = person
@@ -73,8 +74,8 @@ class ChipSetDemoFragment : Fragment() {
 //            ContextCompat.getColor(context,R.color.darkLiteGrey)
 //        )
 //        val myList = ColorStateList(states, colors)
-//        chip.chipIconTint= myList
         chip.isCloseIconVisible=true
+//        chip.chipIconTint= myList
         chip.closeIcon=ContextCompat.getDrawable(context, com.hbb20.R.drawable.abc_ic_clear_material)
         chip.isCheckable = false
         binding.chipGroup.addView(chip as View)

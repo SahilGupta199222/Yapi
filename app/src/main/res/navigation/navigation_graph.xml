@@ -7,12 +7,13 @@
     <fragment
         android:id="@+id/signUpFragment2"
         android:name="com.yapi.views.signup.SignUpFragment"
-        android:label="SignUpFragment" >
+        android:label="SignUpFragment">
         <action
             android:id="@+id/action_signUpFragment2_to_signUpCodeFragment"
             app:destination="@id/signUpCodeFragment" />
     </fragment>
-    <fragment android:id="@+id/signupTeam"
+    <fragment
+        android:id="@+id/signupTeam"
         android:name="com.yapi.views.signupTeam.SignUpTeamFragment"
         android:label="SignupTeamFragment">
         <action
@@ -23,7 +24,7 @@
     <fragment
         android:id="@+id/signUpCodeFragment"
         android:name="com.yapi.views.signup_code.SignUpCodeFragment"
-        android:label="SignUpCodeFragment" >
+        android:label="SignUpCodeFragment">
         <action
             android:id="@+id/action_signUpCodeFragment_to_signupTeam"
             app:destination="@id/signupTeam" />
@@ -32,7 +33,7 @@
         android:id="@+id/signInFragment"
         android:name="com.yapi.views.sign_in.SignInFragment"
 
-        android:label="SignInFragment" >
+        android:label="SignInFragment">
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment2"
             app:destination="@id/signUpFragment2" />
@@ -40,7 +41,7 @@
     <fragment
         android:id="@+id/menuFragment"
         android:name="com.yapi.views.menu_screen.MenuFragment"
-        android:label="MenuFragment" >
+        android:label="MenuFragment">
         <action
             android:id="@+id/action_menuFragment_to_createGroupFragment"
             app:destination="@id/createGroupFragment" />
@@ -50,27 +51,30 @@
     </fragment>
 
 
-    <fragment android:id="@+id/firstStepCreateTeam"
-        android:label="FirstStepCreateTeam"
-        android:name="com.yapi.views.create_team.first_step_create_team.FirstStepCreateFragment">
+    <fragment
+        android:id="@+id/firstStepCreateTeam"
+        android:name="com.yapi.views.create_team.first_step_create_team.FirstStepCreateFragment"
+        android:label="FirstStepCreateTeam">
 
-    <action
-        app:destination="@id/secondStepCreateTeam"
-        android:id="@+id/action_firstStepCreateTeam_to_secondStepCreateTeam"/>
+        <action
+            android:id="@+id/action_firstStepCreateTeam_to_secondStepCreateTeam"
+            app:destination="@id/secondStepCreateTeam" />
     </fragment>
 
-    <fragment android:id="@+id/secondStepCreateTeam"
-        android:label="SecondStepCreateTeam"
-        android:name="com.yapi.views.create_team.second_step_create_team.SecondStepCreateFragment">
+    <fragment
+        android:id="@+id/secondStepCreateTeam"
+        android:name="com.yapi.views.create_team.second_step_create_team.SecondStepCreateFragment"
+        android:label="SecondStepCreateTeam">
 
-   <action
-       app:destination="@+id/thirdStepCreateTeam"
-       android:id="@+id/action_secondStepCreateTeam_to_thirdStepCreateTeam"/>
+        <action
+            android:id="@+id/action_secondStepCreateTeam_to_thirdStepCreateTeam"
+            app:destination="@+id/thirdStepCreateTeam" />
     </fragment>
 
-    <fragment android:id="@+id/thirdStepCreateTeam"
-        android:label="ThirdStepCreateTeam"
-        android:name="com.yapi.views.create_team.third_step_create_team.ThirdStepCreateFragment">
+    <fragment
+        android:id="@+id/thirdStepCreateTeam"
+        android:name="com.yapi.views.create_team.third_step_create_team.ThirdStepCreateFragment"
+        android:label="ThirdStepCreateTeam">
         <action
             android:id="@+id/action_thirdStepCreateTeam_to_chatEmptyFragment"
             app:destination="@id/chatEmptyFragment" />
@@ -78,23 +82,25 @@
     <fragment
         android:id="@+id/chatEmptyFragment"
         android:name="com.yapi.views.chat_empty.ChatEmptyFragment"
-        android:label="ChatEmptyFragment" >
+        android:label="ChatEmptyFragment">
         <action
             android:id="@+id/action_chatEmptyFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
     </fragment>
 
-    <fragment android:id="@+id/leaveGroupFragment"
+    <fragment
+        android:id="@+id/leaveGroupFragment"
         android:name="com.yapi.views.leaveGroup.LeaveGroupFragment"
-        android:label="Leave Group"/>
+        android:label="Leave Group" />
 
-    <fragment android:id="@+id/deleteGroupFragment"
+    <fragment
+        android:id="@+id/deleteGroupFragment"
         android:name="com.yapi.views.deleteGroup.DeleteGroupFragment"
-        android:label="Delete Group"/>
+        android:label="Delete Group" />
     <fragment
         android:id="@+id/createGroupFragment"
         android:name="com.yapi.views.create_group.CreateGroupFragment"
-        android:label="CreateGroupFragment" >
+        android:label="CreateGroupFragment">
         <action
             android:id="@+id/action_createGroupFragment_to_addPeopleFragment"
             app:destination="@id/addPeopleFragment" />
@@ -102,7 +108,7 @@
     <fragment
         android:id="@+id/addPeopleFragment"
         android:name="com.yapi.views.add_people.AddPeopleFragment"
-        android:label="AddPeopleFragment" >
+        android:label="AddPeopleFragment">
         <action
             android:id="@+id/action_addPeopleFragment_to_addPeopleEmailFragment"
             app:destination="@id/addPeopleEmailFragment" />
@@ -110,7 +116,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.yapi.views.profile.ProfileFragment"
-        android:label="ProfileFragment" >
+        android:label="ProfileFragment">
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
@@ -126,7 +132,7 @@
     <fragment
         android:id="@+id/addPeopleEmailFragment"
         android:name="com.yapi.views.add_people_email.AddPeopleEmailFragment"
-        android:label="AddPeopleEmailFragment" >
+        android:label="AddPeopleEmailFragment">
         <action
             android:id="@+id/action_addPeopleEmailFragment_to_addPeopleEmailConfirmationFragment"
             app:destination="@id/addPeopleEmailConfirmationFragment" />
@@ -135,4 +141,11 @@
         android:id="@+id/addPeopleEmailConfirmationFragment"
         android:name="com.yapi.views.add_people_email_confirmation.AddPeopleEmailConfirmationFragment"
         android:label="AddPeopleEmailConfirmationFragment" />
+
+    <fragment
+        android:id="@+id/chatMessageFragment"
+        android:name="com.yapi.views.chat.ChatMessagesFragment"
+        android:label="ChatMessageFragment">
+
+    </fragment>
 </navigation>
