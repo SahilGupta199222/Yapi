@@ -49,7 +49,7 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imgBannerCreateGroup"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_90sdp"
+                    android:layout_height="@dimen/group_banner_height"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/create_group_banner"
 
