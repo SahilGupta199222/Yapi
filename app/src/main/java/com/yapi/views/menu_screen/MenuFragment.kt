@@ -238,7 +238,6 @@ class MenuFragment : Fragment() {
         list.add(PojoCustomerList("ab", "Madelyn Levin", tempOnlineList.random(), 1))
         list.add(PojoCustomerList("ab", "Zaire Stanton", tempOnlineList.random(), 0))
 
-
         val fixImageHeight =
             requireContext().resources.getDimension(com.intuit.sdp.R.dimen._45sdp).toInt()
         val rvHeight = fixImageHeight * list.size
@@ -269,13 +268,10 @@ class MenuFragment : Fragment() {
         list.add(PojoCustomerList("ab", "Jakob Vetrovs", tempOnlineList.random(), 2))
         list.add(PojoCustomerList("ab", "John C Flood", tempOnlineList.random(), 0))
 
-
         val fixImageHeight =
             requireContext().resources.getDimension(com.intuit.sdp.R.dimen._45sdp).toInt()
         val rvHeight = fixImageHeight * list.size
         binding.rvLeadsListMenu.layoutParams.height = rvHeight
-
-
 
         adapterLeadsList =
             AdapterCustomerList(requireContext(), list, object : AdapterCustomerList.Click {
@@ -303,12 +299,10 @@ class MenuFragment : Fragment() {
         list.add(PojoCustomerList("ab", "Madelyn Levin", tempOnlineList.random(), 0))
         list.add(PojoCustomerList("ab", "Zaire Stanton", tempOnlineList.random(), 0))
 
-
         val fixImageHeight =
             requireContext().resources.getDimension(com.intuit.sdp.R.dimen._45sdp).toInt()
         val rvHeight = fixImageHeight * list.size
         binding.rvTeamsListMenu.layoutParams.height = rvHeight
-
 
         adapterTeamList =
             AdapterCustomerList(requireContext(), list, object : AdapterCustomerList.Click {
