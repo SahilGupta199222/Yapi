@@ -43,10 +43,10 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgBannerAddPeopleEmail"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_70sdp"
+            android:layout_height="@dimen/_90sdp"
             android:layout_marginTop="@dimen/_15sdp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/add_people"
+
+            android:background="@drawable/add_people"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imgCancelAddPeopleEmail" />
@@ -78,21 +78,24 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/topFiveMargin"
             android:background="@drawable/et_drawable"
-            android:paddingStart="@dimen/etHorizontalPadding"
-            android:paddingEnd="@dimen/etHorizontalPadding"
-            android:paddingTop="@dimen/etVerticalPadding"
-            android:paddingBottom="@dimen/etVerticalPadding"
+            android:paddingStart="@dimen/_1sdp"
+            android:paddingEnd="@dimen/_1sdp"
+            android:paddingTop="@dimen/_1sdp"
+            android:paddingBottom="@dimen/_1sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtTempGroupImageAddPeopleEmail"
-            >
+            app:layout_constraintTop_toBottomOf="@+id/txtTempGroupImageAddPeopleEmail">
+
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chipGroupAddPeopleEmail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:chipSpacing="@dimen/_1sdp"
-                android:textSize="@dimen/normalTextSize"
 
+                app:chipSpacingVertical="@dimen/_minus10sdp"
+                app:layout_constraintVertical_chainStyle="spread_inside"
+                android:textSize="@dimen/normalTextSize"
+                android:layout_marginStart="@dimen/_5sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -103,10 +106,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/enter_email"
-                android:background="@color/white"
+                android:background="@drawable/et_drawable"
+                android:backgroundTint="@color/white"
                 android:textColor="@color/black"
                 android:textColorHint="@color/darkLiteGrey"
                 android:textSize="@dimen/normalTextSize"
+                android:paddingStart="@dimen/etHorizontalPadding"
+                android:paddingEnd="@dimen/etHorizontalPadding"
+                android:paddingTop="@dimen/etVerticalPadding"
+                android:paddingBottom="@dimen/etVerticalPadding"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/chipGroupAddPeopleEmail" />
@@ -167,41 +175,45 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
-        <androidx.appcompat.widget.AppCompatButton
+      <!--  <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnBackAddPeopleEmail"
             android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:onClick="@{model::onClick}"
-            android:background="@drawable/round_lite_gray"
-            android:paddingStart="@dimen/_25sdp"
-            android:paddingTop="@dimen/_15sdp"
-            android:paddingEnd="@dimen/_25sdp"
-            android:paddingBottom="@dimen/_15sdp"
+            android:background="@drawable/rounded_background"
+            android:backgroundTint="#F5F5F5"
+            android:paddingStart="@dimen/etHorizontalPadding"
+            android:paddingTop="@dimen/etVerticalPadding"
+            android:paddingEnd="@dimen/etHorizontalPadding"
+            android:paddingBottom="@dimen/etVerticalPadding"
+            android:onClick="@{vModel::onClick}"
             android:text="@string/back"
             android:fontFamily="@font/larsseit_bold"
             android:textAllCaps="true"
             android:stateListAnimator="@null"
             android:textColor="@color/black"
-            android:layout_marginEnd="@dimen/topFiveMargin"
             android:textSize="@dimen/normalTextSize"
+            android:layout_marginEnd="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnNextGroupAddPeopleEmail"
+            app:layout_constraintEnd_toStartOf="@+id/btnDelGroup"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintTop_toBottomOf="@+id/nestedScrollViewAddPeopleEmail"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"  />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnNextGroupAddPeopleEmail"
             android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_drawable_blue"
-            android:onClick="@{model::onClick}"
-            android:paddingStart="@dimen/_25sdp"
-            android:paddingTop="@dimen/_15sdp"
-            android:paddingEnd="@dimen/_25sdp"
-            android:paddingBottom="@dimen/_15sdp"
+            android:background="@drawable/rounded_background"
+            android:backgroundTint="#3D97F2"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:paddingStart="@dimen/etHorizontalPadding"
+            android:paddingTop="@dimen/etVerticalPadding"
+            android:paddingEnd="@dimen/etHorizontalPadding"
+            android:paddingBottom="@dimen/etVerticalPadding"
             android:text="@string/next"
+            android:onClick="@{vModel::onClick}"
             android:textAllCaps="true"
             android:stateListAnimator="@null"
             android:fontFamily="@font/larsseit_bold"
@@ -210,7 +222,65 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            android:layout_marginStart="@dimen/topFiveMargin"
-            app:layout_constraintStart_toEndOf="@+id/btnBackAddPeopleEmail" />
+            app:layout_constraintStart_toEndOf="@+id/btnCancel"/>
+-->
+        <LinearLayout
+            android:id="@+id/bottomConstarints"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnBackAddPeopleEmail"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_background"
+                android:backgroundTint="#F5F5F5"
+                android:paddingStart="@dimen/etHorizontalPadding"
+                android:paddingTop="@dimen/etVerticalPadding"
+                android:paddingEnd="@dimen/etHorizontalPadding"
+                android:paddingBottom="@dimen/etVerticalPadding"
+                android:onClick="@{model::onClick}"
+                android:text="@string/back"
+                android:fontFamily="@font/larsseit_bold"
+                android:textAllCaps="true"
+                android:stateListAnimator="@null"
+                android:textColor="@color/black"
+                android:textSize="@dimen/normalTextSize"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnDelGroup"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnNextGroupAddPeopleEmail"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_background"
+                android:backgroundTint="#3D97F2"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:paddingStart="@dimen/etHorizontalPadding"
+                android:paddingTop="@dimen/etVerticalPadding"
+                android:paddingEnd="@dimen/etHorizontalPadding"
+                android:paddingBottom="@dimen/etVerticalPadding"
+                android:text="@string/next"
+                android:onClick="@{model::onClick}"
+                android:textAllCaps="true"
+                android:stateListAnimator="@null"
+                android:fontFamily="@font/larsseit_bold"
+                android:textColor="@color/white"
+                android:textSize="@dimen/normalTextSize"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnCancel" />
+
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

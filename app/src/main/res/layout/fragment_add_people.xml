@@ -30,7 +30,9 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/topConstraintsAddPeople"
                 android:layout_width="match_parent"
+                android:onClick="@{vModel::onClick}"
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -254,7 +256,6 @@
             android:id="@+id/bottomConstarints"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_7sdp"
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent">
@@ -270,6 +271,7 @@
                 android:paddingTop="@dimen/etVerticalPadding"
                 android:paddingEnd="@dimen/etHorizontalPadding"
                 android:paddingBottom="@dimen/etVerticalPadding"
+                android:onClick="@{vModel::onClick}"
                 android:text="@string/back"
                 android:fontFamily="@font/larsseit_bold"
                 android:textAllCaps="true"
@@ -296,6 +298,7 @@
                 android:paddingEnd="@dimen/etHorizontalPadding"
                 android:paddingBottom="@dimen/etVerticalPadding"
                 android:text="@string/next"
+                android:onClick="@{vModel::onClick}"
                 android:textAllCaps="true"
                 android:stateListAnimator="@null"
                 android:fontFamily="@font/larsseit_bold"

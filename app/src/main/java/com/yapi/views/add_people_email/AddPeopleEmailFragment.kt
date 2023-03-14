@@ -71,9 +71,13 @@ class AddPeopleEmailFragment : Fragment() {
         chip.isCloseIconVisible = true
         chip.closeIcon =
             ContextCompat.getDrawable(context, R.drawable.ic_cross_icon)
+        chip.closeIconSize=context.resources.getDimension(com.intuit.sdp.R.dimen._8sdp)
+      var paddingValue= context.resources.getDimension(com.intuit.sdp.R.dimen._5sdp).toInt()
         chip.isCheckable = false
+        chip.setPadding(paddingValue,paddingValue,paddingValue,paddingValue)
         chip.closeIconTint =
             ColorStateList.valueOf(ContextCompat.getColor(context, com.yapi.R.color.darkLiteGrey))
+
         binding.chipGroupAddPeopleEmail.addView(chip as View)
         chip.setOnCloseIconClickListener {
             binding.chipGroupAddPeopleEmail.removeView(chip as View)

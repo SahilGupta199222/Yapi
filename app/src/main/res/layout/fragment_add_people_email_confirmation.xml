@@ -44,10 +44,9 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgBannerAddPeopleEmailConf"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_70sdp"
+            android:layout_height="@dimen/_90sdp"
             android:layout_marginTop="@dimen/_15sdp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/add_people"
+            android:background="@drawable/add_people"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imgCancelAddPeopleEmailConf" />
