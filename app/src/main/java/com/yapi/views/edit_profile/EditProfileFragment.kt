@@ -28,6 +28,13 @@ class EditProfileFragment : Fragment() {
 
     private fun init() {
         binding.apply {
+            countryCodePickerEditProfile.setOnCountryChangeListener {
+               var selected_country_code = countryCodePickerEditProfile.getSelectedCountryCodeWithPlus();
+                viewModel.countryCodeValue.set(selected_country_code.toString())
+                viewModel.phoneNumberValue.set(selected_country_code.toString()+viewModel.phoneNumberValue.get().toString())
+                etNumberEditProfile.setSelection(etNumberEditProfile.text.toString().trim().length)
+            }
+
 
         }
     }

@@ -3,6 +3,7 @@ package com.yapi.views.profile
 import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.util.DisplayMetrics
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,12 @@ class ProfileFragment : Fragment() {
     ): View {
         binding=com.yapi.databinding.FragmentProfileBinding.inflate(LayoutInflater.from(requireActivity()))
         binding.model=viewModel
+
+        val displayMetrics = DisplayMetrics()
+        requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+
+        var width = displayMetrics.widthPixels
+        viewModel.screenWidth=width
         return  binding.root
     }
 
