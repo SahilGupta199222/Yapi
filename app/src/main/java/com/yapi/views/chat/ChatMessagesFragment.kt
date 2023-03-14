@@ -24,6 +24,5 @@ class ChatMessagesFragment : Fragment() {
 
     private fun initUI() {
 
-
     }
 }

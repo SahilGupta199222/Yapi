@@ -6,6 +6,9 @@
         <variable
             name="vModel"
             type="com.yapi.views.create_group.ViewModelCreateGroup" />
+        <variable
+            name="mView"
+            type="android.view.View" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -26,7 +29,9 @@
             app:layout_constraintBottom_toTopOf="@+id/btnCreateGroup"
             >
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/topCreateGroupLayout"
                 android:layout_width="match_parent"
+                android:onClick="@{vModel::onClick}"
                 android:layout_height="wrap_content"
                 >
 
@@ -42,11 +47,11 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imgBannerCreateGroup"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_70sdp"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_90sdp"
                     android:layout_marginTop="@dimen/_15sdp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/create_group_banner"
+                    android:background="@drawable/create_group_banner"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imgCancelCreateGroup" />
@@ -119,6 +124,7 @@
                         android:text="@string/upload"
                         android:textColor="@color/blueColor"
                         android:textSize="@dimen/normalTextSize"
+                        android:layout_marginStart="@dimen/_4sdp"
                         app:layout_constraintBottom_toBottomOf="@+id/imgGalleryUploadCreateGroup"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -155,7 +161,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/larsseit_medium"
-                    android:text="@string/_0_128"
+                    android:text="@={vModel.groupNameCount}"
                     android:textColor="@color/darkLiteGrey"
                     android:textSize="@dimen/smallTextSize"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -170,11 +176,14 @@
                     android:hint="@string/enterGroupName"
                     android:inputType="textEmailAddress"
                     android:maxLength="128"
+                    android:afterTextChanged="@{vModel::AfterTextChanged}"
+                    android:onTextChanged="@{vModel::onTextChanged}"
                     android:paddingStart="@dimen/etHorizontalPadding"
                     android:paddingTop="@dimen/etVerticalPadding"
                     android:paddingEnd="@dimen/etHorizontalPadding"
                     android:paddingBottom="@dimen/etVerticalPadding"
-                    android:textColor="@color/darkLiteGrey"
+                    android:text="@={vModel.groupNameValue}"
+                    android:textColor="@color/darkGrey"
                     android:textSize="@dimen/normalTextSize"
                     android:layout_marginTop="@dimen/topFiveMargin"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -198,7 +207,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/larsseit_medium"
-                    android:text="@string/maxLenthGroupDescription"
+                    android:text="@={vModel.groupDescriptionCount}"
                     android:textColor="@color/darkLiteGrey"
                     android:textSize="@dimen/smallTextSize"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -212,12 +221,15 @@
                     android:fontFamily="@font/larsseit_regular"
                     android:hint="@string/enter_a_description"
                     android:inputType="textEmailAddress"
-                    android:maxLength="128"
+                    android:maxLength="256"
                     android:paddingStart="@dimen/etHorizontalPadding"
                     android:paddingTop="@dimen/etVerticalPadding"
                     android:paddingEnd="@dimen/etHorizontalPadding"
                     android:paddingBottom="@dimen/etVerticalPadding"
-                    android:textColor="@color/darkLiteGrey"
+                    android:textColor="@color/darkGrey"
+                    android:afterTextChanged="@{vModel::AfterTextChangedDes}"
+                    android:onTextChanged="@{vModel::onTextChanged}"
+                    android:text="@={vModel.groupDescriptionValue}"
                     android:textSize="@dimen/normalTextSize"
                     android:layout_marginTop="@dimen/topFiveMargin"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -262,9 +274,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/tbMakePrivateBtnCreateGroup"
-
-                        />
+                        app:layout_constraintEnd_toStartOf="@+id/tbMakePrivateBtnCreateGroup" />
 
                     <androidx.appcompat.widget.SwitchCompat
                         android:id="@+id/tbMakePrivateBtnCreateGroup"
@@ -272,13 +282,12 @@
                         android:layout_height="@dimen/_21sdp"
                         android:thumb="@drawable/custom_thumb"
                         app:track="@drawable/custom_track"
-                        android:checked="false"
+                        android:checked="true"
                         android:layout_gravity="center"
                         app:layout_constraintStart_toEndOf="@+id/txtTempMakePrivateInfoCreateGroup"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        />
+                        app:layout_constraintEnd_toEndOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,71 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:paddingBottom="@dimen/etVerticalPadding"
-    android:paddingTop="@dimen/etVerticalPadding"
-    android:paddingEnd="@dimen/etHorizontalPadding"
-    android:paddingStart="@dimen/etHorizontalPadding"
-    android:layout_height="match_parent">
-<ImageView
-    android:id="@+id/ivChatBack"
-    android:src="@drawable/arrow_forward"
-    android:layout_width="@dimen/iconSize"
-    app:tint="@color/medium_grey_color"
-    android:rotation="180"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="@+id/tvName"
-    app:layout_constraintBottom_toBottomOf="@+id/tvMemberValue"
-    android:layout_height="@dimen/iconSize"/>
 
-    <ImageView
-        android:id="@+id/ivChatCall"
-        app:layout_constraintEnd_toStartOf="@+id/ivChat_more_icon"
-        android:src="@drawable/chat_call_icon"
-        android:layout_width="@dimen/iconSize"
-        app:tint="@color/medium_grey_color"
-        app:layout_constraintTop_toTopOf="@+id/tvName"
-        app:layout_constraintBottom_toBottomOf="@+id/tvMemberValue"
-        android:layout_height="@dimen/iconSize"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/etHorizontalPadding"
+        android:paddingTop="@dimen/etVerticalPadding"
+        android:paddingEnd="@dimen/etHorizontalPadding"
+        android:paddingBottom="@dimen/etVerticalPadding">
 
-    <ImageView
-        android:id="@+id/ivChat_more_icon"
-        android:src="@drawable/chat_more_icon"
-        android:layout_width="@dimen/iconSize"
-        app:tint="@color/medium_grey_color"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/topConstraints"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tvName"
-        app:layout_constraintBottom_toBottomOf="@+id/tvMemberValue"
-        android:layout_height="@dimen/iconSize"/>
+            <ImageView
+                android:id="@+id/ivChatBack"
+                android:layout_width="@dimen/iconSize"
+                android:layout_height="@dimen/iconSize"
+                android:rotation="180"
+                android:src="@drawable/arrow_forward"
+                app:layout_constraintBottom_toBottomOf="@+id/tvMemberValue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvName"
+                app:tint="@color/medium_grey_color" />
 
-    <TextView
-        android:id="@+id/tvName"
-        app:layout_constraintStart_toEndOf="@+id/ivChatBack"
-        android:layout_width="0dp"
-        android:text="Human Resource"
-        android:textColor="@color/darkGrey"
-        android:fontFamily="@font/larsseit_medium"
-        android:textSize="@dimen/mobileTitleTextSize"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="@dimen/_10sdp"
-        app:layout_constraintEnd_toStartOf="@+id/ivChatCall"
-        android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/ivChatCall"
+                android:layout_width="@dimen/iconSize"
+                android:layout_height="@dimen/iconSize"
+                android:src="@drawable/chat_call_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/tvMemberValue"
+                app:layout_constraintEnd_toStartOf="@+id/ivChat_more_icon"
+                app:layout_constraintTop_toTopOf="@+id/tvName"
+                app:tint="@color/medium_grey_color" />
 
-    <TextView
-        android:id="@+id/tvMemberValue"
-        app:layout_constraintStart_toEndOf="@+id/ivChatBack"
-        android:layout_width="0dp"
-        android:text="35 Members"
-        android:fontFamily="@font/larsseit_medium"
-        android:textColor="@color/medium_grey_color"
-        android:textSize="@dimen/normalTextSize"
-        android:layout_marginStart="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@+id/tvName"
-        app:layout_constraintEnd_toStartOf="@+id/ivChatCall"
-        android:layout_height="wrap_content"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/ivChat_more_icon"
+                android:layout_width="@dimen/iconSize"
+                android:layout_height="@dimen/iconSize"
+                android:src="@drawable/chat_more_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/tvMemberValue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvName"
+                app:tint="@color/medium_grey_color" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/larsseit_medium"
+                android:text="Human Resource"
+                android:textColor="@color/darkGrey"
+                android:textSize="@dimen/mobileTitleTextSize"
+                app:layout_constraintEnd_toStartOf="@+id/ivChatCall"
+                app:layout_constraintStart_toEndOf="@+id/ivChatBack"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvMemberValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/larsseit_medium"
+                android:text="35 Members"
+                android:textColor="@color/medium_grey_color"
+                android:textSize="@dimen/normalTextSize"
+                app:layout_constraintEnd_toStartOf="@+id/ivChatCall"
+                app:layout_constraintStart_toEndOf="@+id/ivChatBack"
+                app:layout_constraintTop_toBottomOf="@+id/tvName" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottomConstraints"
+            android:layout_width="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tvMessages"
+                    android:text="Messages"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

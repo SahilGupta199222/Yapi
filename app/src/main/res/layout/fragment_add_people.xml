@@ -45,11 +45,10 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imgBannerAddPeople"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_70sdp"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_90sdp"
                     android:layout_marginTop="@dimen/_15sdp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/add_people"
+                    android:background="@drawable/add_people"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imgCancelAddPeople" />
@@ -170,7 +169,8 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/txtTempBusinessUnitsAddPeople"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/business_nunits"
@@ -181,6 +181,7 @@
                             android:layout_width="@dimen/iconSize"
                             android:layout_height="@dimen/iconSize"
                             android:layout_gravity="center"
+
                             android:src="@drawable/ic_baseline_keyboard_arrow_down_24" />
                     </LinearLayout>
 
@@ -200,7 +201,8 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/txtTempRegionAddPeople"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/region"
@@ -227,13 +229,12 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/txtTempJobTypeAddPeople"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/job_ntype"
-                            android:textSize="@dimen/normalSmallTextSize"
-
-                            />
+                            android:textSize="@dimen/normalSmallTextSize"/>
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="@dimen/iconSize"
@@ -248,5 +249,64 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:id="@+id/bottomConstarints"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_7sdp"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnBack"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_background"
+                android:backgroundTint="#F5F5F5"
+                android:paddingStart="@dimen/etHorizontalPadding"
+                android:paddingTop="@dimen/etVerticalPadding"
+                android:paddingEnd="@dimen/etHorizontalPadding"
+                android:paddingBottom="@dimen/etVerticalPadding"
+                android:text="@string/back"
+                android:fontFamily="@font/larsseit_bold"
+                android:textAllCaps="true"
+                android:stateListAnimator="@null"
+                android:textColor="@color/black"
+                android:textSize="@dimen/normalTextSize"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnDelGroup"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnNext"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_background"
+                android:backgroundTint="#3D97F2"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:paddingStart="@dimen/etHorizontalPadding"
+                android:paddingTop="@dimen/etVerticalPadding"
+                android:paddingEnd="@dimen/etHorizontalPadding"
+                android:paddingBottom="@dimen/etVerticalPadding"
+                android:text="@string/next"
+                android:textAllCaps="true"
+                android:stateListAnimator="@null"
+                android:fontFamily="@font/larsseit_bold"
+                android:textColor="@color/white"
+                android:textSize="@dimen/normalTextSize"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/btnCancel" />
+
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -34,7 +34,7 @@
     <string name="search">Search</string>
     <string name="yapibot">yapibot</string>
     <string name="groups">GROUPS</string>
-    <string name="createGroup">CREATE GROUPS</string>
+    <string name="createGroup">CREATE GROUP</string>
     <string name="jobs">JOBS</string>
     <string name="customers">CUSTOMERS</string>
     <string name="team">TEAM</string>
@@ -61,7 +61,7 @@
 </string>
     <string name="members_email_title">Member’s Email</string>
     <string name="enter_email">Enter email</string>
-    <string name="add_member_text">Add member</string>
+    <string name="add_member_text">Add members</string>
     <string name="skip_this_step">Skip this step</string>
 
     <string name="please_enter_email">Please enter email</string>
