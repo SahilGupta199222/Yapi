@@ -76,7 +76,7 @@ class ChipSetDemoFragment : Fragment() {
 //        val myList = ColorStateList(states, colors)
         chip.isCloseIconVisible=true
 //        chip.chipIconTint= myList
-        chip.closeIcon=ContextCompat.getDrawable(context, com.hbb20.R.drawable.abc_ic_clear_material)
+        chip.closeIcon=ContextCompat.getDrawable(context, R.drawable.ic_cross_icon)
         chip.isCheckable = false
         binding.chipGroup.addView(chip as View)
 //        chip.chipStrokeColor= ColorStateList.valueOf(ContextCompat.getColor(context, R.color.normaltxtColor))

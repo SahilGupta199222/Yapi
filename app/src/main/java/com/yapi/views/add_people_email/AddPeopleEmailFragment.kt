@@ -70,7 +70,7 @@ class AddPeopleEmailFragment : Fragment() {
         chip.chipCornerRadius = context.resources.getDimension(com.intuit.sdp.R.dimen._5sdp)
         chip.isCloseIconVisible = true
         chip.closeIcon =
-            ContextCompat.getDrawable(context, com.hbb20.R.drawable.abc_ic_clear_material)
+            ContextCompat.getDrawable(context, R.drawable.ic_cross_icon)
         chip.isCheckable = false
         chip.closeIconTint =
             ColorStateList.valueOf(ContextCompat.getColor(context, com.yapi.R.color.darkLiteGrey))
