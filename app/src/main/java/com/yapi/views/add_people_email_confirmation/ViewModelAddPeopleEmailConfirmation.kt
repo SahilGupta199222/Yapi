@@ -9,10 +9,16 @@ class ViewModelAddPeopleEmailConfirmation:ViewModel(){
     fun onClick(view:View){
         when(view.id){
             R.id.imgCancelAddPeopleEmailConf->{
-                view.findNavController().popBackStack()
+                if (view.findNavController().currentDestination?.id == R.id.addPeopleEmailConfirmationFragment) {
+
+                    view.findNavController().popBackStack()
+                }
             }
             R.id.btnDoneGroupAddPeopleEmailConfirm->{
-                view.findNavController().popBackStack()
+                if (view.findNavController().currentDestination?.id == R.id.addPeopleEmailConfirmationFragment) {
+
+                    view.findNavController().popBackStack()
+                }
             }
         }
     }

@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.yapi.R
 import com.yapi.databinding.FragmentMenuBinding
@@ -61,7 +62,11 @@ class MenuFragment : Fragment() {
     private fun clickListener() {
         binding.apply {
             imgTempDrawableMenu.setOnClickListener {
-                findNavController().popBackStack()
+                lifecycleScope.launchWhenResumed {
+                    if (findNavController().currentDestination?.id == R.id.menuFragment) {
+                        findNavController().popBackStack()
+                    }
+                }
             }
             layoutGroupsMenu.setOnClickListener {
                 groupListClicked = !groupListClicked
@@ -194,9 +199,6 @@ class MenuFragment : Fragment() {
             }
             layoutBoatMenu.setOnClickListener {
                 Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
-            }
-            layoutAddNewGroupsMenu.setOnClickListener {
-//                findNavController().navigate(R.id.action_menuFragment_to_createGroupFragment)
             }
             layoutAddNewCustomersMenu.setOnClickListener {
                 Toast.makeText(requireContext(), "Add new member", Toast.LENGTH_SHORT).show()

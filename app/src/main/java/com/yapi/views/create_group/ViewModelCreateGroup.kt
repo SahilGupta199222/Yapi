@@ -9,6 +9,15 @@ import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.hideKeyboard
 
+class ViewModelCreateGroup:ViewModel() {
+    fun onClick(view:View){
+        when(view.id){
+            R.id.btnCreateGroup->{
+                if (view.findNavController().currentDestination?.id == R.id.createGroupFragment) {
+
+                    view.findNavController()
+                        .navigate(R.id.action_createGroupFragment_to_addPeopleFragment)
+                }
 class ViewModelCreateGroup : ViewModel() {
     var groupNameValue = ObservableField("")
     var groupNameCount = ObservableField("0/128")
@@ -23,6 +32,11 @@ class ViewModelCreateGroup : ViewModel() {
             }
             R.id.imgCancelCreateGroup -> {
                 view.findNavController().popBackStack()
+            R.id.imgCancelCreateGroup->{
+                if (view.findNavController().currentDestination?.id == R.id.createGroupFragment) {
+
+                    view.findNavController().popBackStack()
+                }
             }
             R.id.topCreateGroupLayout->{
                 MainActivity.activity!!.get()!!.hideKeyboard()

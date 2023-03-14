@@ -15,7 +15,10 @@ class SignupCodeViewModel : ViewModel() {
                 MainActivity.activity!!.get()!!.hideKeyboard()
             }
             R.id.btnSignUpCode->{
-                view.findNavController().navigate(R.id.action_signUpCodeFragment_to_signupTeam)
+                if(view.findNavController().currentDestination?.id==R.id.signUpCodeFragment) {
+
+                    view.findNavController().navigate(R.id.action_signUpCodeFragment_to_signupTeam)
+                }
             }
         }
     }

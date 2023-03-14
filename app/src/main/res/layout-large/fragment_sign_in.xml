@@ -257,6 +257,7 @@
                 android:textSize="@dimen/normalTextSize"
                 android:fontFamily="@font/larsseit_regular"
                 android:gravity="center"
+                android:onClick="@{vModel::onClick}"
                 android:layout_marginStart="@dimen/margin_from_signup"
                 android:textColor="@color/blueColor"
                 android:text="@string/signup_text" />
