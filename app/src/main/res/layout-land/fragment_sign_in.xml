@@ -258,6 +258,7 @@
                 android:layout_marginStart="@dimen/margin_from_signup"
                 android:fontFamily="@font/larsseit_regular"
                 android:gravity="center"
+                android:onClick="@{vModel::onClick}"
                 android:textColor="@color/blueColor"
                 android:text="@string/signup_text" />
         </LinearLayout>

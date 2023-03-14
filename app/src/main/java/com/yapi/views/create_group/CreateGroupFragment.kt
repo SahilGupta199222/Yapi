@@ -13,14 +13,15 @@ import com.yapi.views.menu_screen.MenuViewModel
 
 
 class CreateGroupFragment : Fragment() {
-    private lateinit var binding:FragmentCreateGroupBinding
+    private lateinit var binding: FragmentCreateGroupBinding
     val viewModel: ViewModelCreateGroup by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
-        binding=FragmentCreateGroupBinding.inflate(LayoutInflater.from(requireActivity()))
+        binding = FragmentCreateGroupBinding.inflate(LayoutInflater.from(requireActivity()))
+        binding.vModel = viewModel
         return binding.root
     }
 
@@ -28,9 +29,9 @@ class CreateGroupFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
     }
-    private fun init(){
+
+    private fun init() {
         binding.apply {
-vModel=viewModel
         }
     }
 

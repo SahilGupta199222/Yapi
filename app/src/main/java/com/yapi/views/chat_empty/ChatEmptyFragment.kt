@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.yapi.R
 import com.yapi.databinding.FragmentChatEmptyBinding
@@ -27,14 +28,24 @@ class ChatEmptyFragment : Fragment() {
     private fun init() {
         binding.apply {
             imgTempDrawableChatEmpty.setOnClickListener {
-                findNavController().navigate(R.id.action_chatEmptyFragment_to_menuFragment)
+                if (findNavController().currentDestination?.id == R.id.chatEmptyFragment) {
+                    findNavController().navigate(R.id.action_chatEmptyFragment_to_menuFragment)
+                }
             }
-            imgDemoIconEmptyChat.setOnClickListener     {
-                findNavController().navigate(R.id.action_chatEmptyFragment_to_menuFragment)
-            }
-            txtTempChatEmpty.setOnClickListener         {
-                findNavController().navigate(R.id.action_chatEmptyFragment_to_menuFragment)
-            }
+                imgDemoIconEmptyChat.setOnClickListener {
+                    if (findNavController().currentDestination?.id == R.id.chatEmptyFragment) {
+
+                        findNavController().navigate(R.id.action_chatEmptyFragment_to_menuFragment)
+                    }
+                }
+                txtTempChatEmpty.setOnClickListener {
+                    if (findNavController().currentDestination?.id == R.id.chatEmptyFragment) {
+
+                        findNavController().navigate(R.id.action_chatEmptyFragment_to_menuFragment)
+                    }
+
+                }
+
         }
     }
 }

@@ -10,7 +10,9 @@ class SignupViewModel():ViewModel() {
     fun onClick(view: View){
         when(view.id){
             R.id.craeteTeamBtn ->{
-                view.findNavController().navigate(R.id.action_signupTeam_to_firstStepCreateTeam)
+                if(view.findNavController().currentDestination?.id==R.id.signupTeam) {
+                    view.findNavController().navigate(R.id.action_signupTeam_to_firstStepCreateTeam)
+                }
             }
         }
     }

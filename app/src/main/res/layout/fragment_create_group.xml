@@ -8,6 +8,7 @@
             type="com.yapi.views.create_group.ViewModelCreateGroup" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutCreateGroup"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
@@ -26,6 +27,7 @@
             app:layout_constraintBottom_toTopOf="@+id/btnCreateGroup"
             >
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutScrollViewCreateGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >

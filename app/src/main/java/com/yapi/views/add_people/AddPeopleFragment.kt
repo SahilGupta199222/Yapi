@@ -17,6 +17,7 @@ class AddPeopleFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentAddPeopleBinding.inflate(LayoutInflater.from(requireActivity()))
+            binding.vModel = viewModel
         return binding.root
     }
 
@@ -27,7 +28,6 @@ class AddPeopleFragment : Fragment() {
 
     private fun init() {
         binding.apply {
-            vModel = viewModel
         }
     }
 

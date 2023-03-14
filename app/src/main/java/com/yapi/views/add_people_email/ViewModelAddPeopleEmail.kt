@@ -27,10 +27,18 @@ class ViewModelAddPeopleEmail:ViewModel() {
                     }
                     val bundle=Bundle()
                     bundle.putStringArrayList("personList",list)
-                    view.findNavController().navigate(R.id.action_addPeopleEmailFragment_to_addPeopleEmailConfirmationFragment,bundle)
+                    if (view.findNavController().currentDestination?.id == R.id.addPeopleEmailFragment) {
+
+                        view.findNavController()
+                            .navigate(R.id.action_addPeopleEmailFragment_to_addPeopleEmailConfirmationFragment,
+                                bundle)
+                    }
                 }
                 R.id.btnBackAddPeopleEmail->{
-                    view.findNavController().popBackStack()
+                    if (view.findNavController().currentDestination?.id == R.id.addPeopleEmailFragment) {
+
+                        view.findNavController().popBackStack()
+                    }
                 }
             }
         }

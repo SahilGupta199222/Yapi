@@ -23,11 +23,16 @@ class SignInViewModel : ViewModel() {
         when (view.id) {
             R.id.btnSignIn -> {
                 if (checkValidation()) {
-                    view.findNavController().navigate(R.id.action_signInFragment_to_signUpFragment2)
+                    if(view.findNavController().currentDestination?.id==R.id.signInFragment) {
+//                        view.findNavController().navigate(R.id.action_signInFragment_to_signUpFragment2)
+                        view.findNavController().navigate(R.id.action_signInFragment_to_chatEmptyFragment)
+                    }
                 }
             }
             R.id.txtSignIn -> {
-                view.findNavController().navigate(R.id.action_signInFragment_to_signUpFragment2)
+                if(view.findNavController().currentDestination?.id==R.id.signInFragment) {
+                    view.findNavController().navigate(R.id.action_signInFragment_to_signUpFragment2)
+                }
             }
             R.id.linearTopSignIn, R.id.constraintsTopSignIN -> {
                 //for hide keyboard
