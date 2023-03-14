@@ -12,41 +12,39 @@ import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.hideKeyboard
 
-class FirstStepViewModel() : ViewModel() {
+class FirstStepViewModel : ViewModel() {
 
-     var teamName=ObservableField("")
-     var nameCountValue=ObservableField("0/50")
-    var checkBoxValue=ObservableBoolean(false)
+    var teamName = ObservableField("")
+    var nameCountValue = ObservableField("0/50")
+    var checkBoxValue = ObservableBoolean(false)
 
     fun onClick(view: View) {
         when (view.id) {
             R.id.btnFirstCreateTeam -> {
-                Log.e("Hello_Text==","Helloo")
-               // showMessage("Hello")
-                if(checkValidation()){
-                    view.findNavController().navigate(R.id.action_firstStepCreateTeam_to_secondStepCreateTeam)
-                }else{
-                    Toast.makeText(view.context, "Please enter company name", Toast.LENGTH_SHORT).show()
+                Log.e("Hello_Text==", "Helloo")
+                // showMessage("Hello")
+                if (checkValidation()) {
+                    view.findNavController()
+                        .navigate(R.id.action_firstStepCreateTeam_to_secondStepCreateTeam)
+                } else {
+                    Toast.makeText(view.context, "Please enter company name", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
-            R.id.linearTopFirstStep,R.id.constraintsTopFirstStep->{
+            R.id.linearTopFirstStep, R.id.constraintsTopFirstStep -> {
                 MainActivity.activity!!.get()!!.hideKeyboard()
             }
         }
     }
 
-    private fun checkValidation():Boolean
-    {
-        return if(teamName.get().toString().trim().isEmpty()) {
-            false
-        }else
-            true
+    private fun checkValidation(): Boolean {
+        return !teamName.get().toString().trim().isEmpty()
 //            checkBoxValue.get()
     }
 
     fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         Log.w("tag", "onTextChanged $s")
-        nameCountValue.set(s.length.toString()+"/50")
+        nameCountValue.set(s.length.toString() + "/50")
 
     }
 }
