@@ -233,6 +233,7 @@
                 android:background="@drawable/btn_drawable_blue"
                 android:fontFamily="@font/larsseit_bold"
                 android:onClick="@{vModel::onClick}"
+
                 android:text="@string/sign_in"
                 android:textColor="@color/white" />
 
@@ -263,6 +264,8 @@
                     android:textSize="@dimen/normalTextSize"
                     android:fontFamily="@font/larsseit_regular"
 android:layout_marginStart="@dimen/margin_from_signup"
+                    android:onClick="@{vModel::onClick}"
+
                     android:textColor="@color/blueColor"
                     android:text="@string/signup_text" />
             </LinearLayout>

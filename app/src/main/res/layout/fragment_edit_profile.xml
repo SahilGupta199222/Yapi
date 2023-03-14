@@ -2,10 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="model"
+            type="com.yapi.views.edit_profile.ViewModelEditProfile" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutEditProfile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:onClick="@{model::onClick}"
         android:background="@color/white"
         android:paddingStart="@dimen/startMainMargin"
         android:paddingTop="@dimen/startMainMargin"
@@ -25,7 +32,9 @@
             app:layout_constraintVertical_bias="0.568">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutScrollViewEditProfile"
                 android:layout_width="match_parent"
+                android:onClick="@{model::onClick}"
                 android:layout_height="match_parent">
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -34,6 +43,8 @@
                     android:layout_height="@dimen/iconSize"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:src="@drawable/ic_cross_icon"
+                    android:onClick="@{model::onClick}"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -386,6 +397,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/btn_drawable_blue"
             android:text="@string/done"
+            android:onClick="@{model::onClick}"
+
             android:padding="@dimen/etVerticalPadding"
             android:textColor="@color/white"
             android:fontFamily="@font/larsseit_bold"

@@ -18,7 +18,11 @@ class SecondStepViewModel() : ViewModel() {
             R.id.btnSecondCreateTeam -> {
                 Log.e("Hello_Text==","Helloo")
                 // showMessage("Hello")
-                view.findNavController().navigate(R.id.action_secondStepCreateTeam_to_thirdStepCreateTeam)
+                if(view.findNavController().currentDestination?.id==R.id.secondStepCreateTeam) {
+
+                    view.findNavController()
+                        .navigate(R.id.action_secondStepCreateTeam_to_thirdStepCreateTeam)
+                }
             }
             R.id.linearTopSecondStep,R.id.constrantsTopSecondStep->{
                 MainActivity.activity!!.get()!!.hideKeyboard()

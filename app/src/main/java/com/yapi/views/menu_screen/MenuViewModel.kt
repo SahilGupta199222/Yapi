@@ -11,7 +11,9 @@ import android.widget.PopupWindow
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.yapi.MainActivity
 import com.yapi.R
 
@@ -41,21 +43,31 @@ class MenuViewModel():ViewModel() {
               var constraintsProfile= mView.findViewById<ConstraintLayout>(R.id.constraintsProfile)
                constraintsProfile.setOnClickListener {
                    popUp.dismiss()
-                   //view.findNavController().navigate(R.id.action_menuFragment_to_profileFragment)
-                   view.findNavController().navigate(R.id.leaveGroupFragment)
-                   val dialog=Dialog(MainActivity.activity!!.get()!!)
+                   if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
+                       view.findNavController()
+                           .navigate(R.id.action_menuFragment_to_profileFragment)
+                   }
 
-                   dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent);
-                   dialog.setContentView(R.layout.delete_profile_popup)
+//                       if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
+//                           view.findNavController().navigate(R.id.leaveGroupFragment)
+//                       }
+//                   val dialog=Dialog(MainActivity.activity!!.get()!!)
 
-                   dialog.show()
-                   var cardviewDeleteProfile=dialog.findViewById<CardView>(R.id.cardviewDeleteProfile)
-                   cardviewDeleteProfile.layoutParams.width=(screenWidth!!.toDouble()/1.1).toInt()
+//                   dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent);
+//                   dialog.setContentView(R.layout.delete_profile_popup)
+
+//                   dialog.show()
+//                   var cardviewDeleteProfile=dialog.findViewById<CardView>(R.id.cardviewDeleteProfile)
+//                   cardviewDeleteProfile.layoutParams.width=(screenWidth!!.toDouble()/1.1).toInt()
                }
             }
-         R.id.layoutAddNewGroupsMenu->{
-                view.findNavController().navigate(com.yapi.R.id.action_menuFragment_to_createGroupFragment)
-            }
+         R.id.layoutAddNewGroupsMenu-> {
+             if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
+
+                 view.findNavController()
+                     .navigate(R.id.action_menuFragment_to_createGroupFragment)
+             }
+         }
         }
     }
 }

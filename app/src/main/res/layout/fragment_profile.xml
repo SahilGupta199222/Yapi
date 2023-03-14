@@ -9,6 +9,7 @@
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/layoutProfile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -27,6 +28,7 @@
     app:layout_constraintBottom_toBottomOf="parent"
     >
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutScrollViewProfile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
@@ -36,6 +38,7 @@
         android:layout_width="@dimen/iconSize"
         android:layout_height="@dimen/iconSize"
         android:layout_marginTop="@dimen/_5sdp"
+        android:onClick="@{model::onClick}"
         android:src="@drawable/ic_cross_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -413,6 +416,7 @@
         android:id="@+id/layoutDeActiveProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{model::onClick}"
         android:layout_marginTop="@dimen/topFiveMargin"
         app:layout_constraintTop_toBottomOf="@+id/txtTempDeActiveAccountProfile"
         app:layout_constraintStart_toStartOf="parent"
@@ -461,6 +465,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/topFiveMargin"
+        android:onClick="@{model::onClick}"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutDeActiveProfile"

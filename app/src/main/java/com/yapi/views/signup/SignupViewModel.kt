@@ -17,7 +17,10 @@ class SignupViewModel : ViewModel() {
     fun onClick(view: View) {
         when (view.id) {
             R.id.btnSignUp -> {
-                view.findNavController().navigate(R.id.action_signUpFragment2_to_signUpCodeFragment)
+                if(view.findNavController().currentDestination?.id==R.id.signUpFragment2) {
+                    view.findNavController()
+                        .navigate(R.id.action_signUpFragment2_to_signUpCodeFragment)
+                }
             }
             R.id.linearTopSignup, R.id.constarintsTopSignup -> {
                 MainActivity.activity!!.get()!!.hideKeyboard()

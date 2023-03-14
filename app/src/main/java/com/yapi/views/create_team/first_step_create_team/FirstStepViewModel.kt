@@ -24,8 +24,11 @@ class FirstStepViewModel : ViewModel() {
                 Log.e("Hello_Text==", "Helloo")
                 // showMessage("Hello")
                 if (checkValidation()) {
-                    view.findNavController()
-                        .navigate(R.id.action_firstStepCreateTeam_to_secondStepCreateTeam)
+                    if(view.findNavController().currentDestination?.id==R.id.firstStepCreateTeam) {
+
+                        view.findNavController()
+                            .navigate(R.id.action_firstStepCreateTeam_to_secondStepCreateTeam)
+                    }
                 } else {
                     Toast.makeText(view.context, "Please enter company name", Toast.LENGTH_SHORT)
                         .show()
