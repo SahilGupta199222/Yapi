@@ -16,6 +16,9 @@ class ViewModelAddPeopleEmail:ViewModel() {
     var chipGroupAddPeopleEmail:ChipGroup?=null
         fun onClick(view:View){
             when(view.id){
+                R.id.layoutNestedScrollViewAddPeopleEmail,R.id.layoutAddPeopleEmail,R.id.nestedScrollViewAddPeopleEmail->{
+                   MainActivity.activity?.get()?.hideKeyboard()
+                }
                 R.id.imgCancelAddPeopleEmail->{
                     view.findNavController().popBackStack()
                 }
@@ -38,13 +41,10 @@ class ViewModelAddPeopleEmail:ViewModel() {
                 }
                 R.id.btnBackAddPeopleEmail->{
                     if (view.findNavController().currentDestination?.id == R.id.addPeopleEmailFragment) {
-
                         view.findNavController().popBackStack()
                     }
                 }
-                R.id.addEmailPeopleConstraints->{
-                    MainActivity.activity!!.get()!!.hideKeyboard()
-                }
+
             }
         }
 }

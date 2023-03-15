@@ -19,6 +19,12 @@ class ThirdStepViewModel() : ViewModel() {
                         .navigate(R.id.action_thirdStepCreateTeam_to_chatEmptyFragment)
                 }
             }
+            R.id.tvSkipStep->{
+                if(view.findNavController().currentDestination?.id==R.id.thirdStepCreateTeam) {
+                    view.findNavController()
+                        .navigate(R.id.action_thirdStepCreateTeam_to_chatEmptyFragment)
+                }
+            }
             R.id.linearTopThirdStep,R.id.constraintsTopThirdStep->{
                 MainActivity.activity!!.get()!!.hideKeyboard()
             }
