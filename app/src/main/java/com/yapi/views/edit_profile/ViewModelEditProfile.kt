@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.hideKeyboard
+import com.yapi.common.isValidEmail
 
 class ViewModelEditProfile:ViewModel() {
     var countryCodeValue=ObservableField("")
@@ -28,5 +29,18 @@ class ViewModelEditProfile:ViewModel() {
                 }
             }
     }
+    }
+
+    fun AfterTextChanged(s: CharSequence) {
+
+     /*   if(phoneNumberValue.get().toString().length==4 || phoneNumberValue.get().toString().length==10)
+        {
+            phoneNumberValue.set(phoneNumberValue.get().toString()+" ")
+        }*/
+        /*if (emailFieldValue.get().toString().trim().length>0 && isValidEmail(emailFieldValue.get().toString())) {
+            emailCorrectValue.set(true)
+        } else {
+            emailCorrectValue.set(false)
+        }*/
     }
 }

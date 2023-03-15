@@ -2,7 +2,9 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="model"
             type="com.yapi.views.edit_profile.ViewModelEditProfile" />
@@ -12,8 +14,8 @@
         android:id="@+id/layoutEditProfile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:onClick="@{model::onClick}"
         android:background="@color/white"
+        android:onClick="@{model::onClick}"
         android:paddingStart="@dimen/startMainMargin"
         android:paddingTop="@dimen/startMainMargin"
         android:paddingEnd="@dimen/startMainMargin"
@@ -34,16 +36,16 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layoutScrollViewEditProfile"
                 android:layout_width="match_parent"
-                android:onClick="@{model::onClick}"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:onClick="@{model::onClick}">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imgCancelEditProfile"
                     android:layout_width="@dimen/iconSize"
                     android:layout_height="@dimen/iconSize"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:src="@drawable/ic_cross_icon"
                     android:onClick="@{model::onClick}"
+                    android:src="@drawable/ic_cross_icon"
 
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -176,11 +178,11 @@
                         android:id="@+id/appCompatTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
                         android:fontFamily="@font/larsseit_medium"
                         android:text="@string/upload"
                         android:textColor="@color/blueColor"
                         android:textSize="@dimen/normalTextSize"
-                        android:layout_marginStart="@dimen/_5sdp"
                         app:layout_constraintBottom_toBottomOf="@+id/imgGalleryUploadEditProfile"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
@@ -288,8 +290,8 @@
                     android:inputType="textEmailAddress"
                     android:paddingStart="@dimen/etHorizontalPadding"
                     android:paddingTop="@dimen/etVerticalPadding"
-                    android:paddingBottom="@dimen/etVerticalPadding"
                     android:paddingEnd="@dimen/etHorizontalPadding"
+                    android:paddingBottom="@dimen/etVerticalPadding"
                     android:textColor="@color/darkGrey"
                     android:textSize="@dimen/normalTextSize"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -320,39 +322,56 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtTempPhoneEditProfile">
+
                     <com.hbb20.CountryCodePicker
                         android:id="@+id/countryCodePickerEditProfile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/etHorizontalPadding"
+                        android:padding="0dp"
+                        app:ccp_showArrow="false"
+
                         app:ccp_showNameCode="false"
                         app:ccp_showPhoneCode="false"
-                        android:layout_marginStart="@dimen/etHorizontalPadding"
-                        app:ccp_showArrow="false"
-                        android:padding="0dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <ImageView
                         android:id="@+id/ivDrpArrow"
                         android:layout_width="@dimen/_15sdp"
-                        app:layout_constraintStart_toEndOf="@+id/countryCodePickerEditProfile"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_height="@dimen/_15sdp"
-                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"/>
+                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/countryCodePickerEditProfile"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <View
                         android:id="@+id/viewLinePhoneNumberEditProfile"
                         android:layout_width="@dimen/_1sdp"
                         android:layout_height="0dp"
-                        android:background="@color/darkLiteGrey"
-                        android:layout_marginTop="@dimen/topFiveMargin"
                         android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/topFiveMargin"
                         android:layout_marginBottom="@dimen/topFiveMargin"
-                        app:layout_constraintStart_toEndOf="@+id/ivDrpArrow"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:background="@color/darkLiteGrey"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        />
+                        app:layout_constraintStart_toEndOf="@+id/ivDrpArrow"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtcountryCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="@dimen/etHorizontalPadding"
+                        android:fontFamily="@font/larsseit_regular"
+                        android:gravity="center"
+                        android:text="@{model.countryCodeValue}"
+                        android:textColor="@color/darkGrey"
+                        android:textSize="@dimen/normalTextSize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/viewLinePhoneNumberEditProfile"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/etNumberEditProfile"
                         android:layout_width="0dp"
@@ -360,15 +379,17 @@
                         android:background="@null"
                         android:inputType="number"
                         android:maxLength="15"
-                        android:paddingStart="@dimen/etHorizontalPadding"
-                        android:text="@={model.phoneNumberValue}"
+                        android:paddingStart="@dimen/_3sdp"
                         android:paddingEnd="@dimen/etHorizontalPadding"
+                        android:text="@={model.phoneNumberValue}"
+                        android:fontFamily="@font/larsseit_regular"
+                        android:afterTextChanged="@{model::AfterTextChanged}"
                         android:textColor="@color/darkGrey"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:textSize="@dimen/normalTextSize"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/viewLinePhoneNumberEditProfile"
-                        />
+                        app:layout_constraintStart_toEndOf="@+id/txtcountryCode"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -382,12 +403,14 @@
                     android:textSize="@dimen/normalTextSize"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/layoutNumberProfileEdit" />
+
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etAboutYourSelfEditProfile"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/et_drawable"
+                    android:layout_marginBottom="@dimen/startMainMargin"
 
+                    android:background="@drawable/et_drawable"
                     android:fontFamily="@font/larsseit_regular"
                     android:hint="@string/aboutSelf"
                     android:inputType="textMultiLine"
@@ -397,7 +420,6 @@
                     android:paddingBottom="@dimen/etVerticalPadding"
                     android:textColor="@color/darkGrey"
                     android:textSize="@dimen/normalTextSize"
-                    android:layout_marginBottom="@dimen/startMainMargin"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -409,20 +431,20 @@
             android:id="@+id/btnDoneEditProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_drawable_blue"
-            android:text="@string/done"
-            android:onClick="@{model::onClick}"
-
-            android:padding="@dimen/etVerticalPadding"
-            android:textColor="@color/white"
-            android:fontFamily="@font/larsseit_bold"
-            android:textSize="@dimen/normalTextSize"
-            android:textAllCaps="true"
-            android:layout_marginBottom="@dimen/_7sdp"
             android:layout_marginTop="@dimen/topTwentyFiveMargin"
-            app:layout_constraintTop_toBottomOf="@+id/nestedScrollViewEditProfile"
+            android:layout_marginBottom="@dimen/_7sdp"
+            android:background="@drawable/btn_drawable_blue"
+
+            android:fontFamily="@font/larsseit_bold"
+            android:onClick="@{model::onClick}"
+            android:padding="@dimen/etVerticalPadding"
+            android:text="@string/done"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normalTextSize"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/nestedScrollViewEditProfile" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
