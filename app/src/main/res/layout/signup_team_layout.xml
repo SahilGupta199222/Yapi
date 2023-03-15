@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="model"
@@ -197,6 +198,7 @@
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/rvUsers"
        android:layout_width="0dp"
+       tools:listitem="@layout/rv_users_adapter"
        android:layout_marginTop="@dimen/_6sdp"
        app:layout_constraintTop_toBottomOf="@+id/tvinvitaionIDS"
        app:layout_constraintStart_toStartOf="parent"

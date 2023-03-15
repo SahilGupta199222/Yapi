@@ -205,6 +205,7 @@
                     android:layout_width="wrap_content"
                     android:fontFamily="@font/larsseit_regular"
                     android:text="@string/skip_this_step"
+                    android:onClick="@{vModel::onClick}"
                     android:textColor="@color/dark_blue"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:textSize="@dimen/_12ssp"
