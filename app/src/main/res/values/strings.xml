@@ -122,4 +122,8 @@
     <string name="back">Back</string>
     <string name="next">Next</string>
     <string name="you_have_invited_one_person">You have invited one person</string>
+
+    <string name="chat_text">Chat</string>
+    <string name="email_text">Email</string>
+    <string name="sms_text">SMS</string>
 </resources>
