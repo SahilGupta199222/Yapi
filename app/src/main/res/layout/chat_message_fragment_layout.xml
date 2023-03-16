@@ -20,8 +20,8 @@
 
             <ImageView
                 android:id="@+id/ivChatBack"
-                android:layout_width="@dimen/iconSize"
-                android:layout_height="@dimen/iconSize"
+                android:layout_width="@dimen/extraIconSize"
+                android:layout_height="@dimen/extraIconSize"
                 android:rotation="180"
                 android:src="@drawable/arrow_forward"
                 app:layout_constraintBottom_toBottomOf="@+id/tvMemberValue"
@@ -34,6 +34,7 @@
                 android:layout_width="@dimen/iconSize"
                 android:layout_height="@dimen/iconSize"
                 android:src="@drawable/chat_call_icon"
+                android:layout_marginEnd="@dimen/topFiveMargin"
                 app:layout_constraintBottom_toBottomOf="@+id/tvMemberValue"
                 app:layout_constraintEnd_toStartOf="@+id/ivChat_more_icon"
                 app:layout_constraintTop_toTopOf="@+id/tvName"
@@ -41,8 +42,8 @@
 
             <ImageView
                 android:id="@+id/ivChat_more_icon"
-                android:layout_width="@dimen/iconSize"
-                android:layout_height="@dimen/iconSize"
+                android:layout_width="@dimen/extraIconSize"
+                android:layout_height="@dimen/extraIconSize"
                 android:src="@drawable/chat_more_icon"
                 app:layout_constraintBottom_toBottomOf="@+id/tvMemberValue"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +58,7 @@
                 android:fontFamily="@font/larsseit_medium"
                 android:text="Human Resource"
                 android:textColor="@color/darkGrey"
-                android:textSize="@dimen/mobileTitleTextSize"
+                android:textSize="@dimen/_16ssp"
                 app:layout_constraintEnd_toStartOf="@+id/ivChatCall"
                 app:layout_constraintStart_toEndOf="@+id/ivChatBack"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -70,7 +71,7 @@
                 android:fontFamily="@font/larsseit_medium"
                 android:text="35 Members"
                 android:textColor="@color/medium_grey_color"
-                android:textSize="@dimen/normalTextSize"
+                android:textSize="@dimen/normalSmallTextSize"
                 app:layout_constraintEnd_toStartOf="@+id/ivChatCall"
                 app:layout_constraintStart_toEndOf="@+id/ivChatBack"
                 app:layout_constraintTop_toBottomOf="@+id/tvName" />

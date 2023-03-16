@@ -142,4 +142,8 @@
     <string name="Invite_textt">Invite</string>
 
     <string name="add_teammates_text">ADD Teammates</string>
+    <string name="add_member_text_third_step">Add member</string>
+    <string name="conversations">CONVERSATIONS</string>
+    <string name="add_conversation">ADD CONVERSATION</string>
+
 </resources>

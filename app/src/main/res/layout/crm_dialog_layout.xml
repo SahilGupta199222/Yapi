@@ -165,7 +165,7 @@
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnCancelInvite"
-                        android:layout_width="@dimen/_80sdp"
+                        android:layout_width="@dimen/_95sdp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:background="@drawable/rounded_background"
@@ -188,7 +188,7 @@
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnInviteCRM"
-                        android:layout_width="@dimen/_80sdp"
+                        android:layout_width="@dimen/_95sdp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
                         android:background="@drawable/rounded_background"

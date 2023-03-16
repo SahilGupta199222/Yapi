@@ -503,7 +503,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <View
-            android:id="@+id/viewLineTopTeamMenu"
+            android:id="@+id/viewLineConversationMenu"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_2sdp"
             android:layout_marginTop="@dimen/topFiveMargin"
@@ -511,6 +511,142 @@
             app:layout_constraintTop_toBottomOf="@+id/layoutAddNewCustomersMenu"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutConversationMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/_10ssp"
+            android:paddingBottom="@dimen/_10ssp"
+            app:layout_constraintTop_toBottomOf="@+id/viewLineConversationMenu"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgConversationMenu"
+        android:layout_width="@dimen/iconSize"
+        android:layout_height="@dimen/iconSize"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_baseline_mail_outline_24"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtTitleConversationMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/startPaddingNormal"
+            android:layout_weight="1"
+            android:fontFamily="@font/larsseit_medium"
+            android:gravity="start"
+            android:text="@string/conversations"
+            android:textColor="@color/darkGrey"
+            android:textAllCaps="true"
+            android:textSize="@dimen/smallTextSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imgConversationMenu"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtCountConversationMenu"
+            android:layout_width="@dimen/unSeenCountSize"
+            android:layout_height="@dimen/unSeenCountSize"
+            android:paddingTop="@dimen/topPaddingUnSeenCountSize"
+            android:paddingStart="@dimen/startPaddingUnSeenCountSize"
+            android:layout_gravity="center"
+            android:background="@drawable/round_circle_blue"
+            android:clipToOutline="true"
+            android:fontFamily="@font/larsseit_bold"
+            android:text="5"
+            android:textColor="@color/white"
+            android:textSize="@dimen/unSeenCountTextSize"
+            app:layout_constraintEnd_toStartOf="@+id/imgArrowConversationMenu"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgArrowConversationMenu"
+            android:layout_width="@dimen/arrow_size"
+            android:layout_height="@dimen/arrow_size"
+            android:layout_gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvConversationListMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="4"
+        tools:listitem="@layout/rv_customers_list_menu"
+        app:layout_constraintTop_toBottomOf="@+id/layoutConversationMenu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutAddNewConversationMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/topFiveMargin"
+        android:clipToOutline="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/_10ssp"
+        android:paddingBottom="@dimen/_10ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvConversationListMenu">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/imgAddNewConversationMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:fontFamily="@font/larsseit_bold"
+            android:gravity="start"
+            android:text="@string/add_conversation"
+            android:textAllCaps="true"
+            android:textColor="@color/blueColor"
+            android:textSize="@dimen/smallTextSize"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_26sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtAddNewConversationMenu"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/txtAddNewConversationMenu"
+            android:layout_width="@dimen/iconSize"
+            android:layout_height="@dimen/iconSize"
+            android:src="@drawable/ic_baseline_add_24"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/topFiveMargin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imgAddNewConversationMenu"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:id="@+id/viewLineTopTeamMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/topFiveMargin"
+        android:background="@color/liteGrey"
+        app:layout_constraintTop_toBottomOf="@+id/layoutAddNewConversationMenu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutTeamMenu"
