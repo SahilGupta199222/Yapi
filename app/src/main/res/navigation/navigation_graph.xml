@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/signUpCodeFragment">
+    app:startDestination="@id/menuFragment">
 
     <fragment
         android:id="@+id/signUpFragment2"
@@ -61,7 +61,6 @@
             android:id="@+id/action_menuFragment_to_chatMessageFragment"
             app:destination="@id/chatMessageFragment" />
     </fragment>
-
 
     <fragment
         android:id="@+id/firstStepCreateTeam"

@@ -8,23 +8,28 @@ import androidx.navigation.findNavController
 import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.hideKeyboard
+import com.yapi.common.showToastMessage
 
-class SecondStepViewModel() : ViewModel() {
+class SecondStepViewModel : ViewModel() {
 
-    var countFieldValue=ObservableField("0/50")
-    var teamNameValue=ObservableField("")
+    var countFieldValue = ObservableField("0/50")
+    var teamNameValue = ObservableField("")
     fun onClick(view: View) {
         when (view.id) {
             R.id.btnSecondCreateTeam -> {
-                Log.e("Hello_Text==","Helloo")
+                Log.e("Hello_Text==", "Helloo")
                 // showMessage("Hello")
-                if(view.findNavController().currentDestination?.id==R.id.secondStepCreateTeam) {
-
-                    view.findNavController()
-                        .navigate(R.id.action_secondStepCreateTeam_to_thirdStepCreateTeam)
+                if (view.findNavController().currentDestination?.id == R.id.secondStepCreateTeam) {
+                    if (teamNameValue.get().toString().trim().isNotEmpty()) {
+                        view.findNavController()
+                            .navigate(R.id.action_secondStepCreateTeam_to_thirdStepCreateTeam)
+                    }else
+                    {
+                        showToastMessage("Please enter name")
+                    }
                 }
             }
-            R.id.linearTopSecondStep,R.id.constrantsTopSecondStep->{
+            R.id.linearTopSecondStep, R.id.constrantsTopSecondStep -> {
                 MainActivity.activity!!.get()!!.hideKeyboard()
             }
         }
@@ -32,6 +37,6 @@ class SecondStepViewModel() : ViewModel() {
 
     fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         Log.w("tag", "onTextChanged $s")
-        countFieldValue.set(s.length.toString()+"/50")
+        countFieldValue.set(s.length.toString() + "/50")
     }
 }

@@ -1,5 +1,7 @@
 package com.yapi.views.signup
 
+import android.os.Bundle
+import android.text.Editable
 import android.view.View
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
@@ -9,6 +11,8 @@ import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.hideKeyboard
 import com.yapi.common.isValidEmail
+import dagger.hilt.android.lifecycle.HiltViewModel
+
 
 class SignupViewModel : ViewModel() {
 
@@ -18,8 +22,10 @@ class SignupViewModel : ViewModel() {
         when (view.id) {
             R.id.btnSignUp -> {
                 if(view.findNavController().currentDestination?.id==R.id.signUpFragment2) {
+                    var bundle= Bundle()
+                    bundle.putString("email",emailValueField.get())
                     view.findNavController()
-                        .navigate(R.id.action_signUpFragment2_to_signUpCodeFragment)
+                        .navigate(R.id.action_signUpFragment2_to_signUpCodeFragment,bundle)
                 }
             }
             R.id.linearTopSignup, R.id.constarintsTopSignup -> {
@@ -38,7 +44,7 @@ class SignupViewModel : ViewModel() {
         }*/
     }
 
-    fun AfterTextChanged(s: CharSequence) {
+    fun AfterTextChanged(s: Editable?) {
         if (emailValueField.get().toString().trim().length > 0 && isValidEmail(emailValueField.get()
                 .toString())
         ) {

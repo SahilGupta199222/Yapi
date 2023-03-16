@@ -1,5 +1,6 @@
 package com.yapi.views.create_team.first_step_create_team
 
+import android.text.Html
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -11,12 +12,24 @@ import androidx.navigation.findNavController
 import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.hideKeyboard
+import com.yapi.pref.PreferenceFile
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class FirstStepViewModel : ViewModel() {
+@HiltViewModel
+class FirstStepViewModel @Inject constructor(private var preferenceFile: PreferenceFile) : ViewModel() {
 
     var teamName = ObservableField("")
     var nameCountValue = ObservableField("0/50")
     var checkBoxValue = ObservableBoolean(false)
+var checkBoxTextValue=ObservableField("")
+    init {
+  /*    var email=  preferenceFile.fetchStringValue("login_email")
+       var firstText= MainActivity.activity?.get()?.resources?.getString(R.string.create_team_first_text)
+       var lastText= MainActivity.activity?.get()?.resources?.getString(R.string.create_team_last_text)
+     var checkBoxText=  Html.fromHtml(MainActivity.activity?.get()?.getString(R.string.create_team_first_text)+"<font color='#3d3d3d'>"+email+"</font> "+MainActivity.activity?.get()?.getString(R.string.create_team_last_text))
+        checkBoxTextValue.set(checkBoxText.toString())*/
+    }
 
     fun onClick(view: View) {
         when (view.id) {

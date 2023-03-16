@@ -58,6 +58,7 @@
                 android:layout_marginStart="@dimen/topFiveMargin"
                 android:textColor="@color/black"
                 android:textSize="@dimen/IconTextSize"
+                android:visibility="gone"
                 app:layout_constraintStart_toEndOf="@+id/imgTempDrawableMenu"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -65,11 +66,11 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgLogoMenu"
-                android:layout_width="@dimen/_25sdp"
-                android:layout_height="@dimen/_25sdp"
+                android:layout_width="@dimen/_85sdp"
+                android:layout_height="@dimen/_38sdp"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/topFiveMargin"
-                android:src="@drawable/blue_chat_icon"
+                android:src="@drawable/new_menu_logo"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/txtTempLogoMenu"
                 app:layout_constraintBottom_toBottomOf="parent"

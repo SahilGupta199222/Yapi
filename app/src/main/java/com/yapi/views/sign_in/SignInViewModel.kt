@@ -1,5 +1,7 @@
 package com.yapi.views.sign_in
 
+import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.View
 import androidx.databinding.ObservableBoolean
@@ -26,7 +28,9 @@ class SignInViewModel : ViewModel() {
                     if(view.findNavController().currentDestination?.id==R.id.signInFragment) {
 //                        view.findNavController().navigate(R.id.action_signInFragment_to_signUpFragment2)
                        // view.findNavController().navigate(R.id.action_signInFragment_to_chatEmptyFragment)
-                        view.findNavController().navigate(R.id.action_signInFragment_to_signUpCodeFragment)
+                        var bundle= Bundle()
+                        bundle.putString("email",emailFieldValue.get())
+                        view.findNavController().navigate(R.id.action_signInFragment_to_signUpCodeFragment,bundle)
                     }
                 }
             }
@@ -79,7 +83,7 @@ class SignInViewModel : ViewModel() {
         }*/
     }
 
-    fun AfterTextChanged(s: CharSequence) {
+    fun AfterTextChanged(s: Editable?) {
      if (emailFieldValue.get().toString().trim().length>0 && isValidEmail(emailFieldValue.get().toString())) {
             emailCorrectValue.set(true)
         } else {

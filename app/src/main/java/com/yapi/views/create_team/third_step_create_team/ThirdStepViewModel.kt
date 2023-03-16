@@ -4,22 +4,27 @@ import android.app.Dialog
 import android.view.LayoutInflater
 import android.view.View
 import androidx.cardview.widget.CardView
+import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.hideKeyboard
+import com.yapi.common.isValidEmail
+import com.yapi.common.showToastMessage
 import com.yapi.databinding.CrmDialogLayoutBinding
 
 class ThirdStepViewModel : ViewModel() {
     var screenWidth: Int? = 0
+    var emailFieldValue = ObservableField("")
     fun onClick(view: View) {
         when (view.id) {
             R.id.btnThirdCreateTeam -> {
                 if (view.findNavController().currentDestination?.id == R.id.thirdStepCreateTeam) {
-
-                    view.findNavController()
-                        .navigate(R.id.action_thirdStepCreateTeam_to_chatEmptyFragment)
+                    if (checkValidation()) {
+                        view.findNavController()
+                            .navigate(R.id.action_thirdStepCreateTeam_to_chatEmptyFragment)
+                    }
                 }
             }
             R.id.tvSkipStep -> {
@@ -34,11 +39,11 @@ class ThirdStepViewModel : ViewModel() {
             R.id.btnInviteCRM -> {
                 //show CRM Invite Dialog
                 showCRMDialog()
-
             }
         }
     }
 
+    //show CRM Dialog
     private fun showCRMDialog() {
         var dialog = Dialog(MainActivity.activity!!.get()!!)
         var databinding =
@@ -53,5 +58,17 @@ class ThirdStepViewModel : ViewModel() {
             dialog.dismiss()
         }
         databinding.btnInviteCRM.setOnClickListener { }
+    }
+
+    private fun checkValidation(): Boolean {
+        if (emailFieldValue.get().toString().isEmpty()) {
+            showToastMessage(MainActivity.activity!!.get()!!.resources.getString(R.string.please_enter_email))
+            return false
+        } else if (!(isValidEmail(emailFieldValue.get().toString()))) {
+            showToastMessage(MainActivity.activity!!.get()!!.resources.getString(R.string.please_enter_valid_email))
+            return false
+        } else {
+            return true
+        }
     }
 }

@@ -86,6 +86,8 @@
                         android:layout_marginTop="@dimen/topFiveMargin"
                         android:fontFamily="@font/larsseit_regular"
                         android:gravity="center"
+                        android:letterSpacing="0.07"
+                        android:lineSpacingExtra="@dimen/line_spacing_extra"
                         android:text="@string/signup_info"
                         android:textColor="@color/darkLiteGrey"
                         android:textSize="@dimen/normalTextSize"

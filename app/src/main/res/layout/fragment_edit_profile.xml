@@ -317,8 +317,10 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/et_drawable"
 
-                    android:paddingTop="@dimen/_4sdp"
-                    android:paddingBottom="@dimen/_4sdp"
+
+                    android:paddingTop="@dimen/etHorizontalPadding"
+
+                    android:paddingBottom="@dimen/etHorizontalPadding"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtTempPhoneEditProfile">
@@ -330,7 +332,8 @@
                         android:layout_marginStart="@dimen/etHorizontalPadding"
                         android:padding="0dp"
                         app:ccp_showArrow="false"
-
+                      app:ccp_padding="0dp"
+                        android:clipToPadding="false"
                         app:ccp_showNameCode="false"
                         app:ccp_showPhoneCode="false"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -339,8 +342,8 @@
 
                     <ImageView
                         android:id="@+id/ivDrpArrow"
-                        android:layout_width="@dimen/_15sdp"
-                        android:layout_height="@dimen/_15sdp"
+                        android:layout_width="@dimen/iconSize"
+                        android:layout_height="@dimen/iconSize"
                         android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/countryCodePickerEditProfile"
@@ -365,6 +368,7 @@
                         android:layout_marginStart="@dimen/etHorizontalPadding"
                         android:fontFamily="@font/larsseit_regular"
                         android:gravity="center"
+
                         android:text="@{model.countryCodeValue}"
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/normalTextSize"
