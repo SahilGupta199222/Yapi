@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.core.view.size
@@ -46,6 +47,11 @@ class ChipSetDemoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
+        binding.apply {
+           imgEmojiIconChatDemo.setOnClickListener {
+               Toast.makeText(requireContext(), "clicked", Toast.LENGTH_SHORT).show()
+           }
+        }
     }
 
     private fun init() {

@@ -280,7 +280,7 @@
                 android:id="@+id/etRichChatDemo"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_45sdp"
-
+                android:visibility="gone"
                 android:textSize="@dimen/normalSmallTextSize"
                 android:layout_marginEnd="@dimen/startMainMargin"
                 app:layout_constraintBottom_toTopOf="@+id/layoutStyleOptionsEditTextViewChatDemo"
