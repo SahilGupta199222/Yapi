@@ -126,7 +126,7 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/larsseit_bold"
                         android:text="OR"
-                        android:textColor="@color/darkLiteGrey"
+                        android:textColor="#000000"
                         android:textSize="@dimen/_12ssp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -207,9 +207,10 @@
 
                         <ImageView
                             android:id="@+id/ivaddMember"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/plus_icon_size"
+                            android:layout_height="@dimen/plus_icon_size"
                             android:src="@drawable/add_member"
+                            android:backgroundTint="@color/blueColor"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -217,13 +218,13 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_6sdp"
                             android:layout_marginEnd="@dimen/startMainMargin"
                             android:fontFamily="@font/larsseit_regular"
                             android:lineSpacingExtra="@dimen/line_spacing_extra"
-                            android:text="@string/add_member_text"
+                            android:text="@string/add_member_text_third_step"
 
-                            android:textColor="@color/dark_blue"
+                            android:textColor="@color/blueColor"
                             android:textSize="@dimen/_12ssp"
                             app:layout_constraintBottom_toBottomOf="@+id/ivaddMember"
                             app:layout_constraintStart_toEndOf="@+id/ivaddMember"

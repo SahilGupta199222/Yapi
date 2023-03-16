@@ -55,6 +55,7 @@ class ChipSetDemoFragment : Fragment() {
     }
 
     private fun init() {
+        Log.i("asdfjnasdf","init fucntion called")
         binding.apply {
             etRichChatDemo.setPlaceholder("Enter msg here")
 //            etRichChatDemo.hint = "Enter msg here"
@@ -267,22 +268,17 @@ class ChipSetDemoFragment : Fragment() {
             imgLinkIconChatDemo.setOnClickListener {
                 etRichChatDemo.insertLink("https://cdn.britannica.com/49/182849-050-4C7FE34F/scene-Iron-Man.jpg","iron man link")
             }
+            etRichChatDemo.setOnTextChangeListener { object:RichEditor.OnTextChangeListener{
+                override fun onTextChange(text: String?) {
+                    Log.i("asdfjnasdf","OnText Chage listner ${text}\n")
+                    etRichChatDemo.performClick()
+                }
+
+            } }
 
             etRichChatDemo.setOnDecorationChangeListener { text, types ->
                 Log.i("asdfjnasdf","i ->${types}  and text  $text\n")
             }
-            etRichChatDemo.setOnDecorationChangeListener(object : RichEditor.OnDecorationStateListener{
-                override fun onStateChangeListener(
-                    text: String?,
-                    types: MutableList<RichEditor.Type>?,
-                ) {
-                }
-
-
-            })
-
-
-
         }
     }
 
