@@ -1,5 +1,6 @@
 package com.yapi.views.edit_profile
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
@@ -8,8 +9,11 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.yapi.MainActivity
+import com.yapi.R
 import com.yapi.databinding.FragmentEditProfileBinding
 
 class EditProfileFragment : Fragment() {
@@ -30,6 +34,8 @@ class EditProfileFragment : Fragment() {
     }
 
     private fun init() {
+
+
         setPhoneMethod(binding.countryCodePickerEditProfile.getSelectedCountryCodeWithPlus())
         binding.apply {
             countryCodePickerEditProfile.setOnCountryChangeListener {
@@ -91,7 +97,12 @@ class EditProfileFragment : Fragment() {
     fun setPhoneMethod(selectedCountryCode:String)
     {
         viewModel.countryCodeValue.set(selectedCountryCode.toString())
-        //viewModel.phoneNumberValue.set(viewModel.phoneNumberValue.get().toString())
         binding.etNumberEditProfile.setSelection(binding.etNumberEditProfile.text.toString().trim().length)
+        var profilePic= binding.countryCodePickerEditProfile.imageViewFlag
+        val imageBitmap = BitmapFactory.decodeResource(resources, binding.countryCodePickerEditProfile.selectedCountryFlagResourceId)
+        val roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(resources, imageBitmap)
+        roundedBitmapDrawable.cornerRadius = 20.0f
+        roundedBitmapDrawable.setAntiAlias(true)
+        profilePic.setImageDrawable(roundedBitmapDrawable)
     }
 }

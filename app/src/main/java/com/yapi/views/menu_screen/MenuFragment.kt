@@ -21,12 +21,14 @@ class MenuFragment : Fragment() {
     private var groupListClicked = false
     private var jobListClicked = false
     private var customerListClicked = false
+    private var conversationListClicked = false
     private var teamListClicked = false
     private var leadListClicked = false
     private var settingListClicked = false
     private var adapterGroupsList: AdapterGroupsList? = null
     private var adapterJobsList: AdapterGroupsList? = null
     private var adapterCustomerList: AdapterCustomerList? = null
+    private var adapterConversationList: AdapterCustomerList? = null
     private var adapterTeamList: AdapterCustomerList? = null
     private var adapterLeadsList: AdapterCustomerList? = null
     private var adapterSettingsList: AdapterSettingList? = null
@@ -129,6 +131,27 @@ class MenuFragment : Fragment() {
                         )
                     )
                     rvCustomersListMenu.visibility = View.GONE
+                }
+            }
+            layoutConversationMenu.setOnClickListener {
+                conversationListClicked = !conversationListClicked
+                if (conversationListClicked) {
+                    imgArrowConversationMenu.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_baseline_keyboard_arrow_up_24
+                        )
+                    )
+                    rvConversationListMenu.visibility = View.VISIBLE
+                    setConversationListAdapter()
+                } else {
+                    imgArrowConversationMenu.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            R.drawable.ic_baseline_keyboard_arrow_right_24
+                        )
+                    )
+                    rvConversationListMenu.visibility = View.GONE
                 }
             }
             layoutTeamMenu.setOnClickListener {
@@ -261,6 +284,38 @@ class MenuFragment : Fragment() {
                 }
             })
         binding.rvCustomersListMenu.adapter = adapterCustomerList
+    }
+    private fun setConversationListAdapter() {
+        val list = ArrayList<PojoCustomerList>()
+        val tempOnlineList = listOf(true, false)
+       /* for (i in 0 until 5) {
+            list.add(PojoCustomerList("ab", "Customer${i + 34}", tempOnlineList.random(), i))
+        }*/
+
+        list.add(PojoCustomerList("ab", "Daman", tempOnlineList.random(), 1))
+        list.add(PojoCustomerList("ab", "Sahil sir", tempOnlineList.random(), 1))
+        list.add(PojoCustomerList("ab", "Amit sir", tempOnlineList.random(), 0))
+        list.add(PojoCustomerList("ab", "Arundeep sir", tempOnlineList.random(), 1))
+        list.add(PojoCustomerList("ab", "Khem sir", tempOnlineList.random(), 0))
+
+        val fixImageHeight =
+            requireContext().resources.getDimension(com.intuit.sdp.R.dimen._45sdp).toInt()
+        val rvHeight = fixImageHeight * list.size
+        binding.rvConversationListMenu.layoutParams.height = rvHeight
+
+        adapterConversationList =
+            AdapterCustomerList(requireContext(), list, object : AdapterCustomerList.Click {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onSeletect(position: Int) {
+                    for (i in 0 until adapterConversationList?.getListt()?.size!!) {
+                        adapterConversationList?.getListt()?.get(i)?.selectedStatus = position == i
+                    }
+                    adapterConversationList?.notifyDataSetChanged()
+                    if(findNavController().currentDestination?.id == R.id.menuFragment)
+                    findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)
+                }
+            })
+        binding.rvConversationListMenu.adapter = adapterConversationList
     }
 
     private fun rvLeadsListMenu() {

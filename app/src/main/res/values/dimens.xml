@@ -6,6 +6,7 @@
     <dimen name="topMargin">@dimen/_10sdp</dimen>
 
     <dimen name="iconSize">@dimen/_16sdp</dimen>
+    <dimen name="extraIconSize">@dimen/_18sdp</dimen>
 
     <dimen name="normalTextSize">@dimen/_12ssp</dimen>
     <dimen name="normalSmallTextSize">@dimen/_11ssp</dimen>
@@ -39,4 +40,7 @@
 
 <dimen name="group_banner_height">@dimen/_100sdp</dimen>
     <dimen name="cardview_popup_back_radius">@dimen/_6sdp</dimen>
+
+    <dimen name="plus_icon_size">@dimen/_20sdp</dimen>
+    <dimen name="add_memeber_margin_left">@dimen/_7sdp</dimen>
 </resources>

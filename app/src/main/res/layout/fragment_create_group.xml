@@ -284,7 +284,7 @@
                         android:layout_height="@dimen/_21sdp"
                         android:thumb="@drawable/custom_thumb"
                         app:track="@drawable/custom_track"
-                        android:checked="true"
+                        android:checked="false"
                         android:layout_gravity="center"
                         app:layout_constraintStart_toEndOf="@+id/txtTempMakePrivateInfoCreateGroup"
                         app:layout_constraintTop_toTopOf="parent"
