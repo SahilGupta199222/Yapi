@@ -222,6 +222,9 @@ class MenuFragment : Fragment() {
                         adapterSettingsList?.getListt()?.get(i)?.selectedStatus = position == i
                     }
                     adapterSettingsList?.notifyDataSetChanged()
+
+                    if(findNavController().currentDestination?.id == R.id.menuFragment)
+                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)
                 }
             })
         binding.rvSettingsListMenu.adapter = adapterSettingsList
@@ -253,6 +256,8 @@ class MenuFragment : Fragment() {
                         adapterCustomerList?.getListt()?.get(i)?.selectedStatus = position == i
                     }
                     adapterCustomerList?.notifyDataSetChanged()
+                    if(findNavController().currentDestination?.id == R.id.menuFragment)
+                    findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)
                 }
             })
         binding.rvCustomersListMenu.adapter = adapterCustomerList
@@ -283,6 +288,9 @@ class MenuFragment : Fragment() {
                         adapterLeadsList?.getListt()?.get(i)?.selectedStatus = position == i
                     }
                     adapterLeadsList?.notifyDataSetChanged()
+
+                    if(findNavController().currentDestination?.id == R.id.menuFragment)
+                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)
                 }
             })
         binding.rvLeadsListMenu.adapter = adapterLeadsList
@@ -314,6 +322,9 @@ class MenuFragment : Fragment() {
                         adapterTeamList?.getListt()?.get(i)?.selectedStatus = position == i
                     }
                     adapterTeamList?.notifyDataSetChanged()
+
+                    if(findNavController().currentDestination?.id == R.id.menuFragment)
+                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)
                 }
             })
         binding.rvTeamsListMenu.adapter = adapterTeamList
@@ -344,6 +355,9 @@ class MenuFragment : Fragment() {
                     }
                     Log.i("asdfjanskdf", "before notifiy list is\n${adapterGroupsList?.getListt()}")
                     adapterGroupsList?.notifyDataSetChanged()
+
+                    if(findNavController().currentDestination?.id == R.id.menuFragment)
+                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)
                 }
             })
         binding.rvGroupListMenu.adapter = adapterGroupsList
@@ -376,6 +390,9 @@ class MenuFragment : Fragment() {
                     }
                     Log.i("asdfjanskdf", "before notifiy list is\n${adapterJobsList?.getListt()}")
                     adapterJobsList?.notifyDataSetChanged()
+
+                    if(findNavController().currentDestination?.id == R.id.menuFragment)
+                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)
                 }
             })
         binding.rvJobsListMenu.adapter = adapterJobsList

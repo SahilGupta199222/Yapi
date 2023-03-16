@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_signInFragment_to_chatEmptyFragment"
             app:destination="@id/chatEmptyFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_chipSetDemoFragment"
+            app:destination="@id/chipSetDemoFragment" />
     </fragment>
     <fragment
         android:id="@+id/menuFragment"
@@ -51,6 +54,9 @@
         <action
             android:id="@+id/action_menuFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_menuFragment_to_chatMessageFragment"
+            app:destination="@id/chatMessageFragment" />
     </fragment>
 
 
