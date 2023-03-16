@@ -40,6 +40,17 @@ class SignInViewModel : ViewModel() {
             }
         }
     }
+    fun onLongg(view:View):Boolean{
+        when (view.id) {
+            R.id.btnSignIn -> {
+                    if(view.findNavController().currentDestination?.id==R.id.signInFragment) {
+//                        view.findNavController().navigate(R.id.action_signInFragment_to_signUpFragment2)
+                        view.findNavController().navigate(R.id.action_signInFragment_to_chipSetDemoFragment)
+                    }
+                }
+            }
+        return  true
+    }
 
     private fun checkValidation(): Boolean {
         if (emailFieldValue.get().toString().isEmpty()) {

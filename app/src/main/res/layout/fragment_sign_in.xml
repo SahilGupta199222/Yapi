@@ -233,7 +233,7 @@
                 android:background="@drawable/btn_drawable_blue"
                 android:fontFamily="@font/larsseit_bold"
                 android:onClick="@{vModel::onClick}"
-
+                android:onLongClick="@{vModel::onLongg}"
                 android:text="@string/sign_in"
                 android:textColor="@color/white" />
 
