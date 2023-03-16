@@ -157,13 +157,14 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/layoutEmailSignIn" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
+                <!--    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtTempPasswordNameSignUp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/topFiveMargin"
                         android:fontFamily="@font/larsseit_medium"
                         android:text="@string/password"
+                        android:visibility="gone"
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/smallTextSize"
                         app:layout_constraintStart_toStartOf="parent"
@@ -177,6 +178,7 @@
                         android:background="@drawable/et_drawable"
                         android:inputType="textPassword"
                         android:padding="0dp"
+                        android:visibility="gone"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
                         app:hintEnabled="false"
@@ -218,7 +220,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/etPasswordLayoutSignIn" />
-
+-->
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
 

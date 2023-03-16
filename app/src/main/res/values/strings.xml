@@ -126,4 +126,20 @@
     <string name="chat_text">Chat</string>
     <string name="email_text">Email</string>
     <string name="sms_text">SMS</string>
+    <string name="invites_from_crm_text">Invites From CRM</string>
+
+    <string name="clientid_title">Client Id</string>
+    <string name="write_clientid_title">Write Client ID</string>
+
+    <string name="client_secret_title">Client secret</string>
+    <string name="write_secret_number_title">Write secret number</string>
+
+    <string name="tenant_id_title">Tenant Id</string>
+    <string name="tenant_id_value">Write tenant ID</string>
+
+    <string name="app_key_title">app key</string>
+    <string name="app_key_value">Write app key number</string>
+    <string name="Invite_textt">Invite</string>
+
+    <string name="add_teammates_text">ADD Teammates</string>
 </resources>

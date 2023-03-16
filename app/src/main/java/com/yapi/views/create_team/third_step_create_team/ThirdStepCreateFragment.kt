@@ -1,6 +1,7 @@
 package com.yapi.views.create_team.third_step_create_team
 
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,8 +22,13 @@ class ThirdStepCreateFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         dataBinding = ThirdStepCreateLayoutBinding.inflate(LayoutInflater.from(requireActivity()))
-        initUI()
         dataBinding.vModel=viewModel
+        initUI()
+        val displayMetrics = DisplayMetrics()
+        requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+
+        var width = displayMetrics.widthPixels
+        viewModel.screenWidth=width
         return dataBinding.root
     }
 

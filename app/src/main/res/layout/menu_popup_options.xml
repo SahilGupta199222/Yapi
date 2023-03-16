@@ -15,7 +15,7 @@
         android:layout_marginBottom="@dimen/_10sdp"
         android:elevation="@dimen/_5sdp"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardCornerRadius="@dimen/cardview_popup_back_radius"
         app:cardElevation="@dimen/_5sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

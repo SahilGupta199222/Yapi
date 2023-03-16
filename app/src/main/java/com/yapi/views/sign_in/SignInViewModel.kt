@@ -25,7 +25,8 @@ class SignInViewModel : ViewModel() {
                 if (checkValidation()) {
                     if(view.findNavController().currentDestination?.id==R.id.signInFragment) {
 //                        view.findNavController().navigate(R.id.action_signInFragment_to_signUpFragment2)
-                        view.findNavController().navigate(R.id.action_signInFragment_to_chatEmptyFragment)
+                       // view.findNavController().navigate(R.id.action_signInFragment_to_chatEmptyFragment)
+                        view.findNavController().navigate(R.id.action_signInFragment_to_signUpCodeFragment)
                     }
                 }
             }
@@ -59,10 +60,10 @@ class SignInViewModel : ViewModel() {
         } else if (!(isValidEmail(emailFieldValue.get().toString()))) {
             showToastMessage(MainActivity.activity!!.get()!!.resources.getString(R.string.please_enter_valid_email))
             return false
-        } else if (passwordFieldValue.get().toString().isEmpty()) {
+        } /*else if (passwordFieldValue.get().toString().isEmpty()) {
             showToastMessage(MainActivity.activity!!.get()!!.resources.getString(R.string.please_enter_password))
             return false
-        } else {
+        } */else {
             return true
         }
     }

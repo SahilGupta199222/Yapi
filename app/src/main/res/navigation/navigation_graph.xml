@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/signInFragment">
+    app:startDestination="@id/thirdStepCreateTeam">
 
     <fragment
         android:id="@+id/signUpFragment2"
@@ -32,8 +32,11 @@
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.yapi.views.sign_in.SignInFragment"
-
         android:label="SignInFragment">
+
+        <action android:id="@+id/action_signInFragment_to_signUpCodeFragment"
+            app:destination="@id/signUpCodeFragment"/>
+
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment2"
             app:destination="@id/signUpFragment2" />
@@ -156,5 +159,13 @@
         android:name="com.yapi.views.chat.ChatMessagesFragment"
         android:label="ChatMessageFragment">
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.yapi.views.splash.SplashFragment"
+        android:label="splashFragment">
+        <action android:id="@+id/action_splashFragment_to_signInFragment"
+            app:destination="@+id/signInFragment"/>
     </fragment>
 </navigation>
