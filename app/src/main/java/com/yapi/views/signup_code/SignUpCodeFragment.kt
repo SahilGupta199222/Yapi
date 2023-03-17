@@ -41,6 +41,8 @@ class SignUpCodeFragment : Fragment() {
     private fun onClick(){
        // binding.otpViewSignUpCodee as Fram
         binding.apply{
+//            pin?.layoutParams?.width = resources.getDimensionPixelSize(R.dimen.three);
+//            pin?.layoutParams?.height = resources.getDimensionPixelSize(R.dimen.threePlus);
           /* btnSignUpCode.setOnClickListener {
                findNavController().navigate(R.id.action_signUpCodeFragment_to_signupTeam)
            }*/
