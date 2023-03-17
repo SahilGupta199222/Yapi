@@ -102,8 +102,8 @@
 
                 <ImageView
                     android:id="@+id/ivSearch"
-                    android:layout_width="@dimen/iconSize"
-                    android:layout_height="@dimen/iconSize"
+                    android:layout_width="@dimen/smallIconSize"
+                    android:layout_height="@dimen/smallIconSize"
                     android:src="@drawable/search"
                     app:layout_constraintBottom_toBottomOf="@+id/etSearchMenu"
                     app:layout_constraintStart_toStartOf="parent"
@@ -113,7 +113,7 @@
                     android:id="@+id/etSearchMenu"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/startPaddingNormal"
                     android:layout_marginTop="@dimen/topMainMargin"
                     android:background="@null"
                     android:fontFamily="@font/larsseit_regular"

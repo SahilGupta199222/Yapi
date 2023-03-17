@@ -54,6 +54,7 @@ class MenuFragment : Fragment() {
     }
 
     private fun init() {
+        setGroupDataMethod()
         binding.apply {
             layoutAddNewGroupsMenu.clipToOutline = true
             layoutAddNewCustomersMenu.clipToOutline = true
@@ -62,6 +63,7 @@ class MenuFragment : Fragment() {
     }
 
     private fun clickListener() {
+
         binding.apply {
             imgTempDrawableMenu.setOnClickListener {
                 lifecycleScope.launchWhenResumed {
@@ -71,25 +73,7 @@ class MenuFragment : Fragment() {
                 }
             }
             layoutGroupsMenu.setOnClickListener {
-                groupListClicked = !groupListClicked
-                if (groupListClicked) {
-                    imgArrowGroupMenu.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            requireContext(),
-                            R.drawable.ic_baseline_keyboard_arrow_up_24
-                        )
-                    )
-                    rvGroupListMenu.visibility = View.VISIBLE
-                    setGroupListAdapter()
-                } else {
-                    imgArrowGroupMenu.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            requireContext(),
-                            R.drawable.ic_baseline_keyboard_arrow_right_24
-                        )
-                    )
-                    rvGroupListMenu.visibility = View.GONE
-                }
+              setGroupDataMethod()
             }
             layoutJobsMenu.setOnClickListener {
                 jobListClicked = !jobListClicked
@@ -227,6 +211,29 @@ class MenuFragment : Fragment() {
                 Toast.makeText(requireContext(), "Add new member", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun setGroupDataMethod() {
+        groupListClicked = !groupListClicked
+        if (groupListClicked) {
+            binding.imgArrowGroupMenu.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_keyboard_arrow_up_24
+                )
+            )
+            binding.rvGroupListMenu.visibility = View.VISIBLE
+            setGroupListAdapter()
+        } else {
+            binding.imgArrowGroupMenu.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_keyboard_arrow_right_24
+                )
+            )
+            binding.rvGroupListMenu.visibility = View.GONE
+        }
+
     }
 
     private fun setSettingListAdapter() {
