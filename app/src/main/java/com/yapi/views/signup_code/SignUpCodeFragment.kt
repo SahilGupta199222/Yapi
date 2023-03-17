@@ -39,7 +39,7 @@ class SignUpCodeFragment : Fragment() {
     }
 
     private fun onClick(){
-        binding.otpViewSignUpCodee
+       // binding.otpViewSignUpCodee as Fram
         binding.apply{
           /* btnSignUpCode.setOnClickListener {
                findNavController().navigate(R.id.action_signUpCodeFragment_to_signupTeam)

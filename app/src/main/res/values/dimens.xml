@@ -5,7 +5,7 @@
     <dimen name="bottomMarggin">@dimen/_30sdp</dimen>
     <dimen name="topMargin">@dimen/_10sdp</dimen>
 
-    <dimen name="smallIconSize">@dimen/_14sdp</dimen>
+    <dimen name="smallIconSize">@dimen/_13sdp</dimen>
     <dimen name="iconSize">@dimen/_16sdp</dimen>
     <dimen name="extraIconSize">@dimen/_18sdp</dimen>
 
