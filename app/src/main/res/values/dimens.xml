@@ -46,4 +46,6 @@
     <dimen name="add_memeber_margin_left">@dimen/_7sdp</dimen>
 
     <dimen name="menu_line_height">@dimen/_1sdp</dimen>
+    <dimen name="three">@dimen/_32sdp</dimen>
+    <dimen name="threePlus">@dimen/_42sdp</dimen>
 </resources>
