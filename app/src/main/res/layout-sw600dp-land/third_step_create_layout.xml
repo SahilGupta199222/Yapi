@@ -178,6 +178,7 @@
                         android:background="@drawable/et_drawable"
                         android:hint="@string/enter_email"
                         android:paddingStart="@dimen/etHorizontalPadding"
+                        android:text="@={vModel.emailFieldValue}"
                         android:paddingTop="@dimen/etVerticalPadding"
                         android:paddingEnd="@dimen/etHorizontalPadding"
                         android:paddingBottom="@dimen/etVerticalPadding"

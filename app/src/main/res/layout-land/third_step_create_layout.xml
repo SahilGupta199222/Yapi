@@ -172,6 +172,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/startMainMargin"
+                        android:text="@={vModel.emailFieldValue}"
+
                         android:layout_marginEnd="@dimen/startMainMargin"
                         android:background="@drawable/et_drawable"
                         android:hint="@string/enter_email"
