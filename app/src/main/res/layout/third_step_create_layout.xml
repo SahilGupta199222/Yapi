@@ -278,7 +278,7 @@
                     android:fontFamily="@font/larsseit_regular"
                     android:onClick="@{vModel::onClick}"
                     android:text="@string/skip_this_step"
-                    android:textColor="@color/dark_blue"
+                    android:textColor="@color/blueColor"
                     android:textSize="@dimen/_12ssp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
