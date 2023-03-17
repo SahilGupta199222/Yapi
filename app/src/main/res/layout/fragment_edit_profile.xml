@@ -327,11 +327,12 @@
 
                     <com.hbb20.CountryCodePicker
                         android:id="@+id/countryCodePickerEditProfile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
                         android:layout_marginStart="@dimen/etHorizontalPadding"
                         android:padding="0dp"
                         app:ccp_showArrow="false"
+                        android:gravity="center"
                       app:ccp_padding="0dp"
                         android:clipToPadding="false"
                         app:ccp_showNameCode="false"

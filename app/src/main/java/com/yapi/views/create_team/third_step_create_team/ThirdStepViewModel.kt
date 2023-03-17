@@ -23,14 +23,14 @@ class ThirdStepViewModel : ViewModel() {
                 if (view.findNavController().currentDestination?.id == R.id.thirdStepCreateTeam) {
                     if (checkValidation()) {
                         view.findNavController()
-                            .navigate(R.id.action_thirdStepCreateTeam_to_chatEmptyFragment)
+                            .navigate(R.id.action_thirdStepCreateTeam_to_menuFragment)
                     }
                 }
             }
             R.id.tvSkipStep -> {
                 if (view.findNavController().currentDestination?.id == R.id.thirdStepCreateTeam) {
                     view.findNavController()
-                        .navigate(R.id.action_thirdStepCreateTeam_to_chatEmptyFragment)
+                        .navigate(R.id.action_thirdStepCreateTeam_to_menuFragment)
                 }
             }
             R.id.linearTopThirdStep, R.id.constraintsTopThirdStep -> {

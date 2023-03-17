@@ -55,6 +55,13 @@ class MenuFragment : Fragment() {
 
     private fun init() {
         setGroupDataMethod()
+        setJobDataMethod()
+        setCusomerListMethod()
+        setConversationMethod()
+        setTeamMethod()
+        setLeadMethod()
+        setSettingMethod()
+
         binding.apply {
             layoutAddNewGroupsMenu.clipToOutline = true
             layoutAddNewCustomersMenu.clipToOutline = true
@@ -68,7 +75,7 @@ class MenuFragment : Fragment() {
             imgTempDrawableMenu.setOnClickListener {
                 lifecycleScope.launchWhenResumed {
                     if (findNavController().currentDestination?.id == R.id.menuFragment) {
-                        findNavController().popBackStack()
+                       // findNavController().popBackStack()
                     }
                 }
             }
@@ -76,140 +83,168 @@ class MenuFragment : Fragment() {
               setGroupDataMethod()
             }
             layoutJobsMenu.setOnClickListener {
-                jobListClicked = !jobListClicked
-                if (jobListClicked) {
-                    imgArrowJobsMenu.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            requireContext(),
-                            R.drawable.ic_baseline_keyboard_arrow_up_24
-                        )
-                    )
-                    rvJobsListMenu.visibility = View.VISIBLE
-                    setJobsListAdapter()
-                } else {
-                    imgArrowJobsMenu.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            requireContext(),
-                            R.drawable.ic_baseline_keyboard_arrow_right_24
-                        )
-                    )
-                    rvJobsListMenu.visibility = View.GONE
-                }
+             setJobDataMethod()
             }
             layoutCustomersMenu.setOnClickListener {
-                customerListClicked = !customerListClicked
-                if (customerListClicked) {
-                    imgArrowCustomersMenu.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            requireContext(),
-                            R.drawable.ic_baseline_keyboard_arrow_up_24
-                        )
-                    )
-                    rvCustomersListMenu.visibility = View.VISIBLE
-                    setCustomerListAdapter()
-                } else {
-                    imgArrowCustomersMenu.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            requireContext(),
-                            R.drawable.ic_baseline_keyboard_arrow_right_24
-                        )
-                    )
-                    rvCustomersListMenu.visibility = View.GONE
-                }
+               setCusomerListMethod()
             }
             layoutConversationMenu.setOnClickListener {
-                conversationListClicked = !conversationListClicked
-                if (conversationListClicked) {
-                    imgArrowConversationMenu.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            requireContext(),
-                            R.drawable.ic_baseline_keyboard_arrow_up_24
-                        )
-                    )
-                    rvConversationListMenu.visibility = View.VISIBLE
-                    setConversationListAdapter()
-                } else {
-                    imgArrowConversationMenu.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            requireContext(),
-                            R.drawable.ic_baseline_keyboard_arrow_right_24
-                        )
-                    )
-                    rvConversationListMenu.visibility = View.GONE
-                }
+            setConversationMethod()
             }
             layoutTeamMenu.setOnClickListener {
-                teamListClicked = !teamListClicked
-                if (teamListClicked) {
-                    imgArrowTeamMenu.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            requireContext(),
-                            R.drawable.ic_baseline_keyboard_arrow_up_24
-                        )
-                    )
-                    rvTeamsListMenu.visibility = View.VISIBLE
-                    setTeamListAdapter()
-                } else {
-                    imgArrowTeamMenu.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            requireContext(),
-                            R.drawable.ic_baseline_keyboard_arrow_right_24
-                        )
-                    )
-                    rvTeamsListMenu.visibility = View.GONE
-                }
+               setTeamMethod()
             }
             layoutLeadMenu.setOnClickListener {
-                leadListClicked = !leadListClicked
-                if (leadListClicked) {
-                    imgArrowLeadMenu.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            requireContext(),
-                            R.drawable.ic_baseline_keyboard_arrow_up_24
-                        )
-                    )
-                    rvLeadsListMenu.visibility = View.VISIBLE
-                    rvLeadsListMenu()
-                } else {
-                    imgArrowLeadMenu.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            requireContext(),
-                            R.drawable.ic_baseline_keyboard_arrow_right_24
-                        )
-                    )
-                    rvLeadsListMenu.visibility = View.GONE
-                }
+              setLeadMethod()
             }
             layoutSettingsMenu.setOnClickListener {
-                settingListClicked = !settingListClicked
-                if (settingListClicked) {
-                    imgArrowSettingsMenu.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            requireContext(),
-                            R.drawable.ic_baseline_keyboard_arrow_up_24
-                        )
-                    )
-                    rvSettingsListMenu.visibility = View.VISIBLE
-                    setSettingListAdapter()
-                } else {
-                    imgArrowSettingsMenu.setImageDrawable(
-                        ContextCompat.getDrawable(
-                            requireContext(),
-                            R.drawable.ic_baseline_keyboard_arrow_right_24
-                        )
-                    )
-                    rvSettingsListMenu.visibility = View.GONE
-                }
+               setSettingMethod()
             }
             etSearchMenu.setOnClickListener {
-                Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
+              //  Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
             }
             layoutBoatMenu.setOnClickListener {
-                Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
+              //  Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
             }
             layoutAddNewCustomersMenu.setOnClickListener {
-                Toast.makeText(requireContext(), "Add new member", Toast.LENGTH_SHORT).show()
+             //   Toast.makeText(requireContext(), "Add new member", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun setSettingMethod() {
+        settingListClicked = !settingListClicked
+        if (settingListClicked) {
+            binding.imgArrowSettingsMenu.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_keyboard_arrow_up_24
+                )
+            )
+            binding.rvSettingsListMenu.visibility = View.VISIBLE
+            setSettingListAdapter()
+        } else {
+            binding.imgArrowSettingsMenu.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_keyboard_arrow_right_24
+                )
+            )
+            binding.rvSettingsListMenu.visibility = View.GONE
+        }
+    }
+
+    private fun setLeadMethod() {
+
+        leadListClicked = !leadListClicked
+        if (leadListClicked) {
+            binding.imgArrowLeadMenu.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_keyboard_arrow_up_24
+                )
+            )
+            binding. rvLeadsListMenu.visibility = View.VISIBLE
+            rvLeadsListMenu()
+        } else {
+            binding.imgArrowLeadMenu.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_keyboard_arrow_right_24
+                )
+            )
+            binding.rvLeadsListMenu.visibility = View.GONE
+        }
+    }
+
+    private fun setTeamMethod() {
+
+        teamListClicked = !teamListClicked
+        if (teamListClicked) {
+            binding.imgArrowTeamMenu.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_keyboard_arrow_up_24
+                )
+            )
+            binding.rvTeamsListMenu.visibility = View.VISIBLE
+            setTeamListAdapter()
+        } else {
+            binding.imgArrowTeamMenu.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_keyboard_arrow_right_24
+                )
+            )
+            binding.rvTeamsListMenu.visibility = View.GONE
+        }
+    }
+
+    private fun setConversationMethod() {
+
+        conversationListClicked = !conversationListClicked
+        if (conversationListClicked) {
+            binding.imgArrowConversationMenu.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_keyboard_arrow_up_24
+                )
+            )
+            binding.rvConversationListMenu.visibility = View.VISIBLE
+            setConversationListAdapter()
+        } else {
+            binding.imgArrowConversationMenu.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_keyboard_arrow_right_24
+                )
+            )
+            binding.rvConversationListMenu.visibility = View.GONE
+        }
+    }
+
+    private fun setCusomerListMethod() {
+        customerListClicked = !customerListClicked
+        if (customerListClicked) {
+            binding.imgArrowCustomersMenu.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_keyboard_arrow_up_24
+                )
+            )
+            binding.rvCustomersListMenu.visibility = View.VISIBLE
+            setCustomerListAdapter()
+        } else {
+            binding.imgArrowCustomersMenu.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_keyboard_arrow_right_24
+                )
+            )
+            binding.rvCustomersListMenu.visibility = View.GONE
+        }
+    }
+
+    private fun setJobDataMethod() {
+
+        jobListClicked = !jobListClicked
+        if (jobListClicked) {
+            binding.imgArrowJobsMenu.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_keyboard_arrow_up_24
+                )
+            )
+            binding.rvJobsListMenu.visibility = View.VISIBLE
+            setJobsListAdapter()
+        } else {
+            binding.imgArrowJobsMenu.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_keyboard_arrow_right_24
+                )
+            )
+            binding.rvJobsListMenu.visibility = View.GONE
         }
     }
 
@@ -253,8 +288,8 @@ class MenuFragment : Fragment() {
                     }
                     adapterSettingsList?.notifyDataSetChanged()
 
-                    if(findNavController().currentDestination?.id == R.id.menuFragment)
-                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)
+                   /* if(findNavController().currentDestination?.id == R.id.menuFragment)
+                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)*/
                 }
             })
         binding.rvSettingsListMenu.adapter = adapterSettingsList
@@ -272,6 +307,7 @@ class MenuFragment : Fragment() {
         list.add(PojoCustomerList("ab", "Talan George", tempOnlineList.random(), 0))
         list.add(PojoCustomerList("ab", "Madelyn Levin", tempOnlineList.random(), 1))
         list.add(PojoCustomerList("ab", "Zaire Stanton", tempOnlineList.random(), 0))
+        list.add(PojoCustomerList("ab", requireActivity().getString(R.string.add_customers), tempOnlineList.random(), -1))
 
         val fixImageHeight =
             requireContext().resources.getDimension(com.intuit.sdp.R.dimen._45sdp).toInt()
@@ -286,8 +322,8 @@ class MenuFragment : Fragment() {
                         adapterCustomerList?.getListt()?.get(i)?.selectedStatus = position == i
                     }
                     adapterCustomerList?.notifyDataSetChanged()
-                    if(findNavController().currentDestination?.id == R.id.menuFragment)
-                    findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)
+                 /*   if(findNavController().currentDestination?.id == R.id.menuFragment)
+                    findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)*/
                 }
             })
         binding.rvCustomersListMenu.adapter = adapterCustomerList
@@ -304,6 +340,7 @@ class MenuFragment : Fragment() {
         list.add(PojoCustomerList("ab", "Amit sir", tempOnlineList.random(), 0))
         list.add(PojoCustomerList("ab", "Arundeep sir", tempOnlineList.random(), 1))
         list.add(PojoCustomerList("ab", "Khem sir", tempOnlineList.random(), 0))
+        list.add(PojoCustomerList("ab", requireActivity().getString(R.string.add_conversation), tempOnlineList.random(), -1))
 
         val fixImageHeight =
             requireContext().resources.getDimension(com.intuit.sdp.R.dimen._45sdp).toInt()
@@ -318,8 +355,8 @@ class MenuFragment : Fragment() {
                         adapterConversationList?.getListt()?.get(i)?.selectedStatus = position == i
                     }
                     adapterConversationList?.notifyDataSetChanged()
-                    if(findNavController().currentDestination?.id == R.id.menuFragment)
-                    findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)
+                 /*   if(findNavController().currentDestination?.id == R.id.menuFragment)
+                    findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)*/
                 }
             })
         binding.rvConversationListMenu.adapter = adapterConversationList
@@ -336,6 +373,7 @@ class MenuFragment : Fragment() {
         list.add(PojoCustomerList("ab", "Lincoln Rosser", tempOnlineList.random(), 2))
         list.add(PojoCustomerList("ab", "Jakob Vetrovs", tempOnlineList.random(), 2))
         list.add(PojoCustomerList("ab", "John C Flood", tempOnlineList.random(), 0))
+        list.add(PojoCustomerList("ab", requireActivity().getString(R.string.add_lead), tempOnlineList.random(), -1))
 
         val fixImageHeight =
             requireContext().resources.getDimension(com.intuit.sdp.R.dimen._45sdp).toInt()
@@ -351,8 +389,8 @@ class MenuFragment : Fragment() {
                     }
                     adapterLeadsList?.notifyDataSetChanged()
 
-                    if(findNavController().currentDestination?.id == R.id.menuFragment)
-                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)
+                   /* if(findNavController().currentDestination?.id == R.id.menuFragment)
+                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)*/
                 }
             })
         binding.rvLeadsListMenu.adapter = adapterLeadsList
@@ -370,6 +408,7 @@ class MenuFragment : Fragment() {
         list.add(PojoCustomerList("ab", "Talan George", tempOnlineList.random(), 1))
         list.add(PojoCustomerList("ab", "Madelyn Levin", tempOnlineList.random(), 0))
         list.add(PojoCustomerList("ab", "Zaire Stanton", tempOnlineList.random(), 0))
+        list.add(PojoCustomerList("ab", requireActivity().getString(R.string.add_teammates), tempOnlineList.random(), -1))
 
         val fixImageHeight =
             requireContext().resources.getDimension(com.intuit.sdp.R.dimen._45sdp).toInt()
@@ -385,8 +424,8 @@ class MenuFragment : Fragment() {
                     }
                     adapterTeamList?.notifyDataSetChanged()
 
-                    if(findNavController().currentDestination?.id == R.id.menuFragment)
-                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)
+                    /*if(findNavController().currentDestination?.id == R.id.menuFragment)
+                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)*/
                 }
             })
         binding.rvTeamsListMenu.adapter = adapterTeamList
@@ -402,6 +441,7 @@ class MenuFragment : Fragment() {
         list.add(PojoGroupMembersList("Operations", 1, false))
         list.add(PojoGroupMembersList("Reports", 2, false))
         list.add(PojoGroupMembersList("Engineers", 2, false))
+        list.add(PojoGroupMembersList(requireActivity().getString(R.string.createGroups_text), -1, false))
 
         val fixImageHeight =
             requireContext().resources.getDimension(com.intuit.sdp.R.dimen._36sdp).toInt()
@@ -418,8 +458,8 @@ class MenuFragment : Fragment() {
                     Log.i("asdfjanskdf", "before notifiy list is\n${adapterGroupsList?.getListt()}")
                     adapterGroupsList?.notifyDataSetChanged()
 
-                    if(findNavController().currentDestination?.id == R.id.menuFragment)
-                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)
+                    /*if(findNavController().currentDestination?.id == R.id.menuFragment)
+                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)*/
                 }
             })
         binding.rvGroupListMenu.adapter = adapterGroupsList
@@ -434,6 +474,7 @@ class MenuFragment : Fragment() {
         list.add(PojoGroupMembersList("Discount_SH1h73", 1, false))
         list.add(PojoGroupMembersList("Palosi_39875", 2, false))
         list.add(PojoGroupMembersList("Skiffington_h90", 1, false))
+       // list.add(PojoGroupMembersList(requireActivity().getString(R.string.createGroups_text), -2, false))
 
         val fixImageHeight =
             requireContext().resources.getDimension(com.intuit.sdp.R.dimen._36sdp).toInt()
@@ -453,8 +494,8 @@ class MenuFragment : Fragment() {
                     Log.i("asdfjanskdf", "before notifiy list is\n${adapterJobsList?.getListt()}")
                     adapterJobsList?.notifyDataSetChanged()
 
-                    if(findNavController().currentDestination?.id == R.id.menuFragment)
-                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)
+                  /*  if(findNavController().currentDestination?.id == R.id.menuFragment)
+                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)*/
                 }
             })
         binding.rvJobsListMenu.adapter = adapterJobsList

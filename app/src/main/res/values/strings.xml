@@ -38,7 +38,7 @@
     <string name="jobs">JOBS</string>
     <string name="customers">CUSTOMERS</string>
     <string name="team">TEAM</string>
-
+    <string name="createGroups_text">CREATE GROUPS</string>
 
     <string name="stemp_size">Step 1 of 3</string>
     <string name="company_name_title">What’s the name of your \nteam or company</string>

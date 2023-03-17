@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.yapi.R
@@ -16,6 +17,9 @@ class AdapterCustomerList(val context: Context, val list:ArrayList<PojoCustomerL
         val userName:AppCompatTextView=view.findViewById(R.id.txtUserNameRvCustomerList)
         val unSeenMsgCount:AppCompatTextView=view.findViewById(R.id.txtCountRvCustomerList)
         val selectedLine:View=view.findViewById(R.id.selectedLineRvCustomersList)
+        val constraintsLayoutStart:ConstraintLayout=view.findViewById(R.id.constraintsLayoutStart)
+        val layoutAddNewTeamsMenuAdapter:ConstraintLayout=view.findViewById(R.id.layoutAddNewTeamsMenuAdapter)
+        val imgAddNewTeamsMenu:AppCompatTextView=view.findViewById(R.id.imgAddNewTeamsMenu)
     }
     fun getListt():ArrayList<PojoCustomerList>
     {
@@ -54,7 +58,21 @@ class AdapterCustomerList(val context: Context, val list:ArrayList<PojoCustomerL
             holder.selectedLine.visibility = View.INVISIBLE
         }
         holder.itemView.setOnClickListener {
-            click.onSeletect(holder.adapterPosition)
+            if(list[position].unSeenMsgCount!=-1) {
+                click.onSeletect(holder.adapterPosition)
+            }
+        }
+
+        if(list[position].unSeenMsgCount!=-1)
+        {
+            holder.imgAddNewTeamsMenu.setText("")
+            holder.constraintsLayoutStart.visibility=View.VISIBLE
+            holder.layoutAddNewTeamsMenuAdapter.visibility=View.GONE
+        }else
+        {
+            holder.imgAddNewTeamsMenu.setText(list[position].name)
+            holder.constraintsLayoutStart.visibility=View.GONE
+            holder.layoutAddNewTeamsMenuAdapter.visibility=View.VISIBLE
         }
     }
 

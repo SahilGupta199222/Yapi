@@ -50,7 +50,7 @@ class SignInViewModel : ViewModel() {
             R.id.btnSignIn -> {
                     if(view.findNavController().currentDestination?.id==R.id.signInFragment) {
 //                        view.findNavController().navigate(R.id.action_signInFragment_to_signUpFragment2)
-                        view.findNavController().navigate(R.id.action_signInFragment_to_chipSetDemoFragment)
+                      //  view.findNavController().navigate(R.id.action_signInFragment_to_chipSetDemoFragment)
                     }
                 }
             }

@@ -43,10 +43,32 @@ class MenuViewModel():ViewModel() {
               var constraintsProfile= mView.findViewById<ConstraintLayout>(R.id.constraintsProfile)
                constraintsProfile.setOnClickListener {
                    popUp.dismiss()
-                   if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
+                /*   if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
                        view.findNavController()
                            .navigate(R.id.action_menuFragment_to_profileFragment)
-                   }
+                   }*/
+                      }
+               var constraintsSettings= mView.findViewById<ConstraintLayout>(R.id.constraintsSettings)
+               constraintsSettings.setOnClickListener {
+                   popUp.dismiss()
+                   /*   if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
+                          view.findNavController()
+                              .navigate(R.id.action_menuFragment_to_profileFragment)
+                      }*/
+               }
+               var constraintsLogout= mView.findViewById<ConstraintLayout>(R.id.constraintsLogout)
+               constraintsLogout.setOnClickListener {
+                   popUp.dismiss()
+                   /*   if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
+                          view.findNavController()
+                              .navigate(R.id.action_menuFragment_to_profileFragment)
+                      }*/
+               }
+
+
+                   
+                   
+                   
 
 //                       if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
 //                           view.findNavController().navigate(R.id.leaveGroupFragment)
@@ -59,15 +81,16 @@ class MenuViewModel():ViewModel() {
 //                   dialog.show()
 //                   var cardviewDeleteProfile=dialog.findViewById<CardView>(R.id.cardviewDeleteProfile)
 //                   cardviewDeleteProfile.layoutParams.width=(screenWidth!!.toDouble()/1.1).toInt()
-               }
+
             }
-         R.id.layoutAddNewGroupsMenu-> {
-             if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
+
+       /*  R.id.layoutAddNewGroupsMenu-> {
+            *//* if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
 
                  view.findNavController()
                      .navigate(R.id.action_menuFragment_to_createGroupFragment)
-             }
-         }
+             }*//*
+         }*/
         }
     }
 }

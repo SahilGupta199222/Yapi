@@ -14,6 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         />
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintsLayoutStart"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/_10ssp"
@@ -89,5 +90,51 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutAddNewTeamsMenuAdapter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/_10ssp"
+        android:paddingBottom="@dimen/_10ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/selectedLineRvCustomersList"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/imgAddNewTeamsMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_26sdp"
+            android:fontFamily="@font/larsseit_bold"
+            android:gravity="start"
+            android:text="@string/add_teammates"
+            android:textAllCaps="true"
+            android:textColor="@color/blueColor"
+            android:textSize="@dimen/smallTextSize"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/txtAddNewTeamsMenu"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/txtAddNewTeamsMenu"
+            android:layout_width="@dimen/iconSize"
+            android:layout_height="@dimen/iconSize"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/topFiveMargin"
+            android:src="@drawable/ic_baseline_add_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imgAddNewTeamsMenu"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

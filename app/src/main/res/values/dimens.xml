@@ -44,4 +44,6 @@
 
     <dimen name="plus_icon_size">@dimen/_20sdp</dimen>
     <dimen name="add_memeber_margin_left">@dimen/_7sdp</dimen>
+
+    <dimen name="menu_line_height">@dimen/_1sdp</dimen>
 </resources>

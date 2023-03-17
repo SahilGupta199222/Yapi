@@ -89,6 +89,11 @@
         <action
             android:id="@+id/action_thirdStepCreateTeam_to_chatEmptyFragment"
             app:destination="@id/chatEmptyFragment" />
+
+        <action
+            android:id="@+id/action_thirdStepCreateTeam_to_menuFragment"
+            app:destination="@id/menuFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/chatEmptyFragment"

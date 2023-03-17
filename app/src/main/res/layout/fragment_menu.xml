@@ -250,6 +250,7 @@
                     android:onClick="@{mViewmodel::onClick}"
                     android:orientation="horizontal"
                     android:paddingTop="@dimen/_10ssp"
+                    android:visibility="gone"
                     android:paddingBottom="@dimen/_10ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -262,7 +263,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="@dimen/_26sdp"
                         android:fontFamily="@font/larsseit_bold"
-                        android:text="@string/createGroup"
+                        android:text="@string/createGroups_text"
                         android:textColor="@color/blueColor"
                         android:textSize="@dimen/smallTextSize"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -285,12 +286,12 @@
                 <View
                     android:id="@+id/viewLineTopJobsMenu"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_2sdp"
+                    android:layout_height="@dimen/menu_line_height"
                     android:layout_marginTop="@dimen/topFiveMargin"
                     android:background="@color/liteGrey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layoutAddNewGroupsMenu" />
+                    app:layout_constraintTop_toBottomOf="@+id/rvGroupListMenu" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layoutJobsMenu"
@@ -375,7 +376,7 @@
                 <View
                     android:id="@+id/viewLineBottomJobsMenu"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_2sdp"
+                    android:layout_height="@dimen/menu_line_height"
                     android:background="@color/liteGrey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -467,6 +468,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="@dimen/topFiveMargin"
                     android:clipToOutline="true"
+                    android:visibility="gone"
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:paddingTop="@dimen/_10ssp"
@@ -509,12 +511,11 @@
                 <View
                     android:id="@+id/viewLineConversationMenu"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_2sdp"
-                    android:layout_marginTop="@dimen/topFiveMargin"
+                    android:layout_height="@dimen/menu_line_height"
                     android:background="@color/liteGrey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layoutAddNewCustomersMenu" />
+                    app:layout_constraintTop_toBottomOf="@+id/rvCustomersListMenu" />
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -604,6 +605,7 @@
                     android:layout_marginTop="@dimen/topFiveMargin"
                     android:clipToOutline="true"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:orientation="horizontal"
                     android:paddingTop="@dimen/_10ssp"
                     android:paddingBottom="@dimen/_10ssp"
@@ -645,12 +647,11 @@
                 <View
                     android:id="@+id/viewLineTopTeamMenu"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_2sdp"
-                    android:layout_marginTop="@dimen/topFiveMargin"
+                    android:layout_height="@dimen/menu_line_height"
                     android:background="@color/liteGrey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layoutAddNewConversationMenu" />
+                    app:layout_constraintTop_toBottomOf="@+id/rvConversationListMenu" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layoutTeamMenu"
@@ -739,7 +740,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-
+android:visibility="gone"
                     android:layout_marginTop="@dimen/topFiveMargin"
                     android:clipToOutline="true"
                     android:gravity="center"
@@ -784,12 +785,11 @@
                 <View
                     android:id="@+id/viewLineBottomTeamMenu"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_2sdp"
-                    android:layout_marginTop="@dimen/topFiveMargin"
+                    android:layout_height="@dimen/menu_line_height"
                     android:background="@color/liteGrey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layoutAddNewTeamsMenu" />
+                    app:layout_constraintTop_toBottomOf="@+id/rvTeamsListMenu" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layoutLeadMenu"
@@ -878,6 +878,7 @@
                     android:layout_marginTop="@dimen/topFiveMargin"
                     android:clipToOutline="true"
                     android:gravity="center"
+                    android:visibility="gone"
                     android:orientation="horizontal"
                     android:paddingTop="@dimen/_10ssp"
                     android:paddingBottom="@dimen/_10ssp"
@@ -919,12 +920,11 @@
                 <View
                     android:id="@+id/viewLineBottomLeadMenu"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_2sdp"
-                    android:layout_marginTop="@dimen/topFiveMargin"
+                    android:layout_height="@dimen/menu_line_height"
                     android:background="@color/liteGrey"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layoutAddNewLeadsMenu" />
+                    app:layout_constraintTop_toBottomOf="@+id/rvLeadsListMenu" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layoutSettingsMenu"
@@ -1009,7 +1009,7 @@
                 <View
                     android:id="@+id/viewLineBottomSettingsMenu"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_2sdp"
+                    android:layout_height="@dimen/menu_line_height"
                     android:layout_marginBottom="@dimen/_20sdp"
                     android:background="@color/liteGrey"
                     app:layout_constraintBottom_toBottomOf="parent"
