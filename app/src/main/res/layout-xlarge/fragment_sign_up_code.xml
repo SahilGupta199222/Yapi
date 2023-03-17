@@ -87,34 +87,36 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtTempTitleSignUpCode" />
-            <in.aabhasjindal.otptextview.OtpTextView
-                android:id="@+id/otpViewSignUpCodee"
+            <com.chaos.view.PinView
+                android:id="@+id/otp_view"
+                style="@style/PinWidget.PinView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:height="@dimen/_42sdp"
-                app:width="@dimen/_32sdp"
-                android:elevation="3dp"
-
-                app:length="6"
-                app:otp_text_size="@dimen/normalTextSize"
-                android:layout_marginTop="@dimen/topMarginTitle"
-                app:layout_constraintTop_toBottomOf="@+id/txtTempTitleDescriptionSignUpCode"
-                app:layout_constraintStart_toStartOf="parent"
+                android:cursorVisible="false"
+                android:hint="------"
+                android:textColorHint="@color/darkGrey"
+                android:focusable="true"
+                android:layout_marginTop="@dimen/_44sdp"
+                android:inputType="number"
+                android:itemBackground="@drawable/otp_background_box"
+                android:padding="0dp"
+                android:textColor="@color/darkGrey"
+                android:textSize="@dimen/_12ssp"
+                android:elevation="0dp"
+                app:hideLineWhenFilled="false"
+                app:itemCount="6"
+                app:itemHeight="@dimen/_42sdp"
+                app:itemRadius="@dimen/_6sdp"
+                app:itemSpacing="@dimen/_7sdp"
+                app:itemWidth="@dimen/_32sdp"
+                app:lineColor="#F5F5F5"
+                app:lineWidth="@dimen/_1sdp"
+                app:viewType="rectangle"
                 app:layout_constraintEnd_toEndOf="parent"
-
-                app:otp_box_background="@drawable/otp_background_box"
-                app:bar_inactive_color="@color/darkGrey"
-                app:bar_active_color="@color/darkGrey"
-                app:bar_success_color="#00000000"
-                app:bar_error_color="@color/transparent"
-
-                android:textColor="@color/black"
-                app:bar_enabled="true"
-                app:bar_height="1dp"
-                app:bar_margin_bottom="@dimen/_20sdp"
-                app:bar_margin_left="@dimen/_15sdp"
-                app:bar_margin_right="@dimen/_15sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtTempTitleDescriptionSignUpCode"
                 />
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
