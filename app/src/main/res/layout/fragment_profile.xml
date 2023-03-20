@@ -19,22 +19,22 @@
     android:paddingBottom="@dimen/startMainMargin"
     tools:context=".views.profile.ProfileFragment">
 <androidx.core.widget.NestedScrollView
+android:layout_width="match_parent"
+android:layout_height="0dp"
+android:layout_marginBottom="@dimen/topFiveMargin"
+app:layout_constraintTop_toTopOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintBottom_toBottomOf="parent"
+>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/layoutScrollViewProfile"
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_marginBottom="@dimen/topFiveMargin"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_height="match_parent"
     >
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layoutScrollViewProfile"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgCancelProfile"
+    android:id="@+id/imgCancelProfile"
         android:layout_width="@dimen/iconSize"
         android:layout_height="@dimen/iconSize"
         android:layout_marginTop="@dimen/_5sdp"
@@ -113,6 +113,7 @@
         android:background="@drawable/btn_drawable_blue"
         android:text="@string/edit_profile"
         android:onClick="@{model::onClick}"
+        android:backgroundTint="@color/darkBlueBtn"
         android:layout_marginTop="@dimen/_20sdp"
         android:padding="@dimen/etVerticalPadding"
         android:textColor="@color/white"

@@ -1,0 +1,51 @@
+package com.yapi.views.group_info.group_general
+
+import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.yapi.R
+import com.yapi.databinding.FragmentGroupGeneralBinding
+
+
+class GroupGeneral : Fragment() {
+    private lateinit var binding:FragmentGroupGeneralBinding
+    private var editGroupOpenStatus=true
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        binding=FragmentGroupGeneralBinding.inflate(LayoutInflater.from(requireContext()))
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        changeLayout()
+        clickListner()
+    }
+
+    private fun clickListner() {
+        binding.apply {
+            btnDoneGroupGeneral.setOnClickListener {
+                editGroupOpenStatus=!editGroupOpenStatus
+                changeLayout()
+            }
+        }
+    }
+    private fun changeLayout() {
+        binding.apply {
+            if (editGroupOpenStatus) {
+                btnDoneGroupGeneral.setText(requireActivity().getString(R.string.edit_group))
+                includeGroupGnlInfoEdit.layoutGroupGnlInfoEdit.visibility=View.INVISIBLE
+                includeGroupGnlInfo.layoutGroupGnlInfo.visibility=View.VISIBLE
+            } else {
+                btnDoneGroupGeneral.setText(requireActivity().getString(R.string.done))
+                includeGroupGnlInfo.layoutGroupGnlInfo.visibility=View.INVISIBLE
+                includeGroupGnlInfoEdit.layoutGroupGnlInfoEdit.visibility=View.VISIBLE
+            }
+        }
+    }
+}

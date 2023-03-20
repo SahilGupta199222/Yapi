@@ -42,8 +42,7 @@ class MenuFragment : Fragment() {
         binding.mViewmodel=viewModel
         val displayMetrics = DisplayMetrics()
        requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
-
-        var width = displayMetrics.widthPixels
+        val width = displayMetrics.widthPixels
         viewModel.screenWidth=width
         return binding.root
     }

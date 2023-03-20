@@ -96,6 +96,7 @@
     <string name="subTitleDeActiveAccountDilaog">If you deactivate your account, you won’t be able to receive messages. You can activate</string>
     <string name="titleDeActiveAccountDialog">Do you want to\ndeactivate your account?</string>
     <string name="group_image">GROUP IMAGE<font color="#B8B8B8"> (OPTIONAL)</font></string>
+    <string name="group_imageW">GROUP IMAGE</string>
     <string name="groupName">Group Name<font color="red">*</font></string>
     <string name="_0_128">0/128</string>
     <string name="enterGroupName">Enter a group name</string>
@@ -145,13 +146,25 @@
     <string name="add_member_text_third_step">Add member</string>
     <string name="conversations">CONVERSATIONS</string>
     <string name="add_conversation">ADD CONVERSATION</string>
-    <string name="create_group_description">GROUP DESCRIPTION<font color="#B8B8B8"> (OPTIONAL)</font></string>
+    <string name="create_group_description">GROUP DESCRIPTION</string>
 
     <string name="code_first_part">We\'ve sent a 6-character code to \n</string>
-<string name="code_last_part"><!--\n<font color="#3d3d3d">sulaman.abir@gmail.com</font>-->.The code expires \nshortly. Please enter it soon.</string>
+    <string name="code_last_part"><!--\n<font color="#3d3d3d">sulaman.abir@gmail.com</font>-->.The code expires \nshortly. Please enter it soon.</string>
 
 
     <string name="create_team_first_text">Let anyone with an </string>
     <string name="create_team_last_text">\nemail address join this workspace.</string>
+    <string name="edit_group">Edit Group</string>
+    <string name="group_name">GROUP NAME</string>
+    <string name="created_by">CREATED BY</string>
+    <string name="managed_by">MANAGED BY</string>
+    <string name="status">STATUS</string>
+    <string name="additional_info">Additional Info</string>
+    <string name="los_nangels">Los\nAngels</string>
+    <string name="search_files">Search files</string>
+    <string name="files">Files</string>
+    <string name="sort">SORT:</string>
+    <string name="most_relevant">Most Relevant</string>
+    <string name="date">DATE</string>
 
 </resources>
