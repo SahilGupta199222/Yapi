@@ -37,7 +37,7 @@ class SignInViewModel : ViewModel() {
             R.id.txtSignIn -> {
                 if(view.findNavController().currentDestination?.id==R.id.signInFragment) {
                     view.findNavController().navigate(R.id.action_signInFragment_to_signUpFragment2)
-                }
+             3   }
             }
             R.id.linearTopSignIn, R.id.constraintsTopSignIN -> {
                 //for hide keyboard
@@ -50,7 +50,7 @@ class SignInViewModel : ViewModel() {
             R.id.btnSignIn -> {
                     if(view.findNavController().currentDestination?.id==R.id.signInFragment) {
 //                        view.findNavController().navigate(R.id.action_signInFragment_to_signUpFragment2)
-                      //  view.findNavController().navigate(R.id.action_signInFragment_to_chipSetDemoFragment)
+//                        view.findNavController().navigate(R.id.action_signInFragment_to_chipSetDemoFragment)
                     }
                 }
             }
@@ -75,7 +75,7 @@ class SignInViewModel : ViewModel() {
     fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         Log.w("tag", "onTextChanged $s")
      /*   if (s.length == 0) {
-            emailCorrectValue.set(false)
+             emailCorrectValue.set(false)
         } else if (emailFieldValue.get().toString().trim().length>0 && isValidEmail(emailFieldValue.get().toString())) {
             emailCorrectValue.set(true)
         } else {
