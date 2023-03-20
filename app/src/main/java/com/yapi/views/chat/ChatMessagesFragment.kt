@@ -15,7 +15,7 @@ class ChatMessagesFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         dataBinding =
             ChatMessageFragmentLayoutBinding.inflate(LayoutInflater.from(requireActivity()))
         initUI()
