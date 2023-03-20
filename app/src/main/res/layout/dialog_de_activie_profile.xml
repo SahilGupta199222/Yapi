@@ -31,19 +31,29 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/_20sdp">
+            android:paddingStart="@dimen/startMainMargin"
+            android:paddingBottom="@dimen/startMainMargin">
+
+            <ImageView
+                android:id="@+id/ivCrossDeactivate"
+                android:src="@drawable/ic_cross_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="@dimen/iconSize"
+                android:padding="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_height="@dimen/iconSize"/>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgDeActiveAccountDialog"
         android:layout_width="@dimen/_120sdp"
         android:layout_height="@dimen/_120sdp"
+        android:layout_marginEnd="@dimen/startMainMargin"
         android:src="@drawable/de_active_drawable"
-
-        android:layout_marginTop="@dimen/_15sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/ivCrossDeactivate" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtTitleDeActiveProfile"
@@ -52,6 +62,7 @@
                 android:layout_marginTop="@dimen/_15sdp"
                 android:fontFamily="@font/larsseit_bold"
                 android:gravity="center"
+                android:layout_marginEnd="@dimen/startMainMargin"
                 android:text="@string/titleDeActiveAccountDialog"
                 android:textColor="@color/darkGrey"
                 android:textSize="@dimen/titleTextSize"
@@ -61,25 +72,28 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/txtSubTitleDeActiveProfile"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:fontFamily="@font/larsseit_regular"
                 android:gravity="center"
                 android:letterSpacing="0.07"
                 android:lineSpacingExtra="@dimen/line_spacing_extra"
+                android:layout_marginEnd="@dimen/startMainMargin"
                 android:text="@string/subTitleDeActiveAccountDilaog"
                 android:textColor="@color/medium_grey_color"
                 android:textSize="@dimen/normalSmallTextSize"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtTitleDeActiveProfile" />
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_16sdp"
                 android:orientation="horizontal"
                 android:weightSum="2"
+                android:layout_marginEnd="@dimen/startMainMargin"
                 android:paddingBottom="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

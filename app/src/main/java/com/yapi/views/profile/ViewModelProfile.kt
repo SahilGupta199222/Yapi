@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.view.View
 import android.view.ViewGroup.LayoutParams
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.cardview.widget.CardView
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
@@ -47,10 +48,17 @@ class ViewModelProfile : ViewModel() {
 //        dialog.window?.setLayout(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT)
         val cancelBtn=dialog.findViewById<AppCompatButton>(R.id.btnProfileCancel)
         val deleteBtn=dialog.findViewById<AppCompatButton>(R.id.btnProfileDelete)
+        val ivCross=dialog.findViewById<AppCompatImageView>(R.id.ivCross)
+
+        ivCross.setOnClickListener {
+            dialog.dismiss()
+        }
+
         cancelBtn.setOnClickListener {
             dialog.dismiss()
 
         }
+
         deleteBtn.setOnClickListener {
             dialog.dismiss()
 
@@ -68,6 +76,12 @@ class ViewModelProfile : ViewModel() {
 //        dialog.window?.setLayout(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT)
         val cancelBtn=dialog.findViewById<AppCompatButton>(R.id.btnCancelDeActiveDialog)
         val deActivateBtn=dialog.findViewById<AppCompatButton>(R.id.btnDeActiveDialog)
+
+        val ivCrossDeactivate=dialog.findViewById<AppCompatImageView>(R.id.ivCrossDeactivate)
+
+        ivCrossDeactivate.setOnClickListener {
+            dialog.dismiss()
+        }
         cancelBtn.setOnClickListener {
             dialog.dismiss()
         }
@@ -78,7 +92,6 @@ class ViewModelProfile : ViewModel() {
 
         dialog.setCancelable(false)
         dialog.show()
-
 
         var cardViewDeActiveProfile=dialog.findViewById<CardView>(R.id.cardViewDeActiveProfile)
         cardViewDeActiveProfile.layoutParams.width=(screenWidth!!.toDouble()/1.1).toInt()

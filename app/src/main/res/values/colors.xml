@@ -26,4 +26,6 @@
     <color name="unSelectTrackColorOfSwitchButton">#e6e6e6</color>
 <color name="light_red">#FFF2F2</color>
 
+    <color name="chatbottom_grey_color">#8F8F8F</color>
+    <color name="chat_bottom_line_color">#E6E6E6</color>
 </resources>
