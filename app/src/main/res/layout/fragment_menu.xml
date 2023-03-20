@@ -120,6 +120,7 @@
                     android:hint="@string/search"
                     android:paddingStart="2sp"
                     android:paddingTop="@dimen/_10ssp"
+                    android:singleLine="true"
                     android:paddingBottom="@dimen/_10ssp"
                     android:textColor="@color/darkGrey"
                     android:textColorHint="@color/darkGrey"
