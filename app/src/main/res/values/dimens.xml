@@ -4,6 +4,8 @@
     <dimen name="topMainMargin">@dimen/_22sdp</dimen>
     <dimen name="bottomMarggin">@dimen/_30sdp</dimen>
     <dimen name="topMargin">@dimen/_10sdp</dimen>
+    <dimen name="topFifteenMargin">@dimen/_15sdp</dimen>
+    <dimen name="topNormalMargin">@dimen/_12sdp</dimen>
 
     <dimen name="smallIconSize">@dimen/_13sdp</dimen>
     <dimen name="iconSize">@dimen/_16sdp</dimen>
@@ -26,6 +28,7 @@
 
     <dimen name="roundDrawableCommon">@dimen/_5sdp</dimen>
 
+    <dimen name="popSideMargin">@dimen/_12sdp</dimen>
     <dimen name="startMainMargin">@dimen/_18sdp</dimen>
     <dimen name="topMarginTitle">@dimen/_45sdp</dimen>
     <dimen name="mobileTitleTextSize">@dimen/_18ssp</dimen>

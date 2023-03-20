@@ -208,7 +208,7 @@
                     android:id="@+id/txtTempNameEditProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/topMargin"
+                    android:layout_marginTop="@dimen/topNormalMargin"
                     android:fontFamily="@font/larsseit_medium"
                     android:text="@string/name"
                     android:textColor="@color/darkGrey"
@@ -439,7 +439,7 @@
             android:layout_marginTop="@dimen/topTwentyFiveMargin"
             android:layout_marginBottom="@dimen/_7sdp"
             android:background="@drawable/btn_drawable_blue"
-
+            android:backgroundTint="@color/darkBlueBtn"
             android:fontFamily="@font/larsseit_bold"
             android:onClick="@{model::onClick}"
             android:padding="@dimen/etVerticalPadding"

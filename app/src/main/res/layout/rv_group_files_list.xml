@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/_5sdp"
+    android:paddingBottom="@dimen/_4sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutImgRvGroupFiles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_lite_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/iconSize"
+            android:layout_height="@dimen/iconSize"
+            android:src="@drawable/file"
+            android:layout_margin="@dimen/_8sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtFileNameRvGroupFiles"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="TechRequirements.pdf"
+            android:textColor="@color/darkGrey"
+            android:layout_marginStart="@dimen/topFiveMargin"
+            android:fontFamily="@font/larsseit_medium"
+            android:textSize="@dimen/normalTextSize"
+            app:layout_constraintTop_toTopOf="@id/layoutImgRvGroupFiles"
+            app:layout_constraintStart_toEndOf="@id/layoutImgRvGroupFiles"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtFileSizeRvGroupFiles"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="0.4mb"
+            android:textColor="@color/darkLiteGrey"
+            android:fontFamily="@font/larsseit_medium"
+            android:textSize="@dimen/smallTextSize"
+            app:layout_constraintTop_toTopOf="@id/layoutImgRvGroupFiles"
+            app:layout_constraintStart_toEndOf="@id/txtFileNameRvGroupFiles"
+            app:layout_constraintEnd_toStartOf="@id/imgEditRvGroupFiles"
+            />
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtFileInfoRvGroupFiles"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/topFiveMargin"
+
+        android:text="Shared by Yadira Redmond on Feb 20"
+            android:textColor="@color/darkLiteGrey"
+            android:fontFamily="@font/larsseit_regular"
+            android:textSize="@dimen/smallTextSize"
+            app:layout_constraintTop_toBottomOf="@id/txtFileNameRvGroupFiles"
+            app:layout_constraintStart_toEndOf="@id/layoutImgRvGroupFiles"
+            app:layout_constraintEnd_toStartOf="@id/imgEditRvGroupFiles"
+            />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgEditRvGroupFiles"
+        android:layout_width="@dimen/iconSize"
+        android:layout_height="@dimen/iconSize"
+        android:src="@drawable/chat_more_icon"
+        android:layout_margin="@dimen/_8sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
