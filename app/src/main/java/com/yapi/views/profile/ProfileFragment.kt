@@ -15,7 +15,6 @@ import com.google.android.material.chip.Chip
 import com.yapi.R
 import com.yapi.databinding.FragmentProfileBinding
 
-
 class ProfileFragment : Fragment() {
     private lateinit var binding:com.yapi.databinding.FragmentProfileBinding
     private val viewModel:ViewModelProfile by viewModels()
@@ -33,6 +32,4 @@ class ProfileFragment : Fragment() {
         viewModel.screenWidth=width
         return  binding.root
     }
-
-
 }
