@@ -21,7 +21,13 @@ class AddGroupMembers : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val list=ArrayList<PojoGroupMembers>()
+        for(i in 0 until 10){
+            list.add(PojoGroupMembers("Name${i+1}","Sales ${i+4}"))
+        }
+        binding.apply {
+            rvGroupMembers.adapter=AdapterGroupMembers(requireContext(),list)
+        }
     }
 
 

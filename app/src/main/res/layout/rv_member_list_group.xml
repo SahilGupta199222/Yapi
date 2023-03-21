@@ -43,7 +43,7 @@
         android:singleLine="true"
         android:text="Technician"
         android:textColor="@color/darkLiteGrey"
-        android:textSize="@dimen/normalSmallTextSize"
+        android:textSize="@dimen/smallTextSize"
         app:layout_constraintEnd_toStartOf="@+id/layoutUserPositionRvMemberListGroup"
         app:layout_constraintStart_toStartOf="@+id/txtUserNameRvMemberListGroup"
         app:layout_constraintTop_toBottomOf="@+id/txtUserNameRvMemberListGroup" />
@@ -90,10 +90,10 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgEditRvMemberListGroup"
-        android:layout_width="@dimen/iconSize"
-        android:layout_height="@dimen/iconSize"
+        android:layout_width="@dimen/_18sdp"
+        android:layout_height="@dimen/_18sdp"
         android:src="@drawable/chat_more_icon"
-        android:layout_margin="@dimen/_8sdp"
+        android:layout_margin="@dimen/topMargin"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -45,7 +45,9 @@
             android:textColor="@color/darkLiteGrey"
             android:fontFamily="@font/larsseit_medium"
             android:textSize="@dimen/smallTextSize"
-            app:layout_constraintTop_toTopOf="@id/layoutImgRvGroupFiles"
+            android:layout_marginStart="@dimen/_2sdp"
+            app:layout_constraintTop_toTopOf="@id/txtFileNameRvGroupFiles"
+            app:layout_constraintBottom_toBottomOf="@id/txtFileNameRvGroupFiles"
             app:layout_constraintStart_toEndOf="@id/txtFileNameRvGroupFiles"
             app:layout_constraintEnd_toStartOf="@id/imgEditRvGroupFiles"
             />
