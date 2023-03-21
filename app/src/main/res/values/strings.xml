@@ -167,4 +167,12 @@
     <string name="most_relevant">Most Relevant</string>
     <string name="date">DATE</string>
 
+    <string name="created_group_title_chat">You have created a Group</string>
+
+    <string name="groups_can_have">Groups can have:</string>
+    <string name="persistant_chat_history">Persistant chat history</string>
+    <string name="public_links">Public links</string>
+    <string name="admin_manager_text_chat">Admin, Managers with different rights</string>
+    <string name="view_group_info">View group info</string>
+
 </resources>

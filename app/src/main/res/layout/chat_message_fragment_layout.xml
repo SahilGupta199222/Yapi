@@ -6,8 +6,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingStart="@dimen/etHorizontalPadding"
-        android:paddingTop="@dimen/etVerticalPadding"
         android:paddingEnd="@dimen/etHorizontalPadding"
+        android:paddingTop="@dimen/etVerticalPadding"
+android:background="#FAFAFA"
         android:paddingBottom="@dimen/_5sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -76,6 +77,29 @@
                 app:layout_constraintStart_toEndOf="@+id/ivChatBack"
                 app:layout_constraintTop_toBottomOf="@+id/tvName" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            app:layout_constraintTop_toBottomOf="@id/topConstraints"
+            android:layout_width="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bottomConstraints"
+            android:layout_height="0dp">
+
+            <LinearLayout
+                android:gravity="center"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:paddingStart="@dimen/etHorizontalPadding"
+                android:paddingEnd="@dimen/etHorizontalPadding"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <include layout="@layout/created_group_ui_chat"
+                    android:id="@+id/createGroupUI"/>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottomConstraints"
