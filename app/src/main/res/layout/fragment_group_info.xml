@@ -2,6 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="model"
+            type="com.yapi.views.group_info.ViewModelGroupInfo" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,6 +22,7 @@
             android:layout_width="@dimen/iconSize"
             android:layout_height="@dimen/iconSize"
             android:layout_marginTop="@dimen/_5sdp"
+            android:onClick="@{model::onClick}"
             android:src="@drawable/ic_cross_icon"
             android:layout_marginEnd="@dimen/popSideMargin"
             app:layout_constraintEnd_toEndOf="parent"

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup.LayoutParams
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import com.yapi.R
 
@@ -24,7 +25,8 @@ class ViewModelGroupGeneral : ViewModel() {
     private fun leaveGroupDialog(context: Context){
         val dialog = Dialog(context)
         dialog.setContentView(R.layout.leave_module_popup)
-        dialog.window?.setLayout(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT)
+        dialog.window?.setBackgroundDrawable(ContextCompat.getDrawable(context,android.R.color.transparent))
+        dialog.window?.setLayout(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT)
         val crosseIcon:AppCompatImageView = dialog.findViewById(R.id.ivCross)
         val cancelBtn: AppCompatButton = dialog.findViewById(R.id.btnCancel)
         val btnLeave: AppCompatButton = dialog.findViewById(R.id.btnDelGroup)
@@ -43,7 +45,8 @@ class ViewModelGroupGeneral : ViewModel() {
     private fun deleteGroupDialog(context: Context){
         val dialog = Dialog(context)
         dialog.setContentView(R.layout.delete_group_popup)
-        dialog.window?.setLayout(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT)
+        dialog.window?.setBackgroundDrawable(ContextCompat.getDrawable(context,android.R.color.transparent))
+        dialog.window?.setLayout(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT)
         val crosseIcon:AppCompatImageView = dialog.findViewById(R.id.ivCross)
         crosseIcon.setOnClickListener {
             dialog.dismiss()
