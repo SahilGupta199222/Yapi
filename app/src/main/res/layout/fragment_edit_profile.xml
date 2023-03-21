@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="model"
             type="com.yapi.views.edit_profile.ViewModelEditProfile" />
@@ -307,7 +306,6 @@
                     android:text="@string/phone_number"
                     android:textColor="@color/darkGrey"
                     android:textSize="@dimen/normalTextSize"
-
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/etEmailEditProfile" />
 
@@ -316,10 +314,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/et_drawable"
-
-
                     android:paddingTop="@dimen/etHorizontalPadding"
-
                     android:paddingBottom="@dimen/etHorizontalPadding"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -327,13 +322,13 @@
 
                     <com.hbb20.CountryCodePicker
                         android:id="@+id/countryCodePickerEditProfile"
-                        android:layout_width="@dimen/_24sdp"
-                        android:layout_height="@dimen/_24sdp"
+                        android:layout_width="@dimen/_34sdp"
+                        android:layout_height="@dimen/_34sdp"
                         android:layout_marginStart="@dimen/etHorizontalPadding"
                         android:padding="0dp"
                         app:ccp_showArrow="false"
                         android:gravity="center"
-                      app:ccp_padding="0dp"
+                        app:ccp_padding="0dp"
                         android:clipToPadding="false"
                         app:ccp_showNameCode="false"
                         app:ccp_showPhoneCode="false"
@@ -345,6 +340,7 @@
                         android:id="@+id/ivDrpArrow"
                         android:layout_width="@dimen/iconSize"
                         android:layout_height="@dimen/iconSize"
+                        android:layout_marginStart="@dimen/_minus3sdp"
                         android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/countryCodePickerEditProfile"
@@ -354,7 +350,7 @@
                         android:id="@+id/viewLinePhoneNumberEditProfile"
                         android:layout_width="@dimen/_1sdp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_7sdp"
                         android:layout_marginTop="@dimen/topFiveMargin"
                         android:layout_marginBottom="@dimen/topFiveMargin"
                         android:background="@color/darkLiteGrey"

@@ -227,7 +227,7 @@ app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/txtRoleDescriptionProfile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/role"
+        android:text="Workspace owner"
         android:textSize="@dimen/normalTextSize"
 
         android:textColor="@color/darkGrey"
@@ -290,7 +290,7 @@ app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/txtEmailProfile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/emailAddress"
+        android:text="briski@datacube.ai"
         android:textSize="@dimen/normalTextSize"
 
         android:textColor="@color/darkGrey"
@@ -336,22 +336,19 @@ app:layout_constraintBottom_toBottomOf="parent"
         android:fontFamily="@font/larsseit_medium"
         android:layout_marginStart="@dimen/topMargin"
         app:layout_constraintTop_toTopOf="@+id/layoutImgPhoneProfile"
-        app:layout_constraintStart_toEndOf="@+id/layoutImgPhoneProfile"
-        />
+        app:layout_constraintStart_toEndOf="@+id/layoutImgPhoneProfile" />
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtPhoneProfile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="+1 8556211255"
         android:textSize="@dimen/normalTextSize"
-
         android:textColor="@color/darkGrey"
         android:fontFamily="@font/larsseit_medium"
         android:layout_marginTop="@dimen/_2sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTempPhoneLiteGreyProfile"
-        app:layout_constraintStart_toStartOf="@+id/txtTempPhoneLiteGreyProfile"
-        />
+        app:layout_constraintStart_toStartOf="@+id/txtTempPhoneLiteGreyProfile"/>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutImgRegionProfile"
         android:layout_width="wrap_content"
@@ -359,8 +356,7 @@ app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="@dimen/topFiveMargin"
         android:background="@drawable/round_lite_gray"
         app:layout_constraintTop_toBottomOf="@+id/layoutImgPhoneProfile"
-        app:layout_constraintStart_toStartOf="parent"
-        >
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgTempRegionProfile"
@@ -371,8 +367,7 @@ app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.appcompat.widget.AppCompatTextView
@@ -381,21 +376,17 @@ app:layout_constraintBottom_toBottomOf="parent"
         android:layout_height="wrap_content"
         android:text="@string/region"
         android:textSize="@dimen/smallTextSize"
-
-
         android:textColor="@color/medium_grey_color"
         android:fontFamily="@font/larsseit_medium"
         android:layout_marginStart="@dimen/topMargin"
         app:layout_constraintTop_toTopOf="@+id/layoutImgRegionProfile"
-        app:layout_constraintStart_toEndOf="@+id/layoutImgRegionProfile"
-        />
+        app:layout_constraintStart_toEndOf="@+id/layoutImgRegionProfile" />
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtRegionProfile"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="(UTC-08:00) Pacific Time (US and Canada)"
         android:textSize="@dimen/normalTextSize"
-
         android:textColor="@color/darkGrey"
         android:fontFamily="@font/larsseit_medium"
         android:layout_marginTop="@dimen/_2sdp"
