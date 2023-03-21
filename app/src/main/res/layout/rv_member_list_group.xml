@@ -90,8 +90,8 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imgEditRvMemberListGroup"
-        android:layout_width="@dimen/_18sdp"
-        android:layout_height="@dimen/_18sdp"
+        android:layout_width="@dimen/extraIconSize"
+        android:layout_height="@dimen/extraIconSize"
         android:src="@drawable/chat_more_icon"
         android:layout_margin="@dimen/topMargin"
         app:layout_constraintTop_toTopOf="parent"

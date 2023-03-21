@@ -2,26 +2,24 @@ package com.yapi.views.chipset_demo
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.drawable.Drawable
+import android.graphics.Typeface
+import android.icu.lang.UProperty.INT_START
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.StyleSpan
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.view.get
-import androidx.core.view.size
+import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import com.google.android.material.chip.Chip
 import com.yapi.R
-import com.yapi.common.getTextSizeValue
-import com.yapi.databinding.FragmentAddPeopleBinding
 import com.yapi.databinding.FragmentChipSetDemoBinding
-import jp.wasabeef.richeditor.RichEditor
 
 
 class ChipSetDemoFragment : Fragment() {
@@ -36,6 +34,7 @@ class ChipSetDemoFragment : Fragment() {
     private var leftAlignTxtSelected=false
     private var rightAlignTxtSelected=false
     private var centerAlignTxtSelected=false
+    private var before=0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -57,7 +56,7 @@ class ChipSetDemoFragment : Fragment() {
     private fun init() {
         Log.i("asdfjnasdf","init fucntion called")
         binding.apply {
-            etRichChatDemo.setPlaceholder("Enter msg here")
+//            etRichChatDemo.setPlaceholder("Enter msg here")
 //            etRichChatDemo.hint = "Enter msg here"
             imgTxtStyleChangeIconChatDemo.setOnClickListener {
                 fontStyleSelected=!fontStyleSelected
@@ -77,7 +76,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgBoldTxtIconChatDemo.setOnClickListener {
-                etRichChatDemo.setBold()
+//                etRichChatDemo.setBold()
 //                etRichChatDemo.focusEditor()
 //                etRichChatDemo.updateTextStyle(EditorTextStyle.BOLD)
                 boldTxtSelected=!boldTxtSelected
@@ -85,6 +84,7 @@ class ChipSetDemoFragment : Fragment() {
                     imgBoldTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
                         requireContext(),
                         R.color.blueColor))
+
                 }
                 else {
                     imgBoldTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -93,7 +93,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgItalicTxtIconChatDemo.setOnClickListener {
-                etRichChatDemo.setItalic()
+//                etRichChatDemo.setItalic()
 //                etRichChatDemo.focusEditor()
 
                 italicTxtSelected=!italicTxtSelected
@@ -101,6 +101,7 @@ class ChipSetDemoFragment : Fragment() {
                     imgItalicTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
                         requireContext(),
                         R.color.blueColor))
+
                 }
                 else {
                     imgItalicTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -109,7 +110,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgUnderLineTxtIconChatDemo.setOnClickListener {
-                    etRichChatDemo.setUnderline()
+//                    etRichChatDemo.setUnderline()
 //                etRichChatDemo.focusEditor()
                 underLineTxtSelected=!underLineTxtSelected
                 if (underLineTxtSelected) {
@@ -124,7 +125,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgStrikeTxtIconChatDemo.setOnClickListener {
-                    etRichChatDemo.setStrikeThrough()
+//                    etRichChatDemo.setStrikeThrough()
 //                etRichChatDemo.focusEditor()
                 strikeTxtSelected=!strikeTxtSelected
 
@@ -141,7 +142,7 @@ class ChipSetDemoFragment : Fragment() {
             }
             imgFormatListNumberTxtIconChatDemo.setOnClickListener {
 //                etRichChatDemo.focusEditor()
-                    etRichChatDemo.setNumbers()
+//                    etRichChatDemo.setNumbers()
                 listNumberTxtSelected=!listNumberTxtSelected
 
                 if (listNumberTxtSelected) {
@@ -156,7 +157,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgFormatListBulletedTxtIconChatDemo.setOnClickListener {
-                    etRichChatDemo.setBullets()
+//                    etRichChatDemo.setBullets()
                 listBulletTxtSelected=!listBulletTxtSelected
                 if (listBulletTxtSelected) {
                     imgFormatListBulletedTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -170,7 +171,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgLeftAlignTxtIconChatDemo.setOnClickListener {
-                    etRichChatDemo.setAlignLeft()
+//                    etRichChatDemo.setAlignLeft()
                 leftAlignTxtSelected=!leftAlignTxtSelected
                 if (leftAlignTxtSelected) {
                     imgLeftAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -196,7 +197,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgCenterAlignTxtIconChatDemo.setOnClickListener {
-                    etRichChatDemo.setAlignCenter()
+//                    etRichChatDemo.setAlignCenter()
                 centerAlignTxtSelected=!centerAlignTxtSelected
                 if (centerAlignTxtSelected) {
                     imgCenterAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -222,7 +223,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgRightAlignTxtIconChatDemo.setOnClickListener {
-                    etRichChatDemo.setAlignRight()
+//                    etRichChatDemo.setAlignRight()
                 rightAlignTxtSelected=!rightAlignTxtSelected
                 if (rightAlignTxtSelected) {
                     imgRightAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -254,7 +255,7 @@ class ChipSetDemoFragment : Fragment() {
                     txtUserNameChip.text= text[0].toString()
                 }else{
                     layoutAddPeople.visibility=View.GONE
-                    etRichChatDemo.removeFormat()
+//                    etRichChatDemo.removeFormat()
                 }
             }
             layoutAddPeople.setOnClickListener {
@@ -266,19 +267,70 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgLinkIconChatDemo.setOnClickListener {
-                etRichChatDemo.insertLink("https://cdn.britannica.com/49/182849-050-4C7FE34F/scene-Iron-Man.jpg","iron man link")
+//                etRichChatDemo.insertLink("https://cdn.britannica.com/49/182849-050-4C7FE34F/scene-Iron-Man.jpg","iron man link")
             }
-            etRichChatDemo.setOnTextChangeListener { object:RichEditor.OnTextChangeListener{
-                override fun onTextChange(text: String?) {
-                    Log.i("asdfjnasdf","OnText Chage listner ${text}\n")
-                    etRichChatDemo.performClick()
+            etRichChatDemo.doAfterTextChanged {
+                val text=etRichChatDemo.text
+                val count=etRichChatDemo.text?.length
+                etRichChatDemo.text?.clear()
+                val str = SpannableStringBuilder(text)
+                if(boldTxtSelected && italicTxtSelected) {
+                    str.setSpan(StyleSpan(Typeface.BOLD_ITALIC),
+                        before,
+                        count?:0,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                 }
-
-            } }
-
-            etRichChatDemo.setOnDecorationChangeListener { text, types ->
-                Log.i("asdfjnasdf","i ->${types}  and text  $text\n")
+                else if(boldTxtSelected) {
+                    str.setSpan(StyleSpan(Typeface.BOLD),
+                        before,
+                        count?:0,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+                else if(italicTxtSelected) {
+                    str.setSpan(StyleSpan(Typeface.ITALIC),
+                        before,
+                        count?:0,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+                Log.i("asdfiasdjkfn","Spannable string is ->$str")
+                etRichChatDemo.text=str
             }
+            etRichChatDemo.doOnTextChanged { text, start, beforee, count ->
+                before=beforee
+                Log.i("asdfiasdjkfn","Start $start, before $before , count $count")
+//                val str = SpannableStringBuilder(text)
+//                if(boldTxtSelected && italicTxtSelected) {
+//                    str.setSpan(StyleSpan(Typeface.BOLD_ITALIC),
+//                        before,
+//                        count,
+//                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+//                }
+//                else if(boldTxtSelected) {
+//                    str.setSpan(StyleSpan(Typeface.BOLD),
+//                        before,
+//                        count,
+//                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+//                }
+//                else if(italicTxtSelected) {
+//                    str.setSpan(StyleSpan(Typeface.ITALIC),
+//                        before,
+//                        count,
+//                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+//                }
+//                Log.i("asdfiasdjkfn","Spannable string is ->$str")
+//                etRichChatDemo.text=str
+            }
+//            etRichChatDemo.setOnTextChangeListener { object:RichEditor.OnTextChangeListener{
+//                override fun onTextChange(text: String?) {
+//                    Log.i("asdfjnasdf","OnText Chage listner ${text}\n")
+//                    etRichChatDemo.performClick()
+//                }
+//
+//            } }
+
+//            etRichChatDemo.setOnDecorationChangeListener { text, types ->
+//                Log.i("asdfjnasdf","i ->${types}  and text  $text\n")
+//            }
         }
     }
 
@@ -314,5 +366,6 @@ class ChipSetDemoFragment : Fragment() {
 //        }
         }
     }
+
 
 }

@@ -92,6 +92,7 @@ dependencies {
     implementation 'jp.wasabeef:richeditor-android:2.0.0'
     // for otp enter don't update 1.4.2 library because upper version have some error.
     implementation 'io.github.chaosleung:pinview:1.4.2'
+
 }
 // Allow references to generated code
 kapt {

@@ -61,7 +61,7 @@
 </string>
     <string name="members_email_title">Member’s Email</string>
     <string name="enter_email">Enter email</string>
-    <string name="add_member_text">Add members</string>
+    <string name="add_member_text">ADD MEMBERS</string>
     <string name="skip_this_step">Skip this step</string>
 
     <string name="please_enter_email">Please enter email</string>
@@ -164,7 +164,7 @@
     <string name="search_files">Search files</string>
     <string name="files">Files</string>
     <string name="sort">SORT:</string>
-    <string name="most_relevant">Most Relevant</string>
+    <string name="most_relevant">MOST RELEVANT</string>
     <string name="date">DATE</string>
 
 </resources>
