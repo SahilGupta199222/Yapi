@@ -13,7 +13,6 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:paddingTop="@dimen/popSideMargin"
-        android:paddingBottom="@dimen/popSideMargin"
         tools:context=".views.group_info.GroupInfoFragment">
 
 
@@ -90,6 +89,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/larsseit_medium"
             android:gravity="start"
+            android:ellipsize="end"
+            android:singleLine="true"
             android:text="January 15, 2022"
             android:layout_marginStart="@dimen/topFiveMargin"
             android:textColor="@color/darkLiteGrey"
