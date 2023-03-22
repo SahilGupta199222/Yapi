@@ -61,6 +61,5 @@ var checkBoxTextValue=ObservableField("")
     fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         Log.w("tag", "onTextChanged $s")
         nameCountValue.set(s.length.toString() + "/50")
-
     }
 }

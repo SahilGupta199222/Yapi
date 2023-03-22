@@ -35,7 +35,7 @@
         android:textColor="@color/darkGrey"
         android:textSize="@dimen/smallTextSize"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnDoneGroupMembers" />
+        app:layout_constraintTop_toBottomOf="@id/btnDoneGroupMembers" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/etGroupNameGroupMembers"
@@ -44,7 +44,7 @@
         android:layout_marginTop="@dimen/topFiveMargin"
         android:background="@drawable/et_drawable"
         android:drawableStart="@drawable/search"
-        android:drawablePadding="@dimen/_20sdp"
+        android:drawablePadding="@dimen/_15sdp"
         android:drawableTint="@color/drawableLiteGreyColor"
         android:fontFamily="@font/larsseit_regular"
         android:hint="@string/search_member_by_name"
@@ -60,7 +60,7 @@
         android:textSize="@dimen/normalTextSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTempGroupImageGroupMembers" />
+        app:layout_constraintTop_toBottomOf="@id/txtTempGroupImageGroupMembers" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtTempOrGroupMembers"
@@ -74,7 +74,7 @@
         android:textSize="@dimen/normalTextSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etGroupNameGroupMembers" />
+        app:layout_constraintTop_toBottomOf="@id/etGroupNameGroupMembers" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutSendEmailInvitationGroupMembers"
@@ -89,7 +89,7 @@
         android:paddingBottom="@dimen/etVerticalPadding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTempOrGroupMembers">
+        app:layout_constraintTop_toBottomOf="@id/txtTempOrGroupMembers">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgTempMailGroupMembers"
@@ -112,7 +112,7 @@
             android:textSize="@dimen/normalTextSize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imgTempMailGroupMembers"
+            app:layout_constraintStart_toEndOf="@id/imgTempMailGroupMembers"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -124,7 +124,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layoutSendEmailInvitationGroupMembers">
+        app:layout_constraintTop_toBottomOf="@id/layoutSendEmailInvitationGroupMembers">
 
         <LinearLayout
             android:id="@+id/layoutBusinessUnitGroupMembers"
@@ -143,6 +143,8 @@
                 android:id="@+id/txtTempBusinessUnitsGroupMembers"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/larsseit_medium"
+                android:textColor="@color/darkLiteGrey"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/business_nunits"
@@ -175,6 +177,8 @@
                 android:id="@+id/txtTempRegionGroupMembers"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/larsseit_medium"
+                android:textColor="@color/black"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/los_nangels"
@@ -203,6 +207,8 @@
                 android:id="@+id/txtTempJobTypeGroupMembers"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/larsseit_medium"
+                android:textColor="@color/darkLiteGrey"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/job_ntype"
@@ -228,8 +234,21 @@
         app:layout_constraintTop_toBottomOf="@id/layoutFilterOptionGroupMembers"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/rvNumberPaginationGroupMembers"
         />
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvNumberPaginationGroupMembers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:itemCount="5"
+        android:foregroundGravity="center"
+        android:padding="@dimen/topFiveMargin"
+        tools:listitem="@layout/number_pagination"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

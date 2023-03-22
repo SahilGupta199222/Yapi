@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.yapi.R
 import com.yapi.databinding.FragmentGroupGeneralBinding
 
@@ -13,11 +14,15 @@ import com.yapi.databinding.FragmentGroupGeneralBinding
 class GroupGeneral : Fragment() {
     private lateinit var binding:FragmentGroupGeneralBinding
     private var editGroupOpenStatus=true
+    private val vModel:ViewModelGroupGeneral by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         binding=FragmentGroupGeneralBinding.inflate(LayoutInflater.from(requireContext()))
+        binding.model=vModel
+        binding.includeGroupGnlInfo.model=vModel
+        binding.includeGroupGnlInfoEdit.model=vModel
         return binding.root
     }
 
