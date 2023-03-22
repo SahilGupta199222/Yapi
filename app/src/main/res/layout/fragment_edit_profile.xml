@@ -314,8 +314,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/et_drawable"
-                    android:paddingTop="@dimen/etHorizontalPadding"
-                    android:paddingBottom="@dimen/etHorizontalPadding"
+                    android:paddingTop="@dimen/_3sdp"
+                    android:paddingBottom="@dimen/_3sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtTempPhoneEditProfile">
@@ -365,7 +365,6 @@
                         android:layout_marginStart="@dimen/etHorizontalPadding"
                         android:fontFamily="@font/larsseit_regular"
                         android:gravity="center"
-
                         android:text="@{model.countryCodeValue}"
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/normalTextSize"
@@ -377,20 +376,22 @@
                         android:id="@+id/etNumberEditProfile"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
+                        android:afterTextChanged="@{model::AfterTextChanged}"
                         android:background="@null"
+                        android:fontFamily="@font/larsseit_regular"
                         android:inputType="number"
-                        android:maxLength="15"
+                        android:maxLength="12"
                         android:paddingStart="@dimen/_3sdp"
                         android:paddingEnd="@dimen/etHorizontalPadding"
                         android:text="@={model.phoneNumberValue}"
-                        android:fontFamily="@font/larsseit_regular"
-                        android:afterTextChanged="@{model::AfterTextChanged}"
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/normalTextSize"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@+id/txtcountryCode"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
