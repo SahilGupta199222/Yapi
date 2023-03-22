@@ -51,7 +51,7 @@ class MenuViewModel : ViewModel() {
                 constraintsSettings.setOnClickListener {
                     popUp.dismiss()
                   //  showLeaveGroupDialog()
-                    showDeleteGroupDialog()
+                   // showDeleteGroupDialog()
                     /*   if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
                            view.findNavController()
                                .navigate(R.id.action_menuFragment_to_profileFragment)
@@ -60,10 +60,10 @@ class MenuViewModel : ViewModel() {
                 var constraintsLogout = mView.findViewById<ConstraintLayout>(R.id.constraintsLogout)
                 constraintsLogout.setOnClickListener {
                     popUp.dismiss()
-                       if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
+                     /*  if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
                            view.findNavController()
                                .navigate(R.id.action_menuFragment_to_chatMessageFragment)
-                       }
+                       }*/
                 }
 
 

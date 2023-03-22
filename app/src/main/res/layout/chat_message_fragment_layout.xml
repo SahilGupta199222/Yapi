@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <data>
-
         <variable
             name="mViewModel"
             type="com.yapi.views.chat.ChatViewModel" />
@@ -31,6 +29,7 @@
                 android:layout_width="@dimen/extraIconSize"
                 android:layout_height="@dimen/extraIconSize"
                 android:rotation="180"
+                android:onClick="@{mViewModel::onClick}"
                 android:src="@drawable/arrow_forward"
                 app:layout_constraintBottom_toBottomOf="@+id/tvMemberValue"
                 app:layout_constraintStart_toStartOf="parent"
@@ -110,7 +109,6 @@
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottomConstraints"
@@ -312,7 +310,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/etRichChatDemo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
-                <!--  <jp.wasabeef.richeditor.RichEditor
+                  <jp.wasabeef.richeditor.RichEditor
                       android:id="@+id/etRichChatDemo"
                       android:layout_width="match_parent"
                       android:layout_height="@dimen/_45sdp"
@@ -324,7 +322,6 @@
                       app:layout_constraintEnd_toEndOf="parent"
                       app:layout_constraintStart_toStartOf="parent"
                       app:layout_constraintTop_toTopOf="parent" />
-  -->
                 <!--
 
                 <LinearLayout
@@ -416,6 +413,7 @@
                         android:layout_width="@dimen/iconSize"
                         android:layout_height="@dimen/iconSize"
                         android:layout_marginStart="@dimen/topMargin"
+                        android:onClick="@{mViewModel::onClick}"
                         android:src="@drawable/ic_baseline_link_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/imgPickImageIconChatDemo"
@@ -427,6 +425,7 @@
                         android:layout_height="@dimen/iconSize"
                         android:layout_marginStart="@dimen/topMargin"
                         android:rotation="90"
+                        android:onClick="@{mViewModel::onClick}"
                         android:src="@drawable/ic_baseline_attach_file_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/imgLinkIconChatDemo"

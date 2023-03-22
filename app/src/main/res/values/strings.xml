@@ -215,4 +215,6 @@
     <string name="phone_number_text">Phone Number</string>
     <string name="email_address_text">eMail Address</string>
     <string name="address_text">Address</string>
+    <string name="view_group_info_textt">View Group Info</string>
+    <string name="delete_group">Delete Group</string>
 </resources>
