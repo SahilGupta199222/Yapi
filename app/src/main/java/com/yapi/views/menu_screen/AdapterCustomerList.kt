@@ -10,7 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.yapi.R
 
-class AdapterCustomerList(val context: Context, val list:ArrayList<PojoCustomerList>,val click: AdapterCustomerList.Click):RecyclerView.Adapter<AdapterCustomerList.MyViewHolder>() {
+class AdapterCustomerList(val context: Context, val list:ArrayList<PojoCustomerList>,val click: AdapterCustomerList.Click,
+val userType:String):RecyclerView.Adapter<AdapterCustomerList.MyViewHolder>() {
     class MyViewHolder(view:View):RecyclerView.ViewHolder(view){
         val img:com.makeramen.roundedimageview.RoundedImageView=view.findViewById(R.id.imgProfilePicRvCustomerList)
         val onlineStatus:com.makeramen.roundedimageview.RoundedImageView=view.findViewById(R.id.onlineStatusRvCustomerList)
@@ -59,7 +60,7 @@ class AdapterCustomerList(val context: Context, val list:ArrayList<PojoCustomerL
         }
         holder.itemView.setOnClickListener {
             if(list[position].unSeenMsgCount!=-1) {
-                click.onSeletect(holder.adapterPosition)
+                click.onSeletect(holder.adapterPosition,userType)
             }
         }
 
@@ -81,6 +82,6 @@ class AdapterCustomerList(val context: Context, val list:ArrayList<PojoCustomerL
     }
 
     interface Click{
-        fun onSeletect(position: Int)
+        fun onSeletect(position: Int,userType:String)
     }
 }

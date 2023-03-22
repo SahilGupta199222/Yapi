@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/groupInfoFragment">
+    app:startDestination="@id/menuFragment">
 
     <fragment
         android:id="@+id/signUpFragment2"
@@ -162,9 +163,15 @@
         android:id="@+id/chatMessageFragment"
         android:name="com.yapi.views.chat.ChatMessagesFragment"
         android:label="ChatMessageFragment">
-
+<action
+    app:destination="@+id/chatUserProfileInfo"
+    android:id="@+id/action_chatMessageFragment_to_chatUserProfileInfo"/>
     </fragment>
-
+<fragment
+    android:id="@+id/chatUserProfileInfo"
+    tools:layout="ChatUserInfoFragment"
+    android:name="com.yapi.views.chat.chatUserInfo.ChatUserInfoFragment"
+    ></fragment>
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.yapi.views.splash.SplashFragment"

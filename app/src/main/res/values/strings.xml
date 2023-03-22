@@ -174,5 +174,45 @@
     <string name="public_links">Public links</string>
     <string name="admin_manager_text_chat">Admin, Managers with different rights</string>
     <string name="view_group_info">View group info</string>
+    <string name="add_template_title">Add Template</string>
+    <string name="add_template_description">Lorem Ipsom dolow sit amet</string>
 
+
+    <string name="message_title_text">Message title</string>
+    <string name="write_message_title">Write Message Title</string>
+
+
+    <string name="message_content_text">message content</string>
+    <string name="write_message_content">Write Message Content</string>
+    <string name="save_text">Save</string>
+
+    <string name="search_for_files">Search for files</string>
+    <string name="attachments_text">Attachments</string>
+    <string name="upload_from_google_drive">Upload from google drive</string>
+    <string name="recent_files">Recent files</string>
+    <string name="Upload_from_your_computer">Upload from your computer</string>
+<string name="add_link_text">Add Link</string>
+<string name="text_to_display">Text to display</string>
+<string name="paste_link">Paste link</string>
+    <string name="mute_notification">Mute Notification</string>
+    <string name="delete_chat_text">Delete Chat</string>
+    <string name="Call_text">Call</string>
+    <string name="information_text">Information</string>
+    <string name="previous_jobs">Previous Jobs</string>
+    <string name="previous_estimations">Previous Estimations</string>
+    <string name="balance_text">Balance</string>
+    <string name="activity_text">Activity</string>
+    <string name="media_text">Media</string>
+    <string name="view_all">View All</string>
+    <string name="links_text">Links</string>
+    <string name="view_messages_text">View Messages</string>
+    <string name="Files_text">Filess</string>
+    <string name="templates_text">Templates</string>
+    <string name="add_text">Add</string>
+    <string name="hello_text"><font color='#B8B8B8'>Hello</font>  <font color='#3D3D3D'>Lincoln</font></string>
+
+    <string name="source_lead">source of lead</string>
+    <string name="phone_number_text">Phone Number</string>
+    <string name="email_address_text">eMail Address</string>
+    <string name="address_text">Address</string>
 </resources>

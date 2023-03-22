@@ -2,13 +2,20 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="mViewModel"
+            type="com.yapi.views.chat.ChatViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FAFAFA"
         android:paddingStart="@dimen/etHorizontalPadding"
-        android:paddingEnd="@dimen/etHorizontalPadding"
         android:paddingTop="@dimen/etVerticalPadding"
-android:background="#FAFAFA"
+        android:paddingEnd="@dimen/etHorizontalPadding"
         android:paddingBottom="@dimen/_5sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,8 +41,8 @@ android:background="#FAFAFA"
                 android:id="@+id/ivChatCall"
                 android:layout_width="@dimen/iconSize"
                 android:layout_height="@dimen/iconSize"
-                android:src="@drawable/chat_call_icon"
                 android:layout_marginEnd="@dimen/topFiveMargin"
+                android:src="@drawable/chat_call_icon"
                 app:layout_constraintBottom_toBottomOf="@+id/tvMemberValue"
                 app:layout_constraintEnd_toStartOf="@+id/ivChat_more_icon"
                 app:layout_constraintTop_toTopOf="@+id/tvName"
@@ -45,6 +52,7 @@ android:background="#FAFAFA"
                 android:id="@+id/ivChat_more_icon"
                 android:layout_width="@dimen/extraIconSize"
                 android:layout_height="@dimen/extraIconSize"
+                android:onClick="@{mViewModel::onClick}"
                 android:src="@drawable/chat_more_icon"
                 app:layout_constraintBottom_toBottomOf="@+id/tvMemberValue"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -60,6 +68,7 @@ android:background="#FAFAFA"
                 android:text="Human Resource"
                 android:textColor="@color/darkGrey"
                 android:textSize="@dimen/_16ssp"
+                android:onClick="@{mViewModel::onClick}"
                 app:layout_constraintEnd_toStartOf="@+id/ivChatCall"
                 app:layout_constraintStart_toEndOf="@+id/ivChatBack"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -79,23 +88,25 @@ android:background="#FAFAFA"
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            app:layout_constraintTop_toBottomOf="@id/topConstraints"
             android:layout_width="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@id/bottomConstraints"
-            android:layout_height="0dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topConstraints">
 
             <LinearLayout
-                android:gravity="center"
-                android:paddingTop="@dimen/_10sdp"
-                android:paddingBottom="@dimen/_10sdp"
-                android:paddingStart="@dimen/etHorizontalPadding"
-                android:paddingEnd="@dimen/etHorizontalPadding"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <include layout="@layout/created_group_ui_chat"
-                    android:id="@+id/createGroupUI"/>
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:paddingStart="@dimen/etHorizontalPadding"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingEnd="@dimen/etHorizontalPadding"
+                android:paddingBottom="@dimen/_10sdp">
+
+                <include
+                    android:id="@+id/createGroupUI"
+                    layout="@layout/created_group_ui_chat" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -104,10 +115,10 @@ android:background="#FAFAFA"
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottomConstraints"
             android:layout_width="match_parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_height="wrap_content">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <View
                 android:id="@+id/viewAboveMessage"
@@ -116,9 +127,9 @@ android:background="#FAFAFA"
                 android:layout_marginStart="@dimen/topMargin"
                 android:background="@color/liteGrey"
                 app:layout_constraintBottom_toTopOf="@id/chatMessageConstrinats"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -301,19 +312,19 @@ android:background="#FAFAFA"
                     app:layout_constraintBottom_toTopOf="@+id/etRichChatDemo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
-                <jp.wasabeef.richeditor.RichEditor
-                    android:id="@+id/etRichChatDemo"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_45sdp"
+                <!--  <jp.wasabeef.richeditor.RichEditor
+                      android:id="@+id/etRichChatDemo"
+                      android:layout_width="match_parent"
+                      android:layout_height="@dimen/_45sdp"
 
-                    android:layout_marginEnd="@dimen/startMainMargin"
-                    android:visibility="gone"
-                    android:textSize="@dimen/normalSmallTextSize"
-                    app:layout_constraintBottom_toTopOf="@+id/layoutStyleOptionsEditTextViewChatDemo"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
+                      android:layout_marginEnd="@dimen/startMainMargin"
+                      android:visibility="gone"
+                      android:textSize="@dimen/normalSmallTextSize"
+                      app:layout_constraintBottom_toTopOf="@+id/layoutStyleOptionsEditTextViewChatDemo"
+                      app:layout_constraintEnd_toEndOf="parent"
+                      app:layout_constraintStart_toStartOf="parent"
+                      app:layout_constraintTop_toTopOf="parent" />
+  -->
                 <!--
 
                 <LinearLayout
@@ -395,10 +406,10 @@ android:background="#FAFAFA"
                         android:layout_marginStart="@dimen/topMargin"
                         android:backgroundTint="@color/medium_grey_color"
                         android:src="@drawable/image_drawable"
-                        app:tint="@color/chatbottom_grey_color"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/viewEmojiIconChatDemo"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/chatbottom_grey_color" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/imgLinkIconChatDemo"
@@ -454,8 +465,8 @@ android:background="#FAFAFA"
                         android:id="@+id/imgSendIconChatDemo"
                         android:layout_width="@dimen/_22sdp"
                         android:layout_height="@dimen/_22sdp"
-                        android:src="@drawable/ic_baseline_send_24"
                         android:layout_marginEnd="@dimen/topFiveMargin"
+                        android:src="@drawable/ic_baseline_send_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/viewLineBeforeDownArrowIconChatDemo"
                         app:layout_constraintTop_toTopOf="parent" />
