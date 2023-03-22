@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.yapi.R
+import com.yapi.common.Constants
 import com.yapi.databinding.FragmentMenuBinding
 
 class MenuFragment : Fragment() {
@@ -316,15 +317,18 @@ class MenuFragment : Fragment() {
         adapterCustomerList =
             AdapterCustomerList(requireContext(), list, object : AdapterCustomerList.Click {
                 @SuppressLint("NotifyDataSetChanged")
-                override fun onSeletect(position: Int) {
+                override fun onSeletect(position: Int,userType:String) {
                     for (i in 0 until adapterCustomerList?.getListt()?.size!!) {
                         adapterCustomerList?.getListt()?.get(i)?.selectedStatus = position == i
                     }
                     adapterCustomerList?.notifyDataSetChanged()
-                 /*   if(findNavController().currentDestination?.id == R.id.menuFragment)
-                    findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)*/
+                    if(findNavController().currentDestination?.id == R.id.menuFragment) {
+                        var bundle=Bundle()
+                        bundle.putString("userType",userType)
+                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment,bundle)
+                    }
                 }
-            })
+            },Constants.CUSTOMERS_KEY)
         binding.rvCustomersListMenu.adapter = adapterCustomerList
     }
     private fun setConversationListAdapter() {
@@ -349,15 +353,17 @@ class MenuFragment : Fragment() {
         adapterConversationList =
             AdapterCustomerList(requireContext(), list, object : AdapterCustomerList.Click {
                 @SuppressLint("NotifyDataSetChanged")
-                override fun onSeletect(position: Int) {
+                override fun onSeletect(position: Int,userType:String) {
                     for (i in 0 until adapterConversationList?.getListt()?.size!!) {
                         adapterConversationList?.getListt()?.get(i)?.selectedStatus = position == i
                     }
                     adapterConversationList?.notifyDataSetChanged()
-                 /*   if(findNavController().currentDestination?.id == R.id.menuFragment)
-                    findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)*/
+                    if(findNavController().currentDestination?.id == R.id.menuFragment){
+                        var bundle=Bundle()
+                        bundle.putString("userType",userType)
+                    findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment,bundle)}
                 }
-            })
+            },Constants.CONVERSATIONS_KEY)
         binding.rvConversationListMenu.adapter = adapterConversationList
     }
 
@@ -382,16 +388,18 @@ class MenuFragment : Fragment() {
         adapterLeadsList =
             AdapterCustomerList(requireContext(), list, object : AdapterCustomerList.Click {
                 @SuppressLint("NotifyDataSetChanged")
-                override fun onSeletect(position: Int) {
+                override fun onSeletect(position: Int,userType:String) {
                     for (i in 0 until adapterLeadsList?.getListt()?.size!!) {
                         adapterLeadsList?.getListt()?.get(i)?.selectedStatus = position == i
                     }
                     adapterLeadsList?.notifyDataSetChanged()
 
-                   /* if(findNavController().currentDestination?.id == R.id.menuFragment)
-                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)*/
+                    if(findNavController().currentDestination?.id == R.id.menuFragment){
+                    var bundle=Bundle()
+                    bundle.putString("userType",userType)
+                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment,bundle)}
                 }
-            })
+            },Constants.LEADS_KEY)
         binding.rvLeadsListMenu.adapter = adapterLeadsList
     }
 
@@ -417,16 +425,18 @@ class MenuFragment : Fragment() {
         adapterTeamList =
             AdapterCustomerList(requireContext(), list, object : AdapterCustomerList.Click {
                 @SuppressLint("NotifyDataSetChanged")
-                override fun onSeletect(position: Int) {
+                override fun onSeletect(position: Int,userType:String) {
                     for (i in 0 until adapterTeamList?.getListt()?.size!!) {
                         adapterTeamList?.getListt()?.get(i)?.selectedStatus = position == i
                     }
                     adapterTeamList?.notifyDataSetChanged()
 
-                    /*if(findNavController().currentDestination?.id == R.id.menuFragment)
-                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)*/
+                    if(findNavController().currentDestination?.id == R.id.menuFragment){
+                        var bundle=Bundle()
+                        bundle.putString("userType",userType)
+                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment,bundle)}
                 }
-            })
+            },"")
         binding.rvTeamsListMenu.adapter = adapterTeamList
     }
 

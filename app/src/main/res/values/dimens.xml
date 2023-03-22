@@ -52,4 +52,12 @@
     <dimen name="menu_line_height">@dimen/_1sdp</dimen>
     <dimen name="three">@dimen/_32sdp</dimen>
     <dimen name="threePlus">@dimen/_42sdp</dimen>
+
+    <dimen name="text_letter_spacing">0.07</dimen>
+
+    <dimen name="roundDrawableCommon_bottom">@dimen/_10sdp</dimen>
+
+    <dimen name="profile_start_margin">@dimen/_20sdp</dimen>
+<dimen name="user_info_box">@dimen/_35sdp</dimen>
+
 </resources>
