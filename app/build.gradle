@@ -89,7 +89,7 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
     // for country code pick
-    implementation 'com.hbb20:ccp:2.7.0'
+   /* implementation 'com.hbb20:ccp:2.7.0'*/
 
     // richest edittext testing
     implementation 'jp.wasabeef:richeditor-android:2.0.0'

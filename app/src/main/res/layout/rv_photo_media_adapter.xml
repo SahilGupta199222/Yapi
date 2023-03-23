@@ -9,7 +9,10 @@
         android:layout_width="@dimen/_80sdp"
         android:layout_height="@dimen/_80sdp"
         android:src="@drawable/temp_photo"
-        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

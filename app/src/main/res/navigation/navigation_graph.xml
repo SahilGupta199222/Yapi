@@ -35,8 +35,9 @@
         android:name="com.yapi.views.sign_in.SignInFragment"
         android:label="SignInFragment">
 
-        <action android:id="@+id/action_signInFragment_to_signUpCodeFragment"
-            app:destination="@id/signUpCodeFragment"/>
+        <action
+            android:id="@+id/action_signInFragment_to_signUpCodeFragment"
+            app:destination="@id/signUpCodeFragment" />
 
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment2"
@@ -163,21 +164,21 @@
         android:id="@+id/chatMessageFragment"
         android:name="com.yapi.views.chat.ChatMessagesFragment"
         android:label="ChatMessageFragment">
-<action
-    app:destination="@+id/chatUserProfileInfo"
-    android:id="@+id/action_chatMessageFragment_to_chatUserProfileInfo"/>
+        <action
+            android:id="@+id/action_chatMessageFragment_to_chatUserProfileInfo"
+            app:destination="@+id/chatUserProfileInfo" />
     </fragment>
-<fragment
-    android:id="@+id/chatUserProfileInfo"
-    tools:layout="ChatUserInfoFragment"
-    android:name="com.yapi.views.chat.chatUserInfo.ChatUserInfoFragment"
-    ></fragment>
+    <fragment
+        android:id="@+id/chatUserProfileInfo"
+        android:name="com.yapi.views.chat.chatUserInfo.ChatUserInfoFragment"
+        tools:layout="ChatUserInfoFragment"></fragment>
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.yapi.views.splash.SplashFragment"
         android:label="splashFragment">
-        <action android:id="@+id/action_splashFragment_to_signInFragment"
-            app:destination="@+id/signInFragment"/>
+        <action
+            android:id="@+id/action_splashFragment_to_signInFragment"
+            app:destination="@+id/signInFragment" />
     </fragment>
     <fragment
         android:id="@+id/groupInfoFragment"
