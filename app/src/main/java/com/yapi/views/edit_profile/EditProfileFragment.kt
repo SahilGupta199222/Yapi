@@ -35,14 +35,14 @@ class EditProfileFragment : Fragment(), View.OnClickListener {
     private fun init() {
         binding.ivDrpArrow.setOnClickListener(this)
 
-       /* setPhoneMethod(binding.countryCodePickerEditProfile.selectedCountryCodeWithPlus)
+        setPhoneMethod(binding.countryCodePickerEditProfile.selectedCountryCodeWithPlus)
         binding.apply {
             countryCodePickerEditProfile.setOnCountryChangeListener {
                 var selected_country_code =
                     countryCodePickerEditProfile.selectedCountryCodeWithPlus
                 setPhoneMethod(selected_country_code!!)
             }
-        }*/
+        }
 
         binding.etNumberEditProfile.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
@@ -92,22 +92,22 @@ class EditProfileFragment : Fragment(), View.OnClickListener {
     }
 
     fun setPhoneMethod(selectedCountryCode: String) {
-      /*  viewModel.countryCodeValue.set(selectedCountryCode.toString())
-        binding.etNumberEditProfile.setSelection(binding.etNumberEditProfile.text.toString()
-            .trim().length)
-
-        //var profilePic = binding.countryCodePickerEditProfile.mImvFlag
         viewModel.countryCodeValue.set(selectedCountryCode.toString())
         binding.etNumberEditProfile.setSelection(binding.etNumberEditProfile.text.toString()
             .trim().length)
-        var profilePic = binding.countryCodePickerEditProfile.mImvFlag
-        val imageBitmap = BitmapFactory.decodeResource(resources,
-            binding.countryCodePickerEditProfile.sourceLayoutResId!!)
-        val roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(resources, imageBitmap)
-        var radiusValue = requireActivity().resources.getDimension(com.intuit.sdp.R.dimen._5sdp)
-        roundedBitmapDrawable.cornerRadius = radiusValue
-        roundedBitmapDrawable.setAntiAlias(true)
-        profilePic.setImageDrawable(roundedBitmapDrawable)*/
+
+        /*   //var profilePic = binding.countryCodePickerEditProfile.mImvFlag
+           viewModel.countryCodeValue.set(selectedCountryCode.toString())
+           binding.etNumberEditProfile.setSelection(binding.etNumberEditProfile.text.toString()
+               .trim().length)
+           var profilePic = binding.countryCodePickerEditProfile.mImvFlag
+           val imageBitmap = BitmapFactory.decodeResource(resources,
+               binding.countryCodePickerEditProfile.sourceLayoutResId!!)
+           val roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(resources, imageBitmap)
+           var radiusValue = requireActivity().resources.getDimension(com.intuit.sdp.R.dimen._5sdp)
+           roundedBitmapDrawable.cornerRadius = radiusValue
+           roundedBitmapDrawable.setAntiAlias(true)
+           profilePic.setImageDrawable(roundedBitmapDrawable)*/
     }
 
     override fun onClick(v: View?) {

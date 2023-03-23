@@ -329,7 +329,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_marginStart="@dimen/etHorizontalPadding"
                         android:background="@drawable/flag_back_drawable">
-                   <!-- <com.rilixtech.widget.countrycodepicker.CountryCodePicker
+                    <com.rilixtech.widget.countrycodepicker.CountryCodePicker
                         android:id="@+id/countryCodePickerEditProfile"
                         android:layout_width="@dimen/_34sdp"
                         android:layout_height="@dimen/_34sdp"
@@ -347,7 +347,7 @@
                         app:ccp_showPhoneCode="false"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>-->
+                        app:layout_constraintTop_toTopOf="parent"/>
                     </FrameLayout>
 <!--
                     <com.hbb20.CountryCodePicker
