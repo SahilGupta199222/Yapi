@@ -49,7 +49,7 @@
                     android:paddingBottom="@dimen/_5sdp"
                     android:text="Duis aute irure dolor in reprehenderit in voluptate velit"
                     android:textColor="@color/darkGrey"
-                    android:textSize="@dimen/normalTextSize" />
+                    android:textSize="@dimen/normalSmallTextSize" />
 
         </RelativeLayout>
     </RelativeLayout>

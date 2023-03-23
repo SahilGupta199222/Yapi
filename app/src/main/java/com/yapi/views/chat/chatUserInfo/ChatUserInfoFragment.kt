@@ -38,7 +38,8 @@ val viewModel:ChatUserInfoViewModel by viewModels()
         if(viewModel.userType.get().equals(Constants.CUSTOMERS_KEY))
         {
            viewModel.userInformation.set(true)
-        }else
+        }
+        else
         {
             viewModel.userInformation.set(false)
         }
