@@ -320,6 +320,36 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtTempPhoneEditProfile">
 
+                    <FrameLayout
+                        android:id="@+id/frameCoutryCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginStart="@dimen/etHorizontalPadding"
+                        android:background="@drawable/flag_back_drawable">
+                    <com.rilixtech.widget.countrycodepicker.CountryCodePicker
+                        android:id="@+id/countryCodePickerEditProfile"
+                        android:layout_width="@dimen/_34sdp"
+                        android:layout_height="@dimen/_34sdp"
+
+                        android:padding="0dp"
+                        android:layout_gravity="center"
+                        app:ccp_showArrow="false"
+                        android:gravity="center"
+                        app:ccp_showFlag="true"
+                        android:paddingHorizontal="0dp"
+                        android:paddingVertical="0dp"
+                        app:ccp_textSize="@dimen/_15sdp"
+                        android:clipToPadding="true"
+                        app:ccp_showNameCode="false"
+                        app:ccp_showPhoneCode="false"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                    </FrameLayout>
+<!--
                     <com.hbb20.CountryCodePicker
                         android:id="@+id/countryCodePickerEditProfile"
                         android:layout_width="@dimen/_34sdp"
@@ -328,13 +358,22 @@
                         android:padding="0dp"
                         app:ccp_showArrow="false"
                         android:gravity="center"
-                        app:ccp_padding="0dp"
-                        android:clipToPadding="false"
+                        app:ccp_showFlag="true"
+                        android:paddingHorizontal="0dp"
+                        android:paddingVertical="0dp"
+                        android:background="@android:color/white"
+                        android:clipToPadding="true"
                         app:ccp_showNameCode="false"
                         app:ccp_showPhoneCode="false"
+                        app:layout_constraintWidth_percent="0.8"
+                        app:layout_constraintHeight_percent="0.8"
+                        app:ccp_padding="10dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+
+                        />
+-->
 
                     <ImageView
                         android:id="@+id/ivDrpArrow"
@@ -343,7 +382,7 @@
                         android:layout_marginStart="@dimen/_minus3sdp"
                         android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/countryCodePickerEditProfile"
+                        app:layout_constraintStart_toEndOf="@+id/frameCoutryCode"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <View

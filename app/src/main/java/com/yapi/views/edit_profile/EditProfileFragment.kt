@@ -95,6 +95,11 @@ class EditProfileFragment : Fragment(), View.OnClickListener {
         viewModel.countryCodeValue.set(selectedCountryCode.toString())
         binding.etNumberEditProfile.setSelection(binding.etNumberEditProfile.text.toString()
             .trim().length)
+
+        //var profilePic = binding.countryCodePickerEditProfile.mImvFlag
+      /*  viewModel.countryCodeValue.set(selectedCountryCode.toString())
+        binding.etNumberEditProfile.setSelection(binding.etNumberEditProfile.text.toString()
+            .trim().length)
         var profilePic = binding.countryCodePickerEditProfile.imageViewFlag
         val imageBitmap = BitmapFactory.decodeResource(resources,
             binding.countryCodePickerEditProfile.selectedCountryFlagResourceId)
@@ -102,14 +107,14 @@ class EditProfileFragment : Fragment(), View.OnClickListener {
         var radiusValue = requireActivity().resources.getDimension(com.intuit.sdp.R.dimen._5sdp)
         roundedBitmapDrawable.cornerRadius = radiusValue
         roundedBitmapDrawable.setAntiAlias(true)
-        profilePic.setImageDrawable(roundedBitmapDrawable)
+        profilePic.setImageDrawable(roundedBitmapDrawable)*/
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.ivDrpArrow -> {
               //  if(!(binding.countryCodePickerEditProfile.isShown)) {
-                showToastMessage("Hello")
+                //showToastMessage("Hello")
                    // binding.countryCodePickerEditProfile.
               //  }
             }

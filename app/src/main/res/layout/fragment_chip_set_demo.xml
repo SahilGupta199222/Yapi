@@ -338,7 +338,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <jp.wasabeef.richeditor.RichEditor
                     android:id="@+id/etRichChatDemo"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_45sdp"
