@@ -1,9 +1,11 @@
 package com.yapi.views.edit_profile
 
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +13,10 @@ import android.view.ViewGroup
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.rilixtech.widget.countrycodepicker.CountryUtils
 import com.yapi.R
-import com.yapi.common.showToastMessage
 import com.yapi.databinding.FragmentEditProfileBinding
+
 
 class EditProfileFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentEditProfileBinding
@@ -38,6 +41,7 @@ class EditProfileFragment : Fragment(), View.OnClickListener {
         setPhoneMethod(binding.countryCodePickerEditProfile.selectedCountryCodeWithPlus)
         binding.apply {
             countryCodePickerEditProfile.setOnCountryChangeListener {
+                Log.e("fefefewefwddf===",countryCodePickerEditProfile.selectedCountryCodeWithPlus)
                 var selected_country_code =
                     countryCodePickerEditProfile.selectedCountryCodeWithPlus
                 setPhoneMethod(selected_country_code!!)
@@ -96,18 +100,29 @@ class EditProfileFragment : Fragment(), View.OnClickListener {
         binding.etNumberEditProfile.setSelection(binding.etNumberEditProfile.text.toString()
             .trim().length)
 
-        /*   //var profilePic = binding.countryCodePickerEditProfile.mImvFlag
+           //var profilePic = binding.countryCodePickerEditProfile.mImvFlag
            viewModel.countryCodeValue.set(selectedCountryCode.toString())
            binding.etNumberEditProfile.setSelection(binding.etNumberEditProfile.text.toString()
                .trim().length)
            var profilePic = binding.countryCodePickerEditProfile.mImvFlag
-           val imageBitmap = BitmapFactory.decodeResource(resources,
-               binding.countryCodePickerEditProfile.sourceLayoutResId!!)
-           val roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(resources, imageBitmap)
-           var radiusValue = requireActivity().resources.getDimension(com.intuit.sdp.R.dimen._5sdp)
+        profilePic.invalidate()
+          /* val imageBitmap = BitmapFactory.decodeResource(resources,
+               binding.countryCodePickerEditProfile.selectedCountry.name)*/
+
+
+       // profilePic.setDrawingCacheEnabled(true);
+        //val imageBitmap: Bitmap = profilePic.getDrawingCache()
+
+
+     var  resourceId= CountryUtils.getFlagDrawableResId(binding.countryCodePickerEditProfile.selectedCountry)
+        val imageBitmap = BitmapFactory.decodeResource(resources, resourceId)
+
+
+        val roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(resources, imageBitmap)
+           var radiusValue = requireActivity().resources.getDimension(com.intuit.sdp.R.dimen._3sdp)
            roundedBitmapDrawable.cornerRadius = radiusValue
            roundedBitmapDrawable.setAntiAlias(true)
-           profilePic.setImageDrawable(roundedBitmapDrawable)*/
+           profilePic.setImageDrawable(roundedBitmapDrawable)
     }
 
     override fun onClick(v: View?) {
