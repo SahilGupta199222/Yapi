@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.icu.lang.UProperty.INT_START
 import android.os.Bundle
+import android.text.Html
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
@@ -76,7 +77,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgBoldTxtIconChatDemo.setOnClickListener {
-//                etRichChatDemo.setBold()
+                etRichChatDemo.setBold()
 //                etRichChatDemo.focusEditor()
 //                etRichChatDemo.updateTextStyle(EditorTextStyle.BOLD)
                 boldTxtSelected=!boldTxtSelected
@@ -93,7 +94,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgItalicTxtIconChatDemo.setOnClickListener {
-//                etRichChatDemo.setItalic()
+                etRichChatDemo.setItalic()
 //                etRichChatDemo.focusEditor()
 
                 italicTxtSelected=!italicTxtSelected
@@ -110,7 +111,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgUnderLineTxtIconChatDemo.setOnClickListener {
-//                    etRichChatDemo.setUnderline()
+                    etRichChatDemo.setUnderline()
 //                etRichChatDemo.focusEditor()
                 underLineTxtSelected=!underLineTxtSelected
                 if (underLineTxtSelected) {
@@ -125,7 +126,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgStrikeTxtIconChatDemo.setOnClickListener {
-//                    etRichChatDemo.setStrikeThrough()
+                    etRichChatDemo.setStrikeThrough()
 //                etRichChatDemo.focusEditor()
                 strikeTxtSelected=!strikeTxtSelected
 
@@ -142,7 +143,7 @@ class ChipSetDemoFragment : Fragment() {
             }
             imgFormatListNumberTxtIconChatDemo.setOnClickListener {
 //                etRichChatDemo.focusEditor()
-//                    etRichChatDemo.setNumbers()
+                    etRichChatDemo.setNumbers()
                 listNumberTxtSelected=!listNumberTxtSelected
 
                 if (listNumberTxtSelected) {
@@ -157,7 +158,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgFormatListBulletedTxtIconChatDemo.setOnClickListener {
-//                    etRichChatDemo.setBullets()
+                    etRichChatDemo.setBullets()
                 listBulletTxtSelected=!listBulletTxtSelected
                 if (listBulletTxtSelected) {
                     imgFormatListBulletedTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -171,7 +172,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgLeftAlignTxtIconChatDemo.setOnClickListener {
-//                    etRichChatDemo.setAlignLeft()
+                    etRichChatDemo.setAlignLeft()
                 leftAlignTxtSelected=!leftAlignTxtSelected
                 if (leftAlignTxtSelected) {
                     imgLeftAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -197,7 +198,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgCenterAlignTxtIconChatDemo.setOnClickListener {
-//                    etRichChatDemo.setAlignCenter()
+                    etRichChatDemo.setAlignCenter()
                 centerAlignTxtSelected=!centerAlignTxtSelected
                 if (centerAlignTxtSelected) {
                     imgCenterAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -269,57 +270,60 @@ class ChipSetDemoFragment : Fragment() {
             imgLinkIconChatDemo.setOnClickListener {
 //                etRichChatDemo.insertLink("https://cdn.britannica.com/49/182849-050-4C7FE34F/scene-Iron-Man.jpg","iron man link")
             }
-            etRichChatDemo.doAfterTextChanged {
-                val text=etRichChatDemo.text
-                val count=etRichChatDemo.text?.length
-                etRichChatDemo.text?.clear()
-                val str = SpannableStringBuilder(text)
-                if(boldTxtSelected && italicTxtSelected) {
-                    str.setSpan(StyleSpan(Typeface.BOLD_ITALIC),
-                        before,
-                        count?:0,
-                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                }
-                else if(boldTxtSelected) {
-                    str.setSpan(StyleSpan(Typeface.BOLD),
-                        before,
-                        count?:0,
-                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                }
-                else if(italicTxtSelected) {
-                    str.setSpan(StyleSpan(Typeface.ITALIC),
-                        before,
-                        count?:0,
-                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                }
-                Log.i("asdfiasdjkfn","Spannable string is ->$str")
-                etRichChatDemo.text=str
-            }
-            etRichChatDemo.doOnTextChanged { text, start, beforee, count ->
-                before=beforee
-                Log.i("asdfiasdjkfn","Start $start, before $before , count $count")
+//            etRichChatDemo.doAfterTextChanged {
+//                val text=etRichChatDemo.text
+//                val count=etRichChatDemo.text?.length
+//                etRichChatDemo.text?.clear()
 //                val str = SpannableStringBuilder(text)
 //                if(boldTxtSelected && italicTxtSelected) {
 //                    str.setSpan(StyleSpan(Typeface.BOLD_ITALIC),
 //                        before,
-//                        count,
+//                        count?:0,
 //                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 //                }
 //                else if(boldTxtSelected) {
 //                    str.setSpan(StyleSpan(Typeface.BOLD),
 //                        before,
-//                        count,
+//                        count?:0,
 //                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 //                }
 //                else if(italicTxtSelected) {
 //                    str.setSpan(StyleSpan(Typeface.ITALIC),
 //                        before,
-//                        count,
+//                        count?:0,
 //                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 //                }
 //                Log.i("asdfiasdjkfn","Spannable string is ->$str")
 //                etRichChatDemo.text=str
+//            }
+            imgSendIconChatDemo.setOnClickListener {
+                tvMessages.text= Html.fromHtml(etRichChatDemo.html.toString())
             }
+//            etRichChatDemo.doOnTextChanged { text, start, beforee, count ->
+//                before=beforee
+//                Log.i("asdfiasdjkfn","Start $start, before $before , count $count")
+////                val str = SpannableStringBuilder(text)
+////                if(boldTxtSelected && italicTxtSelected) {
+////                    str.setSpan(StyleSpan(Typeface.BOLD_ITALIC),
+////                        before,
+////                        count,
+////                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+////                }
+////                else if(boldTxtSelected) {
+////                    str.setSpan(StyleSpan(Typeface.BOLD),
+////                        before,
+////                        count,
+////                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+////                }
+////                else if(italicTxtSelected) {
+////                    str.setSpan(StyleSpan(Typeface.ITALIC),
+////                        before,
+////                        count,
+////                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+////                }
+////                Log.i("asdfiasdjkfn","Spannable string is ->$str")
+////                etRichChatDemo.text=str
+//            }
 //            etRichChatDemo.setOnTextChangeListener { object:RichEditor.OnTextChangeListener{
 //                override fun onTextChange(text: String?) {
 //                    Log.i("asdfjnasdf","OnText Chage listner ${text}\n")
