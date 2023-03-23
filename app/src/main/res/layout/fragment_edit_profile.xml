@@ -320,7 +320,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtTempPhoneEditProfile">
 
-                    <FrameLayout
+                   <!-- <FrameLayout
                         android:id="@+id/frameCoutryCode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -328,12 +328,11 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         android:layout_marginStart="@dimen/etHorizontalPadding"
-                        android:background="@drawable/flag_back_drawable">
+                        android:background="@drawable/flag_back_drawable">-->
                     <com.rilixtech.widget.countrycodepicker.CountryCodePicker
                         android:id="@+id/countryCodePickerEditProfile"
                         android:layout_width="@dimen/_34sdp"
                         android:layout_height="@dimen/_34sdp"
-
                         android:padding="0dp"
                         android:layout_gravity="center"
                         app:ccp_showArrow="false"
@@ -345,10 +344,11 @@
                         android:clipToPadding="true"
                         app:ccp_showNameCode="false"
                         app:ccp_showPhoneCode="false"
+                        android:layout_marginStart="@dimen/etHorizontalPadding"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
-                    </FrameLayout>
+                  <!--  </FrameLayout>-->
 <!--
                     <com.hbb20.CountryCodePicker
                         android:id="@+id/countryCodePickerEditProfile"
@@ -382,7 +382,7 @@
                         android:layout_marginStart="@dimen/_minus3sdp"
                         android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/frameCoutryCode"
+                        app:layout_constraintStart_toEndOf="@+id/countryCodePickerEditProfile"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <View
