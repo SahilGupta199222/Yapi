@@ -76,7 +76,6 @@
         <TextView
             android:text="@string/delete_group_des"
             android:layout_width="0dp"
-
             android:textSize="@dimen/normalSmallTextSize"
             android:gravity="center_horizontal"
             android:fontFamily="@font/larsseit_regular"

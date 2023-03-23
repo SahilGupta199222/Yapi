@@ -58,9 +58,10 @@ val viewModel:ChatUserInfoViewModel by viewModels()
 
     fun setPhotoAdapterMethod()
     {
-        var finalPerPhoto=screenWidth!!.toFloat()/3.61f
+//        var finalPerPhoto=screenWidth!!.toFloat()/3.61f
 //        var finalPerPhoto=screenWidth!!.toFloat()/3.51f
-        mediaAdapter=RVPhotoMediaAdapter(requireActivity(),finalPerPhoto.toInt())
+        var finalPerPhoto=screenWidth!!.toFloat()/3.58f
+        mediaAdapter=RVPhotoMediaAdapter(requireActivity(),finalPerPhoto!!.toInt())
         dataBinding.rvMediaView.layoutManager=GridLayoutManager(requireActivity(),3)
         dataBinding.rvMediaView.adapter=mediaAdapter
     }
