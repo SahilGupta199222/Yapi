@@ -48,7 +48,7 @@
                     android:paddingBottom="@dimen/_5sdp"
                     android:text="Hi Everyone, Nibh ipsum consequat nisl vel pretium lectus quam id leo"
                     android:textColor="@color/darkGrey"
-                    android:textSize="@dimen/normalTextSize" />
+                    android:textSize="@dimen/normalSmallTextSize" />
 
         </RelativeLayout>
     </LinearLayout>
@@ -81,8 +81,8 @@
             app:layout_constraintTop_toTopOf="@id/ivLeftUserPhoto" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_4sdp"
+            android:layout_height="@dimen/_4sdp"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/_8sdp"
             app:tint="#E6E6E6"
@@ -105,23 +105,23 @@
             app:layout_constraintTop_toTopOf="@id/ivLeftUserPhoto" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_4sdp"
+            android:layout_height="@dimen/_4sdp"
             android:layout_gravity="center_vertical"
             app:tint="#E6E6E6"
             android:layout_marginStart="@dimen/_8sdp"
             android:src="@drawable/circle_bullet" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/iconSize"
+            android:layout_height="@dimen/iconSize"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/_8sdp"
             android:src="@drawable/add_reaction_left" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/iconSize"
+            android:layout_height="@dimen/iconSize"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/_8sdp"
             android:rotation="90"

@@ -31,5 +31,4 @@ class AdapterTabLayoutGroupInfo(val fm: FragmentActivity, val totalCount: Int) :
             }
         }
     }
-
 }

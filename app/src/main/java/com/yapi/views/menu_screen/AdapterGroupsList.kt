@@ -16,7 +16,7 @@ class AdapterGroupsList(
     val context: Context,
     var groupList: Boolean,
     var list: ArrayList<PojoGroupMembersList>,
-    val click: Click,
+    val click: Click,val userType:String
 ) : RecyclerView.Adapter<AdapterGroupsList.MyViewHolder>() {
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val selectedLine: View = view.findViewById(R.id.SelectedLineRvGroupList)
@@ -88,9 +88,9 @@ class AdapterGroupsList(
 //            }
 //            list[holder.adapterPosition].selected=!list[position].selected
 //            notifyDataSetChanged()
-            if (list[position].unSeenMsgCount != -1) {
-                click.onSeletect(holder.adapterPosition)
-            }
+            //if (list[position].unSeenMsgCount != -1) {
+                click.onSeletect(holder.adapterPosition,userType)
+            //}
         }
     }
 
@@ -99,6 +99,6 @@ class AdapterGroupsList(
     }
 
     interface Click {
-        fun onSeletect(position: Int)
+        fun onSeletect(position: Int,userType:String)
     }
 }

@@ -10,11 +10,14 @@ import android.widget.PopupWindow
 import androidx.appcompat.widget.AppCompatButton
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.yapi.MainActivity
 import com.yapi.R
+import com.yapi.common.Constants
 import com.yapi.common.hideKeyboard
 import com.yapi.databinding.ChatAttachementLayoutBinding
 
@@ -24,8 +27,13 @@ class ChatViewModel : ViewModel() {
 
     }
 
+    var chatValue=ObservableBoolean(false)
+    var emailValue=ObservableBoolean(false)
+    var smsValue=ObservableBoolean(false)
+
     var screenWidth: Int? = 0
     var userType:String?=""
+    var sendDataValue=ObservableField("")
     fun onClick(view: View) {
         when (view.id) {
             R.id.ivChat_more_icon -> {
@@ -33,29 +41,67 @@ class ChatViewModel : ViewModel() {
                 // attachmentPopupDialog()
                 // addLinkDialog()
              //   showChatMenuMethod(view)
-                showChatGroupMenuMethod(view)
+                if(userType.equals(Constants.GROUPS_KEY)){
+                    showChatGroupMenuMethod(view)
+                }else
+                {
+                    showChatMenuMethod(view)
+                }
             }
             R.id.tvName->{
-                //For Goto Information of user
+              /*  //For Goto Information of user
                 var bundle=Bundle()
                 bundle.putString("userType",userType.toString())
+                if(userType.equals(Constants.GROUPS_KEY)){
+
+                }
                 view.findNavController().navigate(R.id.action_chatMessageFragment_to_chatUserProfileInfo,bundle)
-            }
+           */ }
             R.id.ivChatBack->{
                 //For back pressed Method
                 view.findNavController().navigateUp()
             }
             R.id.imgAttachmentIconChatDemo->{
              //For Attachment
-                attachmentPopupDialog()
+                //attachmentPopupDialog()
             }
             R.id.imgLinkIconChatDemo->{
                 //for Add Template
-                showAddTemplateDialog()
+              //  showAddTemplateDialog()
+            }
+            R.id.tvMessages->{
+                setDataTabs(1)
+            }
+            R.id.tvEmail->{
+                setDataTabs(2)
+            }
+
+            R.id.tvSMS->{
+                setDataTabs(3)
+            }
+            R.id.imgSendIconChatDemo->{
+                sendDataValue.set("")
             }
         }
     }
 
+    fun setDataTabs(tabValue:Int)
+    {
+        chatValue.set(false)
+        emailValue.set(false)
+        smsValue.set(false)
+        if(tabValue==1)
+        {
+            chatValue.set(true)
+        }else
+            if(tabValue==2)
+            {
+                emailValue.set(true)
+            }else
+            {
+                smsValue.set(true)
+            }
+    }
 
     //For show Template Dialog
     fun showAddTemplateDialog() {
@@ -128,8 +174,7 @@ class ChatViewModel : ViewModel() {
         constraintsProfileChat.setOnClickListener {
             popUp.dismiss()
             if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
-                view.findNavController()
-                    .navigate(R.id.action_menuFragment_to_profileFragment)
+               // view.findNavController().navigate(R.id.action_menuFragment_to_profileFragment)
             }
         }
         var constraintsMute =
@@ -142,8 +187,7 @@ class ChatViewModel : ViewModel() {
         constraintsDeleteChat.setOnClickListener {
             popUp.dismiss()
             if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
-                view.findNavController()
-                    .navigate(R.id.action_menuFragment_to_chatMessageFragment)
+               // view.findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)
             }
         }
     }
@@ -173,8 +217,7 @@ class ChatViewModel : ViewModel() {
         constraintsProfileChat.setOnClickListener {
             popUp.dismiss()
             if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
-                view.findNavController()
-                    .navigate(R.id.action_menuFragment_to_profileFragment)
+                //view.findNavController().navigate(R.id.action_menuFragment_to_profileFragment)
             }
         }
         var constraintsMute =

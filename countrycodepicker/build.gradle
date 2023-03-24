@@ -32,5 +32,6 @@ dependencies {
   //api 'io.michaelrocks:libphonenumber-android:8.12.5'
   implementation 'androidx.annotation:annotation:1.1.0'
   implementation 'io.michaelrocks:libphonenumber-android:8.13.7'
-
+//Dimensions
+  implementation 'com.intuit.sdp:sdp-android:1.1.0'
 }

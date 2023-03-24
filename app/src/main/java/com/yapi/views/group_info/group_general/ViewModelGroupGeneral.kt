@@ -11,7 +11,9 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
+import com.yapi.MainActivity
 import com.yapi.R
+import com.yapi.common.hideKeyboard
 
 class ViewModelGroupGeneral : ViewModel() {
      val groupNameCount=ObservableField<String>("0/128")
@@ -25,10 +27,14 @@ class ViewModelGroupGeneral : ViewModel() {
                 deleteGroupDialog(view.context)
             }
             R.id.layoutUploadImageGroupGnlInfoEdit->{
-                Toast.makeText(view.context, "Clicked", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(view.context, "Clicked", Toast.LENGTH_SHORT).show()
+            }
+            R.id.layoutGroupGnlInfoEdit,R.id.layoutGroupGnlInfo->{
+                MainActivity.activity!!.get()!!.hideKeyboard()
             }
         }
     }
+
     private fun leaveGroupDialog(context: Context){
         val dialog = Dialog(context)
         dialog.setContentView(R.layout.leave_module_popup)

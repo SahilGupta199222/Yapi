@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.yapi.R
+import com.yapi.common.hideKeyboard
 import com.yapi.databinding.FragmentGroupGeneralBinding
-
 
 class GroupGeneral : Fragment() {
     private lateinit var binding:FragmentGroupGeneralBinding
@@ -38,8 +38,17 @@ class GroupGeneral : Fragment() {
                 editGroupOpenStatus=!editGroupOpenStatus
                 changeLayout()
             }
+            /*includeGroupGnlInfoEdit.layoutGroupGnlInfoEdit.setOnClickListener {
+                //forHide Keyboard
+                requireActivity().hideKeyboard()
+            }
+            includeGroupGnlInfo.layoutGroupGnlInfo.setOnClickListener {
+                //forHide Keyboard
+                requireActivity().hideKeyboard()
+            }*/
         }
     }
+
     private fun changeLayout() {
         binding.apply {
             if (editGroupOpenStatus) {

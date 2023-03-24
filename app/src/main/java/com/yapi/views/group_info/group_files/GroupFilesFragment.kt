@@ -25,12 +25,12 @@ class GroupFilesFragment : Fragment() {
 
     private fun init() {
         val list=ArrayList<PojoGroupFiles>()
-        for(i in 0 until 10){
+        //for(i in 1 until 10){
+        for(i in 1..10){
             list.add(PojoGroupFiles("File$i",(i+5).toString(),"Sared by $i"))
         }
         binding.apply {
             rvFileGroupFiles.adapter=AdapterGroupFiles(requireContext(),list)
         }
     }
-
 }

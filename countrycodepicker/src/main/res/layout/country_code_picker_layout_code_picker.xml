@@ -27,14 +27,13 @@
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
         android:layout_marginEnd="@dimen/google_1x"
-        android:layout_marginRight="@dimen/google_1x"
-        >
+        android:layout_marginRight="@dimen/google_1x">
 
-      <ImageView
+      <com.rilixtech.widget.countrycodepicker.NewRoundRectCornerImageView
           android:id="@+id/flag_imv"
-          android:layout_width="wrap_content"
-          android:layout_height="18dp"
-          android:adjustViewBounds="true"
+          android:layout_width="@dimen/_22sdp"
+          android:layout_height="@dimen/_22sdp"
+        android:scaleType="fitXY"
           android:src="@drawable/flag_indonesia"
           />
     </LinearLayout>

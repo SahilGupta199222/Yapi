@@ -49,7 +49,7 @@
                     android:paddingBottom="@dimen/_5sdp"
                     android:text="Duis aute irure dolor in reprehenderit in voluptate velit"
                     android:textColor="@color/darkGrey"
-                    android:textSize="@dimen/normalTextSize" />
+                    android:textSize="@dimen/normalSmallTextSize" />
 
         </RelativeLayout>
     </RelativeLayout>
@@ -67,8 +67,8 @@
         app:layout_constraintEnd_toStartOf="@id/ivRightUserPhoto">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/iconSize"
+            android:layout_height="@dimen/iconSize"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="@dimen/_8sdp"
             android:rotation="90"
@@ -76,15 +76,15 @@
             android:src="@drawable/chat_more_icon" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/iconSize"
+            android:layout_height="@dimen/iconSize"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="@dimen/_8sdp"
             android:src="@drawable/blue_double_tick" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_4sdp"
+            android:layout_height="@dimen/_4sdp"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="@dimen/_8sdp"
             app:tint="#E6E6E6"
@@ -96,7 +96,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="@dimen/_8sdp"
-
             android:fontFamily="@font/larsseit_medium"
             android:letterSpacing="0.07"
             android:lineSpacingExtra="@dimen/line_spacing_extra"
@@ -106,10 +105,9 @@
             app:layout_constraintStart_toEndOf="@id/ivRightUserPhoto"
             app:layout_constraintTop_toTopOf="@id/ivRightUserPhoto" />
 
-
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_4sdp"
+            android:layout_height="@dimen/_4sdp"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="@dimen/_8sdp"
             app:tint="#E6E6E6"
@@ -127,7 +125,6 @@
             android:textAllCaps="true"
             android:textColor="@color/medium_grey_color"
             android:textSize="@dimen/smallTextSize" />
-
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
