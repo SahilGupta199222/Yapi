@@ -11,15 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FAFAFA"
-        android:paddingStart="@dimen/etHorizontalPadding"
+
         android:paddingTop="@dimen/etVerticalPadding"
-        android:paddingEnd="@dimen/etHorizontalPadding"
+
         android:paddingBottom="@dimen/_5sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/topConstraints"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/etHorizontalPadding"
+            android:layout_marginEnd="@dimen/etHorizontalPadding"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -89,6 +91,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="@dimen/etHorizontalPadding"
+            android:layout_marginEnd="@dimen/etHorizontalPadding"
             app:layout_constraintBottom_toTopOf="@id/bottomConstraints"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -108,6 +112,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
+                    android:visibility="visible"
                     android:layout_height="match_parent">
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvChatList"
@@ -181,7 +186,8 @@
                 android:id="@+id/viewAboveMessage"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_1sdp"
-                android:layout_marginStart="@dimen/topMargin"
+                android:layout_marginStart="@dimen/etHorizontalPadding"
+                android:layout_marginEnd="@dimen/etHorizontalPadding"
                 android:background="@color/liteGrey"
                 app:layout_constraintBottom_toTopOf="@id/chatMessageConstrinats"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -196,6 +202,7 @@
                 android:layout_marginStart="@dimen/startMainMargin"
                 android:layout_marginEnd="@dimen/startMainMargin"
                 android:background="@color/transparent"
+
                 app:layout_constraintBottom_toTopOf="@+id/layoutEditTextViewChatDemo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
@@ -206,7 +213,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/larsseit_medium"
                     android:text="@string/chat_text"
-                    android:textColor="@color/medium_grey_color"
+                    android:onClick="@{mViewModel::onClick}"
+                    android:textColor="@{mViewModel.chatValue?@color/darkGrey:@color/medium_grey_color}"
                     android:textSize="@dimen/normalTextSize"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -218,7 +226,8 @@
                     android:layout_marginStart="@dimen/_15sdp"
                     android:fontFamily="@font/larsseit_medium"
                     android:text="@string/email_text"
-                    android:textColor="@color/medium_grey_color"
+                    android:textColor="@{mViewModel.emailValue?@color/darkGrey:@color/medium_grey_color}"
+                    android:onClick="@{mViewModel::onClick}"
                     android:textSize="@dimen/normalTextSize"
                     app:layout_constraintStart_toEndOf="@+id/tvMessages"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -230,7 +239,8 @@
                     android:layout_marginStart="@dimen/_15sdp"
                     android:fontFamily="@font/larsseit_medium"
                     android:text="@string/sms_text"
-                    android:textColor="@color/medium_grey_color"
+                    android:textColor="@{mViewModel.smsValue?@color/darkGrey:@color/medium_grey_color}"
+                    android:onClick="@{mViewModel::onClick}"
                     android:textSize="@dimen/normalTextSize"
                     app:layout_constraintStart_toEndOf="@+id/tvEmail"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -238,7 +248,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layoutEditTextViewChatDemo"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -249,7 +259,7 @@
                     android:id="@+id/layoutFontStylesOfEditTextDemoChat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@+id/viewLineFontStylesEditTextDemoChat"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -372,10 +382,12 @@
                   <jp.wasabeef.richeditor.RichEditor
                       android:id="@+id/etRichChatDemo"
                       android:layout_width="match_parent"
-                      android:layout_height="@dimen/_45sdp"
-
-                      android:layout_marginEnd="@dimen/startMainMargin"
-                      android:visibility="gone"
+                      android:layout_height="@dimen/_55sdp"
+                      android:layout_marginTop="@dimen/_3sdp"
+                      android:layout_marginBottom="@dimen/_3sdp"
+                      android:layout_marginEnd="@dimen/_10sdp"
+                      android:layout_marginStart="@dimen/_20sdp"
+                      android:visibility="visible"
                       android:textSize="@dimen/normalSmallTextSize"
                       app:layout_constraintBottom_toTopOf="@+id/layoutStyleOptionsEditTextViewChatDemo"
                       app:layout_constraintEnd_toEndOf="parent"
@@ -524,6 +536,7 @@
                         android:layout_width="@dimen/_22sdp"
                         android:layout_height="@dimen/_22sdp"
                         android:layout_marginEnd="@dimen/topFiveMargin"
+                        android:onClick="@{mViewModel::onClick}"
                         android:src="@drawable/ic_baseline_send_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/viewLineBeforeDownArrowIconChatDemo"

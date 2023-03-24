@@ -57,11 +57,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/topTwentyFiveMargin"
             android:fontFamily="@font/larsseit_medium"
-            android:text="@string/you_have_invited_one_person"
+            android:text="@{model.invitedPersonCount}"
             android:textColor="@color/darkGrey"
             android:textSize="@dimen/_16sdp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgBannerAddPeopleEmailConf" />
+            app:layout_constraintTop_toBottomOf="@+id/imgBannerAddPeopleEmailConf"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvEmailConfirmationOfAddPeopleEmailConf"
             android:layout_width="match_parent"

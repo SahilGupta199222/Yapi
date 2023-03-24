@@ -12,6 +12,7 @@ class AdapterGroupMembers(val context: Context,val list:ArrayList<PojoGroupMembe
 class MyViewHolder(val itemView:View):RecyclerView.ViewHolder(itemView){
     val name=itemView.findViewById<AppCompatTextView>(R.id.txtUserNameRvMemberListGroup)
     val designation=itemView.findViewById<AppCompatTextView>(R.id.txtUserDesignationRvMemberListGroup)
+    val txtUserPositionRvMenerListCreateGroup=itemView.findViewById<AppCompatTextView>(R.id.txtUserPositionRvMenerListCreateGroup)
 }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -22,10 +23,17 @@ class MyViewHolder(val itemView:View):RecyclerView.ViewHolder(itemView){
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.name.text=list[position].name
         holder.designation.text=list[position].designation
+
+      /*  if(position==0 || position==2)
+        {
+            holder.txtUserPositionRvMenerListCreateGroup.setText("Owner")
+        }else
+        {*/
+            holder.txtUserPositionRvMenerListCreateGroup.setText("Manager")
+       // }
     }
 
     override fun getItemCount(): Int {
         return list.size
     }
-
 }

@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import com.yapi.R
 import com.yapi.databinding.FragmentAddGroupMembersBinding
 
-
 class AddGroupMembers : Fragment() {
     private lateinit var adapterPagination: AdapterNumberPaginationGroupMember
     private lateinit var binding:FragmentAddGroupMembersBinding
@@ -24,6 +23,9 @@ class AddGroupMembers : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.rvGroupMembers.setNestedScrollingEnabled(true);
+
         val list=ArrayList<PojoGroupMembers>()
         for(i in 0 until 20){
             list.add(PojoGroupMembers("Name${i+1}","Sales ${i+4}"))
@@ -47,6 +49,4 @@ class AddGroupMembers : Fragment() {
             rvNumberPaginationGroupMembers.adapter=adapterPagination
         }
     }
-
-
 }

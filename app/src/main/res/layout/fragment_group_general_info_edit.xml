@@ -8,6 +8,7 @@
             type="com.yapi.views.group_info.group_general.ViewModelGroupGeneral" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
+android:onClick="@{model::onClick}"
         android:id="@+id/layoutGroupGnlInfoEdit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -54,7 +55,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutUploadImageGroupGnlInfoEdit"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_49sdp"
             android:layout_marginStart="@dimen/topFifteenMargin"
             android:onClick="@{model::onClick}"
             android:background="@drawable/lite_blue_drawable"

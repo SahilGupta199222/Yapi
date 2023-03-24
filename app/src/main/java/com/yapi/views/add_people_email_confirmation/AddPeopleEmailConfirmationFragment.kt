@@ -37,8 +37,15 @@ class AddPeopleEmailConfirmationFragment : Fragment() {
 
     private fun setList() {
         val list=arguments?.getStringArrayList("personList")
+        var listCount="0"
         if(list?.isNotEmpty()==true){
+           listCount= list.size.toString()
             binding.rvEmailConfirmationOfAddPeopleEmailConf.adapter=AdapterEmailConfirmation(requireContext(),list)
+        }else
+        {
+            listCount= "0"
         }
+        var countValue=requireActivity().getString(R.string.you_have_invited)+" "+listCount+" "+requireActivity().getString(R.string.one_person)
+        viewModel.invitedPersonCount.set(countValue)
     }
 }
