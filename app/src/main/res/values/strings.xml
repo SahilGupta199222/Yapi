@@ -77,7 +77,7 @@
     <string name="about">ABOUT</string>
     <string name="role">ROLE</string>
     <string name="contact_info">Contact Info</string>
-    <string name="region">REGION</string>
+    <string name="region">Region</string>
     <string name="account_infor">Account Info</string>
     <string name="deactivate_your_account">Deactivate your account</string>
     <string name="delete_account">Delete Account</string>

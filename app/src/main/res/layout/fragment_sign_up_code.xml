@@ -57,6 +57,7 @@
                     android:layout_marginEnd="@dimen/startMainMargin"
                     android:background="@color/white"
                     android:onClick="@{vModel::onClick}"
+                    android:paddingTop="@dimen/_10sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

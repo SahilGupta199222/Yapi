@@ -71,14 +71,16 @@ app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="\@briski"
-        android:layout_marginBottom="@dimen/_3sdp"
+        android:layout_marginBottom="@dimen/_6sdp"
         android:textColor="@color/darkLiteGrey"
         android:fontFamily="@font/larsseit_medium"
         android:textSize="@dimen/normalSmallTextSize"
+
         app:layout_constraintBottom_toBottomOf="@+id/imgProfilePicProfile"
         app:layout_constraintStart_toStartOf="@+id/txtNameProfile"
         />
-    <androidx.appcompat.widget.AppCompatTextView
+
+   <!-- <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtTempDotProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -91,15 +93,28 @@ app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txtUserNameProfile"
         app:layout_constraintBottom_toBottomOf="@+id/txtUserNameProfile"
         app:layout_constraintStart_toEndOf="@+id/txtUserNameProfile"
-        />
+        />-->
+
+    <ImageView
+        android:id="@+id/txtTempDotProfile"
+        android:layout_width="@dimen/_4sdp"
+        android:layout_height="@dimen/_4sdp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/_8sdp"
+        app:tint="#E6E6E6"
+        app:layout_constraintTop_toTopOf="@+id/txtUserNameProfile"
+        app:layout_constraintBottom_toBottomOf="@+id/txtUserNameProfile"
+        app:layout_constraintStart_toEndOf="@+id/txtUserNameProfile"
+        android:src="@drawable/circle_bullet" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtTopicProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Datacube"
         android:gravity="center"
-        android:layout_marginStart="@dimen/topFiveMargin"
-             android:textColor="@color/darkLiteGrey"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:textColor="@color/darkLiteGrey"
         android:fontFamily="@font/larsseit_medium"
         android:textSize="@dimen/normalSmallTextSize"
         app:layout_constraintTop_toTopOf="@+id/txtUserNameProfile"
@@ -141,6 +156,7 @@ app:layout_constraintBottom_toBottomOf="parent"
         android:id="@+id/layoutImgPersonProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/topFiveMargin"
         android:background="@drawable/round_lite_gray"
         app:layout_constraintTop_toBottomOf="@+id/txtTempAboutProfile"
         app:layout_constraintStart_toStartOf="parent"

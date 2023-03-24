@@ -143,9 +143,9 @@
                 android:background="@drawable/round_circle_blue"
                 android:clipToOutline="true"
                 android:gravity="center"
-                android:text="A"
+                android:text="p"
                 android:textColor="@color/white"
-                android:textSize="@dimen/_20sdp"
+                android:textSize="@dimen/_18ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
