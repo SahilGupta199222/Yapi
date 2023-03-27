@@ -168,12 +168,19 @@
             android:id="@+id/action_chatMessageFragment_to_chatUserProfileInfo"
             app:destination="@+id/chatUserProfileInfo" />
 
-
+        <action
+            android:id="@+id/action_chatMessageFragment_to_chatGroupProfileInfo"
+            app:destination="@+id/chatGroupProfileInfo" />
     </fragment>
     <fragment
         android:id="@+id/chatUserProfileInfo"
         android:name="com.yapi.views.chat.chatUserInfo.ChatUserInfoFragment"
         tools:layout="ChatUserInfoFragment"></fragment>
+
+    <fragment
+        android:id="@+id/chatGroupProfileInfo"
+        android:name="com.yapi.views.chat.chatGroupInfo.ChatGroupInfoFragment"
+        tools:layout="chatGroupInfoFragment" />
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.yapi.views.splash.SplashFragment"
