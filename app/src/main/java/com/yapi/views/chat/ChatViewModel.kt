@@ -221,7 +221,7 @@ class ChatViewModel : ViewModel() {
             if (view.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
                 var bundle=Bundle()
                 bundle.putString("userType",userType.toString())
-                view.findNavController().navigate(R.id.action_chatMessageFragment_to_chatUserProfileInfo,bundle)
+                view.findNavController().navigate(R.id.action_chatMessageFragment_to_chatGroupProfileInfo,bundle)
             }
         }
         var constraintsMute =

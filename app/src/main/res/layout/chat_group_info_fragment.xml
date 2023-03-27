@@ -9,7 +9,7 @@
 
         <variable
             name="vModel"
-            type="com.yapi.views.chat.chatUserInfo.ChatUserInfoViewModel" />
+            type="com.yapi.views.chat.chatGroupInfo.ChatGroupInfoViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -21,20 +21,18 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             android:paddingBottom="@dimen/profile_start_margin">
-
-            <ImageView
-                android:id="@+id/ivBackUserInfo"
-                android:src="@drawable/arrow_forward"
-                android:rotation="180"
-                android:layout_width="@dimen/iconSize"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:tint="@color/medium_grey_color"
-                app:layout_constraintTop_toTopOf="@id/relNameTitle"
-                android:layout_marginStart="@dimen/profile_start_margin"
-                android:onClick="@{vModel::onClick}"
-                android:layout_height="@dimen/iconSize"/>
-
+<ImageView
+    android:id="@+id/ivBackGroupInfo"
+    android:src="@drawable/arrow_forward"
+    android:rotation="180"
+    android:layout_width="@dimen/iconSize"
+    app:layout_constraintStart_toStartOf="parent"
+    android:layout_marginTop="@dimen/_10sdp"
+    app:tint="@color/medium_grey_color"
+    app:layout_constraintTop_toTopOf="@id/relNameTitle"
+    android:layout_marginStart="@dimen/profile_start_margin"
+    android:onClick="@{vModel::onClick}"
+    android:layout_height="@dimen/iconSize"/>
             <RelativeLayout
                 android:id="@+id/relNameTitle"
                 android:layout_width="@dimen/_50sdp"
@@ -61,7 +59,15 @@
                     android:textColor="#F2CB00"
                     android:textSize="@dimen/titleTextSize" />
             </RelativeLayout>
-
+            <ImageView
+                android:id="@+id/ivmoreGroupInfo"
+                android:src="@drawable/chat_more_icon"
+                android:layout_width="@dimen/iconSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintTop_toTopOf="@id/relNameTitle"
+                android:layout_marginEnd="@dimen/profile_start_margin"
+                android:layout_height="@dimen/iconSize"/>
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvUserName"
                 android:layout_width="0dp"
@@ -205,7 +211,7 @@
 
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatTextView
+         <!--   <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvInformationText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -675,7 +681,7 @@
                         app:layout_constraintTop_toBottomOf="@id/tvAddressTitle" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -692,7 +698,7 @@
                 android:textColor="@color/darkGrey"
                 android:textSize="@dimen/normalTextSize"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/constraintsInformation" />
+                app:layout_constraintTop_toBottomOf="@id/linearContactType" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvMediaAllCount"
