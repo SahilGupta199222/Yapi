@@ -122,7 +122,6 @@
             app:tabGravity="fill"
             app:tabMaxWidth="0dp"
             app:tabPaddingBottom="@dimen/_4sdp"
-
             android:layout_marginTop="@dimen/_10sdp"
             app:tabBackground="@drawable/selector_tab_indicator"
             app:tabIndicator="@android:color/transparent"

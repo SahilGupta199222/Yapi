@@ -3,11 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:fillViewport="true"
         android:layout_height="match_parent">
-<androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/rvNumberPaginationGroupMembers"
+            >
+        <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingStart="@dimen/popSideMargin"
@@ -236,24 +243,23 @@
         app:layout_constraintTop_toBottomOf="@id/layoutFilterOptionGroupMembers"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
 
-        app:layout_constraintBottom_toTopOf="@id/rvNumberPaginationGroupMembers"
-        />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvNumberPaginationGroupMembers"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        tools:itemCount="5"
-        android:foregroundGravity="center"
-        android:padding="@dimen/topFiveMargin"
-        tools:listitem="@layout/number_pagination"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
 </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvNumberPaginationGroupMembers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:itemCount="5"
+            android:foregroundGravity="center"
+            android:padding="@dimen/topFiveMargin"
+            tools:listitem="@layout/number_pagination"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
