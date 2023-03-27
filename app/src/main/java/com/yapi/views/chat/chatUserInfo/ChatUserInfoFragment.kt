@@ -14,7 +14,6 @@ import com.yapi.common.Constants
 import com.yapi.databinding.ChatUserInfoFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-
 class ChatUserInfoFragment : Fragment() {
     private lateinit var rvLinkAdapter: RVLinksAdapter
     private var screenWidth: Int?=0

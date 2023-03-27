@@ -63,11 +63,11 @@ class ChatViewModel : ViewModel() {
             }
             R.id.imgAttachmentIconChatDemo->{
              //For Attachment
-                //attachmentPopupDialog()
+                attachmentPopupDialog()
             }
             R.id.imgLinkIconChatDemo->{
                 //for Add Template
-              //  showAddTemplateDialog()
+                showAddTemplateDialog()
             }
             R.id.tvMessages->{
                 setDataTabs(1)
@@ -173,20 +173,22 @@ class ChatViewModel : ViewModel() {
             mView.findViewById<ConstraintLayout>(R.id.constraintsProfileChat)
         constraintsProfileChat.setOnClickListener {
             popUp.dismiss()
-            if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
-               // view.findNavController().navigate(R.id.action_menuFragment_to_profileFragment)
+            if (view.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
+                var bundle=Bundle()
+                bundle.putString("userType",userType.toString())
+                view.findNavController().navigate(R.id.action_chatMessageFragment_to_chatUserProfileInfo,bundle)
             }
         }
         var constraintsMute =
             mView.findViewById<ConstraintLayout>(R.id.constraintsMute)
         constraintsMute.setOnClickListener {
             popUp.dismiss()
-            // showDeleteGroupDialog()
+             showDeleteGroupDialog()
         }
         var constraintsDeleteChat = mView.findViewById<ConstraintLayout>(R.id.constraintsDeleteChat)
         constraintsDeleteChat.setOnClickListener {
             popUp.dismiss()
-            if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
+            if (view.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
                // view.findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)
             }
         }
@@ -216,8 +218,10 @@ class ChatViewModel : ViewModel() {
             mView.findViewById<ConstraintLayout>(R.id.constraintsProfileChat)
         constraintsProfileChat.setOnClickListener {
             popUp.dismiss()
-            if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
-                //view.findNavController().navigate(R.id.action_menuFragment_to_profileFragment)
+            if (view.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
+                var bundle=Bundle()
+                bundle.putString("userType",userType.toString())
+                view.findNavController().navigate(R.id.action_chatMessageFragment_to_chatUserProfileInfo,bundle)
             }
         }
         var constraintsMute =
