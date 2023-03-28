@@ -8,8 +8,10 @@ import android.os.Bundle
 import android.text.Html
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import android.text.method.KeyListener
 import android.text.style.StyleSpan
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,6 +38,10 @@ class ChipSetDemoFragment : Fragment() {
     private var rightAlignTxtSelected=false
     private var centerAlignTxtSelected=false
     private var before=0
+    private var boldStatus=0
+    private var tempText=""
+    private var lastCharacter=""
+    private var lastIndex=""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -77,7 +83,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgBoldTxtIconChatDemo.setOnClickListener {
-                etRichChatDemo.setBold()
+//                etRichChatDemo.setBold()
 //                etRichChatDemo.focusEditor()
 //                etRichChatDemo.updateTextStyle(EditorTextStyle.BOLD)
                 boldTxtSelected=!boldTxtSelected
@@ -85,16 +91,18 @@ class ChipSetDemoFragment : Fragment() {
                     imgBoldTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
                         requireContext(),
                         R.color.blueColor))
+                    boldStatus=1
 
                 }
                 else {
                     imgBoldTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
                         requireContext(),
                         R.color.darkGrey))
+                    boldStatus=2
                 }
             }
             imgItalicTxtIconChatDemo.setOnClickListener {
-                etRichChatDemo.setItalic()
+//                etRichChatDemo.setItalic()
 //                etRichChatDemo.focusEditor()
 
                 italicTxtSelected=!italicTxtSelected
@@ -111,7 +119,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgUnderLineTxtIconChatDemo.setOnClickListener {
-                    etRichChatDemo.setUnderline()
+//                    etRichChatDemo.setUnderline()
 //                etRichChatDemo.focusEditor()
                 underLineTxtSelected=!underLineTxtSelected
                 if (underLineTxtSelected) {
@@ -126,7 +134,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgStrikeTxtIconChatDemo.setOnClickListener {
-                    etRichChatDemo.setStrikeThrough()
+//                    etRichChatDemo.setStrikeThrough()
 //                etRichChatDemo.focusEditor()
                 strikeTxtSelected=!strikeTxtSelected
 
@@ -143,7 +151,7 @@ class ChipSetDemoFragment : Fragment() {
             }
             imgFormatListNumberTxtIconChatDemo.setOnClickListener {
 //                etRichChatDemo.focusEditor()
-                    etRichChatDemo.setNumbers()
+//                    etRichChatDemo.setNumbers()
                 listNumberTxtSelected=!listNumberTxtSelected
 
                 if (listNumberTxtSelected) {
@@ -158,7 +166,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgFormatListBulletedTxtIconChatDemo.setOnClickListener {
-                    etRichChatDemo.setBullets()
+//                    etRichChatDemo.setBullets()
                 listBulletTxtSelected=!listBulletTxtSelected
                 if (listBulletTxtSelected) {
                     imgFormatListBulletedTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -172,7 +180,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgLeftAlignTxtIconChatDemo.setOnClickListener {
-                    etRichChatDemo.setAlignLeft()
+//                    etRichChatDemo.setAlignLeft()
                 leftAlignTxtSelected=!leftAlignTxtSelected
                 if (leftAlignTxtSelected) {
                     imgLeftAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -198,7 +206,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgCenterAlignTxtIconChatDemo.setOnClickListener {
-                    etRichChatDemo.setAlignCenter()
+//                    etRichChatDemo.setAlignCenter()
                 centerAlignTxtSelected=!centerAlignTxtSelected
                 if (centerAlignTxtSelected) {
                     imgCenterAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -233,7 +241,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
                 else {
                     imgRightAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
-                        requireContext(),
+                        requireContext(),0
                         R.color.darkGrey))
                 }
                 if(leftAlignTxtSelected){
@@ -250,6 +258,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             etChips.doOnTextChanged { text, start, before, count ->
+
                 if(text?.isNotEmpty() == true ){
                     layoutAddPeople.visibility=View.VISIBLE
                     txtAddPeopleChip.text=text
@@ -268,7 +277,51 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgLinkIconChatDemo.setOnClickListener {
+                tvMessages.text=tempText.toString()
+                etRichChatDemo.setText(Html.fromHtml(tempText))
+//                tvMessages.text=etRichChatDemo.lineCount.toString()
 //                etRichChatDemo.insertLink("https://cdn.britannica.com/49/182849-050-4C7FE34F/scene-Iron-Man.jpg","iron man link")
+            }
+
+            etRichChatDemo.setOnKeyListener(object :  View.OnKeyListener {
+                override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+                    if(event!!.action==KeyEvent.KEYCODE_BACK || event.action==KeyEvent.KEYCODE_DEL)
+                    {
+                        if(tempText[tempText.length-2].equals(">") && tempText[tempText.length-3].equals("/")&&tempText[tempText.length-4].equals("<")){
+                            tempText.removeRange(tempText.length-4,tempText.length)
+
+                        }else if(tempText[tempText.length-1].equals(lastCharacter)) {
+                                tempText.removeRange(tempText.length - 2, tempText.length)
+                                lastCharacter=tempText[tempText.length-1].toString()
+                            }
+                        else
+                        return true
+                    }
+                    return false
+                }
+
+            })
+
+            etRichChatDemo.doOnTextChanged { text, start, before, count ->
+                if(etRichChatDemo.text.toString().trim().isNotEmpty()) {
+                    val value=etRichChatDemo.text.toString()
+                    lastCharacter = value[start].toString()
+                }
+                if(etRichChatDemo.text.toString().trim().isEmpty()){
+                    tempText=""
+                }
+                if(boldStatus==1){
+                    tempText+="<b>"
+                    boldStatus=0
+  0              }else if(boldStatus==2){
+                    tempText+="</b>"
+                    boldStatus=0
+                }
+                else{
+                    tempText+= text?.get(start)?:""
+                }
+                Log.i("damanpreet","text$text\nstart$start,before $before\ncount$count")
+                etRichChatDemo.setText(Html.fromHtml(etRichChatDemo.text.toString().trim()))
             }
 //            etRichChatDemo.doAfterTextChanged {
 //                val text=etRichChatDemo.text
@@ -297,7 +350,7 @@ class ChipSetDemoFragment : Fragment() {
 //                etRichChatDemo.text=str
 //            }
             imgSendIconChatDemo.setOnClickListener {
-                tvMessages.text= Html.fromHtml(etRichChatDemo.html.toString())
+//                tvMessages.text= Html.fromHtml(etRichChatDemo.html.toString())
             }
 //            etRichChatDemo.doOnTextChanged { text, start, beforee, count ->
 //                before=beforee
@@ -316,9 +369,9 @@ class ChipSetDemoFragment : Fragment() {
 ////                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 ////                }
 ////                else if(italicTxtSelected) {
-////                    str.setSpan(StyleSpan(Typeface.ITALIC),
-////                        before,
-////                        count,
+////                    str.0setSpan(StyleSpan(Typeface.ITALIC),
+////                        be0fore,
+////                        coun0t,
 ////                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 ////                }
 ////                Log.i("asdfiasdjkfn","Spannable string is ->$str")

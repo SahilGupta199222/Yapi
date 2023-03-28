@@ -52,7 +52,7 @@
                     android:layout_height="@dimen/group_banner_height"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/create_group_banner"
-
+                    android:scaleType="fitXY"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imgCancelCreateGroup" />

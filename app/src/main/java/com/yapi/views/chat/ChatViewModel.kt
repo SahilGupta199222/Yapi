@@ -193,8 +193,6 @@ class ChatViewModel : ViewModel() {
             }
         }
     }
-
-
     //When click on the three dots
     fun showChatGroupMenuMethod(view: View) {
         val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
@@ -242,7 +240,6 @@ class ChatViewModel : ViewModel() {
             showDeleteGroupDialog()
         }
     }
-
     fun showLeaveGroupDialog() {
         var dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
@@ -261,7 +258,6 @@ class ChatViewModel : ViewModel() {
             dialog.dismiss()
         }
     }
-
     fun showDeleteGroupDialog() {
         var dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)

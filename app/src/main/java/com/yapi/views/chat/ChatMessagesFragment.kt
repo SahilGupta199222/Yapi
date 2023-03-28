@@ -37,5 +37,6 @@ class ChatMessagesFragment : Fragment() {
         rvChatAdapter = RVchatAdapter(requireActivity())
         dataBinding.rvChatList.layoutManager = LinearLayoutManager(requireActivity())
         dataBinding.rvChatList.adapter = rvChatAdapter
+
     }
 }
