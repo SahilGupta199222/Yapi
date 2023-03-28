@@ -241,8 +241,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
                 else {
                     imgRightAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
-                        requireContext(),0
-                        R.color.darkGrey))
+                        requireContext(),R.color.darkGrey))
                 }
                 if(leftAlignTxtSelected){
                     leftAlignTxtSelected=false

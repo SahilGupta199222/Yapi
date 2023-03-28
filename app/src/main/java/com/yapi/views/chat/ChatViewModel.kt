@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.PopupWindow
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -14,12 +15,18 @@ import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.Constants
 import com.yapi.common.hideKeyboard
 import com.yapi.databinding.ChatAttachementLayoutBinding
+import com.yapi.views.chat.chatUserInfo.RVFilesAdapter
+import com.yapi.views.chat.chatUserInfo.RVLinksAdapter
+import com.yapi.views.chat.chatUserInfo.RVPhotoMediaAdapter
 
 class ChatViewModel : ViewModel() {
 
@@ -27,80 +34,77 @@ class ChatViewModel : ViewModel() {
 
     }
 
-    var chatValue=ObservableBoolean(false)
-    var emailValue=ObservableBoolean(false)
-    var smsValue=ObservableBoolean(false)
+    var chatValue = ObservableBoolean(false)
+    var emailValue = ObservableBoolean(false)
+    var smsValue = ObservableBoolean(false)
 
     var screenWidth: Int? = 0
-    var userType:String?=""
-    var sendDataValue=ObservableField("")
+    var screenHeight: Int? = 0
+    var userType: String? = ""
+    var sendDataValue = ObservableField("")
     fun onClick(view: View) {
         when (view.id) {
             R.id.ivChat_more_icon -> {
                 // showAddTemplateDialog()
                 // attachmentPopupDialog()
                 // addLinkDialog()
-             //   showChatMenuMethod(view)
-                if(userType.equals(Constants.GROUPS_KEY)){
+                //   showChatMenuMethod(view)
+                if (userType.equals(Constants.GROUPS_KEY)) {
                     showChatGroupMenuMethod(view)
-                }else
-                {
+                } else {
                     showChatMenuMethod(view)
                 }
             }
-            R.id.tvName->{
-              /*  //For Goto Information of user
-                var bundle=Bundle()
-                bundle.putString("userType",userType.toString())
-                if(userType.equals(Constants.GROUPS_KEY)){
+            R.id.tvName -> {
+                showViewAllMethod()
+                /*  //For Goto Information of user
+                  var bundle=Bundle()
+                  bundle.putString("userType",userType.toString())
+                  if(userType.equals(Constants.GROUPS_KEY)){
 
-                }
-                view.findNavController().navigate(R.id.action_chatMessageFragment_to_chatUserProfileInfo,bundle)
-           */ }
-            R.id.ivChatBack->{
+                  }
+                  view.findNavController().navigate(R.id.action_chatMessageFragment_to_chatUserProfileInfo,bundle)
+             */
+            }
+            R.id.ivChatBack -> {
                 //For back pressed Method
                 view.findNavController().navigateUp()
             }
-            R.id.imgAttachmentIconChatDemo->{
-             //For Attachment
+            R.id.imgAttachmentIconChatDemo -> {
+                //For Attachment
                 attachmentPopupDialog()
             }
-            R.id.imgLinkIconChatDemo->{
+            R.id.imgLinkIconChatDemo -> {
                 //for Add Template
                 showAddTemplateDialog()
             }
-            R.id.tvMessages->{
+            R.id.tvMessages -> {
                 setDataTabs(1)
             }
-            R.id.tvEmail->{
+            R.id.tvEmail -> {
                 setDataTabs(2)
             }
 
-            R.id.tvSMS->{
+            R.id.tvSMS -> {
                 setDataTabs(3)
             }
-            R.id.imgSendIconChatDemo->{
+            R.id.imgSendIconChatDemo -> {
                 sendDataValue.set("")
             }
         }
     }
 
-    fun setDataTabs(tabValue:Int)
-    {
+    fun setDataTabs(tabValue: Int) {
         chatValue.set(false)
         emailValue.set(false)
         smsValue.set(false)
-        if(tabValue==1)
-        {
+        if (tabValue == 1) {
             chatValue.set(true)
-        }else
-            if(tabValue==2)
-            {
-                emailValue.set(true)
-            }else
-            {
-                smsValue.set(true)
-            }
+        } else if (tabValue == 2) {
+            emailValue.set(true)
+        } else {
+            smsValue.set(true)
+        }
     }
 
     //For show Template Dialog
@@ -157,10 +161,8 @@ class ChatViewModel : ViewModel() {
         var newWidth = screenWidth!! / 1.5
 
         //   val popUp = PopupWindow(mView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, false)
-        val popUp = PopupWindow(mView,
-            newWidth.toInt(),
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            false)
+        val popUp =
+            PopupWindow(mView, newWidth.toInt(), LinearLayout.LayoutParams.WRAP_CONTENT, false)
         // popUp.showAtLocation(mView, Gravity.RIGHT,0,0);
         popUp.isTouchable = true
         popUp.isFocusable = true
@@ -174,59 +176,52 @@ class ChatViewModel : ViewModel() {
         constraintsProfileChat.setOnClickListener {
             popUp.dismiss()
             if (view.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
-                var bundle=Bundle()
-                bundle.putString("userType",userType.toString())
-                view.findNavController().navigate(R.id.action_chatMessageFragment_to_chatUserProfileInfo,bundle)
+                var bundle = Bundle()
+                bundle.putString("userType", userType.toString())
+                view.findNavController()
+                    .navigate(R.id.action_chatMessageFragment_to_chatUserProfileInfo, bundle)
             }
         }
-        var constraintsMute =
-            mView.findViewById<ConstraintLayout>(R.id.constraintsMute)
+        var constraintsMute = mView.findViewById<ConstraintLayout>(R.id.constraintsMute)
         constraintsMute.setOnClickListener {
             popUp.dismiss()
-             showDeleteGroupDialog()
+            showDeleteGroupDialog()
         }
         var constraintsDeleteChat = mView.findViewById<ConstraintLayout>(R.id.constraintsDeleteChat)
         constraintsDeleteChat.setOnClickListener {
             popUp.dismiss()
             if (view.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
-               // view.findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)
+                // view.findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)
             }
         }
     }
+
     //When click on the three dots
     fun showChatGroupMenuMethod(view: View) {
         val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
             .inflate(com.yapi.R.layout.group_chat_menu_options, null, false)
         var newWidth = screenWidth!! / 1.5
-
-        //   val popUp = PopupWindow(mView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, false)
-        val popUp = PopupWindow(mView,
-            newWidth.toInt(),
-            LinearLayout.LayoutParams.WRAP_CONTENT,
-            false)
-        // popUp.showAtLocation(mView, Gravity.RIGHT,0,0);
+        val popUp =
+            PopupWindow(mView, newWidth.toInt(), LinearLayout.LayoutParams.WRAP_CONTENT, false)
         popUp.isTouchable = true
         popUp.isFocusable = true
         popUp.isOutsideTouchable = true
-        val btnViewProfile =
-
-            popUp.showAsDropDown(view.findViewById(com.yapi.R.id.ivChat_more_icon))
+        // val btnViewProfile = popUp.showAsDropDown(view.findViewById(com.yapi.R.id.ivChat_more_icon))
 
         var constraintsProfileChat =
             mView.findViewById<ConstraintLayout>(R.id.constraintsProfileChat)
         constraintsProfileChat.setOnClickListener {
             popUp.dismiss()
             if (view.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
-                var bundle=Bundle()
-                bundle.putString("userType",userType.toString())
-                view.findNavController().navigate(R.id.action_chatMessageFragment_to_chatGroupProfileInfo,bundle)
+                var bundle = Bundle()
+                bundle.putString("userType", userType.toString())
+                view.findNavController()
+                    .navigate(R.id.action_chatMessageFragment_to_chatGroupProfileInfo, bundle)
             }
         }
-        var constraintsMute =
-            mView.findViewById<ConstraintLayout>(R.id.constraintsMute)
+        var constraintsMute = mView.findViewById<ConstraintLayout>(R.id.constraintsMute)
         constraintsMute.setOnClickListener {
             popUp.dismiss()
-            // showDeleteGroupDialog()
         }
         var constraintsLeaveGroup = mView.findViewById<ConstraintLayout>(R.id.constraintsLeaveGroup)
         constraintsLeaveGroup.setOnClickListener {
@@ -234,12 +229,14 @@ class ChatViewModel : ViewModel() {
             showLeaveGroupDialog()
         }
 
-        var constraintsDeleteGroup = mView.findViewById<ConstraintLayout>(R.id.constraintsDeleteGroup)
+        var constraintsDeleteGroup =
+            mView.findViewById<ConstraintLayout>(R.id.constraintsDeleteGroup)
         constraintsDeleteGroup.setOnClickListener {
             popUp.dismiss()
             showDeleteGroupDialog()
         }
     }
+
     fun showLeaveGroupDialog() {
         var dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
@@ -258,6 +255,7 @@ class ChatViewModel : ViewModel() {
             dialog.dismiss()
         }
     }
+
     fun showDeleteGroupDialog() {
         var dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
@@ -276,6 +274,90 @@ class ChatViewModel : ViewModel() {
         ivCross.setOnClickListener {
             dialog.dismiss()
         }
+    }
 
+    fun showViewAllMethod() {
+        var dialog = Dialog(MainActivity.activity!!.get()!!)
+        dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setContentView(R.layout.view_all_documents_layout)
+        dialog.show()
+        var cardviewViewAll = dialog.findViewById<CardView>(R.id.cardviewViewAll)
+        cardviewViewAll.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
+        cardviewViewAll.layoutParams.height = (screenHeight!!.toDouble() / 1.5).toInt()
+        var rvAllMedia = dialog.findViewById<RecyclerView>(R.id.rvAllMedia)
+        var linearMedia = dialog.findViewById<LinearLayout>(R.id.linearMedia)
+        var linearLinks = dialog.findViewById<LinearLayout>(R.id.linearLinks)
+        var linearFiles = dialog.findViewById<LinearLayout>(R.id.linearFiles)
+
+        var tvMediaText = dialog.findViewById<TextView>(R.id.tvMediaText)
+        var viewMediaLine = dialog.findViewById<View>(R.id.viewMediaLine)
+
+        var tvLinkText = dialog.findViewById<TextView>(R.id.tvLinkText)
+        var viewLinkLine = dialog.findViewById<View>(R.id.viewLinkLine)
+
+        var tvFilesText = dialog.findViewById<TextView>(R.id.tvFilesText)
+        var viewFilesLine = dialog.findViewById<View>(R.id.viewFilesLine)
+        var ivViewAllCross = dialog.findViewById<ImageView>(R.id.ivViewAllCross)
+
+        setSelectedTab(tvMediaText, viewMediaLine)
+        setDeSelectedTab(tvLinkText, viewLinkLine)
+        setDeSelectedTab(tvFilesText, viewFilesLine)
+
+        linearMedia.setOnClickListener {
+            setSelectedTab(tvMediaText, viewMediaLine)
+            setDeSelectedTab(tvLinkText, viewLinkLine)
+            setDeSelectedTab(tvFilesText, viewFilesLine)
+            setPhotoAdapterMethod(rvAllMedia)
+        }
+
+        linearLinks.setOnClickListener {
+            setDeSelectedTab(tvMediaText, viewMediaLine)
+            setSelectedTab(tvLinkText, viewLinkLine)
+            setDeSelectedTab(tvFilesText, viewFilesLine)
+            setLinkAdapterMethod(rvAllMedia)
+        }
+
+        linearFiles.setOnClickListener {
+            setDeSelectedTab(tvMediaText, viewMediaLine)
+            setDeSelectedTab(tvLinkText, viewLinkLine)
+            setSelectedTab(tvFilesText, viewFilesLine)
+            setFilesAdapterMethod(rvAllMedia)
+        }
+
+        ivViewAllCross.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        setPhotoAdapterMethod(rvAllMedia)
+    }
+
+    fun setDeSelectedTab(textView: TextView, view: View) {
+        textView.setTextColor(MainActivity.activity!!.get()!!.getColor(R.color.darkGrey))
+        view.setBackgroundColor(MainActivity.activity!!.get()!!.getColor(R.color.liteGrey))
+    }
+
+    fun setSelectedTab(textView: TextView, view: View) {
+        textView.setTextColor(MainActivity.activity!!.get()!!.getColor(R.color.blueColor))
+        view.setBackgroundColor(MainActivity.activity!!.get()!!.getColor(R.color.blueColor))
+    }
+
+    fun setPhotoAdapterMethod(rvAllMedia: RecyclerView) {
+        var finalPerPhoto = screenWidth!!.toFloat() / 3.8f
+        var mediaAdapter =
+            RVPhotoMediaAdapter(MainActivity.activity!!.get()!!, finalPerPhoto.toInt())
+        rvAllMedia.layoutManager = GridLayoutManager(MainActivity.activity!!.get()!!, 3)
+        rvAllMedia.adapter = mediaAdapter
+    }
+
+    fun setLinkAdapterMethod(rvAllMedia: RecyclerView) {
+        var rvLinkAdapter = RVLinksAdapter(MainActivity.activity!!.get()!!)
+        rvAllMedia.layoutManager = LinearLayoutManager(MainActivity.activity!!.get()!!)
+        rvAllMedia.adapter = rvLinkAdapter
+    }
+
+    fun setFilesAdapterMethod(rvAllMedia: RecyclerView) {
+        var rvFilesAdapter = RVFilesAdapter(MainActivity.activity!!.get()!!)
+        rvAllMedia.layoutManager = LinearLayoutManager(MainActivity.activity!!.get()!!)
+        rvAllMedia.adapter = rvFilesAdapter
     }
 }

@@ -67,6 +67,7 @@
         app:layout_constraintEnd_toStartOf="@id/ivRightUserPhoto">
 
         <ImageView
+            android:id="@+id/iv_more_chat"
             android:layout_width="@dimen/iconSize"
             android:layout_height="@dimen/iconSize"
             android:layout_gravity="center_vertical"

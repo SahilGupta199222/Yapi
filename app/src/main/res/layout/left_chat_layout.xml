@@ -120,12 +120,14 @@
             android:src="@drawable/add_reaction_left" />
 
         <ImageView
+            android:id="@+id/iv_more_chat"
             android:layout_width="@dimen/iconSize"
             android:layout_height="@dimen/iconSize"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/_8sdp"
             android:rotation="90"
             app:tint="#B8B8B8"
+
             android:src="@drawable/chat_more_icon" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

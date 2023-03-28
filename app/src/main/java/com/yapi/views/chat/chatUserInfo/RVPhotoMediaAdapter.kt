@@ -32,6 +32,6 @@ class RVPhotoMediaAdapter(
     }
 
     override fun getItemCount(): Int {
-        return 6
+        return 12
     }
 }

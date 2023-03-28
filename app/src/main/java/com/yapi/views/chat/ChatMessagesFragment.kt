@@ -5,12 +5,19 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.PopupWindow
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.yapi.MainActivity
+import com.yapi.R
 import com.yapi.databinding.ChatMessageFragmentLayoutBinding
 
-class ChatMessagesFragment : Fragment() {
+class ChatMessagesFragment : Fragment(),MessageClickListener {
 
     private lateinit var rvChatAdapter: RVchatAdapter
     private lateinit var dataBinding: ChatMessageFragmentLayoutBinding
@@ -26,17 +33,58 @@ class ChatMessagesFragment : Fragment() {
         val displayMetrics = DisplayMetrics()
         requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
         val width = displayMetrics.widthPixels
+        val height = displayMetrics.heightPixels
         viewModel.screenWidth = width
+        viewModel.screenHeight = height
 
         viewModel.userType = requireArguments().getString("userType")
+
         initUI()
         return dataBinding.root
     }
 
     private fun initUI() {
-        rvChatAdapter = RVchatAdapter(requireActivity())
+        rvChatAdapter = RVchatAdapter(requireActivity(),this)
         dataBinding.rvChatList.layoutManager = LinearLayoutManager(requireActivity())
         dataBinding.rvChatList.adapter = rvChatAdapter
 
+    }
+
+    //When click on the three dots
+    fun showEditMessageMethod(ivMoreImageView:ImageView) {
+        val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
+            .inflate(com.yapi.R.layout.edit_chat_message_layout, null, false)
+        var newWidth = viewModel.screenWidth!! / 1.5
+
+        //   val popUp = PopupWindow(mView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, false)
+        val popUp = PopupWindow(mView,
+            newWidth.toInt(),
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            false)
+        // popUp.showAtLocation(mView, Gravity.RIGHT,0,0);
+        popUp.isTouchable = true
+        popUp.isFocusable = true
+        popUp.isOutsideTouchable = true
+        val btnViewProfile =
+
+            popUp.showAsDropDown(ivMoreImageView)
+        var constraintsEditMessage =
+            mView.findViewById<ConstraintLayout>(R.id.constraintsEditMessage)
+        constraintsEditMessage.setOnClickListener {
+            popUp.dismiss()
+        }
+        var constraintsCopyMessage =
+            mView.findViewById<ConstraintLayout>(R.id.constraintsCopyMessage)
+        constraintsCopyMessage.setOnClickListener {
+            popUp.dismiss()
+        }
+        var constraintsDeleteMessage = mView.findViewById<ConstraintLayout>(R.id.constraintsDeleteMessage)
+        constraintsDeleteMessage.setOnClickListener {
+            popUp.dismiss()
+        }
+    }
+
+    override fun onMesssageListener(position: Int,ivMoreImageView: ImageView) {
+        showEditMessageMethod(ivMoreImageView)
     }
 }
