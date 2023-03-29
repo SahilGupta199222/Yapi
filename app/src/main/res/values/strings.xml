@@ -191,9 +191,9 @@
     <string name="upload_from_google_drive">Upload from google drive</string>
     <string name="recent_files">Recent files</string>
     <string name="Upload_from_your_computer">Upload from your computer</string>
-<string name="add_link_text">Add Link</string>
-<string name="text_to_display">Text to display</string>
-<string name="paste_link">Paste link</string>
+    <string name="add_link_text">Add Link</string>
+    <string name="text_to_display">Text to display</string>
+    <string name="paste_link">Paste link</string>
     <string name="mute_notification">Mute Notification</string>
     <string name="delete_chat_text">Delete Chat</string>
     <string name="Call_text">Call</string>
@@ -219,7 +219,7 @@
     <string name="delete_group">Delete Group</string>
 
 
-   <!-- <string name="you_have_invited_one_person">You have invited one person</string>-->
+    <!-- <string name="you_have_invited_one_person">You have invited one person</string>-->
     <string name="you_have_invited">You have invited</string>
     <string name="one_person">person</string>
 
