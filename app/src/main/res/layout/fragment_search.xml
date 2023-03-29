@@ -1,68 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingStart="@dimen/startMainMargin"
+        android:paddingTop="@dimen/startMainMargin"
+        android:paddingEnd="@dimen/startMainMargin"
+        android:paddingBottom="@dimen/startMainMargin"
         tools:context=".views.search.SearchFragment">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/red"
-            android:paddingStart="@dimen/startMainMargin"
-            android:paddingTop="@dimen/startMainMargin"
-            android:paddingEnd="@dimen/startMainMargin"
-            android:paddingBottom="@dimen/startMainMargin">
-
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgCancelTabSearch"
+            android:layout_width="@dimen/iconSize"
+            android:layout_height="@dimen/iconSize"
+            android:src="@drawable/ic_cross_icon"
+            android:tint="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="  parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/imgCancelTabSearch"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgCancelTabSearch"
+                android:id="@+id/imgCancelSearch"
                 android:layout_width="@dimen/iconSize"
                 android:layout_height="@dimen/iconSize"
                 android:src="@drawable/ic_cross_icon"
-
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/imgCancelTabSearch"
+                />
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/round_lite_gray"
+                android:fontFamily="@font/larsseit_regular"
+                android:hint="@string/enterGroupName"
+                android:inputType="text"
+                android:maxLength="128"
+                android:paddingStart="@dimen/etHorizontalPadding"
+                android:paddingTop="@dimen/etVerticalPadding"
+                android:paddingEnd="@dimen/etHorizontalPadding"
+                android:paddingBottom="@dimen/etVerticalPadding"
+                android:textColor="@color/darkGrey"
+                android:textSize="@dimen/normalTextSize"
+                android:layout_marginTop="@dimen/topNormalMargin"
+                app:layout_constraintTop_toBottomOf="@+id/imgCancelSearch"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="  parent">
+                app:layout_constraintEnd_toEndOf="parent"
+                />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/imgCancelSearch"
-                    android:layout_width="@dimen/iconSize"
-                    android:layout_height="@dimen/iconSize"
-                    android:src="@drawable/ic_cross_icon"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/topNormalMargin"
-                    android:background="@drawable/round_lite_gray"
-                    android:fontFamily="@font/larsseit_regular"
-                    android:hint="@string/enterGroupName"
-                    android:inputType="text"
-                    android:maxLength="128"
-                    android:paddingStart="@dimen/etHorizontalPadding"
-                    android:paddingTop="@dimen/etVerticalPadding"
-                    android:paddingEnd="@dimen/etHorizontalPadding"
-                    android:paddingBottom="@dimen/etVerticalPadding"
-                    android:textColor="@color/darkGrey"
-                    android:textSize="@dimen/normalTextSize"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imgCancelSearch" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>
