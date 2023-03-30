@@ -11,11 +11,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.yapi.R
 import com.yapi.common.Constants
+import com.yapi.common.GroupEvent
+import com.yapi.common.MyMessageEvent
 import com.yapi.databinding.FragmentMenuBinding
+import com.yapi.views.profile.ProfileFragment
+import org.greenrobot.eventbus.EventBus
 
 class MenuFragment : Fragment() {
     private lateinit var binding: FragmentMenuBinding
@@ -45,7 +50,9 @@ class MenuFragment : Fragment() {
         requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
         val width = displayMetrics.widthPixels
         viewModel.screenWidth = width
+        addNextToScreenObserver()
         init()
+
         return binding.root
     }
 
@@ -497,8 +504,15 @@ if(type>0) {
                 override fun onSeletect(position: Int, userType: String) {
 
                     if (adapterGroupsList?.getListt()?.get(position)!!.unSeenMsgCount == -1) {
-                        findNavController()
-                            .navigate(R.id.action_menuFragment_to_createGroupFragment)
+
+                        if(getResources().getBoolean(R.bool.isTab)) {
+                            System.out.println("phone========tablet");
+                            EventBus.getDefault().post(GroupEvent(2,Constants.CREATEGOUP_KEY)) //post event
+                        }
+                        else
+                        {
+                            findNavController().navigate(R.id.action_menuFragment_to_createGroupFragment)
+                        }
                     } else {
                         for (i in 0 until adapterGroupsList?.getListt()?.size!!) {
                             adapterGroupsList?.getListt()?.get(i)?.selected = position == i
@@ -507,12 +521,24 @@ if(type>0) {
                             "before notifiy list is\n${adapterGroupsList?.getListt()}")
                         adapterGroupsList?.notifyDataSetChanged()
 
-                        if (findNavController().currentDestination?.id == R.id.menuFragment) {
-                            var bundle = Bundle()
-                            bundle.putString("userType", userType)
-                            findNavController()
-                                .navigate(R.id.action_menuFragment_to_chatMessageFragment, bundle)
+                        if(getResources().getBoolean(R.bool.isTab)) {
+                            System.out.println("phone========tablet");
+                            EventBus.getDefault().post(MyMessageEvent(3,Constants.CHAT_MESSAGE_KEY)) //post event
                         }
+                        else
+                        {
+                           // findNavController().navigate(R.id.action_menuFragment_to_createGroupFragment)
+
+                            if (findNavController().currentDestination?.id == R.id.menuFragment) {
+                                var bundle = Bundle()
+                                bundle.putString("userType", userType)
+                                findNavController()
+                                    .navigate(R.id.action_menuFragment_to_chatMessageFragment, bundle)
+                            }
+                        }
+
+
+
                     }
                     /*if(findNavController().currentDestination?.id == R.id.menuFragment)
                         findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)*/
@@ -559,5 +585,15 @@ if(type>0) {
                 }
             }, "")
         binding.rvJobsListMenu.adapter = adapterJobsList
+    }
+    private fun addNextToScreenObserver() {
+
+        viewModel.openProfileScreenData.observe(requireActivity(), Observer {
+            var data=it as Boolean
+            if(data)
+            {
+                ProfileFragment.newInstanceProfileScreen("").showNow(requireActivity().supportFragmentManager,"")
+            }
+        })
     }
 }

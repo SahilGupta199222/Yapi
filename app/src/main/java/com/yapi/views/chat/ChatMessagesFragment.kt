@@ -1,7 +1,9 @@
 package com.yapi.views.chat
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,9 +17,25 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yapi.MainActivity
 import com.yapi.R
+import com.yapi.common.Constants
+import com.yapi.common.GroupEvent
 import com.yapi.databinding.ChatMessageFragmentLayoutBinding
+import com.yapi.views.create_group.CreateGroupFragment
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class ChatMessagesFragment : Fragment(),MessageClickListener {
+
+  /*  companion object {
+        fun newInstanceChatMethod(title: String): ChatMessagesFragment {
+            val args = Bundle()
+            args.putString("11", title)
+            val fragment = ChatMessagesFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }*/
 
     private lateinit var rvChatAdapter: RVchatAdapter
     private lateinit var dataBinding: ChatMessageFragmentLayoutBinding
@@ -86,5 +104,26 @@ class ChatMessagesFragment : Fragment(),MessageClickListener {
 
     override fun onMesssageListener(position: Int,ivMoreImageView: ImageView) {
         showEditMessageMethod(ivMoreImageView)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this);
+    }
+
+    override fun onPause() {
+        super.onPause()
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: GroupEvent?) {
+        // Do something
+        Log.e("gsegegsgsgs===",System.currentTimeMillis().toString())
+
+            if(event!!.screenName== Constants.CREATEGOUP_KEY)
+            {
+                CreateGroupFragment.newInstanceCreateGroup("").showNow(requireActivity().supportFragmentManager," SimpleDialog.TAG")
+            }
     }
 }

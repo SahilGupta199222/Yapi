@@ -10,13 +10,29 @@
             name="mView"
             type="android.view.View" />
     </data>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@color/transparent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/ivOutsideCloseGroup"
+            android:layout_width="@dimen/outside_cross_width"
+            android:layout_height="@dimen/outside_cross_height"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:src="@drawable/ic_cross_icon"
+            android:layout_gravity="end"
+            app:tint="@color/white"
+            android:onClick="@{vModel::onClick}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutCreateGroup"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
         android:paddingStart="@dimen/startMainMargin"
         android:paddingTop="@dimen/startMainMargin"
+        android:backgroundTint="@color/white"
         android:paddingEnd="@dimen/startMainMargin"
         android:paddingBottom="@dimen/startMainMargin"
         tools:context=".views.create_group.CreateGroupFragment">
@@ -27,14 +43,12 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/btnCreateGroup"
-            >
+            app:layout_constraintBottom_toTopOf="@+id/btnCreateGroup">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/topCreateGroupLayout"
                 android:layout_width="match_parent"
                 android:onClick="@{vModel::onClick}"
-                android:layout_height="wrap_content"
-                >
+                android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imgCancelCreateGroup"
@@ -318,4 +332,5 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>

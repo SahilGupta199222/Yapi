@@ -8,14 +8,18 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.yapi.MainActivity
 import com.yapi.R
+import com.yapi.common.checkDeviceType
+import com.yapi.views.profile.ProfileFragment
 
 class MenuViewModel : ViewModel() {
 
     var screenWidth: Int? = 0
+    var openProfileScreenData=MutableLiveData<Boolean>()
     fun onClick(view: View) {
         when (view.id) {
             com.yapi.R.id.imgProfilePicCustomerList -> {
@@ -41,17 +45,22 @@ class MenuViewModel : ViewModel() {
                     mView.findViewById<ConstraintLayout>(R.id.constraintsProfile)
                 constraintsProfile.setOnClickListener {
                     popUp.dismiss()
-                    if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
-                        view.findNavController()
-                            .navigate(R.id.action_menuFragment_to_profileFragment)
+                    if (checkDeviceType()) {
+
+                        openProfileScreenData.value=true
+                    } else {
+                        if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
+                            view.findNavController()
+                                .navigate(R.id.action_menuFragment_to_profileFragment)
+                        }
                     }
                 }
                 var constraintsSettings =
                     mView.findViewById<ConstraintLayout>(R.id.constraintsSettings)
                 constraintsSettings.setOnClickListener {
                     popUp.dismiss()
-                  //  showLeaveGroupDialog()
-                   // showDeleteGroupDialog()
+                    //  showLeaveGroupDialog()
+                    // showDeleteGroupDialog()
                     /*   if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
                            view.findNavController()
                                .navigate(R.id.action_menuFragment_to_profileFragment)
@@ -60,10 +69,10 @@ class MenuViewModel : ViewModel() {
                 var constraintsLogout = mView.findViewById<ConstraintLayout>(R.id.constraintsLogout)
                 constraintsLogout.setOnClickListener {
                     popUp.dismiss()
-                     /*  if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
-                           view.findNavController()
-                               .navigate(R.id.action_menuFragment_to_chatMessageFragment)
-                       }*/
+                    /*  if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
+                          view.findNavController()
+                              .navigate(R.id.action_menuFragment_to_chatMessageFragment)
+                      }*/
                 }
 
 

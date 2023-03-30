@@ -6,21 +6,30 @@ import android.view.ViewGroup.LayoutParams
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.cardview.widget.CardView
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.yapi.MainActivity
 import com.yapi.R
+import com.yapi.common.checkDeviceType
 import com.yapi.common.hideKeyboard
 
 class ViewModelProfile : ViewModel() {
+var openEditProfileData=MutableLiveData<Boolean>()
+var dismissDialogData=MutableLiveData<Boolean>()
 
     var screenWidth:Int?=0
     fun onClick(view: View) {
         when (view.id) {
             R.id.btnEditProfile -> {
-                if (view.findNavController().currentDestination?.id == R.id.profileFragment) {
-                    view.findNavController()
-                        .navigate(R.id.action_profileFragment_to_editProfileFragment)
+                if(checkDeviceType()){
+                    openEditProfileData.value=true
+                }else
+                {
+                    if (view.findNavController().currentDestination?.id == R.id.profileFragment) {
+                        view.findNavController()
+                            .navigate(R.id.action_profileFragment_to_editProfileFragment)
+                    }
                 }
             }
             R.id.layoutDeleteAccountProfile->{
@@ -29,9 +38,14 @@ class ViewModelProfile : ViewModel() {
             R.id.layoutDeActiveProfile->{
                 deActiveAccountDialog(view)
             }
-            R.id.imgCancelProfile-> {
-                if (view.findNavController().currentDestination?.id == R.id.profileFragment) {
-                    view.findNavController().popBackStack()
+            R.id.imgCancelProfile,R.id.ivOutsideCloseProfile-> {
+                if(checkDeviceType()){
+                    dismissDialogData.value=true
+                }else
+                {
+                    if (view.findNavController().currentDestination?.id == R.id.profileFragment) {
+                        view.findNavController().popBackStack()
+                    }
                 }
             }
             R.id.layoutProfile,R.id.layoutScrollViewProfile->{
@@ -56,12 +70,10 @@ class ViewModelProfile : ViewModel() {
 
         cancelBtn.setOnClickListener {
             dialog.dismiss()
-
         }
 
         deleteBtn.setOnClickListener {
             dialog.dismiss()
-
         }
         dialog.setCancelable(false)
         dialog.show()

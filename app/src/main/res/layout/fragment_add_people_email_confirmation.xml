@@ -7,7 +7,24 @@
             name="model"
             type="com.yapi.views.add_people_email_confirmation.ViewModelAddPeopleEmailConfirmation" />
     </data>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@color/transparent"
+        android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/ivOutsideCloseAddEmailConfirmation"
+        android:layout_width="@dimen/outside_cross_width"
+        android:layout_height="@dimen/outside_cross_height"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:src="@drawable/ic_cross_icon"
+        android:layout_gravity="end"
+        app:tint="@color/white"
+        android:onClick="@{model::onClick}"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/constraintsEmailConfirm"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="@color/white"
@@ -101,4 +118,5 @@
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>

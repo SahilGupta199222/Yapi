@@ -25,8 +25,9 @@
         android:gravity="center"
         android:layout_weight="35">
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/signup_process_top_logo_width"
+            android:layout_height="@dimen/signup_process_top_logo_height"
+
             android:src="@drawable/logo"
             android:layout_gravity="center"
             />
@@ -34,10 +35,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/white"
-        android:orientation="vertical"
+
+        android:orientation="horizontal"
         android:layout_weight="65"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:weightSum="@dimen/signup_process_weight_sum"
         >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white"
+            android:layout_weight="@dimen/signup_process_weight">
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScrollViewSignIn"
             android:layout_width="match_parent"
@@ -262,6 +273,7 @@
                 android:layout_marginStart="@dimen/margin_from_signup"
                 android:textColor="@color/blueColor"
                 android:text="@string/signup_text" />
+        </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

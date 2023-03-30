@@ -26,6 +26,7 @@
             android:layout_height="@dimen/iconSize"
             android:src="@drawable/ic_cross_icon"
             android:tint="@color/white"
+
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             />

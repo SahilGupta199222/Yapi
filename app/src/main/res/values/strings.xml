@@ -226,4 +226,7 @@
     <string name="edit_message_text">Edit Message</string>
     <string name="copy_message_text">Copy Message</string>
     <string name="delete_message_text">Delete Message</string>
+
+   <!-- <bool name="is_tablet">false</bool>-->
+
 </resources>

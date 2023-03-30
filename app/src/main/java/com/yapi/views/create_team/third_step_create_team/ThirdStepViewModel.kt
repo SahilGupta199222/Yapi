@@ -1,6 +1,7 @@
 package com.yapi.views.create_team.third_step_create_team
 
 import android.app.Dialog
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.cardview.widget.CardView
@@ -9,10 +10,9 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.yapi.MainActivity
 import com.yapi.R
-import com.yapi.common.hideKeyboard
-import com.yapi.common.isValidEmail
-import com.yapi.common.showToastMessage
+import com.yapi.common.*
 import com.yapi.databinding.CrmDialogLayoutBinding
+import org.greenrobot.eventbus.EventBus
 
 class ThirdStepViewModel : ViewModel() {
     var screenWidth: Int? = 0
@@ -22,15 +22,30 @@ class ThirdStepViewModel : ViewModel() {
             R.id.btnThirdCreateTeam -> {
                 if (view.findNavController().currentDestination?.id == R.id.thirdStepCreateTeam) {
                     if (checkValidation()) {
-                        view.findNavController()
-                            .navigate(R.id.action_thirdStepCreateTeam_to_menuFragment)
+                        if(MainActivity.activity!!.get()!!.getResources().getBoolean(R.bool.isTab)) {
+                            System.out.println("phone========tablet");
+                            Log.e("gsegegsgsgs111===",System.currentTimeMillis().toString())
+
+                            EventBus.getDefault().post(MyMessageEvent(1,Constants.MENU_KEY)) //post event
+                        }else
+                        {
+                            view.findNavController()
+                                .navigate(R.id.action_thirdStepCreateTeam_to_menuFragment)
+                        }
                     }
                 }
             }
             R.id.tvSkipStep -> {
                 if (view.findNavController().currentDestination?.id == R.id.thirdStepCreateTeam) {
-                    view.findNavController()
-                        .navigate(R.id.action_thirdStepCreateTeam_to_menuFragment)
+                    if(MainActivity.activity!!.get()!!.getResources().getBoolean(R.bool.isTab)) {
+                        System.out.println("phone========tablet");
+                        Log.e("gsegegsgsgs111===",System.currentTimeMillis().toString())
+                        EventBus.getDefault().post(MyMessageEvent(1,Constants.MENU_KEY)) //post event
+                    }else
+                    {
+                        view.findNavController()
+                            .navigate(R.id.action_thirdStepCreateTeam_to_menuFragment)
+                    }
                 }
             }
             R.id.linearTopThirdStep, R.id.constraintsTopThirdStep -> {

@@ -21,18 +21,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.yapi.MainActivity
 import com.yapi.R
-import com.yapi.common.Constants
-import com.yapi.common.hideKeyboard
+import com.yapi.common.*
 import com.yapi.databinding.ChatAttachementLayoutBinding
 import com.yapi.views.chat.chatUserInfo.RVFilesAdapter
 import com.yapi.views.chat.chatUserInfo.RVLinksAdapter
 import com.yapi.views.chat.chatUserInfo.RVPhotoMediaAdapter
+import org.greenrobot.eventbus.EventBus
 
 class ChatViewModel : ViewModel() {
-
-    init {
-
-    }
 
     var chatValue = ObservableBoolean(false)
     var emailValue = ObservableBoolean(false)
@@ -175,12 +171,18 @@ class ChatViewModel : ViewModel() {
             mView.findViewById<ConstraintLayout>(R.id.constraintsProfileChat)
         constraintsProfileChat.setOnClickListener {
             popUp.dismiss()
-            if (view.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
-                var bundle = Bundle()
-                bundle.putString("userType", userType.toString())
-                view.findNavController()
-                    .navigate(R.id.action_chatMessageFragment_to_chatUserProfileInfo, bundle)
+            if(checkDeviceType()){
+                EventBus.getDefault().post(MyMessageEvent(10,Constants.USER_PROFILE)) //post event
+            }else
+            {
+                if (view.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
+                    var bundle = Bundle()
+                    bundle.putString("userType", userType.toString())
+                    view.findNavController()
+                        .navigate(R.id.action_chatMessageFragment_to_chatUserProfileInfo, bundle)
+                }
             }
+
         }
         var constraintsMute = mView.findViewById<ConstraintLayout>(R.id.constraintsMute)
         constraintsMute.setOnClickListener {
@@ -212,12 +214,19 @@ class ChatViewModel : ViewModel() {
             mView.findViewById<ConstraintLayout>(R.id.constraintsProfileChat)
         constraintsProfileChat.setOnClickListener {
             popUp.dismiss()
-            if (view.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
-                var bundle = Bundle()
-                bundle.putString("userType", userType.toString())
-                view.findNavController()
-                    .navigate(R.id.action_chatMessageFragment_to_chatGroupProfileInfo, bundle)
+
+            if(checkDeviceType()){
+                EventBus.getDefault().post(MyMessageEvent(10,Constants.GROUP_PROFILE)) //post event
+            }else{
+                if (view.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
+                    var bundle = Bundle()
+                    bundle.putString("userType", userType.toString())
+                    view.findNavController()
+                        .navigate(R.id.action_chatMessageFragment_to_chatGroupProfileInfo, bundle)
+                }
             }
+
+
         }
         var constraintsMute = mView.findViewById<ConstraintLayout>(R.id.constraintsMute)
         constraintsMute.setOnClickListener {
