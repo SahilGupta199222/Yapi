@@ -104,6 +104,16 @@ class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : Vi
 //                   cardviewDeleteProfile.layoutParams.width=(screenWidth!!.toDouble()/1.1).toInt()
 
             }
+            R.id.layoutSearch,R.id.etSearchMenu->{
+                if(checkDeviceType()){
+
+                }else
+                {
+                if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
+                    view.findNavController()
+                        .navigate(R.id.action_menuFragment_to_searchFragment)
+                }
+            }}
 
             /*  R.id.layoutAddNewGroupsMenu-> {
                  *//* if (view.findNavController().currentDestination?.id == R.id.menuFragment) {

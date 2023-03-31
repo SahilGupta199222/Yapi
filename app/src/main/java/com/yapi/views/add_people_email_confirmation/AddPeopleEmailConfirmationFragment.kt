@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
@@ -19,7 +20,7 @@ import com.yapi.views.create_group.CreateGroupFragment
 class AddPeopleEmailConfirmationFragment : DialogFragment() {
     private lateinit var binding:FragmentAddPeopleEmailConfirmationBinding
     private val viewModel:ViewModelAddPeopleEmailConfirmation by viewModels()
-
+//add_email_conirmation_logo
     companion object {
         fun newInstanceEmailConfirmation(title: String): AddPeopleEmailConfirmationFragment {
             val args = Bundle()
@@ -96,12 +97,16 @@ class AddPeopleEmailConfirmationFragment : DialogFragment() {
             binding.imgCancelAddPeopleEmailConf.visibility=View.GONE
             binding.constraintsEmailConfirm.setBackgroundResource(R.drawable.et_drawable)
 
+            binding.imgBannerAddPeopleEmailConf.setBackgroundDrawable(requireActivity().getDrawable(R.drawable.add_email_conirmation_logo))
+            binding.imgBannerAddPeopleEmailConf.scaleType=ImageView.ScaleType.FIT_XY
         }else
         {
             binding.constraintsEmailConfirm.setBackgroundResource(0)
             rightMarginTopLayout=0
             binding.ivOutsideCloseAddEmailConfirmation.visibility=View.GONE
             binding.imgCancelAddPeopleEmailConf.visibility=View.VISIBLE
+            binding.imgBannerAddPeopleEmailConf.scaleType=ImageView.ScaleType.FIT_XY
+            binding.imgBannerAddPeopleEmailConf.setBackgroundDrawable(requireActivity().getDrawable(R.drawable.add_people))
         }
         val layoutParams = binding.constraintsEmailConfirm.layoutParams as LinearLayout.LayoutParams
         //  val newLayoutParams = toolbar.getLayoutParams()
