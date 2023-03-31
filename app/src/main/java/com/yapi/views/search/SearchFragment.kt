@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.yapi.R
 import com.yapi.databinding.FragmentSearchBinding
 import com.yapi.views.search_result.AdapterSearch
@@ -15,11 +16,13 @@ import com.yapi.views.search_result.PojoSearchScreenData
 
 class SearchFragment : Fragment() {
     private lateinit var binding: FragmentSearchBinding
+    private val viewmodel:SearchViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentSearchBinding.inflate(LayoutInflater.from(requireContext()))
+        binding.mViewModel=viewmodel
         return binding.root
     }
 

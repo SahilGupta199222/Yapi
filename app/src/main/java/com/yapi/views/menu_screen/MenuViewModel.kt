@@ -1,21 +1,30 @@
 package com.yapi.views.menu_screen
 
-
 import android.app.Dialog
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.yapi.MainActivity
 import com.yapi.R
+import com.yapi.common.Constants
+import com.yapi.common.checkDeviceType
+import com.yapi.pref.PreferenceFile
+import com.yapi.views.profile.ProfileFragment
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MenuViewModel : ViewModel() {
+@HiltViewModel
+class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : ViewModel() {
 
     var screenWidth: Int? = 0
+    var openProfileScreenData = MutableLiveData<Boolean>()
     fun onClick(view: View) {
         when (view.id) {
             com.yapi.R.id.imgProfilePicCustomerList -> {
@@ -41,17 +50,22 @@ class MenuViewModel : ViewModel() {
                     mView.findViewById<ConstraintLayout>(R.id.constraintsProfile)
                 constraintsProfile.setOnClickListener {
                     popUp.dismiss()
-                    if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
-                        view.findNavController()
-                            .navigate(R.id.action_menuFragment_to_profileFragment)
+                    if (checkDeviceType()) {
+
+                        openProfileScreenData.value = true
+                    } else {
+                        if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
+                            view.findNavController()
+                                .navigate(R.id.action_menuFragment_to_profileFragment)
+                        }
                     }
                 }
                 var constraintsSettings =
                     mView.findViewById<ConstraintLayout>(R.id.constraintsSettings)
                 constraintsSettings.setOnClickListener {
                     popUp.dismiss()
-                  //  showLeaveGroupDialog()
-                   // showDeleteGroupDialog()
+                    //  showLeaveGroupDialog()
+                    // showDeleteGroupDialog()
                     /*   if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
                            view.findNavController()
                                .navigate(R.id.action_menuFragment_to_profileFragment)
@@ -60,10 +74,20 @@ class MenuViewModel : ViewModel() {
                 var constraintsLogout = mView.findViewById<ConstraintLayout>(R.id.constraintsLogout)
                 constraintsLogout.setOnClickListener {
                     popUp.dismiss()
-                     /*  if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
-                           view.findNavController()
-                               .navigate(R.id.action_menuFragment_to_chatMessageFragment)
-                       }*/
+                    preferenceFile.saveStringValue(Constants.USER_ID, "")
+                    if(checkDeviceType()){
+                        var intent=Intent(MainActivity.activity!!.get(),MainActivity::class.java)
+                        MainActivity.activity!!.get()!!.startActivity(intent)
+                    }else
+                    {
+                        view.findNavController()
+                            .navigate(R.id.action_menuFragment_to_signInFragment)
+                    }
+
+                    /*  if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
+                          view.findNavController()
+                              .navigate(R.id.action_menuFragment_to_chatMessageFragment)
+                      }*/
                 }
 
 
@@ -80,6 +104,16 @@ class MenuViewModel : ViewModel() {
 //                   cardviewDeleteProfile.layoutParams.width=(screenWidth!!.toDouble()/1.1).toInt()
 
             }
+            R.id.layoutSearch,R.id.etSearchMenu->{
+                if(checkDeviceType()){
+
+                }else
+                {
+                if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
+                    view.findNavController()
+                        .navigate(R.id.action_menuFragment_to_searchFragment)
+                }
+            }}
 
             /*  R.id.layoutAddNewGroupsMenu-> {
                  *//* if (view.findNavController().currentDestination?.id == R.id.menuFragment) {

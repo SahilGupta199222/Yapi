@@ -7,8 +7,27 @@
         <variable
             name="model"
             type="com.yapi.views.edit_profile.ViewModelEditProfile" />
+        <variable
+            name="mView"
+            type="android.view.View" />
     </data>
-
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@color/transparent"
+        android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/ivOutsideCloseAddPeople"
+        android:layout_width="@dimen/outside_cross_width"
+        android:layout_height="@dimen/outside_cross_height"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:src="@drawable/ic_cross_icon"
+        android:layout_gravity="end"
+        app:tint="@color/white"
+        android:visibility="@{model.checkTabValid?mView.VISIBLE:mView.GONE}"
+        android:onClick="@{model::onClick}"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutEditProfile"
         android:layout_width="match_parent"
@@ -18,6 +37,7 @@
         android:paddingStart="@dimen/startMainMargin"
         android:paddingTop="@dimen/startMainMargin"
         android:paddingEnd="@dimen/startMainMargin"
+
         android:paddingBottom="@dimen/startMainMargin"
         tools:context=".views.edit_profile.EditProfileFragment">
 
@@ -45,6 +65,7 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:onClick="@{model::onClick}"
                     android:src="@drawable/ic_cross_icon"
+                    android:visibility="@{model.checkTabValid?mView.GONE:mView.VISIBLE}"
 
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -501,4 +522,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nestedScrollViewEditProfile" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 </layout>

@@ -8,6 +8,7 @@ import android.util.Patterns
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.yapi.MainActivity
+import com.yapi.R
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -18,12 +19,13 @@ fun Activity.hideKeyboard() {
         imm?.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
+
 fun Activity.isEmailValid(email: String): String {
-     if(android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-         return ""
-     }else{
-         return "Email is not valid"
-     }
+    if (android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        return ""
+    } else {
+        return "Email is not valid"
+    }
 }
 
 fun Activity.showMessage(message: String) {
@@ -52,11 +54,10 @@ fun Activity.isNetworkConnected(): Boolean {
     return cm!!.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
 }
 
-fun getTextSizeValue(text1:Float)
-{
-    var text=10
-    var showText="ssp"
-    var newTextSize="_$text$showText"
+fun getTextSizeValue(text1: Float) {
+    var text = 10
+    var showText = "ssp"
+    var newTextSize = "_$text$showText"
 //  MainActivity.activity.get().resources.getDimension(com.intuit.ssp.R.dimen._10ssp)
 }
 
@@ -70,4 +71,8 @@ fun isValidEmail(target: CharSequence?): Boolean {
     } else {
         Patterns.EMAIL_ADDRESS.matcher(target).matches()
     }
+}
+
+fun checkDeviceType(): Boolean {
+    return MainActivity.activity!!.get()!!.resources.getBoolean(R.bool.isTab)
 }

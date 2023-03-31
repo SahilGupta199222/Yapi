@@ -62,5 +62,13 @@
 
     <dimen name="profile_start_margin">@dimen/_20sdp</dimen>
 <dimen name="user_info_box">@dimen/_35sdp</dimen>
+    <bool name="isTab">false</bool>
 
+    <dimen name="signup_process_weight_sum">3</dimen>
+    <dimen name="signup_process_weight">2</dimen>
+    <dimen name="signup_process_top_logo_width">@dimen/_164sdp</dimen>
+    <dimen name="signup_process_top_logo_height">@dimen/_73sdp</dimen>
+
+    <dimen name="outside_cross_height">@dimen/_10sdp</dimen>
+    <dimen name="outside_cross_width">@dimen/_10sdp</dimen>
 </resources>

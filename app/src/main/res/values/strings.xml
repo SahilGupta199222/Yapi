@@ -237,4 +237,7 @@
     <string name="filters">Filters</string>
     <string name="clear_all_filters">Clear all filters</string>
     <string name="messages">Messages</string>
+
+   <!-- <bool name="is_tablet">false</bool>-->
+
 </resources>

@@ -10,11 +10,12 @@ import androidx.fragment.app.viewModels
 import com.yapi.databinding.SecondStepCreateTeamBinding
 import com.yapi.databinding.ThirdStepCreateLayoutBinding
 import com.yapi.views.create_team.second_step_create_team.SecondStepViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ThirdStepCreateFragment : Fragment() {
     private lateinit var dataBinding: ThirdStepCreateLayoutBinding
     private val viewModel: ThirdStepViewModel by viewModels()
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
