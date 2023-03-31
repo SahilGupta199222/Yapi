@@ -62,6 +62,7 @@ class MenuFragment : Fragment() {
         Log.e("gmwslgwrgwrg===", "grwegrweg")
     }
 
+    //for UI Intialization
     private fun init() {
         setGroupDataMethod(0)
         setJobDataMethod(0)
