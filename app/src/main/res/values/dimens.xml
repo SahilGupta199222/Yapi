@@ -10,6 +10,7 @@
     <dimen name="smallIconSize">@dimen/_13sdp</dimen>
     <dimen name="iconSize">@dimen/_16sdp</dimen>
     <dimen name="bigIconSize">@dimen/_25sdp</dimen>
+    <dimen name="fortyFourIconSize">@dimen/_36sdp</dimen>
     <dimen name="extraIconSize">@dimen/_18sdp</dimen>
 
     <dimen name="extraNormalTextSize">@dimen/_15ssp</dimen>
@@ -23,7 +24,7 @@
     <dimen name="unSeenCountSize">@dimen/_16ssp</dimen>
     <dimen name="startPaddingUnSeenCountSize">@dimen/_5sdp</dimen>
     <dimen name="topPaddingUnSeenCountSize">@dimen/_2sdp</dimen>
-    <dimen name="unSeenCountTextSize">@dimen/_10sdp</dimen>
+    <dimen name="unSeenCountTextSize">@dimen/_7sdp</dimen>
 
     <dimen name="etHorizontalPadding">@dimen/_10sdp</dimen>
     <dimen name="etVerticalPadding">@dimen/_13sdp</dimen>
@@ -57,6 +58,7 @@
     <dimen name="text_letter_spacing">0.07</dimen>
 
     <dimen name="roundDrawableCommon_bottom">@dimen/_10sdp</dimen>
+    <dimen name="drawableEtPadding">@dimen/_5sdp</dimen>
 
     <dimen name="profile_start_margin">@dimen/_20sdp</dimen>
 <dimen name="user_info_box">@dimen/_35sdp</dimen>

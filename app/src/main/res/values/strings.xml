@@ -226,6 +226,17 @@
     <string name="edit_message_text">Edit Message</string>
     <string name="copy_message_text">Copy Message</string>
     <string name="delete_message_text">Delete Message</string>
+    <string name="search_here">Search here</string>
+    <string name="recent_searches">Recent Searches</string>
+    <string name="clear">Clear</string>
+    <string name="view_history">View History</string>
+    <string name="people">People</string>
+    <string name="_groups">Groups</string>
+    <string name="all">All</string>
+    <string name="most_relevent">Most Relevent</string>
+    <string name="filters">Filters</string>
+    <string name="clear_all_filters">Clear all filters</string>
+    <string name="messages">Messages</string>
 
    <!-- <bool name="is_tablet">false</bool>-->
 

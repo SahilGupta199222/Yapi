@@ -202,5 +202,13 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.yapi.views.search.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.yapi.views.search_result.SearchResultFragment"
+        android:label="SearchResultFragment" />
 </navigation>

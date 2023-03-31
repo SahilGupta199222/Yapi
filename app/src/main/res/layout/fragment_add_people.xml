@@ -90,7 +90,7 @@
                     android:layout_marginTop="@dimen/topFiveMargin"
                     android:background="@drawable/et_drawable"
                     android:drawableStart="@drawable/search"
-                    android:drawablePadding="@dimen/_15sdp"
+                    android:drawablePadding="@dimen/drawableEtPadding"
                     android:drawableTint="@color/drawableLiteGreyColor"
                     android:fontFamily="@font/larsseit_regular"
                     android:hint="@string/search_member_by_name"

@@ -34,7 +34,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import okhttp3.internal.notify
 import okhttp3.internal.notifyAll
-import org.jsoup.Jsoup
+//import org.jsoup.Jsoup
 import java.awt.font.TextAttribute.UNDERLINE
 
 
@@ -347,12 +347,12 @@ class ChipSetDemoFragment : Fragment() {
                     if (textt?.length!! > 0) {
                         val text = textt[textt.length - 1].toString()
                         if (text.isNotEmpty()) {
-                            val doc = Jsoup.parse(textt)
-                            val lis = doc.select(text).first()
-                            val t = lis?.text()
+//                            val doc = Jsoup.parse(textt)
+//                            val lis = doc.select(text).first()
+//                            val t = lis?.text()
 //                            val  tt=t?.lastIndexOf(text)
 //                            val lis = doc.select(text.toString())
-                            Log.i("fhycdfhfdrfdc", "textS ${t}")
+//                            Log.i("fhycdfhfdrfdc", "textS ${t}")
                         }
 //                    var abc=text
 //                    Log.d("fhycdfhfdrfdc",abc.toString())
