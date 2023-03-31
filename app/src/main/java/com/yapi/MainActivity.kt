@@ -9,6 +9,8 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.yapi.common.Constants
 import com.yapi.common.MyMessageEvent
 import com.yapi.common.Repository_Factory.newInstance
@@ -28,6 +30,7 @@ import java.lang.ref.WeakReference
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+    private lateinit var navController: NavController
     private lateinit var dataBinding: ActivityMainBinding
     val viewModel: DataViewModel by viewModels()
 
@@ -46,7 +49,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initUI() {
-
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
+         navController = navHostFragment.navController
         /*  val navHostFragment =
               supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
           val navController = navHostFragment.navController
@@ -190,6 +195,20 @@ class MainActivity : AppCompatActivity() {
                 fragment.arguments = bundle
                 supportFragmentManager.beginTransaction().replace(R.id.thirdFrame, fragment)
                     .commit()
+            }
+    }
+
+        override fun onBackPressed() {
+            if (navController.currentDestination?.id == R.id.signInFragment) {
+                finishAffinity()
+            }
+            else
+                if(navController.currentDestination!!.id==R.id.menuFragment)
+                {
+                    finish()
+                }
+            else {
+                super.onBackPressed()
             }
     }
 }

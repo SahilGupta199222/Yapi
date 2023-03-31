@@ -1,12 +1,9 @@
 package com.yapi.views.create_group
 
+import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.marginRight
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -19,33 +16,46 @@ class CreateGroupFragment : DialogFragment() {
     private lateinit var binding: FragmentCreateGroupBinding
     val viewModel: ViewModelCreateGroup by viewModels()
 
-companion object {
-    fun newInstanceCreateGroup(title: String): CreateGroupFragment {
-        val args = Bundle()
-        args.putString("11", title)
-        val fragment = CreateGroupFragment()
-        fragment.arguments = args
-        return fragment
+    companion object {
+        fun newInstanceCreateGroup(title: String): CreateGroupFragment {
+            val args = Bundle()
+            args.putString("11", title)
+            val fragment = CreateGroupFragment()
+            fragment.arguments = args
+            return fragment
+        }
     }
-}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(checkDeviceType()) {
-            System.out.println("phone========tablet");
+        if (checkDeviceType()) {
+            System.out.println("phone========tablet")
             setStyle(DialogFragment.STYLE_NO_FRAME, R.style.FullScreenDialog)
         }
     }
 
-  /*  override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        // Implement Dialog-specific functionality here
-        if(requireActivity().getResources().getBoolean(R.bool.isTab)) {
-            return super.onCreateDialog(savedInstanceState)
-        }else
-        {
-            return null!!
-        }
-    }*/
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        // Create a new dialog
+        val dialog: Dialog = super.onCreateDialog(savedInstanceState)
+
+        // Get the window of the dialog
+        val window: Window = dialog.getWindow()!!
+
+        // Set the dialog to be shown at the bottom of the screen
+        window.setGravity(Gravity.BOTTOM)
+
+        return dialog
+    }
+
+    /*  override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+          // Implement Dialog-specific functionality here
+          if(requireActivity().getResources().getBoolean(R.bool.isTab)) {
+              return super.onCreateDialog(savedInstanceState)
+          }else
+          {
+              return null!!
+          }
+      }*/
 
 
     override fun onCreateView(
@@ -62,9 +72,10 @@ companion object {
 
     private fun addObserverForOpenAddPeople() {
         viewModel.addPeopleScreenOpenData.observe(requireActivity(), Observer {
-            var data =it as Boolean
-            if(data){
-                AddPeopleFragment.newInstanceAddPeople("").showNow(requireActivity().supportFragmentManager," SimpleDialog.TAG")
+            var data = it as Boolean
+            if (data) {
+                AddPeopleFragment.newInstanceAddPeople("")
+                    .showNow(requireActivity().supportFragmentManager, " SimpleDialog.TAG")
             }
         })
     }
@@ -76,42 +87,38 @@ companion object {
 
     private fun init() {
         binding.apply {
-            var rightMarginTopLayout=0
-            if(checkDeviceType())
-            {
-                rightMarginTopLayout=requireActivity().resources.getDimension(com.intuit.sdp.R.dimen._18sdp).toInt()
-                ivOutsideCloseGroup.visibility=View.VISIBLE
-                imgCancelCreateGroup.visibility=View.GONE
+            var rightMarginTopLayout = 0
+            if (checkDeviceType()) {
+                rightMarginTopLayout =
+                    requireActivity().resources.getDimension(com.intuit.sdp.R.dimen._18sdp).toInt()
+                ivOutsideCloseGroup.visibility = View.VISIBLE
+                imgCancelCreateGroup.visibility = View.GONE
                 layoutCreateGroup.setBackgroundResource(R.drawable.et_drawable)
-            }else
-            {
+            } else {
                 layoutCreateGroup.setBackgroundResource(0)
-                rightMarginTopLayout=0
-                ivOutsideCloseGroup.visibility=View.GONE
-                imgCancelCreateGroup.visibility=View.VISIBLE
+                rightMarginTopLayout = 0
+                ivOutsideCloseGroup.visibility = View.GONE
+                imgCancelCreateGroup.visibility = View.VISIBLE
             }
 
-           // val ll = LinearLayout(this)
+            // val ll = LinearLayout(this)
             //ll.setOrientation(LinearLayout.VERTICAL)
 
-//var layoutParams=binding.layoutCreateGroup.layoutParams
+            //var layoutParams=binding.layoutCreateGroup.layoutParams
 
             val layoutParams = binding.layoutCreateGroup.layoutParams as LinearLayout.LayoutParams
-          //  val newLayoutParams = toolbar.getLayoutParams()
+            //  val newLayoutParams = toolbar.getLayoutParams()
             layoutParams.topMargin = 0
             layoutParams.leftMargin = 0
             layoutParams.rightMargin = rightMarginTopLayout
-            binding.layoutCreateGroup.setLayoutParams(layoutParams)
+            binding.layoutCreateGroup.layoutParams = layoutParams
         }
-
     }
 
-    fun dialogDismissMethod()
-    {
+    fun dialogDismissMethod() {
         viewModel.dismissDialogData.observe(requireActivity(), Observer {
-            var data=it as Boolean
-            if(data)
-            {
+            var data = it as Boolean
+            if (data) {
                 dismiss()
             }
         })

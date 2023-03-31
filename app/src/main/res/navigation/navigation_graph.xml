@@ -64,7 +64,8 @@
             app:destination="@id/chatMessageFragment" />
 
         <action android:id="@+id/action_menuFragment_to_signInFragment"
-            app:destination="@id/signInFragment"/>
+            app:destination="@id/signInFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
@@ -190,7 +191,9 @@
         android:label="splashFragment">
         <action
             android:id="@+id/action_splashFragment_to_signInFragment"
-            app:destination="@+id/signInFragment" />
+            app:destination="@+id/signInFragment"/>
+        <action android:id="@+id/action_splashFragment_to_menuFragment"
+            app:destination="@+id/menuFragment"/>
     </fragment>
     <fragment
         android:id="@+id/groupInfoFragment"

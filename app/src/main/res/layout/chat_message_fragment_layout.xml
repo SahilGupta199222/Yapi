@@ -5,15 +5,16 @@
         <variable
             name="mViewModel"
             type="com.yapi.views.chat.ChatViewModel" />
+        <variable
+            name="mView"
+            type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FAFAFA"
-
         android:paddingTop="@dimen/etVerticalPadding"
-
         android:paddingBottom="@dimen/_5sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,6 +33,7 @@
                 android:layout_height="@dimen/extraIconSize"
                 android:rotation="180"
                 android:onClick="@{mViewModel::onClick}"
+                android:visibility="@{mViewModel.backButtonVisible?mView.VISIBLE:mView.GONE}"
                 android:src="@drawable/arrow_forward"
                 app:layout_constraintBottom_toBottomOf="@+id/tvMemberValue"
                 app:layout_constraintStart_toStartOf="parent"

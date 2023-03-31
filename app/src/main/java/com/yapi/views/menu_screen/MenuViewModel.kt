@@ -1,7 +1,7 @@
 package com.yapi.views.menu_screen
 
-
 import android.app.Dialog
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
@@ -76,7 +76,8 @@ class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : Vi
                     popUp.dismiss()
                     preferenceFile.saveStringValue(Constants.USER_ID, "")
                     if(checkDeviceType()){
-
+                        var intent=Intent(MainActivity.activity!!.get(),MainActivity::class.java)
+                        MainActivity.activity!!.get()!!.startActivity(intent)
                     }else
                     {
                         view.findNavController()

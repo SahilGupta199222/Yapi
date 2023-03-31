@@ -13,6 +13,7 @@ import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -38,6 +39,7 @@ class ChatViewModel : ViewModel() {
     var screenHeight: Int? = 0
     var userType: String? = ""
     var sendDataValue = ObservableField("")
+    var backButtonVisible=ObservableBoolean(false)
     fun onClick(view: View) {
         when (view.id) {
             R.id.ivChat_more_icon -> {
@@ -90,7 +92,7 @@ class ChatViewModel : ViewModel() {
         }
     }
 
-    fun setDataTabs(tabValue: Int) {
+    private fun setDataTabs(tabValue: Int) {
         chatValue.set(false)
         emailValue.set(false)
         smsValue.set(false)
@@ -103,28 +105,49 @@ class ChatViewModel : ViewModel() {
         }
     }
 
+    var keyboardHideData = MutableLiveData<Boolean>()
+
     //For show Template Dialog
-    fun showAddTemplateDialog() {
+    private fun showAddTemplateDialog() {
         var dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.add_template_layout)
 
         dialog.show()
         var cardviewAddTemplate = dialog.findViewById<CardView>(R.id.cardviewAddTemplate)
+        var ivOutsideCloseGroup = dialog.findViewById<ImageView>(R.id.ivOutsideCloseGroup)
+        var constraintsTopTemplate =
+            dialog.findViewById<ConstraintLayout>(R.id.constraintsTopTemplate)
+        var ivTemplateLogo = dialog.findViewById<ImageView>(R.id.ivTemplateLogo)
         cardviewAddTemplate.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
 
+        if (checkDeviceType()) {
+            ivOutsideCloseGroup.visibility = View.VISIBLE
+        } else {
+            ivOutsideCloseGroup.visibility = View.GONE
+        }
+
         cardviewAddTemplate.setOnClickListener {
-            MainActivity.activity!!.get()!!.hideKeyboard()
+            keyboardHideData.value = true
+        }
+        constraintsTopTemplate.setOnClickListener {
+            keyboardHideData.value = true
+        }
+        ivTemplateLogo.setOnClickListener {
+            keyboardHideData.value = true
         }
 
         var btnCancelTemplate = dialog.findViewById<AppCompatButton>(R.id.btnCancelTemplate)
         btnCancelTemplate.setOnClickListener {
             dialog.dismiss()
         }
+        ivOutsideCloseGroup.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 
     //For attachment dialog
-    fun attachmentPopupDialog() {
+    private fun attachmentPopupDialog() {
         var bottomSheetDialog =
             BottomSheetDialog(MainActivity.activity!!.get()!!, R.style.CustomBottomSheetDialogTheme)
         //bottomSheetDialog.window.setBackground(new ColorDrawable(Color.TRANSPARENT));
@@ -151,7 +174,7 @@ class ChatViewModel : ViewModel() {
     }
 
     //When click on the three dots
-    fun showChatMenuMethod(view: View) {
+    private fun showChatMenuMethod(view: View) {
         val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
             .inflate(com.yapi.R.layout.chat_menu_options, null, false)
         var newWidth = screenWidth!! / 1.5
@@ -171,10 +194,9 @@ class ChatViewModel : ViewModel() {
             mView.findViewById<ConstraintLayout>(R.id.constraintsProfileChat)
         constraintsProfileChat.setOnClickListener {
             popUp.dismiss()
-            if(checkDeviceType()){
-                EventBus.getDefault().post(MyMessageEvent(10,Constants.USER_PROFILE)) //post event
-            }else
-            {
+            if (checkDeviceType()) {
+                EventBus.getDefault().post(MyMessageEvent(10, Constants.USER_PROFILE)) //post event
+            } else {
                 if (view.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
                     var bundle = Bundle()
                     bundle.putString("userType", userType.toString())
@@ -182,7 +204,6 @@ class ChatViewModel : ViewModel() {
                         .navigate(R.id.action_chatMessageFragment_to_chatUserProfileInfo, bundle)
                 }
             }
-
         }
         var constraintsMute = mView.findViewById<ConstraintLayout>(R.id.constraintsMute)
         constraintsMute.setOnClickListener {
@@ -192,14 +213,18 @@ class ChatViewModel : ViewModel() {
         var constraintsDeleteChat = mView.findViewById<ConstraintLayout>(R.id.constraintsDeleteChat)
         constraintsDeleteChat.setOnClickListener {
             popUp.dismiss()
-            if (view.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
-                // view.findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)
+            if (checkDeviceType()) {
+
+            } else {
+                if (view.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
+                    // view.findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)
+                }
             }
         }
     }
 
     //When click on the three dots
-    fun showChatGroupMenuMethod(view: View) {
+    private fun showChatGroupMenuMethod(view: View) {
         val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
             .inflate(com.yapi.R.layout.group_chat_menu_options, null, false)
         var newWidth = screenWidth!! / 1.5
@@ -215,9 +240,9 @@ class ChatViewModel : ViewModel() {
         constraintsProfileChat.setOnClickListener {
             popUp.dismiss()
 
-            if(checkDeviceType()){
-                EventBus.getDefault().post(MyMessageEvent(10,Constants.GROUP_PROFILE)) //post event
-            }else{
+            if (checkDeviceType()) {
+                EventBus.getDefault().post(MyMessageEvent(10, Constants.GROUP_PROFILE)) //post event
+            } else {
                 if (view.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
                     var bundle = Bundle()
                     bundle.putString("userType", userType.toString())
@@ -246,7 +271,7 @@ class ChatViewModel : ViewModel() {
         }
     }
 
-    fun showLeaveGroupDialog() {
+    private fun showLeaveGroupDialog() {
         var dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.leave_module_popup)
@@ -265,7 +290,7 @@ class ChatViewModel : ViewModel() {
         }
     }
 
-    fun showDeleteGroupDialog() {
+    private fun showDeleteGroupDialog() {
         var dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.delete_group_popup)
@@ -285,7 +310,7 @@ class ChatViewModel : ViewModel() {
         }
     }
 
-    fun showViewAllMethod() {
+    private fun showViewAllMethod() {
         var dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.view_all_documents_layout)
@@ -309,13 +334,12 @@ class ChatViewModel : ViewModel() {
         var ivViewAllCross = dialog.findViewById<ImageView>(R.id.ivViewAllCross)
         var ivViewAllCrossOutside = dialog.findViewById<ImageView>(R.id.ivViewAllCrossOutside)
 
-        if(checkDeviceType()){
-            ivViewAllCrossOutside.visibility=View.VISIBLE
-            ivViewAllCross.visibility=View.GONE
-        }else
-        {
-            ivViewAllCrossOutside.visibility=View.GONE
-            ivViewAllCross.visibility=View.VISIBLE
+        if (checkDeviceType()) {
+            ivViewAllCrossOutside.visibility = View.VISIBLE
+            ivViewAllCross.visibility = View.GONE
+        } else {
+            ivViewAllCrossOutside.visibility = View.GONE
+            ivViewAllCross.visibility = View.VISIBLE
         }
 
         setSelectedTab(tvMediaText, viewMediaLine)
@@ -354,17 +378,17 @@ class ChatViewModel : ViewModel() {
         setPhotoAdapterMethod(rvAllMedia)
     }
 
-    fun setDeSelectedTab(textView: TextView, view: View) {
+    private fun setDeSelectedTab(textView: TextView, view: View) {
         textView.setTextColor(MainActivity.activity!!.get()!!.getColor(R.color.darkGrey))
         view.setBackgroundColor(MainActivity.activity!!.get()!!.getColor(R.color.liteGrey))
     }
 
-    fun setSelectedTab(textView: TextView, view: View) {
+    private fun setSelectedTab(textView: TextView, view: View) {
         textView.setTextColor(MainActivity.activity!!.get()!!.getColor(R.color.blueColor))
         view.setBackgroundColor(MainActivity.activity!!.get()!!.getColor(R.color.blueColor))
     }
 
-    fun setPhotoAdapterMethod(rvAllMedia: RecyclerView) {
+    private fun setPhotoAdapterMethod(rvAllMedia: RecyclerView) {
         var finalPerPhoto = screenWidth!!.toFloat() / 3.8f
         var mediaAdapter =
             RVPhotoMediaAdapter(MainActivity.activity!!.get()!!, finalPerPhoto.toInt())
@@ -372,13 +396,13 @@ class ChatViewModel : ViewModel() {
         rvAllMedia.adapter = mediaAdapter
     }
 
-    fun setLinkAdapterMethod(rvAllMedia: RecyclerView) {
+    private fun setLinkAdapterMethod(rvAllMedia: RecyclerView) {
         var rvLinkAdapter = RVLinksAdapter(MainActivity.activity!!.get()!!)
         rvAllMedia.layoutManager = LinearLayoutManager(MainActivity.activity!!.get()!!)
         rvAllMedia.adapter = rvLinkAdapter
     }
 
-    fun setFilesAdapterMethod(rvAllMedia: RecyclerView) {
+    private fun setFilesAdapterMethod(rvAllMedia: RecyclerView) {
         var rvFilesAdapter = RVFilesAdapter(MainActivity.activity!!.get()!!)
         rvAllMedia.layoutManager = LinearLayoutManager(MainActivity.activity!!.get()!!)
         rvAllMedia.adapter = rvFilesAdapter

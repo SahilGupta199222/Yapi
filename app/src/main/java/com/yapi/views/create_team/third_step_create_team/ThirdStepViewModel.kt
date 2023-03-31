@@ -26,10 +26,11 @@ class ThirdStepViewModel @Inject constructor(val preferenceFile: PreferenceFile)
             R.id.btnThirdCreateTeam -> {
                 if (view.findNavController().currentDestination?.id == R.id.thirdStepCreateTeam) {
                     if (checkValidation()) {
+                        preferenceFile.saveStringValue(Constants.USER_ID,"1")
                         if(MainActivity.activity!!.get()!!.getResources().getBoolean(R.bool.isTab)) {
                             System.out.println("phone========tablet");
                             Log.e("gsegegsgsgs111===",System.currentTimeMillis().toString())
-                            preferenceFile.saveStringValue(Constants.USER_ID,"1")
+
                             EventBus.getDefault().post(MyMessageEvent(1,Constants.MENU_KEY)) //post
                         // event
                         }else
@@ -42,10 +43,11 @@ class ThirdStepViewModel @Inject constructor(val preferenceFile: PreferenceFile)
             }
             R.id.tvSkipStep -> {
                 if (view.findNavController().currentDestination?.id == R.id.thirdStepCreateTeam) {
+                    preferenceFile.saveStringValue(Constants.USER_ID,"1")
                     if(MainActivity.activity!!.get()!!.getResources().getBoolean(R.bool.isTab)) {
                         System.out.println("phone========tablet");
                         Log.e("gsegegsgsgs111===",System.currentTimeMillis().toString())
-                        preferenceFile.saveStringValue(Constants.USER_ID,"1")
+
                         EventBus.getDefault().post(MyMessageEvent(1,Constants.MENU_KEY)) //post event
                     }else
                     {
