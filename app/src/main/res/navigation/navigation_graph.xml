@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/thirdStepCreateTeam">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/signUpFragment2"
@@ -62,6 +62,9 @@
         <action
             android:id="@+id/action_menuFragment_to_chatMessageFragment"
             app:destination="@id/chatMessageFragment" />
+
+        <action android:id="@+id/action_menuFragment_to_signInFragment"
+            app:destination="@id/signInFragment"/>
     </fragment>
 
     <fragment

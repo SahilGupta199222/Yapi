@@ -19,4 +19,6 @@ object Constants {
 
  const val GROUP_PROFILE="group_profile"
  const val GROUP_PROFILE_BACK="group_profile_back"
+
+ const val USER_ID="user_id"
 }

@@ -307,6 +307,16 @@ class ChatViewModel : ViewModel() {
         var tvFilesText = dialog.findViewById<TextView>(R.id.tvFilesText)
         var viewFilesLine = dialog.findViewById<View>(R.id.viewFilesLine)
         var ivViewAllCross = dialog.findViewById<ImageView>(R.id.ivViewAllCross)
+        var ivViewAllCrossOutside = dialog.findViewById<ImageView>(R.id.ivViewAllCrossOutside)
+
+        if(checkDeviceType()){
+            ivViewAllCrossOutside.visibility=View.VISIBLE
+            ivViewAllCross.visibility=View.GONE
+        }else
+        {
+            ivViewAllCrossOutside.visibility=View.GONE
+            ivViewAllCross.visibility=View.VISIBLE
+        }
 
         setSelectedTab(tvMediaText, viewMediaLine)
         setDeSelectedTab(tvLinkText, viewLinkLine)
@@ -334,6 +344,10 @@ class ChatViewModel : ViewModel() {
         }
 
         ivViewAllCross.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        ivViewAllCrossOutside.setOnClickListener {
             dialog.dismiss()
         }
 

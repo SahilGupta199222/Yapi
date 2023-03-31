@@ -13,13 +13,18 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.yapi.MainActivity
 import com.yapi.R
+import com.yapi.common.Constants
 import com.yapi.common.checkDeviceType
+import com.yapi.pref.PreferenceFile
 import com.yapi.views.profile.ProfileFragment
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MenuViewModel : ViewModel() {
+@HiltViewModel
+class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : ViewModel() {
 
     var screenWidth: Int? = 0
-    var openProfileScreenData=MutableLiveData<Boolean>()
+    var openProfileScreenData = MutableLiveData<Boolean>()
     fun onClick(view: View) {
         when (view.id) {
             com.yapi.R.id.imgProfilePicCustomerList -> {
@@ -47,7 +52,7 @@ class MenuViewModel : ViewModel() {
                     popUp.dismiss()
                     if (checkDeviceType()) {
 
-                        openProfileScreenData.value=true
+                        openProfileScreenData.value = true
                     } else {
                         if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
                             view.findNavController()
@@ -69,6 +74,15 @@ class MenuViewModel : ViewModel() {
                 var constraintsLogout = mView.findViewById<ConstraintLayout>(R.id.constraintsLogout)
                 constraintsLogout.setOnClickListener {
                     popUp.dismiss()
+                    preferenceFile.saveStringValue(Constants.USER_ID, "")
+                    if(checkDeviceType()){
+
+                    }else
+                    {
+                        view.findNavController()
+                            .navigate(R.id.action_menuFragment_to_signInFragment)
+                    }
+
                     /*  if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
                           view.findNavController()
                               .navigate(R.id.action_menuFragment_to_chatMessageFragment)

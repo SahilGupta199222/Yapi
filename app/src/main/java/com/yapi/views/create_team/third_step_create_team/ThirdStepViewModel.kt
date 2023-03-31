@@ -12,9 +12,13 @@ import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.*
 import com.yapi.databinding.CrmDialogLayoutBinding
+import com.yapi.pref.PreferenceFile
+import dagger.hilt.android.lifecycle.HiltViewModel
 import org.greenrobot.eventbus.EventBus
+import javax.inject.Inject
 
-class ThirdStepViewModel : ViewModel() {
+@HiltViewModel
+class ThirdStepViewModel @Inject constructor(val preferenceFile: PreferenceFile) : ViewModel() {
     var screenWidth: Int? = 0
     var emailFieldValue = ObservableField("")
     fun onClick(view: View) {
@@ -25,8 +29,9 @@ class ThirdStepViewModel : ViewModel() {
                         if(MainActivity.activity!!.get()!!.getResources().getBoolean(R.bool.isTab)) {
                             System.out.println("phone========tablet");
                             Log.e("gsegegsgsgs111===",System.currentTimeMillis().toString())
-
-                            EventBus.getDefault().post(MyMessageEvent(1,Constants.MENU_KEY)) //post event
+                            preferenceFile.saveStringValue(Constants.USER_ID,"1")
+                            EventBus.getDefault().post(MyMessageEvent(1,Constants.MENU_KEY)) //post
+                        // event
                         }else
                         {
                             view.findNavController()
@@ -40,6 +45,7 @@ class ThirdStepViewModel : ViewModel() {
                     if(MainActivity.activity!!.get()!!.getResources().getBoolean(R.bool.isTab)) {
                         System.out.println("phone========tablet");
                         Log.e("gsegegsgsgs111===",System.currentTimeMillis().toString())
+                        preferenceFile.saveStringValue(Constants.USER_ID,"1")
                         EventBus.getDefault().post(MyMessageEvent(1,Constants.MENU_KEY)) //post event
                     }else
                     {

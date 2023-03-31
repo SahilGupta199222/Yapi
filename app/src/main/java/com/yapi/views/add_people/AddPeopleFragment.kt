@@ -78,7 +78,6 @@ class AddPeopleFragment : DialogFragment() {
         }
 
         val layoutParams = binding.constraintsAddPeople.layoutParams as LinearLayout.LayoutParams
-        //  val newLayoutParams = toolbar.getLayoutParams()
         layoutParams.topMargin = 0
         layoutParams.leftMargin = 0
         layoutParams.rightMargin = rightMarginTopLayout

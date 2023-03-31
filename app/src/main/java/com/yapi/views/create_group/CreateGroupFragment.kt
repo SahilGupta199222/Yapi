@@ -19,12 +19,6 @@ class CreateGroupFragment : DialogFragment() {
     private lateinit var binding: FragmentCreateGroupBinding
     val viewModel: ViewModelCreateGroup by viewModels()
 
-   /* init {
-        if(requireActivity().getResources().getBoolean(R.bool.isTab)) {
-            System.out.println("phone========tablet");
-        }
-    }*/
-
 companion object {
     fun newInstanceCreateGroup(title: String): CreateGroupFragment {
         val args = Bundle()
@@ -89,7 +83,6 @@ companion object {
                 ivOutsideCloseGroup.visibility=View.VISIBLE
                 imgCancelCreateGroup.visibility=View.GONE
                 layoutCreateGroup.setBackgroundResource(R.drawable.et_drawable)
-
             }else
             {
                 layoutCreateGroup.setBackgroundResource(0)

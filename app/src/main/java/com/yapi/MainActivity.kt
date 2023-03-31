@@ -45,7 +45,6 @@ class MainActivity : AppCompatActivity() {
         EventBus.getDefault().unregister(this)
     }
 
-
     private fun initUI() {
 
         /*  val navHostFragment =
@@ -69,7 +68,6 @@ class MainActivity : AppCompatActivity() {
 
             showTabsLayoutMethod()
             hideContainerMethod()
-
 
         } else {
             System.out.println("phone========mobile")

@@ -20,8 +20,10 @@ import com.yapi.common.GroupEvent
 import com.yapi.common.MyMessageEvent
 import com.yapi.databinding.FragmentMenuBinding
 import com.yapi.views.profile.ProfileFragment
+import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
 
+@AndroidEntryPoint
 class MenuFragment : Fragment() {
     private lateinit var binding: FragmentMenuBinding
     private var groupListClicked = true
@@ -527,8 +529,6 @@ if(type>0) {
                         }
                         else
                         {
-                           // findNavController().navigate(R.id.action_menuFragment_to_createGroupFragment)
-
                             if (findNavController().currentDestination?.id == R.id.menuFragment) {
                                 var bundle = Bundle()
                                 bundle.putString("userType", userType)
@@ -536,12 +536,7 @@ if(type>0) {
                                     .navigate(R.id.action_menuFragment_to_chatMessageFragment, bundle)
                             }
                         }
-
-
-
                     }
-                    /*if(findNavController().currentDestination?.id == R.id.menuFragment)
-                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)*/
                 }
             }, Constants.GROUPS_KEY)
         binding.rvGroupListMenu.adapter = adapterGroupsList
@@ -549,10 +544,6 @@ if(type>0) {
 
     private fun setJobsListAdapter() {
         val list = ArrayList<PojoGroupMembersList>()
-        /* for (i in 0 until 5) {
-             list.add(PojoGroupMembersList("Jobs ${i + 2}", i, false))
-         }*/
-
         list.add(PojoGroupMembersList("Discount_SH1h73", 1, false))
         list.add(PojoGroupMembersList("Palosi_39875", 2, false))
         list.add(PojoGroupMembersList("Skiffington_h90", 1, false))
@@ -586,6 +577,7 @@ if(type>0) {
             }, "")
         binding.rvJobsListMenu.adapter = adapterJobsList
     }
+
     private fun addNextToScreenObserver() {
 
         viewModel.openProfileScreenData.observe(requireActivity(), Observer {

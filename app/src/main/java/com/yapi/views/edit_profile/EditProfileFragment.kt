@@ -22,7 +22,6 @@ import com.yapi.common.checkDeviceType
 import com.yapi.databinding.FragmentEditProfileBinding
 import com.yapi.views.profile.ProfileFragment
 
-
 class EditProfileFragment : DialogFragment(), View.OnClickListener {
 
     companion object {
