@@ -14,3 +14,4 @@
 .cxx
 local.properties
 /app/src/main/java/com/yapi/common/Constants.kt
+/app/src/main/java/com/yapi/common/WebAPIKeys.kt
