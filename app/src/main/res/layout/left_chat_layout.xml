@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/_10sdp">
+
+    <com.yapi.common.ChatRoundRectCornerImageView
+        android:id="@+id/ivLeftUserPhoto"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:src="@drawable/temp_boy_photo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cardLeftChatText" />
+
+    <LinearLayout
+        android:id="@+id/cardLeftChatText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ivLeftUserPhoto"
+        app:layout_constraintTop_toBottomOf="@id/linearLeftUserDetail">
+
+        <RelativeLayout
+            android:id="@+id/cardViewLeftTextMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/chat_left_box_back"
+            app:cardElevation="@dimen/_2sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvLeftMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:backgroundTint="#ffffff"
+                    android:fontFamily="@font/larsseit_medium"
+                    android:letterSpacing="0.07"
+                    android:lineSpacingExtra="@dimen/line_spacing_extra"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:text="Hi Everyone, Nibh ipsum consequat nisl vel pretium lectus quam id leo"
+                    android:textColor="@color/darkGrey"
+                    android:textSize="@dimen/normalSmallTextSize" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLeftUserDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:orientation="horizontal"
+
+        app:layout_constraintBottom_toTopOf="@id/cardLeftChatText"
+        app:layout_constraintStart_toStartOf="@id/cardLeftChatText">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvLeftUserName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+
+            android:fontFamily="@font/larsseit_medium"
+            android:letterSpacing="0.07"
+            android:lineSpacingExtra="@dimen/line_spacing_extra"
+            android:text="Kaylynn"
+            android:textAllCaps="true"
+            android:textColor="@color/medium_grey_color"
+            android:textSize="@dimen/smallTextSize"
+            app:layout_constraintStart_toEndOf="@id/ivLeftUserPhoto"
+            app:layout_constraintTop_toTopOf="@id/ivLeftUserPhoto" />
+
+        <ImageView
+            android:layout_width="@dimen/_4sdp"
+            android:layout_height="@dimen/_4sdp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_8sdp"
+            app:tint="#E6E6E6"
+            android:src="@drawable/circle_bullet" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvLeftMessageTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_8sdp"
+
+            android:fontFamily="@font/larsseit_medium"
+            android:letterSpacing="0.07"
+            android:lineSpacingExtra="@dimen/line_spacing_extra"
+            android:text="12:00"
+            android:textColor="@color/medium_grey_color"
+            android:textSize="@dimen/smallTextSize"
+            app:layout_constraintStart_toEndOf="@id/ivLeftUserPhoto"
+            app:layout_constraintTop_toTopOf="@id/ivLeftUserPhoto" />
+
+        <ImageView
+            android:layout_width="@dimen/_4sdp"
+            android:layout_height="@dimen/_4sdp"
+            android:layout_gravity="center_vertical"
+            app:tint="#E6E6E6"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:src="@drawable/circle_bullet" />
+
+        <ImageView
+            android:layout_width="@dimen/iconSize"
+            android:layout_height="@dimen/iconSize"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:src="@drawable/add_reaction_left" />
+
+        <ImageView
+            android:id="@+id/iv_more_chat"
+            android:layout_width="@dimen/iconSize"
+            android:layout_height="@dimen/iconSize"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:rotation="90"
+            app:tint="#B8B8B8"
+
+            android:src="@drawable/chat_more_icon" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

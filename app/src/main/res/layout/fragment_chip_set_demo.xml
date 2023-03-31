@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:are="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/liteGrey"
+        android:orientation="vertical"
+        tools:context=".views.chipset_demo.ChipSetDemoFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/chipLayoutChip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/et_drawable"
+            android:paddingStart="@dimen/etHorizontalPadding"
+            android:paddingTop="@dimen/etVerticalPadding"
+            android:paddingEnd="@dimen/etHorizontalPadding"
+            android:paddingBottom="@dimen/etVerticalPadding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/normalTextSize"
+                android:visibility="gone"
+                app:chipSpacing="@dimen/topFiveMargin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etChips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/topFiveMargin"
+                android:background="@color/white"
+                android:hint="Add People"
+                android:textColor="@color/black"
+                android:textColorHint="@color/darkLiteGrey"
+                android:textSize="@dimen/normalTextSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutAddPeople"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/etHorizontalPadding"
+            android:paddingEnd="@dimen/etHorizontalPadding"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chipLayoutChip">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtUserNameChip"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:background="@drawable/round_circle_blue"
+                android:clipToOutline="true"
+                android:gravity="center"
+                android:text="A"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_20sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtTempAddPeopleChip"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/topMargin"
+                android:layout_marginTop="@dimen/topFiveMargin"
+                android:fontFamily="@font/larsseit_bold"
+                android:text="Add People"
+                android:textColor="@color/blueColor"
+                android:textSize="@dimen/normalTextSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txtUserNameChip"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtAddPeopleChip"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/larsseit_medium"
+                android:text="Damanpreet@gmail.com"
+                android:textColor="@color/darkLiteGrey"
+                android:textSize="@dimen/normalSmallTextSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/txtTempAddPeopleChip"
+                app:layout_constraintTop_toBottomOf="@+id/txtTempAddPeopleChip" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottomConstraints"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <View
+                android:id="@+id/viewAboveMessage"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginStart="@dimen/topMargin"
+                android:background="@color/liteGrey"
+                app:layout_constraintBottom_toTopOf="@id/chatMessageConstrinats"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chatMessageConstrinats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/startMainMargin"
+                android:layout_marginEnd="@dimen/startMainMargin"
+                android:background="@color/transparent"
+                app:layout_constraintBottom_toTopOf="@+id/layoutEditTextViewChatDemo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvMessages"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/larsseit_medium"
+                    android:text="@string/chat_text"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/normalTextSize"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:fontFamily="@font/larsseit_medium"
+                    android:text="@string/email_text"
+                    android:textColor="@color/medium_grey_color"
+                    android:textSize="@dimen/normalTextSize"
+                    app:layout_constraintStart_toEndOf="@+id/tvMessages"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvSMS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:fontFamily="@font/larsseit_medium"
+                    android:text="@string/sms_text"
+                    android:textColor="@color/medium_grey_color"
+                    android:textSize="@dimen/normalTextSize"
+                    app:layout_constraintStart_toEndOf="@+id/tvEmail"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutEditTextViewChatDemo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <HorizontalScrollView
+                    android:id="@+id/layoutFontStylesOfEditTextDemoChat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toTopOf="@+id/viewLineFontStylesEditTextDemoChat"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/startMainMargin"
+                        android:layout_marginEnd="@dimen/startMainMargin"
+                        android:background="@color/transparent"
+                        android:paddingTop="@dimen/_8sdp"
+                        android:paddingBottom="@dimen/_8sdp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layoutTxtFontStyleChange"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/txtFontNameStyleChange"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/larsseit_regular"
+                                android:text="Normal"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/normalSmallTextSize"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="@dimen/iconSize"
+                                android:layout_height="@dimen/iconSize"
+                                android:layout_marginStart="@dimen/topMargin"
+                                android:src="@drawable/up_down_arrow"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/txtFontNameStyleChange"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgBoldTxtIconChatDemo"
+                            android:layout_width="@dimen/iconSize"
+                            android:layout_height="@dimen/iconSize"
+                            android:layout_marginStart="@dimen/topMargin"
+                            android:src="@drawable/ic_baseline_format_bold_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/layoutTxtFontStyleChange"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgItalicTxtIconChatDemo"
+                            android:layout_width="@dimen/iconSize"
+                            android:layout_height="@dimen/iconSize"
+                            android:layout_marginStart="@dimen/topMargin"
+                            android:src="@drawable/ic_baseline_format_italic_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/imgBoldTxtIconChatDemo"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgUnderLineTxtIconChatDemo"
+                            android:layout_width="@dimen/iconSize"
+                            android:layout_height="@dimen/iconSize"
+                            android:layout_marginStart="@dimen/topMargin"
+                            android:src="@drawable/ic_baseline_format_underlined_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/imgItalicTxtIconChatDemo"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgStrikeTxtIconChatDemo"
+                            android:layout_width="@dimen/iconSize"
+                            android:layout_height="@dimen/iconSize"
+                            android:layout_marginStart="@dimen/topMargin"
+                            android:src="@drawable/ic_baseline_strikethrough_s_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/imgUnderLineTxtIconChatDemo"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgFormatListNumberTxtIconChatDemo"
+                            android:layout_width="@dimen/iconSize"
+                            android:layout_height="@dimen/iconSize"
+                            android:layout_marginStart="@dimen/topMargin"
+                            android:src="@drawable/ic_baseline_format_list_numbered_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/imgStrikeTxtIconChatDemo"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgFormatListBulletedTxtIconChatDemo"
+                            android:layout_width="@dimen/iconSize"
+                            android:layout_height="@dimen/iconSize"
+                            android:layout_marginStart="@dimen/topMargin"
+                            android:src="@drawable/ic_baseline_format_list_bulleted_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/imgFormatListNumberTxtIconChatDemo"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgLeftAlignTxtIconChatDemo"
+                            android:layout_width="@dimen/iconSize"
+                            android:layout_height="@dimen/iconSize"
+                            android:layout_marginStart="@dimen/topMargin"
+                            android:src="@drawable/ic_baseline_format_align_left_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/imgFormatListBulletedTxtIconChatDemo"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgCenterAlignTxtIconChatDemo"
+                            android:layout_width="@dimen/iconSize"
+                            android:layout_height="@dimen/iconSize"
+                            android:layout_marginStart="@dimen/topMargin"
+                            android:src="@drawable/ic_baseline_format_align_center_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/imgLeftAlignTxtIconChatDemo"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imgRightAlignTxtIconChatDemo"
+                            android:layout_width="@dimen/iconSize"
+                            android:layout_height="@dimen/iconSize"
+                            android:layout_marginStart="@dimen/topMargin"
+                            android:src="@drawable/ic_baseline_format_align_right_24"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/imgCenterAlignTxtIconChatDemo"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </HorizontalScrollView>
+
+                <View
+                    android:id="@+id/viewLineFontStylesEditTextDemoChat"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginStart="@dimen/startMainMargin"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginEnd="@dimen/startMainMargin"
+                    android:layout_marginBottom="@dimen/topFiveMargin"
+                    android:background="#f4f4f4"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/etRichChatDemo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <jp.wasabeef.richeditor.RichEditor
+                    android:id="@+id/etRichChatDemo"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_45sdp"
+                    android:background="@null"
+                    android:layout_marginEnd="@dimen/startMainMargin"
+                    android:textSize="@dimen/normalSmallTextSize"
+                    app:layout_constraintBottom_toTopOf="@+id/layoutStyleOptionsEditTextViewChatDemo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutStyleOptionsEditTextViewChatDemo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/startMainMargin"
+                    android:layout_marginTop="@dimen/topFiveMargin"
+                    android:layout_marginEnd="@dimen/startMainMargin"
+                    android:layout_marginBottom="@dimen/startMainMargin"
+                    android:background="@color/transparent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgTxtStyleChangeIconChatDemo"
+                        android:layout_width="@dimen/iconSize"
+                        android:layout_height="@dimen/iconSize"
+                        android:src="@drawable/font_text"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgEmojiIconChatDemo"
+                        android:layout_width="@dimen/iconSize"
+                        android:layout_height="@dimen/iconSize"
+                        android:layout_marginStart="@dimen/topMargin"
+                        android:src="@drawable/emoji"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imgTxtStyleChangeIconChatDemo"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/viewEmojiIconChatDemo"
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="@dimen/iconSize"
+                        android:layout_marginStart="@dimen/topMargin"
+                        android:background="@color/chat_bottom_line_color"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imgEmojiIconChatDemo"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgPickImageIconChatDemo"
+                        android:layout_width="@dimen/iconSize"
+                        android:layout_height="@dimen/iconSize"
+                        android:layout_marginStart="@dimen/topMargin"
+                        android:backgroundTint="@color/medium_grey_color"
+                        android:src="@drawable/image_drawable"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/viewEmojiIconChatDemo"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/chatbottom_grey_color" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgLinkIconChatDemo"
+                        android:layout_width="@dimen/iconSize"
+                        android:layout_height="@dimen/iconSize"
+                        android:layout_marginStart="@dimen/topMargin"
+                        android:src="@drawable/ic_baseline_link_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imgPickImageIconChatDemo"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgAttachmentIconChatDemo"
+                        android:layout_width="@dimen/iconSize"
+                        android:layout_height="@dimen/iconSize"
+                        android:layout_marginStart="@dimen/topMargin"
+                        android:rotation="90"
+                        android:src="@drawable/ic_baseline_attach_file_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imgLinkIconChatDemo"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgMicIconChatDemo"
+                        android:layout_width="@dimen/iconSize"
+                        android:layout_height="@dimen/iconSize"
+                        android:layout_marginStart="@dimen/topMargin"
+                        android:src="@drawable/ic_baseline_mic_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imgAttachmentIconChatDemo"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgDownArrowIconChatDemo"
+                        android:layout_width="@dimen/iconSize"
+                        android:layout_height="@dimen/iconSize"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/viewLineBeforeDownArrowIconChatDemo"
+                        android:layout_width="@dimen/_1sdp"
+                        android:layout_height="@dimen/iconSize"
+                        android:layout_marginEnd="@dimen/topFiveMargin"
+                        android:background="@color/chat_bottom_line_color"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imgDownArrowIconChatDemo"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgSendIconChatDemo"
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:layout_marginEnd="@dimen/topFiveMargin"
+                        android:src="@drawable/ic_baseline_send_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/viewLineBeforeDownArrowIconChatDemo"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
