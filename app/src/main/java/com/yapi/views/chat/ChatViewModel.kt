@@ -208,7 +208,7 @@ class ChatViewModel : ViewModel() {
         var constraintsMute = mView.findViewById<ConstraintLayout>(R.id.constraintsMute)
         constraintsMute.setOnClickListener {
             popUp.dismiss()
-            showDeleteGroupDialog()
+//            showDeleteGroupDialog()
         }
         var constraintsDeleteChat = mView.findViewById<ConstraintLayout>(R.id.constraintsDeleteChat)
         constraintsDeleteChat.setOnClickListener {
@@ -225,6 +225,7 @@ class ChatViewModel : ViewModel() {
 
     //When click on the three dots
     private fun showChatGroupMenuMethod(view: View) {
+
         val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
             .inflate(com.yapi.R.layout.group_chat_menu_options, null, false)
         var newWidth = screenWidth!! / 1.5
@@ -233,6 +234,8 @@ class ChatViewModel : ViewModel() {
         popUp.isTouchable = true
         popUp.isFocusable = true
         popUp.isOutsideTouchable = true
+        popUp.showAsDropDown(view.findViewById(R.id.ivChat_more_icon))
+
         // val btnViewProfile = popUp.showAsDropDown(view.findViewById(com.yapi.R.id.ivChat_more_icon))
 
         var constraintsProfileChat =

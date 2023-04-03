@@ -37,7 +37,8 @@ class ChatGroupInfoFragment():Fragment() {
         val displayMetrics = DisplayMetrics()
         requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
         screenWidth = displayMetrics.widthPixels
-
+        viewModel.screenWidth=screenWidth
+        viewModel.screenHeight=displayMetrics.heightPixels
         initUI()
         return dataBinding.root
     }
