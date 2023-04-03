@@ -53,16 +53,15 @@
         />
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtCountRvGroupList"
-        android:layout_width="@dimen/unSeenCountSize"
-        android:layout_height="@dimen/unSeenCountSize"
-        android:paddingStart="@dimen/startPaddingUnSeenCountSize"
-        android:paddingTop="@dimen/topPaddingUnSeenCountSize"
-        android:text="5"
-        android:clipToOutline="true"
-        android:textColor="@color/white"
-        android:background="@drawable/round_circle_blue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:background="@drawable/round_circle_blue"
+        android:clipToOutline="true"
         android:fontFamily="@font/larsseit_bold"
+        android:gravity="center"
+        android:text="84"
+        android:textColor="@color/white"
         android:textSize="@dimen/unSeenCountTextSize"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

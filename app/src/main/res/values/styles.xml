@@ -15,6 +15,9 @@
         <item name="android:windowCloseOnTouchOutside">false</item>
         <item name="animationMode">fade</item>
         <item name="android:layout_alignParentRight">true</item>
+    </style>
+    <style name="SpinnerThem" parent="Widget.AppCompat.Light.DropDownItem.Spinner">
+        <item name="android:background">@drawable/ic_baseline_keyboard_arrow_down_24</item>
 
     </style>
 </resources>

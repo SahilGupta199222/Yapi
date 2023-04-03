@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:text="@string/cancel_txt"
         android:visibility="gone"
-        android:fontFamily="@font/larsseit_bold "
+        android:fontFamily="@font/larsseit_regular"
         android:textColor="@color/blueColor"
         android:textSize="@dimen/smallTextSize"
         app:layout_constraintEnd_toEndOf="parent"

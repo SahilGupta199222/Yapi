@@ -121,8 +121,8 @@ class MenuFragment : Fragment() {
         }
     }
 
-    private fun setSettingMethod(type:Int) {
-        if(type>0) {
+    private fun setSettingMethod(type: Int) {
+        if (type > 0) {
             settingListClicked = !settingListClicked
         }
         if (settingListClicked) {
@@ -145,8 +145,8 @@ class MenuFragment : Fragment() {
         }
     }
 
-    private fun setLeadMethod(type:Int) {
-        if(type>0) {
+    private fun setLeadMethod(type: Int) {
+        if (type > 0) {
             leadListClicked = !leadListClicked
         }
         if (leadListClicked) {
@@ -169,10 +169,10 @@ class MenuFragment : Fragment() {
         }
     }
 
-    private fun setTeamMethod(type:Int) {
-if(type>0) {
-    teamListClicked = !teamListClicked
-}
+    private fun setTeamMethod(type: Int) {
+        if (type > 0) {
+            teamListClicked = !teamListClicked
+        }
         if (teamListClicked) {
             binding.imgArrowTeamMenu.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -193,8 +193,8 @@ if(type>0) {
         }
     }
 
-    private fun setConversationMethod(type:Int) {
-        if(type>0) {
+    private fun setConversationMethod(type: Int) {
+        if (type > 0) {
             conversationListClicked = !conversationListClicked
         }
         if (conversationListClicked) {
@@ -217,8 +217,8 @@ if(type>0) {
         }
     }
 
-    private fun setCusomerListMethod(type:Int) {
-        if(type>0) {
+    private fun setCusomerListMethod(type: Int) {
+        if (type > 0) {
             customerListClicked = !customerListClicked
         }
         if (customerListClicked) {
@@ -505,12 +505,11 @@ if(type>0) {
 
                     if (adapterGroupsList?.getListt()?.get(position)!!.unSeenMsgCount == -1) {
 
-                        if(getResources().getBoolean(R.bool.isTab)) {
-                            System.out.println("phone========tablet");
-                            EventBus.getDefault().post(GroupEvent(2,Constants.CREATEGOUP_KEY)) //post event
-                        }
-                        else
-                        {
+                        if (resources.getBoolean(R.bool.isTab)) {
+                            System.out.println("phone========tablet")
+                            EventBus.getDefault()
+                                .post(GroupEvent(2, Constants.CREATEGOUP_KEY)) //post event
+                        } else {
                             findNavController().navigate(R.id.action_menuFragment_to_createGroupFragment)
                         }
                     } else {
@@ -521,17 +520,17 @@ if(type>0) {
                             "before notifiy list is\n${adapterGroupsList?.getListt()}")
                         adapterGroupsList?.notifyDataSetChanged()
 
-                        if(getResources().getBoolean(R.bool.isTab)) {
-                            System.out.println("phone========tablet");
-                            EventBus.getDefault().post(MyMessageEvent(3,Constants.CHAT_MESSAGE_KEY)) //post event
-                        }
-                        else
-                        {
+                        if (resources.getBoolean(R.bool.isTab)) {
+                            System.out.println("phone========tablet")
+                            EventBus.getDefault()
+                                .post(MyMessageEvent(3, Constants.CHAT_MESSAGE_KEY)) //post event
+                        } else {
                             if (findNavController().currentDestination?.id == R.id.menuFragment) {
                                 var bundle = Bundle()
                                 bundle.putString("userType", userType)
                                 findNavController()
-                                    .navigate(R.id.action_menuFragment_to_chatMessageFragment, bundle)
+                                    .navigate(R.id.action_menuFragment_to_chatMessageFragment,
+                                        bundle)
                             }
                         }
                     }
@@ -579,10 +578,10 @@ if(type>0) {
     private fun addNextToScreenObserver() {
 
         viewModel.openProfileScreenData.observe(requireActivity(), Observer {
-            var data=it as Boolean
-            if(data)
-            {
-                ProfileFragment.newInstanceProfileScreen("").showNow(requireActivity().supportFragmentManager,"")
+            var data = it as Boolean
+            if (data) {
+                ProfileFragment.newInstanceProfileScreen("")
+                    .showNow(requireActivity().supportFragmentManager, "")
             }
         })
     }
