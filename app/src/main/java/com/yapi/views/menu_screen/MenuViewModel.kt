@@ -27,6 +27,12 @@ class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : Vi
     var openProfileScreenData = MutableLiveData<Boolean>()
     fun onClick(view: View) {
         when (view.id) {
+            R.id.layoutSearch->{
+                if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
+                    view.findNavController()
+                        .navigate(R.id.action_menuFragment_to_searchFragment)
+                }
+            }
             com.yapi.R.id.imgProfilePicCustomerList -> {
                 val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
                     .inflate(com.yapi.R.layout.menu_popup_options, null, false)

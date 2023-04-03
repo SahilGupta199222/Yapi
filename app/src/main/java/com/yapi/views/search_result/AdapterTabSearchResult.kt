@@ -29,35 +29,55 @@ class MyViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+
         holder.title.text=list[position].title
+        holder.title.setTextColor(ContextCompat.getColor(context,R.color.blueColor))
         holder.notificationCount.text=list[position].notificationCount.toString()
         holder.viewLine.setBackgroundColor(ContextCompat.getColor(context,R.color.liteGrey))
-
-         if(list[position].selected ==0){
+        holder.notificationCount.backgroundTintList=ContextCompat.getColorStateList(context, R.color.blueColor)
+         if(list[position].selected){
             holder.notificationCount.setTextColor(ContextCompat.getColor(context,R.color.white))
-            holder.title.setTextColor(ContextCompat.getColor(context,R.color.blueColor))
              holder.viewLine.setBackgroundColor(ContextCompat.getColor(context,R.color.blueColor))
          }
-        else if(list[position].selected == 1){
-
-            holder.notificationCount.setTextColor(ContextCompat.getColor(context,R.color.white))
+        else{
             holder.title.setTextColor(ContextCompat.getColor(context,R.color.darkGrey))
-        }else{
-            Log.i("sdfbasf","else part")
-             val colorStateList =
-                 ColorStateList(arrayOf(intArrayOf(android.R.attr.state_pressed),
-                     intArrayOf(android.R.attr.state_focused),
-                     intArrayOf(android.R.attr.state_enabled),
-                     intArrayOf()), intArrayOf(
-                     R.color.chat_bottom_line_color,  // color for pressed state
-                     R.color.chat_bottom_line_color,  // color for focused state
-                     R.color.chat_bottom_line_color,  // color for enabled state
-                     R.color.chat_bottom_line_color // color for default state
-                 ))
-             holder.notificationCount.backgroundTintList=colorStateList
+            if(list[position].notificationCount>0){
+                holder.notificationCount.setTextColor(ContextCompat.getColor(context,R.color.white))
+                holder.notificationCount.backgroundTintList=ContextCompat.getColorStateList(context, R.color.blueColor)
+            }else{
              holder.notificationCount.setTextColor(ContextCompat.getColor(context,R.color.darkLiteGrey))
-             holder.title.setTextColor(ContextCompat.getColor(context,R.color.darkGrey))
+             holder.notificationCount.backgroundTintList=ContextCompat.getColorStateList(context, R.color.chat_bottom_line_color)
+            }
         }
+
+     /*   if(list[position].notificationCount==0){
+            val colorStateList =
+                ColorStateList(arrayOf(intArrayOf(android.R.attr.state_pressed),
+                    intArrayOf(android.R.attr.state_focused),
+                    intArrayOf(android.R.attr.state_enabled),
+                    intArrayOf()), intArrayOf(
+                    R.color.medium_grey_color,  // color for pressed state
+                    R.color.medium_grey_color,  // color for focused state
+                    R.color.medium_grey_color,  // color for enabled state
+                    R.color.medium_grey_color // color for default state
+                ))
+            holder.notificationCount.backgroundTintList=colorStateList
+            holder.notificationCount.setTextColor(ContextCompat.getColor(context,R.color.darkLiteGrey))
+        }
+        else{
+            val colorStateList =
+                ColorStateList(arrayOf(intArrayOf(android.R.attr.state_pressed),
+                    intArrayOf(android.R.attr.state_focused),
+                    intArrayOf(android.R.attr.state_enabled),
+                    intArrayOf()), intArrayOf(
+                    R.color.blueColor,  // color for pressed state
+                    R.color.blueColor,  // color for focused state
+                    R.color.blueColor,  // color for enabled state
+                    R.color.blueColor // color for default state
+                ))
+            holder.notificationCount.backgroundTintList=colorStateList
+            holder.notificationCount.setTextColor(ContextCompat.getColor(context,R.color.darkLiteGrey))
+        }*/
         holder.itemView.setOnClickListener {
             click.onClick(position)
         }
