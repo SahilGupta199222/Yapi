@@ -238,6 +238,17 @@
     <string name="clear_all_filters">Clear all filters</string>
     <string name="messages">Messages</string>
 
-   <!-- <bool name="is_tablet">false</bool>-->
+    <!-- <bool name="is_tablet">false</bool>-->
+    <string name="search_text">Search</string>
+    <string name="add_text_values">Add</string>
 
+    <string name="crmr_text">CRM</string>
+    <string name="role_text">Role</string>
+    <string name="full_name">Full Name</string>
+    <string name="full_name_text" translatable="false">Full Name</string>
+
+    <string name="edit_member_text">Edit Member</string>
+    <string name="delete_user_text">Delete user</string>
+
+    <string name="save_information_text">save information</string>
 </resources>

@@ -1,14 +1,13 @@
 package com.yapi.views.menu_screen
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -62,6 +61,7 @@ class MenuFragment : Fragment() {
         Log.e("gmwslgwrgwrg===", "grwegrweg")
     }
 
+    //for UI Intialization
     private fun init() {
         setGroupDataMethod(0)
         setJobDataMethod(0)
@@ -307,8 +307,8 @@ if(type>0) {
                     }
                     adapterSettingsList?.notifyDataSetChanged()
 
-                    /* if(findNavController().currentDestination?.id == R.id.menuFragment)
-                         findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)*/
+                     if(findNavController().currentDestination?.id == R.id.menuFragment)
+                         findNavController().navigate(R.id.action_menuFragment_to_userListFragment)
                 }
             })
         binding.rvSettingsListMenu.adapter = adapterSettingsList

@@ -69,7 +69,15 @@
 
         <action android:id="@+id/action_menuFragment_to_searchFragment"
             app:destination="@id/searchFragment"/>
+
+        <action android:id="@+id/action_menuFragment_to_userListFragment"
+            app:destination="@id/UserListFragment"/>
     </fragment>
+
+    <fragment
+        android:id="@+id/UserListFragment"
+        android:label="userListFragment"
+        android:name="com.yapi.views.userList.UserListFragment"/>
 
     <fragment
         android:id="@+id/firstStepCreateTeam"

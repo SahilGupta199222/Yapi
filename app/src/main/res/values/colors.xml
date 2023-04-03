@@ -33,4 +33,6 @@
     <color name="information_profile_back_box">#FAFAFA</color>
 
     <color name="green_color">#00D936</color>
+
+    <color name="user_list_box">#F3F3F3</color>
 </resources>
