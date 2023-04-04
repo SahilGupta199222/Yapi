@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:are="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -105,6 +104,103 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutRecoding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_15sdp"
+            android:padding="@dimen/_15sdp"
+            android:visibility="gone"
+            android:background="@drawable/et_drawable"
+            android:backgroundTint="@color/liteYellow"
+            app:layout_constraintBottom_toTopOf="@id/bottomConstraints"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgStopRecoding"
+                android:layout_width="@dimen/iconSize"
+                android:layout_height="@dimen/iconSize"
+                android:src="@drawable/ic_cross_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+            <com.visualizer.amplitude.AudioRecordView
+                android:id="@+id/audioRecordView"
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                app:chunkAlignTo="bottom"
+                app:chunkRoundedCorners="true"
+                app:chunkSoftTransition="true"
+                app:chunkColor="@color/blueColor"
+                app:chunkSpace="1dp"
+                app:chunkWidth="2dp"
+                app:chunkMaxHeight="48dp"
+                app:chunkMinHeight="2dp"
+                app:direction="rightToLeft"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginEnd="@dimen/_2sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imgStopRecoding"
+                app:layout_constraintEnd_toStartOf="@id/txtRecodingTime"
+                />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtRecodingTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/darkGrey"
+                android:textSize="@dimen/normalTextSize"
+                android:text="00:00"
+                android:layout_marginEnd="@dimen/_3sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/imgDoneRecoding"
+                />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgDoneRecoding"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:src="@drawable/checked_tick"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--<com.visualizer.amplitude.AudioRecordView
+            android:id="@+id/audioRecordView"
+            android:layout_width="256dp"
+            android:layout_height="64dp"
+            app:chunkAlignTo="bottom"
+            app:chunkRoundedCorners="true"
+            app:chunkSoftTransition="true"
+            app:chunkColor="@color/blueColor"
+            app:chunkSpace="1dp"
+            app:chunkWidth="2dp"
+            app:chunkMaxHeight="48dp"
+            app:chunkMinHeight="2dp"
+            app:direction="leftToRight"
+            app:layout_constraintBottom_toTopOf="@id/bottomConstraints"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+       -->
+        <!--   <rm.com.audiowave.AudioWaveView
+               android:id="@+id/wave"
+               android:layout_width="match_parent"
+               android:layout_height="32dp"
+               android:layout_margin="16dp"
+               app:animateExpansion="false"
+               app:chunkWidth="3dp"
+               app:chunkHeight="24dp"
+               app:minChunkHeight="2dp"
+               app:chunkSpacing="1dp"
+               app:chunkRadius="1dp"
+               app:touchable="true"
+               app:waveColor="@android:color/white"
+               app:layout_constraintBottom_toTopOf="@id/bottomConstraints"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               />-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottomConstraints"
             android:layout_width="match_parent"
@@ -342,13 +438,13 @@
                     android:id="@+id/etRichChatDemo"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_45sdp"
-                    android:background="@null"
                     android:layout_marginEnd="@dimen/startMainMargin"
+                    android:background="@null"
                     android:textSize="@dimen/normalSmallTextSize"
                     app:layout_constraintBottom_toTopOf="@+id/layoutStyleOptionsEditTextViewChatDemo"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    />
+                    app:layout_constraintStart_toStartOf="parent" />
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layoutStyleOptionsEditTextViewChatDemo"
                     android:layout_width="match_parent"

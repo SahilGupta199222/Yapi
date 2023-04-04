@@ -29,6 +29,8 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.yapi.R
 import com.yapi.databinding.FragmentChipSetDemoBinding
 import kotlinx.coroutines.Runnable
+import java.io.File
+import java.util.*
 
 
 class ChipSetDemoFragment : Fragment() {
@@ -54,14 +56,14 @@ class ChipSetDemoFragment : Fragment() {
     private var mRecorder: MediaRecorder? = null
     private var mPlayer: MediaPlayer? = null
     private var mFileName: String? = null
+    private var playingStatus=false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentChipSetDemoBinding.inflate(LayoutInflater.from(requireActivity()))
-        mFileName = Environment.getExternalStorageDirectory().absolutePath;
-        mFileName += "/AudioRecording.3gp";
+
         return binding.root
     }
 
@@ -335,6 +337,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             })
 
+
             /*      etRichChatDemo.doOnTextChanged { text, start, before, count ->
                       if(etRichChatDemo.text.toString().trim().isNotEmpty()) {
                           val value=etRichChatDemo.text.toString()
@@ -546,6 +549,7 @@ class ChipSetDemoFragment : Fragment() {
             override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
                 if (p0?.areAllPermissionsGranted() == true) {
 //                    Toast.makeText(requireContext(), "All the permissions are granted..", Toast.LENGTH_SHORT).show();
+                    recodeAudio()
                     Log.i(TAG,"All the permissions are granted..")
                 }else {
                     if (p0?.isAnyPermissionPermanentlyDenied == true) {
@@ -568,5 +572,61 @@ class ChipSetDemoFragment : Fragment() {
                 "Error occurred! ${error.name}",
                 Toast.LENGTH_SHORT).show()
         }.onSameThread().check()
+    }
+    fun mediaRecorderReady() {
+        mRecorder = MediaRecorder()
+        mRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
+        mRecorder?.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+        mRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+        mRecorder?.setOutputFile(mFileName)
+    }
+    fun getAmplitude(){
+       Handler(Looper.myLooper()!!).postDelayed(object :kotlinx.coroutines.Runnable{
+           override fun run() {
+               if(playingStatus){
+                   val amplitude=mRecorder?.maxAmplitude
+                   binding.audioRecordView.update(amplitude?:0)
+                   getAmplitude()
+               }else{
+                    binding.layoutRecoding.visibility=View.GONE
+               }
+           }
+
+       },100)
+    }
+    fun recodeAudio(){
+        binding.imgStopRecoding.setOnClickListener {
+        mRecorder?.stop()
+        mRecorder?.release()
+        mRecorder=null
+            playingStatus=false
+        }
+        binding.layoutRecoding.visibility=View.VISIBLE
+        binding.imgStopRecoding.setOnClickListener {
+            binding.layoutRecoding.visibility=View.GONE
+        }
+        val uuid = UUID.randomUUID().toString()
+        val directory = File(Environment.getExternalStorageDirectory().absolutePath + "/MyRecordings")
+        if (!directory.exists()) {
+            val success = directory.mkdirs()
+            if (!success) {
+                Log.e(TAG, "Failed to create directory")
+                return
+            }
+        }
+        val file = File(directory, "${uuid}+recording.mp3")
+        mFileName=file.absolutePath
+//            mFileName = requireActivity().externalCacheDir?.absolutePath + "/" + uuid + ".3gp"
+            Log.i(TAG, mFileName.toString())
+             mediaRecorderReady()
+        try {
+            mRecorder?.prepare()
+            mRecorder?.start()
+            playingStatus=true
+            getAmplitude()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.i(TAG,"IoException ${e.message}")
+        }
     }
 }
