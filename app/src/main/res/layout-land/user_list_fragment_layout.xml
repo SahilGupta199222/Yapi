@@ -31,9 +31,12 @@
             android:layout_marginStart="@dimen/_12sdp"
             android:fontFamily="@font/larsseit_bold"
             android:text="User Lists"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintTop_toTopOf="@id/tvUserListText"
             android:textColor="@color/darkGrey"
+            app:layout_constraintBottom_toBottomOf="@id/tvUserListText"
             android:textSize="@dimen/titleTextSize"
+
             app:layout_constraintStart_toEndOf="@+id/txtuserBack" />
 
         <LinearLayout
@@ -43,7 +46,7 @@
             android:layout_marginStart="@dimen/startMainMargin"
             android:layout_marginEnd="@dimen/startMainMargin"
             android:orientation="horizontal"
-
+android:layout_marginTop="@dimen/_8sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvUserListText"
             app:layout_constraintBottom_toBottomOf="@+id/tvUserListText">
@@ -119,9 +122,10 @@
             android:id="@+id/rvUserList"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="@dimen/startMainMargin"
+
+            android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_7sdp"
-            android:layout_marginEnd="@dimen/startMainMargin"
+            android:layout_marginEnd="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
