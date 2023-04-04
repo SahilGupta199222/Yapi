@@ -1,19 +1,16 @@
 package com.yapi.views.chipset_demo
 
+//import org.jsoup.Jsoup
+import android.Manifest
+import android.app.Activity
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Typeface
-import android.icu.lang.UProperty.INT_START
+import android.media.MediaPlayer
+import android.media.MediaRecorder
 import android.os.Bundle
-import android.text.Html
-import android.text.Layout
-import android.text.Spannable
-import android.text.SpannableStringBuilder
-import android.text.method.KeyListener
-import android.text.style.AlignmentSpan
-import android.text.style.StrikethroughSpan
-import android.text.style.StyleSpan
-import android.text.style.UnderlineSpan
+import android.os.Environment
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -21,21 +18,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.google.android.material.chip.Chip
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.yapi.R
 import com.yapi.databinding.FragmentChipSetDemoBinding
-import jp.wasabeef.richeditor.RichEditor
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import okhttp3.internal.notify
-import okhttp3.internal.notifyAll
-//import org.jsoup.Jsoup
-import java.awt.font.TextAttribute.UNDERLINE
+import kotlinx.coroutines.Runnable
 
 
 class ChipSetDemoFragment : Fragment() {
@@ -55,11 +48,20 @@ class ChipSetDemoFragment : Fragment() {
     private var tempText = ""
     private var lastCharacter = ""
     private var lastIndex = ""
+    private var TAG="asdifjhasjkdfnskandf"
+
+
+    private var mRecorder: MediaRecorder? = null
+    private var mPlayer: MediaPlayer? = null
+    private var mFileName: String? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentChipSetDemoBinding.inflate(LayoutInflater.from(requireActivity()))
+        mFileName = Environment.getExternalStorageDirectory().absolutePath;
+        mFileName += "/AudioRecording.3gp";
         return binding.root
     }
 
@@ -76,7 +78,21 @@ class ChipSetDemoFragment : Fragment() {
     private fun init() {
         Log.i("asdfjnasdf", "init fucntion called")
         binding.apply {
-            etRichChatDemo.setPlaceholder("Enter msg here")
+            imgMicIconChatDemo.setOnClickListener {
+                gettingMicPermission(requireActivity(), arrayListOf(Manifest.permission.RECORD_AUDIO
+                    ,Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                    imgMicIconChatDemo.setColorFilter(ContextCompat.getColor(
+                        requireContext(),
+                        R.color.blueColor))
+                Handler(Looper.myLooper()!!).postDelayed(object :Runnable{
+                    override fun run() {
+                        imgMicIconChatDemo.setColorFilter(ContextCompat.getColor(
+                            requireContext(),
+                            R.color.medium_grey_color))
+                    }
+                },250)
+            }
+//            etRichChatDemo.setPlaceholder("Enter msg here")
 //            etRichChatDemo.hint = "Enter msg here"
             imgTxtStyleChangeIconChatDemo.setOnClickListener {
                 fontStyleSelected = !fontStyleSelected
@@ -95,7 +111,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgBoldTxtIconChatDemo.setOnClickListener {
-                etRichChatDemo.setBold()
+//                etRichChatDemo.setBold()
 //                CoroutineScope(Dispatchers.Main).async {
 //                    etRichChatDemo.notifyAll()
 //                    etRichChatDemo.performClick();
@@ -119,7 +135,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgItalicTxtIconChatDemo.setOnClickListener {
-                etRichChatDemo.setItalic()
+//                etRichChatDemo.setItalic()
 //                etRichChatDemo.focusEditor()
 
                 italicTxtSelected = !italicTxtSelected
@@ -135,7 +151,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgUnderLineTxtIconChatDemo.setOnClickListener {
-                etRichChatDemo.setUnderline()
+//                etRichChatDemo.setUnderline()
 //                etRichChatDemo.focusEditor()
                 underLineTxtSelected = !underLineTxtSelected
                 if (underLineTxtSelected) {
@@ -149,7 +165,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgStrikeTxtIconChatDemo.setOnClickListener {
-                etRichChatDemo.setStrikeThrough()
+//                etRichChatDemo.setStrikeThrough()
 //                etRichChatDemo.focusEditor()
                 strikeTxtSelected = !strikeTxtSelected
 
@@ -165,7 +181,7 @@ class ChipSetDemoFragment : Fragment() {
             }
             imgFormatListNumberTxtIconChatDemo.setOnClickListener {
 //                etRichChatDemo.focusEditor()
-                etRichChatDemo.setNumbers()
+//                etRichChatDemo.setNumbers()
                 listNumberTxtSelected = !listNumberTxtSelected
 
                 if (listNumberTxtSelected) {
@@ -179,7 +195,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgFormatListBulletedTxtIconChatDemo.setOnClickListener {
-                etRichChatDemo.setBullets()
+//                etRichChatDemo.setBullets()
                 listBulletTxtSelected = !listBulletTxtSelected
                 if (listBulletTxtSelected) {
                     imgFormatListBulletedTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -192,7 +208,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgLeftAlignTxtIconChatDemo.setOnClickListener {
-                etRichChatDemo.setAlignLeft()
+//                etRichChatDemo.setAlignLeft()
                 leftAlignTxtSelected = !leftAlignTxtSelected
                 if (leftAlignTxtSelected) {
                     imgLeftAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -217,7 +233,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgCenterAlignTxtIconChatDemo.setOnClickListener {
-                etRichChatDemo.setAlignCenter()
+//                etRichChatDemo.setAlignCenter()
                 centerAlignTxtSelected = !centerAlignTxtSelected
                 if (centerAlignTxtSelected) {
                     imgCenterAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -242,7 +258,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgRightAlignTxtIconChatDemo.setOnClickListener {
-                etRichChatDemo.setAlignRight()
+//                etRichChatDemo.setAlignRight()
                 rightAlignTxtSelected = !rightAlignTxtSelected
                 if (rightAlignTxtSelected) {
                     imgRightAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -290,16 +306,16 @@ class ChipSetDemoFragment : Fragment() {
 //                tvMessages.text=etRichChatDemo.lineCount.toString()
 //                etRichChatDemo.insertLink("https://cdn.britannica.com/49/182849-050-4C7FE34F/scene-Iron-Man.jpg","iron man link")
             }
-            etRichChatDemo.setOnDecorationChangeListener(object :
-                RichEditor.OnDecorationStateListener {
-                override fun onStateChangeListener(
-                    text: String?,
-                    types: MutableList<RichEditor.Type>?,
-                ) {
-                    Log.i("fhycdfhfdrfdc", "decoration changed $text\ntypes$types")
-                }
-
-            })
+//            etRichChatDemo.setOnDecorationChangeListener(object :
+//                RichEditor.OnDecorationStateListener {
+//                override fun onStateChangeListener(
+//                    text: String?,
+//                    types: MutableList<RichEditor.Type>?,
+//                ) {
+//                    Log.i("fhycdfhfdrfdc", "decoration changed $text\ntypes$types")
+//                }
+//
+//            })
 
             etRichChatDemo.setOnKeyListener(object : View.OnKeyListener {
                 override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
@@ -340,87 +356,87 @@ class ChipSetDemoFragment : Fragment() {
                       Log.i("damanpreet","text$text\nstart$start,before $before\ncount$count")
                       etRichChatDemo.setText(Html.fromHtml(etRichChatDemo.text.toString().trim()))
                   }*/
-            etRichChatDemo.setOnTextChangeListener(object : RichEditor.OnTextChangeListener {
-                override fun onTextChange(textt: String?) {
-                    val text1 = etRichChatDemo.html
-                    Log.i("fhycdfhfdrfdc", "text $textt")
-                    if (textt?.length!! > 0) {
-                        val text = textt[textt.length - 1].toString()
-                        if (text.isNotEmpty()) {
-//                            val doc = Jsoup.parse(textt)
-//                            val lis = doc.select(text).first()
-//                            val t = lis?.text()
-//                            val  tt=t?.lastIndexOf(text)
-//                            val lis = doc.select(text.toString())
-//                            Log.i("fhycdfhfdrfdc", "textS ${t}")
-                        }
-//                    var abc=text
-//                    Log.d("fhycdfhfdrfdc",abc.toString())
-                        val spannable =
-                            SpannableStringBuilder.valueOf(Html.fromHtml(text.toString()))
-                        val spans = spannable.getSpans(0, spannable.length, StyleSpan::class.java)
-                        if (spans.isNotEmpty()) {
-                            val value = spans[0]
-                            when (value.style) {
-                                Typeface.BOLD_ITALIC -> {
-                                    Log.i("fhycdfhfdrfdc", "bold italic span apply")
-
-                                }
-                                Typeface.BOLD -> {
-                                    Log.i("fhycdfhfdrfdc", "bold span apply")
-
-                                }
-                                Typeface.ITALIC -> {
-                                    Log.i("fhycdfhfdrfdc", "italic span apply")
-
-                                }
-                            }
-                        }
-                    }
-//                    val alignmentSpans = spannable.getSpans(0, spannable.length, AlignmentSpan::class.java)
+//            etRichChatDemo.setOnTextChangeListener(object : RichEditor.OnTextChangeListener {
+//                override fun onTextChange(textt: String?) {
+//                    val text1 = etRichChatDemo.html
+//                    Log.i("fhycdfhfdrfdc", "text $textt")
+//                    if (textt?.length!! > 0) {
+//                        val text = textt[textt.length - 1].toString()
+//                        if (text.isNotEmpty()) {
+////                            val doc = Jsoup.parse(textt)
+////                            val lis = doc.select(text).first()
+////                            val t = lis?.text()
+////                            val  tt=t?.lastIndexOf(text)
+////                            val lis = doc.select(text.toString())
+////                            Log.i("fhycdfhfdrfdc", "textS ${t}")
+//                        }
+////                    var abc=text
+////                    Log.d("fhycdfhfdrfdc",abc.toString())
+//                        val spannable =
+//                            SpannableStringBuilder.valueOf(Html.fromHtml(text.toString()))
+//                        val spans = spannable.getSpans(0, spannable.length, StyleSpan::class.java)
+//                        if (spans.isNotEmpty()) {
+//                            val value = spans[0]
+//                            when (value.style) {
+//                                Typeface.BOLD_ITALIC -> {
+//                                    Log.i("fhycdfhfdrfdc", "bold italic span apply")
 //
-//                    if (alignmentSpans.isNotEmpty()) {
-//                        // Get the last applied AlignmentSpan (since alignment can change multiple times)
-//                        val lastAlignmentSpan = alignmentSpans.last()
+//                                }
+//                                Typeface.BOLD -> {
+//                                    Log.i("fhycdfhfdrfdc", "bold span apply")
 //
-//                        // Check the alignment value of the lastAlignmentSpan
-//                        when (lastAlignmentSpan.alignment) {
-//                            Layout.Alignment.ALIGN_CENTER -> {
-//                                // Handle center-aligned text
-//                            }
-//                            Layout.Alignment.ALIGN_OPPOSITE -> {
-//                                // Handle right-aligned text
-//                            }
-//                            else -> {
-//                                // Handle left-aligned text (default)
+//                                }
+//                                Typeface.ITALIC -> {
+//                                    Log.i("fhycdfhfdrfdc", "italic span apply")
+//
+//                                }
 //                            }
 //                        }
-//                    } else {
-//                        // Handle left-aligned text (default)
 //                    }
-//                    val underlineSpans = spannable.getSpans(0, spannable.length, UnderlineSpan::class.java)
-//                    val isUnderlined = underlineSpans.isNotEmpty()
-//                    if (isUnderlined) {
-//                        Log.i("fhycdfhfdrfdc", "underLine span apply")
-//                        // Handle underlined text
-//                    }
-//                    val strikeThroughSpans = spannable.getSpans(0, spannable.length, StrikethroughSpan::class.java)
-//                    val isStrikethrough = strikeThroughSpans.isNotEmpty()
-//                    if (isStrikethrough) {
-//                        // Handle strikethrough text
-//                        Log.i("fhycdfhfdrfdc", "StrikeThrough span apply")
-//                    }
-//                    if (value.style == Typeface.BOLD) {
-//                        Log.i("fhycdfhfdrfdc","bold span apply")
-//                        // Handle bold text
-//                    }
-//                    if (styleSpan.style == Typeface.ITALIC) {
-//                        Log.i("fhycdfhfdrfdc","italic span apply")
-//                        // Handle italic text
-//                    }
-                }
-
-            })
+////                    val alignmentSpans = spannable.getSpans(0, spannable.length, AlignmentSpan::class.java)
+////
+////                    if (alignmentSpans.isNotEmpty()) {
+////                        // Get the last applied AlignmentSpan (since alignment can change multiple times)
+////                        val lastAlignmentSpan = alignmentSpans.last()
+////
+////                        // Check the alignment value of the lastAlignmentSpan
+////                        when (lastAlignmentSpan.alignment) {
+////                            Layout.Alignment.ALIGN_CENTER -> {
+////                                // Handle center-aligned text
+////                            }
+////                            Layout.Alignment.ALIGN_OPPOSITE -> {
+////                                // Handle right-aligned text
+////                            }
+////                            else -> {
+////                                // Handle left-aligned text (default)
+////                            }
+////                        }
+////                    } else {
+////                        // Handle left-aligned text (default)
+////                    }
+////                    val underlineSpans = spannable.getSpans(0, spannable.length, UnderlineSpan::class.java)
+////                    val isUnderlined = underlineSpans.isNotEmpty()
+////                    if (isUnderlined) {
+////                        Log.i("fhycdfhfdrfdc", "underLine span apply")
+////                        // Handle underlined text
+////                    }
+////                    val strikeThroughSpans = spannable.getSpans(0, spannable.length, StrikethroughSpan::class.java)
+////                    val isStrikethrough = strikeThroughSpans.isNotEmpty()
+////                    if (isStrikethrough) {
+////                        // Handle strikethrough text
+////                        Log.i("fhycdfhfdrfdc", "StrikeThrough span apply")
+////                    }
+////                    if (value.style == Typeface.BOLD) {
+////                        Log.i("fhycdfhfdrfdc","bold span apply")
+////                        // Handle bold text
+////                    }
+////                    if (styleSpan.style == Typeface.ITALIC) {
+////                        Log.i("fhycdfhfdrfdc","italic span apply")
+////                        // Handle italic text
+////                    }
+//                }
+//
+//            })
 
 //            etRichChatDemo.doAfterTextChanged {
 //                val text=etRichChatDemo.text
@@ -525,5 +541,32 @@ class ChipSetDemoFragment : Fragment() {
         }
     }
 
-
+    private fun gettingMicPermission(context: Activity, permission: ArrayList<String>){
+        Dexter.withContext(context).withPermissions(permission).withListener(object :MultiplePermissionsListener{
+            override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
+                if (p0?.areAllPermissionsGranted() == true) {
+//                    Toast.makeText(requireContext(), "All the permissions are granted..", Toast.LENGTH_SHORT).show();
+                    Log.i(TAG,"All the permissions are granted..")
+                }else {
+                    if (p0?.isAnyPermissionPermanentlyDenied == true) {
+                        Log.i(TAG, "Permission denied")
+//                    Toast.makeText(requireContext(), "Permission denied", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Log.i(TAG, "Permission denied temp")
+                        gettingMicPermission(context, permission)
+                    }
+                }
+            }
+            override fun onPermissionRationaleShouldBeShown(
+                p0: MutableList<PermissionRequest>?,
+                p1: PermissionToken?,
+            ) {
+                p1?.continuePermissionRequest()
+            }
+        }).withErrorListener { error ->
+            Toast.makeText(requireContext(),
+                "Error occurred! ${error.name}",
+                Toast.LENGTH_SHORT).show()
+        }.onSameThread().check()
+    }
 }
