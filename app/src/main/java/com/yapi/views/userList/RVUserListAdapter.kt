@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.yapi.R
+import com.yapi.common.checkDeviceType
 
 class RVUserListAdapter(
     private var context: Context,
@@ -32,13 +33,17 @@ class RVUserListAdapter(
             holder.viewBottomLine.visibility = View.VISIBLE
             holder.constarintsTopList.setBackgroundResource(0)
         }
+        if(checkDeviceType()){
+            holder.viewBottomLine.visibility = View.GONE
+        }else
+        {
         if (position != userList.size - 1) {
             if (userList[position + 1].isCheck!!) {
                 holder.viewBottomLine.visibility = View.GONE
             } else {
                 // holder.viewBottomLine.visibility = View.VISIBLE
             }
-        }
+        }}
         holder.ivMorUsers.setOnClickListener {
             userClick.onClick(position, holder.ivMorUsers)
         }

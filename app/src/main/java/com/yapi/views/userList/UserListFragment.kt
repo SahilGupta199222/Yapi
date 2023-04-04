@@ -103,11 +103,7 @@ class UserListFragment : Fragment(), UserClickEvent {
 
         constraintsProfile.setOnClickListener {
             popUp.dismiss()
-            if (checkDeviceType()) {
-
-            } else {
                 showEditMemberMethod()
-            }
         }
         var constraintsSettings =
             mView.findViewById<ConstraintLayout>(R.id.constraintsSettings)
@@ -118,11 +114,7 @@ class UserListFragment : Fragment(), UserClickEvent {
         var constraintsLogout = mView.findViewById<ConstraintLayout>(R.id.constraintsLogout)
         constraintsLogout.setOnClickListener {
             popUp.dismiss()
-            if (checkDeviceType()) {
-
-            } else {
                 showRemoveMemberMethod()
-            }
         }
     }
 
@@ -131,16 +123,40 @@ class UserListFragment : Fragment(), UserClickEvent {
     }
 
     fun showEditMemberMethod() {
+
+        var dividedValue=0.0
+        if(checkDeviceType())
+        {
+            dividedValue=1.3
+        }else
+        {
+            dividedValue=1.05
+        }
         var dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.edit_memeber_info_popup)
         dialog.show()
 
         var linearEditMember = dialog.findViewById<LinearLayout>(R.id.linearEditMember)
-        linearEditMember.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
+        linearEditMember.layoutParams.width = (screenWidth!!.toDouble() / dividedValue).toInt()
         var ivInnerBack = dialog.findViewById<ImageView>(R.id.ivInnerBack)
         var btnCancelTemplate = dialog.findViewById<AppCompatButton>(R.id.btnCancelTemplate)
+        var ivOutsideCloseGroup = dialog.findViewById<ImageView>(R.id.ivOutsideCloseGroup)
+
+        if(checkDeviceType())
+        {
+            ivOutsideCloseGroup.visibility=View.VISIBLE
+            ivInnerBack.visibility=View.GONE
+        }else
+        {
+            ivOutsideCloseGroup.visibility=View.GONE
+            ivInnerBack.visibility=View.VISIBLE
+        }
+
         ivInnerBack.setOnClickListener {
+            dialog.dismiss()
+        }
+        ivOutsideCloseGroup.setOnClickListener {
             dialog.dismiss()
         }
 
@@ -150,6 +166,16 @@ class UserListFragment : Fragment(), UserClickEvent {
     }
 
     fun showRemoveMemberMethod() {
+
+        var dividedValue=0.0
+        if(checkDeviceType())
+        {
+            dividedValue=1.3
+        }else
+        {
+            dividedValue=1.05
+        }
+
         var dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.remove_member_layout)
@@ -158,7 +184,7 @@ class UserListFragment : Fragment(), UserClickEvent {
         var ivOutsideCloseGroup = dialog.findViewById<ImageView>(R.id.ivOutsideCloseGroup)
 
         var linearRemoveMember = dialog.findViewById<LinearLayout>(R.id.linearRemoveMember)
-        linearRemoveMember.layoutParams.width = (screenWidth!!.toDouble() / 1.01).toInt()
+        linearRemoveMember.layoutParams.width = (screenWidth!!.toDouble() / dividedValue).toInt()
 
         if (checkDeviceType()) {
             ivOutsideCloseGroup.visibility = View.VISIBLE
@@ -178,6 +204,16 @@ class UserListFragment : Fragment(), UserClickEvent {
 
 
     fun showDeactivateMemberMethod() {
+
+        var dividedValue=0.0
+        if(checkDeviceType())
+        {
+            dividedValue=1.3
+        }else
+        {
+            dividedValue=1.05
+        }
+
         var dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.remove_member_layout)
@@ -196,7 +232,7 @@ class UserListFragment : Fragment(), UserClickEvent {
         btnTemplateSave.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.darkBlueBtn)));
 
         var linearRemoveMember = dialog.findViewById<LinearLayout>(R.id.linearRemoveMember)
-        linearRemoveMember.layoutParams.width = (screenWidth!!.toDouble() / 1.01).toInt()
+        linearRemoveMember.layoutParams.width = (screenWidth!!.toDouble() /dividedValue).toInt()
 
         if (checkDeviceType()) {
             ivOutsideCloseGroup.visibility = View.VISIBLE
@@ -213,4 +249,49 @@ class UserListFragment : Fragment(), UserClickEvent {
             dialog.dismiss()
         }
     }
+
+
+    fun showAddMemberMethod() {
+
+        var dividedValue=0.0
+        if(checkDeviceType())
+        {
+            dividedValue=1.3
+        }else
+        {
+            dividedValue=1.05
+        }
+        var dialog = Dialog(MainActivity.activity!!.get()!!)
+        dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setContentView(R.layout.edit_memeber_info_popup)
+        dialog.show()
+
+        var linearEditMember = dialog.findViewById<LinearLayout>(R.id.linearEditMember)
+        linearEditMember.layoutParams.width = (screenWidth!!.toDouble() / dividedValue).toInt()
+        var ivInnerBack = dialog.findViewById<ImageView>(R.id.ivInnerBack)
+        var btnCancelTemplate = dialog.findViewById<AppCompatButton>(R.id.btnCancelTemplate)
+        var ivOutsideCloseGroup = dialog.findViewById<ImageView>(R.id.ivOutsideCloseGroup)
+
+        if(checkDeviceType())
+        {
+            ivOutsideCloseGroup.visibility=View.VISIBLE
+            ivInnerBack.visibility=View.GONE
+        }else
+        {
+            ivOutsideCloseGroup.visibility=View.GONE
+            ivInnerBack.visibility=View.VISIBLE
+        }
+
+        ivInnerBack.setOnClickListener {
+            dialog.dismiss()
+        }
+        ivOutsideCloseGroup.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        btnCancelTemplate.setOnClickListener {
+            dialog.dismiss()
+        }
+    }
+
 }

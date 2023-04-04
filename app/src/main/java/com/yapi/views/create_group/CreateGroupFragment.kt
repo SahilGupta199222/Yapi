@@ -63,6 +63,7 @@ class CreateGroupFragment : DialogFragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentCreateGroupBinding.inflate(LayoutInflater.from(context))
+
         //inflater.context.setTheme(R.style.FullScreenDialog)
         binding.vModel = viewModel
         addObserverForOpenAddPeople()
