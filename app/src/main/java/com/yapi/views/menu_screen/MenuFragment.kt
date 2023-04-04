@@ -16,6 +16,7 @@ import com.yapi.R
 import com.yapi.common.Constants
 import com.yapi.common.GroupEvent
 import com.yapi.common.MyMessageEvent
+import com.yapi.common.checkDeviceType
 import com.yapi.databinding.FragmentMenuBinding
 import com.yapi.views.profile.ProfileFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -307,8 +308,15 @@ class MenuFragment : Fragment() {
                     }
                     adapterSettingsList?.notifyDataSetChanged()
 
-                     if(findNavController().currentDestination?.id == R.id.menuFragment)
-                         findNavController().navigate(R.id.action_menuFragment_to_userListFragment)
+                    if(checkDeviceType()){
+                        EventBus.getDefault()
+                            .post(MyMessageEvent(2, Constants.USER_MANAGEMENT)) //post event
+                    }else
+                    {
+                        if(findNavController().currentDestination?.id == R.id.menuFragment)
+                            findNavController().navigate(R.id.action_menuFragment_to_userListFragment)
+                    }
+
                 }
             })
         binding.rvSettingsListMenu.adapter = adapterSettingsList

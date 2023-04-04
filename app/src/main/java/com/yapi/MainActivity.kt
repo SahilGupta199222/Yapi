@@ -21,6 +21,7 @@ import com.yapi.views.chat.chatUserInfo.ChatUserInfoFragment
 import com.yapi.views.chat_empty.ChatEmptyFragment
 import com.yapi.views.create_group.CreateGroupFragment
 import com.yapi.views.menu_screen.MenuFragment
+import com.yapi.views.userList.UserListFragment
 import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -140,8 +141,18 @@ class MainActivity : AppCompatActivity() {
                         } else
                             if (event.screenName == Constants.GROUP_PROFILE_BACK) {
                                 showTabsMethod(2, event.screenName)
-                            }
+                            }else
+                                if(event.screenName==Constants.USER_MANAGEMENT)
+                                {
+                                    openUserMamangementScreen()
+                                }
 
+    }
+
+    fun openUserMamangementScreen()
+    {
+        var fragment = UserListFragment()
+        supportFragmentManager.beginTransaction().replace(R.id.secondFrame, fragment).commit()
     }
 
     fun createChatMethod() {

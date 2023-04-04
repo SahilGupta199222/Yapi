@@ -67,10 +67,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_3sdp"
                         android:layout_marginEnd="@dimen/startMainMargin"
-                        android:background="@drawable/btn_drawable_blue"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:padding="@dimen/_15sdp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/ivInnerBack">
@@ -163,7 +161,7 @@
                                 android:gravity="center"
                                 android:letterSpacing="@dimen/text_letter_spacing"
                                 android:lineSpacingExtra="@dimen/line_spacing_extra"
-                                android:text="Phone"
+                                android:text="@string/phone_textt"
                                 android:textAllCaps="true"
                                 android:textColor="@color/darkGrey"
                                 android:textSize="@dimen/smallTextSize"
@@ -191,10 +189,6 @@
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/tvPhoneTitle" />
-
-
-
-
 
                         </LinearLayout>
 
@@ -241,7 +235,6 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/tvemailTitle" />
 
-
                             <TextView
                                 android:id="@+id/tvRoleTitle"
                                 android:layout_width="wrap_content"
@@ -251,7 +244,7 @@
                                 android:gravity="center"
                                 android:letterSpacing="@dimen/text_letter_spacing"
                                 android:lineSpacingExtra="@dimen/line_spacing_extra"
-                                android:text="Role"
+                                android:text="@string/role_textt"
                                 android:textAllCaps="true"
                                 android:textColor="@color/darkGrey"
                                 android:textSize="@dimen/smallTextSize"

@@ -94,9 +94,9 @@ class UserListFragment : Fragment(), UserClickEvent {
         var ivDeactiveMember = mView.findViewById<ImageView>(R.id.ivmenuSetting)
         var ivmenulogout = mView.findViewById<ImageView>(R.id.ivmenulogout)
 
-        editMemberInfoTV.text = "Edit Member Info"
-        deactivateMemberTV.text = "Deactivate Member"
-        logoutTV.text = "Remove Member"
+        editMemberInfoTV.text = requireActivity().getString(R.string.edit_member_info_text)
+        deactivateMemberTV.text = requireActivity().getString(R.string.deactivate_member_text)
+        logoutTV.text = requireActivity().getString(R.string.remove_member_text)
         ivEditMember.setImageResource(R.drawable.edit_message_icon)
         ivDeactiveMember.setImageResource(R.drawable.deactivate_user)
         ivmenulogout.setImageResource(R.drawable.delete_account)
@@ -185,13 +185,13 @@ class UserListFragment : Fragment(), UserClickEvent {
         var ivInnerBack = dialog.findViewById<ImageView>(R.id.ivInnerBack)
         var ivOutsideCloseGroup = dialog.findViewById<ImageView>(R.id.ivOutsideCloseGroup)
         var tvTitle = dialog.findViewById<AppCompatTextView>(R.id.tvTitle)
-        tvTitle.setText("Are you sure you want to deactivate this user?")
+        tvTitle.setText(requireActivity().getString(R.string.are_you_sure_deactivate_user))
 
         var tvDescription = dialog.findViewById<AppCompatTextView>(R.id.tvDescription)
-        tvDescription.setText("If you deactivate this account, user won’t be able to receive messages.")
+        tvDescription.setText(requireActivity().getString(R.string.if_deactivate_account_receive))
 
         var btnTemplateSave = dialog.findViewById<AppCompatButton>(R.id.btnTemplateSave)
-        btnTemplateSave.setText("Deactivate user")
+        btnTemplateSave.setText(requireActivity().getString(R.string.deactivate_user_text))
 
         btnTemplateSave.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.darkBlueBtn)));
 
