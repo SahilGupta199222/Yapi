@@ -8,7 +8,7 @@ import android.content.res.ColorStateList
 import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.Bundle
-import android.os.Environment
+import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -26,9 +26,14 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import com.masoudss.lib.SeekBarOnProgressChanged
+import com.masoudss.lib.WaveformSeekBar
 import com.yapi.R
 import com.yapi.databinding.FragmentChipSetDemoBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Runnable
+import kotlinx.coroutines.launch
 import java.io.File
 import java.util.*
 
@@ -57,6 +62,8 @@ class ChipSetDemoFragment : Fragment() {
     private var mPlayer: MediaPlayer? = null
     private var mFileName: String? = null
     private var playingStatus=false
+    private var recordFile: File? = null
+    var cTimer: CountDownTimer? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -82,7 +89,7 @@ class ChipSetDemoFragment : Fragment() {
         binding.apply {
             imgMicIconChatDemo.setOnClickListener {
                 gettingMicPermission(requireActivity(), arrayListOf(Manifest.permission.RECORD_AUDIO
-                    ,Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                    ,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE))
                     imgMicIconChatDemo.setColorFilter(ContextCompat.getColor(
                         requireContext(),
                         R.color.blueColor))
@@ -578,51 +585,77 @@ class ChipSetDemoFragment : Fragment() {
         mRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
         mRecorder?.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
         mRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-        mRecorder?.setOutputFile(mFileName)
+
+
+//        mRecorder?.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT)
+//        mRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT)
+        mRecorder?.setOutputFile(recordFile?.path)
     }
     fun getAmplitude(){
-       Handler(Looper.myLooper()!!).postDelayed(object :kotlinx.coroutines.Runnable{
-           override fun run() {
-               if(playingStatus){
-                   val amplitude=mRecorder?.maxAmplitude
-                   binding.audioRecordView.update(amplitude?:0)
-                   getAmplitude()
-               }else{
-                    binding.layoutRecoding.visibility=View.GONE
-               }
-           }
-
-       },100)
+        playingStatus=true
+        cTimer= object : CountDownTimer(30000, 100) {
+            override fun onTick(millisUntilFinished: Long) {
+                val sec=millisUntilFinished/1000
+                binding.txtRecodingTime.text=sec.toString()+"Sec"
+                val amplitude=mRecorder?.maxAmplitude
+               binding.audioRecordView.update(amplitude?:0)
+            }
+            override fun onFinish() {
+                mRecorder?.stop()
+                mRecorder?.release()
+                mRecorder=null
+                playingStatus=false
+                cTimer=null
+            }
+        }.start()
     }
     fun recodeAudio(){
-        binding.imgStopRecoding.setOnClickListener {
-        mRecorder?.stop()
-        mRecorder?.release()
-        mRecorder=null
-            playingStatus=false
+        if (cTimer!=null) {
+            cTimer!!.cancel()
+            cTimer = null
         }
-        binding.layoutRecoding.visibility=View.VISIBLE
         binding.imgStopRecoding.setOnClickListener {
-            binding.layoutRecoding.visibility=View.GONE
-        }
-        val uuid = UUID.randomUUID().toString()
-        val directory = File(Environment.getExternalStorageDirectory().absolutePath + "/MyRecordings")
-        if (!directory.exists()) {
-            val success = directory.mkdirs()
-            if (!success) {
-                Log.e(TAG, "Failed to create directory")
-                return
+            if (cTimer != null) {
+                cTimer!!.cancel()
+                cTimer = null
+                mRecorder?.stop()
+                mRecorder?.release()
+                mRecorder = null
+                playingStatus = false
+            }
+//            binding.recodingProgressBar.setSampleFrom(recordFile?.path.toString())
+            CoroutineScope(Dispatchers.IO).launch {
+                binding.recodingProgressBar.setSampleFrom("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3")
             }
         }
-        val file = File(directory, "${uuid}+recording.mp3")
-        mFileName=file.absolutePath
-//            mFileName = requireActivity().externalCacheDir?.absolutePath + "/" + uuid + ".3gp"
-            Log.i(TAG, mFileName.toString())
+        binding.recodingProgressBar.onProgressChanged=object :SeekBarOnProgressChanged{
+            override fun onProgressChanged(
+                waveformSeekBar: WaveformSeekBar,
+                progress: Float,
+                fromUser: Boolean,
+            ) {
+                Log.i(TAG,"Wave $waveformSeekBar , Progress $progress , FromUser $fromUser")
+            }
+
+        }
+        binding.imgDoneRecoding.setOnClickListener {
+            binding.txtRecodingTime.text=""
+            binding.audioRecordView.recreate()
+            binding.recodingProgressBar.setSampleFrom("")
+            binding.layoutRecoding.visibility=View.GONE
+        }
+        binding.layoutRecoding.visibility=View.VISIBLE
+        recordFile =
+            File(requireContext().filesDir,  UUID.randomUUID().toString() +".mp3")
+        if (!recordFile?.exists()!!) {
+            recordFile?.createNewFile()
+        }
+            Log.i(TAG, recordFile?.path.toString())
              mediaRecorderReady()
         try {
             mRecorder?.prepare()
             mRecorder?.start()
-            playingStatus=true
+
             getAmplitude()
         } catch (e: Exception) {
             e.printStackTrace()
