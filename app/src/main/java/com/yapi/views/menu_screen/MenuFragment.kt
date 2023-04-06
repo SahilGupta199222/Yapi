@@ -1,7 +1,7 @@
 package com.yapi.views.menu_screen
 
 import android.annotation.SuppressLint
-import android.app.Dialog
+import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
@@ -24,6 +24,7 @@ import org.greenrobot.eventbus.EventBus
 
 @AndroidEntryPoint
 class MenuFragment : Fragment() {
+    private var rowHeight: Int?=0
     private lateinit var binding: FragmentMenuBinding
     private var groupListClicked = true
     private var jobListClicked = true
@@ -51,6 +52,21 @@ class MenuFragment : Fragment() {
         requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
         val width = displayMetrics.widthPixels
         viewModel.screenWidth = width
+
+        val vto: ViewTreeObserver = binding.constraintsTop!!.getViewTreeObserver()
+        vto.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+           override fun onGlobalLayout() {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                    binding.constraintsTop!!.getViewTreeObserver().removeGlobalOnLayoutListener(this)
+                } else {
+                    binding.constraintsTop!!.getViewTreeObserver().removeOnGlobalLayoutListener(this)
+                }
+               // val width: Int = binding.constraintsTop!!.getMeasuredWidth()
+                rowHeight = binding.constraintsTop!!.getMeasuredHeight()
+
+            }
+        })
+
         addNextToScreenObserver()
         init()
 
@@ -505,7 +521,7 @@ class MenuFragment : Fragment() {
             requireContext().resources.getDimension(com.intuit.sdp.R.dimen._36sdp).toInt()
         val rvHeight = fixImageHeight * list.size
         binding.rvGroupListMenu.layoutParams.height = rvHeight
-
+        Log.e("fknkwefwsfwfwaf===",rowHeight.toString())
         adapterGroupsList =
             AdapterGroupsList(requireContext(), true, list, object : AdapterGroupsList.Click {
                 @SuppressLint("NotifyDataSetChanged")

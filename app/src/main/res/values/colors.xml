@@ -35,4 +35,7 @@
     <color name="green_color">#00D936</color>
 
     <color name="user_list_box">#F3F3F3</color>
+
+    <color name="error_border_color">#D91717</color>
+    <color name="error_box_color">#FFF2F2</color>
 </resources>

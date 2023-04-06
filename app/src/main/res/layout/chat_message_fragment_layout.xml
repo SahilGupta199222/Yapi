@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="mViewModel"
             type="com.yapi.views.chat.ChatViewModel" />
+
         <variable
             name="mView"
             type="android.view.View" />
@@ -27,27 +30,122 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/ivChatBack"
-                android:layout_width="@dimen/extraIconSize"
-                android:layout_height="@dimen/extraIconSize"
-                android:rotation="180"
-                android:onClick="@{mViewModel::onClick}"
-                android:visibility="@{mViewModel.backButtonVisible?mView.VISIBLE:mView.GONE}"
-                android:src="@drawable/arrow_forward"
-                app:layout_constraintBottom_toBottomOf="@+id/tvMemberValue"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvName"
-                app:tint="@color/medium_grey_color" />
+            <LinearLayout
+                android:id="@+id/linearChatArrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/ivChatCall"
+                app:layout_constraintTop_toTopOf="@+id/ivChatCall">
+
+                <ImageView
+                    android:id="@+id/ivChatBack"
+                    android:layout_width="@dimen/extraIconSize"
+                    android:layout_height="@dimen/extraIconSize"
+                    android:layout_gravity="center_vertical"
+                    android:onClick="@{mViewModel::onClick}"
+                    android:rotation="180"
+                    android:src="@drawable/arrow_forward"
+                    android:visibility="@{mViewModel.backButtonVisible?mView.VISIBLE:mView.GONE}"
+                    app:tint="@color/medium_grey_color" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.yapi.common.RoundRectCornerImageView
+                        android:id="@+id/ivGroupImage"
+                        android:layout_width="@dimen/_45sdp"
+                        android:layout_height="@dimen/_45sdp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/temp_group_image"
+                        android:visibility="@{mViewModel.groupImageVisible?mView.VISIBLE:mView.GONE}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <RelativeLayout
+                        android:id="@+id/relNameValue"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:background="@drawable/et_drawable"
+                        android:backgroundTint="#FEFAE5"
+                        android:visibility="@{mViewModel.noImageOnlyNameVisible?mView.VISIBLE:mView.GONE}"
+                        android:orientation="horizontal"
+
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/larsseit_bold"
+                            android:letterSpacing="@dimen/text_letter_spacing"
+                            android:lineSpacingExtra="@dimen/line_spacing_extra"
+                            android:text="LR"
+                            android:textColor="#F2CB00"
+                            android:textSize="@dimen/titleTextSize" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/relGroupIconImage"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:background="@drawable/et_drawable"
+                        android:backgroundTint="#ffffff"
+                        android:visibility="@{mViewModel.groupIconVisible?mView.VISIBLE:mView.GONE}"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent">
+                    <ImageView
+                        android:id="@+id/ivGroupIconImage"
+                        android:layout_width="@dimen/_10sdp"
+                        android:layout_height="@dimen/_10sdp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/group_icon"
+                        android:layout_centerInParent="true"
+                        android:visibility="@{mViewModel.groupIconVisible?mView.VISIBLE:mView.GONE}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:tint="@color/blueColor" />
+                    </RelativeLayout>
+                    <ImageView
+                        android:id="@+id/ivLiveUser"
+                        android:layout_width="@dimen/_10sdp"
+                        android:layout_height="@dimen/_10sdp"
+
+                        android:visibility="@{mViewModel.liveUserVisible?mView.VISIBLE:mView.GONE}"
+                        android:src="@drawable/green_circle_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                       />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/ivChatCall"
                 android:layout_width="@dimen/iconSize"
                 android:layout_height="@dimen/iconSize"
-                android:layout_marginEnd="@dimen/topFiveMargin"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:src="@drawable/chat_call_icon"
                 app:layout_constraintBottom_toBottomOf="@+id/tvMemberValue"
-                app:layout_constraintEnd_toStartOf="@+id/ivChat_more_icon"
+                app:layout_constraintEnd_toStartOf="@+id/ivChat_video_icon"
+                app:layout_constraintTop_toTopOf="@+id/tvName"
+                app:tint="@color/medium_grey_color" />
+
+            <ImageView
+                android:id="@+id/ivChat_video_icon"
+                android:layout_width="@dimen/extraIconSize"
+                android:layout_height="@dimen/extraIconSize"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:src="@drawable/video_call_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/tvMemberValue"
+                app:layout_constraintEnd_toStartOf="@id/ivChat_more_icon"
                 app:layout_constraintTop_toTopOf="@+id/tvName"
                 app:tint="@color/medium_grey_color" />
 
@@ -68,12 +166,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:fontFamily="@font/larsseit_medium"
+                android:onClick="@{mViewModel::onClick}"
                 android:text="Human Resource"
                 android:textColor="@color/darkGrey"
                 android:textSize="@dimen/_16ssp"
-                android:onClick="@{mViewModel::onClick}"
                 app:layout_constraintEnd_toStartOf="@+id/ivChatCall"
-                app:layout_constraintStart_toEndOf="@+id/ivChatBack"
+                app:layout_constraintStart_toEndOf="@+id/linearChatArrow"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -86,8 +184,60 @@
                 android:textColor="@color/medium_grey_color"
                 android:textSize="@dimen/normalSmallTextSize"
                 app:layout_constraintEnd_toStartOf="@+id/ivChatCall"
-                app:layout_constraintStart_toEndOf="@+id/ivChatBack"
+                app:layout_constraintStart_toEndOf="@+id/linearChatArrow"
                 app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+       <LinearLayout
+           android:id="@+id/linear_all_photos"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:visibility="@{mViewModel.groupAllPhotos?mView.VISIBLE:mView.GONE}"
+           app:layout_constraintTop_toTopOf="@id/ivChat_more_icon"
+           app:layout_constraintBottom_toBottomOf="@id/ivChat_more_icon"
+           app:layout_constraintEnd_toStartOf="@id/ivChatCall"
+           android:orientation="horizontal">
+           <ImageView
+               android:src="@drawable/temp_photo"
+               android:layout_width="@dimen/_15sdp"
+               android:layout_height="@dimen/_15sdp"/>
+           <ImageView
+               android:src="@drawable/temp_photo"
+               android:layout_width="@dimen/_15sdp"
+               android:layout_marginStart="@dimen/_3sdp"
+               android:layout_height="@dimen/_15sdp"/>
+           <ImageView
+               android:src="@drawable/temp_photo"
+               android:layout_marginStart="@dimen/_3sdp"
+               android:layout_width="@dimen/_15sdp"
+               android:layout_height="@dimen/_15sdp"/>
+
+           <FrameLayout
+               android:layout_width="@dimen/_15sdp"
+               android:layout_height="@dimen/_15sdp">
+           <ImageView
+               android:src="@drawable/temp_photo"
+               android:layout_marginStart="@dimen/_3sdp"
+               android:layout_width="@dimen/_15sdp"
+               android:layout_height="@dimen/_15sdp"/>
+               <TextView
+                   android:background="#FAFAFA"
+                   android:text="4+"
+                   android:alpha="0.5"
+                   android:layout_gravity="center"
+                   android:gravity="center"
+                   android:textSize="@dimen/_6sdp"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"/>
+           </FrameLayout>
+           <androidx.appcompat.widget.AppCompatTextView
+               android:layout_width="wrap_content"
+               android:textSize="@dimen/_9ssp"
+               android:textColor="@color/medium_grey_color"
+               android:fontFamily="@font/larsseit_regular"
+               android:text="Phoebe, Ross and 4 others are here now"
+               android:layout_height="wrap_content"/>
+       </LinearLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -108,69 +258,70 @@
                 android:paddingBottom="@dimen/_5sdp">
 
                 <include
-                    android:visibility="gone"
                     android:id="@+id/createGroupUI"
-                    layout="@layout/created_group_ui_chat" />
+                    layout="@layout/created_group_ui_chat"
+                    android:visibility="gone" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:visibility="visible"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:visibility="visible">
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvChatList"
                         android:layout_width="0dp"
-                        android:layout_marginTop="@dimen/_20sdp"
-                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_height="0dp"/>
-<View
-    android:layout_width="0dp"
-    android:layout_height="@dimen/_1sdp"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    android:layout_marginEnd="@dimen/_15sdp"
-    app:layout_constraintEnd_toStartOf="@id/constraintsTopTime"
-    android:background="@color/chat_bottom_line_color"/>
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintsTopTime"
-                        android:layout_width="wrap_content"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:layout_height="wrap_content">
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:id="@+id/tvShowTime"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:text="Today, March 13, 2023"
-                        android:textSize="@dimen/normalSmallTextSize"
-                        android:fontFamily="@font/larsseit_regular"
-                        android:textColor="@color/darkGrey"
-                        android:layout_height="wrap_content"/>
-
-                    <ImageView
-                        android:id="@+id/timeDownArrow"
-                        android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-                        android:layout_width="wrap_content"
-                        android:rotation="90"
-                        app:tint="#B8B8B8"
-                        app:layout_constraintBottom_toBottomOf="@id/tvShowTime"
-                        app:layout_constraintTop_toTopOf="@id/tvShowTime"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        app:layout_constraintStart_toEndOf="@id/tvShowTime"
-                        android:layout_height="wrap_content"/>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                    <View
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <!--<View
                         android:layout_width="0dp"
-                        android:layout_marginStart="@dimen/_15sdp"
                         android:layout_height="@dimen/_1sdp"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/constraintsTopTime"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        app:layout_constraintEnd_toStartOf="@id/constraintsTopTime"
                         android:background="@color/chat_bottom_line_color"/>
+                                        <androidx.constraintlayout.widget.ConstraintLayout
+                                            android:id="@+id/constraintsTopTime"
+                                            android:layout_width="wrap_content"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent"
+                                            android:layout_height="wrap_content">
+                                        <androidx.appcompat.widget.AppCompatTextView
+                                            android:layout_width="wrap_content"
+                                            android:id="@+id/tvShowTime"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent"
+                                            android:text="Today, March 13, 2023"
+                                            android:textSize="@dimen/normalSmallTextSize"
+                                            android:fontFamily="@font/larsseit_regular"
+                                            android:textColor="@color/darkGrey"
+                                            android:layout_height="wrap_content"/>
+
+                                        <ImageView
+                                            android:id="@+id/timeDownArrow"
+                                            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+                                            android:layout_width="wrap_content"
+                                            android:rotation="90"
+                                            app:tint="#B8B8B8"
+                                            app:layout_constraintBottom_toBottomOf="@id/tvShowTime"
+                                            app:layout_constraintTop_toTopOf="@id/tvShowTime"
+                                            android:layout_marginStart="@dimen/_10sdp"
+                                            app:layout_constraintStart_toEndOf="@id/tvShowTime"
+                                            android:layout_height="wrap_content"/>
+                                        </androidx.constraintlayout.widget.ConstraintLayout>
+                                        <View
+                                            android:layout_width="0dp"
+                                            android:layout_marginStart="@dimen/_15sdp"
+                                            android:layout_height="@dimen/_1sdp"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent"
+                                            app:layout_constraintStart_toEndOf="@id/constraintsTopTime"
+                                            android:background="@color/chat_bottom_line_color"/>-->
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
@@ -214,8 +365,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/larsseit_medium"
-                    android:text="@string/chat_text"
                     android:onClick="@{mViewModel::onClick}"
+                    android:text="@string/chat_text"
                     android:textColor="@{mViewModel.chatValue?@color/darkGrey:@color/medium_grey_color}"
                     android:textSize="@dimen/normalTextSize"
                     app:layout_constraintStart_toStartOf="parent"
@@ -227,9 +378,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:fontFamily="@font/larsseit_medium"
+                    android:onClick="@{mViewModel::onClick}"
                     android:text="@string/email_text"
                     android:textColor="@{mViewModel.emailValue?@color/darkGrey:@color/medium_grey_color}"
-                    android:onClick="@{mViewModel::onClick}"
                     android:textSize="@dimen/normalTextSize"
                     app:layout_constraintStart_toEndOf="@+id/tvMessages"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -240,9 +391,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:fontFamily="@font/larsseit_medium"
+                    android:onClick="@{mViewModel::onClick}"
                     android:text="@string/sms_text"
                     android:textColor="@{mViewModel.smsValue?@color/darkGrey:@color/medium_grey_color}"
-                    android:onClick="@{mViewModel::onClick}"
                     android:textSize="@dimen/normalTextSize"
                     app:layout_constraintStart_toEndOf="@+id/tvEmail"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -381,20 +532,20 @@
                     app:layout_constraintBottom_toTopOf="@+id/etRichChatDemo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
-                  <jp.wasabeef.richeditor.RichEditor
-                      android:id="@+id/etRichChatDemo"
-                      android:layout_width="match_parent"
-                      android:layout_height="@dimen/_55sdp"
-                      android:layout_marginTop="@dimen/_3sdp"
-                      android:layout_marginBottom="@dimen/_3sdp"
-                      android:layout_marginEnd="@dimen/_10sdp"
-                      android:layout_marginStart="@dimen/_20sdp"
-                      android:visibility="visible"
-                      android:textSize="@dimen/normalSmallTextSize"
-                      app:layout_constraintBottom_toTopOf="@+id/layoutStyleOptionsEditTextViewChatDemo"
-                      app:layout_constraintEnd_toEndOf="parent"
-                      app:layout_constraintStart_toStartOf="parent"
-                      app:layout_constraintTop_toTopOf="parent" />
+                <!-- <jp.wasabeef.richeditor.RichEditor
+                     android:id="@+id/etRichChatDemo"
+                     android:layout_width="match_parent"
+                     android:layout_height="@dimen/_55sdp"
+                     android:layout_marginTop="@dimen/_3sdp"
+                     android:layout_marginBottom="@dimen/_3sdp"
+                     android:layout_marginEnd="@dimen/_10sdp"
+                     android:layout_marginStart="@dimen/_20sdp"
+                     android:visibility="visible"
+                     android:textSize="@dimen/normalSmallTextSize"
+                     app:layout_constraintBottom_toTopOf="@+id/layoutStyleOptionsEditTextViewChatDemo"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     app:layout_constraintStart_toStartOf="parent"
+                     app:layout_constraintTop_toTopOf="parent" />-->
                 <!--
 
                 <LinearLayout
@@ -497,8 +648,8 @@
                         android:layout_width="@dimen/iconSize"
                         android:layout_height="@dimen/iconSize"
                         android:layout_marginStart="@dimen/topMargin"
-                        android:rotation="90"
                         android:onClick="@{mViewModel::onClick}"
+                        android:rotation="90"
                         android:src="@drawable/ic_baseline_attach_file_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/imgLinkIconChatDemo"

@@ -1,11 +1,13 @@
 package com.yapi.views.create_team.third_step_create_team
 
 import android.app.Dialog
+import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.cardview.widget.CardView
 import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.yapi.MainActivity
@@ -13,6 +15,7 @@ import com.yapi.R
 import com.yapi.common.*
 import com.yapi.databinding.CrmDialogLayoutBinding
 import com.yapi.pref.PreferenceFile
+import com.yapi.views.sign_in.SignInErrorData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
@@ -21,11 +24,13 @@ import javax.inject.Inject
 class ThirdStepViewModel @Inject constructor(val preferenceFile: PreferenceFile) : ViewModel() {
     var screenWidth: Int? = 0
     var emailFieldValue = ObservableField("")
+    var errorData=MutableLiveData<SignInErrorData>()
     fun onClick(view: View) {
         when (view.id) {
             R.id.btnThirdCreateTeam -> {
                 if (view.findNavController().currentDestination?.id == R.id.thirdStepCreateTeam) {
                     if (checkValidation()) {
+                        errorData.value= SignInErrorData("",0)
                         preferenceFile.saveStringValue(Constants.USER_ID,"1")
                         if(MainActivity.activity!!.get()!!.getResources().getBoolean(R.bool.isTab)) {
                             System.out.println("phone========tablet");
@@ -63,6 +68,11 @@ class ThirdStepViewModel @Inject constructor(val preferenceFile: PreferenceFile)
                 //show CRM Invite Dialog
                 showCRMDialog()
             }
+            R.id.constraintsAddMember->{
+                //for Add Member
+                view.findNavController()
+                    .navigate(R.id.action_thirdStepCreateTeam_to_addPeopleFragment)
+            }
         }
     }
 
@@ -85,13 +95,25 @@ class ThirdStepViewModel @Inject constructor(val preferenceFile: PreferenceFile)
 
     private fun checkValidation(): Boolean {
         if (emailFieldValue.get().toString().isEmpty()) {
-            showToastMessage(MainActivity.activity!!.get()!!.resources.getString(R.string.please_enter_email))
+          //  showToastMessage(MainActivity.activity!!.get()!!.resources.getString(R.string.please_enter_email))
+            errorData.value=SignInErrorData(MainActivity.activity!!.get()!!.resources.getString(R.string.please_enter_email),0)
             return false
         } else if (!(isValidEmail(emailFieldValue.get().toString()))) {
-            showToastMessage(MainActivity.activity!!.get()!!.resources.getString(R.string.please_enter_valid_email))
+           // showToastMessage(MainActivity.activity!!.get()!!.resources.getString(R.string.please_enter_valid_email))
+            errorData.value=SignInErrorData(MainActivity.activity!!.get()!!.resources.getString(R.string.please_enter_valid_email),0)
+
             return false
         } else {
             return true
+        }
+    }
+
+    fun AfterTextChanged(s: Editable?) {
+        if (emailFieldValue.get().toString().trim().length > 0 && isValidEmail(emailFieldValue.get()
+                .toString())
+        ) {
+            errorData.value= SignInErrorData("",0)
+        } else {
         }
     }
 }

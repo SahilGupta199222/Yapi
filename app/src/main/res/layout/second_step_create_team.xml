@@ -145,6 +145,19 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tvteamField" />
 
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtErrorEmailSecond"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/larsseit_regular"
+                        android:text=""
+                        android:layout_marginStart="@dimen/error_margin_start"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/smallTextSize"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/etTeamName"
+                        app:layout_constraintTop_toBottomOf="@+id/etTeamName" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>

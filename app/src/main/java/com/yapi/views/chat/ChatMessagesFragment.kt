@@ -1,21 +1,17 @@
 package com.yapi.views.chat
 
 import android.os.Bundle
-import android.os.Handler
 import android.util.DisplayMetrics
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.PopupWindow
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.Constants
@@ -40,6 +36,7 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
           }
       }*/
 
+    private var lastVisible: Int?=-1
     private lateinit var rvChatAdapter: RVchatAdapter
     private lateinit var dataBinding: ChatMessageFragmentLayoutBinding
     val viewModel: ChatViewModel by viewModels()
@@ -60,12 +57,30 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
 
         viewModel.userType = requireArguments().getString("userType")
 
-        if(checkDeviceType())
-        {
+        if (checkDeviceType()) {
             viewModel.backButtonVisible.set(false)
-        }else
-        {
+
+            if(viewModel.userType==Constants.CUSTOMERS_KEY || viewModel.userType==Constants.CONVERSATIONS_KEY)
+            {
+                viewModel.groupImageVisible.set(true)
+                viewModel.groupIconVisible.set(false)
+                viewModel.liveUserVisible.set(true)
+                viewModel.noImageOnlyNameVisible.set(true)
+                viewModel.groupAllPhotos.set(false)
+            }else
+            {
+                viewModel.groupImageVisible.set(true)
+                viewModel.groupIconVisible.set(true)
+                viewModel.liveUserVisible.set(false)
+                viewModel.noImageOnlyNameVisible.set(false)
+                viewModel.groupAllPhotos.set(true)
+            }
+        } else {
             viewModel.backButtonVisible.set(true)
+            viewModel.groupImageVisible.set(false)
+            viewModel.groupIconVisible.set(false)
+            viewModel.liveUserVisible.set(false)
+            viewModel.groupAllPhotos.set(false)
         }
 
         initUI()
@@ -74,11 +89,45 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
 
     //For UI Intialization
     private fun initUI() {
-        rvChatAdapter = RVchatAdapter(requireActivity(), this)
+
+        var arraylist=ArrayList<String>()
+        arraylist.clear()
+        arraylist.add("AA")
+        arraylist.add("AA")
+        arraylist.add("AA")
+        arraylist.add("AA")
+        arraylist.add("AA")
+        arraylist.add("AA")
+        arraylist.add("AA")
+        arraylist.add("AA")
+        arraylist.add("AA")
+        arraylist.add("AA")
+        arraylist.add("AA")
+        arraylist.add("AA")
+
+        rvChatAdapter = RVchatAdapter(requireActivity(), this,arraylist)
         dataBinding.rvChatList.layoutManager = LinearLayoutManager(requireActivity())
         dataBinding.rvChatList.adapter = rvChatAdapter
         hideKeyboardObserverMethod()
+        scrollRecylerViewMethod()
+
     }
+
+    private fun scrollRecylerViewMethod() {
+
+        dataBinding.rvChatList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val layoutManager = LinearLayoutManager::class.java.cast(recyclerView.layoutManager)
+                val totalItemCount = layoutManager.itemCount
+                 lastVisible = layoutManager.findLastVisibleItemPosition()
+                val endHasBeenReached = lastVisible!! + 5 >= totalItemCount
+                if (totalItemCount > 0 && endHasBeenReached) {
+                    //you have reached to the bottom of your recycler view
+                }
+            }
+        })
+    }
+
 
     //When click on the three dots
     fun showEditMessageMethod(ivMoreImageView: ImageView) {
@@ -91,32 +140,62 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
             newWidth.toInt(),
             LinearLayout.LayoutParams.WRAP_CONTENT,
             false)
-        // popUp.showAtLocation(mView, Gravity.RIGHT,0,0);
+
+      //  if(rvChatAdapter)
+
+       //  popUp.showAtLocation(mView, Gravity.RIGHT,0,0);
         popUp.isTouchable = true
         popUp.isFocusable = true
         popUp.isOutsideTouchable = true
-        val btnViewProfile =
 
-            popUp.showAsDropDown(ivMoreImageView)
-        var constraintsEditMessage =
-            mView.findViewById<ConstraintLayout>(R.id.constraintsEditMessage)
-        constraintsEditMessage.setOnClickListener {
-            popUp.dismiss()
-        }
-        var constraintsCopyMessage =
-            mView.findViewById<ConstraintLayout>(R.id.constraintsCopyMessage)
-        constraintsCopyMessage.setOnClickListener {
-            popUp.dismiss()
-        }
-        var constraintsDeleteMessage =
-            mView.findViewById<ConstraintLayout>(R.id.constraintsDeleteMessage)
-        constraintsDeleteMessage.setOnClickListener {
-            popUp.dismiss()
-        }
+        //popUp.setIsLaidOutInScreen(true)
+     //   val btnViewProfile =
+
+        popUp.showAsDropDown(ivMoreImageView)
+
+        popUp.setOutsideTouchable(true)
+
+        popUp.setTouchInterceptor(object : View.OnTouchListener {
+          override fun onTouch(v: View?, event: MotionEvent): Boolean {
+                if (event.getAction() === MotionEvent.ACTION_OUTSIDE) {
+                    popUp.dismiss()
+                    return true
+                }
+                return false
+            }
+        })
+
+        var editMessageList = ArrayList<EditMessageData>()
+        editMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.reply_message_text),
+            R.drawable.reply_message_icon))
+        editMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.edit_message_text),
+            R.drawable.edit_message_icon))
+        editMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.save_message_text),
+            R.drawable.save_message))
+        editMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.mark_unread_text),
+            R.drawable.mark_as_unread))
+        editMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.copy_message_text),
+            R.drawable.copy_message_icon))
+        editMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.pin_conversation_text),
+            R.drawable.push_pin))
+        editMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.delete_message_text),
+            R.drawable.delete_chat_icon))
+
+        var rvEditMessageAdapter = RVEditMessageAdapter(requireActivity(), editMessageList,
+            object : ClickMessage {
+                override fun onClickListener(position: Int) {
+                //For click on Edit Message Options
+                    popUp.dismiss()
+                }
+            })
+        var rvEditMessages = mView.findViewById<RecyclerView>(R.id.rvEditMessages)
+        rvEditMessages.layoutManager = LinearLayoutManager(requireActivity())
+        rvEditMessages.adapter = rvEditMessageAdapter
     }
 
     override fun onMesssageListener(position: Int, ivMoreImageView: ImageView) {
         showEditMessageMethod(ivMoreImageView)
+
     }
 
     override fun onStart() {

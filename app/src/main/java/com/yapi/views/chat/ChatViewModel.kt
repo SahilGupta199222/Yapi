@@ -40,6 +40,11 @@ class ChatViewModel : ViewModel() {
     var userType: String? = ""
     var sendDataValue = ObservableField("")
     var backButtonVisible=ObservableBoolean(false)
+    var groupImageVisible=ObservableBoolean(false)
+    var groupIconVisible=ObservableBoolean(false)
+    var liveUserVisible=ObservableBoolean(false)
+    var noImageOnlyNameVisible=ObservableBoolean(false)
+    var groupAllPhotos=ObservableBoolean(false)
     fun onClick(view: View) {
         when (view.id) {
             R.id.ivChat_more_icon -> {

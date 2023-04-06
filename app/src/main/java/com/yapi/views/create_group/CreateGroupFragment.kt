@@ -4,13 +4,17 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.*
 import android.widget.LinearLayout
+import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.yapi.R
+import com.yapi.common.changeBackgroundForEditError
 import com.yapi.common.checkDeviceType
 import com.yapi.databinding.FragmentCreateGroupBinding
 import com.yapi.views.add_people.AddPeopleFragment
+import com.yapi.views.sign_in.SignInErrorData
 
 class CreateGroupFragment : DialogFragment() {
     private lateinit var binding: FragmentCreateGroupBinding
@@ -87,6 +91,7 @@ class CreateGroupFragment : DialogFragment() {
     }
 
     private fun init() {
+        showErrorUIObserver()
         binding.apply {
             var rightMarginTopLayout = 0
             if (checkDeviceType()) {
@@ -121,6 +126,51 @@ class CreateGroupFragment : DialogFragment() {
             var data = it as Boolean
             if (data) {
                 dismiss()
+            }
+        })
+    }
+
+    fun showErrorUIObserver()
+    {
+        viewModel.errorData.observe(requireActivity(), Observer {
+            var data=it as SignInErrorData
+
+            var editText:AppCompatEditText?=null
+            var errorText: AppCompatTextView?=null
+            if(data.fieldId==1)
+            {
+                editText=binding.etGroupNameCreateGroup
+                errorText=binding.txtErrorEmailSignup
+            }else
+                if(data.fieldId==2)
+                {
+                    editText=binding.etGroupDescriptionCreateGroup
+                    errorText=binding.txtErrorDescription
+                }else{
+                    binding.txtErrorEmailSignup!!.setText("")
+                    changeBackgroundForEditError(binding.etGroupNameCreateGroup!!,requireActivity().resources.getColor(
+                        R.color.white),
+                        requireActivity().resources.getColor(R.color.liteGrey))
+
+                    binding.txtErrorDescription!!.setText("")
+                    changeBackgroundForEditError(binding.etGroupDescriptionCreateGroup!!,requireActivity().resources.getColor(
+                        R.color.white),
+                        requireActivity().resources.getColor(R.color.liteGrey))
+                }
+
+            if(data!=null && data.message.isNotEmpty())
+            {
+                errorText!!.setText(data.message)
+                changeBackgroundForEditError(editText!!,requireActivity().resources.getColor(
+                    R.color.error_box_color),
+                    requireActivity().resources.getColor(R.color.error_border_color))
+            }else {
+                if (data.fieldId != 0) {
+                    errorText!!.setText("")
+                    changeBackgroundForEditError(editText!!, requireActivity().resources.getColor(
+                        R.color.white),
+                        requireActivity().resources.getColor(R.color.liteGrey))
+                }
             }
         })
     }

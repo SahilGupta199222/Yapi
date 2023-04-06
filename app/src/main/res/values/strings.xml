@@ -223,7 +223,13 @@
     <string name="you_have_invited">You have invited</string>
     <string name="one_person">person</string>
 
+    <string name="reply_message_text">Reply to Message</string>
     <string name="edit_message_text">Edit Message</string>
+    <string name="save_message_text">Save Message</string>
+    <string name="mark_unread_text">Mark Unread</string>
+    <string name="pin_conversation_text">Pin This Conversation</string>
+
+
     <string name="copy_message_text">Copy Message</string>
     <string name="delete_message_text">Delete Message</string>
     <string name="search_here">Search here</string>
@@ -264,4 +270,19 @@
 
     <string name="deactivate_user_text">Deactivate user</string>
     <string name="add_members_text">Add Members</string>
+
+    <string name="enter_correct_otp">Please enter correct otp</string>
+    <string name="enter_otp">Please enter otp</string>
+
+    <string name="please_enter_name_text">Please enter name</string>
+    <string name="please_enter_user_name_text">Please enter user name</string>
+    <string name="please_enter_email_text">Please enter email</string>
+    <string name="please_enter_valid_email_text">Please enter valid email</string>
+    <string name="please_enter_phone_text">Please enter phone number</string>
+    <string name="please_enter_yourself_text">Please enter about yourself</string>
+
+    <string name="enter_group_name">Please enter group name</string>
+    <string name="enter_group_description">Please enter group description</string>
+
+    <string name="please_enter_company_name">Please enter company name</string>
 </resources>

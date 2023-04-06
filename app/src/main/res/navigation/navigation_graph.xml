@@ -103,6 +103,9 @@
         android:id="@+id/thirdStepCreateTeam"
         android:name="com.yapi.views.create_team.third_step_create_team.ThirdStepCreateFragment"
         android:label="ThirdStepCreateTeam">
+
+        <action android:id="@+id/action_thirdStepCreateTeam_to_addPeopleFragment"
+            app:destination="@+id/addPeopleFragment"/>
         <action
             android:id="@+id/action_thirdStepCreateTeam_to_chatEmptyFragment"
             app:destination="@id/chatEmptyFragment" />

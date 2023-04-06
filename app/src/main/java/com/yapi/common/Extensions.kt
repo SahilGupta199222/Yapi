@@ -2,11 +2,14 @@ package com.yapi.common
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.drawable.GradientDrawable
 import android.net.ConnectivityManager
 import android.text.TextUtils
 import android.util.Patterns
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatEditText
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.yapi.MainActivity
 import com.yapi.R
 import java.text.SimpleDateFormat
@@ -75,4 +78,27 @@ fun isValidEmail(target: CharSequence?): Boolean {
 
 fun checkDeviceType(): Boolean {
     return MainActivity.activity!!.get()!!.resources.getBoolean(R.bool.isTab)
+}
+
+fun changeBackgroundForError(layoutEmailSignIn: ConstraintLayout, boxColor:Int, borderColor:Int)
+{
+    val drawable = GradientDrawable()
+    drawable.shape = GradientDrawable.RECTANGLE
+    var finalWidth2 = MainActivity.activity!!.get()!!.resources.getDimension(com.intuit.sdp.R.dimen._1sdp)
+    drawable.setStroke(finalWidth2.toInt(), borderColor)
+    drawable.cornerRadius = MainActivity.activity!!.get()!!.resources.getDimension(R.dimen.roundDrawableCommon)
+    drawable.setColor(boxColor)
+    layoutEmailSignIn!!.setBackgroundDrawable(drawable)
+}
+
+
+fun changeBackgroundForEditError(layoutEmailSignIn: AppCompatEditText, boxColor:Int, borderColor:Int)
+{
+    val drawable = GradientDrawable()
+    drawable.shape = GradientDrawable.RECTANGLE
+    var finalWidth2 = MainActivity.activity!!.get()!!.resources.getDimension(com.intuit.sdp.R.dimen._1sdp)
+    drawable.setStroke(finalWidth2.toInt(), borderColor)
+    drawable.cornerRadius = MainActivity.activity!!.get()!!.resources.getDimension(R.dimen.roundDrawableCommon)
+    drawable.setColor(boxColor)
+    layoutEmailSignIn!!.setBackgroundDrawable(drawable)
 }

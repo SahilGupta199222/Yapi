@@ -1,13 +1,18 @@
 package com.yapi.views.sign_in
 
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.yapi.R
+import com.yapi.common.changeBackgroundForError
 import com.yapi.databinding.FragmentSignInBinding
 import com.yapi.databinding.FragmentSignUpBinding
 
@@ -20,6 +25,7 @@ class SignInFragment : Fragment() {
     ): View {
         binding= FragmentSignInBinding.inflate(LayoutInflater.from(requireActivity()))
         binding.vModel=viewModel
+        showErrorUIObserver()
         return binding.root
     }
 
@@ -41,4 +47,33 @@ class SignInFragment : Fragment() {
             }
         }*/
     }
+
+    fun showErrorUIObserver()
+    {
+        viewModel.errorData.observe(requireActivity(), Observer {
+            var data=it as SignInErrorData
+            if(data!=null && data.message.isNotEmpty())
+            {
+                binding.txtErrorEmailSignIn.setText(data.message)
+                changeBackgroundForError(binding.layoutEmailSignIn,requireActivity().resources.getColor(R.color.error_box_color),
+                    requireActivity().resources.getColor(R.color.error_border_color))
+            }else
+            {
+                binding.txtErrorEmailSignIn.setText("")
+                changeBackgroundForError(binding.layoutEmailSignIn,requireActivity().resources.getColor(R.color.white),
+                    requireActivity().resources.getColor(R.color.liteGrey))
+            }
+        })
+    }
+
+/*   fun changeBackgroundForError(layoutEmailSignIn:ConstraintLayout,boxColor:Int,borderColor:Int)
+    {
+        val drawable = GradientDrawable()
+        drawable.shape = GradientDrawable.RECTANGLE
+        var finalWidth2 = requireActivity().resources.getDimension(com.intuit.sdp.R.dimen._1sdp)
+        drawable.setStroke(finalWidth2.toInt(), borderColor)
+        drawable.cornerRadius = requireActivity().resources.getDimension(R.dimen.roundDrawableCommon)
+        drawable.setColor(boxColor)
+        layoutEmailSignIn!!.setBackgroundDrawable(drawable)
+    }*/
 }

@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.yapi.R
 import com.yapi.databinding.FragmentSignUpCodeBinding
+import com.yapi.views.sign_in.SignInErrorData
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,6 +35,22 @@ class SignUpCodeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
+        addErrorObserverMethod()
+
+    }
+
+    private fun addErrorObserverMethod() {
+
+        viewModel.errorData.observe(requireActivity(),Observer{
+            var data=it as SignInErrorData
+            if(data!=null)
+            {
+             binding.txtErrorMessageTitle!!.setText(data.message)
+            }else
+            {
+                binding.txtErrorMessageTitle!!.setText("")
+            }
+        })
     }
 
     private fun init() {

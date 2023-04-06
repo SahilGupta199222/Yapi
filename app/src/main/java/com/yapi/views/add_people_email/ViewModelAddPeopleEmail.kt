@@ -13,16 +13,22 @@ import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.checkDeviceType
 import com.yapi.common.hideKeyboard
+import com.yapi.views.sign_in.SignInErrorData
 
 class ViewModelAddPeopleEmail:ViewModel() {
     var chipGroupAddPeopleEmail:ChipGroup?=null
     var addPeopleEmailConfirmationOpenData= MutableLiveData<Boolean>()
     var dismissDialogData=MutableLiveData<Boolean>()
 
+    var errorData=MutableLiveData<SignInErrorData>()
+
+    var hideKeyboardData=MutableLiveData<Boolean>()
+
     fun onClick(view:View){
             when(view.id){
                 R.id.layoutNestedScrollViewAddPeopleEmail,R.id.layoutAddPeopleEmail,R.id.nestedScrollViewAddPeopleEmail->{
-                   MainActivity.activity?.get()?.hideKeyboard()
+                  // MainActivity.activity?.get()?.hideKeyboard()
+                    hideKeyboardData.value=true
                 }
                 R.id.imgCancelAddPeopleEmail,R.id.ivOutsideCloseAddPeopleEmail->{
                     if(checkDeviceType()){
@@ -34,25 +40,30 @@ class ViewModelAddPeopleEmail:ViewModel() {
                         }
                     }
                 }
-                R.id.btnNextGroupAddPeopleEmail->{
-                    val list=ArrayList<String>()
+                R.id.btnNextGroupAddPeopleEmail-> {
+                    val list = ArrayList<String>()
                     for (i in 0 until chipGroupAddPeopleEmail?.childCount!!) {
                         val chipView = chipGroupAddPeopleEmail?.getChildAt(i) as Chip
                         val title = chipView.text.toString()
                         list.add(title)
                         Log.d("ChipGroupTitle", title)
                     }
-                    val bundle=Bundle()
-                    bundle.putStringArrayList("personList",list)
-                    if(checkDeviceType()){
-                        addPeopleEmailConfirmationOpenData.value=true
-                    }else
-                    {
-                    if (view.findNavController().currentDestination?.id == R.id.addPeopleEmailFragment) {
+                    val bundle = Bundle()
+                    bundle.putStringArrayList("personList", list)
+
+                    if (list.size == 0) {
+                        errorData.value = SignInErrorData("Please enter email", 1)
+                    }else{
+                    if (checkDeviceType()) {
+                        addPeopleEmailConfirmationOpenData.value = true
+                    } else {
+                        if (view.findNavController().currentDestination?.id == R.id.addPeopleEmailFragment) {
                             view.findNavController()
                                 .navigate(R.id.action_addPeopleEmailFragment_to_addPeopleEmailConfirmationFragment,
                                     bundle)
-                    }}
+                        }
+                    }
+                }
                 }
                 R.id.btnBackAddPeopleEmail->{
                     if(checkDeviceType()){

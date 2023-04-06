@@ -4,7 +4,61 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="@dimen/_10sdp">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/constraintsTimeLayout"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_width="0dp"
 
+    android:layout_height="wrap_content">
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_1sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="@dimen/_15sdp"
+        app:layout_constraintEnd_toStartOf="@id/constraintsTopTime"
+        android:background="@color/chat_bottom_line_color"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintsTopTime"
+        android:layout_width="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:id="@+id/tvShowTime"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Today, March 13, 2023"
+            android:textSize="@dimen/normalSmallTextSize"
+            android:fontFamily="@font/larsseit_regular"
+            android:textColor="@color/darkGrey"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/timeDownArrow"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+            android:layout_width="wrap_content"
+            android:rotation="90"
+            app:tint="#B8B8B8"
+            app:layout_constraintBottom_toBottomOf="@id/tvShowTime"
+            app:layout_constraintTop_toTopOf="@id/tvShowTime"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintStart_toEndOf="@id/tvShowTime"
+            android:layout_height="wrap_content"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:layout_width="0dp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_height="@dimen/_1sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/constraintsTopTime"
+        android:background="@color/chat_bottom_line_color"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
     <com.yapi.common.ChatRoundRectCornerImageView
         android:id="@+id/ivLeftUserPhoto"
         android:layout_width="@dimen/_35sdp"
@@ -60,8 +114,8 @@
         android:layout_marginStart="@dimen/_6sdp"
         android:layout_marginTop="@dimen/_4sdp"
         android:orientation="horizontal"
+app:layout_constraintTop_toBottomOf="@+id/constraintsTimeLayout"
 
-        app:layout_constraintBottom_toTopOf="@id/cardLeftChatText"
         app:layout_constraintStart_toStartOf="@id/cardLeftChatText">
 
         <androidx.appcompat.widget.AppCompatTextView

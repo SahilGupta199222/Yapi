@@ -202,9 +202,24 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tvteamField" />
 
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtErrorEmailSignup"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/larsseit_regular"
+                        android:text=""
+                        android:layout_marginStart="@dimen/error_margin_start"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/smallTextSize"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/etMemberEmail"
+                        app:layout_constraintTop_toBottomOf="@+id/etMemberEmail" />
+
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@+id/etMemberEmail"
+                        app:layout_constraintTop_toBottomOf="@+id/txtErrorEmailSignup"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginTop="@dimen/_2sdp"
                         android:paddingStart="0dp"

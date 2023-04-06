@@ -7,12 +7,14 @@ import android.widget.Toast
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.databinding.adapters.TextViewBindingAdapter.AfterTextChanged
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.hideKeyboard
 import com.yapi.pref.PreferenceFile
+import com.yapi.views.sign_in.SignInErrorData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -23,6 +25,8 @@ class FirstStepViewModel @Inject constructor(private var preferenceFile: Prefere
     var nameCountValue = ObservableField("0/50")
     var checkBoxValue = ObservableBoolean(false)
 var checkBoxTextValue=ObservableField("")
+
+    var errorData=MutableLiveData<SignInErrorData>()
     init {
   /*    var email=  preferenceFile.fetchStringValue("login_email")
        var firstText= MainActivity.activity?.get()?.resources?.getString(R.string.create_team_first_text)
@@ -37,14 +41,16 @@ var checkBoxTextValue=ObservableField("")
                 Log.e("Hello_Text==", "Helloo")
                 // showMessage("Hello")
                 if (checkValidation()) {
+                    errorData.value= SignInErrorData("",0)
                     if(view.findNavController().currentDestination?.id==R.id.firstStepCreateTeam) {
 
                         view.findNavController()
                             .navigate(R.id.action_firstStepCreateTeam_to_secondStepCreateTeam)
                     }
                 } else {
-                    Toast.makeText(view.context, "Please enter company name", Toast.LENGTH_SHORT)
-                        .show()
+                    errorData.value=SignInErrorData(MainActivity.activity!!.get()!!.resources.getString(R.string.please_enter_company_name),0)
+                   /* Toast.makeText(view.context, "Please enter company name", Toast.LENGTH_SHORT)
+                        .show()*/
                 }
             }
             R.id.linearTopFirstStep, R.id.constraintsTopFirstStep -> {
@@ -60,6 +66,10 @@ var checkBoxTextValue=ObservableField("")
 
     fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         Log.w("tag", "onTextChanged $s")
+        if(s.length>0)
+        {
+            errorData.value= SignInErrorData("",0)
+        }
         nameCountValue.set(s.length.toString() + "/50")
     }
 }
