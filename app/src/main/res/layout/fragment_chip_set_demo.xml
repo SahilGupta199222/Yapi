@@ -295,6 +295,8 @@
                             android:id="@+id/layoutTxtFontStyleChange"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintEnd_toStartOf="@id/imgBoldTxtIconChatDemo"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
@@ -328,6 +330,8 @@
                             android:layout_height="@dimen/iconSize"
                             android:layout_marginStart="@dimen/topMargin"
                             android:src="@drawable/ic_baseline_format_bold_24"
+                            app:layout_constraintEnd_toStartOf="@id/imgItalicTxtIconChatDemo"
+
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@id/layoutTxtFontStyleChange"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -338,6 +342,8 @@
                             android:layout_height="@dimen/iconSize"
                             android:layout_marginStart="@dimen/topMargin"
                             android:src="@drawable/ic_baseline_format_italic_24"
+                            app:layout_constraintEnd_toStartOf="@id/imgUnderLineTxtIconChatDemo"
+
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@id/imgBoldTxtIconChatDemo"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -347,6 +353,8 @@
                             android:layout_width="@dimen/iconSize"
                             android:layout_height="@dimen/iconSize"
                             android:layout_marginStart="@dimen/topMargin"
+                            app:layout_constraintEnd_toStartOf="@id/imgStrikeTxtIconChatDemo"
+
                             android:src="@drawable/ic_baseline_format_underlined_24"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@id/imgItalicTxtIconChatDemo"
@@ -359,6 +367,8 @@
                             android:layout_marginStart="@dimen/topMargin"
                             android:src="@drawable/ic_baseline_strikethrough_s_24"
                             app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/imgFormatListNumberTxtIconChatDemo"
+
                             app:layout_constraintStart_toEndOf="@id/imgUnderLineTxtIconChatDemo"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -368,6 +378,8 @@
                             android:layout_height="@dimen/iconSize"
                             android:layout_marginStart="@dimen/topMargin"
                             android:src="@drawable/ic_baseline_format_list_numbered_24"
+                            app:layout_constraintEnd_toStartOf="@id/imgFormatListBulletedTxtIconChatDemo"
+
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@id/imgStrikeTxtIconChatDemo"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -379,6 +391,8 @@
                             android:layout_marginStart="@dimen/topMargin"
                             android:src="@drawable/ic_baseline_format_list_bulleted_24"
                             app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/imgLeftAlignTxtIconChatDemo"
+
                             app:layout_constraintStart_toEndOf="@id/imgFormatListNumberTxtIconChatDemo"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -388,6 +402,8 @@
                             android:layout_height="@dimen/iconSize"
                             android:layout_marginStart="@dimen/topMargin"
                             android:src="@drawable/ic_baseline_format_align_left_24"
+                            app:layout_constraintEnd_toStartOf="@id/imgCenterAlignTxtIconChatDemo"
+
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@id/imgFormatListBulletedTxtIconChatDemo"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -397,6 +413,7 @@
                             android:layout_width="@dimen/iconSize"
                             android:layout_height="@dimen/iconSize"
                             android:layout_marginStart="@dimen/topMargin"
+                            app:layout_constraintEnd_toStartOf="@id/imgRightAlignTxtIconChatDemo"
                             android:src="@drawable/ic_baseline_format_align_center_24"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@id/imgLeftAlignTxtIconChatDemo"
@@ -407,6 +424,8 @@
                             android:layout_width="@dimen/iconSize"
                             android:layout_height="@dimen/iconSize"
                             android:layout_marginStart="@dimen/topMargin"
+                            android:layout_marginEnd="@dimen/topMargin"
+                            app:layout_constraintEnd_toEndOf="parent"
                             android:src="@drawable/ic_baseline_format_align_right_24"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@id/imgCenterAlignTxtIconChatDemo"
@@ -482,7 +501,7 @@
                             app:chunkSoftTransition="true"
                             app:chunkSpace="@dimen/_1sdp"
                             app:chunkWidth="@dimen/_2sdp"
-                            app:direction="rightToLeft"
+                            app:direction="leftToRight"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@id/txtAudioTimeRecodingLiveChat"
                             app:layout_constraintStart_toStartOf="parent"
@@ -591,13 +610,18 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-                <EditText
+                <jp.wasabeef.richeditor.RichEditor
                     android:id="@+id/etRichChatDemo"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_45sdp"
-                    android:layout_marginEnd="@dimen/startMainMargin"
+                    android:layout_height="wrap_content"
                     android:background="@null"
+                    android:maxHeight="@dimen/_50sdp"
                     android:textSize="@dimen/normalSmallTextSize"
+                    android:layout_marginStart="@dimen/_18sdp"
+                    android:layout_marginEnd="@dimen/_18sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:scrollbars="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

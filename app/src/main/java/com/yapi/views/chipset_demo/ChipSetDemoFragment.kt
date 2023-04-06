@@ -9,12 +9,11 @@ import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.*
 import android.util.Log
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.widget.TextViewCompat
+import androidx.core.widget.TextViewCompat.setCustomSelectionActionModeCallback
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.google.android.material.chip.Chip
@@ -164,7 +163,7 @@ class ChipSetDemoFragment : Fragment() {
                     }
                 },250)
             }
-//            etRichChatDemo.setPlaceholder("Enter msg here")
+            etRichChatDemo.setPlaceholder("Enter msg here")
 //            etRichChatDemo.hint = "Enter msg here"
             imgTxtStyleChangeIconChatDemo.setOnClickListener {
                 fontStyleSelected = !fontStyleSelected
@@ -183,7 +182,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgBoldTxtIconChatDemo.setOnClickListener {
-//                etRichChatDemo.setBold()
+                etRichChatDemo.setBold()
 //                CoroutineScope(Dispatchers.Main).async {
 //                    etRichChatDemo.notifyAll()
 //                    etRichChatDemo.performClick();
@@ -207,7 +206,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgItalicTxtIconChatDemo.setOnClickListener {
-//                etRichChatDemo.setItalic()
+                etRichChatDemo.setItalic()
 //                etRichChatDemo.focusEditor()
 
                 italicTxtSelected = !italicTxtSelected
@@ -223,7 +222,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgUnderLineTxtIconChatDemo.setOnClickListener {
-//                etRichChatDemo.setUnderline()
+                etRichChatDemo.setUnderline()
 //                etRichChatDemo.focusEditor()
                 underLineTxtSelected = !underLineTxtSelected
                 if (underLineTxtSelected) {
@@ -237,7 +236,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgStrikeTxtIconChatDemo.setOnClickListener {
-//                etRichChatDemo.setStrikeThrough()
+                etRichChatDemo.setStrikeThrough()
 //                etRichChatDemo.focusEditor()
                 strikeTxtSelected = !strikeTxtSelected
 
@@ -253,7 +252,7 @@ class ChipSetDemoFragment : Fragment() {
             }
             imgFormatListNumberTxtIconChatDemo.setOnClickListener {
 //                etRichChatDemo.focusEditor()
-//                etRichChatDemo.setNumbers()
+                etRichChatDemo.setNumbers()
                 listNumberTxtSelected = !listNumberTxtSelected
 
                 if (listNumberTxtSelected) {
@@ -267,7 +266,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgFormatListBulletedTxtIconChatDemo.setOnClickListener {
-//                etRichChatDemo.setBullets()
+                etRichChatDemo.setBullets()
                 listBulletTxtSelected = !listBulletTxtSelected
                 if (listBulletTxtSelected) {
                     imgFormatListBulletedTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -280,7 +279,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgLeftAlignTxtIconChatDemo.setOnClickListener {
-//                etRichChatDemo.setAlignLeft()
+                etRichChatDemo.setAlignLeft()
                 leftAlignTxtSelected = !leftAlignTxtSelected
                 if (leftAlignTxtSelected) {
                     imgLeftAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -305,7 +304,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgCenterAlignTxtIconChatDemo.setOnClickListener {
-//                etRichChatDemo.setAlignCenter()
+                etRichChatDemo.setAlignCenter()
                 centerAlignTxtSelected = !centerAlignTxtSelected
                 if (centerAlignTxtSelected) {
                     imgCenterAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -330,7 +329,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgRightAlignTxtIconChatDemo.setOnClickListener {
-//                etRichChatDemo.setAlignRight()
+                etRichChatDemo.setAlignRight()
                 rightAlignTxtSelected = !rightAlignTxtSelected
                 if (rightAlignTxtSelected) {
                     imgRightAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -364,6 +363,7 @@ class ChipSetDemoFragment : Fragment() {
 //                    etRichChatDemo.removeFormat()
                 }
             }
+
             layoutAddPeople.setOnClickListener {
                 if (etChips.text?.isNotEmpty() == true) {
                     addChipToGroup(requireContext(), etChips.text.toString())
@@ -378,6 +378,7 @@ class ChipSetDemoFragment : Fragment() {
 //                tvMessages.text=etRichChatDemo.lineCount.toString()
 //                etRichChatDemo.insertLink("https://cdn.britannica.com/49/182849-050-4C7FE34F/scene-Iron-Man.jpg","iron man link")
             }
+
 //            etRichChatDemo.setOnDecorationChangeListener(object :
 //                RichEditor.OnDecorationStateListener {
 //                override fun onStateChangeListener(
@@ -388,6 +389,7 @@ class ChipSetDemoFragment : Fragment() {
 //                }
 //
 //            })
+
 
             etRichChatDemo.setOnKeyListener(object : View.OnKeyListener {
                 override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
@@ -692,8 +694,8 @@ class ChipSetDemoFragment : Fragment() {
             mediaRecorderReady()
             try {
                 mRecorder?.prepare()
-                mRecorder?.start()
                 runnableGetTimeRecoderLive?.run()
+                mRecorder?.start()
             } catch (e: Exception) {
                 e.printStackTrace()
                 Log.i(TAG, "IoException ${e.message}")
@@ -751,10 +753,14 @@ class ChipSetDemoFragment : Fragment() {
                         progress: Float,
                         fromUser: Boolean,
                     ) {
-                        Log.i(TAG,"onProgress change  $waveformSeekBar\nProgress $progress\nFromUser$fromUser")
                         if(fromUser){
-                            mPlayer?.seekTo(progress.toInt())
-                            seekBarRecodingPlayChat.progress=progress
+                        Log.i(TAG,"onProgress change  $waveformSeekBar\nProgress $progress\nFromUser$fromUser")
+                            mPlayer?.seekTo(progress.toInt() * 100)
+                            seekBarRecodingPlayChat.progress=progress * 100
+                            mHandler?.removeCallbacks(runnableGetTimeRecoderPlay!!)
+                            recoderPlayTime= progress.toInt()/10
+                            Log.i(TAG,"change progress is ${progress.toInt()}")
+                            runnableGetTimeRecoderPlay?.run()
                         }
                     }
                 }
