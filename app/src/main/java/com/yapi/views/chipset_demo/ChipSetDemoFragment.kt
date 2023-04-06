@@ -12,11 +12,10 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.widget.TextViewCompat
-import androidx.core.widget.TextViewCompat.setCustomSelectionActionModeCallback
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.google.android.material.chip.Chip
+//import com.google.cloud.speech.v1.*
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -68,10 +67,36 @@ class ChipSetDemoFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentChipSetDemoBinding.inflate(LayoutInflater.from(requireActivity()))
-
+        binding.btnTranscript.setOnClickListener {
+//            transcriptAudio()
+        }
         return binding.root
     }
+/*    private fun transcriptAudio(){
+        binding.apply {
+            SpeechClient.create().use { speechClient ->
+                // The path to the audio file to transcribe
+                val gcsUri = "gs://cloud-samples-data/speech/brooklyn_bridge.raw"
+                // Builds the sync recognize request
+                val config: RecognitionConfig = RecognitionConfig.newBuilder()
+                    .setEncoding(RecognitionConfig.AudioEncoding.LINEAR16)
+                    .setSampleRateHertz(16000)
+                    .setLanguageCode("en-US")
+                    .build()
+                val audio: RecognitionAudio = RecognitionAudio.newBuilder().setUri(gcsUri).build()
 
+                // Performs speech recognition on the audio file
+                val response: RecognizeResponse = speechClient.recognize(config, audio)
+                val results: List<SpeechRecognitionResult> = response.resultsList
+                for (result in results) {
+                    // There can be several alternative transcripts for a given chunk of speech. Just use the
+                    // first (most likely) one here.
+                    val alternative: SpeechRecognitionAlternative = result.alternativesList[0]
+                    Log.i(TAG,"Transcription: %s%n ${alternative.transcript}")
+                }
+            }
+        }
+    }*/
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
