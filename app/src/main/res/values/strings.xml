@@ -285,4 +285,7 @@
     <string name="enter_group_description">Please enter group description</string>
 
     <string name="please_enter_company_name">Please enter company name</string>
+
+    <string name="add_member_texttt">Add Member</string>
+    <string name="add_member_button">Add Member</string>
 </resources>

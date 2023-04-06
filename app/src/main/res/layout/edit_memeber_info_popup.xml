@@ -47,7 +47,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingStart="@dimen/startMainMargin"
-
                     android:paddingBottom="@dimen/startMainMargin">
 
                     <ImageView
@@ -55,7 +54,7 @@
                         android:layout_width="@dimen/iconSize"
                         android:layout_height="@dimen/iconSize"
                         android:layout_gravity="end"
-android:padding="@dimen/_2sdp"
+                        android:padding="@dimen/_2sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_10sdp"
                         android:src="@drawable/ic_cross_icon"
@@ -76,7 +75,14 @@ android:padding="@dimen/_2sdp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/ivInnerBack">
 
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivaddMemberLogo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/edit_member_logog" />
+
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvAddMemberTitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/larsseit_bold"
@@ -87,6 +93,7 @@ android:padding="@dimen/_2sdp"
                             android:textSize="@dimen/titleTextSize" />
 
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvAddMemberDescription"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_5sdp"

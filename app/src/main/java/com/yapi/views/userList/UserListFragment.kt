@@ -40,7 +40,7 @@ class UserListFragment : Fragment(), UserClickEvent {
         val displayMetrics = DisplayMetrics()
         requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
         screenWidth = displayMetrics.widthPixels
-        //  viewModel.screenWidth = width
+          viewModel.screenWidth = screenWidth
         initUI()
 
         return dataBinding!!.root
@@ -143,7 +143,34 @@ class UserListFragment : Fragment(), UserClickEvent {
         var btnCancelTemplate = dialog.findViewById<AppCompatButton>(R.id.btnCancelTemplate)
         var ivOutsideCloseGroup = dialog.findViewById<ImageView>(R.id.ivOutsideCloseGroup)
 
+        var linearTemplateHeader = dialog.findViewById<LinearLayout>(R.id.linearTemplateHeader)
+        var ivaddMemberLogo = dialog.findViewById<AppCompatImageView>(R.id.ivaddMemberLogo)
+
+        var tvAddMemberTitle = dialog.findViewById<AppCompatTextView>(R.id.tvAddMemberTitle)
+        var tvAddMemberDescription = dialog.findViewById<AppCompatTextView>(R.id.tvAddMemberDescription)
+        var btnTemplateSave = dialog.findViewById<AppCompatButton>(R.id.btnTemplateSave)
+
         if(checkDeviceType())
+        {
+            ivOutsideCloseGroup.visibility=View.VISIBLE
+            ivInnerBack.visibility=View.GONE
+            ivaddMemberLogo.visibility=View.VISIBLE
+            ivaddMemberLogo.setImageResource(R.drawable.edit_member_logog)
+            btnTemplateSave.setText(MainActivity.activity!!.get()!!.resources.getString(R.string.save_information_text))
+            tvAddMemberTitle.visibility=View.GONE
+            tvAddMemberDescription.visibility=View.GONE
+        }else
+        {
+            ivaddMemberLogo.visibility=View.GONE
+            ivOutsideCloseGroup.visibility=View.GONE
+            ivInnerBack.visibility=View.VISIBLE
+            tvAddMemberTitle.visibility=View.VISIBLE
+            tvAddMemberDescription.visibility=View.VISIBLE
+            tvAddMemberTitle.setText(MainActivity.activity!!.get()!!.resources.getString(R.string.edit_member_text))
+            btnTemplateSave.setText(MainActivity.activity!!.get()!!.resources.getString(R.string.save_text))
+        }
+
+     /*   if(checkDeviceType())
         {
             ivOutsideCloseGroup.visibility=View.VISIBLE
             ivInnerBack.visibility=View.GONE
@@ -151,7 +178,7 @@ class UserListFragment : Fragment(), UserClickEvent {
         {
             ivOutsideCloseGroup.visibility=View.GONE
             ivInnerBack.visibility=View.VISIBLE
-        }
+        }*/
 
         ivInnerBack.setOnClickListener {
             dialog.dismiss()
@@ -266,6 +293,8 @@ class UserListFragment : Fragment(), UserClickEvent {
         dialog.setContentView(R.layout.edit_memeber_info_popup)
         dialog.show()
 
+
+        //add_member_logo
         var linearEditMember = dialog.findViewById<LinearLayout>(R.id.linearEditMember)
         linearEditMember.layoutParams.width = (screenWidth!!.toDouble() / dividedValue).toInt()
         var ivInnerBack = dialog.findViewById<ImageView>(R.id.ivInnerBack)
@@ -293,5 +322,4 @@ class UserListFragment : Fragment(), UserClickEvent {
             dialog.dismiss()
         }
     }
-
 }

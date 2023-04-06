@@ -80,10 +80,12 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearAddMember"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_9sdp"
                 android:layout_weight="1"
+                android:onClick="@{mViewModel::onClick}"
                 android:background="@drawable/btn_drawable_blue"
                 android:gravity="center_horizontal"
                 android:padding="@dimen/_10sdp">
