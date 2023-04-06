@@ -30,20 +30,25 @@ class RVUserListAdapter(
             holder.ivPlusIcon.setImageResource(R.drawable.add_user_button)
             holder.constarintDetails.visibility = View.GONE
             holder.constraintsUsers.setBackgroundColor(context.getColor(R.color.white))
-            holder.viewBottomLine.visibility = View.VISIBLE
+
+            if (position == userList.size - 1) {
+                holder.viewBottomLine.visibility = View.INVISIBLE
+            } else {
+                holder.viewBottomLine.visibility = View.VISIBLE
+            }
             holder.constarintsTopList.setBackgroundResource(0)
         }
-        if(checkDeviceType()){
+        if (checkDeviceType()) {
             holder.viewBottomLine.visibility = View.GONE
-        }else
-        {
-        if (position != userList.size - 1) {
-            if (userList[position + 1].isCheck!!) {
-                holder.viewBottomLine.visibility = View.GONE
-            } else {
-                // holder.viewBottomLine.visibility = View.VISIBLE
+        } else {
+            if (position != userList.size - 1) {
+                if (userList[position + 1].isCheck!!) {
+                    holder.viewBottomLine.visibility = View.GONE
+                } else {
+                    // holder.viewBottomLine.visibility = View.VISIBLE
+                }
             }
-        }}
+        }
         holder.ivMorUsers.setOnClickListener {
             userClick.onClick(position, holder.ivMorUsers)
         }

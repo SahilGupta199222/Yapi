@@ -217,11 +217,13 @@
 
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintsAddMember"
                         android:layout_width="wrap_content"
                         app:layout_constraintTop_toBottomOf="@+id/txtErrorEmailSignup"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginTop="@dimen/_2sdp"
                         android:paddingStart="0dp"
+                        android:onClick="@{vModel::onClick}"
                         android:paddingTop="@dimen/_10sdp"
                         android:paddingBottom="@dimen/_20sdp"
                         android:paddingEnd="@dimen/_10sdp"

@@ -116,6 +116,7 @@
                         android:inputType="number"
                         android:itemBackground="@drawable/otp_background_box"
                         android:padding="0dp"
+                        android:text="@={vModel.otpValue}"
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/_12ssp"
                         android:elevation="0dp"

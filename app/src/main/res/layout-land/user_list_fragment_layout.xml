@@ -85,11 +85,13 @@ android:layout_marginTop="@dimen/_8sdp"
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linearAddMember"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_9sdp"
                 android:background="@drawable/btn_drawable_blue"
                 android:gravity="center_horizontal"
+                android:onClick="@{mViewModel::onClick}"
                 android:paddingStart="@dimen/_15sdp"
                 android:paddingEnd="@dimen/_15sdp"
                 android:paddingBottom="@dimen/_10sdp"

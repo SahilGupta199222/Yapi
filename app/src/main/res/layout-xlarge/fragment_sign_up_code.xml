@@ -110,6 +110,7 @@
                 android:focusable="true"
                 android:layout_marginTop="@dimen/_44sdp"
                 android:inputType="number"
+                android:text="@={vModel.otpValue}"
                 android:itemBackground="@drawable/otp_background_box"
                 android:padding="0dp"
                 android:textColor="@color/darkGrey"

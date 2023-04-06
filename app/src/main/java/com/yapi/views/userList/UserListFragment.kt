@@ -155,7 +155,9 @@ class UserListFragment : Fragment(), UserClickEvent {
             ivOutsideCloseGroup.visibility=View.VISIBLE
             ivInnerBack.visibility=View.GONE
             ivaddMemberLogo.visibility=View.VISIBLE
+
             ivaddMemberLogo.setImageResource(R.drawable.edit_member_logog)
+
             btnTemplateSave.setText(MainActivity.activity!!.get()!!.resources.getString(R.string.save_information_text))
             tvAddMemberTitle.visibility=View.GONE
             tvAddMemberDescription.visibility=View.GONE

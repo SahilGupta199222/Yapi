@@ -118,6 +118,7 @@
                 android:elevation="0dp"
                 app:hideLineWhenFilled="false"
                 app:itemCount="6"
+                android:text="@={vModel.otpValue}"
                 app:itemHeight="@dimen/_42sdp"
                 app:itemRadius="@dimen/_6sdp"
                 app:itemSpacing="@dimen/_7sdp"
