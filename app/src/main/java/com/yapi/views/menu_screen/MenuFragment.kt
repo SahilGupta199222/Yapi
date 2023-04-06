@@ -53,7 +53,7 @@ class MenuFragment : Fragment() {
         val width = displayMetrics.widthPixels
         viewModel.screenWidth = width
 
-        val vto: ViewTreeObserver = binding.constraintsTop!!.getViewTreeObserver()
+       /* val vto: ViewTreeObserver = binding.constraintsTop!!.getViewTreeObserver()
         vto.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
            override fun onGlobalLayout() {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
@@ -65,7 +65,7 @@ class MenuFragment : Fragment() {
                 rowHeight = binding.constraintsTop!!.getMeasuredHeight()
 
             }
-        })
+        })*/
 
         addNextToScreenObserver()
         init()

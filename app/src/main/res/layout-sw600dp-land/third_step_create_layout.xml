@@ -217,6 +217,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/etMemberEmail" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintsAddMember"
                         android:layout_width="wrap_content"
                         app:layout_constraintTop_toBottomOf="@+id/txtErrorEmailSignup"
                         app:layout_constraintStart_toStartOf="parent"
@@ -224,6 +225,8 @@
                         android:paddingStart="0dp"
                         android:paddingTop="@dimen/_10sdp"
                         android:paddingBottom="@dimen/_20sdp"
+                        android:onClick="@{vModel::onClick}"
+
                         android:paddingEnd="@dimen/_10sdp"
                         android:layout_marginStart="@dimen/startMainMargin"
                         android:layout_marginEnd="@dimen/startMainMargin"
