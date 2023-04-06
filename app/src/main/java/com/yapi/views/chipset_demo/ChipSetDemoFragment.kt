@@ -7,25 +7,22 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.media.MediaPlayer
 import android.media.MediaRecorder
-import android.os.Bundle
-import android.os.Environment
-import android.os.Handler
-import android.os.Looper
+import android.os.*
 import android.util.Log
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.google.android.material.chip.Chip
+//import com.google.cloud.speech.v1.*
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import com.masoudss.lib.SeekBarOnProgressChanged
+import com.masoudss.lib.WaveformSeekBar
 import com.yapi.R
 import com.yapi.databinding.FragmentChipSetDemoBinding
 import kotlinx.coroutines.Runnable
@@ -55,34 +52,131 @@ class ChipSetDemoFragment : Fragment() {
 
     private var mRecorder: MediaRecorder? = null
     private var mPlayer: MediaPlayer? = null
-    private var mFileName: String? = null
-    private var playingStatus=false
+
+    private var recordFile: File? = null
+    private var playRecodingStatus=true
+    private var recoderPlayTime=0
+    private var recoderTimeStemp=0
+    private var recoderPlayLiveTime=0
+    private var mHandler: Handler? = null
+    private var runnableGetTimeRecoderPlay: java.lang.Runnable?=null
+    private var runnableGetTimeRecoderLive: java.lang.Runnable?=null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentChipSetDemoBinding.inflate(LayoutInflater.from(requireActivity()))
-
+        binding.btnTranscript.setOnClickListener {
+//            transcriptAudio()
+        }
         return binding.root
     }
+/*    private fun transcriptAudio(){
+        binding.apply {
+            SpeechClient.create().use { speechClient ->
+                // The path to the audio file to transcribe
+                val gcsUri = "gs://cloud-samples-data/speech/brooklyn_bridge.raw"
+                // Builds the sync recognize request
+                val config: RecognitionConfig = RecognitionConfig.newBuilder()
+                    .setEncoding(RecognitionConfig.AudioEncoding.LINEAR16)
+                    .setSampleRateHertz(16000)
+                    .setLanguageCode("en-US")
+                    .build()
+                val audio: RecognitionAudio = RecognitionAudio.newBuilder().setUri(gcsUri).build()
 
+                // Performs speech recognition on the audio file
+                val response: RecognizeResponse = speechClient.recognize(config, audio)
+                val results: List<SpeechRecognitionResult> = response.resultsList
+                for (result in results) {
+                    // There can be several alternative transcripts for a given chunk of speech. Just use the
+                    // first (most likely) one here.
+                    val alternative: SpeechRecognitionAlternative = result.alternativesList[0]
+                    Log.i(TAG,"Transcription: %s%n ${alternative.transcript}")
+                }
+            }
+        }
+    }*/
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
         binding.apply {
+            etRichChatDemo.visibility=View.VISIBLE
+            layoutRecodingChat.visibility=View.GONE
             imgEmojiIconChatDemo.setOnClickListener {
                 Toast.makeText(requireContext(), "clicked", Toast.LENGTH_SHORT).show()
+            }
+
+             runnableGetTimeRecoderPlay = object : java.lang.Runnable {
+                override fun run() {
+                    try {
+                        if (recoderTimeStemp==10){
+                            recoderTimeStemp=0
+                            recoderPlayTime+=1
+
+                        }else{
+                            recoderTimeStemp+=1
+                        }
+
+                        if(recoderPlayTime.toString().trim().length<2)
+                            txtAudioTimeRecodingPlayChat.text= "00:0$recoderPlayTime"
+                        else
+                            txtAudioTimeRecodingPlayChat.text= "00:$recoderPlayTime"
+                        val currentPosition: Int = mPlayer?.currentPosition ?:0
+                        val totalDuration: Int = mPlayer?.duration ?:0
+                        val positionPercent =
+                            currentPosition.toFloat() / totalDuration.toFloat() * 100
+                        seekBarRecodingPlayChat.progress= positionPercent
+                    } finally {
+                        mHandler!!.postDelayed(this, 100)
+                    }
+                }
             }
         }
     }
 
     private fun init() {
+
         Log.i("asdfjnasdf", "init fucntion called")
         binding.apply {
             imgMicIconChatDemo.setOnClickListener {
+
+                if(runnableGetTimeRecoderLive!=null){
+                    mHandler?.removeCallbacks(runnableGetTimeRecoderLive!!)
+                    runnableGetTimeRecoderLive=null
+                    mRecorder?.stop()
+                    mRecorder?.release()
+                    mRecorder = null
+                    recordFile = null
+                }
+                if(runnableGetTimeRecoderPlay!=null){
+                 mHandler?.removeCallbacks(runnableGetTimeRecoderPlay!!)
+                }
+                if (mHandler!=null){
+                    mHandler=null
+                }
+                if(mPlayer !=null ){
+                    mPlayer?.release()
+                    mPlayer=null
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 gettingMicPermission(requireActivity(), arrayListOf(Manifest.permission.RECORD_AUDIO
-                    ,Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                    ,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE))
                     imgMicIconChatDemo.setColorFilter(ContextCompat.getColor(
                         requireContext(),
                         R.color.blueColor))
@@ -94,7 +188,7 @@ class ChipSetDemoFragment : Fragment() {
                     }
                 },250)
             }
-//            etRichChatDemo.setPlaceholder("Enter msg here")
+            etRichChatDemo.setPlaceholder("Enter msg here")
 //            etRichChatDemo.hint = "Enter msg here"
             imgTxtStyleChangeIconChatDemo.setOnClickListener {
                 fontStyleSelected = !fontStyleSelected
@@ -113,7 +207,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgBoldTxtIconChatDemo.setOnClickListener {
-//                etRichChatDemo.setBold()
+                etRichChatDemo.setBold()
 //                CoroutineScope(Dispatchers.Main).async {
 //                    etRichChatDemo.notifyAll()
 //                    etRichChatDemo.performClick();
@@ -137,7 +231,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgItalicTxtIconChatDemo.setOnClickListener {
-//                etRichChatDemo.setItalic()
+                etRichChatDemo.setItalic()
 //                etRichChatDemo.focusEditor()
 
                 italicTxtSelected = !italicTxtSelected
@@ -153,7 +247,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgUnderLineTxtIconChatDemo.setOnClickListener {
-//                etRichChatDemo.setUnderline()
+                etRichChatDemo.setUnderline()
 //                etRichChatDemo.focusEditor()
                 underLineTxtSelected = !underLineTxtSelected
                 if (underLineTxtSelected) {
@@ -167,7 +261,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgStrikeTxtIconChatDemo.setOnClickListener {
-//                etRichChatDemo.setStrikeThrough()
+                etRichChatDemo.setStrikeThrough()
 //                etRichChatDemo.focusEditor()
                 strikeTxtSelected = !strikeTxtSelected
 
@@ -183,7 +277,7 @@ class ChipSetDemoFragment : Fragment() {
             }
             imgFormatListNumberTxtIconChatDemo.setOnClickListener {
 //                etRichChatDemo.focusEditor()
-//                etRichChatDemo.setNumbers()
+                etRichChatDemo.setNumbers()
                 listNumberTxtSelected = !listNumberTxtSelected
 
                 if (listNumberTxtSelected) {
@@ -197,7 +291,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgFormatListBulletedTxtIconChatDemo.setOnClickListener {
-//                etRichChatDemo.setBullets()
+                etRichChatDemo.setBullets()
                 listBulletTxtSelected = !listBulletTxtSelected
                 if (listBulletTxtSelected) {
                     imgFormatListBulletedTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -210,7 +304,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgLeftAlignTxtIconChatDemo.setOnClickListener {
-//                etRichChatDemo.setAlignLeft()
+                etRichChatDemo.setAlignLeft()
                 leftAlignTxtSelected = !leftAlignTxtSelected
                 if (leftAlignTxtSelected) {
                     imgLeftAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -235,7 +329,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgCenterAlignTxtIconChatDemo.setOnClickListener {
-//                etRichChatDemo.setAlignCenter()
+                etRichChatDemo.setAlignCenter()
                 centerAlignTxtSelected = !centerAlignTxtSelected
                 if (centerAlignTxtSelected) {
                     imgCenterAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -260,7 +354,7 @@ class ChipSetDemoFragment : Fragment() {
                 }
             }
             imgRightAlignTxtIconChatDemo.setOnClickListener {
-//                etRichChatDemo.setAlignRight()
+                etRichChatDemo.setAlignRight()
                 rightAlignTxtSelected = !rightAlignTxtSelected
                 if (rightAlignTxtSelected) {
                     imgRightAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
@@ -294,6 +388,7 @@ class ChipSetDemoFragment : Fragment() {
 //                    etRichChatDemo.removeFormat()
                 }
             }
+
             layoutAddPeople.setOnClickListener {
                 if (etChips.text?.isNotEmpty() == true) {
                     addChipToGroup(requireContext(), etChips.text.toString())
@@ -308,6 +403,7 @@ class ChipSetDemoFragment : Fragment() {
 //                tvMessages.text=etRichChatDemo.lineCount.toString()
 //                etRichChatDemo.insertLink("https://cdn.britannica.com/49/182849-050-4C7FE34F/scene-Iron-Man.jpg","iron man link")
             }
+
 //            etRichChatDemo.setOnDecorationChangeListener(object :
 //                RichEditor.OnDecorationStateListener {
 //                override fun onStateChangeListener(
@@ -318,6 +414,7 @@ class ChipSetDemoFragment : Fragment() {
 //                }
 //
 //            })
+
 
             etRichChatDemo.setOnKeyListener(object : View.OnKeyListener {
                 override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
@@ -578,55 +675,167 @@ class ChipSetDemoFragment : Fragment() {
         mRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
         mRecorder?.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
         mRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-        mRecorder?.setOutputFile(mFileName)
+        mRecorder?.setOutputFile(recordFile?.absolutePath)
     }
-    fun getAmplitude(){
-       Handler(Looper.myLooper()!!).postDelayed(object :kotlinx.coroutines.Runnable{
-           override fun run() {
-               if(playingStatus){
-                   val amplitude=mRecorder?.maxAmplitude
-                   binding.audioRecordView.update(amplitude?:0)
-                   getAmplitude()
-               }else{
-                    binding.layoutRecoding.visibility=View.GONE
-               }
-           }
 
-       },100)
-    }
-    fun recodeAudio(){
-        binding.imgStopRecoding.setOnClickListener {
-        mRecorder?.stop()
-        mRecorder?.release()
-        mRecorder=null
-            playingStatus=false
-        }
-        binding.layoutRecoding.visibility=View.VISIBLE
-        binding.imgStopRecoding.setOnClickListener {
-            binding.layoutRecoding.visibility=View.GONE
-        }
-        val uuid = UUID.randomUUID().toString()
-        val directory = File(Environment.getExternalStorageDirectory().absolutePath + "/MyRecordings")
-        if (!directory.exists()) {
-            val success = directory.mkdirs()
-            if (!success) {
-                Log.e(TAG, "Failed to create directory")
-                return
+    fun recodeAudio() {
+        binding.apply {
+            mHandler=Handler(Looper.myLooper()!!)
+//            mHandlerLive=Handler(Looper.myLooper()!!)
+            recoderTimeStemp=0
+            runnableGetTimeRecoderLive = object : java.lang.Runnable {
+                override fun run() {
+                    try {
+                        if (recoderTimeStemp==10){
+                            recoderPlayLiveTime+=1
+                            recoderTimeStemp=0
+                        }else{
+                            recoderTimeStemp+=1
+                        }
+                        if(recoderPlayLiveTime.toString().trim().length<2)
+                            txtAudioTimeRecodingLiveChat.text= "00:0$recoderPlayLiveTime"
+                        else
+                            txtAudioTimeRecodingLiveChat.text= "00:$recoderPlayLiveTime"
+                        val amplitude=mRecorder?.maxAmplitude
+                        binding.audioRecodingViewRecodingLiveChat.update(amplitude?:0)
+                    } finally {
+                        mHandler!!.postDelayed(this, 100)
+                    }
+                }
             }
+            layoutRecodingChat.visibility = View.VISIBLE
+            etRichChatDemo.visibility = View.GONE
+            layoutRecodingLiveChat.visibility = View.VISIBLE
+            layoutRecodingPlayChat.visibility = View.GONE
+            txtAudioTimeRecodingLiveChat.text = ""
+            audioRecodingViewRecodingLiveChat.recreate()
+            recoderPlayLiveTime=0
+            recoderPlayTime=0
+            recordFile =
+                File(requireContext().filesDir, UUID.randomUUID().toString() + ".mp3")
+            if (!recordFile?.exists()!!) {
+                recordFile?.createNewFile()
+            }
+            mediaRecorderReady()
+            try {
+                mRecorder?.prepare()
+                runnableGetTimeRecoderLive?.run()
+                mRecorder?.start()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.i(TAG, "IoException ${e.message}")
+            }
+
+            imgDeleteRecodingChat.setOnClickListener {
+                if(runnableGetTimeRecoderLive!=null){
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        mRecorder?.pause()
+                    }
+                    mHandler?.removeCallbacks(runnableGetTimeRecoderLive!!)
+                    runnableGetTimeRecoderLive=null
+                    mRecorder?.stop()
+                    mRecorder?.release()
+                    mRecorder = null
+                    recordFile = null
+                    layoutRecodingChat.visibility = View.GONE
+                    etRichChatDemo.visibility = View.VISIBLE
+                }
+                else{
+                    recordFile = null
+                    layoutRecodingChat.visibility = View.GONE
+                    etRichChatDemo.visibility = View.VISIBLE
+                }
+                if(runnableGetTimeRecoderPlay!=null){
+                    mHandler?.removeCallbacks(runnableGetTimeRecoderPlay!!)
+                }
+                if (mHandler!=null){
+                    mHandler=null
+                }
+                if(mPlayer !=null ){
+                    mPlayer?.release()
+                    mPlayer=null
+                }
+            }
+
+            imgDoneRecodingLiveChat.setOnClickListener {
+                if(runnableGetTimeRecoderLive!=null){
+                    mHandler?.removeCallbacks(runnableGetTimeRecoderLive!!)
+                    runnableGetTimeRecoderLive=null
+//                    mHandlerLive=null
+                    mRecorder?.stop()
+                    mRecorder?.release()
+                    mRecorder = null
+                }
+                seekBarRecodingPlayChat.setSampleFrom(recordFile?.absolutePath.toString())
+                layoutRecodingLiveChat.visibility = View.GONE
+                layoutRecodingPlayChat.visibility = View.VISIBLE
+                txtAudioTimeRecodingPlayChat.text = "00:00"
+                imgRecodingPlayBtn.setImageDrawable(ContextCompat.getDrawable(requireContext(),
+                    R.drawable.ic_baseline_play_arrow_24))
+                seekBarRecodingPlayChat.onProgressChanged=object : SeekBarOnProgressChanged {
+                    override fun onProgressChanged(
+                        waveformSeekBar: WaveformSeekBar,
+                        progress: Float,
+                        fromUser: Boolean,
+                    ) {
+                        if(fromUser){
+                        Log.i(TAG,"onProgress change  $waveformSeekBar\nProgress $progress\nFromUser$fromUser")
+                            mPlayer?.seekTo(progress.toInt() * 100)
+                            seekBarRecodingPlayChat.progress=progress * 100
+                            mHandler?.removeCallbacks(runnableGetTimeRecoderPlay!!)
+                            recoderPlayTime= progress.toInt()/10
+                            Log.i(TAG,"change progress is ${progress.toInt()}")
+                            runnableGetTimeRecoderPlay?.run()
+                        }
+                    }
+                }
+            }
+            layoutBtnRecodingPlayChat.setOnClickListener {
+                playRecodingStatus = !playRecodingStatus
+                if (playRecodingStatus) {
+                    imgRecodingPlayBtn.setImageDrawable(ContextCompat.getDrawable(requireContext(),
+                        R.drawable.ic_baseline_play_arrow_24))
+                    pauseAudio()
+                } else {
+                    imgRecodingPlayBtn.setImageDrawable(ContextCompat.getDrawable(requireContext(),
+                        R.drawable.ic_baseline_pause_24))
+                    playAudio()
+                }
+            }
+
         }
-        val file = File(directory, "${uuid}+recording.mp3")
-        mFileName=file.absolutePath
-//            mFileName = requireActivity().externalCacheDir?.absolutePath + "/" + uuid + ".3gp"
-            Log.i(TAG, mFileName.toString())
-             mediaRecorderReady()
-        try {
-            mRecorder?.prepare()
-            mRecorder?.start()
-            playingStatus=true
-            getAmplitude()
-        } catch (e: Exception) {
-            e.printStackTrace()
-            Log.i(TAG,"IoException ${e.message}")
+    }
+    private fun playAudio(){
+        if(mPlayer==null && recordFile!=null){
+            mPlayer= MediaPlayer()
+            mPlayer?.setDataSource(recordFile?.absolutePath.toString())
+            Log.i(TAG,"reco ${recordFile?.absolutePath.toString()}")
+            mPlayer?.prepare()
+            mPlayer?.start()
+            recoderTimeStemp=0
+            runnableGetTimeRecoderPlay?.run()
+        }else{
+            mPlayer?.start()
+            runnableGetTimeRecoderPlay?.run()
+        }
+
+        mPlayer?.setOnCompletionListener {
+            Log.i(TAG, "onComplete called")
+            playRecodingStatus = !playRecodingStatus
+            binding.imgRecodingPlayBtn.setImageDrawable(ContextCompat.getDrawable(requireContext(),
+                R.drawable.ic_baseline_play_arrow_24))
+            mHandler?.removeCallbacks(runnableGetTimeRecoderPlay!!)
+            recoderPlayTime=0
+            recoderTimeStemp=0
+        }
+
+    }
+     private fun pauseAudio(){
+        if(mPlayer!=null && recordFile!=null){
+            mHandler?.removeCallbacks(runnableGetTimeRecoderPlay!!)
+            mPlayer?.pause()
+        }else{
+            Toast.makeText(requireContext(), "Something error", Toast.LENGTH_SHORT).show()
         }
     }
 }

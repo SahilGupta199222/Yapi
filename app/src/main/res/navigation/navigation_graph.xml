@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/chipSetDemoFragment">
 
     <fragment
         android:id="@+id/signUpFragment2"
@@ -83,7 +83,6 @@
         android:id="@+id/firstStepCreateTeam"
         android:name="com.yapi.views.create_team.first_step_create_team.FirstStepCreateFragment"
         android:label="FirstStepCreateTeam">
-
         <action
             android:id="@+id/action_firstStepCreateTeam_to_secondStepCreateTeam"
             app:destination="@id/secondStepCreateTeam" />
@@ -93,7 +92,6 @@
         android:id="@+id/secondStepCreateTeam"
         android:name="com.yapi.views.create_team.second_step_create_team.SecondStepCreateFragment"
         android:label="SecondStepCreateTeam">
-
         <action
             android:id="@+id/action_secondStepCreateTeam_to_thirdStepCreateTeam"
             app:destination="@+id/thirdStepCreateTeam" />
@@ -109,7 +107,6 @@
         <action
             android:id="@+id/action_thirdStepCreateTeam_to_chatEmptyFragment"
             app:destination="@id/chatEmptyFragment" />
-
         <action
             android:id="@+id/action_thirdStepCreateTeam_to_menuFragment"
             app:destination="@id/menuFragment" />

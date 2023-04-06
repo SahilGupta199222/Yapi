@@ -9,6 +9,7 @@
 
     <dimen name="smallIconSize">@dimen/_13sdp</dimen>
     <dimen name="iconSize">@dimen/_16sdp</dimen>
+    <dimen name="iconSmallBigSize">@dimen/_18sdp</dimen>
     <dimen name="bigIconSize">@dimen/_25sdp</dimen>
     <dimen name="fortyFourIconSize">@dimen/_36sdp</dimen>
     <dimen name="extraIconSize">@dimen/_18sdp</dimen>
@@ -30,6 +31,7 @@
     <dimen name="etVerticalPadding">@dimen/_13sdp</dimen>
 
     <dimen name="roundDrawableCommon">@dimen/_5sdp</dimen>
+    <dimen name="roundRecodingDrawableCommon">@dimen/_5sdp</dimen>
 
     <dimen name="popSideMargin">@dimen/_12sdp</dimen>
     <dimen name="startMainMargin">@dimen/_18sdp</dimen>
