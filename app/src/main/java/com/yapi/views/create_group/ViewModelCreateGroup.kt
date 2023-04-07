@@ -28,6 +28,7 @@ class ViewModelCreateGroup : ViewModel() {
     var privateGroupToggle = ObservableBoolean(false)
 
     var errorData=MutableLiveData<SignInErrorData>()
+    var hideKeyboardData=MutableLiveData<Boolean>()
 
     fun onClick(view: View) {
         when (view.id) {
@@ -54,7 +55,9 @@ class ViewModelCreateGroup : ViewModel() {
                 }
             }
             R.id.topCreateGroupLayout -> {
-                MainActivity.activity!!.get()!!.hideKeyboard()
+               //view.context.hideKeyboard()
+               // MainActivity.activity!!.get()!!.hideKeyboard()
+                hideKeyboardData.value=true
             }
         }
     }

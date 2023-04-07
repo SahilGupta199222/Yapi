@@ -19,6 +19,7 @@ import com.yapi.common.MyMessageEvent
 import com.yapi.common.checkDeviceType
 import com.yapi.databinding.FragmentMenuBinding
 import com.yapi.views.profile.ProfileFragment
+import com.yapi.views.search.SearchFragment
 import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
 
@@ -606,6 +607,15 @@ class MenuFragment : Fragment() {
             if (data) {
                 ProfileFragment.newInstanceProfileScreen("")
                     .showNow(requireActivity().supportFragmentManager, "")
+            }
+        })
+
+
+        viewModel.openSearchScreenData.observe(requireActivity(), Observer {
+            var data=it as Boolean
+            if(data)
+            {
+                SearchFragment.newInstanceSearch("").showNow(requireActivity().supportFragmentManager,"")
             }
         })
     }
