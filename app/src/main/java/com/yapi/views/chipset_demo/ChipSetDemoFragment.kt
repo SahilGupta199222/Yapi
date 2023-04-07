@@ -6,15 +6,21 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Typeface
 import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.*
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.StyleSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.text.HtmlCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.google.android.material.chip.Chip
@@ -27,6 +33,7 @@ import com.masoudss.lib.SeekBarOnProgressChanged
 import com.masoudss.lib.WaveformSeekBar
 import com.yapi.R
 import com.yapi.databinding.FragmentChipSetDemoBinding
+import jp.wasabeef.richeditor.RichEditor
 import kotlinx.coroutines.Runnable
 import java.io.File
 import java.util.*
@@ -210,10 +217,11 @@ class ChipSetDemoFragment : Fragment() {
             }
             imgBoldTxtIconChatDemo.setOnClickListener {
                 etRichChatDemo.setBold()
-                Handler(Looper.myLooper()!!).postDelayed({
-                    val text: String = etRichChatDemo.html
-                    etRichChatDemo.html = text
-                }, 500)
+
+//                Handler(Looper.myLooper()!!).postDelayed({
+//                    val text: String = etRichChatDemo.html
+//                    etRichChatDemo.html = text
+//                }, 200)
 //                etRichChatDemo.onTextChange()
 //                CoroutineScope(Dispatchers.Main).async {
 //                    etRichChatDemo.notifyAll()
@@ -411,15 +419,44 @@ class ChipSetDemoFragment : Fragment() {
 //                etRichChatDemo.insertLink("https://cdn.britannica.com/49/182849-050-4C7FE34F/scene-Iron-Man.jpg","iron man link")
             }
 
-            etRichChatDemo.setOnDecorationChangeListener { text, types ->
-                Log.i("fhycdfhfdrfdc",
+//            etRichChatDemo.setOnDecorationChangeListener { text, types ->
+//                Log.i("fhycdfhfdrfdc",
+//                    "decoration changed $text\ntypes$types")
+//            }
+            etRichChatDemo.setOnDecorationChangeListener(object : RichEditor.OnDecorationStateListener {
+                override fun onStateChangeListener(text: String?, types: List<RichEditor.Type>?) {
+                    // Update the view based on the applied decorations
+                    Log.i("fhycdfhfdrfdc",
                     "decoration changed $text\ntypes$types")
-            }
+                }
+            })
+            var a=0
             etRichChatDemo.setOnTextChangeListener {
-                Log.i("fhycdfhfdrfdc",
-                    "OnText change called")
+//                Log.i("fhycdfhfdrfdc",
+//                    "OnText change called")
+                if(a==10){
+
+                    val htmlText = etRichChatDemo.html
+                    val spannedString: Spanned = HtmlCompat.fromHtml(htmlText, HtmlCompat.FROM_HTML_MODE_LEGACY)
+                    val lastLine: CharSequence = spannedString.split("\n").last()
+                    val activeStyles: Array<StyleSpan> = (lastLine as SpannableString).getSpans(0, lastLine.length, StyleSpan::class.java)
+                    Log.i("fhycdfhfdrfdc",
+                        "data is $activeStyles")
+
+                    a=1
+                }else{
+                    a+=1
+                }
 
             }
+
+
+
+
+
+
+
+
 
 
 //            etRichChatDemo.setOnTextChangeListener(object : RichEditor.OnTextChangeListener {
