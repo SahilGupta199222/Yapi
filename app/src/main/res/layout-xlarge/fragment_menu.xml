@@ -100,35 +100,45 @@
                     </RelativeLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <ImageView
-                    android:id="@+id/ivSearch"
-                    android:layout_width="@dimen/smallIconSize"
-                    android:layout_height="@dimen/smallIconSize"
-                    android:src="@drawable/search"
-                    app:layout_constraintBottom_toBottomOf="@+id/etSearchMenu"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/etSearchMenu" />
-
-                <TextView
-                    android:id="@+id/etSearchMenu"
-                    android:layout_width="0dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutSearch"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/startPaddingNormal"
-                    android:layout_marginTop="@dimen/topMainMargin"
-                    android:background="@null"
-                    android:fontFamily="@font/larsseit_regular"
-                    android:hint="@string/search"
-                    android:paddingStart="2sp"
                     android:paddingTop="@dimen/_10ssp"
-                    android:singleLine="true"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:onClick="@{mViewmodel::onClick}"
                     android:paddingBottom="@dimen/_10ssp"
-                    android:textColor="@color/darkGrey"
-                    android:textColorHint="@color/darkGrey"
-                    android:textSize="@dimen/normalTextSize"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/ivSearch"
-                    app:layout_constraintTop_toBottomOf="@+id/layoutToolBarMenu" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutToolBarMenu">
+                    <ImageView
+                        android:id="@+id/ivSearch"
+                        android:layout_width="@dimen/smallIconSize"
+                        android:layout_height="@dimen/smallIconSize"
+                        android:src="@drawable/search"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
 
+                    <TextView
+                        android:id="@+id/etSearchMenu"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/startPaddingNormal"
+                        android:background="@null"
+                        android:fontFamily="@font/larsseit_regular"
+                        android:hint="@string/search"
+                        android:onClick="@{mViewmodel::onClick}"
+                        android:paddingStart="2sp"
+                        android:singleLine="true"
+                        android:textColor="@color/darkGrey"
+                        android:textColorHint="@color/darkGrey"
+                        android:textSize="@dimen/normalTextSize"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ivSearch"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layoutBoatMenu"
                     android:layout_width="match_parent"
@@ -137,9 +147,7 @@
                     android:paddingBottom="@dimen/_10ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etSearchMenu">
-
-                    <androidx.appcompat.widget.AppCompatImageView
+                    app:layout_constraintTop_toBottomOf="@+id/layoutSearch">     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/imgBoatMenu"
                         android:layout_width="@dimen/iconSize"
                         android:layout_height="@dimen/iconSize"

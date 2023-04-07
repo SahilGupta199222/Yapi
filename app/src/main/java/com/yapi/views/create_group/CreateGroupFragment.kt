@@ -161,6 +161,7 @@ class CreateGroupFragment : DialogFragment() {
             if(data!=null && data.message.isNotEmpty())
             {
                 errorText!!.setText(data.message)
+
                 changeBackgroundForEditError(editText!!,requireActivity().resources.getColor(
                     R.color.error_box_color),
                     requireActivity().resources.getColor(R.color.error_border_color))
@@ -168,8 +169,8 @@ class CreateGroupFragment : DialogFragment() {
                 if (data.fieldId != 0) {
                     errorText!!.setText("")
                     changeBackgroundForEditError(editText!!, requireActivity().resources.getColor(
-                        R.color.white),
-                        requireActivity().resources.getColor(R.color.liteGrey))
+                        R.color.liteGrey),
+                        requireActivity().resources.getColor(R.color.white))
                 }
             }
         })

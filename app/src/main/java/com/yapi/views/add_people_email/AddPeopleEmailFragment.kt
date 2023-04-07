@@ -107,6 +107,7 @@ class AddPeopleEmailFragment : DialogFragment() {
                         addChipToGroup(requireContext(), etChipAddPeopleEmail.text.toString())
                         layoutAddPeopleAddPeopleEmail.visibility = View.GONE
                         etChipAddPeopleEmail.text?.clear()
+                        viewModelAddPeopleEmail.errorData.value = SignInErrorData("", 0)
                     } else {
                         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
                     }
@@ -192,15 +193,16 @@ class AddPeopleEmailFragment : DialogFragment() {
             if(data!=null && data.message!="")
             {
                 binding.txtErrorEmailAddPeople.setText(data.message)
-                changeBackgroundForEditError(binding.etChipAddPeopleEmail!!,requireActivity().resources.getColor(
+                changeBackgroundTintForError(binding.chipLayoutAddPeopleEmail!!,requireActivity().resources.getColor(
                     R.color.error_box_color),
-                    requireActivity().resources.getColor(R.color.error_border_color))
+                    requireActivity().resources.getColor(R.color.error_border_color),-1)
             }else
             {
                 binding.txtErrorEmailAddPeople.setText("")
-                changeBackgroundForEditError(binding.etChipAddPeopleEmail!!, requireActivity().resources.getColor(
+             //   binding.chipLayoutAddPeopleEmail!!.setbackg
+                changeBackgroundTintForError(binding.chipLayoutAddPeopleEmail!!, requireActivity().resources.getColor(
                     R.color.white),
-                    requireActivity().resources.getColor(R.color.liteGrey))
+                    requireActivity().resources.getColor(R.color.liteGrey),requireActivity().resources.getColor(R.color.information_profile_back_box))
             }
         })
     }

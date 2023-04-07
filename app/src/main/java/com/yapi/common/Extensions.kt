@@ -88,6 +88,7 @@ fun changeBackgroundForError(layoutEmailSignIn: ConstraintLayout, boxColor:Int, 
     drawable.setStroke(finalWidth2.toInt(), borderColor)
     drawable.cornerRadius = MainActivity.activity!!.get()!!.resources.getDimension(R.dimen.roundDrawableCommon)
     drawable.setColor(boxColor)
+
     layoutEmailSignIn!!.setBackgroundDrawable(drawable)
 }
 
@@ -100,5 +101,20 @@ fun changeBackgroundForEditError(layoutEmailSignIn: AppCompatEditText, boxColor:
     drawable.setStroke(finalWidth2.toInt(), borderColor)
     drawable.cornerRadius = MainActivity.activity!!.get()!!.resources.getDimension(R.dimen.roundDrawableCommon)
     drawable.setColor(boxColor)
+    layoutEmailSignIn!!.setBackgroundDrawable(drawable)
+}
+
+fun changeBackgroundTintForError(layoutEmailSignIn: ConstraintLayout, boxColor:Int, borderColor:Int,
+backTintColor:Int)
+{
+    val drawable = GradientDrawable()
+    drawable.shape = GradientDrawable.RECTANGLE
+    var finalWidth2 = MainActivity.activity!!.get()!!.resources.getDimension(com.intuit.sdp.R.dimen._1sdp)
+    drawable.setStroke(finalWidth2.toInt(), borderColor)
+    drawable.cornerRadius = MainActivity.activity!!.get()!!.resources.getDimension(R.dimen.roundDrawableCommon)
+    drawable.setColor(boxColor)
+    if(backTintColor!=-1) {
+        drawable.setTint(backTintColor)
+    }
     layoutEmailSignIn!!.setBackgroundDrawable(drawable)
 }
