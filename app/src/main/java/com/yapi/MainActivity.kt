@@ -6,6 +6,7 @@ import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewTreeObserver
 import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -13,19 +14,20 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.yapi.common.Constants
 import com.yapi.common.MyMessageEvent
-import com.yapi.common.Repository_Factory.newInstance
 import com.yapi.databinding.ActivityMainBinding
+import com.yapi.pref.PreferenceFile
 import com.yapi.views.chat.ChatMessagesFragment
 import com.yapi.views.chat.chatGroupInfo.ChatGroupInfoFragment
 import com.yapi.views.chat.chatUserInfo.ChatUserInfoFragment
 import com.yapi.views.chat_empty.ChatEmptyFragment
-import com.yapi.views.create_group.CreateGroupFragment
 import com.yapi.views.menu_screen.MenuFragment
+import com.yapi.views.userList.UserListFragment
 import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.lang.ref.WeakReference
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -34,6 +36,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var dataBinding: ActivityMainBinding
     val viewModel: DataViewModel by viewModels()
 
+    @Inject
+    lateinit var preferenceFile: PreferenceFile
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dataBinding = ActivityMainBinding.inflate(LayoutInflater.from(this))
@@ -41,11 +45,26 @@ class MainActivity : AppCompatActivity() {
         activity = WeakReference<Activity>(this)
         EventBus.getDefault().register(this)
         initUI()
+
+        dataBinding.secondFrame.getViewTreeObserver().addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                dataBinding.secondFrame.getViewTreeObserver().removeOnGlobalLayoutListener(this)
+
+                preferenceFile.saveStringValue("second_frame_height",dataBinding.secondFrame.height.toString())
+                preferenceFile.saveStringValue("second_frame_width",dataBinding.secondFrame.width.toString())
+                //height is ready
+                //   dataBinding.secondFrame.width //height is ready
+            }
+        })
+
+
     }
 
     override fun onStop() {
         super.onStop()
         EventBus.getDefault().unregister(this)
+
+
     }
 
     private fun initUI() {
@@ -140,8 +159,18 @@ class MainActivity : AppCompatActivity() {
                         } else
                             if (event.screenName == Constants.GROUP_PROFILE_BACK) {
                                 showTabsMethod(2, event.screenName)
-                            }
+                            }else
+                                if(event.screenName==Constants.USER_MANAGEMENT)
+                                {
+                                    openUserMamangementScreen()
+                                }
 
+    }
+
+    fun openUserMamangementScreen()
+    {
+        var fragment = UserListFragment()
+        supportFragmentManager.beginTransaction().replace(R.id.secondFrame, fragment).commit()
     }
 
     fun createChatMethod() {

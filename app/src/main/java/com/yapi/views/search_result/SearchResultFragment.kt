@@ -1,16 +1,19 @@
 package com.yapi.views.search_result
 
 import android.annotation.SuppressLint
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.yapi.R
+import kotlin.concurrent.timerTask
 
 
 class SearchResultFragment : Fragment() {
@@ -78,16 +81,29 @@ init()
                     "Documentation is very important task. It is needed to be finished by this week."))
 
                 resentSearchList.add(PojoSearchScreenData(1,
-                    "File",
+                    "Files",
                     "VIEW FILES",
                     "Documentation.pdf",
                     "0.4mb",
                     ContextCompat.getDrawable(requireContext(), R.drawable.file)))
                 resentSearchList.add(PojoSearchScreenData(1,
-                    "File",
+                    "Files",
                     "VIEW FILES",
                     "Document_drafter.pdf",
                     "1.5mb",
+                    ContextCompat.getDrawable(requireContext(), R.drawable.file)))
+                searchList(resentSearchList)
+                resentSearchList.add(PojoSearchScreenData(1,
+                    "People",
+                    "VIEW ALL",
+                    "Donald Sutherland",
+                    "Frontend Engineer",
+                    ContextCompat.getDrawable(requireContext(), R.drawable.file)))
+                resentSearchList.add(PojoSearchScreenData(1,
+                    "People",
+                    "VIEW ALL",
+                    "Michelle Dochery",
+                    "Customer",
                     ContextCompat.getDrawable(requireContext(), R.drawable.file)))
                 searchList(resentSearchList)
 
@@ -101,37 +117,67 @@ init()
     private fun setTabLayout(empty:Boolean) {
         tabList = ArrayList<PojoTabSearchResult>()
         if (empty) {
-            tabList.add(PojoTabSearchResult("All", 0, 2))
-            tabList.add(PojoTabSearchResult("Messages", 0, 2))
-            tabList.add(PojoTabSearchResult("Files", 0, 2))
-            tabList.add(PojoTabSearchResult("People", 0, 2))
-            tabList.add(PojoTabSearchResult("Groups", 0, 2))
+            tabList.add(PojoTabSearchResult("All", 0, true))
+            tabList.add(PojoTabSearchResult("Messages", 0, false))
+            tabList.add(PojoTabSearchResult("Files", 0, false))
+            tabList.add(PojoTabSearchResult("People", 0, false))
+            tabList.add(PojoTabSearchResult("Groups", 0, false))
 
         } else {
-            tabList.add(PojoTabSearchResult("All", 12, 0))
-            tabList.add(PojoTabSearchResult("Messages", 2, 1))
-            tabList.add(PojoTabSearchResult("Files", 24, 1))
-            tabList.add(PojoTabSearchResult("People", 4, 1))
-            tabList.add(PojoTabSearchResult("Groups", 45, 1))
+            tabList.add(PojoTabSearchResult("All", 12, true))
+            tabList.add(PojoTabSearchResult("Messages", 2, false))
+            tabList.add(PojoTabSearchResult("Files", 0, false))
+            tabList.add(PojoTabSearchResult("People", 4, false))
+            tabList.add(PojoTabSearchResult("Groups", 45, false))
+            tabList.add(PojoTabSearchResult("Jobs", 0, false))
+            tabList.add(PojoTabSearchResult("Jobs Type", 0, false))
 
         }
         adapterr = AdapterTabSearchResult(requireContext(),
             tabList,
             object : AdapterTabSearchResult.Click {
                 override fun onClick(position: Int) {
-                    if (!empty) {
+
                         for (i in 0 until tabList.size) {
                             if (i == position) {
-                                tabList[i].selected = 0
+                                tabList[i].selected = true
                             } else {
-                                tabList[i].selected = 1
+                                tabList[i].selected = false
                             }
                         }
                         adapterr.changeList(tabList)
                     }
-                }
+
             })
         binding.rvTabLayoutSearchResult.adapter = adapterr
+
+        val arrayPeople= arrayListOf<String>("ALL","TEAM","CUSTOMERS","LEADS")
+        val adpater=AdapterSpinnerSimple(requireContext(),arrayPeople)
+        binding.spinnerAllSearchResult.adapter=adpater
+//        val ad = ArrayAdapter(
+//            requireActivity(), R.layout.custom_spinner_item,
+//            arrayPeople)
+//        adpater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        binding.spinnerAllSearchResult.adapter=ad
+
+        binding.spinnerAllSearchResult.onItemSelectedListener  = object :AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long,
+            ) {
+                val viewLine=view?.findViewById<View>(R.id.viewSpinnerSimple)
+                viewLine?.visibility=View.GONE
+//                Toast.makeText(requireContext(), "Clicked on ${arrayPeople[position]}", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+        }
+
     }
 
 }

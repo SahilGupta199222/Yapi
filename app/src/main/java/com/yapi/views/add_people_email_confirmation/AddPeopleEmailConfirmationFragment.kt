@@ -20,7 +20,7 @@ import com.yapi.views.create_group.CreateGroupFragment
 class AddPeopleEmailConfirmationFragment : DialogFragment() {
     private lateinit var binding:FragmentAddPeopleEmailConfirmationBinding
     private val viewModel:ViewModelAddPeopleEmailConfirmation by viewModels()
-//add_email_conirmation_logo
+//add_email_confirmation_logo
     companion object {
         fun newInstanceEmailConfirmation(title: String): AddPeopleEmailConfirmationFragment {
             val args = Bundle()

@@ -110,6 +110,7 @@
                 android:focusable="true"
                 android:layout_marginTop="@dimen/_44sdp"
                 android:inputType="number"
+                android:text="@={vModel.otpValue}"
                 android:itemBackground="@drawable/otp_background_box"
                 android:padding="0dp"
                 android:textColor="@color/darkGrey"
@@ -128,6 +129,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtTempTitleDescriptionSignUpCode"
                 />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/txtErrorMessageTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/larsseit_regular"
+                android:text=""
+                android:layout_marginStart="@dimen/error_margin_start"
+                android:textColor="@color/red"
+                android:textSize="@dimen/smallTextSize"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/otp_view"
+                app:layout_constraintTop_toBottomOf="@+id/otp_view" />
 
 
 

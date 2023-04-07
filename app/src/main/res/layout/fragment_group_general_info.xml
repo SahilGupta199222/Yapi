@@ -6,6 +6,9 @@
         <variable
             name="model"
             type="com.yapi.views.group_info.group_general.ViewModelGroupGeneral" />
+        <variable
+            name="mView"
+            type="android.view.View" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -13,6 +16,7 @@
         android:paddingStart="@dimen/popSideMargin"
         android:onClick="@{model::onClick}"
         android:paddingEnd="@dimen/popSideMargin"
+        android:visibility="@{model.editUIShow?mView.VISIBLE:mView.GONE}"
         android:id="@+id/layoutGroupGnlInfo"
         >
     <androidx.core.widget.NestedScrollView

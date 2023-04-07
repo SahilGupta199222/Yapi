@@ -151,10 +151,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/larsseit_regular"
-                    android:text="Please enter valid email address."
+                    android:text=""
                     android:textColor="@color/red"
                     android:textSize="@dimen/normalSmallTextSize"
-                    android:visibility="gone"
+                    android:visibility="visible"
+                    android:layout_marginStart="@dimen/error_margin_start"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/layoutEmailSignIn" />

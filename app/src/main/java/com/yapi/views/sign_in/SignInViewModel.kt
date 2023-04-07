@@ -7,6 +7,7 @@ import android.view.View
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.databinding.adapters.TextViewBindingAdapter.AfterTextChanged
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.yapi.MainActivity
@@ -20,6 +21,8 @@ class SignInViewModel : ViewModel() {
     var emailFieldValue = ObservableField("")
     var passwordFieldValue = ObservableField("")
     var emailCorrectValue = ObservableBoolean(false)
+
+    var errorData=MutableLiveData<SignInErrorData>()
 
     fun onClick(view: View) {
         when (view.id) {
@@ -59,15 +62,18 @@ class SignInViewModel : ViewModel() {
 
     private fun checkValidation(): Boolean {
         if (emailFieldValue.get().toString().isEmpty()) {
-            showToastMessage(MainActivity.activity!!.get()!!.resources.getString(R.string.please_enter_email))
+          //  showToastMessage(MainActivity.activity!!.get()!!.resources.getString(R.string.please_enter_email))
+            errorData.value=SignInErrorData(MainActivity.activity!!.get()!!.resources.getString(R.string.please_enter_email))
             return false
         } else if (!(isValidEmail(emailFieldValue.get().toString()))) {
-            showToastMessage(MainActivity.activity!!.get()!!.resources.getString(R.string.please_enter_valid_email))
+          //  showToastMessage(MainActivity.activity!!.get()!!.resources.getString(R.string.please_enter_valid_email))
+            errorData.value=SignInErrorData(MainActivity.activity!!.get()!!.resources.getString(R.string.please_enter_valid_email))
             return false
         } /*else if (passwordFieldValue.get().toString().isEmpty()) {
             showToastMessage(MainActivity.activity!!.get()!!.resources.getString(R.string.please_enter_password))
             return false
         } */else {
+            errorData.value=SignInErrorData("")
             return true
         }
     }
@@ -86,6 +92,7 @@ class SignInViewModel : ViewModel() {
     fun AfterTextChanged(s: Editable?) {
      if (emailFieldValue.get().toString().trim().length>0 && isValidEmail(emailFieldValue.get().toString())) {
             emailCorrectValue.set(true)
+         errorData.value=SignInErrorData("")
         } else {
             emailCorrectValue.set(false)
         }

@@ -223,7 +223,13 @@
     <string name="you_have_invited">You have invited</string>
     <string name="one_person">person</string>
 
+    <string name="reply_message_text">Reply to Message</string>
     <string name="edit_message_text">Edit Message</string>
+    <string name="save_message_text">Save Message</string>
+    <string name="mark_unread_text">Mark Unread</string>
+    <string name="pin_conversation_text">Pin This Conversation</string>
+
+
     <string name="copy_message_text">Copy Message</string>
     <string name="delete_message_text">Delete Message</string>
     <string name="search_here">Search here</string>
@@ -238,6 +244,52 @@
     <string name="clear_all_filters">Clear all filters</string>
     <string name="messages">Messages</string>
 
-   <!-- <bool name="is_tablet">false</bool>-->
+    <!-- <bool name="is_tablet">false</bool>-->
+    <string name="search_text">Search</string>
+    <string name="add_text_values">Add</string>
 
+    <string name="crmr_text">CRM</string>
+    <string name="role_text">Role</string>
+    <string name="full_name">Full Name</string>
+    <string name="full_name_text" translatable="false">Full Name</string>
+
+    <string name="edit_member_text">Edit Member</string>
+    <string name="delete_user_text">Delete user</string>
+
+    <string name="save_information_text">save information</string>
+    <string name="phone_textt">Phone</string>
+    <string name="role_textt">Role</string>
+
+    <string name="edit_member_info_text">Edit Member Info</string>
+    <string name="deactivate_member_text">Deactivate Member</string>
+    <string name="remove_member_text">Remove Member</string>
+
+    <string name="are_you_sure_deactivate_user">Are you sure you want to deactivate this user?</string>
+
+    <string name="if_deactivate_account_receive">If you deactivate this account, user won’t be able to receive messages.</string>
+
+    <string name="deactivate_user_text">Deactivate user</string>
+    <string name="add_members_text">Add Members</string>
+
+    <string name="enter_correct_otp">Please enter correct otp</string>
+    <string name="enter_otp">Please enter otp</string>
+
+    <string name="please_enter_name_text">Please enter name</string>
+    <string name="please_enter_user_name_text">Please enter user name</string>
+    <string name="please_enter_email_text">Please enter email</string>
+    <string name="please_enter_valid_email_text">Please enter valid email</string>
+    <string name="please_enter_phone_text">Please enter phone number</string>
+    <string name="please_enter_yourself_text">Please enter about yourself</string>
+
+    <string name="enter_group_name">Please enter group name</string>
+    <string name="enter_group_description">Please enter group description</string>
+
+    <string name="please_enter_company_name">Please enter company name</string>
+
+    <string name="add_member_texttt">Add Member</string>
+    <string name="add_member_button">Add Member</string>
+    <string name="saved_items">Saved items</string>
+
+    <string name="view_all_text">View all</string>
+    <string name="read_audio_transcript">Read Audio Transcript</string>
 </resources>

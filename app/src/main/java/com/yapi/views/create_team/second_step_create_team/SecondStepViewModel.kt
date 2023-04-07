@@ -3,17 +3,20 @@ package com.yapi.views.create_team.second_step_create_team
 import android.util.Log
 import android.view.View
 import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.hideKeyboard
 import com.yapi.common.showToastMessage
+import com.yapi.views.sign_in.SignInErrorData
 
 class SecondStepViewModel : ViewModel() {
 
     var countFieldValue = ObservableField("0/50")
     var teamNameValue = ObservableField("")
+    var errorData=MutableLiveData<SignInErrorData>()
     fun onClick(view: View) {
         when (view.id) {
             R.id.btnSecondCreateTeam -> {
@@ -21,11 +24,13 @@ class SecondStepViewModel : ViewModel() {
                 // showMessage("Hello")
                 if (view.findNavController().currentDestination?.id == R.id.secondStepCreateTeam) {
                     if (teamNameValue.get().toString().trim().isNotEmpty()) {
+                        errorData.value= SignInErrorData("",0)
                         view.findNavController()
                             .navigate(R.id.action_secondStepCreateTeam_to_thirdStepCreateTeam)
                     }else
                     {
-                        showToastMessage("Please enter name")
+                        errorData.value=SignInErrorData("Please enter name",0)
+                       // showToastMessage("Please enter name")
                     }
                 }
             }
@@ -37,6 +42,10 @@ class SecondStepViewModel : ViewModel() {
 
     fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         Log.w("tag", "onTextChanged $s")
+        if(s.length>0)
+        {
+            errorData.value=SignInErrorData("",0)
+        }
         countFieldValue.set(s.length.toString() + "/50")
     }
 }

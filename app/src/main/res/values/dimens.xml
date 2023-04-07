@@ -9,6 +9,7 @@
 
     <dimen name="smallIconSize">@dimen/_13sdp</dimen>
     <dimen name="iconSize">@dimen/_16sdp</dimen>
+    <dimen name="iconSmallBigSize">@dimen/_18sdp</dimen>
     <dimen name="bigIconSize">@dimen/_25sdp</dimen>
     <dimen name="fortyFourIconSize">@dimen/_36sdp</dimen>
     <dimen name="extraIconSize">@dimen/_18sdp</dimen>
@@ -30,6 +31,7 @@
     <dimen name="etVerticalPadding">@dimen/_13sdp</dimen>
 
     <dimen name="roundDrawableCommon">@dimen/_5sdp</dimen>
+    <dimen name="roundRecodingDrawableCommon">@dimen/_5sdp</dimen>
 
     <dimen name="popSideMargin">@dimen/_12sdp</dimen>
     <dimen name="startMainMargin">@dimen/_18sdp</dimen>
@@ -45,7 +47,7 @@
 
     <dimen name="arrow_size">@dimen/_22sdp</dimen>
 
-<dimen name="group_banner_height">@dimen/_100sdp</dimen>
+    <dimen name="group_banner_height">@dimen/_100sdp</dimen>
     <dimen name="cardview_popup_back_radius">@dimen/_6sdp</dimen>
 
     <dimen name="plus_icon_size">@dimen/_20sdp</dimen>
@@ -61,7 +63,7 @@
     <dimen name="drawableEtPadding">@dimen/_5sdp</dimen>
 
     <dimen name="profile_start_margin">@dimen/_20sdp</dimen>
-<dimen name="user_info_box">@dimen/_35sdp</dimen>
+    <dimen name="user_info_box">@dimen/_35sdp</dimen>
     <bool name="isTab">false</bool>
 
     <dimen name="signup_process_weight_sum">3</dimen>
@@ -71,4 +73,9 @@
 
     <dimen name="outside_cross_height">@dimen/_10sdp</dimen>
     <dimen name="outside_cross_width">@dimen/_10sdp</dimen>
+
+    <dimen name="error_margin_start">@dimen/_10sdp</dimen>
+
+    <dimen name="space_between_error">@dimen/_5sdp</dimen>
+    <dimen name="side_menu_lineMargin">@dimen/_3sdp</dimen>
 </resources>

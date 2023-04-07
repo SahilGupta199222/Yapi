@@ -1,14 +1,13 @@
 package com.yapi.views.menu_screen
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -17,13 +16,16 @@ import com.yapi.R
 import com.yapi.common.Constants
 import com.yapi.common.GroupEvent
 import com.yapi.common.MyMessageEvent
+import com.yapi.common.checkDeviceType
 import com.yapi.databinding.FragmentMenuBinding
 import com.yapi.views.profile.ProfileFragment
+import com.yapi.views.search.SearchFragment
 import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
 
 @AndroidEntryPoint
 class MenuFragment : Fragment() {
+    private var rowHeight: Int?=0
     private lateinit var binding: FragmentMenuBinding
     private var groupListClicked = true
     private var jobListClicked = true
@@ -51,6 +53,21 @@ class MenuFragment : Fragment() {
         requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
         val width = displayMetrics.widthPixels
         viewModel.screenWidth = width
+
+       /* val vto: ViewTreeObserver = binding.constraintsTop!!.getViewTreeObserver()
+        vto.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+           override fun onGlobalLayout() {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                    binding.constraintsTop!!.getViewTreeObserver().removeGlobalOnLayoutListener(this)
+                } else {
+                    binding.constraintsTop!!.getViewTreeObserver().removeOnGlobalLayoutListener(this)
+                }
+               // val width: Int = binding.constraintsTop!!.getMeasuredWidth()
+                rowHeight = binding.constraintsTop!!.getMeasuredHeight()
+
+            }
+        })*/
+
         addNextToScreenObserver()
         init()
 
@@ -122,8 +139,8 @@ class MenuFragment : Fragment() {
         }
     }
 
-    private fun setSettingMethod(type:Int) {
-        if(type>0) {
+    private fun setSettingMethod(type: Int) {
+        if (type > 0) {
             settingListClicked = !settingListClicked
         }
         if (settingListClicked) {
@@ -146,8 +163,8 @@ class MenuFragment : Fragment() {
         }
     }
 
-    private fun setLeadMethod(type:Int) {
-        if(type>0) {
+    private fun setLeadMethod(type: Int) {
+        if (type > 0) {
             leadListClicked = !leadListClicked
         }
         if (leadListClicked) {
@@ -170,10 +187,10 @@ class MenuFragment : Fragment() {
         }
     }
 
-    private fun setTeamMethod(type:Int) {
-if(type>0) {
-    teamListClicked = !teamListClicked
-}
+    private fun setTeamMethod(type: Int) {
+        if (type > 0) {
+            teamListClicked = !teamListClicked
+        }
         if (teamListClicked) {
             binding.imgArrowTeamMenu.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -194,8 +211,8 @@ if(type>0) {
         }
     }
 
-    private fun setConversationMethod(type:Int) {
-        if(type>0) {
+    private fun setConversationMethod(type: Int) {
+        if (type > 0) {
             conversationListClicked = !conversationListClicked
         }
         if (conversationListClicked) {
@@ -218,8 +235,8 @@ if(type>0) {
         }
     }
 
-    private fun setCusomerListMethod(type:Int) {
-        if(type>0) {
+    private fun setCusomerListMethod(type: Int) {
+        if (type > 0) {
             customerListClicked = !customerListClicked
         }
         if (customerListClicked) {
@@ -308,8 +325,15 @@ if(type>0) {
                     }
                     adapterSettingsList?.notifyDataSetChanged()
 
-                    /* if(findNavController().currentDestination?.id == R.id.menuFragment)
-                         findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment)*/
+                    if(position==0) {
+                        if (checkDeviceType()) {
+                            EventBus.getDefault()
+                                .post(MyMessageEvent(2, Constants.USER_MANAGEMENT)) //post event
+                        } else {
+                            if (findNavController().currentDestination?.id == R.id.menuFragment)
+                                findNavController().navigate(R.id.action_menuFragment_to_userListFragment)
+                        }
+                    }
                 }
             })
         binding.rvSettingsListMenu.adapter = adapterSettingsList
@@ -495,10 +519,10 @@ if(type>0) {
             false))
 
         val fixImageHeight =
-            requireContext().resources.getDimension(com.intuit.sdp.R.dimen._36sdp).toInt()
+            requireContext().resources.getDimension(com.intuit.sdp.R.dimen._37sdp).toInt()
         val rvHeight = fixImageHeight * list.size
         binding.rvGroupListMenu.layoutParams.height = rvHeight
-
+        Log.e("fknkwefwsfwfwaf===",rowHeight.toString())
         adapterGroupsList =
             AdapterGroupsList(requireContext(), true, list, object : AdapterGroupsList.Click {
                 @SuppressLint("NotifyDataSetChanged")
@@ -506,12 +530,11 @@ if(type>0) {
 
                     if (adapterGroupsList?.getListt()?.get(position)!!.unSeenMsgCount == -1) {
 
-                        if(getResources().getBoolean(R.bool.isTab)) {
-                            System.out.println("phone========tablet");
-                            EventBus.getDefault().post(GroupEvent(2,Constants.CREATEGOUP_KEY)) //post event
-                        }
-                        else
-                        {
+                        if (resources.getBoolean(R.bool.isTab)) {
+                            System.out.println("phone========tablet")
+                            EventBus.getDefault()
+                                .post(GroupEvent(2, Constants.CREATEGOUP_KEY)) //post event
+                        } else {
                             findNavController().navigate(R.id.action_menuFragment_to_createGroupFragment)
                         }
                     } else {
@@ -522,17 +545,17 @@ if(type>0) {
                             "before notifiy list is\n${adapterGroupsList?.getListt()}")
                         adapterGroupsList?.notifyDataSetChanged()
 
-                        if(getResources().getBoolean(R.bool.isTab)) {
-                            System.out.println("phone========tablet");
-                            EventBus.getDefault().post(MyMessageEvent(3,Constants.CHAT_MESSAGE_KEY)) //post event
-                        }
-                        else
-                        {
+                        if (resources.getBoolean(R.bool.isTab)) {
+                            System.out.println("phone========tablet")
+                            EventBus.getDefault()
+                                .post(MyMessageEvent(3, Constants.CHAT_MESSAGE_KEY)) //post event
+                        } else {
                             if (findNavController().currentDestination?.id == R.id.menuFragment) {
                                 var bundle = Bundle()
                                 bundle.putString("userType", userType)
                                 findNavController()
-                                    .navigate(R.id.action_menuFragment_to_chatMessageFragment, bundle)
+                                    .navigate(R.id.action_menuFragment_to_chatMessageFragment,
+                                        bundle)
                             }
                         }
                     }
@@ -549,7 +572,7 @@ if(type>0) {
         // list.add(PojoGroupMembersList(requireActivity().getString(R.string.createGroups_text), -2, false))
 
         val fixImageHeight =
-            requireContext().resources.getDimension(com.intuit.sdp.R.dimen._36sdp).toInt()
+            requireContext().resources.getDimension(com.intuit.sdp.R.dimen._37sdp).toInt()
         val rvHeight = fixImageHeight * list.size
         binding.rvJobsListMenu.layoutParams.height = rvHeight
 
@@ -580,10 +603,19 @@ if(type>0) {
     private fun addNextToScreenObserver() {
 
         viewModel.openProfileScreenData.observe(requireActivity(), Observer {
+            var data = it as Boolean
+            if (data) {
+                ProfileFragment.newInstanceProfileScreen("")
+                    .showNow(requireActivity().supportFragmentManager, "")
+            }
+        })
+
+
+        viewModel.openSearchScreenData.observe(requireActivity(), Observer {
             var data=it as Boolean
             if(data)
             {
-                ProfileFragment.newInstanceProfileScreen("").showNow(requireActivity().supportFragmentManager,"")
+                SearchFragment.newInstanceSearch("").showNow(requireActivity().supportFragmentManager,"")
             }
         })
     }

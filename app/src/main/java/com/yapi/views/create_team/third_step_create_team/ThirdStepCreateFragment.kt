@@ -7,9 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import com.yapi.R
+import com.yapi.common.changeBackgroundForEditError
+import com.yapi.common.changeBackgroundForError
 import com.yapi.databinding.SecondStepCreateTeamBinding
 import com.yapi.databinding.ThirdStepCreateLayoutBinding
 import com.yapi.views.create_team.second_step_create_team.SecondStepViewModel
+import com.yapi.views.sign_in.SignInErrorData
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,7 +39,27 @@ class ThirdStepCreateFragment : Fragment() {
     }
 
     private fun initUI() {
+        showErrorUIObserver()
+    }
 
+    fun showErrorUIObserver()
+    {
+        viewModel.errorData.observe(requireActivity(), Observer {
+            var data=it as SignInErrorData
+            if(data!=null && data.message.isNotEmpty())
+            {
+                dataBinding.txtErrorEmailSignup!!.setText(data.message)
+                changeBackgroundForEditError(dataBinding.etMemberEmail,requireActivity().resources.getColor(
+                    R.color.error_box_color),
+                    requireActivity().resources.getColor(R.color.error_border_color))
+            }else
+            {
+                dataBinding.txtErrorEmailSignup!!.setText("")
+                changeBackgroundForEditError(dataBinding.etMemberEmail,requireActivity().resources.getColor(
+                    R.color.white),
+                    requireActivity().resources.getColor(R.color.liteGrey))
+            }
+        })
     }
 }
 

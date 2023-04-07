@@ -100,35 +100,45 @@
                     </RelativeLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <ImageView
-                    android:id="@+id/ivSearch"
-                    android:layout_width="@dimen/smallIconSize"
-                    android:layout_height="@dimen/smallIconSize"
-                    android:src="@drawable/search"
-                    app:layout_constraintBottom_toBottomOf="@+id/etSearchMenu"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/etSearchMenu" />
-
-                <TextView
-                    android:id="@+id/etSearchMenu"
-                    android:layout_width="0dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutSearch"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/startPaddingNormal"
-                    android:layout_marginTop="@dimen/topMainMargin"
-                    android:background="@null"
-                    android:fontFamily="@font/larsseit_regular"
-                    android:hint="@string/search"
-                    android:paddingStart="2sp"
                     android:paddingTop="@dimen/_10ssp"
-                    android:singleLine="true"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:onClick="@{mViewmodel::onClick}"
                     android:paddingBottom="@dimen/_10ssp"
-                    android:textColor="@color/darkGrey"
-                    android:textColorHint="@color/darkGrey"
-                    android:textSize="@dimen/normalTextSize"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/ivSearch"
-                    app:layout_constraintTop_toBottomOf="@+id/layoutToolBarMenu" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutToolBarMenu">
+                    <ImageView
+                        android:id="@+id/ivSearch"
+                        android:layout_width="@dimen/smallIconSize"
+                        android:layout_height="@dimen/smallIconSize"
+                        android:src="@drawable/search"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
 
+                    <TextView
+                        android:id="@+id/etSearchMenu"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/startPaddingNormal"
+                        android:background="@null"
+                        android:fontFamily="@font/larsseit_regular"
+                        android:hint="@string/search"
+                        android:onClick="@{mViewmodel::onClick}"
+                        android:paddingStart="2sp"
+                        android:singleLine="true"
+                        android:textColor="@color/darkGrey"
+                        android:textColorHint="@color/darkGrey"
+                        android:textSize="@dimen/normalTextSize"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/ivSearch"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layoutBoatMenu"
                     android:layout_width="match_parent"
@@ -137,9 +147,7 @@
                     android:paddingBottom="@dimen/_10ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etSearchMenu">
-
-                    <androidx.appcompat.widget.AppCompatImageView
+                    app:layout_constraintTop_toBottomOf="@+id/layoutSearch">     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/imgBoatMenu"
                         android:layout_width="@dimen/iconSize"
                         android:layout_height="@dimen/iconSize"
@@ -163,6 +171,40 @@
                         app:layout_constraintStart_toEndOf="@+id/imgBoatMenu"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutBookMarkMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/_10ssp"
+                    android:paddingBottom="@dimen/_10ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutBoatMenu">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgBookmarkMenu"
+                        android:layout_width="@dimen/iconSize"
+                        android:layout_height="@dimen/iconSize"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_baseline_bookmark_border_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/startPaddingNormal"
+                        android:fontFamily="@font/larsseit_regular"
+                        android:text="@string/saved_items"
+                        android:textColor="@color/darkGrey"
+                        android:textSize="@dimen/normalTextSize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imgBookmarkMenu"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layoutGroupsMenu"
@@ -172,7 +214,7 @@
                     android:paddingBottom="@dimen/_10ssp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/layoutBoatMenu">
+                    app:layout_constraintTop_toBottomOf="@+id/layoutBookMarkMenu">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/imgGroupsMenu"
@@ -201,15 +243,14 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtCountJGroupsMenu"
-                        android:layout_width="@dimen/unSeenCountSize"
-                        android:layout_height="@dimen/unSeenCountSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@drawable/round_circle_blue"
                         android:clipToOutline="true"
                         android:fontFamily="@font/larsseit_bold"
-                        android:paddingStart="@dimen/startPaddingUnSeenCountSize"
-                        android:paddingTop="@dimen/topPaddingUnSeenCountSize"
-                        android:text="2"
+                        android:gravity="center"
+                        android:text="84"
                         android:textColor="@color/white"
                         android:textSize="@dimen/unSeenCountTextSize"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -334,15 +375,14 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtCountJobsMenu"
-                        android:layout_width="@dimen/unSeenCountSize"
-                        android:layout_height="@dimen/unSeenCountSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@drawable/round_circle_blue"
                         android:clipToOutline="true"
                         android:fontFamily="@font/larsseit_bold"
-                        android:paddingStart="@dimen/startPaddingUnSeenCountSize"
-                        android:paddingTop="@dimen/topPaddingUnSeenCountSize"
-                        android:text="5"
+                        android:gravity="center"
+                        android:text="84"
                         android:textColor="@color/white"
                         android:textSize="@dimen/unSeenCountTextSize"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -423,15 +463,14 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtCountCustomersMenu"
-                        android:layout_width="@dimen/unSeenCountSize"
-                        android:layout_height="@dimen/unSeenCountSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@drawable/round_circle_blue"
                         android:clipToOutline="true"
                         android:fontFamily="@font/larsseit_bold"
-                        android:paddingStart="@dimen/startPaddingUnSeenCountSize"
-                        android:paddingTop="@dimen/topPaddingUnSeenCountSize"
-                        android:text="5"
+                        android:gravity="center"
+                        android:text="84"
                         android:textColor="@color/white"
                         android:textSize="@dimen/unSeenCountTextSize"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -559,15 +598,14 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtCountConversationMenu"
-                        android:layout_width="@dimen/unSeenCountSize"
-                        android:layout_height="@dimen/unSeenCountSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@drawable/round_circle_blue"
                         android:clipToOutline="true"
                         android:fontFamily="@font/larsseit_bold"
-                        android:paddingStart="@dimen/startPaddingUnSeenCountSize"
-                        android:paddingTop="@dimen/topPaddingUnSeenCountSize"
-                        android:text="5"
+                        android:gravity="center"
+                        android:text="84"
                         android:textColor="@color/white"
                         android:textSize="@dimen/unSeenCountTextSize"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -695,15 +733,14 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtCountTeamMenu"
-                        android:layout_width="@dimen/unSeenCountSize"
-                        android:layout_height="@dimen/unSeenCountSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@drawable/round_circle_blue"
                         android:clipToOutline="true"
                         android:fontFamily="@font/larsseit_bold"
-                        android:paddingStart="@dimen/startPaddingUnSeenCountSize"
-                        android:paddingTop="@dimen/topPaddingUnSeenCountSize"
-                        android:text="5"
+                        android:gravity="center"
+                        android:text="84"
                         android:textColor="@color/white"
                         android:textSize="@dimen/unSeenCountTextSize"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -832,15 +869,14 @@ android:visibility="gone"
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtCountLeadMenu"
-                        android:layout_width="@dimen/unSeenCountSize"
-                        android:layout_height="@dimen/unSeenCountSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@drawable/round_circle_blue"
                         android:clipToOutline="true"
                         android:fontFamily="@font/larsseit_bold"
-                        android:paddingStart="@dimen/startPaddingUnSeenCountSize"
-                        android:paddingTop="@dimen/topPaddingUnSeenCountSize"
-                        android:text="5"
+                        android:gravity="center"
+                        android:text="84"
                         android:textColor="@color/white"
                         android:textSize="@dimen/unSeenCountTextSize"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -967,15 +1003,14 @@ android:visibility="gone"
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtCountSettingsMenu"
-                        android:layout_width="@dimen/unSeenCountSize"
-                        android:layout_height="@dimen/unSeenCountSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:background="@drawable/round_circle_blue"
                         android:clipToOutline="true"
                         android:fontFamily="@font/larsseit_bold"
-                        android:paddingStart="@dimen/startPaddingUnSeenCountSize"
-                        android:paddingTop="@dimen/topPaddingUnSeenCountSize"
-                        android:text="5"
+                        android:gravity="center"
+                        android:text="84"
                         android:textColor="@color/white"
                         android:textSize="@dimen/unSeenCountTextSize"
                         app:layout_constraintBottom_toBottomOf="parent"

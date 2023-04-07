@@ -3,6 +3,7 @@ package com.yapi.views.add_people
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -11,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.yapi.R
 import com.yapi.common.checkDeviceType
+import com.yapi.common.hideKeyboard
 import com.yapi.databinding.FragmentAddPeopleBinding
 import com.yapi.views.add_people_email.AddPeopleEmailFragment
 import com.yapi.views.create_group.CreateGroupFragment
@@ -45,12 +47,24 @@ class AddPeopleFragment : DialogFragment() {
             binding.vModel = viewModel
         addObserverForOpenAddPeople()
         dialogDismissMethod()
+        setTouchListenereForNested()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
+    }
+
+    //For hide keyboard
+    fun setTouchListenereForNested()
+    {
+        binding.nestedScrollViewAddPeople.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                requireActivity().hideKeyboard()
+                return false
+            }
+        })
     }
 
     private fun init() {

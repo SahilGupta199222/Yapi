@@ -9,15 +9,24 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
+import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.hideKeyboard
+import com.yapi.views.sign_in.SignInErrorData
 
 class ViewModelGroupGeneral : ViewModel() {
      val groupNameCount=ObservableField<String>("0/128")
      val groupDescriptionNameCount=ObservableField<String>("0/256")
+
+    var editUIShow=ObservableBoolean(true)
+    var doneButtonText=ObservableField("")
+    var groupNameValue=ObservableField("")
+    var errorShowData=MutableLiveData<SignInErrorData>()
+
     fun onClick(view: View) {
         when (view.id) {
             R.id.layoutDeActiveGroupGnlInfo -> {
@@ -31,6 +40,22 @@ class ViewModelGroupGeneral : ViewModel() {
             }
             R.id.layoutGroupGnlInfoEdit,R.id.layoutGroupGnlInfo->{
                 MainActivity.activity!!.get()!!.hideKeyboard()
+            }
+            R.id.btnDoneGroupGeneral->{
+                //for click on Done
+                if(editUIShow.get())
+                {
+                    doneButtonText.set(MainActivity.activity!!.get()!!.getString(R.string.done))
+                    editUIShow.set(false)
+
+                }else
+                {
+                    if(checkValidation()){
+                        editUIShow.set(true)
+                        doneButtonText.set(MainActivity.activity!!.get()!!.getString(R.string.edit_group))
+                    }
+
+                }
             }
         }
     }
@@ -80,5 +105,15 @@ class ViewModelGroupGeneral : ViewModel() {
     }
     fun onGroupDescriptionNameTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
         groupDescriptionNameCount.set(s.length.toString() + "/256")
+    }
+
+    private fun checkValidation():Boolean
+    {
+        if(groupNameValue.get()!!.trim().toString().isEmpty())
+        {
+            errorShowData.value=SignInErrorData(MainActivity.activity!!.get()!!.getString(R.string.enter_group_name),1)
+            return false
+        }
+        return true
     }
 }

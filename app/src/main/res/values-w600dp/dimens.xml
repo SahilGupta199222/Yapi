@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <bool name="isTab">true</bool>
-
-
     <dimen name="startMainPlusMargin">@dimen/_20sdp</dimen>
     <dimen name="topMainMargin">@dimen/_22sdp</dimen>
     <dimen name="bottomMarggin">@dimen/_30sdp</dimen>
@@ -12,7 +9,9 @@
 
     <dimen name="smallIconSize">@dimen/_13sdp</dimen>
     <dimen name="iconSize">@dimen/_16sdp</dimen>
+    <dimen name="iconSmallBigSize">@dimen/_18sdp</dimen>
     <dimen name="bigIconSize">@dimen/_25sdp</dimen>
+    <dimen name="fortyFourIconSize">@dimen/_36sdp</dimen>
     <dimen name="extraIconSize">@dimen/_18sdp</dimen>
 
     <dimen name="extraNormalTextSize">@dimen/_15ssp</dimen>
@@ -26,12 +25,13 @@
     <dimen name="unSeenCountSize">@dimen/_16ssp</dimen>
     <dimen name="startPaddingUnSeenCountSize">@dimen/_5sdp</dimen>
     <dimen name="topPaddingUnSeenCountSize">@dimen/_2sdp</dimen>
-    <dimen name="unSeenCountTextSize">@dimen/_10sdp</dimen>
+    <dimen name="unSeenCountTextSize">@dimen/_7sdp</dimen>
 
     <dimen name="etHorizontalPadding">@dimen/_10sdp</dimen>
     <dimen name="etVerticalPadding">@dimen/_13sdp</dimen>
 
     <dimen name="roundDrawableCommon">@dimen/_5sdp</dimen>
+    <dimen name="roundRecodingDrawableCommon">@dimen/_5sdp</dimen>
 
     <dimen name="popSideMargin">@dimen/_12sdp</dimen>
     <dimen name="startMainMargin">@dimen/_18sdp</dimen>
@@ -60,9 +60,11 @@
     <dimen name="text_letter_spacing">0.07</dimen>
 
     <dimen name="roundDrawableCommon_bottom">@dimen/_10sdp</dimen>
+    <dimen name="drawableEtPadding">@dimen/_5sdp</dimen>
 
     <dimen name="profile_start_margin">@dimen/_20sdp</dimen>
     <dimen name="user_info_box">@dimen/_35sdp</dimen>
+    <bool name="isTab">true</bool>
 
     <dimen name="signup_process_weight_sum">3</dimen>
     <dimen name="signup_process_weight">2</dimen>
@@ -71,4 +73,8 @@
 
     <dimen name="outside_cross_height">@dimen/_10sdp</dimen>
     <dimen name="outside_cross_width">@dimen/_10sdp</dimen>
+
+    <dimen name="error_margin_start">@dimen/_10sdp</dimen>
+
+    <dimen name="space_between_error">@dimen/_5sdp</dimen>
 </resources>

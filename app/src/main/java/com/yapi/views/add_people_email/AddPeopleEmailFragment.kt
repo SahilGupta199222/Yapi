@@ -4,24 +4,22 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.chip.Chip
 import com.yapi.R
-import com.yapi.common.checkDeviceType
-import com.yapi.common.isEmailValid
+import com.yapi.common.*
 import com.yapi.databinding.FragmentAddPeopleEmailBinding
-import com.yapi.views.add_people.AddPeopleFragment
 import com.yapi.views.add_people_email_confirmation.AddPeopleEmailConfirmationFragment
+import com.yapi.views.sign_in.SignInErrorData
 
 
 class AddPeopleEmailFragment : DialogFragment() {
@@ -55,7 +53,33 @@ class AddPeopleEmailFragment : DialogFragment() {
         viewModelAddPeopleEmail.chipGroupAddPeopleEmail = binding.chipGroupAddPeopleEmail
         addObserverForOpenAddPeopleEmail()
         dialogDismissMethod()
+        showErrorDataObserver()
+        hideKeyboardDataMethod()
+
+        setTouchListenereForNested()
+
         return binding.root
+    }
+
+    //For hide keyboard
+    fun setTouchListenereForNested()
+    {
+        binding.nestedScrollViewAddPeopleEmail.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                requireActivity().hideKeyboard()
+                return false
+            }
+        })
+    }
+
+    private fun hideKeyboardDataMethod() {
+        viewModelAddPeopleEmail.hideKeyboardData.observe(requireActivity(),Observer{
+            var data=it as Boolean
+            if(data)
+            {
+                requireActivity().hideKeyboard()
+            }
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -79,9 +103,11 @@ class AddPeopleEmailFragment : DialogFragment() {
                 if (etChipAddPeopleEmail.text?.isNotEmpty() == true) {
                     val msg = requireActivity().isEmailValid(etChipAddPeopleEmail.text.toString())
                     if (msg.isEmpty()) {
+                        binding.txtErrorEmailAddPeople.setText("")
                         addChipToGroup(requireContext(), etChipAddPeopleEmail.text.toString())
                         layoutAddPeopleAddPeopleEmail.visibility = View.GONE
                         etChipAddPeopleEmail.text?.clear()
+                        viewModelAddPeopleEmail.errorData.value = SignInErrorData("", 0)
                     } else {
                         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
                     }
@@ -145,7 +171,6 @@ class AddPeopleEmailFragment : DialogFragment() {
             binding.ivOutsideCloseAddPeopleEmail.visibility=View.VISIBLE
             binding.imgCancelAddPeopleEmail.visibility=View.GONE
             binding.layoutAddPeopleEmail.setBackgroundResource(R.drawable.et_drawable)
-
         }else
         {
             binding.layoutAddPeopleEmail.setBackgroundResource(0)
@@ -159,5 +184,26 @@ class AddPeopleEmailFragment : DialogFragment() {
         layoutParams.leftMargin = 0
         layoutParams.rightMargin = rightMarginTopLayout
         binding.layoutAddPeopleEmail.setLayoutParams(layoutParams)
+    }
+
+    fun showErrorDataObserver()
+    {
+        viewModelAddPeopleEmail.errorData.observe(requireActivity(), Observer {
+            var data=it as SignInErrorData
+            if(data!=null && data.message!="")
+            {
+                binding.txtErrorEmailAddPeople.setText(data.message)
+                changeBackgroundTintForError(binding.chipLayoutAddPeopleEmail!!,requireActivity().resources.getColor(
+                    R.color.error_box_color),
+                    requireActivity().resources.getColor(R.color.error_border_color),-1)
+            }else
+            {
+                binding.txtErrorEmailAddPeople.setText("")
+             //   binding.chipLayoutAddPeopleEmail!!.setbackg
+                changeBackgroundTintForError(binding.chipLayoutAddPeopleEmail!!, requireActivity().resources.getColor(
+                    R.color.white),
+                    requireActivity().resources.getColor(R.color.liteGrey),requireActivity().resources.getColor(R.color.information_profile_back_box))
+            }
+        })
     }
 }

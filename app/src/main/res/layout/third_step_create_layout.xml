@@ -183,6 +183,7 @@
                         android:fontFamily="@font/larsseit_regular"
                         android:hint="@string/enter_email"
                         android:text="@={vModel.emailFieldValue}"
+                        android:afterTextChanged="@{vModel::AfterTextChanged}"
                         android:inputType="textEmailAddress"
                         android:paddingStart="@dimen/etHorizontalPadding"
                         android:paddingTop="@dimen/etVerticalPadding"
@@ -193,18 +194,34 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tvteamField" />
 
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtErrorEmailSignup"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/larsseit_regular"
+                        android:text=""
+                        android:layout_marginStart="@dimen/error_margin_start"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/smallTextSize"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/etMemberEmail"
+                        app:layout_constraintTop_toBottomOf="@+id/etMemberEmail" />
+
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintsAddMember"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/startMainMargin"
                         android:layout_marginTop="@dimen/_2sdp"
                         android:layout_marginEnd="@dimen/startMainMargin"
                         android:paddingStart="0dp"
+                        android:onClick="@{vModel::onClick}"
                         android:paddingTop="@dimen/_10sdp"
                         android:paddingEnd="@dimen/_10sdp"
                         android:paddingBottom="@dimen/_20sdp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/etMemberEmail">
+                        app:layout_constraintTop_toBottomOf="@+id/txtErrorEmailSignup">
 
                         <ImageView
                             android:id="@+id/ivaddMember"

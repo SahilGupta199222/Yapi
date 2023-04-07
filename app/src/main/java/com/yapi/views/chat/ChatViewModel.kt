@@ -40,6 +40,11 @@ class ChatViewModel : ViewModel() {
     var userType: String? = ""
     var sendDataValue = ObservableField("")
     var backButtonVisible=ObservableBoolean(false)
+    var groupImageVisible=ObservableBoolean(false)
+    var groupIconVisible=ObservableBoolean(false)
+    var liveUserVisible=ObservableBoolean(false)
+    var noImageOnlyNameVisible=ObservableBoolean(false)
+    var groupAllPhotos=ObservableBoolean(false)
     fun onClick(view: View) {
         when (view.id) {
             R.id.ivChat_more_icon -> {
@@ -208,7 +213,7 @@ class ChatViewModel : ViewModel() {
         var constraintsMute = mView.findViewById<ConstraintLayout>(R.id.constraintsMute)
         constraintsMute.setOnClickListener {
             popUp.dismiss()
-            showDeleteGroupDialog()
+//            showDeleteGroupDialog()
         }
         var constraintsDeleteChat = mView.findViewById<ConstraintLayout>(R.id.constraintsDeleteChat)
         constraintsDeleteChat.setOnClickListener {
@@ -225,6 +230,7 @@ class ChatViewModel : ViewModel() {
 
     //When click on the three dots
     private fun showChatGroupMenuMethod(view: View) {
+
         val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
             .inflate(com.yapi.R.layout.group_chat_menu_options, null, false)
         var newWidth = screenWidth!! / 1.5
@@ -233,6 +239,8 @@ class ChatViewModel : ViewModel() {
         popUp.isTouchable = true
         popUp.isFocusable = true
         popUp.isOutsideTouchable = true
+        popUp.showAsDropDown(view.findViewById(R.id.ivChat_more_icon))
+
         // val btnViewProfile = popUp.showAsDropDown(view.findViewById(com.yapi.R.id.ivChat_more_icon))
 
         var constraintsProfileChat =

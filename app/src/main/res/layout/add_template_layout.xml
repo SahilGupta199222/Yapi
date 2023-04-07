@@ -126,11 +126,26 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tvMessageTitle" />
 
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtErrorMessageTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/larsseit_regular"
+                        android:text=""
+                        android:layout_marginStart="@dimen/error_margin_start"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/smallTextSize"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/etMessageTitle"
+                        app:layout_constraintTop_toBottomOf="@+id/etMessageTitle" />
+
+
                     <TextView
                         android:id="@+id/tvMessageContentTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_7sdp"
                         android:fontFamily="@font/larsseit_medium"
                         android:gravity="center"
                         android:letterSpacing="@dimen/text_letter_spacing"
@@ -141,7 +156,7 @@
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/smallTextSize"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/etMessageTitle" />
+                        app:layout_constraintTop_toBottomOf="@+id/txtErrorMessageTitle" />
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:id="@+id/etMessageContentValue"
@@ -156,7 +171,6 @@
                         android:letterSpacing="@dimen/text_letter_spacing"
                         android:lineSpacingExtra="@dimen/line_spacing_extra"
                         android:paddingStart="@dimen/etHorizontalPadding"
-
                         android:paddingTop="@dimen/etVerticalPadding"
                         android:paddingEnd="@dimen/etHorizontalPadding"
                         android:paddingBottom="@dimen/etVerticalPadding"
@@ -165,15 +179,29 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tvMessageContentTitle" />
 
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/txtErrorMessageContent"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/larsseit_regular"
+                        android:text=""
+                        android:layout_marginStart="@dimen/error_margin_start"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/smallTextSize"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/etMessageContentValue"
+                        app:layout_constraintTop_toBottomOf="@+id/etMessageContentValue" />
+
                     <LinearLayout
                         android:id="@+id/bottomConstarintsTemplate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
                         android:layout_marginBottom="@dimen/_20sdp"
                         android:orientation="horizontal"
                         android:weightSum="2"
-                        app:layout_constraintTop_toBottomOf="@+id/etMessageContentValue">
+                        app:layout_constraintTop_toBottomOf="@+id/txtErrorMessageContent">
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btnCancelTemplate"

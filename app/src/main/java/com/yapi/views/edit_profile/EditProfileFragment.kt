@@ -1,26 +1,23 @@
 package com.yapi.views.edit_profile
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.LinearLayout
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
+import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.rilixtech.widget.countrycodepicker.CountryUtils
 import com.yapi.R
+import com.yapi.common.changeBackgroundForEditError
+import com.yapi.common.changeBackgroundForError
 import com.yapi.common.checkDeviceType
 import com.yapi.databinding.FragmentEditProfileBinding
-import com.yapi.views.profile.ProfileFragment
+import com.yapi.views.sign_in.SignInErrorData
 
 class EditProfileFragment : DialogFragment(), View.OnClickListener {
 
@@ -82,8 +79,11 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
     }
 
     private fun init() {
+        showErrorUIObserver()
+        phoneErrorObserver()
         dismissDialogMethod()
         setTopLayoutMethod()
+        scrollEditTextMethod()
 
         binding.ivDrpArrow.setOnClickListener(this)
 
@@ -120,6 +120,14 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                if (binding.etNumberEditProfile.text.toString().length>0) {
+                    binding.txtErrorPhone.setText("")
+                    changeBackgroundForError(binding.layoutNumberProfileEdit!!, requireActivity().resources.getColor(
+                        R.color.white),
+                        requireActivity().resources.getColor(R.color.liteGrey))
+                }
+
                 if (binding.etNumberEditProfile.text.toString().length == 4) {
                     var first = binding.etNumberEditProfile.text.toString().substring(0, 3)
                     var last = binding.etNumberEditProfile.text.toString().substring(3, 4)
@@ -179,6 +187,7 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.ivDrpArrow -> {
+                binding.countryCodePickerEditProfile.showCountryCodePickerDialog()
                 //  if(!(binding.countryCodePickerEditProfile.isShown)) {
                 //showToastMessage("Hello")
                 // binding.countryCodePickerEditProfile.
@@ -194,5 +203,138 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
                 dismiss()
             }
         })
+    }
+
+    //For Scroll Yourself text
+    fun scrollEditTextMethod()
+    {
+        binding.etAboutYourSelfEditProfile.setOnTouchListener(object : View.OnTouchListener {
+          override  fun onTouch(v: View, event: MotionEvent): Boolean {
+                if (binding.etAboutYourSelfEditProfile.hasFocus()) {
+                    v.parent.requestDisallowInterceptTouchEvent(true)
+                    when (event.getAction() and MotionEvent.ACTION_MASK) {
+                        MotionEvent.ACTION_SCROLL -> {
+                            v.parent.requestDisallowInterceptTouchEvent(false)
+                            return true
+                        }
+                    }
+                }
+                return false
+            }
+        })
+    }
+
+    fun phoneErrorObserver()
+    {
+        viewModel.phoneErrorData.observe(requireActivity(), Observer {
+            var data=it as SignInErrorData
+            var editText: ConstraintLayout?=null
+            var errorText: AppCompatTextView?=null
+            if(data!=null && data.message!="")
+            {
+                editText=binding.layoutNumberProfileEdit
+                errorText=binding.txtErrorPhone
+                errorText!!.setText(data.message)
+                changeBackgroundForError(editText!!,requireActivity().resources.getColor(
+                    R.color.error_box_color),
+                    requireActivity().resources.getColor(R.color.error_border_color))
+            }else
+            {
+                editText=binding.layoutNumberProfileEdit
+                errorText=binding.txtErrorPhone
+                errorText!!.setText("")
+                changeBackgroundForError(editText!!,requireActivity().resources.getColor(
+                    R.color.white),
+                    requireActivity().resources.getColor(R.color.liteGrey))
+            }
+        })
+    }
+
+    fun showErrorUIObserver()
+    {
+        viewModel.errorData.observe(requireActivity(), Observer {
+            var data=it as SignInErrorData
+
+            if(data.fieldId==1)
+            {
+                if(data.message!="")
+                {
+                    setSelectedDataMethod(binding.txtErrorName!!,binding.etNameEditProfile!!,data.message)
+                }else
+                {
+                    setDefaultDataMethod(binding.txtErrorName!!,binding.etNameEditProfile!!)
+                }
+            }else
+                if(data.fieldId==2)
+                {
+                    if(data.message!="")
+                    {
+                        setSelectedDataMethod(binding.txtErrorUserName!!,binding.etUserNameEditProfile!!,data.message)
+                    }else
+                    {
+                        setDefaultDataMethod(binding.txtErrorUserName!!,binding.etUserNameEditProfile!!)
+                    }
+                }else
+                    if(data.fieldId==3)
+                    {
+                        if(data.message!="")
+                        {
+                            setSelectedDataMethod(binding.txtErrorEmail!!,binding.etEmailEditProfile!!,data.message)
+                        }else
+                        {
+                            setDefaultDataMethod(binding.txtErrorEmail!!,binding.etEmailEditProfile!!)
+                        }
+                    }else
+                        if(data.fieldId==4)
+                        {
+                          /*  editText=binding.layoutNumberProfileEdit
+                            errorText=binding.txtErrorPhone*/
+
+                        }else
+                            if(data.fieldId==5)
+                            {
+                                if(data.message!="")
+                                {
+                                    setSelectedDataMethod(binding.txtErrorAbout!!,binding.etAboutYourSelfEditProfile!!,data.message)
+                                }else
+                                {
+                                    setDefaultDataMethod(binding.txtErrorAbout!!,binding.etAboutYourSelfEditProfile!!)
+                                }
+
+                            }
+
+      /*      if(data!=null && data.message.isNotEmpty())
+            {
+                errorText!!.setText(data.message)
+                changeBackgroundForEditError(editText!!,requireActivity().resources.getColor(
+                    R.color.error_box_color),
+                    requireActivity().resources.getColor(R.color.error_border_color))
+            }else {
+                if (data.fieldId != 0) {
+                    errorText!!.setText("")
+                    changeBackgroundForEditError(editText!!, requireActivity().resources.getColor(
+                        R.color.white),
+                        requireActivity().resources.getColor(R.color.liteGrey))
+                }
+
+
+            }*/
+        })
+    }
+
+    fun setSelectedDataMethod(txtErrorName:AppCompatTextView,etNameEditProfile:AppCompatEditText,message:String)
+    {
+        txtErrorName.setText(message)
+        changeBackgroundForEditError(etNameEditProfile!!,requireActivity().resources.getColor(
+            R.color.error_box_color),
+            requireActivity().resources.getColor(R.color.error_border_color))
+    }
+
+    fun setDefaultDataMethod(txtErrorName:AppCompatTextView,etNameEditProfile:AppCompatEditText)
+    {
+        txtErrorName.setText("")
+        changeBackgroundForEditError(etNameEditProfile,requireActivity().resources.getColor(
+            R.color.white),
+            requireActivity().resources.getColor(R.color.liteGrey))
     }
 }

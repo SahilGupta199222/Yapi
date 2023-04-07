@@ -210,16 +210,30 @@
                     app:layout_constraintTop_toBottomOf="@+id/txtTempGroupNameCreateGroup" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtErrorEmailSignup"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/larsseit_regular"
+                    android:text=""
+                    android:textColor="@color/red"
+                    android:layout_marginStart="@dimen/error_margin_start"
+                    android:textSize="@dimen/smallTextSize"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/etGroupNameCreateGroup"
+                    app:layout_constraintTop_toBottomOf="@+id/etGroupNameCreateGroup" />
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtTempGroupDescriptionCreateGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/topMargin"
+                    android:layout_marginTop="@dimen/space_between_error"
                     android:fontFamily="@font/larsseit_medium"
                     android:text="@string/create_group_description"
                     android:textColor="@color/darkGrey"
                     android:textSize="@dimen/smallTextSize"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etGroupNameCreateGroup" />
+                    app:layout_constraintTop_toBottomOf="@+id/txtErrorEmailSignup" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtTempGroupDescriptionMaxCountCreateGroup"
@@ -254,17 +268,32 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtTempGroupDescriptionCreateGroup" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/txtErrorDescription"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/larsseit_regular"
+                    android:text=""
+                    android:layout_marginStart="@dimen/error_margin_start"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/smallTextSize"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/etGroupDescriptionCreateGroup"
+                    app:layout_constraintTop_toBottomOf="@+id/etGroupDescriptionCreateGroup" />
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/txtTempGroupMakePrivateCreateGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/topMargin"
+                    android:layout_marginTop="@dimen/space_between_error"
                     android:fontFamily="@font/larsseit_medium"
                     android:text="@string/make_private"
                     android:textColor="@color/darkGrey"
                     android:textSize="@dimen/smallTextSize"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etGroupDescriptionCreateGroup" />
+                    app:layout_constraintTop_toBottomOf="@+id/txtErrorDescription" />
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layoutMakePrivateCreateGroup"
                     android:layout_width="match_parent"
@@ -272,7 +301,7 @@
                     android:orientation="horizontal"
                     android:gravity="center"
                     android:paddingStart="@dimen/etHorizontalPadding"
-                    android:paddingTop="@dimen/etVerticalPadding"
+                    android:paddingTop="@dimen/_8sdp"
                     android:paddingEnd="@dimen/etHorizontalPadding"
                     android:paddingBottom="@dimen/etVerticalPadding"
                     app:layout_constraintStart_toStartOf="parent"

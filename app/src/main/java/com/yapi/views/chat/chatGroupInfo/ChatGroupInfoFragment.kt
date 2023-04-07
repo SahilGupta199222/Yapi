@@ -1,6 +1,5 @@
 package com.yapi.views.chat.chatGroupInfo
 
-import android.app.Dialog
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
@@ -37,7 +36,8 @@ class ChatGroupInfoFragment():Fragment() {
         val displayMetrics = DisplayMetrics()
         requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
         screenWidth = displayMetrics.widthPixels
-
+        viewModel.screenWidth=screenWidth
+        viewModel.screenHeight=displayMetrics.heightPixels
         initUI()
         return dataBinding.root
     }

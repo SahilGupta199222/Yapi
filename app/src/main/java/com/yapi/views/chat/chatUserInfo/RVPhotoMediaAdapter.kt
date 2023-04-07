@@ -20,7 +20,7 @@ class RVPhotoMediaAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        var view =
+        val view =
             LayoutInflater.from(context).inflate(R.layout.rv_photo_media_adapter, parent, false)
         return MyViewHolder(view)
     }

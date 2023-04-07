@@ -63,6 +63,7 @@
                 android:id="@+id/ivmoreGroupInfo"
                 android:src="@drawable/chat_more_icon"
                 android:layout_width="@dimen/iconSize"
+                android:onClick="@{vModel::onClick}"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="@dimen/_10sdp"
                 app:layout_constraintTop_toTopOf="@id/relNameTitle"
