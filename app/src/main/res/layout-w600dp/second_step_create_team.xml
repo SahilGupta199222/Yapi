@@ -198,7 +198,7 @@
                     android:background="@drawable/rounded_background"
                     android:backgroundTint="@color/blueColor"
                     android:fontFamily="@font/larsseit_bold"
-                    android:text="@string/ccontinue"
+                    android:text="@string/next"
                     android:textSize="@dimen/normalTextSize"
                     android:paddingStart="@dimen/etHorizontalPadding"
                     android:paddingTop="@dimen/etVerticalPadding"

@@ -198,7 +198,7 @@
                         android:textSize="@dimen/_12ssp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/firstTeamCheck"
-                        app:layout_constraintTop_toBottomOf="@+id/etTeamName" />
+                        app:layout_constraintTop_toBottomOf="@+id/txtErrorFirstStep" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
 
@@ -228,7 +228,7 @@
                     android:backgroundTint="@color/blueColor"
                     android:fontFamily="@font/larsseit_bold"
                     android:onClick="@{vModel::onClick}"
-                    android:text="@string/ccontinue"
+                    android:text="@string/next"
                     android:textSize="@dimen/normalTextSize"
 
                     android:paddingStart="@dimen/etHorizontalPadding"

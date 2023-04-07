@@ -177,16 +177,16 @@
                         android:id="@+id/tvCheckBoxName"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
                         android:paddingBottom="@dimen/_20sdp"
                         android:layout_marginEnd="@dimen/startMainMargin"
                         android:lineSpacingExtra="@dimen/line_spacing_extra"
                         android:textColor="#8F8F8F"
                         android:textSize="@dimen/_12ssp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/firstTeamCheck"
-                        app:layout_constraintTop_toBottomOf="@+id/etTeamName" />
+                        app:layout_constraintStart_toEndOf="@id/firstTeamCheck"
+                        app:layout_constraintTop_toBottomOf="@+id/txtErrorFirstStep"  />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
 
@@ -214,7 +214,7 @@
                     android:backgroundTint="@color/blueColor"
                     android:fontFamily="@font/larsseit_bold"
                     android:onClick="@{vModel::onClick}"
-                    android:text="@string/ccontinue"
+                    android:text="@string/next"
                     android:textSize="@dimen/normalTextSize"
 
                     android:paddingStart="@dimen/etHorizontalPadding"

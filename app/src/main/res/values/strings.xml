@@ -288,4 +288,5 @@
 
     <string name="add_member_texttt">Add Member</string>
     <string name="add_member_button">Add Member</string>
+    <string name="saved_items">Saved items</string>
 </resources>
