@@ -23,16 +23,16 @@ class RVUserListAdapter(
         if (userList[position].isCheck!!) {
             holder.ivPlusIcon.setImageResource(R.drawable.minus_user_list)
             holder.constarintDetails.visibility = View.VISIBLE
-            holder.constraintsUsers.setBackgroundColor(context.getColor(R.color.user_list_box))
+            holder.constraintsUsers.setBackgroundResource(R.drawable.user_list_box_background)
             holder.viewBottomLine.visibility = View.GONE
-            holder.constarintsTopList.setBackgroundResource(R.drawable.et_drawable)
+           // holder.constarintsTopList.setBackgroundResource(R.drawable.et_drawable)
         } else {
             holder.ivPlusIcon.setImageResource(R.drawable.add_user_button)
             holder.constarintDetails.visibility = View.GONE
             holder.constraintsUsers.setBackgroundColor(context.getColor(R.color.white))
 
             if (position == userList.size - 1) {
-                holder.viewBottomLine.visibility = View.INVISIBLE
+                holder.viewBottomLine.visibility = View.GONE
             } else {
                 holder.viewBottomLine.visibility = View.VISIBLE
             }

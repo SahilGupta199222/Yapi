@@ -211,6 +211,7 @@ class UserListFragment : Fragment(), UserClickEvent {
         dialog.show()
         var ivInnerBack = dialog.findViewById<ImageView>(R.id.ivInnerBack)
         var ivOutsideCloseGroup = dialog.findViewById<ImageView>(R.id.ivOutsideCloseGroup)
+        var btnCancelTemplate = dialog.findViewById<AppCompatButton>(R.id.btnCancelTemplate)
 
         var linearRemoveMember = dialog.findViewById<LinearLayout>(R.id.linearRemoveMember)
         linearRemoveMember.layoutParams.width = (screenWidth!!.toDouble() / dividedValue).toInt()
@@ -227,6 +228,9 @@ class UserListFragment : Fragment(), UserClickEvent {
         }
 
         ivInnerBack.setOnClickListener {
+            dialog.dismiss()
+        }
+        btnCancelTemplate.setOnClickListener {
             dialog.dismiss()
         }
     }
@@ -261,6 +265,7 @@ class UserListFragment : Fragment(), UserClickEvent {
         btnTemplateSave.setBackgroundTintList(ColorStateList.valueOf(resources.getColor(R.color.darkBlueBtn)));
 
         var linearRemoveMember = dialog.findViewById<LinearLayout>(R.id.linearRemoveMember)
+        var btnCancelTemplate = dialog.findViewById<AppCompatButton>(R.id.btnCancelTemplate)
         linearRemoveMember.layoutParams.width = (screenWidth!!.toDouble() /dividedValue).toInt()
 
         if (checkDeviceType()) {
@@ -275,6 +280,9 @@ class UserListFragment : Fragment(), UserClickEvent {
         }
 
         ivInnerBack.setOnClickListener {
+            dialog.dismiss()
+        }
+        btnCancelTemplate.setOnClickListener {
             dialog.dismiss()
         }
     }

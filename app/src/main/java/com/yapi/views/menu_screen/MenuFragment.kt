@@ -324,15 +324,15 @@ class MenuFragment : Fragment() {
                     }
                     adapterSettingsList?.notifyDataSetChanged()
 
-                    if(checkDeviceType()){
-                        EventBus.getDefault()
-                            .post(MyMessageEvent(2, Constants.USER_MANAGEMENT)) //post event
-                    }else
-                    {
-                        if(findNavController().currentDestination?.id == R.id.menuFragment)
-                            findNavController().navigate(R.id.action_menuFragment_to_userListFragment)
+                    if(position==0) {
+                        if (checkDeviceType()) {
+                            EventBus.getDefault()
+                                .post(MyMessageEvent(2, Constants.USER_MANAGEMENT)) //post event
+                        } else {
+                            if (findNavController().currentDestination?.id == R.id.menuFragment)
+                                findNavController().navigate(R.id.action_menuFragment_to_userListFragment)
+                        }
                     }
-
                 }
             })
         binding.rvSettingsListMenu.adapter = adapterSettingsList
@@ -518,7 +518,7 @@ class MenuFragment : Fragment() {
             false))
 
         val fixImageHeight =
-            requireContext().resources.getDimension(com.intuit.sdp.R.dimen._36sdp).toInt()
+            requireContext().resources.getDimension(com.intuit.sdp.R.dimen._37sdp).toInt()
         val rvHeight = fixImageHeight * list.size
         binding.rvGroupListMenu.layoutParams.height = rvHeight
         Log.e("fknkwefwsfwfwaf===",rowHeight.toString())
@@ -571,7 +571,7 @@ class MenuFragment : Fragment() {
         // list.add(PojoGroupMembersList(requireActivity().getString(R.string.createGroups_text), -2, false))
 
         val fixImageHeight =
-            requireContext().resources.getDimension(com.intuit.sdp.R.dimen._36sdp).toInt()
+            requireContext().resources.getDimension(com.intuit.sdp.R.dimen._37sdp).toInt()
         val rvHeight = fixImageHeight * list.size
         binding.rvJobsListMenu.layoutParams.height = rvHeight
 
