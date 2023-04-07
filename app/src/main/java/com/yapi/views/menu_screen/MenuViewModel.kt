@@ -17,6 +17,7 @@ import com.yapi.common.Constants
 import com.yapi.common.checkDeviceType
 import com.yapi.pref.PreferenceFile
 import com.yapi.views.profile.ProfileFragment
+import com.yapi.views.search.SearchFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -25,14 +26,22 @@ class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : Vi
 
     var screenWidth: Int? = 0
     var openProfileScreenData = MutableLiveData<Boolean>()
+    var openSearchScreenData = MutableLiveData<Boolean>()
     fun onClick(view: View) {
         when (view.id) {
             R.id.layoutSearch->{
+              /*  if(checkDeviceType()){
+                    openSearchScreenData.value=true
+                    //SearchFragment.newInstanceSearch("").showNow(view.re, " SimpleDialog.TAG")
+                }else
+                {
                 if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
                     view.findNavController()
                         .navigate(R.id.action_menuFragment_to_searchFragment)
                 }
+            }*/
             }
+
             com.yapi.R.id.imgProfilePicCustomerList -> {
                 val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
                     .inflate(com.yapi.R.layout.menu_popup_options, null, false)
@@ -110,7 +119,7 @@ class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : Vi
 //                   cardviewDeleteProfile.layoutParams.width=(screenWidth!!.toDouble()/1.1).toInt()
 
             }
-            R.id.layoutSearch,R.id.etSearchMenu->{
+            /*R.id.layoutSearch,R.id.etSearchMenu->{
                 if(checkDeviceType()){
 
                 }else
@@ -119,7 +128,7 @@ class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : Vi
                     view.findNavController()
                         .navigate(R.id.action_menuFragment_to_searchFragment)
                 }
-            }}
+            }}*/
 
             /*  R.id.layoutAddNewGroupsMenu-> {
                  *//* if (view.findNavController().currentDestination?.id == R.id.menuFragment) {

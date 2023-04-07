@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.yapi.R
 import com.yapi.common.ChatRoundRectCornerImageView
 import com.yapi.common.RoundRectCornerImageView
+import com.yapi.common.checkDeviceType
 
 class AdapterSearch(val context: Context, val list: ArrayList<PojoSearchScreenData>) :
     RecyclerView.Adapter<AdapterSearch.MyViewHolder>() {
@@ -169,16 +170,28 @@ class AdapterSearch(val context: Context, val list: ArrayList<PojoSearchScreenDa
             }
         }
         holder.itemView.setOnClickListener {
-            if (it.findNavController().currentDestination?.id == R.id.searchFragment)
-                it.findNavController().navigate(R.id.action_searchFragment_to_searchResultFragment)
+            if(checkDeviceType())
+            {
+
+            }else
+            {
+                if (it.findNavController().currentDestination?.id == R.id.searchFragment)
+                    it.findNavController().navigate(R.id.action_searchFragment_to_searchResultFragment)
+            }
+
         }
         holder.itemView.setOnLongClickListener {
+            if(checkDeviceType())
+            {
+
+            }else
+            {
             if (it.findNavController().currentDestination?.id == R.id.searchFragment) {
                 val bundel = Bundle()
                 bundel.putBoolean("empty", true)
                 it.findNavController()
                     .navigate(R.id.action_searchFragment_to_searchResultFragment, bundel)
-            }
+            }}
             true
         }
     }

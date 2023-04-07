@@ -1,27 +1,59 @@
 package com.yapi.views.search
 
+import android.app.Dialog
 import android.os.Bundle
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.yapi.R
+import com.yapi.common.checkDeviceType
 import com.yapi.databinding.FragmentSearchBinding
+import com.yapi.views.create_group.CreateGroupFragment
 import com.yapi.views.search_result.AdapterSearch
 import com.yapi.views.search_result.PojoSearchScreenData
 
-
-class SearchFragment : Fragment() {
+class SearchFragment : DialogFragment() {
     private lateinit var binding: FragmentSearchBinding
     private val viewmodel: SearchViewModel by viewModels()
+
+    companion object {
+        fun newInstanceSearch(title: String): SearchFragment {
+            val args = Bundle()
+            args.putString("11", title)
+            val fragment = SearchFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (checkDeviceType()) {
+            System.out.println("phone========tablet")
+            setStyle(DialogFragment.STYLE_NO_FRAME, R.style.FullScreenDialog)
+        }
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        // Create a new dialog
+        val dialog: Dialog = super.onCreateDialog(savedInstanceState)
+
+        // Get the window of the dialog
+        val window: Window = dialog.getWindow()!!
+
+        // Set the dialog to be shown at the bottom of the screen
+        window.setGravity(Gravity.BOTTOM)
+
+        return dialog
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,

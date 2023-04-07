@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import com.yapi.R
 import com.yapi.common.changeBackgroundForEditError
 import com.yapi.common.checkDeviceType
+import com.yapi.common.hideKeyboard
 import com.yapi.databinding.FragmentCreateGroupBinding
 import com.yapi.views.add_people.AddPeopleFragment
 import com.yapi.views.sign_in.SignInErrorData
@@ -72,7 +73,19 @@ class CreateGroupFragment : DialogFragment() {
         binding.vModel = viewModel
         addObserverForOpenAddPeople()
         dialogDismissMethod()
+        hideKeyboardObserver()
         return binding.root
+    }
+
+    private fun hideKeyboardObserver() {
+
+        viewModel.hideKeyboardData.observe(requireActivity(), Observer {
+            var data=it as Boolean
+            if(data)
+            {
+                requireActivity().hideKeyboard()
+            }
+        })
     }
 
     private fun addObserverForOpenAddPeople() {
