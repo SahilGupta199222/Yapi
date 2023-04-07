@@ -288,4 +288,7 @@
 
     <string name="add_member_texttt">Add Member</string>
     <string name="add_member_button">Add Member</string>
+
+    <string name="view_all_text">View all</string>
+    <string name="read_audio_transcript">Read Audio Transcript</string>
 </resources>

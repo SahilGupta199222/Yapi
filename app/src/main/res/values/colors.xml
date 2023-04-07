@@ -40,4 +40,6 @@
 
     <color name="error_border_color">#D91717</color>
     <color name="error_box_color">#FFF2F2</color>
+
+    <color name="media_back_color">#E7F0F9</color>
 </resources>

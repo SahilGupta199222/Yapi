@@ -6,15 +6,18 @@
         <variable
             name="model"
             type="com.yapi.views.group_info.group_general.ViewModelGroupGeneral" />
+        <variable
+            name="mView"
+            type="android.view.View" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
-android:onClick="@{model::onClick}"
+
         android:id="@+id/layoutGroupGnlInfoEdit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingStart="@dimen/popSideMargin"
-        android:paddingEnd="@dimen/popSideMargin"
->
+        android:visibility="@{model.editUIShow?mView.GONE:mView.VISIBLE}"
+        android:paddingEnd="@dimen/popSideMargin">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -28,6 +31,7 @@ android:onClick="@{model::onClick}"
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutScrollViewGroupGnlInfoEdit"
         android:layout_width="match_parent"
+
         android:layout_height="match_parent"
         >
 
@@ -147,6 +151,7 @@ android:onClick="@{model::onClick}"
             android:paddingTop="@dimen/etVerticalPadding"
             android:paddingEnd="@dimen/etHorizontalPadding"
             android:paddingBottom="@dimen/etVerticalPadding"
+            android:text="@={model.groupNameValue}"
             android:onTextChanged="@{model.onGroupNameTextChanged}"
             android:textColor="@color/darkGrey"
             android:textSize="@dimen/normalTextSize"
@@ -154,17 +159,33 @@ android:onClick="@{model::onClick}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtTempGroupNameMaxCountGroupGnlInfoEdit" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtErrorGroupName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/larsseit_regular"
+            android:text=""
+            android:layout_marginStart="@dimen/error_margin_start"
+            android:textColor="@color/red"
+            android:textSize="@dimen/smallTextSize"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etGroupNameGroupGnlInfoEdit" />
+
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtTempGroupDescriptionGroupGnlInfoEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/topMargin"
+            android:layout_marginTop="@dimen/space_between_error"
             android:fontFamily="@font/larsseit_medium"
             android:text="@string/create_group_description"
             android:textColor="@color/darkGrey"
             android:textSize="@dimen/smallTextSize"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etGroupNameGroupGnlInfoEdit" />
+            app:layout_constraintTop_toBottomOf="@+id/txtErrorGroupName" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtTempGroupDescriptionMaxCountGroupGnlInfoEdit"
@@ -197,18 +218,32 @@ android:onClick="@{model::onClick}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtTempGroupDescriptionGroupGnlInfoEdit" />
+
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtErrorGroupDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/larsseit_regular"
+            android:text=""
+            android:layout_marginStart="@dimen/error_margin_start"
+            android:textColor="@color/red"
+            android:textSize="@dimen/smallTextSize"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etGroupDescriptionGroupGnlInfoEdit" />
+
+       <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtTempManagedByGroupGnlInfoEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/topMargin"
+           android:layout_marginTop="@dimen/space_between_error"
             android:fontFamily="@font/larsseit_medium"
             android:text="@string/managed_by"
             android:textColor="@color/darkGrey"
             android:textSize="@dimen/smallTextSize"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etGroupDescriptionGroupGnlInfoEdit" />
-
+            app:layout_constraintTop_toBottomOf="@+id/txtErrorGroupDescription" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/etManagedByGroupGnlInfoEdit"

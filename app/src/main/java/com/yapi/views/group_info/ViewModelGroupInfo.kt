@@ -10,7 +10,7 @@ class ViewModelGroupInfo:ViewModel() {
     fun onClick(view:View){
         when(view.id){
             R.id.imgCancelGroupInfo->{
-                Toast.makeText(view.context, "Clicked", Toast.LENGTH_SHORT).show()
+               // Toast.makeText(view.context, "Clicked", Toast.LENGTH_SHORT).show()
                 view.findNavController().popBackStack()
             }
         }

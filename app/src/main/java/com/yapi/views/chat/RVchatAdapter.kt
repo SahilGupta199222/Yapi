@@ -5,26 +5,36 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.yapi.R
 
-class RVchatAdapter(private var context: Context,private var clickListener: MessageClickListener,
-private var arraylist:ArrayList<String>) :
+class RVchatAdapter(
+    private var context: Context, private var clickListener: MessageClickListener,
+    private var arraylist: ArrayList<String>,
+) :
     RecyclerView.Adapter<RVchatAdapter.MyViewHolder>() {
-    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view){
-      var  iv_more_chat=view.findViewById<ImageView>(R.id.iv_more_chat)
-      var  constraintsTimeLayout=view.findViewById<ConstraintLayout>(R.id.constraintsTimeLayout)
+    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        var iv_more_chat = view.findViewById<ImageView>(R.id.iv_more_chat)
+        var constraintsTimeLayout = view.findViewById<ConstraintLayout>(R.id.constraintsTimeLayout)
+        var rvPhotoVW = view.findViewById<RecyclerView>(R.id.rvPhotoVW)
+
+        var cardViewLeftTextMessage =
+            view.findViewById<RelativeLayout>(R.id.cardViewLeftTextMessage)
+        var cardViewMediaLeft = view.findViewById<RelativeLayout>(R.id.cardViewMediaLeft)
+        var cardViewAudioLeft = view.findViewById<RelativeLayout>(R.id.cardViewAudioLeft)
+
     }
 
-    fun getChatList():ArrayList<String>
-    {
+    fun getChatList(): ArrayList<String> {
         return arraylist
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         var view: View? = null
-        if (viewType==1) {
+        if (viewType == 1) {
             view = LayoutInflater.from(context).inflate(R.layout.left_chat_layout, parent, false)
         } else {
             view = LayoutInflater.from(context).inflate(R.layout.right_chat_layout, parent, false)
@@ -34,30 +44,61 @@ private var arraylist:ArrayList<String>) :
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.iv_more_chat.setOnClickListener {
-            clickListener.onMesssageListener(position,holder.iv_more_chat)
+            clickListener.onMesssageListener(position, holder.iv_more_chat)
         }
 
-        if(position==0 || position==4)
-        {
-            holder.constraintsTimeLayout.visibility=View.VISIBLE
-        }else
-        {
-            holder.constraintsTimeLayout.visibility=View.GONE
+        if (position == 0 || position == 4) {
+            holder.constraintsTimeLayout.visibility = View.VISIBLE
+        } else {
+            holder.constraintsTimeLayout.visibility = View.GONE
         }
+
+        holder.cardViewLeftTextMessage.visibility = View.GONE
+        holder.cardViewMediaLeft.visibility = View.GONE
+        holder.cardViewAudioLeft.visibility = View.GONE
+
+        if (arraylist[position].toString() == "AA") {
+            holder.cardViewLeftTextMessage.visibility = View.VISIBLE
+        } else
+            if (arraylist[position].toString() == "BB") {
+                holder.cardViewMediaLeft.visibility = View.VISIBLE
+            } else
+                if (arraylist[position].toString() == "CC") {
+                    holder.cardViewMediaLeft.visibility = View.VISIBLE
+                } else
+                    if (arraylist[position].toString() == "DD") {
+                        holder.cardViewLeftTextMessage.visibility = View.VISIBLE
+                    } else
+                        if (arraylist[position].toString() == "EE") {
+                            holder.cardViewAudioLeft.visibility = View.VISIBLE
+                        } else
+                            if (arraylist[position].toString() == "FF") {
+                                holder.cardViewAudioLeft.visibility = View.VISIBLE
+                            } else {
+                                holder.cardViewLeftTextMessage.visibility = View.VISIBLE
+                            }
+
+
+        var adapter = RVChatPhotoAdapter(context)
+        holder.rvPhotoVW.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        holder.rvPhotoVW.adapter = adapter
+
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return arraylist.size
     }
+
     override fun getItemViewType(position: Int): Int {
-        return if (position%2==0) {
+        return if (position % 2 == 0) {
             1
         } else {
             2
         }
     }
 }
-interface MessageClickListener
-{
-    fun onMesssageListener(position: Int,ivMoreImageView:ImageView)
+
+interface MessageClickListener {
+    fun onMesssageListener(position: Int, ivMoreImageView: ImageView)
 }

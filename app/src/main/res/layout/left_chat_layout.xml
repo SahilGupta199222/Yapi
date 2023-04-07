@@ -10,7 +10,8 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     android:layout_width="0dp"
-
+    android:layout_marginBottom="@dimen/_10sdp"
+    app:layout_constraintBottom_toTopOf="@+id/linearLeftUserDetail"
     android:layout_height="wrap_content">
     <View
         android:layout_width="0dp"
@@ -67,7 +68,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/cardLeftChatText" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/cardLeftChatText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -105,7 +106,222 @@
                     android:textSize="@dimen/normalSmallTextSize" />
 
         </RelativeLayout>
-    </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/cardViewMediaLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_6sdp"
+            android:paddingStart="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_3sdp"
+
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/chat_right_back_box"
+            android:backgroundTint="@color/media_back_color"
+            app:cardElevation="@dimen/_2sdp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvPhotoVW"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/viewLine"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/white"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rvPhotoVW" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/viewLine"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvViewAllPhotos"
+                        android:text="@string/view_all_text"
+                        android:textAllCaps="true"
+                        android:layout_width="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:fontFamily="@font/larsseit_bold"
+                        android:textColor="@color/blueColor"
+                        android:textSize="@dimen/smallTextSize"
+                        android:layout_height="wrap_content"/>
+                    <androidx.appcompat.widget.AppCompatImageView
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/ivMediaForward"
+                        android:id="@+id/ivMediaDownload"
+                        android:layout_width="@dimen/iconSize"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:src="@drawable/download_media_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_height="@dimen/iconSize"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/ivMediaForward"
+                        android:layout_width="@dimen/iconSize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:src="@drawable/forward_media_icon"
+                        android:layout_height="@dimen/iconSize"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/cardViewAudioLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="end"
+            android:paddingTop="@dimen/_1sdp"
+            android:paddingBottom="@dimen/_6sdp"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/chat_right_back_box"
+            android:backgroundTint="@color/white"
+            app:cardElevation="@dimen/_2sdp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintsAudio"
+                    android:layout_width="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivPlayAudio"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:src="@drawable/play_audio_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_width="@dimen/bigIconSize"
+                        android:layout_height="@dimen/bigIconSize"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivPlaySeekBar"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:src="@drawable/equaliser_icon"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        app:layout_constraintEnd_toStartOf="@id/tvAudioTime"
+                        app:layout_constraintStart_toEndOf="@+id/ivPlayAudio"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvAudioTime"
+                        android:layout_width="wrap_content"
+                        android:text="10:12 Min"
+                        android:textSize="@dimen/smallTextSize"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:fontFamily="@font/larsseit_medium"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:textColor="@color/medium_grey_color"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_height="wrap_content"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:id="@+id/viewLineSecond"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/liteGrey"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintsAudio" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/viewLineSecond"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvReadAudioTranscript"
+                        android:text="@string/read_audio_transcript"
+                        android:layout_width="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:fontFamily="@font/larsseit_bold"
+                        android:textColor="@color/blueColor"
+                        android:textSize="@dimen/smallTextSize"
+                        android:textAllCaps="true"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvAudioRange"
+                        android:text="1.0x"
+                        android:background="@drawable/et_drawable"
+                        android:layout_width="wrap_content"
+                        android:backgroundTint="@color/liteBlueForDrawable"
+                        app:layout_constraintEnd_toStartOf="@id/ivAudioDownload"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:fontFamily="@font/larsseit_bold"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:paddingEnd="@dimen/_7sdp"
+                        android:paddingStart="@dimen/_7sdp"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/_2sdp"
+                        android:paddingTop="@dimen/_2sdp"
+                        android:textColor="@color/blueColor"
+                        android:textSize="@dimen/smallTextSize"
+                        android:layout_height="wrap_content"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/ivAudioForward"
+                        android:id="@+id/ivAudioDownload"
+                        android:layout_width="@dimen/iconSize"
+
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:src="@drawable/download_media_icon"
+                        android:layout_height="@dimen/iconSize"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:id="@+id/ivAudioForward"
+                        android:layout_width="@dimen/iconSize"
+                        android:src="@drawable/forward_media_icon"
+                        android:layout_height="@dimen/iconSize"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/linearLeftUserDetail"
@@ -114,16 +330,14 @@
         android:layout_marginStart="@dimen/_6sdp"
         android:layout_marginTop="@dimen/_4sdp"
         android:orientation="horizontal"
-app:layout_constraintTop_toBottomOf="@+id/constraintsTimeLayout"
-
+        app:layout_constraintBottom_toTopOf="@+id/cardLeftChatText"
         app:layout_constraintStart_toStartOf="@id/cardLeftChatText">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvLeftUserName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-
             android:fontFamily="@font/larsseit_medium"
             android:letterSpacing="0.07"
             android:lineSpacingExtra="@dimen/line_spacing_extra"
@@ -144,7 +358,7 @@ app:layout_constraintTop_toBottomOf="@+id/constraintsTimeLayout"
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvLeftMessageTime"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/_8sdp"

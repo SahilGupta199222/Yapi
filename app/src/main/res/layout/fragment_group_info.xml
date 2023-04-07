@@ -15,7 +15,6 @@
         android:paddingTop="@dimen/popSideMargin"
         tools:context=".views.group_info.GroupInfoFragment">
 
-
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgCancelGroupInfo"
             android:layout_width="@dimen/iconSize"

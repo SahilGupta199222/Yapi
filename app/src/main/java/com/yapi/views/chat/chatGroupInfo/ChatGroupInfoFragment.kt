@@ -1,6 +1,5 @@
 package com.yapi.views.chat.chatGroupInfo
 
-import android.app.Dialog
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.LayoutInflater
