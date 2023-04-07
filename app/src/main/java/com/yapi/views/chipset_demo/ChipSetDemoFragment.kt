@@ -1,6 +1,7 @@
 package com.yapi.views.chipset_demo
 
 //import org.jsoup.Jsoup
+//import com.google.cloud.speech.v1.*
 import android.Manifest
 import android.app.Activity
 import android.content.Context
@@ -9,13 +10,14 @@ import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.*
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.google.android.material.chip.Chip
-//import com.google.cloud.speech.v1.*
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -208,6 +210,11 @@ class ChipSetDemoFragment : Fragment() {
             }
             imgBoldTxtIconChatDemo.setOnClickListener {
                 etRichChatDemo.setBold()
+                Handler(Looper.myLooper()!!).postDelayed({
+                    val text: String = etRichChatDemo.html
+                    etRichChatDemo.html = text
+                }, 500)
+//                etRichChatDemo.onTextChange()
 //                CoroutineScope(Dispatchers.Main).async {
 //                    etRichChatDemo.notifyAll()
 //                    etRichChatDemo.performClick();
@@ -404,58 +411,17 @@ class ChipSetDemoFragment : Fragment() {
 //                etRichChatDemo.insertLink("https://cdn.britannica.com/49/182849-050-4C7FE34F/scene-Iron-Man.jpg","iron man link")
             }
 
-//            etRichChatDemo.setOnDecorationChangeListener(object :
-//                RichEditor.OnDecorationStateListener {
-//                override fun onStateChangeListener(
-//                    text: String?,
-//                    types: MutableList<RichEditor.Type>?,
-//                ) {
-//                    Log.i("fhycdfhfdrfdc", "decoration changed $text\ntypes$types")
-//                }
-//
-//            })
+            etRichChatDemo.setOnDecorationChangeListener { text, types ->
+                Log.i("fhycdfhfdrfdc",
+                    "decoration changed $text\ntypes$types")
+            }
+            etRichChatDemo.setOnTextChangeListener {
+                Log.i("fhycdfhfdrfdc",
+                    "OnText change called")
+
+            }
 
 
-            etRichChatDemo.setOnKeyListener(object : View.OnKeyListener {
-                override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
-                    if (event!!.action == KeyEvent.KEYCODE_BACK || event.action == KeyEvent.KEYCODE_DEL) {
-                        if (tempText[tempText.length - 2].equals(">") && tempText[tempText.length - 3].equals(
-                                "/") && tempText[tempText.length - 4].equals("<")
-                        ) {
-                            tempText.removeRange(tempText.length - 4, tempText.length)
-
-                        } else if (tempText[tempText.length - 1].equals(lastCharacter)) {
-                            tempText.removeRange(tempText.length - 2, tempText.length)
-                            lastCharacter = tempText[tempText.length - 1].toString()
-                        } else
-                            return true
-                    }
-                    return false
-                }
-            })
-
-
-            /*      etRichChatDemo.doOnTextChanged { text, start, before, count ->
-                      if(etRichChatDemo.text.toString().trim().isNotEmpty()) {
-                          val value=etRichChatDemo.text.toString()
-                          lastCharacter = value[start].toString()
-                      }
-                      if(etRichChatDemo.text.toString().trim().isEmpty()){
-                          tempText=""
-                      }
-                      if(boldStatus==1){
-                          tempText+="<b>"
-                          boldStatus=0
-        0              }else if(boldStatus==2){
-                          tempText+="</b>"
-                          boldStatus=0
-                      }
-                      else{
-                          tempText+= text?.get(start)?:""
-                      }
-                      Log.i("damanpreet","text$text\nstart$start,before $before\ncount$count")
-                      etRichChatDemo.setText(Html.fromHtml(etRichChatDemo.text.toString().trim()))
-                  }*/
 //            etRichChatDemo.setOnTextChangeListener(object : RichEditor.OnTextChangeListener {
 //                override fun onTextChange(textt: String?) {
 //                    val text1 = etRichChatDemo.html
@@ -538,71 +504,9 @@ class ChipSetDemoFragment : Fragment() {
 //
 //            })
 
-//            etRichChatDemo.doAfterTextChanged {
-//                val text=etRichChatDemo.text
-//                val count=etRichChatDemo.text?.length
-//                etRichChatDemo.text?.clear()
-//                val str = SpannableStringBuilder(text)
-//                if(boldTxtSelected && italicTxtSelected) {
-//                    str.setSpan(StyleSpan(Typeface.BOLD_ITALIC),
-//                        before,
-//                        count?:0,
-//                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-//                }
-//                else if(boldTxtSelected) {
-//                    str.setSpan(StyleSpan(Typeface.BOLD),
-//                        before,
-//                        count?:0,
-//                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-//                }
-//                else if(italicTxtSelected) {
-//                    str.setSpan(StyleSpan(Typeface.ITALIC),
-//                        before,
-//                        count?:0,
-//                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-//                }
-//                Log.i("asdfiasdjkfn","Spannable string is ->$str")
-//                etRichChatDemo.text=str
-//            }
             imgSendIconChatDemo.setOnClickListener {
 //                tvMessages.text= Html.fromHtml(etRichChatDemo.html.toString())
             }
-//            etRichChatDemo.doOnTextChanged { text, start, beforee, count ->
-//                before=beforee
-//                Log.i("asdfiasdjkfn","Start $start, before $before , count $count")
-////                val str = SpannableStringBuilder(text)
-////                if(boldTxtSelected && italicTxtSelected) {
-////                    str.setSpan(StyleSpan(Typeface.BOLD_ITALIC),
-////                        before,
-////                        count,
-////                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-////                }
-////                else if(boldTxtSelected) {
-////                    str.setSpan(StyleSpan(Typeface.BOLD),
-////                        before,
-////                        count,
-////                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-////                }
-////                else if(italicTxtSelected) {
-////                    str.0setSpan(StyleSpan(Typeface.ITALIC),
-////                        be0fore,
-////                        coun0t,
-////                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-////                }
-////                Log.i("asdfiasdjkfn","Spannable string is ->$str")
-////                etRichChatDemo.text=str
-//            }
-//            etRichChatDemo.setOnTextChangeListener { object:RichEditor.OnTextChangeListener{
-//                override fun onTextChange(text: String?) {
-//                    Log.i("asdfjnasdf","OnText Chage listner ${text}\n")
-//                    etRichChatDemo.performClick()
-//                }
-//
-//            } }
-
-//            etRichChatDemo.setOnDecorationChangeListener { text, types ->
-//                Log.i("asdfjnasdf","i ->${types}  and text  $text\n")
-//            }
         }
     }
 
