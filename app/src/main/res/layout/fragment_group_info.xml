@@ -67,21 +67,17 @@
             app:layout_constraintBottom_toBottomOf="@+id/imgGroupPicGroupInfo"
             app:layout_constraintStart_toStartOf="@+id/txtGroupNameGroupInfo"
             />
-        <androidx.appcompat.widget.AppCompatTextView
+        <ImageView
             android:id="@+id/txtTempDotGroupInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="."
-            android:gravity="center"
-            android:layout_marginStart="@dimen/topFiveMargin"
-            android:textColor="@color/darkLiteGrey"
-            android:fontFamily="@font/larsseit_medium"
-            android:textSize="@dimen/normalSmallTextSize"
+            android:layout_width="@dimen/_4sdp"
+            android:layout_height="@dimen/_4sdp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/_8sdp"
+            app:tint="#E6E6E6"
             app:layout_constraintTop_toTopOf="@+id/txtMembersGroupInfo"
             app:layout_constraintBottom_toBottomOf="@+id/txtMembersGroupInfo"
             app:layout_constraintStart_toEndOf="@+id/txtMembersGroupInfo"
-            />
-
+            android:src="@drawable/circle_bullet" />
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/txtCreatedDateOfGroupInfo"
             android:layout_width="0dp"
