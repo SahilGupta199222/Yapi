@@ -18,7 +18,7 @@
             android:layout_height="@dimen/bigIconSize"
             android:layout_gravity="center"
             android:onClick="@{mViewModel::onClick}"
-            android:layout_marginStart="@dimen/topFiveMargin"
+            android:layout_marginStart="@dimen/startMainMargin"
             android:src="@drawable/arrow_forward"
             android:rotation="180"
             app:tint="@color/chatbottom_grey_color"
