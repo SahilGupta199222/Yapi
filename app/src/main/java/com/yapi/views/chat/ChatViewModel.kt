@@ -45,8 +45,14 @@ class ChatViewModel : ViewModel() {
     var liveUserVisible=ObservableBoolean(false)
     var noImageOnlyNameVisible=ObservableBoolean(false)
     var groupAllPhotos=ObservableBoolean(false)
+    var showStyleStatus=ObservableBoolean(false)
+
+
     fun onClick(view: View) {
         when (view.id) {
+            R.id.imgTxtStyleChangeIconChatDemo->{
+                showStyleStatus.set(!showStyleStatus.get())
+            }
             R.id.ivChat_more_icon -> {
                 // showAddTemplateDialog()
                 // attachmentPopupDialog()
@@ -114,16 +120,16 @@ class ChatViewModel : ViewModel() {
 
     //For show Template Dialog
     private fun showAddTemplateDialog() {
-        var dialog = Dialog(MainActivity.activity!!.get()!!)
+        val dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.add_template_layout)
 
         dialog.show()
-        var cardviewAddTemplate = dialog.findViewById<CardView>(R.id.cardviewAddTemplate)
-        var ivOutsideCloseGroup = dialog.findViewById<ImageView>(R.id.ivOutsideCloseGroup)
-        var constraintsTopTemplate =
+        val cardviewAddTemplate = dialog.findViewById<CardView>(R.id.cardviewAddTemplate)
+        val ivOutsideCloseGroup = dialog.findViewById<ImageView>(R.id.ivOutsideCloseGroup)
+        val constraintsTopTemplate =
             dialog.findViewById<ConstraintLayout>(R.id.constraintsTopTemplate)
-        var ivTemplateLogo = dialog.findViewById<ImageView>(R.id.ivTemplateLogo)
+        val ivTemplateLogo = dialog.findViewById<ImageView>(R.id.ivTemplateLogo)
         cardviewAddTemplate.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
 
         if (checkDeviceType()) {
@@ -142,7 +148,7 @@ class ChatViewModel : ViewModel() {
             keyboardHideData.value = true
         }
 
-        var btnCancelTemplate = dialog.findViewById<AppCompatButton>(R.id.btnCancelTemplate)
+        val btnCancelTemplate = dialog.findViewById<AppCompatButton>(R.id.btnCancelTemplate)
         btnCancelTemplate.setOnClickListener {
             dialog.dismiss()
         }
@@ -153,10 +159,10 @@ class ChatViewModel : ViewModel() {
 
     //For attachment dialog
     private fun attachmentPopupDialog() {
-        var bottomSheetDialog =
+        val bottomSheetDialog =
             BottomSheetDialog(MainActivity.activity!!.get()!!, R.style.CustomBottomSheetDialogTheme)
         //bottomSheetDialog.window.setBackground(new ColorDrawable(Color.TRANSPARENT));
-        var chatAttachBinding =
+        val chatAttachBinding =
             ChatAttachementLayoutBinding.inflate(LayoutInflater.from(MainActivity.activity!!.get()!!))
         bottomSheetDialog.setContentView(chatAttachBinding.root)
         bottomSheetDialog.show()
@@ -164,15 +170,15 @@ class ChatViewModel : ViewModel() {
 
     //For Add Link Dialog
     private fun addLinkDialog() {
-        var dialog = Dialog(MainActivity.activity!!.get()!!)
+        val dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.add_chat_link_layout)
 
         dialog.show()
-        var cardviewAddLink = dialog.findViewById<CardView>(R.id.cardviewAddLink)
+        val cardviewAddLink = dialog.findViewById<CardView>(R.id.cardviewAddLink)
         cardviewAddLink.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
 
-        var btnCancelAddLink = dialog.findViewById<AppCompatButton>(R.id.btnCancelAddLink)
+        val btnCancelAddLink = dialog.findViewById<AppCompatButton>(R.id.btnCancelAddLink)
         btnCancelAddLink.setOnClickListener {
             dialog.dismiss()
         }
@@ -181,8 +187,8 @@ class ChatViewModel : ViewModel() {
     //When click on the three dots
     private fun showChatMenuMethod(view: View) {
         val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
-            .inflate(com.yapi.R.layout.chat_menu_options, null, false)
-        var newWidth = screenWidth!! / 1.5
+            .inflate(R.layout.chat_menu_options, null, false)
+        val newWidth = screenWidth!! / 1.5
 
         //   val popUp = PopupWindow(mView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, false)
         val popUp =
@@ -195,7 +201,7 @@ class ChatViewModel : ViewModel() {
 
             popUp.showAsDropDown(view.findViewById(com.yapi.R.id.ivChat_more_icon))
 
-        var constraintsProfileChat =
+        val constraintsProfileChat =
             mView.findViewById<ConstraintLayout>(R.id.constraintsProfileChat)
         constraintsProfileChat.setOnClickListener {
             popUp.dismiss()
@@ -203,19 +209,19 @@ class ChatViewModel : ViewModel() {
                 EventBus.getDefault().post(MyMessageEvent(10, Constants.USER_PROFILE)) //post event
             } else {
                 if (view.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
-                    var bundle = Bundle()
+                    val bundle = Bundle()
                     bundle.putString("userType", userType.toString())
                     view.findNavController()
                         .navigate(R.id.action_chatMessageFragment_to_chatUserProfileInfo, bundle)
                 }
             }
         }
-        var constraintsMute = mView.findViewById<ConstraintLayout>(R.id.constraintsMute)
+        val constraintsMute = mView.findViewById<ConstraintLayout>(R.id.constraintsMute)
         constraintsMute.setOnClickListener {
             popUp.dismiss()
 //            showDeleteGroupDialog()
         }
-        var constraintsDeleteChat = mView.findViewById<ConstraintLayout>(R.id.constraintsDeleteChat)
+        val constraintsDeleteChat = mView.findViewById<ConstraintLayout>(R.id.constraintsDeleteChat)
         constraintsDeleteChat.setOnClickListener {
             popUp.dismiss()
             if (checkDeviceType()) {
@@ -233,7 +239,7 @@ class ChatViewModel : ViewModel() {
 
         val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
             .inflate(com.yapi.R.layout.group_chat_menu_options, null, false)
-        var newWidth = screenWidth!! / 1.5
+        val newWidth = screenWidth!! / 1.5
         val popUp =
             PopupWindow(mView, newWidth.toInt(), LinearLayout.LayoutParams.WRAP_CONTENT, false)
         popUp.isTouchable = true
@@ -243,7 +249,7 @@ class ChatViewModel : ViewModel() {
 
         // val btnViewProfile = popUp.showAsDropDown(view.findViewById(com.yapi.R.id.ivChat_more_icon))
 
-        var constraintsProfileChat =
+        val constraintsProfileChat =
             mView.findViewById<ConstraintLayout>(R.id.constraintsProfileChat)
         constraintsProfileChat.setOnClickListener {
             popUp.dismiss()
@@ -252,7 +258,7 @@ class ChatViewModel : ViewModel() {
                 EventBus.getDefault().post(MyMessageEvent(10, Constants.GROUP_PROFILE)) //post event
             } else {
                 if (view.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
-                    var bundle = Bundle()
+                    val bundle = Bundle()
                     bundle.putString("userType", userType.toString())
                     view.findNavController()
                         .navigate(R.id.action_chatMessageFragment_to_chatGroupProfileInfo, bundle)
@@ -261,17 +267,17 @@ class ChatViewModel : ViewModel() {
 
 
         }
-        var constraintsMute = mView.findViewById<ConstraintLayout>(R.id.constraintsMute)
+        val constraintsMute = mView.findViewById<ConstraintLayout>(R.id.constraintsMute)
         constraintsMute.setOnClickListener {
             popUp.dismiss()
         }
-        var constraintsLeaveGroup = mView.findViewById<ConstraintLayout>(R.id.constraintsLeaveGroup)
+        val constraintsLeaveGroup = mView.findViewById<ConstraintLayout>(R.id.constraintsLeaveGroup)
         constraintsLeaveGroup.setOnClickListener {
             popUp.dismiss()
             showLeaveGroupDialog()
         }
 
-        var constraintsDeleteGroup =
+        val constraintsDeleteGroup =
             mView.findViewById<ConstraintLayout>(R.id.constraintsDeleteGroup)
         constraintsDeleteGroup.setOnClickListener {
             popUp.dismiss()
@@ -280,14 +286,14 @@ class ChatViewModel : ViewModel() {
     }
 
     private fun showLeaveGroupDialog() {
-        var dialog = Dialog(MainActivity.activity!!.get()!!)
+        val dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.leave_module_popup)
 
         dialog.show()
-        var cardviewDeleteProfile = dialog.findViewById<CardView>(R.id.cardviewDeleteProfile)
-        var btnCancel = dialog.findViewById<AppCompatButton>(R.id.btnCancel)
-        var ivCross = dialog.findViewById<ImageView>(R.id.ivCross)
+        val cardviewDeleteProfile = dialog.findViewById<CardView>(R.id.cardviewDeleteProfile)
+        val btnCancel = dialog.findViewById<AppCompatButton>(R.id.btnCancel)
+        val ivCross = dialog.findViewById<ImageView>(R.id.ivCross)
         cardviewDeleteProfile.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
 
         btnCancel.setOnClickListener {
@@ -299,14 +305,14 @@ class ChatViewModel : ViewModel() {
     }
 
     private fun showDeleteGroupDialog() {
-        var dialog = Dialog(MainActivity.activity!!.get()!!)
+        val dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.delete_group_popup)
 
         dialog.show()
-        var cardviewDeleteProfile = dialog.findViewById<CardView>(R.id.cardviewDeleteProfile)
-        var btnCancel = dialog.findViewById<AppCompatButton>(R.id.btnCancel)
-        var ivCross = dialog.findViewById<ImageView>(R.id.ivCross)
+        val cardviewDeleteProfile = dialog.findViewById<CardView>(R.id.cardviewDeleteProfile)
+        val btnCancel = dialog.findViewById<AppCompatButton>(R.id.btnCancel)
+        val ivCross = dialog.findViewById<ImageView>(R.id.ivCross)
         cardviewDeleteProfile.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
 
         btnCancel.setOnClickListener {
@@ -319,28 +325,28 @@ class ChatViewModel : ViewModel() {
     }
 
     private fun showViewAllMethod() {
-        var dialog = Dialog(MainActivity.activity!!.get()!!)
+        val dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.view_all_documents_layout)
         dialog.show()
-        var cardviewViewAll = dialog.findViewById<CardView>(R.id.cardviewViewAll)
+        val cardviewViewAll = dialog.findViewById<CardView>(R.id.cardviewViewAll)
         cardviewViewAll.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
         cardviewViewAll.layoutParams.height = (screenHeight!!.toDouble() / 1.5).toInt()
-        var rvAllMedia = dialog.findViewById<RecyclerView>(R.id.rvAllMedia)
-        var linearMedia = dialog.findViewById<LinearLayout>(R.id.linearMedia)
-        var linearLinks = dialog.findViewById<LinearLayout>(R.id.linearLinks)
-        var linearFiles = dialog.findViewById<LinearLayout>(R.id.linearFiles)
+        val rvAllMedia = dialog.findViewById<RecyclerView>(R.id.rvAllMedia)
+        val linearMedia = dialog.findViewById<LinearLayout>(R.id.linearMedia)
+        val linearLinks = dialog.findViewById<LinearLayout>(R.id.linearLinks)
+        val linearFiles = dialog.findViewById<LinearLayout>(R.id.linearFiles)
 
-        var tvMediaText = dialog.findViewById<TextView>(R.id.tvMediaText)
-        var viewMediaLine = dialog.findViewById<View>(R.id.viewMediaLine)
+        val tvMediaText = dialog.findViewById<TextView>(R.id.tvMediaText)
+        val viewMediaLine = dialog.findViewById<View>(R.id.viewMediaLine)
 
-        var tvLinkText = dialog.findViewById<TextView>(R.id.tvLinkText)
-        var viewLinkLine = dialog.findViewById<View>(R.id.viewLinkLine)
+        val tvLinkText = dialog.findViewById<TextView>(R.id.tvLinkText)
+        val viewLinkLine = dialog.findViewById<View>(R.id.viewLinkLine)
 
-        var tvFilesText = dialog.findViewById<TextView>(R.id.tvFilesText)
-        var viewFilesLine = dialog.findViewById<View>(R.id.viewFilesLine)
-        var ivViewAllCross = dialog.findViewById<ImageView>(R.id.ivViewAllCross)
-        var ivViewAllCrossOutside = dialog.findViewById<ImageView>(R.id.ivViewAllCrossOutside)
+        val tvFilesText = dialog.findViewById<TextView>(R.id.tvFilesText)
+        val viewFilesLine = dialog.findViewById<View>(R.id.viewFilesLine)
+        val ivViewAllCross = dialog.findViewById<ImageView>(R.id.ivViewAllCross)
+        val ivViewAllCrossOutside = dialog.findViewById<ImageView>(R.id.ivViewAllCrossOutside)
 
         if (checkDeviceType()) {
             ivViewAllCrossOutside.visibility = View.VISIBLE
@@ -397,21 +403,21 @@ class ChatViewModel : ViewModel() {
     }
 
     private fun setPhotoAdapterMethod(rvAllMedia: RecyclerView) {
-        var finalPerPhoto = screenWidth!!.toFloat() / 3.8f
-        var mediaAdapter =
+        val finalPerPhoto = screenWidth!!.toFloat() / 3.8f
+        val mediaAdapter =
             RVPhotoMediaAdapter(MainActivity.activity!!.get()!!, finalPerPhoto.toInt())
         rvAllMedia.layoutManager = GridLayoutManager(MainActivity.activity!!.get()!!, 3)
         rvAllMedia.adapter = mediaAdapter
     }
 
     private fun setLinkAdapterMethod(rvAllMedia: RecyclerView) {
-        var rvLinkAdapter = RVLinksAdapter(MainActivity.activity!!.get()!!)
+        val rvLinkAdapter = RVLinksAdapter(MainActivity.activity!!.get()!!)
         rvAllMedia.layoutManager = LinearLayoutManager(MainActivity.activity!!.get()!!)
         rvAllMedia.adapter = rvLinkAdapter
     }
 
     private fun setFilesAdapterMethod(rvAllMedia: RecyclerView) {
-        var rvFilesAdapter = RVFilesAdapter(MainActivity.activity!!.get()!!)
+        val rvFilesAdapter = RVFilesAdapter(MainActivity.activity!!.get()!!)
         rvAllMedia.layoutManager = LinearLayoutManager(MainActivity.activity!!.get()!!)
         rvAllMedia.adapter = rvFilesAdapter
     }
