@@ -3,6 +3,7 @@ package com.yapi.common
 object Constants {
  const val BASEURL:String="http://www.google.com"
 
+ const val TAG="asfjsajkshdfnkafd"
  const val GROUPS_KEY="groups"
  const val JOBS_KEY="jobs"
  const val CUSTOMERS_KEY="customers"
