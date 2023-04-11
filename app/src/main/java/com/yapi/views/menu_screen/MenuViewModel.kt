@@ -30,7 +30,7 @@ class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : Vi
     fun onClick(view: View) {
         when (view.id) {
             R.id.layoutSearch->{
-              /*  if(checkDeviceType()){
+                if(checkDeviceType()){
                     openSearchScreenData.value=true
                     //SearchFragment.newInstanceSearch("").showNow(view.re, " SimpleDialog.TAG")
                 }else
@@ -39,7 +39,7 @@ class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : Vi
                     view.findNavController()
                         .navigate(R.id.action_menuFragment_to_searchFragment)
                 }
-            }*/
+            }
             }
 
             com.yapi.R.id.imgProfilePicCustomerList -> {

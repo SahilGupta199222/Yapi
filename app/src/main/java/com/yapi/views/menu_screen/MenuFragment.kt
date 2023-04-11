@@ -18,6 +18,7 @@ import com.yapi.common.GroupEvent
 import com.yapi.common.MyMessageEvent
 import com.yapi.common.checkDeviceType
 import com.yapi.databinding.FragmentMenuBinding
+import com.yapi.views.add_people.AddPeopleFragment
 import com.yapi.views.profile.ProfileFragment
 import com.yapi.views.search.SearchFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -615,7 +616,7 @@ class MenuFragment : Fragment() {
             var data=it as Boolean
             if(data)
             {
-                SearchFragment.newInstanceSearch("").showNow(requireActivity().supportFragmentManager,"")
+                SearchFragment.newInstanceSearch("").showNow(requireActivity().supportFragmentManager,"SimpleDialog.TAG")
             }
         })
     }

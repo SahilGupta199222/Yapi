@@ -1,12 +1,11 @@
 package com.yapi.views.add_people_email
 
+import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -18,13 +17,19 @@ import com.google.android.material.chip.Chip
 import com.yapi.R
 import com.yapi.common.*
 import com.yapi.databinding.FragmentAddPeopleEmailBinding
+import com.yapi.pref.PreferenceFile
 import com.yapi.views.add_people_email_confirmation.AddPeopleEmailConfirmationFragment
 import com.yapi.views.sign_in.SignInErrorData
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class AddPeopleEmailFragment : DialogFragment() {
     private lateinit var binding: FragmentAddPeopleEmailBinding
     private val viewModelAddPeopleEmail: ViewModelAddPeopleEmail by viewModels()
+
+    @Inject
+    lateinit var preferenceFile: PreferenceFile
 
     companion object {
         fun newInstanceAddPeopleEmail(title: String): AddPeopleEmailFragment {
@@ -34,6 +39,23 @@ class AddPeopleEmailFragment : DialogFragment() {
             fragment.arguments = args
             return fragment
         }
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        // Create a new dialog
+        val dialog: Dialog = super.onCreateDialog(savedInstanceState)
+
+        // Get the window of the dialog
+        val window: Window = dialog.getWindow()!!
+
+        // Set the dialog to be shown at the bottom of the screen
+        window.setGravity(Gravity.RIGHT)
+
+        var second_frame_height= preferenceFile.fetchStringValue("second_frame_height")
+        var second_frame_width=  preferenceFile.fetchStringValue("second_frame_width")
+        Log.e("nefjkwnddfkewfwefe===",second_frame_height+"==="+second_frame_width)
+        window.setLayout(second_frame_width.toInt(),second_frame_height.toInt())
+        return dialog
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

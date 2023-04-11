@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/_16sdp"
+        android:paddingTop="@dimen/_15sdp"
         android:layout_marginBottom="@dimen/_3sdp">
 
         <ImageView
@@ -36,8 +37,19 @@
             android:textColor="@color/darkGrey"
             app:layout_constraintBottom_toBottomOf="@id/tvUserListText"
             android:textSize="@dimen/titleTextSize"
-
             app:layout_constraintStart_toEndOf="@+id/txtuserBack" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvUserListDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/larsseit_regular"
+            android:text="Excepteur sint occaecat cupidatat non proident, sunt in."
+            app:layout_constraintTop_toBottomOf="@id/tvUserListText"
+            android:textColor="@color/medium_grey_color"
+            app:layout_constraintEnd_toStartOf="@id/linearTopUsers"
+            android:textSize="@dimen/_11ssp"
+           app:layout_constraintStart_toStartOf="@id/tvUserListText" />
 
         <LinearLayout
             android:id="@+id/linearTopUsers"

@@ -1,6 +1,5 @@
-package com.yapi.views.search
+package com.yapi.views.search_result
 
-import android.util.Log
 import android.view.View
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
@@ -9,14 +8,16 @@ import androidx.navigation.findNavController
 import com.yapi.R
 import com.yapi.common.checkDeviceType
 
-class SearchViewModel():ViewModel() {
+class SearchResultViewModel():ViewModel() {
 
-var dissmissDialogPopupData=MutableLiveData<Boolean>()
-    var cancelshowField=ObservableBoolean(false)
-    fun onClick(view:View){
+    var dissmissDialogPopupData= MutableLiveData<Boolean>()
+    var cancelshowField= ObservableBoolean(false)
+
+    fun onClick(view: View)
+    {
         when(view.id)
         {
-            R.id.imgCancelSearch,R.id.ivOutsideCloseSearch->{
+            R.id.ivOutsideCloseSearchResult,R.id.imgCancelSearch->{
                 if(checkDeviceType()){
                     dissmissDialogPopupData.value=true
                 }else

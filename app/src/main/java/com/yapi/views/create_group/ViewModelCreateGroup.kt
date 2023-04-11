@@ -24,7 +24,6 @@ class ViewModelCreateGroup : ViewModel() {
     var addPeopleScreenOpenData = MutableLiveData<Boolean>()
     var dismissDialogData = MutableLiveData<Boolean>()
 
-
     var privateGroupToggle = ObservableBoolean(false)
 
     var errorData=MutableLiveData<SignInErrorData>()

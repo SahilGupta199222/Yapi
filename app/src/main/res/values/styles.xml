@@ -7,6 +7,14 @@
     </style>
 
     <style name="FullScreenDialog" parent="Theme.AppCompat.Light.Dialog">
+    <!--    <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:padding">@dimen/_10sdp</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+        <item name="animationMode">fade</item>
+        <item name="android:layout_alignParentRight">true</item>-->
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:padding">@dimen/_10sdp</item>
@@ -16,6 +24,10 @@
         <item name="animationMode">fade</item>
         <item name="android:layout_alignParentRight">true</item>
     </style>
+
+
+
+
     <style name="SpinnerThem" parent="Widget.AppCompat.Light.DropDownItem.Spinner">
         <item name="android:background">@drawable/ic_baseline_keyboard_arrow_down_24</item>
 

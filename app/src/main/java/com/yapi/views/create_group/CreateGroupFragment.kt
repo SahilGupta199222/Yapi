@@ -1,7 +1,10 @@
 package com.yapi.views.create_group
 
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatEditText
@@ -14,13 +17,19 @@ import com.yapi.common.changeBackgroundForEditError
 import com.yapi.common.checkDeviceType
 import com.yapi.common.hideKeyboard
 import com.yapi.databinding.FragmentCreateGroupBinding
+import com.yapi.pref.PreferenceFile
 import com.yapi.views.add_people.AddPeopleFragment
 import com.yapi.views.sign_in.SignInErrorData
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class CreateGroupFragment : DialogFragment() {
     private lateinit var binding: FragmentCreateGroupBinding
     val viewModel: ViewModelCreateGroup by viewModels()
 
+    @Inject
+    lateinit var preferenceFile: PreferenceFile
     companion object {
         fun newInstanceCreateGroup(title: String): CreateGroupFragment {
             val args = Bundle()
@@ -36,6 +45,9 @@ class CreateGroupFragment : DialogFragment() {
         if (checkDeviceType()) {
             System.out.println("phone========tablet")
             setStyle(DialogFragment.STYLE_NO_FRAME, R.style.FullScreenDialog)
+            //setStyle(DialogFragment.STYLE_NO_FRAME,android.R.style.Theme_NoTitleBar);
+        //}
+
         }
     }
 
@@ -47,8 +59,12 @@ class CreateGroupFragment : DialogFragment() {
         val window: Window = dialog.getWindow()!!
 
         // Set the dialog to be shown at the bottom of the screen
-        window.setGravity(Gravity.BOTTOM)
+        window.setGravity(Gravity.RIGHT)
 
+        var second_frame_height= preferenceFile.fetchStringValue("second_frame_height")
+        var second_frame_width=  preferenceFile.fetchStringValue("second_frame_width")
+        Log.e("nefjkwnddfkewfwefe===",second_frame_height+"==="+second_frame_width)
+        window.setLayout(second_frame_width.toInt(),second_frame_height.toInt())
         return dialog
     }
 

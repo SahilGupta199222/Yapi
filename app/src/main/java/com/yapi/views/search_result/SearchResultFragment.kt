@@ -1,52 +1,122 @@
 package com.yapi.views.search_result
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.yapi.R
-import kotlin.concurrent.timerTask
+import com.yapi.common.checkDeviceType
+import com.yapi.pref.PreferenceFile
+import com.yapi.views.search.SearchFragment
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
-class SearchResultFragment : Fragment() {
+@AndroidEntryPoint
+class SearchResultFragment : DialogFragment() {
     private lateinit var binding:com.yapi.databinding.FragmentSearchResultBinding
     private lateinit var adapterr:AdapterTabSearchResult
     private lateinit var tabList: ArrayList<PojoTabSearchResult>
+
+    @Inject
+    lateinit var preferenceFile: PreferenceFile
+
+     val mViewModel:SearchResultViewModel by viewModels()
+
+    companion object {
+        fun newInstanceSearchResult(title: String): SearchResultFragment {
+            val args = Bundle()
+            args.putString("11", title)
+            val fragment = SearchResultFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        // Create a new dialog
+        val dialog: Dialog = super.onCreateDialog(savedInstanceState)
+
+        // Get the window of the dialog
+        val window: Window = dialog.getWindow()!!
+
+        // Set the dialog to be shown at the bottom of the screen
+        window.setGravity(Gravity.RIGHT)
+
+        var second_frame_height= preferenceFile.fetchStringValue("second_frame_height")
+        var second_frame_width=  preferenceFile.fetchStringValue("second_frame_width")
+        Log.e("nefjkwnddfkewfwefe===",second_frame_height+"==="+second_frame_width)
+        window.setLayout(second_frame_width.toInt(),second_frame_height.toInt())
+        return dialog
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (checkDeviceType()) {
+            System.out.println("phone========tablet")
+            setStyle(DialogFragment.STYLE_NO_FRAME, R.style.FullScreenDialog)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         binding= com.yapi.databinding.FragmentSearchResultBinding.inflate(LayoutInflater.from(requireActivity()))
+        binding.mViewModel=mViewModel
+
+        if(checkDeviceType())
+        {
+            mViewModel.cancelshowField.set(false)
+        }else
+        {
+            mViewModel.cancelshowField.set(true)
+        }
+
+        dismissDialogScreenObserver()
+
         return binding.root
+    }
+
+    //For dismiss Dialog Fragment obsever
+    fun dismissDialogScreenObserver()
+    {
+        mViewModel.dissmissDialogPopupData.observe(requireActivity(), Observer {
+            var data=it as Boolean
+            if(data)
+            {
+                dismiss()
+            }
+        })
     }
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-init()
-
+        init()
     }
 
     private fun init() {
+        setBackgroundRectMethod()
         binding.apply {
 
             txtTempResultSearch.setOnClickListener {
                 findNavController().popBackStack()
             }
-            imgCancelSearch.setOnClickListener {
+         /*   imgCancelSearch.setOnClickListener {
                 findNavController().popBackStack()
             }
             imgCancelTabSearchResult.setOnClickListener {
                 findNavController().popBackStack()
-            }
+            }*/
             val check=arguments?.getBoolean("empty")?:false
             if(check==true){
                 setTabLayout(true)
@@ -110,9 +180,13 @@ init()
             }   }
     }
     private fun searchList(list:ArrayList<PojoSearchScreenData>) {
-        binding.apply {
-            rvSearchResult.adapter = AdapterSearch(requireContext(), list)
-        }
+        binding.rvSearchResult.adapter = AdapterSearch(requireContext(), list,
+            object : ClickListener {
+                override fun onClickLisener(position: Int) {
+
+                }
+            })
+
     }
     private fun setTabLayout(empty:Boolean) {
         tabList = ArrayList<PojoTabSearchResult>()
@@ -173,11 +247,35 @@ init()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
             }
-
         }
-
     }
 
+
+    //For set the background Rectangle
+    private fun setBackgroundRectMethod()
+    {
+        binding.apply {
+            var rightMarginTopLayout = 0
+            if (checkDeviceType()) {
+                rightMarginTopLayout =
+                    requireActivity().resources.getDimension(com.intuit.sdp.R.dimen._18sdp).toInt()
+                ivOutsideCloseSearchResult.visibility = View.VISIBLE
+                imgCancelSearch.visibility = View.GONE
+                layoutCreateSearch.setBackgroundResource(R.drawable.et_drawable)
+            } else {
+                layoutCreateSearch.setBackgroundResource(0)
+                rightMarginTopLayout = 0
+                ivOutsideCloseSearchResult.visibility = View.GONE
+                imgCancelSearch.visibility = View.VISIBLE
+            }
+
+            val layoutParams = binding.layoutCreateSearch.layoutParams as LinearLayout.LayoutParams
+            //  val newLayoutParams = toolbar.getLayoutParams()
+            layoutParams.topMargin = 0
+            layoutParams.leftMargin = 0
+            layoutParams.rightMargin = rightMarginTopLayout
+            binding.layoutCreateSearch.layoutParams = layoutParams
+        }
+    }
 }
