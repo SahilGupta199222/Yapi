@@ -31,7 +31,7 @@ import org.greenrobot.eventbus.EventBus
 
 class ChatViewModel : ViewModel() {
 
-    var chatValue = ObservableBoolean(false)
+    var chatValue = ObservableBoolean(true)
     var emailValue = ObservableBoolean(false)
     var smsValue = ObservableBoolean(false)
 
@@ -39,18 +39,23 @@ class ChatViewModel : ViewModel() {
     var screenHeight: Int? = 0
     var userType: String? = ""
     var sendDataValue = ObservableField("")
-    var backButtonVisible=ObservableBoolean(false)
-    var groupImageVisible=ObservableBoolean(false)
-    var groupIconVisible=ObservableBoolean(false)
-    var liveUserVisible=ObservableBoolean(false)
-    var noImageOnlyNameVisible=ObservableBoolean(false)
-    var groupAllPhotos=ObservableBoolean(false)
-    var showStyleStatus=ObservableBoolean(false)
+    var backButtonVisible = ObservableBoolean(false)
+    var groupImageVisible = ObservableBoolean(false)
+    var groupIconVisible = ObservableBoolean(false)
+    var liveUserVisible = ObservableBoolean(false)
+    var noImageOnlyNameVisible = ObservableBoolean(false)
+    var groupAllPhotos = ObservableBoolean(false)
+    var showStyleStatus = ObservableBoolean(false)
+
+    var leftAlignCStatus = ObservableBoolean(true)
+    var centerAlignCStatus = ObservableBoolean(false)
+    var rightAlignCStatus = ObservableBoolean(false)
 
 
     fun onClick(view: View) {
         when (view.id) {
-            R.id.imgTxtStyleChangeIconChatDemo->{
+
+            R.id.imgTxtStyleChangeIconChatDemo -> {
                 showStyleStatus.set(!showStyleStatus.get())
             }
             R.id.ivChat_more_icon -> {
@@ -85,8 +90,10 @@ class ChatViewModel : ViewModel() {
             }
             R.id.imgLinkIconChatDemo -> {
                 //for Add Template
-                showAddTemplateDialog()
+//                showAddTemplateDialog()
+                addLinkDialog()
             }
+
             R.id.tvMessages -> {
                 setDataTabs(1)
             }
@@ -113,6 +120,19 @@ class ChatViewModel : ViewModel() {
             emailValue.set(true)
         } else {
             smsValue.set(true)
+        }
+    }
+
+    fun setAlignText(tabValue: Int) {
+        leftAlignCStatus.set(false)
+        centerAlignCStatus.set(false)
+        rightAlignCStatus.set(false)
+        if (tabValue == 1) {
+            leftAlignCStatus.set(true)
+        } else if (tabValue == 2) {
+            centerAlignCStatus.set(true)
+        } else {
+            rightAlignCStatus.set(true)
         }
     }
 

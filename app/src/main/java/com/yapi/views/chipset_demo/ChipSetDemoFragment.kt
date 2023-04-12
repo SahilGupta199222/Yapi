@@ -116,6 +116,7 @@ class ChipSetDemoFragment : Fragment() {
                 Toast.makeText(requireContext(), "clicked", Toast.LENGTH_SHORT).show()
             }
 
+
              runnableGetTimeRecoderPlay = object : java.lang.Runnable {
                 override fun run() {
                     try {

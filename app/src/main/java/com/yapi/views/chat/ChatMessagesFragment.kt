@@ -3,20 +3,24 @@ package com.yapi.views.chat
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.InputType
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -42,6 +46,7 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.io.File
 import java.util.*
+
 
 class ChatMessagesFragment : Fragment(), MessageClickListener {
 
@@ -70,6 +75,17 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
     private var mHandler: Handler? = null
     private var runnableGetTimeRecoderPlay: Runnable? = null
     private var runnableGetTimeRecoderLive: Runnable? = null
+    private var boldClickStatus=false
+    private var italicClickStatus=false
+    private var underlineClickStatus=false
+    private var strikeClickStatus=false
+    private var numberParagraphClickStatus=false
+    private var bulletParagraphClickStatus=false
+    private var leftAlignClickStatus=false
+    private var centerAlignClickStatus=false
+    private var rightAlignClickStatus=false
+
+
     val viewModel: ChatViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,6 +95,8 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
         dataBinding =
             ChatMessageFragmentLayoutBinding.inflate(LayoutInflater.from(requireActivity()))
         dataBinding.mViewModel = viewModel
+//        dataBinding.etRichChatDemo.setInpu(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD)
+
         val displayMetrics = DisplayMetrics()
         requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
         val width = displayMetrics.widthPixels
@@ -90,7 +108,6 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
 
         if (checkDeviceType()) {
             viewModel.backButtonVisible.set(false)
-
             if (viewModel.userType == Constants.CUSTOMERS_KEY || viewModel.userType == Constants.CONVERSATIONS_KEY) {
                 viewModel.groupImageVisible.set(true)
                 viewModel.groupIconVisible.set(false)
@@ -177,8 +194,112 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
 
     private fun clickListner() {
         dataBinding.apply {
-            imgMicIconChatDemo.setOnClickListener {
+            imgBoldTxtIconChatDemo.setOnClickListener {
+                etRichChatDemo.setBold()
+                boldClickStatus=!boldClickStatus
+                if(boldClickStatus){
+                    imgBoldTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
+                }else{
+                    imgBoldTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
 
+                }
+            }
+            imgItalicTxtIconChatDemo.setOnClickListener {
+                etRichChatDemo.setItalic()
+                italicClickStatus=!italicClickStatus
+                if(italicClickStatus){
+                    imgItalicTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
+
+                }else{
+                    imgItalicTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
+
+                }
+            }
+            imgUnderLineTxtIconChatDemo.setOnClickListener {
+                etRichChatDemo.setUnderline()
+                underlineClickStatus=!underlineClickStatus
+                if(underlineClickStatus){
+                    imgUnderLineTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
+
+                }else{
+                    imgUnderLineTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
+
+                }
+            }
+            imgStrikeTxtIconChatDemo.setOnClickListener {
+                etRichChatDemo.setStrikeThrough()
+                strikeClickStatus=!strikeClickStatus
+                if(strikeClickStatus){
+                    imgStrikeTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
+
+                }else{
+                    imgStrikeTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
+
+                }
+            }
+            imgFormatListNumberTxtIconChatDemo.setOnClickListener {
+                etRichChatDemo.setNumbers()
+                numberParagraphClickStatus=!numberParagraphClickStatus
+                if(numberParagraphClickStatus){
+                    imgFormatListNumberTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
+
+                }else{
+                    imgFormatListNumberTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
+
+                }
+            }
+            imgFormatListBulletedTxtIconChatDemo.setOnClickListener {
+                etRichChatDemo.setBullets()
+                bulletParagraphClickStatus=!bulletParagraphClickStatus
+                if(bulletParagraphClickStatus){
+                    imgFormatListBulletedTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
+
+                }else{
+                    imgFormatListBulletedTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
+
+                }
+            }
+            imgLeftAlignTxtIconChatDemo.setOnClickListener {
+                viewModel.setAlignText(1)
+                etRichChatDemo.setAlignLeft()
+               /* leftAlignClickStatus=!leftAlignClickStatus
+                if(leftAlignClickStatus){
+                    imgLeftAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
+
+                }else{
+                    imgLeftAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
+
+                }*/
+            }
+            imgCenterAlignTxtIconChatDemo.setOnClickListener {
+                viewModel.setAlignText(2)
+                etRichChatDemo.setAlignCenter()
+               /* centerAlignClickStatus=!centerAlignClickStatus
+                if(centerAlignClickStatus){
+                    imgCenterAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
+
+                }else{
+                    imgCenterAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
+
+                }*/
+            }
+            imgRightAlignTxtIconChatDemo.setOnClickListener {
+                viewModel.setAlignText(3)
+                etRichChatDemo.setAlignRight()
+            /*    rightAlignClickStatus=!rightAlignClickStatus
+                if(rightAlignClickStatus){
+                    imgRightAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
+
+                }else{
+                    imgRightAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
+
+                }*/
+            }
+            imgEmojiIconChatDemo.setOnClickListener {
+                val imm: InputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.showSoftInput(etRichChatDemo, InputMethodManager.SHOW_IMPLICIT)
+            }
+            imgMicIconChatDemo.setOnClickListener {
                 if (runnableGetTimeRecoderLive != null) {
                     mHandler?.removeCallbacks(runnableGetTimeRecoderLive!!)
                     runnableGetTimeRecoderLive = null
