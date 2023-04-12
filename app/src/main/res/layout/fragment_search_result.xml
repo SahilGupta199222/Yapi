@@ -2,14 +2,46 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="mViewModel"
+            type="com.yapi.views.search_result.SearchResultViewModel" />
+        <variable
+            name="mView"
+            type="android.view.View" />
+    </data>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@color/transparent"
+        android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/ivOutsideCloseSearchResult"
+        android:layout_width="@dimen/outside_cross_width"
+        android:layout_height="@dimen/outside_cross_height"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:src="@drawable/ic_cross_icon"
+        android:layout_gravity="end"
+        app:tint="@color/white"
+        android:visibility="@{mViewModel.cancelshowField?mView.GONE:mView.VISIBLE}"
 
-    <androidx.core.widget.NestedScrollView
+        android:onClick="@{mViewModel::onClick}"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutCreateSearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingStart="@dimen/startMainMargin"
         android:paddingTop="@dimen/startMainMargin"
+        android:backgroundTint="@color/white"
         android:paddingEnd="@dimen/startMainMargin"
         android:paddingBottom="@dimen/startMainMargin"
+        tools:context=".views.create_group.CreateGroupFragment">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
         tools:context=".views.search_result.SearchResultFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,30 +53,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgCancelTabSearchResult"
-                android:layout_width="@dimen/iconSize"
-                android:layout_height="@dimen/iconSize"
-                android:src="@drawable/ic_cross_icon"
-                android:tint="@color/red"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:background="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/imgCancelTabSearchResult"
+               app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="  parent">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/imgCancelSearch"
                     android:layout_width="@dimen/iconSize"
                     android:layout_height="@dimen/iconSize"
                     android:src="@drawable/ic_cross_icon"
+                    android:visibility="@{mViewModel.cancelshowField?mView.VISIBLE:mView.GONE}"
+
+                    android:onClick="@{mViewModel::onClick}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -652,4 +677,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
 </layout>

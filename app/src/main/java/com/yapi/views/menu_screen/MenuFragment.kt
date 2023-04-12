@@ -18,6 +18,7 @@ import com.yapi.common.GroupEvent
 import com.yapi.common.MyMessageEvent
 import com.yapi.common.checkDeviceType
 import com.yapi.databinding.FragmentMenuBinding
+import com.yapi.views.add_people.AddPeopleFragment
 import com.yapi.views.profile.ProfileFragment
 import com.yapi.views.search.SearchFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -547,7 +548,7 @@ class MenuFragment : Fragment() {
                         if (resources.getBoolean(R.bool.isTab)) {
                             System.out.println("phone========tablet")
                             EventBus.getDefault()
-                                .post(MyMessageEvent(3, Constants.CHAT_MESSAGE_KEY)) //post event
+                                .post(MyMessageEvent(3, Constants.GROUPS_KEY)) //post event
                         } else {
                             if (findNavController().currentDestination?.id == R.id.menuFragment) {
                                 var bundle = Bundle()
@@ -614,7 +615,7 @@ class MenuFragment : Fragment() {
             var data=it as Boolean
             if(data)
             {
-                SearchFragment.newInstanceSearch("").showNow(requireActivity().supportFragmentManager,"")
+                SearchFragment.newInstanceSearch("").showNow(requireActivity().supportFragmentManager,"SimpleDialog.TAG")
             }
         })
     }

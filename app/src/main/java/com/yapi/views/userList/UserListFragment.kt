@@ -5,9 +5,7 @@ import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.PopupWindow
@@ -21,15 +19,22 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yapi.MainActivity
 import com.yapi.R
+import com.yapi.common.Constants
 import com.yapi.common.checkDeviceType
 import com.yapi.databinding.UserListFragmentLayoutBinding
+import com.yapi.pref.PreferenceFile
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class UserListFragment : Fragment(), UserClickEvent {
     private lateinit var rvAdapter: RVUserListAdapter
     private var dataBinding: UserListFragmentLayoutBinding? = null
     var screenWidth: Int? = 0
     val viewModel: UserListViewModel by viewModels()
 
+    @Inject
+    lateinit var preferenceFile:PreferenceFile
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -70,25 +75,32 @@ class UserListFragment : Fragment(), UserClickEvent {
     fun showEditDetailMethod(position: Int, imageview: ImageView) {
         val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
             .inflate(R.layout.menu_popup_options, null, false)
-        var newWidth = screenWidth!! / 1.5
+            //var newWidth = screenWidth!! / 1.5
+        var newWidth=0.0
+        if(checkDeviceType())
+        {
+             newWidth =  LinearLayout.LayoutParams.WRAP_CONTENT.toDouble()
+        }else
+        {
+             newWidth =  screenWidth!! / 1.5
+        }
+
 
         //   val popUp = PopupWindow(mView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, false)
         //val popUp = PopupWindow(mView, newWidth.toInt(), LinearLayout.LayoutParams.WRAP_CONTENT, false)
         val popUp =
             PopupWindow(mView, newWidth.toInt(), LinearLayout.LayoutParams.WRAP_CONTENT, false)
         // popUp.showAtLocation(mView, Gravity.RIGHT,0,0);
+
         popUp.isTouchable = true
         popUp.isFocusable = true
         popUp.isOutsideTouchable = true
-        val btnViewProfile =
-            //Solution
-            popUp.showAsDropDown(imageview)
+        val btnViewProfile = popUp.showAsDropDown(imageview)
 
         var constraintsProfile = mView.findViewById<ConstraintLayout>(R.id.constraintsProfile)
         var editMemberInfoTV = mView.findViewById<TextView>(R.id.tvProfile)
         var deactivateMemberTV = mView.findViewById<TextView>(R.id.tvmenuSetting)
         var logoutTV = mView.findViewById<TextView>(R.id.tvmenuLogout)
-
 
         var ivEditMember = mView.findViewById<ImageView>(R.id.ivProfile_photo)
         var ivDeactiveMember = mView.findViewById<ImageView>(R.id.ivmenuSetting)
@@ -138,7 +150,31 @@ class UserListFragment : Fragment(), UserClickEvent {
         dialog.show()
 
         var linearEditMember = dialog.findViewById<LinearLayout>(R.id.linearEditMember)
-        linearEditMember.layoutParams.width = (screenWidth!!.toDouble() / dividedValue).toInt()
+       // linearEditMember.layoutParams.width = (screenWidth!!.toDouble() / dividedValue).toInt()
+
+        if(checkDeviceType()){
+            val marginDp = MainActivity.activity!!.get()!!.resources.getDimension(com.intuit.sdp.R.dimen._10sdp)
+            val rightmarginDp = MainActivity.activity!!.get()!!.resources.getDimension(com.intuit.sdp.R.dimen._30sdp)
+            linearEditMember.setPadding(0,0,rightmarginDp.toInt(),0)
+
+            var second_frame_height= preferenceFile.fetchStringValue("second_frame_height").toInt()-marginDp
+            var second_frame_width=  preferenceFile.fetchStringValue("second_frame_width").toInt()-marginDp
+            //  Log.e("nefjkwnddfkewfwefe===",second_frame_height+"==="+second_frame_width)
+            dialog.window!!.setLayout(second_frame_width.toInt(),second_frame_height.toInt())
+            //dialog.window!!.attributes.horizontalMargin=10
+
+            val layoutParams = WindowManager.LayoutParams()
+            layoutParams.copyFrom(dialog.window?.attributes)
+            dialog.window!!.setGravity(Gravity.RIGHT)
+
+        }else
+        {
+            linearEditMember.layoutParams.width = (screenWidth!!.toDouble() / dividedValue).toInt()
+        }
+
+
+
+
         var ivInnerBack = dialog.findViewById<ImageView>(R.id.ivInnerBack)
         var btnCancelTemplate = dialog.findViewById<AppCompatButton>(R.id.btnCancelTemplate)
         var ivOutsideCloseGroup = dialog.findViewById<ImageView>(R.id.ivOutsideCloseGroup)
@@ -205,7 +241,7 @@ class UserListFragment : Fragment(), UserClickEvent {
             dividedValue=1.05
         }
 
-        var dialog = Dialog(MainActivity.activity!!.get()!!)
+        var dialog = Dialog(requireContext())
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.remove_member_layout)
         dialog.show()
@@ -214,15 +250,21 @@ class UserListFragment : Fragment(), UserClickEvent {
         var btnCancelTemplate = dialog.findViewById<AppCompatButton>(R.id.btnCancelTemplate)
 
         var linearRemoveMember = dialog.findViewById<LinearLayout>(R.id.linearRemoveMember)
-        linearRemoveMember.layoutParams.width = (screenWidth!!.toDouble() / dividedValue).toInt()
+
 
         if (checkDeviceType()) {
+            dialog.window!!.setGravity(Gravity.CENTER)
             ivOutsideCloseGroup.visibility = View.VISIBLE
             ivInnerBack.visibility = View.GONE
+            var second_frame_height= preferenceFile.fetchStringValue("second_frame_height").toInt()
+            var second_frame_width=  preferenceFile.fetchStringValue("second_frame_width").toInt()
+            linearRemoveMember.layoutParams.width = (second_frame_width!!.toDouble() / dividedValue).toInt()
         } else {
+            linearRemoveMember.layoutParams.width = (screenWidth!!.toDouble() / dividedValue).toInt()
             ivOutsideCloseGroup.visibility = View.GONE
             ivInnerBack.visibility = View.VISIBLE
         }
+
         ivOutsideCloseGroup.setOnClickListener {
             dialog.dismiss()
         }
@@ -247,10 +289,14 @@ class UserListFragment : Fragment(), UserClickEvent {
             dividedValue=1.05
         }
 
-        var dialog = Dialog(MainActivity.activity!!.get()!!)
+        var dialog = Dialog(requireContext())
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.remove_member_layout)
-        dialog.show()
+       // dialog.window!!.setGravity(Gravity.RIGHT)
+
+       // val secondFragment = requireActivity().supportFragmentManager.findFragmentById(R.id.secondFrame) as UserListFragment
+
+
         var ivInnerBack = dialog.findViewById<ImageView>(R.id.ivInnerBack)
         var ivOutsideCloseGroup = dialog.findViewById<ImageView>(R.id.ivOutsideCloseGroup)
         var tvTitle = dialog.findViewById<AppCompatTextView>(R.id.tvTitle)
@@ -266,15 +312,23 @@ class UserListFragment : Fragment(), UserClickEvent {
 
         var linearRemoveMember = dialog.findViewById<LinearLayout>(R.id.linearRemoveMember)
         var btnCancelTemplate = dialog.findViewById<AppCompatButton>(R.id.btnCancelTemplate)
-        linearRemoveMember.layoutParams.width = (screenWidth!!.toDouble() /dividedValue).toInt()
 
         if (checkDeviceType()) {
+            dialog.window!!.setGravity(Gravity.CENTER)
+            var second_frame_height= preferenceFile.fetchStringValue("second_frame_height").toInt()
+            var second_frame_width=  preferenceFile.fetchStringValue("second_frame_width").toInt()
+            linearRemoveMember.layoutParams.width = (second_frame_width!!.toDouble() / dividedValue).toInt()
+         //  linearRemoveMember.layoutParams.width =WindowManager.LayoutParams.WRAP_CONTENT
             ivOutsideCloseGroup.visibility = View.VISIBLE
             ivInnerBack.visibility = View.GONE
         } else {
+            linearRemoveMember.layoutParams.width = (screenWidth!!.toDouble() /dividedValue).toInt()
             ivOutsideCloseGroup.visibility = View.GONE
             ivInnerBack.visibility = View.VISIBLE
         }
+       dialog.show()
+       // dialog.show(secondFragment.childFragmentManager, "dialog_tag")
+
         ivOutsideCloseGroup.setOnClickListener {
             dialog.dismiss()
         }
