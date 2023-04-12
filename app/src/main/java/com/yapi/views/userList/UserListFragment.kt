@@ -76,7 +76,15 @@ class UserListFragment : Fragment(), UserClickEvent {
         val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
             .inflate(R.layout.menu_popup_options, null, false)
             //var newWidth = screenWidth!! / 1.5
-        var newWidth =  LinearLayout.LayoutParams.WRAP_CONTENT
+        var newWidth=0.0
+        if(checkDeviceType())
+        {
+             newWidth =  LinearLayout.LayoutParams.WRAP_CONTENT.toDouble()
+        }else
+        {
+             newWidth =  screenWidth!! / 1.5
+        }
+
 
         //   val popUp = PopupWindow(mView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, false)
         //val popUp = PopupWindow(mView, newWidth.toInt(), LinearLayout.LayoutParams.WRAP_CONTENT, false)

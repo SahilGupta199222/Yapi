@@ -36,13 +36,17 @@ import com.yapi.common.GroupEvent
 import com.yapi.common.checkDeviceType
 import com.yapi.common.hideKeyboard
 import com.yapi.databinding.ChatMessageFragmentLayoutBinding
+import com.yapi.pref.PreferenceFile
 import com.yapi.views.create_group.CreateGroupFragment
+import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.io.File
 import java.util.*
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ChatMessagesFragment : Fragment(), MessageClickListener {
 
     /*  companion object {
@@ -71,6 +75,9 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
     private var runnableGetTimeRecoderPlay: Runnable? = null
     private var runnableGetTimeRecoderLive: Runnable? = null
     val viewModel: ChatViewModel by viewModels()
+
+    @Inject
+    lateinit var preferenceFile:PreferenceFile
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -85,6 +92,10 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
         val height = displayMetrics.heightPixels
         viewModel.screenWidth = width
         viewModel.screenHeight = height
+
+     //   var second_frame_height= preferenceFile.fetchStringValue("second_frame_height").toInt()
+        var second_frame_width=  preferenceFile.fetchStringValue("second_frame_width").toInt()
+        viewModel.SECOND_FRAME_WIDTH=second_frame_width
 
         viewModel.userType = requireArguments().getString("userType")
 

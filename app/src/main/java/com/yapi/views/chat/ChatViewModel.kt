@@ -37,6 +37,9 @@ class ChatViewModel : ViewModel() {
 
     var screenWidth: Int? = 0
     var screenHeight: Int? = 0
+
+    var SECOND_FRAME_WIDTH: Int? = 0
+  //  var screenHeight: Int? = 0
     var userType: String? = ""
     var sendDataValue = ObservableField("")
     var backButtonVisible=ObservableBoolean(false)
@@ -188,7 +191,14 @@ class ChatViewModel : ViewModel() {
     private fun showChatMenuMethod(view: View) {
         val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
             .inflate(R.layout.chat_menu_options, null, false)
-        val newWidth = screenWidth!! / 1.5
+        var newWidth=0.0
+        if(checkDeviceType()){
+            newWidth = SECOND_FRAME_WIDTH!! / 1.5
+        }else
+        {
+             newWidth = screenWidth!! / 1.5
+        }
+
 
         //   val popUp = PopupWindow(mView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, false)
         val popUp =
@@ -239,7 +249,12 @@ class ChatViewModel : ViewModel() {
 
         val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
             .inflate(com.yapi.R.layout.group_chat_menu_options, null, false)
-        val newWidth = screenWidth!! / 1.5
+        var newWidth = screenWidth!! / 1.5
+
+        if(checkDeviceType())
+        {
+           newWidth= SECOND_FRAME_WIDTH!!.toDouble()/ 3
+        }
         val popUp =
             PopupWindow(mView, newWidth.toInt(), LinearLayout.LayoutParams.WRAP_CONTENT, false)
         popUp.isTouchable = true

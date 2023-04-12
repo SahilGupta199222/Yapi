@@ -28,16 +28,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/leftChatConstraints"
+                android:layout_width="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/rightChatConstraints"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_height="wrap_content">
             <LinearLayout
                 android:id="@+id/linearChatArrow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="@+id/ivChatCall"
-                app:layout_constraintTop_toTopOf="@+id/ivChatCall">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
                 <ImageView
                     android:id="@+id/ivChatBack"
@@ -128,15 +132,47 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/larsseit_medium"
+                android:onClick="@{mViewModel::onClick}"
+                android:text="Human Resource"
+                android:textColor="@color/darkGrey"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintStart_toEndOf="@+id/linearChatArrow"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvMemberValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="@font/larsseit_medium"
+                android:text="35 Members"
+                android:textColor="@color/medium_grey_color"
+                android:textSize="@dimen/normalSmallTextSize"
+                app:layout_constraintStart_toEndOf="@+id/linearChatArrow"
+                app:layout_constraintTop_toBottomOf="@+id/tvName" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/rightChatConstraints"
+    android:layout_width="0dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/ivChatCall"
                 android:layout_width="@dimen/iconSize"
                 android:layout_height="@dimen/iconSize"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:src="@drawable/chat_call_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/tvMemberValue"
                 app:layout_constraintEnd_toStartOf="@+id/ivChat_video_icon"
-                app:layout_constraintTop_toTopOf="@+id/tvName"
+                app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/medium_grey_color" />
 
             <ImageView
@@ -145,9 +181,9 @@
                 android:layout_height="@dimen/extraIconSize"
                 android:layout_marginEnd="@dimen/_5sdp"
                 android:src="@drawable/video_call_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/tvMemberValue"
                 app:layout_constraintEnd_toStartOf="@id/ivChat_more_icon"
-                app:layout_constraintTop_toTopOf="@+id/tvName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/medium_grey_color" />
 
             <ImageView
@@ -156,42 +192,16 @@
                 android:layout_height="@dimen/extraIconSize"
                 android:onClick="@{mViewModel::onClick}"
                 android:src="@drawable/chat_more_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/tvMemberValue"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvName"
+                app:layout_constraintTop_toTopOf="parent"
                 app:tint="@color/medium_grey_color" />
 
-            <TextView
-                android:id="@+id/tvName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:fontFamily="@font/larsseit_medium"
-                android:onClick="@{mViewModel::onClick}"
-                android:text="Human Resource"
-                android:textColor="@color/darkGrey"
-                android:textSize="@dimen/_16ssp"
-                app:layout_constraintEnd_toStartOf="@+id/ivChatCall"
-                app:layout_constraintStart_toEndOf="@+id/linearChatArrow"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvMemberValue"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:fontFamily="@font/larsseit_medium"
-                android:text="35 Members"
-                android:textColor="@color/medium_grey_color"
-                android:textSize="@dimen/normalSmallTextSize"
-                app:layout_constraintEnd_toStartOf="@+id/ivChatCall"
-                app:layout_constraintStart_toEndOf="@+id/linearChatArrow"
-                app:layout_constraintTop_toBottomOf="@+id/tvName" />
-
-       <LinearLayout
+            <LinearLayout
            android:id="@+id/linear_all_photos"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
+           android:paddingStart="@dimen/_5sdp"
+           android:paddingEnd="@dimen/_5sdp"
            android:visibility="@{mViewModel.groupAllPhotos?mView.VISIBLE:mView.GONE}"
            app:layout_constraintTop_toTopOf="@id/ivChat_more_icon"
            app:layout_constraintBottom_toBottomOf="@id/ivChat_more_icon"
@@ -199,18 +209,18 @@
            android:orientation="horizontal">
            <ImageView
                android:src="@drawable/temp_photo"
-               android:layout_width="@dimen/_15sdp"
-               android:layout_height="@dimen/_15sdp"/>
+               android:layout_width="@dimen/_10sdp"
+               android:layout_height="@dimen/_10sdp"/>
            <ImageView
                android:src="@drawable/temp_photo"
-               android:layout_width="@dimen/_15sdp"
+               android:layout_width="@dimen/_10sdp"
                android:layout_marginStart="@dimen/_3sdp"
-               android:layout_height="@dimen/_15sdp"/>
+               android:layout_height="@dimen/_10sdp"/>
            <ImageView
                android:src="@drawable/temp_photo"
                android:layout_marginStart="@dimen/_3sdp"
-               android:layout_width="@dimen/_15sdp"
-               android:layout_height="@dimen/_15sdp"/>
+               android:layout_width="@dimen/_10sdp"
+               android:layout_height="@dimen/_10sdp"/>
 
            <FrameLayout
                android:layout_width="@dimen/_15sdp"
@@ -218,8 +228,10 @@
            <ImageView
                android:src="@drawable/temp_photo"
                android:layout_marginStart="@dimen/_3sdp"
-               android:layout_width="@dimen/_15sdp"
-               android:layout_height="@dimen/_15sdp"/>
+               android:layout_width="@dimen/_10sdp"
+               android:paddingEnd="@dimen/_5sdp"
+               android:paddingStart="@dimen/_5sdp"
+               android:layout_height="@dimen/_10sdp"/>
                <TextView
                    android:background="#FAFAFA"
                    android:text="4+"
@@ -235,10 +247,10 @@
                android:textSize="@dimen/_9ssp"
                android:textColor="@color/medium_grey_color"
                android:fontFamily="@font/larsseit_regular"
-               android:text="Phoebe, Ross and 4 others are here now"
+               android:text="Phoebe, Ross and \n4 others are \nhere now"
                android:layout_height="wrap_content"/>
        </LinearLayout>
-
+</androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
