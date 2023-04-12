@@ -533,8 +533,7 @@ class MenuFragment : Fragment() {
 
                         if (resources.getBoolean(R.bool.isTab)) {
                             System.out.println("phone========tablet")
-                            EventBus.getDefault()
-                                .post(GroupEvent(2, Constants.CREATEGOUP_KEY)) //post event
+                            EventBus.getDefault().post(GroupEvent(2, Constants.CREATEGOUP_KEY)) //post event
                         } else {
                             findNavController().navigate(R.id.action_menuFragment_to_createGroupFragment)
                         }
