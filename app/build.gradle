@@ -9,8 +9,6 @@ android {
     namespace 'com.yapi'
     compileSdk 33
 
-
-
     defaultConfig {
         applicationId "com.yapi"
         minSdkVersion 23
@@ -116,6 +114,7 @@ dependencies {
 
     // For getting permission
         implementation 'com.karumi:dexter:6.2.3'
+    implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
 
 /*
     // for transcribe audio to text

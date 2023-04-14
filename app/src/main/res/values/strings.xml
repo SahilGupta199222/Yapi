@@ -181,7 +181,6 @@
     <string name="message_title_text">Message title</string>
     <string name="write_message_title">Write Message Title</string>
 
-
     <string name="message_content_text">message content</string>
     <string name="write_message_content">Write Message Content</string>
     <string name="save_text">Save</string>
@@ -292,4 +291,32 @@
 
     <string name="view_all_text">View all</string>
     <string name="read_audio_transcript">Read Audio Transcript</string>
+
+    <string name="workspace_title">Workspaces</string>
+    <string name="database_title">Database</string>
+    <string name="token_title">Token</string>
+    <string name="secret_title">Secret</string>
+    <string name="active_title">Active</string>
+    <string name="edit_text"><u>Edit</u></string>
+    <string name="open_text"><u>Open</u></string>
+
+    <string name="edit_workspace_text">Edit Workspace</string>
+    <string name="database_name_title">Database Name</string>
+    <string name="enter_database_name_title">Enter Database Name</string>
+    <string name="token_title_text">token</string>
+    <string name="enter_token_title_text">Enter token</string>
+    <string name="secret_title_text">secret</string>
+    <string name="enter_secret_title_text">Enter Secret</string>
+    <string name="active_text">Active</string>
+    <string name="please_enter_workspace_name_text">Please enter name</string>
+    <string name="please_enter_database_name_text">Please enter database name</string>
+    <string name="please_enter_token_text">Please enter token</string>
+    <string name="please_enter_secret_text">Please enter secret</string>
+
+    <string name="edit_workspace_text_title">Edit Workspace</string>
+    <string name="add_workspace_text_title">Add Workspace</string>
+
+    <string name="save_changes_text">Save Changes</string>
+    <string name="add_workspace_text_values">Add workspace</string>
+
 </resources>

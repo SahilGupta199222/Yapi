@@ -69,7 +69,16 @@
 
         <action android:id="@+id/action_menuFragment_to_userListFragment"
             app:destination="@id/UserListFragment"/>
+
+        <action android:id="@+id/action_menuFragment_to_workspacelist"
+            app:destination="@id/workspacelist"/>
     </fragment>
+
+    <fragment
+        android:id="@+id/workspacelist"
+android:name="com.yapi.views.workspaces.workspacesList.WorkSpacesListFragment"
+        android:label="workspaceList"
+        ></fragment>
     <fragment
         android:id="@+id/UserListFragment"
         android:label="userListFragment"

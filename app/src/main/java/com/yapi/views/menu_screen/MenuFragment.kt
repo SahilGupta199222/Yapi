@@ -306,7 +306,6 @@ class MenuFragment : Fragment() {
             )
             binding.rvGroupListMenu.visibility = View.GONE
         }
-
     }
 
     private fun setSettingListAdapter() {
@@ -333,6 +332,18 @@ class MenuFragment : Fragment() {
                         } else {
                             if (findNavController().currentDestination?.id == R.id.menuFragment)
                                 findNavController().navigate(R.id.action_menuFragment_to_userListFragment)
+                        }
+                    }else
+                    {
+                        if(checkDeviceType())
+                        {
+                            EventBus.getDefault()
+                                .post(MyMessageEvent(11, Constants.WORKSPACE_MANAGEMENT)) //post event
+                        }else
+                        {
+                            if (findNavController().currentDestination?.id == R.id.menuFragment){
+                            findNavController().navigate(R.id.action_menuFragment_to_workspacelist)
+                                }
                         }
                     }
                 }

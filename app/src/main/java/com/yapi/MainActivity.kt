@@ -10,6 +10,7 @@ import android.view.ViewTreeObserver
 import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.yapi.common.Constants
@@ -22,13 +23,13 @@ import com.yapi.views.chat.chatUserInfo.ChatUserInfoFragment
 import com.yapi.views.chat_empty.ChatEmptyFragment
 import com.yapi.views.menu_screen.MenuFragment
 import com.yapi.views.userList.UserListFragment
+import com.yapi.views.workspaces.workspacesList.WorkSpacesListFragment
 import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.lang.ref.WeakReference
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -49,22 +50,16 @@ class MainActivity : AppCompatActivity() {
         dataBinding.secondFrame.getViewTreeObserver().addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 dataBinding.secondFrame.getViewTreeObserver().removeOnGlobalLayoutListener(this)
-
                 preferenceFile.saveStringValue("second_frame_height",dataBinding.secondFrame.height.toString())
                 preferenceFile.saveStringValue("second_frame_width",dataBinding.secondFrame.width.toString())
                 //height is ready
-                //   dataBinding.secondFrame.width //height is ready
             }
         })
-
-
     }
 
     override fun onStop() {
         super.onStop()
         EventBus.getDefault().unregister(this)
-
-
     }
 
     private fun initUI() {
@@ -162,14 +157,20 @@ class MainActivity : AppCompatActivity() {
                             }else
                                 if(event.screenName==Constants.USER_MANAGEMENT)
                                 {
-                                    openUserMamangementScreen()
-                                }
+                                    var fragment = UserListFragment()
+                                    openUserMamangementScreen(fragment)
+                                }else
+                                    if(event.screenName==Constants.WORKSPACE_MANAGEMENT)
+                                    {
+                                        var fragment = WorkSpacesListFragment()
+                                        openUserMamangementScreen(fragment)
+                                    }
 
     }
 
-    fun openUserMamangementScreen()
+    fun openUserMamangementScreen(fragment:Fragment)
     {
-        var fragment = UserListFragment()
+        //var fragment = UserListFragment()
         supportFragmentManager.beginTransaction().replace(R.id.secondFrame, fragment).commit()
     }
 
