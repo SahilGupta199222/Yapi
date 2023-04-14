@@ -52,19 +52,8 @@ import java.io.File
 import java.util.*
 import javax.inject.Inject
 
-
 @AndroidEntryPoint
 class ChatMessagesFragment : Fragment(), MessageClickListener {
-
-    /*  companion object {
-          fun newInstanceChatMethod(title: String): ChatMessagesFragment {
-              val args = Bundle()
-              args.putString("11", title)
-              val fragment = ChatMessagesFragment()
-              fragment.arguments = args
-              return fragment
-          }
-      }*/
 
     private var styleArrayList: ArrayList<String>?=null
     private var lastVisible: Int? = -1
@@ -155,10 +144,16 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
 
           text= text.replace("<br>","")
 
+            var newText=""
             if(text.length>4) {
-                var newText = text.substring(text.length - 3, text.length)
+                newText = text.substring(text.length - 3, text.length)
+            }else
+            {
+                newText = text.substring(0, text.length)
+            }
+
                 Log.e("wsmfdmkfmekfmef11===", newText)
-                dataBinding.etNewRichText.text= (Html.fromHtml(newText)).get((Html.fromHtml(newText)).length-1).toString()
+              //  dataBinding.etNewRichText.text= (Html.fromHtml(newText)).get((Html.fromHtml(newText)).length-1).toString()
                 Log.e("wsmfdmkfmekfmef3333===", dataBinding.etNewRichText.text.toString())
               /*  if (appliedStyles.contains(RichEditorType.BOLD)) {
                     // Bold style is currently applied
@@ -272,7 +267,7 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
                     }
                 }*/
 
-            }
+          //  }
             //  if(dataBinding.et)
         })
     }
