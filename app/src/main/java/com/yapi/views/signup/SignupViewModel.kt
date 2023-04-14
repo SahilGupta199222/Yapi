@@ -2,21 +2,25 @@ package com.yapi.views.signup
 
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.view.View
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import com.google.gson.JsonObject
 import com.yapi.MainActivity
 import com.yapi.R
-import com.yapi.common.hideKeyboard
-import com.yapi.common.isValidEmail
+import com.yapi.common.*
 import com.yapi.views.sign_in.SignInErrorData
+import com.yapi.views.sign_in.SignInResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
+import retrofit2.Response
+import javax.inject.Inject
 
-
-class SignupViewModel : ViewModel() {
+@HiltViewModel
+class SignupViewModel @Inject constructor(val repository: Repository): ViewModel() {
 
     var emailValueField = ObservableField("")
     var emailCorrectValue = ObservableBoolean(false)
@@ -26,6 +30,8 @@ class SignupViewModel : ViewModel() {
             R.id.btnSignUp -> {
                 if(view.findNavController().currentDestination?.id==R.id.signUpFragment2) {
                     if (checkValidation()) {
+
+                       // signupAPIMethod(view)
                         var bundle = Bundle()
                         bundle.putString("email", emailValueField.get())
                         view.findNavController()
@@ -73,5 +79,30 @@ class SignupViewModel : ViewModel() {
             errorData.value=SignInErrorData("")
             return true
         }
+    }
+
+    fun signupAPIMethod(view:View)
+    {
+        var jsonObject= JsonObject()
+        jsonObject.addProperty("email",emailValueField.get().toString().trim())
+        repository.makeCall(true,
+            requestProcessor = object : ApiProcessor<Response<SignInResponse>> {
+                override fun onSuccess(success: Response<SignInResponse>) {
+                    Log.e("Resposne_Dataaaa===", success.body().toString())
+
+                    var bundle = Bundle()
+                    bundle.putString("email", emailValueField.get())
+                    view.findNavController()
+                        .navigate(R.id.action_signUpFragment2_to_signUpCodeFragment, bundle)
+                }
+
+                override fun onError(message: String) {
+                    MainActivity.activity!!.get()!!.showMessage(message)
+                }
+
+                override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<SignInResponse> {
+                    return retrofitApi.loginAPI(jsonObject)
+                }
+            })
     }
 }

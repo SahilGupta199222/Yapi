@@ -1,7 +1,7 @@
 package com.yapi.common
 
 object Constants {
- const val BASEURL:String="http://www.google.com"
+ const val BASEURL:String="http://18.117.145.216:3000"
 
  const val TAG="asfjsajkshdfnkafd"
  const val GROUPS_KEY="groups"

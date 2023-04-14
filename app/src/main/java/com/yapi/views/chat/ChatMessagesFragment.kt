@@ -10,7 +10,8 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.text.InputType
+import android.text.Html
+import android.text.Spannable
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.*
@@ -20,7 +21,6 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -43,6 +43,8 @@ import com.yapi.databinding.ChatMessageFragmentLayoutBinding
 import com.yapi.pref.PreferenceFile
 import com.yapi.views.create_group.CreateGroupFragment
 import dagger.hilt.android.AndroidEntryPoint
+import jp.wasabeef.richeditor.RichEditor
+import jp.wasabeef.richeditor.RichEditor.OnTextChangeListener
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -64,6 +66,7 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
           }
       }*/
 
+    private var styleArrayList: ArrayList<String>?=null
     private var lastVisible: Int? = -1
     private lateinit var rvChatAdapter: RVchatAdapter
     private lateinit var dataBinding: ChatMessageFragmentLayoutBinding
@@ -89,7 +92,6 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
     private var centerAlignClickStatus=false
     private var rightAlignClickStatus=false
 
-
     val viewModel: ChatViewModel by viewModels()
 
     @Inject
@@ -102,7 +104,6 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
         dataBinding =
             ChatMessageFragmentLayoutBinding.inflate(LayoutInflater.from(requireActivity()))
         dataBinding.mViewModel = viewModel
-//        dataBinding.etRichChatDemo.setInpu(InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD)
 
         val displayMetrics = DisplayMetrics()
         requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
@@ -144,8 +145,142 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
         return dataBinding.root
     }
 
+    fun setTextListener()
+    {
+        dataBinding.etRichChatDemo.setOnTextChangeListener(OnTextChangeListener {
+            // Handle text changes here
+            var text=it as String
+            Log.e("length_of_string===",text.length.toString())
+            Log.e("wsmfdmkfmekfmef===", dataBinding.etRichChatDemo.html.toString())
+
+          text= text.replace("<br>","")
+
+            if(text.length>4) {
+                var newText = text.substring(text.length - 3, text.length)
+                Log.e("wsmfdmkfmekfmef11===", newText)
+                dataBinding.etNewRichText.text= (Html.fromHtml(newText)).get((Html.fromHtml(newText)).length-1).toString()
+                Log.e("wsmfdmkfmekfmef3333===", dataBinding.etNewRichText.text.toString())
+              /*  if (appliedStyles.contains(RichEditorType.BOLD)) {
+                    // Bold style is currently applied
+                }
+
+                if (appliedStyles.contains(RichEditorType.ITALIC)) {
+                    // Italic style is currently applied
+                }
+
+                if (appliedStyles.contains(RichEditorType.UNDERLINE)) {
+                    // Underline style is currently applied
+                }*/
+
+                // if(styleArrayList!!.size>0){
+                if((styleArrayList!!.size>0 && styleArrayList!![styleArrayList!!.size-1].toString()=="bold") || newText=="/b>")
+                {
+                    Log.e("fnefefef===","Bold_enter")
+                    if(newText!="/b>")
+                    {
+                        if(boldClickStatus) {
+                            boldClickStatus = false
+                            updateBoldText()
+                        }
+                    }else
+                    {
+                        if(!boldClickStatus) {
+                            boldClickStatus = true
+                            updateBoldText()
+                        }
+                    }
+                }else
+                    if((styleArrayList!!.size>0 && styleArrayList!![styleArrayList!!.size-1].toString()=="underline") || newText=="/u>")
+                    {
+                        if(newText!="/u>")
+                        {
+                            if(underlineClickStatus) {
+                                underlineClickStatus = false
+                                ForUnderLineText()
+                            }
+                        }else
+                        {
+                            if(!underlineClickStatus) {
+                                underlineClickStatus = true
+                                ForUnderLineText()
+                            }
+                        }
+                    }else if((styleArrayList!!.size>0 && styleArrayList!![styleArrayList!!.size-1].toString()=="italic") || newText=="/i>")
+                    {
+                        if(newText!="/i>")
+                        {
+                            if(italicClickStatus) {
+                                italicClickStatus = false
+                                setItalicForText()
+                            }
+                        }else
+                        {
+                            if(!italicClickStatus) {
+                                italicClickStatus = true
+                                setItalicForText()
+                            }
+                        }
+                    }
+
+                    else if((styleArrayList!!.size>0 && styleArrayList!![styleArrayList!!.size-1].toString()=="strike") || newText=="ke>")
+                    {
+                        if(newText!="ke>")
+                        {
+                            if(strikeClickStatus) {
+                                strikeClickStatus = false
+                                forStrikeMethod()
+                            }
+                        }else
+                        {
+                            if(!strikeClickStatus) {
+                                strikeClickStatus = true
+                                forStrikeMethod()
+                            }
+                        }
+                    }
+//
+                //italic
+                /*}else{
+                    if(boldClickStatus) {
+                        boldClickStatus = false
+                        updateBoldText()
+                    }
+                    if(underlineClickStatus) {
+                        underlineClickStatus = false
+                        ForUnderLineText()
+                    }
+                }
+*/
+                /*if(newText!="/b>")
+                {
+                    if(boldClickStatus) {
+                        boldClickStatus = false
+                        updateBoldText()
+                    }
+                }else
+                    if(newText!="/u>")
+                    {
+                        if(underlineClickStatus) {
+                            underlineClickStatus = false
+                            ForUnderLineText()
+                        }
+                    }else
+                {
+                    if(!boldClickStatus) {
+                        boldClickStatus = true
+                        updateBoldText()
+                    }
+                }*/
+
+            }
+            //  if(dataBinding.et)
+        })
+    }
+
     //For UI Intialization
     private fun initUI() {
+        styleArrayList=ArrayList<String>()
+        setTextListener()
         dataBinding.apply {
             val arraylist = ArrayList<String>()
             arraylist.clear()
@@ -178,12 +313,12 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
 
                         } else {
                             Log.i(TAG, "total duration is ${mPlayer?.duration}")
-                            if (recoderTimeStemp < (mPlayer?.duration?.div(1000)
+                        /*    if (recoderTimeStemp < (mPlayer?.duration?.div(1000)
                                     ?: (30620 / 1000))
                             ) {
                                 recoderTimeStemp += 1
-                            }
-//                            recoderTimeStemp += 1
+                            }*/
+                            recoderTimeStemp += 1
                         }
 
                         if (recoderPlayTime.toString()
@@ -203,50 +338,77 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
         }
     }
 
+    fun updateBoldText()
+    {
+        dataBinding.etRichChatDemo.setBold()
+        if(boldClickStatus){
+            Log.e("hthhthtt==","added_bold")
+            styleArrayList!!.add("bold")
+            dataBinding.imgBoldTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
+        }else{
+            Log.e("hthhthtt==","Removed_bold")
+            styleArrayList!!.remove("bold")
+            dataBinding.imgBoldTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
+
+        }
+    }
+
+    fun ForUnderLineText()
+    {
+        dataBinding.etRichChatDemo.setUnderline()
+        if(underlineClickStatus){
+            styleArrayList!!.add("underline")
+            dataBinding.imgUnderLineTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
+        }else{
+            styleArrayList!!.remove("underline")
+            dataBinding.imgUnderLineTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
+
+        }
+    }
+
+    fun setItalicForText()
+    { dataBinding.etRichChatDemo.setItalic()
+        if(italicClickStatus){
+            styleArrayList!!.add("italic")
+            dataBinding.imgItalicTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
+        }else{
+            styleArrayList!!.remove("italic")
+            dataBinding.imgItalicTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
+
+        }
+    }
+
+    fun forStrikeMethod()
+    {
+        dataBinding.etRichChatDemo.setStrikeThrough()
+        if(strikeClickStatus){
+            styleArrayList!!.add("strike")
+            dataBinding.imgStrikeTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
+
+        }else{
+            styleArrayList!!.add("strike")
+            dataBinding.imgStrikeTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
+        }
+    }
+
     private fun clickListner() {
         dataBinding.apply {
             imgBoldTxtIconChatDemo.setOnClickListener {
-                etRichChatDemo.setBold()
                 boldClickStatus=!boldClickStatus
-                if(boldClickStatus){
-                    imgBoldTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
-                }else{
-                    imgBoldTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
-
-                }
+                updateBoldText()
             }
             imgItalicTxtIconChatDemo.setOnClickListener {
-                etRichChatDemo.setItalic()
                 italicClickStatus=!italicClickStatus
-                if(italicClickStatus){
-                    imgItalicTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
-
-                }else{
-                    imgItalicTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
-
-                }
+                setItalicForText()
             }
             imgUnderLineTxtIconChatDemo.setOnClickListener {
-                etRichChatDemo.setUnderline()
                 underlineClickStatus=!underlineClickStatus
-                if(underlineClickStatus){
-                    imgUnderLineTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
-
-                }else{
-                    imgUnderLineTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
-
-                }
+                ForUnderLineText()
             }
             imgStrikeTxtIconChatDemo.setOnClickListener {
-                etRichChatDemo.setStrikeThrough()
+
                 strikeClickStatus=!strikeClickStatus
-                if(strikeClickStatus){
-                    imgStrikeTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
-
-                }else{
-                    imgStrikeTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
-
-                }
+                forStrikeMethod()
             }
             imgFormatListNumberTxtIconChatDemo.setOnClickListener {
                 etRichChatDemo.setNumbers()
@@ -331,16 +493,6 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
                 }
 
 
-
-
-
-
-
-
-
-
-
-
                 imgMicIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),
                     R.color.blueColor))
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -354,8 +506,6 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
                             Manifest.permission.READ_EXTERNAL_STORAGE))
 
                 }
-
-
 
                 Handler(Looper.myLooper()!!).postDelayed(object : Runnable {
                     override fun run() {
@@ -384,7 +534,7 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
 
 
     //When click on the three dots
-    fun showEditMessageMethod(ivMoreImageView: ImageView) {
+    fun showEditMessageMethod(ivMoreImageView: ImageView,userType:Int) {
         val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
             .inflate(R.layout.edit_chat_message_layout, null, false)
         val newWidth = viewModel.screenWidth!! / 1.5
@@ -417,24 +567,55 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
             }
         })
 
-        val editMessageList = ArrayList<EditMessageData>()
-        editMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.reply_message_text),
+        val editOtherMessageList = ArrayList<EditMessageData>()
+        editOtherMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.reply_message_text),
             R.drawable.reply_message_icon))
-        editMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.edit_message_text),
-            R.drawable.edit_message_icon))
-        editMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.save_message_text),
+       /* editOtherMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.edit_message_text),
+            R.drawable.edit_message_icon))*/
+        editOtherMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.save_message_text),
             R.drawable.save_message))
-        editMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.mark_unread_text),
+        editOtherMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.mark_unread_text),
             R.drawable.mark_as_unread))
-        editMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.copy_message_text),
+        editOtherMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.copy_message_text),
             R.drawable.copy_message_icon))
-        editMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.pin_conversation_text),
+        editOtherMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.pin_conversation_text),
             R.drawable.push_pin))
-        editMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.delete_message_text),
+        editOtherMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.delete_message_text),
             R.drawable.delete_chat_icon))
 
+        val editOwnMessageList = ArrayList<EditMessageData>()
+        editOwnMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.reply_message_text),
+            R.drawable.reply_message_icon))
+        editOwnMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.edit_message_text),
+            R.drawable.edit_message_icon))
+        editOwnMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.save_message_text),
+            R.drawable.save_message))
+       /* editOwnMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.mark_unread_text),
+            R.drawable.mark_as_unread))*/
+        editOwnMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.copy_message_text),
+            R.drawable.copy_message_icon))
+        editOwnMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.pin_conversation_text),
+            R.drawable.push_pin))
+        editOwnMessageList.add(EditMessageData(requireActivity().resources.getString(R.string.delete_message_text),
+            R.drawable.delete_chat_icon))
+
+        val newMessageList = ArrayList<EditMessageData>()
+        if(userType==0)
+        {
+            for(idx in 0 until editOtherMessageList.size)
+            {
+                newMessageList.add(editOtherMessageList[idx])
+            }
+        }else
+        {
+            for(idx in 0 until editOwnMessageList.size)
+            {
+                newMessageList.add(editOwnMessageList[idx])
+            }
+        }
+
         val rvEditMessageAdapter =
-            RVEditMessageAdapter(requireActivity(), editMessageList, object : ClickMessage {
+            RVEditMessageAdapter(requireActivity(), newMessageList, object : ClickMessage {
                 override fun onClickListener(position: Int) {
                     //For click on Edit Message Options
                     popUp.dismiss()
@@ -445,9 +626,8 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
         rvEditMessages.adapter = rvEditMessageAdapter
     }
 
-    override fun onMesssageListener(position: Int, ivMoreImageView: ImageView) {
-        showEditMessageMethod(ivMoreImageView)
-
+    override fun onMesssageListener(position: Int, ivMoreImageView: ImageView,userType:Int) {
+        showEditMessageMethod(ivMoreImageView,userType)
     }
 
     override fun onStart() {
@@ -462,7 +642,6 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(event: GroupEvent?) {
-        // Do something
         Log.e("gsegegsgsgs===", System.currentTimeMillis().toString())
 
         if (event!!.screenName == Constants.CREATEGOUP_KEY) {

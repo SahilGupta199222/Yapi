@@ -13,7 +13,8 @@ import com.yapi.common.checkDeviceType
 
 class RVWorkspaceListAdapter(
     private var context: Context,
-    private var workspaceList: ArrayList<WorkSpaceData>,private var clickListener:WorkspaceClickListener
+    private var workspaceList: ArrayList<WorkSpaceData>,
+    private var clickListener: WorkspaceClickListener,
 ) :
     RecyclerView.Adapter<RVWorkspaceListAdapter.MyWorkspaceViewHolder>() {
 
@@ -24,6 +25,7 @@ class RVWorkspaceListAdapter(
         var constarintsTopList = itemView.findViewById<ConstraintLayout>(R.id.constarintsTopList)
         var viewBottomLine = itemView.findViewById<View>(R.id.viewBottomLine)
         var tvEditWork = itemView.findViewById<AppCompatTextView>(R.id.tvEditWork)
+        var tvNameValue = itemView.findViewById<AppCompatTextView>(R.id.tvNameValue)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyWorkspaceViewHolder {
@@ -33,6 +35,8 @@ class RVWorkspaceListAdapter(
     }
 
     override fun onBindViewHolder(holder: MyWorkspaceViewHolder, position: Int) {
+
+        holder.tvNameValue.text = workspaceList[position].name
         if (workspaceList[position].isCheck!!) {
             holder.constarintDetails.visibility = View.VISIBLE
             holder.constraintsUsers.setBackgroundResource(R.drawable.user_list_box_background)
@@ -78,7 +82,8 @@ class RVWorkspaceListAdapter(
 
 
 }
-interface WorkspaceClickListener{
+
+interface WorkspaceClickListener {
     fun onEditClickMethod(position: Int)
     fun onOpenClickMethod(position: Int)
 }
