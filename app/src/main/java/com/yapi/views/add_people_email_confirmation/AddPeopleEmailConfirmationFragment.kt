@@ -1,10 +1,10 @@
 package com.yapi.views.add_people_email_confirmation
 
+import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.fragment.app.DialogFragment
@@ -14,13 +14,20 @@ import com.yapi.R
 import com.yapi.common.checkDeviceType
 import com.yapi.databinding.FragmentAddPeopleBinding
 import com.yapi.databinding.FragmentAddPeopleEmailConfirmationBinding
+import com.yapi.pref.PreferenceFile
 import com.yapi.views.create_group.CreateGroupFragment
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class AddPeopleEmailConfirmationFragment : DialogFragment() {
     private lateinit var binding:FragmentAddPeopleEmailConfirmationBinding
     private val viewModel:ViewModelAddPeopleEmailConfirmation by viewModels()
-//add_email_confirmation_logo
+
+    @Inject
+    lateinit var preferenceFile: PreferenceFile
+
+    //add_email_confirmation_logo
     companion object {
         fun newInstanceEmailConfirmation(title: String): AddPeopleEmailConfirmationFragment {
             val args = Bundle()
@@ -37,6 +44,23 @@ class AddPeopleEmailConfirmationFragment : DialogFragment() {
             System.out.println("phone========tablet");
             setStyle(DialogFragment.STYLE_NO_FRAME, R.style.FullScreenDialog)
         }
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        // Create a new dialog
+        val dialog: Dialog = super.onCreateDialog(savedInstanceState)
+
+        // Get the window of the dialog
+        val window: Window = dialog.getWindow()!!
+
+        // Set the dialog to be shown at the bottom of the screen
+        window.setGravity(Gravity.RIGHT)
+
+        var second_frame_height= preferenceFile.fetchStringValue("second_frame_height")
+        var second_frame_width=  preferenceFile.fetchStringValue("second_frame_width")
+        Log.e("nefjkwnddfkewfwefe===",second_frame_height+"==="+second_frame_width)
+        window.setLayout(second_frame_width.toInt(),second_frame_height.toInt())
+        return dialog
     }
 
     override fun onCreateView(

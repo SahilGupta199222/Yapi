@@ -1,6 +1,8 @@
 package com.yapi.views.create_group
 
 import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -43,6 +45,9 @@ class CreateGroupFragment : DialogFragment() {
         if (checkDeviceType()) {
             System.out.println("phone========tablet")
             setStyle(DialogFragment.STYLE_NO_FRAME, R.style.FullScreenDialog)
+            //setStyle(DialogFragment.STYLE_NO_FRAME,android.R.style.Theme_NoTitleBar);
+        //}
+
         }
     }
 

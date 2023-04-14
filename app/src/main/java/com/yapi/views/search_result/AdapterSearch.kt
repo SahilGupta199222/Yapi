@@ -17,8 +17,13 @@ import com.yapi.R
 import com.yapi.common.ChatRoundRectCornerImageView
 import com.yapi.common.RoundRectCornerImageView
 import com.yapi.common.checkDeviceType
+import com.yapi.databinding.FragmentSearchBinding
 
-class AdapterSearch(val context: Context, val list: ArrayList<PojoSearchScreenData>) :
+class AdapterSearch(
+    val context: Context,
+    val list: ArrayList<PojoSearchScreenData>,
+    val  clickListener: ClickListener
+) :
     RecyclerView.Adapter<AdapterSearch.MyViewHolder>() {
     class MyViewHolder(val itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleName: AppCompatTextView = itemView.findViewById(R.id.txtTempTitleRvSearchLayout)
@@ -172,7 +177,7 @@ class AdapterSearch(val context: Context, val list: ArrayList<PojoSearchScreenDa
         holder.itemView.setOnClickListener {
             if(checkDeviceType())
             {
-
+                clickListener.onClickLisener(position)
             }else
             {
                 if (it.findNavController().currentDestination?.id == R.id.searchFragment)
@@ -183,7 +188,6 @@ class AdapterSearch(val context: Context, val list: ArrayList<PojoSearchScreenDa
         holder.itemView.setOnLongClickListener {
             if(checkDeviceType())
             {
-
             }else
             {
             if (it.findNavController().currentDestination?.id == R.id.searchFragment) {
@@ -191,7 +195,8 @@ class AdapterSearch(val context: Context, val list: ArrayList<PojoSearchScreenDa
                 bundel.putBoolean("empty", true)
                 it.findNavController()
                     .navigate(R.id.action_searchFragment_to_searchResultFragment, bundel)
-            }}
+            }
+            }
             true
         }
     }
@@ -199,4 +204,8 @@ class AdapterSearch(val context: Context, val list: ArrayList<PojoSearchScreenDa
     override fun getItemCount(): Int {
         return list.size
     }
+
+} interface ClickListener
+{
+    fun onClickLisener(position: Int)
 }

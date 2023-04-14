@@ -21,7 +21,6 @@
             android:id="@+id/action_signupTeam_to_firstStepCreateTeam"
             app:destination="@id/firstStepCreateTeam" />
     </fragment>
-
     <fragment
         android:id="@+id/signUpCodeFragment"
         android:name="com.yapi.views.signup_code.SignUpCodeFragment"
@@ -34,11 +33,9 @@
         android:id="@+id/signInFragment"
         android:name="com.yapi.views.sign_in.SignInFragment"
         android:label="SignInFragment">
-
         <action
             android:id="@+id/action_signInFragment_to_signUpCodeFragment"
             app:destination="@id/signUpCodeFragment" />
-
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment2"
             app:destination="@id/signUpFragment2" />
@@ -72,13 +69,20 @@
 
         <action android:id="@+id/action_menuFragment_to_userListFragment"
             app:destination="@id/UserListFragment"/>
+
+        <action android:id="@+id/action_menuFragment_to_workspacelist"
+            app:destination="@id/workspacelist"/>
     </fragment>
 
+    <fragment
+        android:id="@+id/workspacelist"
+android:name="com.yapi.views.workspaces.workspacesList.WorkSpacesListFragment"
+        android:label="workspaceList"
+        ></fragment>
     <fragment
         android:id="@+id/UserListFragment"
         android:label="userListFragment"
         android:name="com.yapi.views.userList.UserListFragment"/>
-
     <fragment
         android:id="@+id/firstStepCreateTeam"
         android:name="com.yapi.views.create_team.first_step_create_team.FirstStepCreateFragment"
@@ -87,7 +91,6 @@
             android:id="@+id/action_firstStepCreateTeam_to_secondStepCreateTeam"
             app:destination="@id/secondStepCreateTeam" />
     </fragment>
-
     <fragment
         android:id="@+id/secondStepCreateTeam"
         android:name="com.yapi.views.create_team.second_step_create_team.SecondStepCreateFragment"
@@ -96,12 +99,10 @@
             android:id="@+id/action_secondStepCreateTeam_to_thirdStepCreateTeam"
             app:destination="@+id/thirdStepCreateTeam" />
     </fragment>
-
     <fragment
         android:id="@+id/thirdStepCreateTeam"
         android:name="com.yapi.views.create_team.third_step_create_team.ThirdStepCreateFragment"
         android:label="ThirdStepCreateTeam">
-
         <action android:id="@+id/action_thirdStepCreateTeam_to_addPeopleFragment"
             app:destination="@+id/addPeopleFragment"/>
         <action
@@ -110,7 +111,6 @@
         <action
             android:id="@+id/action_thirdStepCreateTeam_to_menuFragment"
             app:destination="@id/menuFragment" />
-
     </fragment>
     <fragment
         android:id="@+id/chatEmptyFragment"

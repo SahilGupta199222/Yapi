@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +26,7 @@ class RVchatAdapter(
             view.findViewById<RelativeLayout>(R.id.cardViewLeftTextMessage)
         var cardViewMediaLeft = view.findViewById<RelativeLayout>(R.id.cardViewMediaLeft)
         var cardViewAudioLeft = view.findViewById<RelativeLayout>(R.id.cardViewAudioLeft)
+        var tvViewAllPhotos = view.findViewById<AppCompatTextView>(R.id.tvViewAllPhotos)
 
     }
 
@@ -44,7 +46,15 @@ class RVchatAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.iv_more_chat.setOnClickListener {
-            clickListener.onMesssageListener(position, holder.iv_more_chat)
+           var userType=0
+            if(position%2==0)
+            {
+                userType=0
+            }else
+            {
+                userType=1
+            }
+            clickListener.onMesssageListener(position, holder.iv_more_chat,userType)
         }
 
         if (position == 0 || position == 4) {
@@ -79,7 +89,22 @@ class RVchatAdapter(
                             }
 
 
-        var adapter = RVChatPhotoAdapter(context)
+        var arrayList=ArrayList<String>()
+        arrayList.clear()
+        arrayList.add("AA")
+        arrayList.add("BB")
+        arrayList.add("CC")
+        arrayList.add("DD")
+        arrayList.add("EE")
+        if(arrayList.size>4)
+        {
+            holder.tvViewAllPhotos.visibility=View.VISIBLE
+        }else
+        {
+            holder.tvViewAllPhotos.visibility=View.GONE
+        }
+
+        var adapter = RVChatPhotoAdapter(context,arrayList)
         holder.rvPhotoVW.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         holder.rvPhotoVW.adapter = adapter
@@ -100,5 +125,5 @@ class RVchatAdapter(
 }
 
 interface MessageClickListener {
-    fun onMesssageListener(position: Int, ivMoreImageView: ImageView)
+    fun onMesssageListener(position: Int, ivMoreImageView: ImageView,userType:Int)
 }

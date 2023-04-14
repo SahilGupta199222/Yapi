@@ -30,7 +30,7 @@ class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : Vi
     fun onClick(view: View) {
         when (view.id) {
             R.id.layoutSearch->{
-              /*  if(checkDeviceType()){
+                if(checkDeviceType()){
                     openSearchScreenData.value=true
                     //SearchFragment.newInstanceSearch("").showNow(view.re, " SimpleDialog.TAG")
                 }else
@@ -39,13 +39,20 @@ class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : Vi
                     view.findNavController()
                         .navigate(R.id.action_menuFragment_to_searchFragment)
                 }
-            }*/
+            }
             }
 
             com.yapi.R.id.imgProfilePicCustomerList -> {
                 val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
                     .inflate(com.yapi.R.layout.menu_popup_options, null, false)
-                var newWidth = screenWidth!! / 1.5
+                var newWidth=0.0
+
+                if(checkDeviceType()){
+                    newWidth =  LinearLayout.LayoutParams.WRAP_CONTENT.toDouble()
+                }else
+                {
+                     newWidth = screenWidth!! / 1.5
+                }
 
                 //   val popUp = PopupWindow(mView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, false)
                 val popUp = PopupWindow(mView,

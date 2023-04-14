@@ -1,5 +1,6 @@
 package com.yapi.views.edit_profile
 
+import android.app.Dialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -17,9 +18,16 @@ import com.yapi.common.changeBackgroundForEditError
 import com.yapi.common.changeBackgroundForError
 import com.yapi.common.checkDeviceType
 import com.yapi.databinding.FragmentEditProfileBinding
+import com.yapi.pref.PreferenceFile
 import com.yapi.views.sign_in.SignInErrorData
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class EditProfileFragment : DialogFragment(), View.OnClickListener {
+
+    @Inject
+    lateinit var preferenceFile: PreferenceFile
 
     companion object {
         fun newInstanceEditProfileScreen(title: String): EditProfileFragment {
@@ -38,6 +46,24 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
             setStyle(DialogFragment.STYLE_NO_FRAME, R.style.FullScreenDialog)
         }
     }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        // Create a new dialog
+        val dialog: Dialog = super.onCreateDialog(savedInstanceState)
+
+        // Get the window of the dialog
+        val window: Window = dialog.getWindow()!!
+
+        // Set the dialog to be shown at the bottom of the screen
+        window.setGravity(Gravity.RIGHT)
+
+        var second_frame_height= preferenceFile.fetchStringValue("second_frame_height")
+        var second_frame_width=  preferenceFile.fetchStringValue("second_frame_width")
+        Log.e("nefjkwnddfkewfwefe===",second_frame_height+"==="+second_frame_width)
+        window.setLayout(second_frame_width.toInt(),second_frame_height.toInt())
+        return dialog
+    }
+
 
     private lateinit var binding: FragmentEditProfileBinding
     private val viewModel: ViewModelEditProfile by viewModels()

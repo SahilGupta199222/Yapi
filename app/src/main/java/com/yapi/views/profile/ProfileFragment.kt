@@ -1,13 +1,13 @@
 package com.yapi.views.profile
 
+import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
@@ -18,12 +18,19 @@ import com.google.android.material.chip.Chip
 import com.yapi.R
 import com.yapi.common.checkDeviceType
 import com.yapi.databinding.FragmentProfileBinding
+import com.yapi.pref.PreferenceFile
 import com.yapi.views.create_group.CreateGroupFragment
 import com.yapi.views.edit_profile.EditProfileFragment
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ProfileFragment : DialogFragment() {
     private lateinit var binding: com.yapi.databinding.FragmentProfileBinding
     private val viewModel: ViewModelProfile by viewModels()
+
+    @Inject
+    lateinit var preferenceFile: PreferenceFile
 
     companion object {
         fun newInstanceProfileScreen(title: String): ProfileFragment {
@@ -33,6 +40,23 @@ class ProfileFragment : DialogFragment() {
             fragment.arguments = args
             return fragment
         }
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        // Create a new dialog
+        val dialog: Dialog = super.onCreateDialog(savedInstanceState)
+
+        // Get the window of the dialog
+        val window: Window = dialog.getWindow()!!
+
+        // Set the dialog to be shown at the bottom of the screen
+        window.setGravity(Gravity.RIGHT)
+
+        var second_frame_height= preferenceFile.fetchStringValue("second_frame_height")
+        var second_frame_width=  preferenceFile.fetchStringValue("second_frame_width")
+        Log.e("nefjkwnddfkewfwefe===",second_frame_height+"==="+second_frame_width)
+        window.setLayout(second_frame_width.toInt(),second_frame_height.toInt())
+        return dialog
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

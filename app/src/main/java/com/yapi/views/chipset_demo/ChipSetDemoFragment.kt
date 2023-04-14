@@ -116,6 +116,7 @@ class ChipSetDemoFragment : Fragment() {
                 Toast.makeText(requireContext(), "clicked", Toast.LENGTH_SHORT).show()
             }
 
+
              runnableGetTimeRecoderPlay = object : java.lang.Runnable {
                 override fun run() {
                     try {
@@ -178,17 +179,18 @@ class ChipSetDemoFragment : Fragment() {
 
 
 
+                imgMicIconChatDemo.setColorFilter(ContextCompat.getColor(
+                    requireContext(),
+                    R.color.blueColor))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    gettingMicPermission(requireActivity(), arrayListOf(Manifest.permission.RECORD_AUDIO
+                        , Manifest.permission.READ_MEDIA_AUDIO))
+                } else {
+                    gettingMicPermission(requireActivity(), arrayListOf(Manifest.permission.RECORD_AUDIO
+                        , Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE))
 
+                }
 
-
-
-
-
-                gettingMicPermission(requireActivity(), arrayListOf(Manifest.permission.RECORD_AUDIO
-                    ,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE))
-                    imgMicIconChatDemo.setColorFilter(ContextCompat.getColor(
-                        requireContext(),
-                        R.color.blueColor))
                 Handler(Looper.myLooper()!!).postDelayed(object :Runnable{
                     override fun run() {
                         imgMicIconChatDemo.setColorFilter(ContextCompat.getColor(

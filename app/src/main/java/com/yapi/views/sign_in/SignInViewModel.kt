@@ -10,13 +10,17 @@ import androidx.databinding.adapters.TextViewBindingAdapter.AfterTextChanged
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import com.google.gson.JsonObject
 import com.yapi.MainActivity
 import com.yapi.R
-import com.yapi.common.hideKeyboard
-import com.yapi.common.isValidEmail
-import com.yapi.common.showToastMessage
+import com.yapi.common.*
+import dagger.hilt.android.lifecycle.HiltViewModel
+import org.json.JSONObject
+import retrofit2.Response
+import javax.inject.Inject
 
-class SignInViewModel : ViewModel() {
+@HiltViewModel
+class SignInViewModel @Inject constructor(val repository: Repository)  : ViewModel() {
 
     var emailFieldValue = ObservableField("")
     var passwordFieldValue = ObservableField("")
@@ -29,11 +33,14 @@ class SignInViewModel : ViewModel() {
             R.id.btnSignIn -> {
                 if (checkValidation()) {
                     if(view.findNavController().currentDestination?.id==R.id.signInFragment) {
-//                        view.findNavController().navigate(R.id.action_signInFragment_to_signUpFragment2)
-                       // view.findNavController().navigate(R.id.action_signInFragment_to_chatEmptyFragment)
+
+
+                      //  loginAPIMethod(view)
                         var bundle= Bundle()
                         bundle.putString("email",emailFieldValue.get())
                         view.findNavController().navigate(R.id.action_signInFragment_to_signUpCodeFragment,bundle)
+
+
                     }
                 }
             }
@@ -48,6 +55,31 @@ class SignInViewModel : ViewModel() {
             }
         }
     }
+
+    fun loginAPIMethod(view:View)
+    {
+        var jsonObject=JsonObject()
+        jsonObject.addProperty("email",emailFieldValue.get().toString().trim())
+        repository.makeCall(true,
+            requestProcessor = object : ApiProcessor<Response<SignInResponse>> {
+                override fun onSuccess(success: Response<SignInResponse>) {
+                    Log.e("Resposne_Dataaaa===", success.body().toString())
+
+                    var bundle= Bundle()
+                    bundle.putString("email",emailFieldValue.get())
+                    view.findNavController().navigate(R.id.action_signInFragment_to_signUpCodeFragment,bundle)
+                }
+
+                override fun onError(message: String) {
+                    MainActivity.activity!!.get()!!.showMessage(message)
+                }
+
+                override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<SignInResponse> {
+                    return retrofitApi.loginAPI(jsonObject)
+                }
+            })
+    }
+
     fun onLongg(view:View):Boolean{
         when (view.id) {
             R.id.btnSignIn -> {

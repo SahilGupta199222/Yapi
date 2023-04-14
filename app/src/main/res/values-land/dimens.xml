@@ -73,8 +73,8 @@
     <dimen name="signup_process_top_logo_width">@dimen/_164sdp</dimen>
     <dimen name="signup_process_top_logo_height">@dimen/_73sdp</dimen>
 
-    <dimen name="outside_cross_height">@dimen/_10sdp</dimen>
-    <dimen name="outside_cross_width">@dimen/_10sdp</dimen>
+    <dimen name="outside_cross_height">@dimen/_15sdp</dimen>
+    <dimen name="outside_cross_width">@dimen/_15sdp</dimen>
 
     <dimen name="error_margin_start">@dimen/_10sdp</dimen>
 

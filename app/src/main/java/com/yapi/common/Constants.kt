@@ -1,8 +1,9 @@
 package com.yapi.common
 
 object Constants {
- const val BASEURL:String="http://www.google.com"
+ const val BASEURL:String="http://18.117.145.216:3000"
 
+ const val TAG="asfjsajkshdfnkafd"
  const val GROUPS_KEY="groups"
  const val JOBS_KEY="jobs"
  const val CUSTOMERS_KEY="customers"
@@ -22,4 +23,5 @@ object Constants {
 
  const val USER_ID="user_id"
  const val USER_MANAGEMENT="user_management"
+ const val WORKSPACE_MANAGEMENT="workspace_management"
 }
