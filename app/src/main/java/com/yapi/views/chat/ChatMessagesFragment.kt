@@ -288,6 +288,8 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
             arraylist.add("DD")
             arraylist.add("EE")
             arraylist.add("FF")
+            arraylist.add("GG")
+            arraylist.add("GG")
             arraylist.add("AA")
             arraylist.add("AA")
             arraylist.add("AA")

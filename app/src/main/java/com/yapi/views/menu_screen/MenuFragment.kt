@@ -542,7 +542,7 @@ class MenuFragment : Fragment() {
 
                     if (adapterGroupsList?.getListt()?.get(position)!!.unSeenMsgCount == -1) {
 
-                        if (resources.getBoolean(R.bool.isTab)) {
+                        if (checkDeviceType()) {
                             System.out.println("phone========tablet")
                             EventBus.getDefault().post(GroupEvent(2, Constants.CREATEGOUP_KEY)) //post event
                         } else {
@@ -556,10 +556,10 @@ class MenuFragment : Fragment() {
                             "before notifiy list is\n${adapterGroupsList?.getListt()}")
                         adapterGroupsList?.notifyDataSetChanged()
 
-                        if (resources.getBoolean(R.bool.isTab)) {
+                        if (checkDeviceType()) {
                             System.out.println("phone========tablet")
                             EventBus.getDefault()
-                                .post(MyMessageEvent(3, Constants.GROUPS_KEY)) //post event
+                                .post(MyMessageEvent(3, Constants.CHAT_MESSAGE_KEY)) //post event
                         } else {
                             if (findNavController().currentDestination?.id == R.id.menuFragment) {
                                 var bundle = Bundle()
