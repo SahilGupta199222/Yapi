@@ -27,6 +27,7 @@ class RVchatAdapter(
         var cardViewMediaLeft = view.findViewById<RelativeLayout>(R.id.cardViewMediaLeft)
         var cardViewAudioLeft = view.findViewById<RelativeLayout>(R.id.cardViewAudioLeft)
         var tvViewAllPhotos = view.findViewById<AppCompatTextView>(R.id.tvViewAllPhotos)
+        var cardViewFilesLeft = view.findViewById<RelativeLayout>(R.id.cardViewFilesLeft)
 
     }
 
@@ -66,6 +67,7 @@ class RVchatAdapter(
         holder.cardViewLeftTextMessage.visibility = View.GONE
         holder.cardViewMediaLeft.visibility = View.GONE
         holder.cardViewAudioLeft.visibility = View.GONE
+        holder.cardViewFilesLeft.visibility=View.GONE
 
         if (arraylist[position].toString() == "AA") {
             holder.cardViewLeftTextMessage.visibility = View.VISIBLE
@@ -84,19 +86,24 @@ class RVchatAdapter(
                         } else
                             if (arraylist[position].toString() == "FF") {
                                 holder.cardViewAudioLeft.visibility = View.VISIBLE
-                            } else {
+                            } else
+                            if(arraylist[position].toString()=="GG")
+                            {
+                                holder.cardViewFilesLeft.visibility=View.VISIBLE
+                            }else
+                            {
                                 holder.cardViewLeftTextMessage.visibility = View.VISIBLE
                             }
 
 
-        var arrayList=ArrayList<String>()
-        arrayList.clear()
-        arrayList.add("AA")
-        arrayList.add("BB")
-        arrayList.add("CC")
-        arrayList.add("DD")
-        arrayList.add("EE")
-        if(arrayList.size>4)
+        var photoArrayList=ArrayList<String>()
+        photoArrayList.clear()
+        photoArrayList.add("AA")
+        photoArrayList.add("BB")
+        photoArrayList.add("CC")
+        photoArrayList.add("DD")
+        photoArrayList.add("EE")
+        if(photoArrayList.size>4)
         {
             holder.tvViewAllPhotos.visibility=View.VISIBLE
         }else
@@ -104,7 +111,7 @@ class RVchatAdapter(
             holder.tvViewAllPhotos.visibility=View.GONE
         }
 
-        var adapter = RVChatPhotoAdapter(context,arrayList)
+        var adapter = RVChatPhotoAdapter(context,photoArrayList)
         holder.rvPhotoVW.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         holder.rvPhotoVW.adapter = adapter
