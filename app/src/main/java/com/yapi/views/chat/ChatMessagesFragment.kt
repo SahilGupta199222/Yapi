@@ -402,63 +402,19 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
             imgBoldTxtIconChatDemo.setOnClickListener {
                 boldClickStatus=!boldClickStatus
                 updateBoldText()
-                etRichChatDemo.setBold()
-                boldClickStatus = !boldClickStatus
-                if (boldClickStatus) {
-                    imgBoldTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),
-                        R.color.blueColor))
-                } else {
-                    imgBoldTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),
-                        R.color.darkGrey))
-
-                }
             }
             imgItalicTxtIconChatDemo.setOnClickListener {
                 italicClickStatus=!italicClickStatus
                 setItalicForText()
-                etRichChatDemo.setItalic()
-                italicClickStatus = !italicClickStatus
-                if (italicClickStatus) {
-                    imgItalicTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),
-                        R.color.blueColor))
-
-                } else {
-                    imgItalicTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),
-                        R.color.darkGrey))
-
-                }
             }
             imgUnderLineTxtIconChatDemo.setOnClickListener {
                 underlineClickStatus=!underlineClickStatus
                 ForUnderLineText()
-                etRichChatDemo.setUnderline()
-                underlineClickStatus = !underlineClickStatus
-                if (underlineClickStatus) {
-                    imgUnderLineTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),
-                        R.color.blueColor))
-
-                }
-                else {
-                    imgUnderLineTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),
-                        R.color.darkGrey))
-
-                }
             }
             imgStrikeTxtIconChatDemo.setOnClickListener {
 
                 strikeClickStatus=!strikeClickStatus
                 forStrikeMethod()
-                etRichChatDemo.setStrikeThrough()
-                strikeClickStatus = !strikeClickStatus
-                if (strikeClickStatus) {
-                    imgStrikeTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),
-                        R.color.blueColor))
-
-                } else {
-                    imgStrikeTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),
-                        R.color.darkGrey))
-
-                }
             }
             imgFormatListNumberTxtIconChatDemo.setOnClickListener {
                 etRichChatDemo.setNumbers()
@@ -467,17 +423,6 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
                     imgFormatListNumberTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
                 }else{
                     imgFormatListNumberTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
-                numberParagraphClickStatus = !numberParagraphClickStatus
-                if (numberParagraphClickStatus) {
-                    imgFormatListNumberTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
-                        requireContext(),
-                        R.color.blueColor))
-
-                } else {
-                    imgFormatListNumberTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
-                        requireContext(),
-                        R.color.darkGrey))
-
                 }
             }
             imgFormatListBulletedTxtIconChatDemo.setOnClickListener {
@@ -487,17 +432,6 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
                     imgFormatListBulletedTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
                 }else{
                     imgFormatListBulletedTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
-                bulletParagraphClickStatus = !bulletParagraphClickStatus
-                if (bulletParagraphClickStatus) {
-                    imgFormatListBulletedTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
-                        requireContext(),
-                        R.color.blueColor))
-
-                } else {
-                    imgFormatListBulletedTxtIconChatDemo.setColorFilter(ContextCompat.getColor(
-                        requireContext(),
-                        R.color.darkGrey))
-
                 }
             }
             imgLeftAlignTxtIconChatDemo.setOnClickListener {
@@ -537,8 +471,7 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
                     }*/
             }
             imgEmojiIconChatDemo.setOnClickListener {
-                val imm: InputMethodManager =
-                    requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                val imm: InputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.showSoftInput(etRichChatDemo, InputMethodManager.SHOW_IMPLICIT)
             }
             imgMicIconChatDemo.setOnClickListener {
