@@ -152,6 +152,9 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
                 newText = text.substring(0, text.length)
             }
 
+
+
+
                 Log.e("wsmfdmkfmekfmef11===", newText)
               //  dataBinding.etNewRichText.text= (Html.fromHtml(newText)).get((Html.fromHtml(newText)).length-1).toString()
                 Log.e("wsmfdmkfmekfmef3333===", dataBinding.etNewRichText.text.toString())
@@ -410,10 +413,8 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
                 numberParagraphClickStatus=!numberParagraphClickStatus
                 if(numberParagraphClickStatus){
                     imgFormatListNumberTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
-
                 }else{
                     imgFormatListNumberTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
-
                 }
             }
             imgFormatListBulletedTxtIconChatDemo.setOnClickListener {
@@ -421,10 +422,8 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
                 bulletParagraphClickStatus=!bulletParagraphClickStatus
                 if(bulletParagraphClickStatus){
                     imgFormatListBulletedTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
-
                 }else{
                     imgFormatListBulletedTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
-
                 }
             }
             imgLeftAlignTxtIconChatDemo.setOnClickListener {
