@@ -137,6 +137,16 @@ class MenuFragment : Fragment() {
             layoutAddNewCustomersMenu.setOnClickListener {
                 //   Toast.makeText(requireContext(), "Add new member", Toast.LENGTH_SHORT).show()
             }
+            layoutBookMarkMenu.setOnClickListener {
+                if(checkDeviceType()) {
+                    EventBus.getDefault()
+                        .post(MyMessageEvent(15, Constants.SAVED_ITEMS_KEY)) //post event
+                }
+                else
+                {
+                    findNavController().navigate(R.id.action_menuFragment_to_savedItemsFragment)
+                }
+                }
         }
     }
 

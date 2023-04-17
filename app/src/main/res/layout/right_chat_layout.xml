@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/topChatConstraints"
     android:paddingTop="@dimen/_10sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -73,6 +74,29 @@
         android:src="@drawable/girl_temp_photo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/cardLeftChatText" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTypeMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:backgroundTint="#ffffff"
+        android:fontFamily="@font/larsseit_medium"
+        android:letterSpacing="0.07"
+        android:gravity="start"
+        android:lineSpacingExtra="@dimen/line_spacing_extra"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:text="Direct Message"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintBottom_toTopOf="@+id/linearLeftUserDetail"
+        android:textColor="@color/saved_title_message_type"
+        android:textSize="@dimen/normalSmallTextSize" />
 
     <RelativeLayout
         android:id="@+id/cardLeftChatText"
