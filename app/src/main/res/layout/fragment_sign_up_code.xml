@@ -101,7 +101,7 @@
                         android:textColorHint="@color/darkGrey"
                         android:focusable="true"
                         android:layout_marginTop="@dimen/_44sdp"
-                        android:inputType="number"
+                        android:digits="0123456789AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz"
                         android:itemBackground="@drawable/otp_background_box"
                         android:padding="0dp"
                         android:textColor="@color/darkGrey"

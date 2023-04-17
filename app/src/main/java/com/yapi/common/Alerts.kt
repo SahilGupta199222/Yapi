@@ -5,14 +5,15 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
+import com.yapi.MainActivity
 import com.yapi.databinding.ProgressLayoutBinding
 
 private var customDialog: AlertDialog? = null
 
-fun Context.showProgress() {
+fun showProgress() {
     hideProgress()
-    val customAlertBuilder = AlertDialog.Builder(this)
-    val customAlertView = ProgressLayoutBinding.inflate(LayoutInflater.from(this), null, false)
+    val customAlertBuilder = AlertDialog.Builder(MainActivity.activity!!.get())
+    val customAlertView = ProgressLayoutBinding.inflate(LayoutInflater.from(MainActivity.activity!!.get()), null, false)
     customAlertBuilder.setView(customAlertView.root)
     customAlertBuilder.setCancelable(false)
     customDialog = customAlertBuilder.create()

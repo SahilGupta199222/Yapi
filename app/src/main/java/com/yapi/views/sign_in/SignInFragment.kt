@@ -15,7 +15,9 @@ import com.yapi.R
 import com.yapi.common.changeBackgroundForError
 import com.yapi.databinding.FragmentSignInBinding
 import com.yapi.databinding.FragmentSignUpBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignInFragment : Fragment() {
     private lateinit var binding:FragmentSignInBinding
      val viewModel:SignInViewModel by viewModels()

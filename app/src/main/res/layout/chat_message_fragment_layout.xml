@@ -409,7 +409,8 @@
                             android:layout_width="@dimen/iconSize"
                             android:layout_height="@dimen/iconSize"
                             android:layout_marginStart="@dimen/topMargin"
-                            android:src="@drawable/ic_baseline_format_italic_24"
+
+                            android:src="@drawable/info_chat_icon"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@id/imgBoldTxtIconChatDemo"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -459,6 +460,7 @@
                             android:layout_width="@dimen/iconSize"
                             android:layout_height="@dimen/iconSize"
                             android:layout_marginStart="@dimen/topMargin"
+                            android:visibility="gone"
                             android:src="@drawable/ic_baseline_format_align_left_24"
                             android:tint="@{mViewModel.leftAlignCStatus?@color/blueColor:@color/darkGrey}"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -471,7 +473,7 @@
                             android:layout_height="@dimen/iconSize"
                             android:layout_marginStart="@dimen/topMargin"
                             android:src="@drawable/ic_baseline_format_align_center_24"
-
+                            android:visibility="gone"
                             android:tint="@{mViewModel.centerAlignCStatus?@color/blueColor:@color/darkGrey}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@id/imgLeftAlignTxtIconChatDemo"
@@ -483,7 +485,7 @@
                             android:layout_height="@dimen/iconSize"
                             android:layout_marginStart="@dimen/topMargin"
                             android:src="@drawable/ic_baseline_format_align_right_24"
-
+                            android:visibility="gone"
                             android:tint="@{mViewModel.rightAlignCStatus?@color/blueColor:@color/darkGrey}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@id/imgCenterAlignTxtIconChatDemo"

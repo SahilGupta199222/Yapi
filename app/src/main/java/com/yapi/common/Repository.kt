@@ -31,10 +31,11 @@ class Repository @Inject constructor(val retrofit:RetrofitAPI,@ApplicationContex
             return
         }*/
         if (loader) {
-            context.applicationContext.showProgress()
+           // context.applicationContext.showProgress()
+           showProgress()
         }
         val activity =   MainActivity.activity!!.get()!!
-        activity.showMessage("API HIT")
+        //activity.showMessage("API HIT")
         val dataResponse: Flow<Response<Any>?> = flow {
             val response = requestProcessor.sendRequest(retrofit) as Response<Any>
             emit(response)
@@ -51,9 +52,9 @@ class Repository @Inject constructor(val retrofit:RetrofitAPI,@ApplicationContex
             }.collect {
                     response ->
                 Log.d("resCodeIs", "====${response?.code()}")
-                Timer().schedule(1000) {
+              //  Timer().schedule(1000) {
                     hideProgress()
-                }
+                //}
                 when {
                     response?.isSuccessful == true -> {
                         /**Success*/
