@@ -262,6 +262,7 @@
     <string name="edit_member_info_text">Edit Member Info</string>
     <string name="deactivate_member_text">Deactivate Member</string>
     <string name="remove_member_text">Remove Member</string>
+    <string name="remove">Remove</string>
 
     <string name="are_you_sure_deactivate_user">Are you sure you want to deactivate this user?</string>
 

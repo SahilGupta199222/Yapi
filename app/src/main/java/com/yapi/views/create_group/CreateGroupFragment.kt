@@ -9,6 +9,7 @@ import android.view.*
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -191,15 +192,15 @@ class CreateGroupFragment : DialogFragment() {
             {
                 errorText!!.setText(data.message)
 
-                changeBackgroundForEditError(editText!!,requireActivity().resources.getColor(
-                    R.color.error_box_color),
-                    requireActivity().resources.getColor(R.color.error_border_color))
+                changeBackgroundForEditError(editText!!, ContextCompat.getColor(requireContext(),R.color.error_box_color),
+                    ContextCompat.getColor(requireContext(),R.color.error_border_color))
             }else {
                 if (data.fieldId != 0) {
                     errorText!!.setText("")
-                    changeBackgroundForEditError(editText!!, requireActivity().resources.getColor(
-                        R.color.liteGrey),
-                        requireActivity().resources.getColor(R.color.white))
+
+
+                    changeBackgroundForEditError(editText!!, ContextCompat.getColor(requireContext(),R.color.liteGrey),
+                        ContextCompat.getColor(requireContext(),R.color.white))
                 }
             }
         })

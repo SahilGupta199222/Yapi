@@ -21,6 +21,8 @@ fun Activity.hideKeyboard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         imm?.hideSoftInputFromWindow(view.windowToken, 0)
     }
+
+
 }
 
 fun Activity.isEmailValid(email: String): String {
@@ -63,6 +65,7 @@ fun getTextSizeValue(text1: Float) {
     var newTextSize = "_$text$showText"
 //  MainActivity.activity.get().resources.getDimension(com.intuit.ssp.R.dimen._10ssp)
 }
+
 
 fun showToastMessage(message: String) {
     Toast.makeText(MainActivity.activity!!.get(), message, Toast.LENGTH_SHORT).show()
