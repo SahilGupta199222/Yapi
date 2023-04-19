@@ -29,9 +29,10 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
     lateinit var preferenceFile: PreferenceFile
 
     companion object {
-        fun newInstanceEditProfileScreen(title: String): EditProfileFragment {
+        fun newInstanceEditProfileScreen(title: String,profileBundle:ProfileData): EditProfileFragment {
             val args = Bundle()
             args.putString("11", title)
+            args.putSerializable("profile_data",profileBundle)
             val fragment = EditProfileFragment()
             fragment.arguments = args
             return fragment

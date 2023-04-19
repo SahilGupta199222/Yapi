@@ -28,7 +28,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ViewModelProfile @Inject constructor(val repository: Repository,val preferenceFile: PreferenceFile) : ViewModel() {
     private  var profileData: ProfileData?=null
-    var openEditProfileData=MutableLiveData<Boolean>()
+    var openEditProfileData=MutableLiveData<ProfileData?>()
 var dismissDialogData=MutableLiveData<Boolean>()
 
     var nameValue=ObservableField("")
@@ -44,15 +44,17 @@ var dismissDialogData=MutableLiveData<Boolean>()
     fun onClick(view: View) {
         when (view.id) {
             R.id.btnEditProfile -> {
+                var bundle= Bundle()
+                if(profileData!=null) {
+                    bundle.putSerializable("profile_data", profileData)
+                }
+
                 if(checkDeviceType()){
-                    openEditProfileData.value=true
+                    openEditProfileData.value=profileData?:ProfileData()
                 }else
                 {
                     if (view.findNavController().currentDestination?.id == R.id.profileFragment) {
-                        var bundle= Bundle()
-                        if(profileData!=null) {
-                            bundle.putSerializable("profile_data", profileData)
-                        }
+
                         view.findNavController()
                             .navigate(R.id.action_profileFragment_to_editProfileFragment,bundle)
                     }
@@ -139,6 +141,7 @@ var dismissDialogData=MutableLiveData<Boolean>()
 
     fun fetchProfileData()
     {
+        Log.e("Token111====", preferenceFile.fetchStringValue(Constants.USER_TOKEN))
         repository.makeCall(true,
             requestProcessor = object : ApiProcessor<Response<ProfileResponse>> {
                 override fun onSuccess(success: Response<ProfileResponse>) {

@@ -99,9 +99,9 @@ class ProfileFragment : DialogFragment() {
 
     private fun addNextToScreenObserver() {
         viewModel.openEditProfileData.observe(requireActivity(), Observer {
-            var data = it as Boolean
-            if (data) {
-                EditProfileFragment.newInstanceEditProfileScreen("")
+            var data = it as ProfileData
+            if (data!=null) {
+                EditProfileFragment.newInstanceEditProfileScreen("",data)
                     .showNow(requireActivity().supportFragmentManager, "")
             }
         })
