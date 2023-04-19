@@ -29,7 +29,7 @@ class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : Vi
     var openSearchScreenData = MutableLiveData<Boolean>()
     fun onClick(view: View) {
         when (view.id) {
-            R.id.layoutSearch->{
+            R.id.layoutSearch,R.id.etSearchMenu->{
                 if(checkDeviceType()){
                     openSearchScreenData.value=true
                     //SearchFragment.newInstanceSearch("").showNow(view.re, " SimpleDialog.TAG")

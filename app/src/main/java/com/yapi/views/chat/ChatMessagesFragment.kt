@@ -71,20 +71,20 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
     private var mHandler: Handler? = null
     private var runnableGetTimeRecoderPlay: Runnable? = null
     private var runnableGetTimeRecoderLive: Runnable? = null
-    private var boldClickStatus=false
-    private var italicClickStatus=false
-    private var underlineClickStatus=false
-    private var strikeClickStatus=false
-    private var numberParagraphClickStatus=false
-    private var bulletParagraphClickStatus=false
-    private var leftAlignClickStatus=false
-    private var centerAlignClickStatus=false
-    private var rightAlignClickStatus=false
+    private var boldClickStatus = false
+    private var italicClickStatus = false
+    private var underlineClickStatus = false
+    private var strikeClickStatus = false
+    private var numberParagraphClickStatus = false
+    private var bulletParagraphClickStatus = false
+    private var leftAlignClickStatus = false
+    private var centerAlignClickStatus = false
+    private var rightAlignClickStatus = false
 
     val viewModel: ChatViewModel by viewModels()
 
     @Inject
-    lateinit var preferenceFile:PreferenceFile
+    lateinit var preferenceFile: PreferenceFile
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -101,9 +101,9 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
         viewModel.screenWidth = width
         viewModel.screenHeight = height
 
-     //   var second_frame_height= preferenceFile.fetchStringValue("second_frame_height").toInt()
-        var second_frame_width=  preferenceFile.fetchStringValue("second_frame_width").toInt()
-        viewModel.SECOND_FRAME_WIDTH=second_frame_width
+        //   var second_frame_height= preferenceFile.fetchStringValue("second_frame_height").toInt()
+        var second_frame_width = preferenceFile.fetchStringValue("second_frame_width").toInt()
+        viewModel.SECOND_FRAME_WIDTH = second_frame_width
 
         viewModel.userType = requireArguments().getString("userType")
 
@@ -383,6 +383,12 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
                                 recoderTimeStemp += 1
                             }*/
                             recoderTimeStemp += 1
+//                            if (recoderTimeStemp < (mPlayer?.duration?.div(1000)
+//                                    ?: (30620 / 1000))
+//                            ) {
+//                                recoderTimeStemp += 1
+//                            } else
+                                recoderTimeStemp += 1  // Comment this line if not working .
                         }
 
                         if (recoderPlayTime.toString()
@@ -499,38 +505,38 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
             imgLeftAlignTxtIconChatDemo.setOnClickListener {
                 viewModel.setAlignText(1)
                 etRichChatDemo.setAlignLeft()
-               /* leftAlignClickStatus=!leftAlignClickStatus
-                if(leftAlignClickStatus){
-                    imgLeftAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
+                /* leftAlignClickStatus=!leftAlignClickStatus
+                 if(leftAlignClickStatus){
+                     imgLeftAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
 
-                }else{
-                    imgLeftAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
+                 }else{
+                     imgLeftAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
 
-                }*/
+                 }*/
             }
             imgCenterAlignTxtIconChatDemo.setOnClickListener {
                 viewModel.setAlignText(2)
                 etRichChatDemo.setAlignCenter()
-               /* centerAlignClickStatus=!centerAlignClickStatus
-                if(centerAlignClickStatus){
-                    imgCenterAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
+                /* centerAlignClickStatus=!centerAlignClickStatus
+                 if(centerAlignClickStatus){
+                     imgCenterAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
 
-                }else{
-                    imgCenterAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
+                 }else{
+                     imgCenterAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
 
-                }*/
+                 }*/
             }
             imgRightAlignTxtIconChatDemo.setOnClickListener {
                 viewModel.setAlignText(3)
                 etRichChatDemo.setAlignRight()
-            /*    rightAlignClickStatus=!rightAlignClickStatus
-                if(rightAlignClickStatus){
-                    imgRightAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
+                /*    rightAlignClickStatus=!rightAlignClickStatus
+                    if(rightAlignClickStatus){
+                        imgRightAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
 
-                }else{
-                    imgRightAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
+                    }else{
+                        imgRightAlignTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
 
-                }*/
+                    }*/
             }
             imgEmojiIconChatDemo.setOnClickListener {
                 val imm: InputMethodManager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

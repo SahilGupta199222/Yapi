@@ -48,7 +48,7 @@ class SignInViewModel @Inject constructor(val repository: Repository)  : ViewMod
             R.id.txtSignIn -> {
                 if(view.findNavController().currentDestination?.id==R.id.signInFragment) {
                     view.findNavController().navigate(R.id.action_signInFragment_to_signUpFragment2)
-             3   }
+                }
             }
             R.id.linearTopSignIn, R.id.constraintsTopSignIN -> {
                 //for hide keyboard
@@ -59,14 +59,14 @@ class SignInViewModel @Inject constructor(val repository: Repository)  : ViewMod
 
     private fun loginAPIMethod(view:View)
     {
-        var jsonObject=JsonObject()
+        val jsonObject=JsonObject()
         jsonObject.addProperty("email",emailFieldValue.get().toString().trim())
         repository.makeCall(true,
             requestProcessor = object : ApiProcessor<Response<SignInResponse>> {
                 override fun onSuccess(success: Response<SignInResponse>) {
                     Log.e("Resposne_Dataaaa===", success.body().toString())
 
-                    var bundle= Bundle()
+                    val bundle= Bundle()
                     bundle.putString("email",emailFieldValue.get())
                     view.findNavController().navigate(R.id.action_signInFragment_to_signUpCodeFragment,bundle)
                 }
