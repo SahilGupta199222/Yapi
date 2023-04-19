@@ -55,7 +55,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ChatMessagesFragment : Fragment(), MessageClickListener {
 
-    private var styleArrayList: ArrayList<String>?=null
+    private var styleArrayList: ArrayList<OptionSelectionData>?=null
     private var lastVisible: Int? = -1
     private lateinit var rvChatAdapter: RVchatAdapter
     private lateinit var dataBinding: ChatMessageFragmentLayoutBinding
@@ -142,11 +142,11 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
             Log.e("length_of_string===",text.length.toString())
             Log.e("wsmfdmkfmekfmef===", dataBinding.etRichChatDemo.html.toString())
 
-          text= text.replace("<br>","")
+           text= text.replace("<br>","")
 
             var newText=""
             if(text.length>4) {
-                newText = text.substring(text.length - 3, text.length)
+                newText = text.substring(text.length - 4, text.length)
             }else
             {
                 newText = text.substring(0, text.length)
@@ -168,13 +168,43 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
 
                 if (appliedStyles.contains(RichEditorType.UNDERLINE)) {
                     // Underline style is currently applied
-                }*/
+ 0               }*/
+/*
+            for(idx in 0 until text.length)
+            {
+                var newText=""
+                if(text.length>4) {
+                    newText = text.substring(text.length - 4, text.length)
+                    if(newText=="</b>")
+                    {
+                        updateBoldDataBack()
+                    }else
+                        if(newText=="</i>")
+                        {
+
+                        }
+                        else
+                            if(newText=="</u>")
+                            {
+
+                            }
+                            else
+                                if(newText=="</strike>")
+                                {
+
+                                }
+                }else
+                {
+                    newText = text.substring(0, text.length)
+                }
+            }*/
+
 
                 // if(styleArrayList!!.size>0){
-                if((styleArrayList!!.size>0 && styleArrayList!![styleArrayList!!.size-1].toString()=="bold") || newText=="/b>")
+                if((styleArrayList!!.size>0 && styleArrayList!![styleArrayList!!.size-1].name=="bold") || newText=="</b>")
                 {
                     Log.e("fnefefef===","Bold_enter")
-                    if(newText!="/b>")
+                    if(newText!="</b>")
                     {
                         if(boldClickStatus) {
                             boldClickStatus = false
@@ -188,9 +218,9 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
                         }
                     }
                 }else
-                    if((styleArrayList!!.size>0 && styleArrayList!![styleArrayList!!.size-1].toString()=="underline") || newText=="/u>")
+                    if((styleArrayList!!.size>0 && styleArrayList!![styleArrayList!!.size-1].name=="underline") || newText=="</u>")
                     {
-                        if(newText!="/u>")
+                        if(newText!="</u>")
                         {
                             if(underlineClickStatus) {
                                 underlineClickStatus = false
@@ -203,9 +233,9 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
                                 ForUnderLineText()
                             }
                         }
-                    }else if((styleArrayList!!.size>0 && styleArrayList!![styleArrayList!!.size-1].toString()=="italic") || newText=="/i>")
+                    }else if((styleArrayList!!.size>0 && styleArrayList!![styleArrayList!!.size-1].name=="italic") || newText=="</i>")
                     {
-                        if(newText!="/i>")
+                        if(newText!="</i>")
                         {
                             if(italicClickStatus) {
                                 italicClickStatus = false
@@ -220,7 +250,7 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
                         }
                     }
 
-                    else if((styleArrayList!!.size>0 && styleArrayList!![styleArrayList!!.size-1].toString()=="strike") || newText=="ke>")
+                    else if((styleArrayList!!.size>0 && styleArrayList!![styleArrayList!!.size-1].name=="strike") || newText=="ke>")
                     {
                         if(newText!="ke>")
                         {
@@ -275,9 +305,43 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
         })
     }
 
+/*    fun updateBoldDataBack( newText:String)
+    {
+        if(newText!="</b>")
+        {
+            if(boldClickStatus) {
+                boldClickStatus = false
+                updateBoldText()
+            }
+        }else
+        {
+            if(!boldClickStatus) {
+                boldClickStatus = true
+                updateBoldText()
+            }
+        }
+    }*/
+
+ /*   fun updateUnlineDataBack(newText)
+    {
+        if(newText!="</u>")
+        {
+            if(underlineClickStatus) {
+                underlineClickStatus = false
+                ForUnderLineText()
+            }
+        }else
+        {
+            if(!underlineClickStatus) {
+                underlineClickStatus = true
+                ForUnderLineText()
+            }
+        }
+    }*/
+
     //For UI Intialization
     private fun initUI() {
-        styleArrayList=ArrayList<String>()
+        styleArrayList=ArrayList<OptionSelectionData>()
         setTextListener()
         dataBinding.apply {
             val arraylist = ArrayList<String>()
@@ -343,11 +407,11 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
         dataBinding.etRichChatDemo.setBold()
         if(boldClickStatus){
             Log.e("hthhthtt==","added_bold")
-            styleArrayList!!.add("bold")
+            styleArrayList!!.add(OptionSelectionData("bold","<b>"))
             dataBinding.imgBoldTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
         }else{
             Log.e("hthhthtt==","Removed_bold")
-            styleArrayList!!.remove("bold")
+            styleArrayList!!.remove(OptionSelectionData("bold","<b>"))
             dataBinding.imgBoldTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
 
         }
@@ -357,10 +421,11 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
     {
         dataBinding.etRichChatDemo.setUnderline()
         if(underlineClickStatus){
-            styleArrayList!!.add("underline")
+         //   styleArrayList!!.add("underline")
+            styleArrayList!!.add(OptionSelectionData("underline","<u>"))
             dataBinding.imgUnderLineTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
         }else{
-            styleArrayList!!.remove("underline")
+            styleArrayList!!.remove(OptionSelectionData("underline","<u>"))
             dataBinding.imgUnderLineTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
 
         }
@@ -369,10 +434,11 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
     fun setItalicForText()
     { dataBinding.etRichChatDemo.setItalic()
         if(italicClickStatus){
-            styleArrayList!!.add("italic")
+
+            styleArrayList!!.add(OptionSelectionData("italic","<i>"))
             dataBinding.imgItalicTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
         }else{
-            styleArrayList!!.remove("italic")
+            styleArrayList!!.remove(OptionSelectionData("italic","<i>"))
             dataBinding.imgItalicTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
 
         }
@@ -382,11 +448,13 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
     {
         dataBinding.etRichChatDemo.setStrikeThrough()
         if(strikeClickStatus){
-            styleArrayList!!.add("strike")
+            styleArrayList!!.add(OptionSelectionData("strike","<strike>"))
+          //  styleArrayList!!.add("strike")
             dataBinding.imgStrikeTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.blueColor))
 
         }else{
-            styleArrayList!!.add("strike")
+            styleArrayList!!.remove(OptionSelectionData("strike","<strike>"))
+        //   styleArrayList!!.add("strike")
             dataBinding.imgStrikeTxtIconChatDemo.setColorFilter(ContextCompat.getColor(requireContext(),R.color.darkGrey))
         }
     }

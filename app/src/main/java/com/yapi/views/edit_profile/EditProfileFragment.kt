@@ -14,11 +14,10 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.yapi.R
-import com.yapi.common.changeBackgroundForEditError
-import com.yapi.common.changeBackgroundForError
-import com.yapi.common.checkDeviceType
+import com.yapi.common.*
 import com.yapi.databinding.FragmentEditProfileBinding
 import com.yapi.pref.PreferenceFile
+import com.yapi.views.profile.ProfileData
 import com.yapi.views.sign_in.SignInErrorData
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -60,10 +59,9 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
         var second_frame_height= preferenceFile.fetchStringValue("second_frame_height")
         var second_frame_width=  preferenceFile.fetchStringValue("second_frame_width")
         Log.e("nefjkwnddfkewfwefe===",second_frame_height+"==="+second_frame_width)
-        window.setLayout(second_frame_width.toInt(),second_frame_height.toInt())
+       // window.setLayout(second_frame_width.toInt(),second_frame_height.toInt())
         return dialog
     }
-
 
     private lateinit var binding: FragmentEditProfileBinding
     private val viewModel: ViewModelEditProfile by viewModels()
@@ -73,6 +71,26 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
     ): View {
         binding = FragmentEditProfileBinding.inflate(LayoutInflater.from(requireContext()))
         binding.model = viewModel
+
+        if(Constants.API_CALL_DEMO){
+       var profileData=  requireArguments().getSerializable("profile_data") as ProfileData
+        if(profileData!=null) {
+            viewModel.nameValue.set(profileData.name)
+            viewModel.userNameValue.set(profileData.user_name)
+            viewModel.emailAddressValue.set(profileData.email)
+            viewModel.countryCodeValue.set(profileData.country_code.toString())
+            viewModel.aboutValue.set(profileData.about.toString())
+            var phoneNumber=  addSpaceBetweenPhoneMethod(profileData.mobile_number.toString())
+            viewModel.phoneNumberValue.set(phoneNumber)
+        }}else
+        {
+            viewModel.nameValue.set("Testing")
+            viewModel.userNameValue.set("Demo")
+            viewModel.emailAddressValue.set("Testing1@gmail.com")
+            viewModel.aboutValue.set("About Data")
+            var phoneNumber=  addSpaceBetweenPhoneMethod("0123456789")
+            viewModel.phoneNumberValue.set(phoneNumber)
+        }
         return binding.root
     }
 
@@ -166,7 +184,6 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
                         var last = binding.etNumberEditProfile.text.toString().substring(8, 9)
 
                         binding.etNumberEditProfile.setText(first + " " + last)
-
 
                     }
                 binding.etNumberEditProfile.setSelection(binding.etNumberEditProfile.text.toString().length)

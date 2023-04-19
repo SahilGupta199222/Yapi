@@ -50,7 +50,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginBottom="@dimen/topFiveMargin"
-                app:layout_constraintBottom_toTopOf="@+id/btnDoneEditProfile"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -73,12 +72,39 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <LinearLayout
+                        android:id="@+id/linearTopBanner"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_100sdp"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:background="@drawable/rounded_background"
+                        android:backgroundTint="@color/information_profile_back_box"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" >
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/iconSize"
+                        android:src="@drawable/upload_background_banner"
+                        android:layout_height="@dimen/iconSize"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/darkGrey"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:textSize="@dimen/normalTextSize"
+                            android:fontFamily="@font/larsseit_bold"
+                            android:textAllCaps="true"
+                            android:text="@string/upload_your_background_text"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
                     <com.yapi.common.RoundRectCornerImageView
                         android:id="@+id/imgProfilePicEditProfile"
-                        android:layout_width="@dimen/_58sdp"
-                        android:layout_height="@dimen/_58sdp"
-                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_100sdp"
                         android:src="@drawable/demo_photo"
+                        android:layout_marginStart="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_70sdp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imgCancelEditProfile" />
 
@@ -87,14 +113,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/topFiveMargin"
-                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/larsseit_bold"
                         android:text="@{model.nameValue}"
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/_15ssp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/imgProfilePicEditProfile"
-                        app:layout_constraintTop_toTopOf="@+id/imgProfilePicEditProfile" />
+                        app:layout_constraintStart_toEndOf="@id/imgProfilePicEditProfile"
+                        app:layout_constraintTop_toBottomOf="@id/linearTopBanner" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtUserNameEditProfile"
@@ -133,6 +159,50 @@
                         app:layout_constraintBottom_toBottomOf="@+id/txtUserNameEditProfile"
                         app:layout_constraintStart_toEndOf="@+id/txtTempDotEditProfile"
                         app:layout_constraintTop_toTopOf="@+id/txtUserNameEditProfile" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnDoneEditProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/topTwentyFiveMargin"
+                        android:layout_marginBottom="@dimen/_7sdp"
+                        android:background="@drawable/btn_drawable_blue"
+                        android:backgroundTint="@color/darkBlueBtn"
+                        android:fontFamily="@font/larsseit_bold"
+                        android:onClick="@{model::onClick}"
+                        android:paddingStart="@dimen/_30sdp"
+                        android:paddingTop="@dimen/etVerticalPadding"
+                        android:paddingEnd="@dimen/_30sdp"
+                        android:paddingBottom="@dimen/etVerticalPadding"
+                        android:text="@string/done"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/normalTextSize"
+                        app:layout_constraintBottom_toBottomOf="@id/imgProfilePicEditProfile"
+                        app:layout_constraintEnd_toEndOf="parent"
+
+                        app:layout_constraintTop_toBottomOf="@+id/nestedScrollViewEditProfile" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:orientation="horizontal"
+                    android:weightSum="4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imgProfilePicEditProfile">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtTempProfileImageLiteGreyEditProfile"
@@ -222,7 +292,7 @@
                         android:textColor="@color/darkLiteGrey"
                         android:textSize="@dimen/smallTextSize"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/layoutPickGalleryImgEditProfile"
+                        app:layout_constraintStart_toStartOf="@+id/txtTempProfileImageLiteGreyEditProfile"
                         app:layout_constraintTop_toBottomOf="@+id/layoutPickGalleryImgEditProfile" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -234,7 +304,7 @@
                         android:text="@string/name"
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/smallTextSize"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/txtTempProfileImageLiteGreyEditProfile"
                         app:layout_constraintTop_toBottomOf="@+id/txtTempUploadImageConditionEditProfile" />
 
                     <androidx.appcompat.widget.AppCompatEditText
@@ -254,7 +324,7 @@
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/normalTextSize"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/txtTempProfileImageLiteGreyEditProfile"
                         app:layout_constraintTop_toBottomOf="@+id/txtTempNameEditProfile" />
 
 
@@ -282,7 +352,7 @@
                         android:text="@string/userName"
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/smallTextSize"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/txtTempProfileImageLiteGreyEditProfile"
                         app:layout_constraintTop_toBottomOf="@+id/txtErrorName" />
 
                     <androidx.appcompat.widget.AppCompatEditText
@@ -302,7 +372,7 @@
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/normalTextSize"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/txtTempProfileImageLiteGreyEditProfile"
                         app:layout_constraintTop_toBottomOf="@+id/txtTempUserNameEditProfile" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -330,7 +400,7 @@
                         android:textAllCaps="true"
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/smallTextSize"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/txtTempProfileImageLiteGreyEditProfile"
                         app:layout_constraintTop_toBottomOf="@+id/txtErrorUserName" />
 
                     <androidx.appcompat.widget.AppCompatEditText
@@ -350,7 +420,7 @@
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/normalTextSize"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/txtTempProfileImageLiteGreyEditProfile"
                         app:layout_constraintTop_toBottomOf="@+id/txtTempEmailEditProfile" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -377,7 +447,7 @@
                         android:text="@string/phone_number"
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/smallTextSize"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/txtTempProfileImageLiteGreyEditProfile"
                         app:layout_constraintTop_toBottomOf="@+id/txtErrorEmail" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -388,7 +458,7 @@
                         android:paddingTop="@dimen/_3sdp"
                         android:paddingBottom="@dimen/_3sdp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/txtTempProfileImageLiteGreyEditProfile"
                         app:layout_constraintTop_toBottomOf="@+id/txtTempPhoneEditProfile">
 
                         <!-- <FrameLayout
@@ -420,31 +490,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                         <!--  </FrameLayout>-->
-                        <!--
-                                            <com.hbb20.CountryCodePicker
-                                                android:id="@+id/countryCodePickerEditProfile"
-                                                android:layout_width="@dimen/_34sdp"
-                                                android:layout_height="@dimen/_34sdp"
-                                                android:layout_marginStart="@dimen/etHorizontalPadding"
-                                                android:padding="0dp"
-                                                app:ccp_showArrow="false"
-                                                android:gravity="center"
-                                                app:ccp_showFlag="true"
-                                                android:paddingHorizontal="0dp"
-                                                android:paddingVertical="0dp"
-                                                android:background="@android:color/white"
-                                                android:clipToPadding="true"
-                                                app:ccp_showNameCode="false"
-                                                app:ccp_showPhoneCode="false"
-                                                app:layout_constraintWidth_percent="0.8"
-                                                app:layout_constraintHeight_percent="0.8"
-                                                app:ccp_padding="10dp"
-                                                app:layout_constraintBottom_toBottomOf="parent"
-                                                app:layout_constraintStart_toStartOf="parent"
-                                                app:layout_constraintTop_toTopOf="parent"
 
-                                                />
-                        -->
 
                         <ImageView
                             android:id="@+id/ivDrpArrow"
@@ -528,7 +574,8 @@
                         android:text="@string/about_yourself"
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/smallTextSize"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/txtTempProfileImageLiteGreyEditProfile"
+
                         app:layout_constraintTop_toBottomOf="@+id/txtErrorPhone" />
 
                     <androidx.appcompat.widget.AppCompatEditText
@@ -552,7 +599,8 @@
                         android:textSize="@dimen/normalTextSize"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/txtTempProfileImageLiteGreyEditProfile"
+
                         app:layout_constraintTop_toBottomOf="@+id/txtTempAboutYrSelfEditProfile" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -568,30 +616,11 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/etAboutYourSelfEditProfile"
                         app:layout_constraintTop_toBottomOf="@+id/etAboutYourSelfEditProfile" />
-
-
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnDoneEditProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/topTwentyFiveMargin"
-                android:layout_marginBottom="@dimen/_7sdp"
-                android:background="@drawable/btn_drawable_blue"
-                android:backgroundTint="@color/darkBlueBtn"
-                android:fontFamily="@font/larsseit_bold"
-                android:onClick="@{model::onClick}"
-                android:padding="@dimen/etVerticalPadding"
-                android:text="@string/done"
-                android:textAllCaps="true"
-                android:textColor="@color/white"
-                android:textSize="@dimen/normalTextSize"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nestedScrollViewEditProfile" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </layout>

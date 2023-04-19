@@ -24,7 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CreateGroupFragment : DialogFragment() {
+class CreateGroupFragment : DialogFragment(), View.OnClickListener {
     private lateinit var binding: FragmentCreateGroupBinding
     val viewModel: ViewModelCreateGroup by viewModels()
 
@@ -90,7 +90,16 @@ class CreateGroupFragment : DialogFragment() {
         addObserverForOpenAddPeople()
         dialogDismissMethod()
         hideKeyboardObserver()
+        clickMethod()
+
         return binding.root
+    }
+
+    //For call Click Listener
+    private fun clickMethod() {
+
+        binding.layoutUploadImageCreateGroup.setOnClickListener(this)
+
     }
 
     private fun hideKeyboardObserver() {
@@ -203,5 +212,20 @@ class CreateGroupFragment : DialogFragment() {
                 }
             }
         })
+    }
+
+    fun uploadPhotoMethod()
+    {
+
+    }
+
+    override fun onClick(v: View?) {
+        when(v!!.id)
+        {
+            R.id.layoutUploadImageCreateGroup->{
+                Log.e("kgkgvwsgwggwsg","wggwgwggw")
+
+            }
+        }
     }
 }

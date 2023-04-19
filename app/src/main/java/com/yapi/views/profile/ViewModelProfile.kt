@@ -1,22 +1,44 @@
 package com.yapi.views.profile
 
 import android.app.Dialog
+import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup.LayoutParams
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.cardview.widget.CardView
+import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.yapi.MainActivity
 import com.yapi.R
-import com.yapi.common.checkDeviceType
-import com.yapi.common.hideKeyboard
+import com.yapi.common.*
+import com.yapi.pref.PreferenceFile
+import com.yapi.views.edit_profile.EditProfileResponse
+import dagger.hilt.android.lifecycle.HiltViewModel
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
+import okio.Buffer
+import retrofit2.Response
+import javax.inject.Inject
 
-class ViewModelProfile : ViewModel() {
-var openEditProfileData=MutableLiveData<Boolean>()
+@HiltViewModel
+class ViewModelProfile @Inject constructor(val repository: Repository,val preferenceFile: PreferenceFile) : ViewModel() {
+    private  var profileData: ProfileData?=null
+    var openEditProfileData=MutableLiveData<Boolean>()
 var dismissDialogData=MutableLiveData<Boolean>()
+
+    var nameValue=ObservableField("")
+    var userNameValue=ObservableField("")
+    var aboutValue=ObservableField("")
+    var emailValue=ObservableField("")
+    var phoneValue=ObservableField("")
+    var phoneCountryValue=ObservableField("")
+
+    var topProfileVisibility=ObservableBoolean(false)
 
     var screenWidth:Int?=0
     fun onClick(view: View) {
@@ -27,8 +49,12 @@ var dismissDialogData=MutableLiveData<Boolean>()
                 }else
                 {
                     if (view.findNavController().currentDestination?.id == R.id.profileFragment) {
+                        var bundle= Bundle()
+                        if(profileData!=null) {
+                            bundle.putSerializable("profile_data", profileData)
+                        }
                         view.findNavController()
-                            .navigate(R.id.action_profileFragment_to_editProfileFragment)
+                            .navigate(R.id.action_profileFragment_to_editProfileFragment,bundle)
                     }
                 }
             }
@@ -107,5 +133,41 @@ var dismissDialogData=MutableLiveData<Boolean>()
 
         var cardViewDeActiveProfile=dialog.findViewById<CardView>(R.id.cardViewDeActiveProfile)
         cardViewDeActiveProfile.layoutParams.width=(screenWidth!!.toDouble()/1.1).toInt()
+    }
+
+
+
+    fun fetchProfileData()
+    {
+        repository.makeCall(true,
+            requestProcessor = object : ApiProcessor<Response<ProfileResponse>> {
+                override fun onSuccess(success: Response<ProfileResponse>) {
+                    Log.e("Resposne_Dataaaa===", success.body().toString())
+                    profileData=success.body()!!.data
+                    topProfileVisibility.set(true)
+                    nameValue.set(success.body()!!.data.name)
+                    userNameValue.set(success.body()!!.data.user_name)
+                    emailValue.set(success.body()!!.data.email)
+                    aboutValue.set(success.body()!!.data.about)
+
+
+                  var phoneNumber=  addSpaceBetweenPhoneMethod(success.body()!!.data.mobile_number.toString())
+
+                    phoneValue.set(success.body()!!.data.country_code.toString()+" "+phoneNumber)
+                    //phoneCountryValue.set(success.body()!!.data.country_code.toString())
+                    /*   var bundle= Bundle()
+                       bundle.putString("email",emailFieldValue.get())
+                       view.findNavController().navigate(R.id.action_signInFragment_to_signUpCodeFragment,bundle)*/
+                }
+
+                override fun onError(message: String) {
+                    MainActivity.activity!!.get()!!.showMessage(message)
+                }
+
+                override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<ProfileResponse> {
+                    Log.e("mflfldddff==",preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
+                    return retrofitApi.fetchProfileAPI(preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
+                }
+            })
     }
 }

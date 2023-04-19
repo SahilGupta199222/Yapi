@@ -321,4 +321,6 @@
 
     <string name="saved_items_text">Saved Items</string>
     <string name="unsave_message_text">Unsave Message</string>
+
+    <string name="upload_your_background_text">upload your background</string>
 </resources>

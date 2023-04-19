@@ -34,13 +34,14 @@ class SignInViewModel @Inject constructor(val repository: Repository)  : ViewMod
                 if (checkValidation()) {
                     if(view.findNavController().currentDestination?.id==R.id.signInFragment) {
 
-
-                      //  loginAPIMethod(view)
-                        var bundle= Bundle()
-                        bundle.putString("email",emailFieldValue.get())
-                        view.findNavController().navigate(R.id.action_signInFragment_to_signUpCodeFragment,bundle)
-
-
+                        if(Constants.API_CALL_DEMO) {
+                            loginAPIMethod(view)
+                        }else
+                        {
+                            var bundle= Bundle()
+                            bundle.putString("email",emailFieldValue.get())
+                            view.findNavController().navigate(R.id.action_signInFragment_to_signUpCodeFragment,bundle)
+                        }
                     }
                 }
             }
@@ -56,7 +57,7 @@ class SignInViewModel @Inject constructor(val repository: Repository)  : ViewMod
         }
     }
 
-    fun loginAPIMethod(view:View)
+    private fun loginAPIMethod(view:View)
     {
         var jsonObject=JsonObject()
         jsonObject.addProperty("email",emailFieldValue.get().toString().trim())

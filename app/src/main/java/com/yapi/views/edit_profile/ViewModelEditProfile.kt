@@ -1,6 +1,7 @@
 package com.yapi.views.edit_profile
 
 import android.text.Editable
+import android.util.Log
 import android.view.View
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
@@ -8,13 +9,22 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.yapi.MainActivity
 import com.yapi.R
-import com.yapi.common.checkDeviceType
-import com.yapi.common.hideKeyboard
-import com.yapi.common.isValidEmail
-import com.yapi.common.showToastMessage
+import com.yapi.common.*
+import com.yapi.pref.A
+import com.yapi.pref.PreferenceFile
 import com.yapi.views.sign_in.SignInErrorData
+import dagger.hilt.android.lifecycle.HiltViewModel
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.create
+import okio.Buffer
+import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Named
 
-class ViewModelEditProfile:ViewModel() {
+
+@HiltViewModel
+class ViewModelEditProfile @Inject constructor(val repository: Repository, val preferenceFile: PreferenceFile, @Named("token") val stringValue:String):ViewModel() {
     var countryCodeValue=ObservableField("")
     var phoneNumberValue=ObservableField("")
     var dismissDialogData=MutableLiveData<Boolean>()
@@ -56,7 +66,15 @@ class ViewModelEditProfile:ViewModel() {
                     if(view.findNavController().currentDestination?.id == R.id.editProfileFragment){
                         if(checkValidation())
                         {
-                            view.findNavController().popBackStack()
+                            if(Constants.API_CALL_DEMO) {
+                                Log.e("First_Token===", stringValue)
+                                Log.e("First_Token111===",
+                                    preferenceFile.fetchStringValue(Constants.USER_TOKEN))
+                                callEditAPIMethod(view)
+                            }else
+                            {
+                                view.findNavController().popBackStack()
+                            }
                         }
                     }
                 }
@@ -64,6 +82,45 @@ class ViewModelEditProfile:ViewModel() {
     }
     }
 
+
+    fun callEditAPIMethod(view:View)
+    {
+        val nameRequest: RequestBody = create("text/plain".toMediaTypeOrNull(), nameValue.get().toString())
+        val userNameRequest: RequestBody = create("text/plain".toMediaTypeOrNull(), userNameValue.get().toString())
+        val emailAddressRequest: RequestBody = create("text/plain".toMediaTypeOrNull(), emailAddressValue.get().toString())
+        val countryCodeRequest: RequestBody = create("text/plain".toMediaTypeOrNull(), countryCodeValue.get().toString())
+        val aboutRequest: RequestBody = create("text/plain".toMediaTypeOrNull(), aboutValue.get().toString())
+
+        val number = phoneNumberValue.get().toString().replace(" ","").toLong()
+        val buffer = Buffer()
+        buffer.writeLong(number)
+        val phoneNumberRequest: RequestBody = create(
+            "application/octet-stream".toMediaTypeOrNull(),
+            buffer.readByteString())
+
+        repository.makeCall(true,
+            requestProcessor = object : ApiProcessor<Response<EditProfileResponse>> {
+                override fun onSuccess(success: Response<EditProfileResponse>) {
+                    Log.e("Resposne_Dataaaa===", success.body().toString())
+
+                    if(view.findNavController().currentDestination?.id == R.id.editProfileFragment){
+                        view.findNavController().popBackStack()
+                    }
+
+                 /*   var bundle= Bundle()
+                    bundle.putString("email",emailFieldValue.get())
+                    view.findNavController().navigate(R.id.action_signInFragment_to_signUpCodeFragment,bundle)*/
+                }
+
+                override fun onError(message: String) {
+                    MainActivity.activity!!.get()!!.showMessage(message)
+                }
+
+                override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<EditProfileResponse> {
+                    return retrofitApi.editProfileAPI(nameRequest,userNameRequest,emailAddressRequest,phoneNumberRequest,countryCodeRequest,aboutRequest)
+                }
+            })
+    }
 
 
 

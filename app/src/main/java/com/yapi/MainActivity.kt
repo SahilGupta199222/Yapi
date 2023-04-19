@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.LinearLayout
 import androidx.activity.viewModels
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -16,6 +17,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.yapi.common.Constants
 import com.yapi.common.MyMessageEvent
 import com.yapi.databinding.ActivityMainBinding
+import com.yapi.pref.A
 import com.yapi.pref.PreferenceFile
 import com.yapi.views.chat.ChatMessagesFragment
 import com.yapi.views.chat.chatGroupInfo.ChatGroupInfoFragment
@@ -31,6 +33,7 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.lang.ref.WeakReference
 import javax.inject.Inject
+import javax.inject.Named
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -40,8 +43,15 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var preferenceFile: PreferenceFile
+    @Inject
+//    @Named("sahilSir")
+    lateinit var testing: A
+    @Inject
+    lateinit var testiing: A
+//    @Named("sahilDone")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i("asdfjasdn","value a->${testing.a}b->${testing.d} e${testing===testiing}")
         dataBinding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(dataBinding.root)
         activity = WeakReference<Activity>(this)

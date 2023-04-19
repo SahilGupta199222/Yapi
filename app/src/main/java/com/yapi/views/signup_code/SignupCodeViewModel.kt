@@ -1,6 +1,5 @@
 package com.yapi.views.signup_code
 
-import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.databinding.ObservableField
@@ -30,16 +29,18 @@ var errorData=MutableLiveData<SignInErrorData>()
             }
             R.id.btnSignUpCode->{
                 if(view.findNavController().currentDestination?.id==R.id.signUpCodeFragment) {
-
                     if(otpValue.get().toString().isEmpty() || otpValue.get().toString() == "null" || otpValue.get().toString() == null){
                         errorData.value=SignInErrorData(MainActivity.activity!!.get()!!.getString(R.string.enter_otp),0)
                     }else
                     if(otpValue.get().toString().length==6){
-                      //  verifyOTPAPIMethod(view)
-
-                        errorData.value= SignInErrorData("",0)
-                        preferenceFile.saveStringValue("login_email",email.toString())
-                        view.findNavController().navigate(R.id.action_signUpCodeFragment_to_signupTeam)
+                        if(Constants.API_CALL_DEMO) {
+                            verifyOTPAPIMethod(view)
+                        }else
+                        {
+                            errorData.value= SignInErrorData("",0)
+                            preferenceFile.saveStringValue("login_email",email.toString())
+                            view.findNavController().navigate(R.id.action_signUpCodeFragment_to_signupTeam)
+                        }
                     }else
                     {
                         errorData.value=SignInErrorData(MainActivity.activity!!.get()!!.getString(R.string.enter_correct_otp),0)
@@ -55,11 +56,17 @@ var errorData=MutableLiveData<SignInErrorData>()
         var jsonObject=JsonObject()
         jsonObject.addProperty("email",email.toString())
         jsonObject.addProperty("otp",otpValue.get().toString())
+
         repository.makeCall(true,
             requestProcessor = object : ApiProcessor<Response<VerifyOTPResponse>> {
                 override fun onSuccess(success: Response<VerifyOTPResponse>) {
                     Log.e("Resposne_Dataaaa===", success.body().toString())
 
+                    preferenceFile.saveStringValue(Constants.USER_TOKEN,success.body()!!.token.toString())
+                    Log.e("mflfldddff111==",success.body()!!.data._id.toString())
+                    preferenceFile.saveStringValue(Constants.LOGIN_USER_ID,success.body()!!.data._id.toString())
+
+                    Log.e("mflfldddff33==",preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
                     errorData.value= SignInErrorData("",0)
                     preferenceFile.saveStringValue("login_email",email.toString())
                     view.findNavController().navigate(R.id.action_signUpCodeFragment_to_signupTeam)

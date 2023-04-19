@@ -119,6 +119,7 @@ class Repository @Inject constructor(val retrofit:RetrofitAPI,@ApplicationContex
                             when {
                                 jsonObject.has("message") -> {
                                     requestProcessor.onError(jsonObject.getString("message"))
+                                    Log.e("Error_Messageee===",jsonObject.toString())
                                     if (!jsonObject.getString("message").equals("Data not found", true))
 ""
                                     //activity.showNegativeAlerter(jsonObject.getString("message"))

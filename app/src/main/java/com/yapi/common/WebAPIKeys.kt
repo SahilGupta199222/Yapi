@@ -8,4 +8,6 @@ object WebAPIKeys {
     const val BASEURL:String="http://3.15.150.5:3000/"
     const val LOGIN_URL="user/sign-up"
     const val VERIFY_OTP_URL="user/verify-otp"
+    const val USER_EDIT_PROFILE="user/edit-user"
+    const val USER_FETCH_PROFILE="user/view-user-detail"
 }

@@ -16,6 +16,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.chip.Chip
 import com.yapi.R
+import com.yapi.common.Constants
 import com.yapi.common.checkDeviceType
 import com.yapi.databinding.FragmentProfileBinding
 import com.yapi.pref.PreferenceFile
@@ -55,7 +56,7 @@ class ProfileFragment : DialogFragment() {
         var second_frame_height= preferenceFile.fetchStringValue("second_frame_height")
         var second_frame_width=  preferenceFile.fetchStringValue("second_frame_width")
         Log.e("nefjkwnddfkewfwefe===",second_frame_height+"==="+second_frame_width)
-        window.setLayout(second_frame_width.toInt(),second_frame_height.toInt())
+      // window.setLayout(second_frame_width.toInt(),second_frame_height.toInt())
         return dialog
     }
 
@@ -83,11 +84,20 @@ class ProfileFragment : DialogFragment() {
         addNextToScreenObserver()
         dismissDialogMethodObserver()
         setTopLayoutMethod()
+        if(Constants.API_CALL_DEMO) {
+            showProfileResponseObserver()
+        }else
+        {
+            viewModel.topProfileVisibility.set(true)
+        }
         return binding.root
     }
 
-    private fun addNextToScreenObserver() {
+    private fun showProfileResponseObserver() {
+        viewModel.fetchProfileData()
+    }
 
+    private fun addNextToScreenObserver() {
         viewModel.openEditProfileData.observe(requireActivity(), Observer {
             var data = it as Boolean
             if (data) {

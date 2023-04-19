@@ -118,3 +118,12 @@ backTintColor:Int)
     }
     layoutEmailSignIn!!.setBackgroundDrawable(drawable)
 }
+
+
+fun addSpaceBetweenPhoneMethod(phone:String):String
+{
+    var firstValue=phone.substring(0,3)
+    var secondValue=phone.substring(3,7)
+    var thirdValue=phone.substring(7,phone.length)
+    return "$firstValue $secondValue $thirdValue"
+}

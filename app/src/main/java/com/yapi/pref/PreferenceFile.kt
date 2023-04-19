@@ -1,7 +1,16 @@
 package com.yapi.pref
 
 import android.content.SharedPreferences
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import javax.inject.Named
+import javax.inject.Singleton
 
 class PreferenceFile @Inject constructor(
      val editor: SharedPreferences.Editor,
@@ -51,4 +60,10 @@ class PreferenceFile @Inject constructor(
     {
         return pref.getFloat(key,0f)
     }
+}
+
+@Singleton
+class A @Inject constructor(   ){
+    var a=122;
+    var d=212;
 }

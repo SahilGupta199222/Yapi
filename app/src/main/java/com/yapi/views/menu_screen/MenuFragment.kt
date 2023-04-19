@@ -18,11 +18,13 @@ import com.yapi.common.GroupEvent
 import com.yapi.common.MyMessageEvent
 import com.yapi.common.checkDeviceType
 import com.yapi.databinding.FragmentMenuBinding
+import com.yapi.pref.PreferenceFile
 import com.yapi.views.add_people.AddPeopleFragment
 import com.yapi.views.profile.ProfileFragment
 import com.yapi.views.search.SearchFragment
 import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MenuFragment : Fragment() {
@@ -43,6 +45,9 @@ class MenuFragment : Fragment() {
     private var adapterLeadsList: AdapterCustomerList? = null
     private var adapterSettingsList: AdapterSettingList? = null
 
+    @Inject
+     lateinit var preferenceFile:PreferenceFile
+
     val viewModel: MenuViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +60,8 @@ class MenuFragment : Fragment() {
         val width = displayMetrics.widthPixels
         viewModel.screenWidth = width
 
+
+        Log.e("mflfldddff22==",preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
        /* val vto: ViewTreeObserver = binding.constraintsTop!!.getViewTreeObserver()
         vto.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
            override fun onGlobalLayout() {
