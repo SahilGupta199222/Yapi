@@ -72,6 +72,9 @@
 
         <action android:id="@+id/action_menuFragment_to_workspacelist"
             app:destination="@id/workspacelist"/>
+
+        <action android:id="@+id/action_menuFragment_to_savedItemsFragment"
+           app:destination="@id/savedItemsFragment" />
     </fragment>
 
     <fragment
@@ -226,4 +229,9 @@ android:name="com.yapi.views.workspaces.workspacesList.WorkSpacesListFragment"
         android:id="@+id/searchResultFragment"
         android:name="com.yapi.views.search_result.SearchResultFragment"
         android:label="SearchResultFragment" />
+
+    <fragment android:id="@+id/savedItemsFragment"
+        android:name="com.yapi.views.savedItems.SavedItemsFragment"
+        android:label="savedItemsFragment"/>
+
 </navigation>

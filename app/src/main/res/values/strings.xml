@@ -320,4 +320,6 @@
     <string name="save_changes_text">Save Changes</string>
     <string name="add_workspace_text_values">Add workspace</string>
 
+    <string name="saved_items_text">Saved Items</string>
+    <string name="unsave_message_text">Unsave Message</string>
 </resources>

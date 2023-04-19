@@ -22,6 +22,7 @@ import com.yapi.views.chat.chatGroupInfo.ChatGroupInfoFragment
 import com.yapi.views.chat.chatUserInfo.ChatUserInfoFragment
 import com.yapi.views.chat_empty.ChatEmptyFragment
 import com.yapi.views.menu_screen.MenuFragment
+import com.yapi.views.savedItems.SavedItemsFragment
 import com.yapi.views.userList.UserListFragment
 import com.yapi.views.workspaces.workspacesList.WorkSpacesListFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -164,7 +165,12 @@ class MainActivity : AppCompatActivity() {
                                     {
                                         var fragment = WorkSpacesListFragment()
                                         openUserMamangementScreen(fragment)
-                                    }
+                                    }else
+                                        if(event.screenName==Constants.SAVED_ITEMS_KEY)
+                                        {
+                                            var fragment = SavedItemsFragment()
+                                            openUserMamangementScreen(fragment)
+                                        }
 
     }
 

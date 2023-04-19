@@ -24,4 +24,5 @@ object Constants {
  const val USER_ID="user_id"
  const val USER_MANAGEMENT="user_management"
  const val WORKSPACE_MANAGEMENT="workspace_management"
+ const val SAVED_ITEMS_KEY="saved_items_key"
 }
