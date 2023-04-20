@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.yapi.R
+import com.yapi.common.Constants
 import com.yapi.common.changeBackgroundForEditError
 import com.yapi.common.changeBackgroundForError
 import com.yapi.databinding.SecondStepCreateTeamBinding
@@ -35,6 +36,12 @@ class ThirdStepCreateFragment : Fragment() {
 
         var width = displayMetrics.widthPixels
         viewModel.screenWidth=width
+
+        //bundle.putString("team_id", success.body()!!.data._id)
+        if(Constants.API_CALL_DEMO) {
+            var team_id = requireArguments().getString("team_id")
+            viewModel.teamId = team_id
+        }
         return dataBinding.root
     }
 

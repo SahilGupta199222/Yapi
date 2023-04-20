@@ -160,9 +160,8 @@
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/imgPicImageCreateGroup"
-                            android:layout_width="@dimen/iconSize"
-                            android:layout_height="@dimen/iconSize"
-                            android:clipToOutline="true"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
                             android:src="@drawable/image_drawable"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -346,6 +345,7 @@
                         android:paddingTop="@dimen/etVerticalPadding"
                         android:paddingEnd="@dimen/etHorizontalPadding"
                         android:paddingBottom="@dimen/etVerticalPadding"
+                        android:enabled="false"
                         android:text="@={model.emailAddressValue}"
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/normalTextSize"

@@ -1,5 +1,6 @@
 package com.yapi.views.add_people
 
+import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,6 +13,8 @@ import com.yapi.common.hideKeyboard
 class ViewModelAddPeople : ViewModel() {
     var addPeopleEmailScreenOpenData= MutableLiveData<Boolean>()
     var dismissDialogData=MutableLiveData<Boolean>()
+    var teamId:String?=""
+
     fun onClick(view: View) {
         when (view.id) {
             R.id.imgCancelAddPeople,R.id.btnBack,R.id.ivOutsideCloseAddPeople -> {
@@ -23,12 +26,13 @@ class ViewModelAddPeople : ViewModel() {
             }
             }
             R.id.layoutSendEmailInvitationAddPeople->{
-
                 if(checkDeviceType()){
                     addPeopleEmailScreenOpenData.value=true
                 }else
                 {
-                    view.findNavController().navigate(R.id.action_addPeopleFragment_to_addPeopleEmailFragment)
+                    var bundle = Bundle()
+                    bundle.putString("team_id", teamId)
+                    view.findNavController().navigate(R.id.action_addPeopleFragment_to_addPeopleEmailFragment,bundle)
                 }
             }
             R.id.btnNext->{

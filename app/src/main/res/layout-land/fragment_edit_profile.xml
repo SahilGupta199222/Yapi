@@ -416,6 +416,7 @@
                         android:paddingTop="@dimen/etVerticalPadding"
                         android:paddingEnd="@dimen/etHorizontalPadding"
                         android:paddingBottom="@dimen/etVerticalPadding"
+                        android:enabled="false"
                         android:text="@={model.emailAddressValue}"
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/normalTextSize"

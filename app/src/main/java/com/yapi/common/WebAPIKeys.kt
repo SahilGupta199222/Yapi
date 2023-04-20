@@ -10,4 +10,6 @@ object WebAPIKeys {
     const val VERIFY_OTP_URL="user/verify-otp"
     const val USER_EDIT_PROFILE="user/edit-user"
     const val USER_FETCH_PROFILE="user/view-user-detail"
+    const val GROUP_CREATE_TEAM="group/create-team"
+    const val ADD_TEAM_MEMBERS="group/add-team-members"
 }

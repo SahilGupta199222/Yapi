@@ -26,7 +26,7 @@ object Constants {
  const val WORKSPACE_MANAGEMENT="workspace_management"
  const val SAVED_ITEMS_KEY="saved_items_key"
 
- const val USER_TOKEN="token"
+  var USER_TOKEN="token"
   var LOGIN_USER_ID="login_user_id"
 
  var API_CALL_DEMO:Boolean=false

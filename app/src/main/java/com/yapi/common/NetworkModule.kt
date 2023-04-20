@@ -30,7 +30,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideHttpClient( @Named("token") token:String): OkHttpClient {
+    fun provideHttpClient(@Named("token") token:String): OkHttpClient {
         var newToken=""
         if(token!="")
         {

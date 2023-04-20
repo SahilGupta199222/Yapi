@@ -1,7 +1,11 @@
 package com.yapi.views.edit_profile
 
 import android.app.Dialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -10,9 +14,12 @@ import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.FileProvider
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.bumptech.glide.Glide
+import com.yapi.BuildConfig
 import com.yapi.R
 import com.yapi.common.*
 import com.yapi.databinding.FragmentEditProfileBinding
@@ -20,7 +27,12 @@ import com.yapi.pref.PreferenceFile
 import com.yapi.views.profile.ProfileData
 import com.yapi.views.sign_in.SignInErrorData
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class EditProfileFragment : DialogFragment(), View.OnClickListener {
@@ -131,6 +143,7 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
         scrollEditTextMethod()
 
         binding.ivDrpArrow.setOnClickListener(this)
+        binding.layoutUploadImageEditProfile.setOnClickListener(this)
 
         setPhoneMethod(binding.countryCodePickerEditProfile.selectedCountryCodeWithPlus)
         binding.apply {
@@ -236,6 +249,9 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
                 //showToastMessage("Hello")
                 // binding.countryCodePickerEditProfile.
                 //  }
+            }
+            R.id.layoutUploadImageEditProfile->{
+                openCameraIntent()
             }
         }
     }
@@ -380,5 +396,56 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
         changeBackgroundForEditError(etNameEditProfile,requireActivity().resources.getColor(
             R.color.white),
             requireActivity().resources.getColor(R.color.liteGrey))
+    }
+
+    private val REQUEST_CAPTURE_IMAGE = 200
+    var photoFile: File? = null
+    private fun openCameraIntent() {
+        val pictureIntent = Intent(
+            MediaStore.ACTION_IMAGE_CAPTURE)
+        if (pictureIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
+            //Create a file to store the image
+
+            try {
+                photoFile = createImageFile()
+            } catch (ex: IOException) {
+            }
+            if (photoFile != null) {
+                val photoURI: Uri =
+                    FileProvider.getUriForFile(requireActivity(), "${BuildConfig.APPLICATION_ID}.fileprovider", photoFile!!)
+                pictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                    photoURI)
+                startActivityForResult(pictureIntent,
+                    REQUEST_CAPTURE_IMAGE)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+    if(requestCode==REQUEST_CAPTURE_IMAGE)
+    {
+        //binding.imgGalleryUploadEditProfile.set
+        Glide.with(requireActivity())
+            .load(photoFile)
+           // .override(300, 200)
+            .into(binding.imgPicImageCreateGroup)
+    }
+    }
+
+    var imagePath: String? = null
+    @Throws(IOException::class)
+    private fun createImageFile(): File? {
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss",
+            Locale.getDefault()).format(Date())
+        val imageFileName = "IMG_" + timeStamp + "_"
+        val storageDir: File = requireActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
+        val image = File.createTempFile(
+            imageFileName,
+            ".jpg",
+            storageDir
+        )
+        imagePath = image.absolutePath
+        return image
     }
 }

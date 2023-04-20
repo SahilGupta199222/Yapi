@@ -116,9 +116,9 @@ class CreateGroupFragment : DialogFragment(), View.OnClickListener {
 
     private fun addObserverForOpenAddPeople() {
         viewModel.addPeopleScreenOpenData.observe(requireActivity(), Observer {
-            var data = it as Boolean
-            if (data) {
-                AddPeopleFragment.newInstanceAddPeople("")
+            var data = it as String
+            if (data!=null) {
+                AddPeopleFragment.newInstanceAddPeople(data)
                     .showNow(requireActivity().supportFragmentManager, " SimpleDialog.TAG")
             }
         })

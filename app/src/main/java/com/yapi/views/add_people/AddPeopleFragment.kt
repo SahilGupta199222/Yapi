@@ -10,6 +10,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.yapi.R
+import com.yapi.common.Constants
 import com.yapi.common.checkDeviceType
 import com.yapi.common.hideKeyboard
 import com.yapi.databinding.FragmentAddPeopleBinding
@@ -28,9 +29,9 @@ class AddPeopleFragment : DialogFragment() {
     lateinit var preferenceFile: PreferenceFile
 
     companion object {
-        fun newInstanceAddPeople(title: String): AddPeopleFragment {
+        fun newInstanceAddPeople(teamId: String): AddPeopleFragment {
             val args = Bundle()
-            args.putString("11", title)
+            args.putString("team_id", teamId)
             val fragment = AddPeopleFragment()
             fragment.arguments = args
             return fragment
@@ -72,6 +73,12 @@ class AddPeopleFragment : DialogFragment() {
         addObserverForOpenAddPeople()
         dialogDismissMethod()
         setTouchListenereForNested()
+
+        if(Constants.API_CALL_DEMO)
+        {
+            var teamId=requireArguments().getString("team_id")
+            viewModel.teamId=teamId
+        }
         return binding.root
     }
 
@@ -126,7 +133,8 @@ class AddPeopleFragment : DialogFragment() {
         viewModel.addPeopleEmailScreenOpenData.observe(requireActivity(), Observer {
             var data =it as Boolean
             if(data){
-                AddPeopleEmailFragment.newInstanceAddPeopleEmail("").showNow(requireActivity().supportFragmentManager," SimpleDialog.TAG")
+
+                AddPeopleEmailFragment.newInstanceAddPeopleEmail(viewModel.teamId!!).showNow(requireActivity().supportFragmentManager," SimpleDialog.TAG")
             }
         })
     }

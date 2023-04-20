@@ -13,10 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.yapi.R
-import com.yapi.common.Constants
-import com.yapi.common.GroupEvent
-import com.yapi.common.MyMessageEvent
-import com.yapi.common.checkDeviceType
+import com.yapi.common.*
 import com.yapi.databinding.FragmentMenuBinding
 import com.yapi.pref.PreferenceFile
 import com.yapi.views.add_people.AddPeopleFragment
@@ -62,6 +59,11 @@ class MenuFragment : Fragment() {
 
 
         Log.e("mflfldddff22==",preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
+        Log.e("mflfldddff555==",preferenceFile.fetchStringValue(Constants.USER_TOKEN))
+        Log.e("mflfldddff8888==",NumberToWordsConverter.convert(47))
+
+
+
        /* val vto: ViewTreeObserver = binding.constraintsTop!!.getViewTreeObserver()
         vto.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
            override fun onGlobalLayout() {

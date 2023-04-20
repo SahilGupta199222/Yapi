@@ -80,4 +80,6 @@
     <dimen name="side_menu_lineMargin">@dimen/_3sdp</dimen>
 
     <dimen name="chat_view_line_height">@dimen/_1sdp</dimen>
+
+    <dimen name="menu_left_margin">@dimen/_minus3sdp</dimen>
 </resources>

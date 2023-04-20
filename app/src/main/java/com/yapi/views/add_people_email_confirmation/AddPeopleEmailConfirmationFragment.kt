@@ -4,23 +4,25 @@ import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.yapi.R
+import com.yapi.common.Constants
+import com.yapi.common.NumberToWordsConverter
 import com.yapi.common.checkDeviceType
-import com.yapi.databinding.FragmentAddPeopleBinding
 import com.yapi.databinding.FragmentAddPeopleEmailConfirmationBinding
 import com.yapi.pref.PreferenceFile
-import com.yapi.views.create_group.CreateGroupFragment
+import com.yapi.views.add_people_email.EmailData
+import com.yapi.views.add_people_email.Invitaion
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddPeopleEmailConfirmationFragment : DialogFragment() {
+    private var emailData: EmailData?=null
     private lateinit var binding:FragmentAddPeopleEmailConfirmationBinding
     private val viewModel:ViewModelAddPeopleEmailConfirmation by viewModels()
 
@@ -29,9 +31,9 @@ class AddPeopleEmailConfirmationFragment : DialogFragment() {
 
     //add_email_confirmation_logo
     companion object {
-        fun newInstanceEmailConfirmation(title: String): AddPeopleEmailConfirmationFragment {
+        fun newInstanceEmailConfirmation(data: EmailData): AddPeopleEmailConfirmationFragment {
             val args = Bundle()
-            args.putString("11", title)
+            args.putSerializable("invitation_list", data)
             val fragment = AddPeopleEmailConfirmationFragment()
             fragment.arguments = args
             return fragment
@@ -70,6 +72,23 @@ class AddPeopleEmailConfirmationFragment : DialogFragment() {
         binding=FragmentAddPeopleEmailConfirmationBinding.inflate(LayoutInflater.from(requireContext()))
         binding.model=viewModel
         dialogDismissMethod()
+
+
+
+
+        if(Constants.API_CALL_DEMO)
+        {
+           emailData= requireArguments().getSerializable("invitation_list") as EmailData
+            if(emailData!=null)
+            {
+                setList(emailData!!.invitaions!!)
+            }
+        }else
+        {
+            var countValue=requireActivity().getString(R.string.you_have_invited)+" one "+requireActivity().getString(R.string.one_person)
+            viewModel.invitedPersonCount.set(countValue)
+        }
+
         return binding.root
     }
 
@@ -79,23 +98,28 @@ class AddPeopleEmailConfirmationFragment : DialogFragment() {
     }
 
     private fun init() {
-        setList()
+
         setTopLayoutMethod()
         binding.apply {
 
         }
     }
 
-    private fun setList() {
-        val list=arguments?.getStringArrayList("personList")
+    private fun setList(invitationList:ArrayList<Invitaion>) {
+      //  val list=arguments?.getStringArrayList("personList")
         var listCount="0"
-        if(list?.isNotEmpty()==true){
-           listCount= list.size.toString()
-            binding.rvEmailConfirmationOfAddPeopleEmailConf.adapter=AdapterEmailConfirmation(requireContext(),list)
+        if(invitationList?.isNotEmpty()==true){
+           listCount= invitationList.size.toString()
+            binding.rvEmailConfirmationOfAddPeopleEmailConf.adapter=AdapterEmailConfirmation(requireContext(),invitationList)
         }else
         {
             listCount= "0"
         }
+
+        // val number = 50
+        val convertedNumber = NumberToWordsConverter.convert(listCount.toInt())
+        println(convertedNumber) // Output: Fifty
+
         var countValue=requireActivity().getString(R.string.you_have_invited)+" "+listCount+" "+requireActivity().getString(R.string.one_person)
         viewModel.invitedPersonCount.set(countValue)
     }
