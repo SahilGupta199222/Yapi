@@ -55,18 +55,18 @@ class MenuFragment : Fragment() {
         val width = displayMetrics.widthPixels
         viewModel.screenWidth = width
 
-
         Log.e("mflfldddff22==", preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
         Log.e("mflfldddff555==", preferenceFile.fetchStringValue(Constants.USER_TOKEN))
         Log.e("mflfldddff8888==", NumberToWordsConverter.convert(47))
 
-        viewModel.fetchGroupDataMethod().observe(requireActivity(), Observer {
-            var data = it as AllData
-            if(data!=null) {
-                setGroupListAdapter(data.groups)
-            }
-        })
-
+        if (Constants.API_CALL_DEMO) {
+            viewModel.fetchGroupDataMethod().observe(requireActivity(), Observer {
+                var data = it as AllData
+                if (data != null) {
+                    setGroupListAdapter(data.groups)
+                }
+            })
+        }
         /* val vto: ViewTreeObserver = binding.constraintsTop!!.getViewTreeObserver()
          vto.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
@@ -318,7 +318,6 @@ class MenuFragment : Fragment() {
             binding.rvGroupListMenu.visibility = View.VISIBLE
 
 
-
         } else {
             binding.imgArrowGroupMenu.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -543,11 +542,26 @@ class MenuFragment : Fragment() {
         newGroupsList.clear()
         if (groupsList.size > 0) {
             for (idx in 0 until groupsList.size) {
+                groupsList[idx].selected = false
                 newGroupsList.add(groupsList[idx])
             }
         }
-        newGroupsList.add(GroupData(-1, "-1", "", "", "", "", "", list2, false, requireActivity().getString(R.string.createGroups_text), false,
-            "", "", "", ""))
+        newGroupsList.add(GroupData(-1,
+            "-1",
+            "",
+            "",
+            "",
+            "",
+            "",
+            list2,
+            false,
+            requireActivity().getString(R.string.createGroups_text),
+            false,
+            "",
+            "",
+            "",
+            "",
+            false))
         /*   if(groupsList.size>0)
            {
                for(idx in 0 until groupsList.size)
@@ -573,43 +587,48 @@ class MenuFragment : Fragment() {
         binding.rvGroupListMenu.layoutParams.height = rvHeight
         Log.e("fknkwefwsfwfwaf===", rowHeight.toString())
         adapterGroupsList =
-            AdapterGroupsList(requireContext(), true, newGroupsList, object : AdapterGroupsList.Click {
-                @SuppressLint("NotifyDataSetChanged")
-                override fun onSeletect(position: Int, userType: String) {
-                    if (adapterGroupsList?.getListt()?.get(position)!!.__v == -1) {
-                        if (checkDeviceType()) {
-                            System.out.println("phone========tablet")
-                            EventBus.getDefault()
-                                .post(GroupEvent(2, Constants.CREATEGOUP_KEY)) //post event
+            AdapterGroupsList(requireContext(),
+                true,
+                newGroupsList,
+                object : AdapterGroupsList.Click {
+                    @SuppressLint("NotifyDataSetChanged")
+                    override fun onSeletect(position: Int, userType: String) {
+                        if (adapterGroupsList?.getListt()?.get(position)!!.__v == -1) {
+                            if (checkDeviceType()) {
+                                System.out.println("phone========tablet")
+                                EventBus.getDefault()
+                                    .post(GroupEvent(2, Constants.CREATEGOUP_KEY)) //post event
+                            } else {
+                                findNavController().navigate(R.id.action_menuFragment_to_createGroupFragment)
+                            }
                         } else {
-                            findNavController().navigate(R.id.action_menuFragment_to_createGroupFragment)
-                        }
-                    } else {
-                        for (i in 0 until adapterGroupsList?.getListt()?.size!!) {
-                            adapterGroupsList?.getListt()?.get(i)?.selected = position == i
-                        }
-                        Log.i("asdfjanskdf",
-                            "before notifiy list is\n${adapterGroupsList?.getListt()}")
-                        adapterGroupsList?.notifyDataSetChanged()
+                            for (i in 0 until adapterGroupsList?.getListt()?.size!!) {
+                                adapterGroupsList?.getListt()?.get(i)?.selected = position == i
+                            }
+                            Log.i("asdfjanskdf",
+                                "before notifiy list is\n${adapterGroupsList?.getListt()}")
+                            adapterGroupsList?.notifyDataSetChanged()
 
-                        if (checkDeviceType()) {
-                            System.out.println("phone========tablet")
-                            EventBus.getDefault()
-                                .post(MyMessageEvent(3, Constants.CHAT_MESSAGE_KEY)) //post event
-                        } else {
-                            if (findNavController().currentDestination?.id == R.id.menuFragment) {
-                                var bundle = Bundle()
-                                bundle.putString("userType", userType)
-                                bundle.putSerializable("group_data",
-                                    adapterGroupsList!!.getListt()[position])
-                                findNavController()
-                                    .navigate(R.id.action_menuFragment_to_chatMessageFragment,
-                                        bundle)
+                            if (checkDeviceType()) {
+                                System.out.println("phone========tablet")
+                                EventBus.getDefault()
+                                    .post(MyMessageEvent(3,
+                                        Constants.CHAT_MESSAGE_KEY)) //post event
+                            } else {
+                                if (findNavController().currentDestination?.id == R.id.menuFragment) {
+                                    var bundle = Bundle()
+                                    bundle.putString("userType", userType)
+                                    bundle.putSerializable("group_data",
+                                        adapterGroupsList!!.getListt()[position])
+                                    findNavController()
+                                        .navigate(R.id.action_menuFragment_to_chatMessageFragment,
+                                            bundle)
+                                }
                             }
                         }
                     }
-                }
-            }, Constants.GROUPS_KEY)
+                },
+                Constants.GROUPS_KEY)
         binding.rvGroupListMenu.adapter = adapterGroupsList
     }
 

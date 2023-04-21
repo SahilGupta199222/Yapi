@@ -58,13 +58,13 @@ class AdapterGroupsList(
             holder.icon.setColorFilter(ContextCompat.getColor(context, R.color.medium_grey_color))
             holder.title.setTextColor(ContextCompat.getColor(context, R.color.medium_grey_color))
         }
-       /* if (list[position].selected!!) {
+        if (list[position].selected!!) {
             holder.selectedLine.visibility = View.VISIBLE
             holder.icon.setColorFilter(ContextCompat.getColor(context, R.color.blueColor))
             holder.title.setTextColor(ContextCompat.getColor(context, R.color.blueColor))
         } else {
             holder.selectedLine.visibility = View.INVISIBLE
-        }*/
+        }
 
         if (list[position].__v == -1) {
             holder.constraintsTop.visibility = View.GONE
