@@ -4,6 +4,10 @@ import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
+<<<<<<< HEAD
+import android.provider.ContactsContract.CommonDataKinds.Email
+=======
+>>>>>>> origin/master
 import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
@@ -32,9 +36,9 @@ class AddPeopleEmailFragment : DialogFragment() {
     lateinit var preferenceFile: PreferenceFile
 
     companion object {
-        fun newInstanceAddPeopleEmail(title: String): AddPeopleEmailFragment {
+        fun newInstanceAddPeopleEmail(teamId: String): AddPeopleEmailFragment {
             val args = Bundle()
-            args.putString("11", title)
+            args.putString("team_id", teamId)
             val fragment = AddPeopleEmailFragment()
             fragment.arguments = args
             return fragment
@@ -79,6 +83,12 @@ class AddPeopleEmailFragment : DialogFragment() {
         hideKeyboardDataMethod()
 
         setTouchListenereForNested()
+
+        if(Constants.API_CALL_DEMO)
+        {
+            var teamId=requireArguments().getString("team_id")
+            viewModelAddPeopleEmail.teamId=teamId
+        }
 
         return binding.root
     }
@@ -165,10 +175,10 @@ class AddPeopleEmailFragment : DialogFragment() {
 
     private fun addObserverForOpenAddPeopleEmail() {
         viewModelAddPeopleEmail.addPeopleEmailConfirmationOpenData.observe(requireActivity(), Observer {
-            var data =it as Boolean
-            if(data){
-                AddPeopleEmailConfirmationFragment.newInstanceEmailConfirmation("").showNow(requireActivity().supportFragmentManager," SimpleDialog.TAG")
-            }
+            var data =it as EmailData
+           // if(data!=null){
+                AddPeopleEmailConfirmationFragment.newInstanceEmailConfirmation(data).showNow(requireActivity().supportFragmentManager," SimpleDialog.TAG")
+           // }
         })
     }
 

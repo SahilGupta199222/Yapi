@@ -19,7 +19,7 @@
     <string name="emailAddress"> EMAIL ADDRESS</string>
     <string name="enterEmail">Enter Email Address</string>
     <string name="ccontinue">Continue</string>
-    <string name="these_invitation_for">These invitations are for \nsulaman.abir@gmail.com</string>
+    <string name="these_invitation_for">These invitations are for</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sign_in">Sign In</string>
     <string name="signInInfo">Sign in to start the communications with \nyour mates</string>
@@ -262,6 +262,7 @@
     <string name="edit_member_info_text">Edit Member Info</string>
     <string name="deactivate_member_text">Deactivate Member</string>
     <string name="remove_member_text">Remove Member</string>
+    <string name="remove">Remove</string>
 
     <string name="are_you_sure_deactivate_user">Are you sure you want to deactivate this user?</string>
 
@@ -319,4 +320,11 @@
     <string name="save_changes_text">Save Changes</string>
     <string name="add_workspace_text_values">Add workspace</string>
 
+<<<<<<< HEAD
+    <string name="saved_items_text">Saved Items</string>
+    <string name="unsave_message_text">Unsave Message</string>
+
+    <string name="upload_your_background_text">upload your background</string>
+=======
+>>>>>>> origin/master
 </resources>

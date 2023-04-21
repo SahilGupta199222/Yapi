@@ -24,4 +24,14 @@ object Constants {
  const val USER_ID="user_id"
  const val USER_MANAGEMENT="user_management"
  const val WORKSPACE_MANAGEMENT="workspace_management"
+<<<<<<< HEAD
+ const val SAVED_ITEMS_KEY="saved_items_key"
+
+  var USER_TOKEN="token"
+  var LOGIN_USER_ID="login_user_id"
+  var USER_PROFILE_CREATED="user_profile_created"
+
+  var API_CALL_DEMO:Boolean=true
+=======
+>>>>>>> origin/master
 }

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.LinearLayout
 import androidx.activity.viewModels
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -16,12 +17,15 @@ import androidx.navigation.fragment.NavHostFragment
 import com.yapi.common.Constants
 import com.yapi.common.MyMessageEvent
 import com.yapi.databinding.ActivityMainBinding
+import com.yapi.pref.A
 import com.yapi.pref.PreferenceFile
 import com.yapi.views.chat.ChatMessagesFragment
 import com.yapi.views.chat.chatGroupInfo.ChatGroupInfoFragment
 import com.yapi.views.chat.chatUserInfo.ChatUserInfoFragment
 import com.yapi.views.chat_empty.ChatEmptyFragment
+import com.yapi.views.menu_screen.GroupData
 import com.yapi.views.menu_screen.MenuFragment
+import com.yapi.views.savedItems.SavedItemsFragment
 import com.yapi.views.userList.UserListFragment
 import com.yapi.views.workspaces.workspacesList.WorkSpacesListFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,6 +34,10 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.lang.ref.WeakReference
 import javax.inject.Inject
+<<<<<<< HEAD
+import javax.inject.Named
+=======
+>>>>>>> origin/master
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -39,8 +47,15 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var preferenceFile: PreferenceFile
+    @Inject
+//    @Named("sahilSir")
+    lateinit var testing: A
+    @Inject
+    lateinit var testiing: A
+//    @Named("sahilDone")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i("asdfjasdn","value a->${testing.a}b->${testing.d} e${testing===testiing}")
         dataBinding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(dataBinding.root)
         activity = WeakReference<Activity>(this)
@@ -141,7 +156,10 @@ class MainActivity : AppCompatActivity() {
 
         } else
             if (event.screenName == Constants.CHAT_MESSAGE_KEY) {
-                createChatMethod()
+
+                var oldGroupData=event.allData as GroupData
+
+                createChatMethod(oldGroupData)
             } else
                 if (event.screenName == Constants.USER_PROFILE) {
                     showTabsMethod(3, event.screenName)
@@ -164,7 +182,16 @@ class MainActivity : AppCompatActivity() {
                                     {
                                         var fragment = WorkSpacesListFragment()
                                         openUserMamangementScreen(fragment)
+<<<<<<< HEAD
+                                    }else
+                                        if(event.screenName==Constants.SAVED_ITEMS_KEY)
+                                        {
+                                            var fragment = SavedItemsFragment()
+                                            openUserMamangementScreen(fragment)
+                                        }
+=======
                                     }
+>>>>>>> origin/master
 
     }
 
@@ -174,10 +201,11 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().replace(R.id.secondFrame, fragment).commit()
     }
 
-    fun createChatMethod() {
+    fun createChatMethod(groupData:GroupData) {
         //   ChatMessagesFragment.newInstanceChatMethod("").show(supportFragmentManager," SimpleDialog.TAG")
         var bundle = Bundle()
         bundle.putString("userType", "")
+        bundle.putSerializable("group_data", groupData)
         var fragment = ChatMessagesFragment()
         fragment.arguments = bundle
         supportFragmentManager.beginTransaction().replace(R.id.secondFrame, fragment).commit()

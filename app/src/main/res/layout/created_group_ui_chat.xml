@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="mViewModel"
+            type="com.yapi.views.chat.ChatViewModel" />
+
+        <variable
+            name="mView"
+            type="android.view.View" />
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/groupScreenInfoEmpty"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:background="#FAFAFA"
     android:layout_height="wrap_content">
 <androidx.appcompat.widget.AppCompatTextView
     android:id="@+id/tvGroupChatTitle"
-    android:text="@string/created_group_title_chat"
+    android:text="@{mViewModel.emptyGroupMessageTitle}"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"

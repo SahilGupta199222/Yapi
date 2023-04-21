@@ -22,13 +22,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:background="@drawable/rounded_background"
                 android:layout_width="@dimen/fortyFourIconSize"
+                android:backgroundTint="#E5F9FF"
                 android:fontFamily="@font/larsseit_bold"
                 android:layout_height="@dimen/fortyFourIconSize"/>
 
             <com.yapi.common.RoundRectCornerImageView
+                android:id="@+id/ivGroupPhoto"
                 android:layout_width="@dimen/fortyFourIconSize"
                 android:layout_height="@dimen/fortyFourIconSize"
                 android:src="@drawable/demo_photo"
+                android:visibility="gone"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 />
@@ -66,6 +69,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:id="@+id/tvMembersCount"
             android:text="15 members"
             android:textSize="@dimen/normalSmallTextSize"
             android:fontFamily="@font/larsseit_regular"

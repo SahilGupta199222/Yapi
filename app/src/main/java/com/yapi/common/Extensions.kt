@@ -6,6 +6,7 @@ import android.graphics.drawable.GradientDrawable
 import android.net.ConnectivityManager
 import android.text.TextUtils
 import android.util.Patterns
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText
@@ -21,6 +22,8 @@ fun Activity.hideKeyboard() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         imm?.hideSoftInputFromWindow(view.windowToken, 0)
     }
+
+
 }
 
 fun Activity.isEmailValid(email: String): String {
@@ -63,6 +66,7 @@ fun getTextSizeValue(text1: Float) {
     var newTextSize = "_$text$showText"
 //  MainActivity.activity.get().resources.getDimension(com.intuit.ssp.R.dimen._10ssp)
 }
+
 
 fun showToastMessage(message: String) {
     Toast.makeText(MainActivity.activity!!.get(), message, Toast.LENGTH_SHORT).show()
@@ -117,4 +121,31 @@ backTintColor:Int)
         drawable.setTint(backTintColor)
     }
     layoutEmailSignIn!!.setBackgroundDrawable(drawable)
+}
+
+
+fun addSpaceBetweenPhoneMethod(phone:String):String
+{
+    var firstValue=phone.substring(0,3)
+    var secondValue=phone.substring(3,7)
+    var thirdValue=phone.substring(7,phone.length)
+    return "$firstValue $secondValue $thirdValue"
+}
+
+fun convertFromFullNameToTwoString(name:String):String
+{
+    var finalValue=""
+    if(name.contains(" "))
+    {
+        var splitValue=name.split(" ")
+        finalValue= splitValue[0].toCharArray()[0]+""+splitValue[0].toCharArray()[1]
+    }else
+        if(name.length>1)
+        {
+            finalValue=name.substring(0,2)
+        }else
+        {
+            finalValue=name.substring(0,1)
+        }
+    return finalValue.toUpperCase()
 }

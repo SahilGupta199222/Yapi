@@ -42,4 +42,7 @@
     <color name="error_box_color">#FFF2F2</color>
 
     <color name="media_back_color">#E7F0F9</color>
+
+    <color name="saved_items_line_color">#EBEBEB</color>
+    <color name="saved_title_message_type">#575757</color>
 </resources>

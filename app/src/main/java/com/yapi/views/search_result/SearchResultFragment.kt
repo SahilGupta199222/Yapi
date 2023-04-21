@@ -15,6 +15,10 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.yapi.R
 import com.yapi.common.checkDeviceType
+<<<<<<< HEAD
+import com.yapi.common.hideKeyboard
+=======
+>>>>>>> origin/master
 import com.yapi.pref.PreferenceFile
 import com.yapi.views.search.SearchFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -97,6 +101,18 @@ class SearchResultFragment : DialogFragment() {
             }
         })
     }
+<<<<<<< HEAD
+    fun setTouchListenereForNested()
+    {
+        binding.nestedScrollViewSearchResult.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                requireActivity().hideKeyboard()
+                return false
+            }
+        })
+    }
+=======
+>>>>>>> origin/master
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -107,7 +123,7 @@ class SearchResultFragment : DialogFragment() {
     private fun init() {
         setBackgroundRectMethod()
         binding.apply {
-
+            setTouchListenereForNested()
             txtTempResultSearch.setOnClickListener {
                 findNavController().popBackStack()
             }

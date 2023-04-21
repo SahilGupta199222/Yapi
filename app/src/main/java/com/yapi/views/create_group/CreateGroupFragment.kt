@@ -9,6 +9,7 @@ import android.view.*
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -24,7 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CreateGroupFragment : DialogFragment() {
+class CreateGroupFragment : DialogFragment(), View.OnClickListener {
     private lateinit var binding: FragmentCreateGroupBinding
     val viewModel: ViewModelCreateGroup by viewModels()
 
@@ -90,7 +91,16 @@ class CreateGroupFragment : DialogFragment() {
         addObserverForOpenAddPeople()
         dialogDismissMethod()
         hideKeyboardObserver()
+        clickMethod()
+
         return binding.root
+    }
+
+    //For call Click Listener
+    private fun clickMethod() {
+
+        binding.layoutUploadImageCreateGroup.setOnClickListener(this)
+
     }
 
     private fun hideKeyboardObserver() {
@@ -106,9 +116,9 @@ class CreateGroupFragment : DialogFragment() {
 
     private fun addObserverForOpenAddPeople() {
         viewModel.addPeopleScreenOpenData.observe(requireActivity(), Observer {
-            var data = it as Boolean
-            if (data) {
-                AddPeopleFragment.newInstanceAddPeople("")
+            var data = it as String
+            if (data!=null) {
+                AddPeopleFragment.newInstanceAddPeople(data)
                     .showNow(requireActivity().supportFragmentManager, " SimpleDialog.TAG")
             }
         })
@@ -191,17 +201,32 @@ class CreateGroupFragment : DialogFragment() {
             {
                 errorText!!.setText(data.message)
 
-                changeBackgroundForEditError(editText!!,requireActivity().resources.getColor(
-                    R.color.error_box_color),
-                    requireActivity().resources.getColor(R.color.error_border_color))
+                changeBackgroundForEditError(editText!!, ContextCompat.getColor(requireContext(),R.color.error_box_color),
+                    ContextCompat.getColor(requireContext(),R.color.error_border_color))
             }else {
                 if (data.fieldId != 0) {
                     errorText!!.setText("")
-                    changeBackgroundForEditError(editText!!, requireActivity().resources.getColor(
-                        R.color.liteGrey),
-                        requireActivity().resources.getColor(R.color.white))
+
+
+                    changeBackgroundForEditError(editText!!, ContextCompat.getColor(requireContext(),R.color.liteGrey),
+                        ContextCompat.getColor(requireContext(),R.color.white))
                 }
             }
         })
+    }
+
+    fun uploadPhotoMethod()
+    {
+
+    }
+
+    override fun onClick(v: View?) {
+        when(v!!.id)
+        {
+            R.id.layoutUploadImageCreateGroup->{
+                Log.e("kgkgvwsgwggwsg","wggwgwggw")
+
+            }
+        }
     }
 }

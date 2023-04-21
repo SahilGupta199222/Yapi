@@ -8,6 +8,10 @@
         <variable
             name="mViewmodel"
             type="com.yapi.views.menu_screen.MenuViewModel" />
+
+        <variable
+            name="mView"
+            type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,6 +49,7 @@
                         android:id="@+id/imgTempDrawableMenu"
                         android:layout_width="@dimen/iconSize"
                         android:layout_height="@dimen/iconSize"
+                        android:visibility="gone"
                         android:layout_gravity="center"
                         android:src="@drawable/side_drawable_line"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -57,7 +62,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginStart="@dimen/topFiveMargin"
+
                         android:fontFamily="@font/autoguard_regular"
                         android:text="@string/app_name"
                         android:textColor="@color/black"
@@ -72,7 +77,7 @@
                         android:layout_width="@dimen/_85sdp"
                         android:layout_height="@dimen/_38sdp"
                         android:layout_gravity="center"
-                        android:layout_marginStart="@dimen/topFiveMargin"
+                        android:layout_marginStart="@dimen/menu_left_margin"
                         android:src="@drawable/new_menu_logo"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/txtTempLogoMenu"
@@ -86,17 +91,49 @@
                         app:layout_constraintStart_toEndOf="@+id/imgLogoMenu"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <com.makeramen.roundedimageview.RoundedImageView
+                        <com.yapi.common.RoundRectCornerImageView
                             android:id="@+id/imgProfilePicCustomerList"
                             android:layout_width="@dimen/_30sdp"
                             android:layout_height="@dimen/_30sdp"
                             android:layout_alignParentEnd="true"
                             android:layout_gravity="end"
+                            android:visibility="@{mViewmodel.noImageOnlyNameVisible?mView.GONE:mView.VISIBLE}"
                             android:onClick="@{mViewmodel::onClick}"
                             android:scaleType="centerCrop"
                             android:src="@drawable/demo_photo"
                             app:riv_corner_radius="8dp"
+                            setRoundRectImage="@{mViewmodel.userPhotoUrl}"
                             app:riv_mutate_background="true" />
+
+                        <RelativeLayout
+                            android:id="@+id/relNameValue"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_gravity="end"
+                            android:background="@drawable/et_drawable"
+                            android:backgroundTint="#FEFAE5"
+                            android:onClick="@{mViewmodel::onClick}"
+                            android:visibility="@{mViewmodel.noImageOnlyNameVisible?mView.VISIBLE:mView.GONE}"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvGroupImageText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/larsseit_bold"
+                                android:letterSpacing="@dimen/text_letter_spacing"
+                                android:lineSpacingExtra="@dimen/line_spacing_extra"
+                                android:text="@{mViewmodel.showTopNameTag}"
+                                android:textColor="#F2CB00"
+                                android:textSize="@dimen/common_menu_top_title" />
+                        </RelativeLayout>
+
                     </RelativeLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -254,6 +291,7 @@
                         android:fontFamily="@font/larsseit_bold"
                         android:gravity="center"
                         android:text="84"
+                        android:visibility="invisible"
                         android:textColor="@color/white"
                         android:textSize="@dimen/unSeenCountTextSize"
                         app:layout_constraintBottom_toBottomOf="parent"

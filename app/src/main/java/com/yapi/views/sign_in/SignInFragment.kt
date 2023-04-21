@@ -53,7 +53,7 @@ class SignInFragment : Fragment() {
     fun showErrorUIObserver()
     {
         viewModel.errorData.observe(requireActivity(), Observer {
-            var data=it as SignInErrorData
+            val data=it as SignInErrorData
             if(data!=null && data.message.isNotEmpty())
             {
                 binding.txtErrorEmailSignIn.setText(data.message)

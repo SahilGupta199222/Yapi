@@ -42,6 +42,14 @@ class ChatViewModel : ViewModel() {
   //  var screenHeight: Int? = 0
     var userType: String? = ""
     var sendDataValue = ObservableField("")
+<<<<<<< HEAD
+
+    var titleName = ObservableField("")
+    var memberValue = ObservableField("")
+    var emptyGroupMessageTitle = ObservableField("")
+
+=======
+>>>>>>> origin/master
     var backButtonVisible = ObservableBoolean(false)
     var groupImageVisible = ObservableBoolean(false)
     var groupIconVisible = ObservableBoolean(false)
@@ -54,7 +62,10 @@ class ChatViewModel : ViewModel() {
     var centerAlignCStatus = ObservableBoolean(false)
     var rightAlignCStatus = ObservableBoolean(false)
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/master
     fun onClick(view: View) {
         when (view.id) {
 

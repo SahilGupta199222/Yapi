@@ -1,13 +1,14 @@
 package com.yapi.views.search
 
-import android.util.Log
 import android.view.View
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.checkDeviceType
+import com.yapi.common.hideKeyboard
 
 class SearchViewModel():ViewModel() {
 
@@ -16,6 +17,12 @@ var dissmissDialogPopupData=MutableLiveData<Boolean>()
     fun onClick(view:View){
         when(view.id)
         {
+<<<<<<< HEAD
+           R.id.layoutSearch, R.id.layoutCreateSearch->{
+                MainActivity.activity?.get()?.hideKeyboard()
+            }
+=======
+>>>>>>> origin/master
             R.id.imgCancelSearch,R.id.ivOutsideCloseSearch->{
                 if(checkDeviceType()){
                     dissmissDialogPopupData.value=true

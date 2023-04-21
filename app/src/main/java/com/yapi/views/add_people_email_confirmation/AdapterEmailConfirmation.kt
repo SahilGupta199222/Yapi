@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.yapi.R
+import com.yapi.views.add_people_email.Invitaion
 
-class AdapterEmailConfirmation(val context: Context, val list:ArrayList<String>):RecyclerView.Adapter<AdapterEmailConfirmation.MyViewHolder>() {
+class AdapterEmailConfirmation(val context: Context, val invitationList:ArrayList<Invitaion>):RecyclerView.Adapter<AdapterEmailConfirmation.MyViewHolder>() {
     class MyViewHolder(itemView:View):RecyclerView.ViewHolder(itemView) {
-        val title:AppCompatTextView=itemView.findViewById(R.id.txtTitleEmailEvEmailConfirmList)
+        val txtTitleEmailEvEmailConfirmList:AppCompatTextView=itemView.findViewById(R.id.txtTitleEmailEvEmailConfirmList)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -19,10 +20,11 @@ class AdapterEmailConfirmation(val context: Context, val list:ArrayList<String>)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-            holder.title.text=list[position]
+            holder.txtTitleEmailEvEmailConfirmList.text=invitationList[position].user_email
+        //    "status": "pending",
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return invitationList.size
     }
 }

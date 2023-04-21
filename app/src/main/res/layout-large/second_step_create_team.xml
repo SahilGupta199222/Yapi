@@ -145,7 +145,7 @@
                         android:paddingStart="@dimen/etHorizontalPadding"
                         android:paddingTop="@dimen/etVerticalPadding"
                         android:paddingEnd="@dimen/etHorizontalPadding"
-                        android:text="@={vModel.teamNameValue}"
+                        android:text="@={vModel.workNameValue}"
                         android:layout_marginBottom="@dimen/_20sdp"
                         android:paddingBottom="@dimen/etVerticalPadding"
                         android:maxLength="50"

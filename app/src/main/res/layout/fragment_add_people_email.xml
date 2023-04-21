@@ -32,8 +32,7 @@
         android:paddingTop="@dimen/startMainMargin"
         android:paddingEnd="@dimen/startMainMargin"
         android:paddingBottom="@dimen/startMainMargin"
-        android:onClick="@{model::onClick}"
-       >
+        android:onClick="@{model::onClick}">
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollViewAddPeopleEmail"
         android:layout_width="match_parent"
@@ -42,7 +41,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
         app:layout_constraintBottom_toTopOf="@+id/bottomConstarints">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -113,7 +111,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:chipSpacing="@dimen/_1sdp"
-
                 app:chipSpacingVertical="@dimen/_minus10sdp"
                 app:layout_constraintVertical_chainStyle="spread_inside"
                 android:textSize="@dimen/normalTextSize"

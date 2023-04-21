@@ -2,34 +2,58 @@ package com.yapi.views.menu_screen
 
 import android.app.Dialog
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableField
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import com.google.gson.JsonObject
 import com.yapi.MainActivity
 import com.yapi.R
-import com.yapi.common.Constants
-import com.yapi.common.checkDeviceType
+import com.yapi.common.*
 import com.yapi.pref.PreferenceFile
+import com.yapi.views.profile.ProfileData
 import com.yapi.views.profile.ProfileFragment
+import com.yapi.views.profile.ProfileResponse
 import com.yapi.views.search.SearchFragment
+import com.yapi.views.signup_code.LoginUserData
 import dagger.hilt.android.lifecycle.HiltViewModel
+import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
-class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : ViewModel() {
+class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile,
+val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
 
+    var groupData=MutableLiveData<AllData>()
     var screenWidth: Int? = 0
     var openProfileScreenData = MutableLiveData<Boolean>()
     var openSearchScreenData = MutableLiveData<Boolean>()
+
+    var noImageOnlyNameVisible=ObservableBoolean(false)
+
+  //  var noImageOnlyNameVisible = MutableLiveData<Boolean>()
+    var showTopNameTag=ObservableField("")
+
+    var userPhotoUrl=ObservableField("")
+
+    var loginUserData: LoginUserData?=null
     fun onClick(view: View) {
         when (view.id) {
+<<<<<<< HEAD
+            R.id.layoutSearch,R.id.etSearchMenu->{
+=======
             R.id.layoutSearch->{
+>>>>>>> origin/master
                 if(checkDeviceType()){
                     openSearchScreenData.value=true
                     //SearchFragment.newInstanceSearch("").showNow(view.re, " SimpleDialog.TAG")
@@ -42,7 +66,7 @@ class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : Vi
             }
             }
 
-            com.yapi.R.id.imgProfilePicCustomerList -> {
+            com.yapi.R.id.imgProfilePicCustomerList,R.id.relNameValue -> {
                 val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
                     .inflate(com.yapi.R.layout.menu_popup_options, null, false)
                 var newWidth=0.0
@@ -63,10 +87,13 @@ class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : Vi
                 popUp.isTouchable = true
                 popUp.isFocusable = true
                 popUp.isOutsideTouchable = true
-                val btnViewProfile =
 
-                    //Solution
+                if(view.id==R.id.imgProfilePicCustomerList){
                     popUp.showAsDropDown(view.findViewById(com.yapi.R.id.imgProfilePicCustomerList))
+                }else
+                {
+                    popUp.showAsDropDown(view.findViewById(com.yapi.R.id.relNameValue))
+                }
 
                 var constraintsProfile =
                     mView.findViewById<ConstraintLayout>(R.id.constraintsProfile)
@@ -96,7 +123,8 @@ class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : Vi
                 var constraintsLogout = mView.findViewById<ConstraintLayout>(R.id.constraintsLogout)
                 constraintsLogout.setOnClickListener {
                     popUp.dismiss()
-                    preferenceFile.saveStringValue(Constants.USER_ID, "")
+                   // preferenceFile.saveStringValue(Constants.USER_ID, "")
+                    preferenceFile.clearAllPref()
                     if(checkDeviceType()){
                         var intent=Intent(MainActivity.activity!!.get(),MainActivity::class.java)
                         MainActivity.activity!!.get()!!.startActivity(intent)
@@ -165,5 +193,28 @@ class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : Vi
         dialog.show()
         var cardviewDeleteProfile = dialog.findViewById<CardView>(R.id.cardviewDeleteProfile)
         cardviewDeleteProfile.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
+    }
+
+
+    fun fetchGroupDataMethod():LiveData<AllData> {
+        Log.e("Token111====", preferenceFile.fetchStringValue(Constants.USER_TOKEN))
+        repository.makeCall(true,
+            requestProcessor = object : ApiProcessor<Response<GroupMenuResponse>> {
+                override fun onSuccess(success: Response<GroupMenuResponse>) {
+                    Log.e("Resposne_Dataaaa===", success.body().toString())
+
+                    groupData.value=success.body()!!.data
+
+                }
+
+                override fun onError(message: String) {
+                    MainActivity.activity!!.get()!!.showMessage(message)
+                }
+
+                override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<GroupMenuResponse> {
+                    return retrofitApi.fetchAllGroupData(userToken)
+                }
+            })
+        return groupData
     }
 }

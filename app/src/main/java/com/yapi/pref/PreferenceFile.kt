@@ -1,14 +1,28 @@
 package com.yapi.pref
 
 import android.content.SharedPreferences
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import javax.inject.Named
+import javax.inject.Singleton
 
 class PreferenceFile @Inject constructor(
      val editor: SharedPreferences.Editor,
      val pref: SharedPreferences,
 ) {
     fun saveStringValue(key: String, value: String) {
-        editor.putString(key, value).apply()
+        editor.putString(key, value).commit()
+    }
+
+    fun clearAllPref()
+    {
+        editor.clear().apply()
     }
 
     fun fetchStringValue(key:String):String
@@ -17,7 +31,7 @@ class PreferenceFile @Inject constructor(
     }
 
     fun saveBooleanValue(key: String, value: Boolean) {
-        editor.putBoolean(key, value).apply()
+        editor.putBoolean(key, value).commit()
     }
 
     fun fetchBooleanValue(key:String):Boolean
@@ -26,7 +40,7 @@ class PreferenceFile @Inject constructor(
     }
 
     fun saveIntValue(key: String, value: Int) {
-        editor.putInt(key, value).apply()
+        editor.putInt(key, value).commit()
     }
 
     fun fetchIntValue(key:String):Int
@@ -35,7 +49,7 @@ class PreferenceFile @Inject constructor(
     }
 
     fun saveLongValue(key: String, value: Long) {
-        editor.putLong(key, value).apply()
+        editor.putLong(key, value).commit()
     }
 
     fun fetchLongValue(key:String):Long
@@ -44,11 +58,17 @@ class PreferenceFile @Inject constructor(
     }
 
     fun saveFloatValue(key: String, value: Float) {
-        editor.putFloat(key, value).apply()
+        editor.putFloat(key, value).commit()
     }
 
     fun fetchFloatValue(key:String):Float
     {
         return pref.getFloat(key,0f)
     }
+}
+
+@Singleton
+class A @Inject constructor(   ){
+    var a=122;
+    var d=212;
 }

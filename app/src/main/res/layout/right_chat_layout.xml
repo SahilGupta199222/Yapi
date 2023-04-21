@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/topChatConstraints"
     android:paddingTop="@dimen/_10sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -74,6 +75,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/cardLeftChatText" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTypeMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:backgroundTint="#ffffff"
+        android:fontFamily="@font/larsseit_medium"
+        android:letterSpacing="0.07"
+        android:gravity="start"
+        android:lineSpacingExtra="@dimen/line_spacing_extra"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:text="Direct Message"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintBottom_toTopOf="@+id/linearLeftUserDetail"
+        android:textColor="@color/saved_title_message_type"
+        android:textSize="@dimen/normalSmallTextSize" />
+
     <RelativeLayout
         android:id="@+id/cardLeftChatText"
         android:layout_width="0dp"
@@ -144,7 +168,7 @@
                 <View
                     android:id="@+id/viewLine"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_1sdp"
+                    android:layout_height="@dimen/chat_view_line_height"
                     android:background="@color/white"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:layout_marginTop="@dimen/_6sdp"
@@ -259,7 +283,7 @@
                 <View
                     android:id="@+id/viewLineSecond"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_1sdp"
+                    android:layout_height="@dimen/chat_view_line_height"
                     android:background="@color/liteGrey"
                     android:layout_marginTop="@dimen/_2sdp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -326,6 +350,126 @@
                         android:layout_height="@dimen/iconSize"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/cardViewFilesLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:paddingTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_6sdp"
+            android:layout_alignParentRight="true"
+            android:paddingStart="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:paddingEnd="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:background="@drawable/chat_right_back_box"
+            android:backgroundTint="@color/media_back_color"
+            app:cardElevation="@dimen/_2sdp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:paddingEnd="@dimen/_4sdp"
+                android:paddingStart="@dimen/_4sdp"
+                android:layout_height="wrap_content">
+
+                <!-- <androidx.recyclerview.widget.RecyclerView
+                     android:id="@+id/rvPhotoVW"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginEnd="@dimen/_4sdp"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     app:layout_constraintTop_toTopOf="parent" />-->
+
+                <LinearLayout
+                    android:id="@+id/linearFileName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivzipFileIcon"
+                        android:src="@drawable/zip_file_icon"
+                        android:layout_width="@dimen/iconSize"
+                        android:layout_height="@dimen/iconSize"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:text="yapi_design_final.zip"
+                        android:textSize="@dimen/normalTextSize"
+                        android:textColor="@color/darkGrey"
+                        android:fontFamily="@font/larsseit_medium"
+                        android:layout_width="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+                <View
+                    android:id="@+id/viewLineFiles"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/white"
+
+                    android:layout_marginTop="@dimen/_6sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearFileName" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/viewLineFiles"
+                    android:layout_height="wrap_content">
+
+                    <!-- <androidx.appcompat.widget.AppCompatTextView
+                         android:id="@+id/tvViewAllPhotos"
+                         android:text="@string/view_all_text"
+                         android:textAllCaps="true"
+                         android:layout_width="wrap_content"
+                         app:layout_constraintStart_toStartOf="parent"
+                         app:layout_constraintTop_toTopOf="parent"
+                         app:layout_constraintBottom_toBottomOf="parent"
+                         android:fontFamily="@font/larsseit_bold"
+                         android:textColor="@color/blueColor"
+                         android:textSize="@dimen/smallTextSize"
+                         android:layout_height="wrap_content"/>-->
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/ivFilesDownload"
+                        android:id="@+id/ivLinkIcon"
+                        android:layout_width="@dimen/iconSize"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:src="@drawable/chat_link_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_height="@dimen/iconSize"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/ivFilesForward"
+                        android:id="@+id/ivFilesDownload"
+                        android:layout_width="@dimen/iconSize"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:src="@drawable/download_media_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_height="@dimen/iconSize"/>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/ivFilesForward"
+                        android:layout_width="@dimen/iconSize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:src="@drawable/forward_media_icon"
+                        android:layout_height="@dimen/iconSize"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </RelativeLayout>
 
     </RelativeLayout>
