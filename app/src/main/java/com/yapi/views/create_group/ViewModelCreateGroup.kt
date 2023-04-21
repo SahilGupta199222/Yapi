@@ -118,13 +118,13 @@ class ViewModelCreateGroup @Inject constructor(val repository: Repository,@Named
             errorData.value = SignInErrorData(MainActivity.activity!!.get()!!
                 .getString(R.string.enter_group_name), 1)
             return false
-        } else
+        } /*else
             if (groupDescriptionValue.get().toString().trim().length == 0) {
                 //  showToastMessage(MainActivity.activity!!.get()!!.getString(R.string.enter_group_description))
                 errorData.value = SignInErrorData(MainActivity.activity!!.get()!!
                     .getString(R.string.enter_group_description), 2)
                 return false
-            }
+            }*/
         return true
     }
 

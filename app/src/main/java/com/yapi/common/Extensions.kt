@@ -131,3 +131,21 @@ fun addSpaceBetweenPhoneMethod(phone:String):String
     var thirdValue=phone.substring(7,phone.length)
     return "$firstValue $secondValue $thirdValue"
 }
+
+fun convertFromFullNameToTwoString(name:String):String
+{
+    var finalValue=""
+    if(name.contains(" "))
+    {
+        var splitValue=name.split(" ")
+        finalValue= splitValue[0].toCharArray()[0]+""+splitValue[0].toCharArray()[1]
+    }else
+        if(name.length>1)
+        {
+            finalValue=name.substring(0,2)
+        }else
+        {
+            finalValue=name.substring(0,1)
+        }
+    return finalValue.toUpperCase()
+}

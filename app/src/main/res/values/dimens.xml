@@ -82,4 +82,6 @@
     <dimen name="chat_view_line_height">@dimen/_1sdp</dimen>
 
     <dimen name="menu_left_margin">@dimen/_minus3sdp</dimen>
+
+    <dimen name="common_menu_top_title">@dimen/_13ssp</dimen>
 </resources>

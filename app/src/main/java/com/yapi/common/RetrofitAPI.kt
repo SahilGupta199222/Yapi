@@ -32,16 +32,32 @@ interface RetrofitAPI {
     suspend fun verifyOTPAPI(@Body emailData:JsonObject)
     : Response<VerifyOTPResponse>
 
-@Multipart
+    @Multipart
     @POST(WebAPIKeys.USER_EDIT_PROFILE)
-    suspend fun editProfileAPI(@Header ("Authorization") token:String,
-        @Part("name") name:RequestBody,
-        @Part("user_name") user_name:RequestBody,
-        @Part("email") email:RequestBody,
-        @Part("mobile_number") mobile_number:RequestBody,
-        @Part("country_code") country_code:RequestBody,
-        @Part("about") about:RequestBody,
+    suspend fun editProfileAPI(
+        @Header("Authorization") token: String,
+        @Part("name") name: RequestBody,
+        @Part("user_name") user_name: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("mobile_number") mobile_number: RequestBody,
+        @Part("country_code") country_code: RequestBody,
+        @Part("about") about: RequestBody
     ): Response<EditProfileResponse>
+
+    @Multipart
+    @POST(WebAPIKeys.USER_EDIT_PROFILE)
+    suspend fun editProfileForPhotoAPI(
+        @Header("Authorization") token: String,
+        @Part("name") name: RequestBody,
+        @Part("user_name") user_name: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("mobile_number") mobile_number: RequestBody,
+        @Part("country_code") country_code: RequestBody,
+        @Part("about") about: RequestBody,
+        @Part photoBody: MultipartBody.Part,
+    ): Response<EditProfileResponse>
+
+
 
 
     @GET(WebAPIKeys.USER_FETCH_PROFILE+"/{user_id}")

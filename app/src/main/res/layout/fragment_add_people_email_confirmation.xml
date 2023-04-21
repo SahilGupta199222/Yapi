@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/topTwentyFiveMargin"
             android:fontFamily="@font/larsseit_medium"
-            android:text="You have invited one person"
+            android:text="@{model.invitedPersonCount}"
             android:textColor="@color/darkGrey"
             android:textSize="@dimen/_16sdp"
             app:layout_constraintStart_toStartOf="parent"

@@ -46,8 +46,10 @@ Log.e("fmlfafaafaf===",email.toString())*/
         var email=  preferenceFile?.fetchStringValue("login_email")
         var firstText= MainActivity.activity?.get()?.resources?.getString(R.string.create_team_first_text)
         var lastText= MainActivity.activity?.get()?.resources?.getString(R.string.create_team_last_text)
+        var companyName="@Qbistro.com"
         //var checkBoxText=
-        dataBinding.tvCheckBoxName!!.setText(Html.fromHtml(requireActivity().resources.getString(R.string.create_team_first_text)+" <font color='#3D3D3D'><b>"+email+"</b></font> "+ requireActivity().resources.getString(
+    //    dataBinding.tvCheckBoxName!!.setText(Html.fromHtml(requireActivity().resources.getString(R.string.create_team_first_text)+" <font color='#3D3D3D'><b>"+email+"</b></font> "+ requireActivity().resources.getString( R.string.create_team_last_text)))
+        dataBinding.tvCheckBoxName!!.setText(Html.fromHtml(requireActivity().resources.getString(R.string.create_team_first_text)+" <font color='#3D3D3D'><b>"+companyName+"</b></font> "+ requireActivity().resources.getString(
             R.string.create_team_last_text)))
     }
 

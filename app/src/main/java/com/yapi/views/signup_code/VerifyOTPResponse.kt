@@ -1,13 +1,13 @@
 package com.yapi.views.signup_code
 
 data class VerifyOTPResponse(
-    val `data`: Data,
+    val `data`: LoginUserData,
     val message: String,
     val status: Int,
     val token: String
 )
 
-data class Data(
+data class LoginUserData(
     val __v: Int,
     val _id: String,
     val about: String,

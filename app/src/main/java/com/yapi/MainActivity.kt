@@ -23,6 +23,7 @@ import com.yapi.views.chat.ChatMessagesFragment
 import com.yapi.views.chat.chatGroupInfo.ChatGroupInfoFragment
 import com.yapi.views.chat.chatUserInfo.ChatUserInfoFragment
 import com.yapi.views.chat_empty.ChatEmptyFragment
+import com.yapi.views.menu_screen.GroupData
 import com.yapi.views.menu_screen.MenuFragment
 import com.yapi.views.savedItems.SavedItemsFragment
 import com.yapi.views.userList.UserListFragment
@@ -152,7 +153,10 @@ class MainActivity : AppCompatActivity() {
 
         } else
             if (event.screenName == Constants.CHAT_MESSAGE_KEY) {
-                createChatMethod()
+
+                var oldGroupData=event.allData as GroupData
+
+                createChatMethod(oldGroupData)
             } else
                 if (event.screenName == Constants.USER_PROFILE) {
                     showTabsMethod(3, event.screenName)
@@ -190,10 +194,11 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().replace(R.id.secondFrame, fragment).commit()
     }
 
-    fun createChatMethod() {
+    fun createChatMethod(groupData:GroupData) {
         //   ChatMessagesFragment.newInstanceChatMethod("").show(supportFragmentManager," SimpleDialog.TAG")
         var bundle = Bundle()
         bundle.putString("userType", "")
+        bundle.putSerializable("group_data", groupData)
         var fragment = ChatMessagesFragment()
         fragment.arguments = bundle
         supportFragmentManager.beginTransaction().replace(R.id.secondFrame, fragment).commit()

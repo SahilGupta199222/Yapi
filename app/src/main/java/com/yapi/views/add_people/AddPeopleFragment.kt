@@ -131,9 +131,10 @@ class AddPeopleFragment : DialogFragment() {
 
     private fun addObserverForOpenAddPeople() {
         viewModel.addPeopleEmailScreenOpenData.observe(requireActivity(), Observer {
-            var data =it as Boolean
-            if(data){
-
+            var data =it as String
+            if(data!=null){
+                var bundle = Bundle()
+                bundle.putString("team_id", data)
                 AddPeopleEmailFragment.newInstanceAddPeopleEmail(viewModel.teamId!!).showNow(requireActivity().supportFragmentManager," SimpleDialog.TAG")
             }
         })

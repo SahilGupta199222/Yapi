@@ -73,14 +73,51 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <LinearLayout
+                        android:id="@+id/linearTopLabel"
+                        android:orientation="horizontal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imgCancelEditProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
                     <com.yapi.common.RoundRectCornerImageView
                         android:id="@+id/imgProfilePicEditProfile"
                         android:layout_width="@dimen/_58sdp"
                         android:layout_height="@dimen/_58sdp"
+                        android:visibility="@{model.noImageOnlyNameVisible?mView.GONE:mView.VISIBLE}"
                         android:layout_marginTop="@dimen/_3sdp"
                         android:src="@drawable/demo_photo"
+                        android:scaleType="fitXY"
+                        setPhotoAdapter="@{model.photoUrl}"/>
+
+                    <RelativeLayout
+                        android:id="@+id/relNameValue"
+                        android:layout_width="@dimen/_58sdp"
+                        android:layout_height="@dimen/_58sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:background="@drawable/et_drawable"
+                        android:backgroundTint="#FEFAE5"
+                        android:visibility="@{model.noImageOnlyNameVisible?mView.VISIBLE:mView.GONE}"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imgCancelEditProfile" />
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvGroupImageText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/larsseit_bold"
+                            android:letterSpacing="@dimen/text_letter_spacing"
+                            android:lineSpacingExtra="@dimen/line_spacing_extra"
+                            android:text="@{model.showTopNameTag}"
+                            android:textColor="#F2CB00"
+                            android:textSize="@dimen/titleTextSize" />
+                    </RelativeLayout>
+                    </LinearLayout>
+
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtNameEditProfile"
@@ -93,8 +130,8 @@
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/_15ssp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/imgProfilePicEditProfile"
-                        app:layout_constraintTop_toTopOf="@+id/imgProfilePicEditProfile" />
+                        app:layout_constraintStart_toEndOf="@+id/linearTopLabel"
+                        app:layout_constraintTop_toTopOf="@+id/linearTopLabel" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtUserNameEditProfile"
@@ -105,7 +142,7 @@
                         android:text="\@briski"
                         android:textColor="@color/darkLiteGrey"
                         android:textSize="@dimen/normalSmallTextSize"
-                        app:layout_constraintBottom_toBottomOf="@+id/imgProfilePicEditProfile"
+                        app:layout_constraintBottom_toBottomOf="@+id/linearTopLabel"
                         app:layout_constraintStart_toStartOf="@+id/txtNameEditProfile" />
 
                     <ImageView
@@ -145,7 +182,7 @@
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/smallTextSize"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imgProfilePicEditProfile" />
+                        app:layout_constraintTop_toBottomOf="@+id/linearTopLabel" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintUploadPhoto"
@@ -165,7 +202,7 @@
                         android:background="@drawable/round_lite_gray">
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/imgPicImageCreateGroup"
+                            android:id="@+id/imgPicImageCreateGroup11"
                             android:layout_width="@dimen/_15sdp"
                             android:layout_height="@dimen/_15sdp"
                             android:src="@drawable/image_drawable"
@@ -177,14 +214,15 @@
 
                     </RelativeLayout>
 
-                  <!--  <com.yapi.common.ProfileRoundImage
+                    <com.yapi.common.RoundRectCornerImageView
                         android:id="@+id/imgPicImageCreateGroup"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:scaleType="fitXY"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />-->
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -263,6 +301,7 @@
                         android:fontFamily="@font/larsseit_regular"
                         android:hint="@string/enter_name"
                         android:inputType="textPersonName"
+                        android:maxLength="25"
                         android:onTextChanged="@{model::nameTextChange}"
                         android:paddingStart="@dimen/etHorizontalPadding"
                         android:paddingTop="@dimen/etVerticalPadding"
@@ -311,6 +350,7 @@
                         android:fontFamily="@font/larsseit_regular"
                         android:hint="@string/enterUserName"
                         android:inputType="textPersonName"
+                        android:maxLength="25"
                         android:onTextChanged="@{model::userNameTextChange}"
                         android:paddingStart="@dimen/etHorizontalPadding"
                         android:paddingTop="@dimen/etVerticalPadding"

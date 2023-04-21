@@ -11,7 +11,7 @@ import com.yapi.common.checkDeviceType
 import com.yapi.common.hideKeyboard
 
 class ViewModelAddPeople : ViewModel() {
-    var addPeopleEmailScreenOpenData= MutableLiveData<Boolean>()
+    var addPeopleEmailScreenOpenData= MutableLiveData<String>()
     var dismissDialogData=MutableLiveData<Boolean>()
     var teamId:String?=""
 
@@ -27,7 +27,7 @@ class ViewModelAddPeople : ViewModel() {
             }
             R.id.layoutSendEmailInvitationAddPeople->{
                 if(checkDeviceType()){
-                    addPeopleEmailScreenOpenData.value=true
+                    addPeopleEmailScreenOpenData.value=teamId
                 }else
                 {
                     var bundle = Bundle()
@@ -37,10 +37,12 @@ class ViewModelAddPeople : ViewModel() {
             }
             R.id.btnNext->{
                 if(checkDeviceType()){
-                    addPeopleEmailScreenOpenData.value=true
+                    addPeopleEmailScreenOpenData.value=teamId
                 }else
                 {
-                    view.findNavController().navigate(R.id.action_addPeopleFragment_to_addPeopleEmailFragment)
+                    var bundle = Bundle()
+                    bundle.putString("team_id", teamId)
+                    view.findNavController().navigate(R.id.action_addPeopleFragment_to_addPeopleEmailFragment,bundle)
                 }
             }
             R.id.topConstraintsAddPeople->{

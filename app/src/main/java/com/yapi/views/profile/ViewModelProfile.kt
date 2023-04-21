@@ -18,6 +18,7 @@ import com.yapi.common.*
 import com.yapi.pref.PreferenceFile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Response
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Named
 
@@ -36,8 +37,11 @@ class ViewModelProfile @Inject constructor(
     var emailValue = ObservableField("")
     var phoneValue = ObservableField("")
     var phoneCountryValue = ObservableField("")
+    var showTopNameTag = ObservableField("")
+    var photoUrl = ObservableField("")
 
     var topProfileVisibility = ObservableBoolean(false)
+    var noImageOnlyNameVisible = ObservableBoolean(false)
 
     var screenWidth: Int? = 0
     fun onClick(view: View) {
@@ -104,7 +108,17 @@ class ViewModelProfile @Inject constructor(
         dialog.show()
 
         var cardviewDeleteProfile = dialog.findViewById<CardView>(R.id.cardviewDeleteProfile)
-        cardviewDeleteProfile.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
+
+        var second_frame_height= preferenceFile.fetchStringValue("second_frame_height")
+        var second_frame_width=  preferenceFile.fetchStringValue("second_frame_width")
+
+        if (checkDeviceType()){
+            cardviewDeleteProfile.layoutParams.width = (second_frame_width!!.toDouble() / 1.1).toInt()
+            cardviewDeleteProfile.layoutParams.height = (second_frame_height!!.toDouble() / 1.1).toInt()
+        }else
+        {
+            cardviewDeleteProfile.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
+        }
     }
 
     private fun deActiveAccountDialog(view: View) {
@@ -132,9 +146,19 @@ class ViewModelProfile @Inject constructor(
         dialog.show()
 
         var cardViewDeActiveProfile = dialog.findViewById<CardView>(R.id.cardViewDeActiveProfile)
-        cardViewDeActiveProfile.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
-    }
+        var second_frame_height = preferenceFile.fetchStringValue("second_frame_height")
+        var second_frame_width = preferenceFile.fetchStringValue("second_frame_width")
 
+        if (checkDeviceType()) {
+            cardViewDeActiveProfile.layoutParams.width =
+                (second_frame_width!!.toDouble() / 1.1).toInt()
+            cardViewDeActiveProfile.layoutParams.height =
+                (second_frame_height!!.toDouble() / 1.1).toInt()
+        } else {
+            cardViewDeActiveProfile.layoutParams.width =
+                (screenWidth!!.toDouble() / 1.1).toInt()
+        }
+    }
 
     fun fetchProfileData() {
         Log.e("Token111====", preferenceFile.fetchStringValue(Constants.USER_TOKEN))
@@ -145,9 +169,20 @@ class ViewModelProfile @Inject constructor(
                     profileData = success.body()!!.data
                     topProfileVisibility.set(true)
                     nameValue.set(success.body()!!.data.name)
-                    userNameValue.set(success.body()!!.data.user_name)
+                    userNameValue.set("@"+success.body()!!.data.user_name)
                     emailValue.set(success.body()!!.data.email)
                     aboutValue.set(success.body()!!.data.about)
+                    //showTopNameTag.set(success.body()!!.data.name!!.substring(0, 1).uppercase(Locale.getDefault()))
+                    showTopNameTag.set(convertFromFullNameToTwoString(success.body()!!.data.name!!))
+
+                    if(success!!.body()!!.data.profile_pic_url!="")
+                    {
+                        noImageOnlyNameVisible.set(false)
+                        photoUrl.set(success!!.body()!!.data.profile_pic_url)
+                    }else
+                    {
+                        noImageOnlyNameVisible.set(true)
+                    }
 
                     if (!(success.body()!!.data.mobile_number.toString().equals(""))
                         && success.body()!!.data.mobile_number.toString()!=null

@@ -6,6 +6,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.yapi.MainActivity
 import com.yapi.R
@@ -71,6 +72,8 @@ var errorData=MutableLiveData<SignInErrorData>()
                     errorData.value= SignInErrorData("",0)
                     preferenceFile.saveStringValue("login_email",email.toString())
                     preferenceFile.saveBooleanValue(Constants.USER_PROFILE_CREATED,success.body()!!.data.profile_created!!)
+
+                    preferenceFile.saveStringValue("user_all_data",Gson().toJson(success.body()!!.data))
 
                     if(success.body()!!.data.profile_created!!){
                         if(checkDeviceType())

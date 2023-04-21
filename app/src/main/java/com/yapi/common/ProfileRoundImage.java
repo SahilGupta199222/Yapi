@@ -7,7 +7,9 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-public class ProfileRoundImage extends ImageView {
+import androidx.appcompat.widget.AppCompatImageView;
+
+public class ProfileRoundImage extends AppCompatImageView {
 
     private float radius = 10.0f;
     private Path path;

@@ -18,7 +18,7 @@ data class Data(
     val email: String,
     val email_otp: String,
     val email_otp_verified: Boolean,
-    val mobile_number: Long,
+    val mobile_number: String,
     val mobile_otp: String,
     val mobile_otp_verified: Boolean,
     val name: String,

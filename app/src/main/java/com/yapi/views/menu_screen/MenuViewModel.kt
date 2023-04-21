@@ -9,6 +9,8 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.databinding.ObservableBoolean
+import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,9 +20,11 @@ import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.*
 import com.yapi.pref.PreferenceFile
+import com.yapi.views.profile.ProfileData
 import com.yapi.views.profile.ProfileFragment
 import com.yapi.views.profile.ProfileResponse
 import com.yapi.views.search.SearchFragment
+import com.yapi.views.signup_code.LoginUserData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Response
 import javax.inject.Inject
@@ -34,6 +38,15 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
     var screenWidth: Int? = 0
     var openProfileScreenData = MutableLiveData<Boolean>()
     var openSearchScreenData = MutableLiveData<Boolean>()
+
+    var noImageOnlyNameVisible=ObservableBoolean(false)
+
+  //  var noImageOnlyNameVisible = MutableLiveData<Boolean>()
+    var showTopNameTag=ObservableField("")
+
+    var userPhotoUrl=ObservableField("")
+
+    var loginUserData: LoginUserData?=null
     fun onClick(view: View) {
         when (view.id) {
             R.id.layoutSearch,R.id.etSearchMenu->{
@@ -49,7 +62,7 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
             }
             }
 
-            com.yapi.R.id.imgProfilePicCustomerList -> {
+            com.yapi.R.id.imgProfilePicCustomerList,R.id.relNameValue -> {
                 val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
                     .inflate(com.yapi.R.layout.menu_popup_options, null, false)
                 var newWidth=0.0
@@ -70,10 +83,13 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
                 popUp.isTouchable = true
                 popUp.isFocusable = true
                 popUp.isOutsideTouchable = true
-                val btnViewProfile =
 
-                    //Solution
+                if(view.id==R.id.imgProfilePicCustomerList){
                     popUp.showAsDropDown(view.findViewById(com.yapi.R.id.imgProfilePicCustomerList))
+                }else
+                {
+                    popUp.showAsDropDown(view.findViewById(com.yapi.R.id.relNameValue))
+                }
 
                 var constraintsProfile =
                     mView.findViewById<ConstraintLayout>(R.id.constraintsProfile)

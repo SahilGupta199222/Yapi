@@ -73,9 +73,6 @@ class AddPeopleEmailConfirmationFragment : DialogFragment() {
         binding.model=viewModel
         dialogDismissMethod()
 
-
-
-
         if(Constants.API_CALL_DEMO)
         {
            emailData= requireArguments().getSerializable("invitation_list") as EmailData
@@ -117,8 +114,8 @@ class AddPeopleEmailConfirmationFragment : DialogFragment() {
         }
 
         // val number = 50
-        val convertedNumber = NumberToWordsConverter.convert(listCount.toInt())
-        println(convertedNumber) // Output: Fifty
+        //val convertedNumber = NumberToWordsConverter.convert(listCount.toInt())
+     //   println(convertedNumber) // Output: Fifty
 
         var countValue=requireActivity().getString(R.string.you_have_invited)+" "+listCount+" "+requireActivity().getString(R.string.one_person)
         viewModel.invitedPersonCount.set(countValue)

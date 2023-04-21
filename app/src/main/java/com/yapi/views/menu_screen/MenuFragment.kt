@@ -11,15 +11,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.gson.Gson
 import com.yapi.R
 import com.yapi.common.*
 import com.yapi.databinding.FragmentMenuBinding
 import com.yapi.pref.PreferenceFile
 import com.yapi.views.profile.ProfileFragment
 import com.yapi.views.search.SearchFragment
+import com.yapi.views.signup_code.LoginUserData
 import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class MenuFragment : Fragment() {
@@ -80,6 +83,25 @@ class MenuFragment : Fragment() {
 
              }
          })*/
+
+        var user_all_data = preferenceFile.fetchStringValue("user_all_data")
+
+        /*  val token: Type = object : TypeToken<Collection<LoginUserData>>() {}.type
+          val result: Collection<LoginUserData> = Gson().fromJson(user_all_data, token)*/
+        var loginUserData = Gson().fromJson(user_all_data, LoginUserData::class.java)
+        // Log.e("efwekfefweff===",lstObject.toString())
+        viewModel.loginUserData = loginUserData
+
+
+        if(loginUserData.profile_pic_url!="")
+        {
+            viewModel.noImageOnlyNameVisible.set(false)
+            viewModel.userPhotoUrl.set(loginUserData.profile_pic_url)
+        }else
+        {
+            viewModel.showTopNameTag.set(convertFromFullNameToTwoString(loginUserData.name))
+            viewModel.noImageOnlyNameVisible.set(true)
+        }
 
         addNextToScreenObserver()
         init()
@@ -613,7 +635,8 @@ class MenuFragment : Fragment() {
                                 System.out.println("phone========tablet")
                                 EventBus.getDefault()
                                     .post(MyMessageEvent(3,
-                                        Constants.CHAT_MESSAGE_KEY)) //post event
+                                        Constants.CHAT_MESSAGE_KEY,
+                                        adapterGroupsList!!.getListt()[position])) //post event
                             } else {
                                 if (findNavController().currentDestination?.id == R.id.menuFragment) {
                                     var bundle = Bundle()

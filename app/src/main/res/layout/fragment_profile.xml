@@ -75,15 +75,51 @@ app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_height="@dimen/_100sdp"/>
 
+    <LinearLayout
+        android:id="@+id/linearPicProfile"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/imgCancelProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <com.yapi.common.RoundRectCornerImageView
         android:id="@+id/imgProfilePicProfile"
         android:layout_width="@dimen/_58sdp"
         android:layout_height="@dimen/_58sdp"
+        android:visibility="@{model.noImageOnlyNameVisible?mView.GONE:mView.VISIBLE}"
         android:src="@drawable/demo_photo"
+        setPhotoAdapter="@{model.photoUrl}"
+        android:scaleType="fitXY"
+        android:layout_marginTop="@dimen/_3sdp" />
+    <RelativeLayout
+        android:id="@+id/relNameValue"
+        android:layout_width="@dimen/_58sdp"
+        android:layout_height="@dimen/_58sdp"
         android:layout_marginTop="@dimen/_3sdp"
-        app:layout_constraintTop_toBottomOf="@+id/imgCancelProfile"
+        android:background="@drawable/et_drawable"
+        android:backgroundTint="#FEFAE5"
+        android:visibility="@{model.noImageOnlyNameVisible?mView.VISIBLE:mView.GONE}"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvGroupImageText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/larsseit_bold"
+            android:letterSpacing="@dimen/text_letter_spacing"
+            android:lineSpacingExtra="@dimen/line_spacing_extra"
+            android:text="@{model.showTopNameTag}"
+            android:textColor="#F2CB00"
+            android:textSize="@dimen/titleTextSize" />
+    </RelativeLayout>
+    </LinearLayout>
+
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtNameProfile"
         android:layout_width="0dp"
@@ -94,23 +130,20 @@ app:layout_constraintBottom_toBottomOf="parent"
         android:fontFamily="@font/larsseit_bold"
         android:layout_marginTop="@dimen/_3sdp"
         android:layout_marginStart="@dimen/topFiveMargin"
-        app:layout_constraintTop_toTopOf="@+id/imgProfilePicProfile"
-        app:layout_constraintStart_toEndOf="@+id/imgProfilePicProfile"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="@+id/linearPicProfile"
+        app:layout_constraintStart_toEndOf="@+id/linearPicProfile"
+        app:layout_constraintEnd_toEndOf="parent" />
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtUserNameProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="\@briski"
+        android:text="@{model.userNameValue}"
         android:layout_marginBottom="@dimen/_6sdp"
         android:textColor="@color/darkLiteGrey"
         android:fontFamily="@font/larsseit_medium"
         android:textSize="@dimen/normalSmallTextSize"
-
-        app:layout_constraintBottom_toBottomOf="@+id/imgProfilePicProfile"
-        app:layout_constraintStart_toStartOf="@+id/txtNameProfile"
-        />
+        app:layout_constraintBottom_toBottomOf="@+id/linearPicProfile"
+        app:layout_constraintStart_toStartOf="@+id/txtNameProfile" />
 
    <!-- <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txtTempDotProfile"
@@ -167,7 +200,7 @@ app:layout_constraintBottom_toBottomOf="parent"
         android:fontFamily="@font/larsseit_bold"
         android:textSize="@dimen/normalTextSize"
         android:textAllCaps="true"
-        app:layout_constraintTop_toBottomOf="@+id/imgProfilePicProfile"
+        app:layout_constraintTop_toBottomOf="@+id/linearPicProfile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
