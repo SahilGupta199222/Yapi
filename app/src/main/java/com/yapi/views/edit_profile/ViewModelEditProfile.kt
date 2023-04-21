@@ -22,7 +22,8 @@ import javax.inject.Inject
 import javax.inject.Named
 
 @HiltViewModel
-class ViewModelEditProfile @Inject constructor(val repository: Repository, val preferenceFile: PreferenceFile, @Named("token") val stringValue:String):ViewModel() {
+class ViewModelEditProfile @Inject constructor(val repository: Repository, val preferenceFile: PreferenceFile
+, @Named("token") val userToken:String):ViewModel() {
     var countryCodeValue=ObservableField("")
     var phoneNumberValue=ObservableField("")
     var dismissDialogData=MutableLiveData<Boolean>()
@@ -65,7 +66,7 @@ class ViewModelEditProfile @Inject constructor(val repository: Repository, val p
                         if(checkValidation())
                         {
                             if(Constants.API_CALL_DEMO) {
-                                Log.e("First_Token===", stringValue)
+                                Log.e("First_Token===", userToken)
                                 Log.e("First_Token111===",
                                     preferenceFile.fetchStringValue(Constants.USER_TOKEN))
                                 callEditAPIMethod(view)
@@ -115,7 +116,7 @@ class ViewModelEditProfile @Inject constructor(val repository: Repository, val p
                 }
 
                 override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<EditProfileResponse> {
-                    return retrofitApi.editProfileAPI(nameRequest,userNameRequest,emailAddressRequest,phoneNumberRequest,countryCodeRequest,aboutRequest)
+                    return retrofitApi.editProfileAPI(userToken,nameRequest,userNameRequest,emailAddressRequest,phoneNumberRequest,countryCodeRequest,aboutRequest)
                 }
             })
     }

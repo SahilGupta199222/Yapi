@@ -17,7 +17,7 @@ class PreferenceFile @Inject constructor(
      val pref: SharedPreferences,
 ) {
     fun saveStringValue(key: String, value: String) {
-        editor.putString(key, value).apply()
+        editor.putString(key, value).commit()
     }
 
     fun clearAllPref()
@@ -31,7 +31,7 @@ class PreferenceFile @Inject constructor(
     }
 
     fun saveBooleanValue(key: String, value: Boolean) {
-        editor.putBoolean(key, value).apply()
+        editor.putBoolean(key, value).commit()
     }
 
     fun fetchBooleanValue(key:String):Boolean
@@ -40,7 +40,7 @@ class PreferenceFile @Inject constructor(
     }
 
     fun saveIntValue(key: String, value: Int) {
-        editor.putInt(key, value).apply()
+        editor.putInt(key, value).commit()
     }
 
     fun fetchIntValue(key:String):Int
@@ -49,7 +49,7 @@ class PreferenceFile @Inject constructor(
     }
 
     fun saveLongValue(key: String, value: Long) {
-        editor.putLong(key, value).apply()
+        editor.putLong(key, value).commit()
     }
 
     fun fetchLongValue(key:String):Long
@@ -58,7 +58,7 @@ class PreferenceFile @Inject constructor(
     }
 
     fun saveFloatValue(key: String, value: Float) {
-        editor.putFloat(key, value).apply()
+        editor.putFloat(key, value).commit()
     }
 
     fun fetchFloatValue(key:String):Float

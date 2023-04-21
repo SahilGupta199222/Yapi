@@ -24,10 +24,11 @@ import com.yapi.views.search.SearchFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile,
-val repository: Repository) : ViewModel() {
+val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
 
     var groupData=MutableLiveData<AllData>()
     var screenWidth: Int? = 0
@@ -191,7 +192,7 @@ val repository: Repository) : ViewModel() {
                 }
 
                 override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<GroupMenuResponse> {
-                    return retrofitApi.fetchAllGroupData()
+                    return retrofitApi.fetchAllGroupData(userToken)
                 }
             })
         return groupData

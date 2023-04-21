@@ -59,7 +59,6 @@ class ChatViewModel : ViewModel() {
     var centerAlignCStatus = ObservableBoolean(false)
     var rightAlignCStatus = ObservableBoolean(false)
 
-
     fun onClick(view: View) {
         when (view.id) {
 

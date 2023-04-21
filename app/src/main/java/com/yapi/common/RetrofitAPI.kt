@@ -34,7 +34,7 @@ interface RetrofitAPI {
 
 @Multipart
     @POST(WebAPIKeys.USER_EDIT_PROFILE)
-    suspend fun editProfileAPI(
+    suspend fun editProfileAPI(@Header ("Authorization") token:String,
         @Part("name") name:RequestBody,
         @Part("user_name") user_name:RequestBody,
         @Part("email") email:RequestBody,
@@ -45,13 +45,13 @@ interface RetrofitAPI {
 
 
     @GET(WebAPIKeys.USER_FETCH_PROFILE+"/{user_id}")
-    suspend fun fetchProfileAPI(@Path("user_id") user_id:String)
+    suspend fun fetchProfileAPI(@Header ("Authorization") token:String,@Path("user_id") user_id:String)
             : Response<ProfileResponse>
 
 
     @Multipart
     @POST(WebAPIKeys.GROUP_CREATE_TEAM)
-    suspend fun createTeamAPI(
+    suspend fun createTeamAPI(@Header ("Authorization") token:String,
         @Part("name") name:RequestBody,
         @Part("working") working:RequestBody,
         @Part("description") description:RequestBody,
@@ -61,17 +61,19 @@ interface RetrofitAPI {
     ): Response<CreateTeamResponse>
 
     @POST(WebAPIKeys.ADD_TEAM_MEMBERS)
-    suspend fun addTeamMembersAPI(@Body emailData:JsonObject): Response<AddEmailResponse>
+    suspend fun addTeamMembersAPI(@Header ("Authorization") token:String,@Body emailData:JsonObject): Response<AddEmailResponse>
 
     @GET(WebAPIKeys.VIEW_TEAM_INVITATION)
-    suspend fun viewTeamInvitationAPI(): Response<ViewInvitationResponse>
+    suspend fun viewTeamInvitationAPI(@Header ("Authorization") token:String): Response<ViewInvitationResponse>
 
 
     @POST(WebAPIKeys.ACCEPT_TEAM_INVITATION)
-    suspend fun acceptTeamInvitationAPI(@Body jsonObject: JsonObject): Response<JsonObject>
+    suspend fun acceptTeamInvitationAPI(
+        @Header ("Authorization") token:String,
+        @Body jsonObject: JsonObject): Response<JsonObject>
 
     @GET(WebAPIKeys.FETCH_ALL_MENU_DATA)
-    suspend fun fetchAllGroupData(): Response<GroupMenuResponse>
+    suspend fun fetchAllGroupData(@Header ("Authorization") token:String): Response<GroupMenuResponse>
 
 
 }

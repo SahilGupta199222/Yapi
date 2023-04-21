@@ -21,9 +21,10 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Response
 import java.io.File
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
-class ViewModelCreateGroup @Inject constructor(val repository: Repository) : ViewModel() {
+class ViewModelCreateGroup @Inject constructor(val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
     private var isQuickJoin: Boolean? = false
     private var fileImage: File? = null
     var groupNameValue = ObservableField("")
@@ -167,7 +168,7 @@ class ViewModelCreateGroup @Inject constructor(val repository: Repository) : Vie
                 }
 
                 override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<CreateTeamResponse> {
-                    return retrofitApi.createTeamAPI(nameRequest,
+                    return retrofitApi.createTeamAPI(userToken,nameRequest,
                         workingRequest,
                         descriptionRequest,
                         isPrivateRequest,

@@ -31,11 +31,16 @@ class SignupViewModel @Inject constructor(val repository: Repository): ViewModel
                 if(view.findNavController().currentDestination?.id==R.id.signUpFragment2) {
                     if (checkValidation()) {
 
+                        if(Constants.API_CALL_DEMO){
+                            signupAPIMethod(view)
+                        }else
+                        {
+                            var bundle = Bundle()
+                            bundle.putString("email", emailValueField.get())
+                            view.findNavController()
+                                .navigate(R.id.action_signUpFragment2_to_signUpCodeFragment, bundle)
+                        }
                        // signupAPIMethod(view)
-                        var bundle = Bundle()
-                        bundle.putString("email", emailValueField.get())
-                        view.findNavController()
-                            .navigate(R.id.action_signUpFragment2_to_signUpCodeFragment, bundle)
                     }
                 }
             }
@@ -90,8 +95,8 @@ class SignupViewModel @Inject constructor(val repository: Repository): ViewModel
                 override fun onSuccess(success: Response<SignInResponse>) {
                     Log.e("Resposne_Dataaaa===", success.body().toString())
 
-                    var bundle = Bundle()
-                    bundle.putString("email", emailValueField.get())
+                    val bundle= Bundle()
+                    bundle.putString("email",emailValueField.get())
                     view.findNavController()
                         .navigate(R.id.action_signUpFragment2_to_signUpCodeFragment, bundle)
                 }

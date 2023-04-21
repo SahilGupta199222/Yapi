@@ -19,11 +19,12 @@ import com.yapi.pref.PreferenceFile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class ViewModelProfile @Inject constructor(
     val repository: Repository,
-    val preferenceFile: PreferenceFile,
+    val preferenceFile: PreferenceFile,@Named("token") val userToken:String
 ) : ViewModel() {
     private var profileData: ProfileData? = null
     var openEditProfileData = MutableLiveData<ProfileData?>()
@@ -168,7 +169,7 @@ class ViewModelProfile @Inject constructor(
 
                 override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<ProfileResponse> {
                     Log.e("mflfldddff==", preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
-                    return retrofitApi.fetchProfileAPI(preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
+                    return retrofitApi.fetchProfileAPI(userToken,preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
                 }
             })
     }

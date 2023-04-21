@@ -27,9 +27,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import org.greenrobot.eventbus.EventBus
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
-class ThirdStepViewModel @Inject constructor(val preferenceFile: PreferenceFile,val repository: Repository) : ViewModel() {
+class ThirdStepViewModel @Inject constructor(val preferenceFile: PreferenceFile,val repository: Repository,
+    @Named("token") val userToken:String) : ViewModel() {
     var screenWidth: Int? = 0
     var emailFieldValue = ObservableField("")
     var errorData = MutableLiveData<SignInErrorData>()
@@ -204,7 +206,7 @@ class ThirdStepViewModel @Inject constructor(val preferenceFile: PreferenceFile,
                 }
 
                 override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<AddEmailResponse> {
-                    return retrofitApi.addTeamMembersAPI(finalJsonObject)
+                    return retrofitApi.addTeamMembersAPI(userToken,finalJsonObject)
                 }
             })
     }

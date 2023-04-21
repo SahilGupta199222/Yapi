@@ -14,12 +14,14 @@ import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.*
 import com.yapi.views.profile.ProfileResponse
+import dagger.hilt.EntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
-class SignupViewModel @Inject constructor(val repository: Repository):ViewModel() {
+class SignupViewModel  @Inject constructor(val repository: Repository,@Named("token") val userToken:String):ViewModel() {
 
     var viewTemlListResponse=MutableLiveData<ArrayList<ViewInvitationData>>()
     var acceptInvitationResponse=MutableLiveData<Boolean>()
@@ -52,7 +54,7 @@ class SignupViewModel @Inject constructor(val repository: Repository):ViewModel(
 
                 override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<ViewInvitationResponse> {
                 //    Log.e("mflfldddff==",preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
-                    return retrofitApi.viewTeamInvitationAPI()
+                    return retrofitApi.viewTeamInvitationAPI(userToken)
                 }
             })
     }
@@ -77,7 +79,7 @@ class SignupViewModel @Inject constructor(val repository: Repository):ViewModel(
 
                 override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<JsonObject> {
                     //    Log.e("mflfldddff==",preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
-                    return retrofitApi.acceptTeamInvitationAPI(jsonObject)
+                    return retrofitApi.acceptTeamInvitationAPI(userToken,jsonObject)
                 }
             })
         return acceptInvitationResponse

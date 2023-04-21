@@ -20,10 +20,11 @@ import okhttp3.RequestBody
 import retrofit2.Response
 import java.io.File
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
 class SecondStepViewModel @Inject constructor(val repository: Repository,
-val preferenceFile: PreferenceFile) : ViewModel() {
+val preferenceFile: PreferenceFile,@Named("token") val userToken:String) : ViewModel() {
 
     private var fileImage: File?=null
     private var isPrivate: Boolean?=false
@@ -122,7 +123,7 @@ val preferenceFile: PreferenceFile) : ViewModel() {
                 }
 
                 override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<CreateTeamResponse> {
-                    return retrofitApi.createTeamAPI(nameRequest, workingRequest,descriptionRequest,isPrivateRequest,imagePath,quickJoinRequest)
+                    return retrofitApi.createTeamAPI(userToken,nameRequest, workingRequest,descriptionRequest,isPrivateRequest,imagePath,quickJoinRequest)
                 }
             })
     }

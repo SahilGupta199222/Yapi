@@ -124,6 +124,7 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
                 }
                 dataBinding.createGroupUI.groupScreenInfoEmpty!!.visibility=View.VISIBLE
                 dataBinding.rvChatList.visibility=View.GONE
+                dataBinding.chatListconstraints.visibility=View.GONE
 
                 //group_data.invitaions
                 if(group_data.image_url!="")
@@ -174,6 +175,7 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
             viewModel.memberValue.set("5 Members")
             dataBinding.createGroupUI.groupScreenInfoEmpty!!.visibility=View.GONE
             dataBinding.rvChatList.visibility=View.VISIBLE
+            dataBinding.chatListconstraints.visibility=View.VISIBLE
             dataBinding.ivGroupImage.visibility=View.VISIBLE
             dataBinding.relNameValue.visibility=View.GONE
 

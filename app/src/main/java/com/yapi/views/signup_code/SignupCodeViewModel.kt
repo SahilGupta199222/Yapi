@@ -63,8 +63,8 @@ var errorData=MutableLiveData<SignInErrorData>()
                 override fun onSuccess(success: Response<VerifyOTPResponse>) {
                     Log.e("Resposne_Dataaaa===", success.body().toString())
 
-                    preferenceFile.saveStringValue(Constants.USER_TOKEN,success.body()!!.token.toString())
-                    Log.e("mflfldddff111==",success.body()!!.data._id.toString())
+                    preferenceFile.saveStringValue(Constants.USER_TOKEN,"Bearer "+success.body()!!.token.toString())
+                    Log.e("mflfldddff16666==",success.body()!!.token.toString())
                     preferenceFile.saveStringValue(Constants.LOGIN_USER_ID,success.body()!!.data._id.toString())
 
                     Log.e("mflfldddff33==",preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))

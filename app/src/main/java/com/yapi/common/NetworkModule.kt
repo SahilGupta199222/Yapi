@@ -1,5 +1,6 @@
 package com.yapi.common
 
+import android.content.SharedPreferences
 import com.google.gson.GsonBuilder
 import com.yapi.pref.PreferenceFile
 import dagger.Module
@@ -20,29 +21,28 @@ import javax.inject.Singleton
 object NetworkModule {
 
     @Provides
-     @Singleton
+     //@Singleton
     @Named("token")
     fun getStr(preferenceFile:PreferenceFile):String{
         return preferenceFile.fetchStringValue(Constants.USER_TOKEN)
     }
 
-
-
     @Provides
     @Singleton
-    fun provideHttpClient(@Named("token") token:String): OkHttpClient {
-        var newToken=""
+    fun provideHttpClient(): OkHttpClient {
+      /*  var newToken=""
         if(token!="")
         {
-            newToken="Bearer $token"
-        }
+           // newToken="Bearer $token"
+            newToken="Bearer "+sharedPreferences.getString("token","")
+        }*/
 
         return OkHttpClient.Builder().apply {
             this.addInterceptor(Interceptor { chain ->
                 val original = chain.request()
                 val request = original.newBuilder()
                    // .header("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjNjZTIzMTFhNjdjNzA4NTc0MzlmNTQzIiwiaWF0IjoxNjc1MDYxMjUxfQ.-XFkdhmagEV-4V31HWuQ39nK2rsfmVaNUceoA5Zlyrw")
-                    .header("Authorization", newToken)
+                 //   .header("Authorization", newToken)
                     .method(original.method, original.body)
                     .build()
                 chain.proceed(request)

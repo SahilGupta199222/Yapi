@@ -17,9 +17,10 @@ import com.yapi.views.sign_in.SignInErrorData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Named
 
 @HiltViewModel
-class ViewModelAddPeopleEmail @Inject constructor(val repository: Repository) : ViewModel() {
+class ViewModelAddPeopleEmail @Inject constructor(val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
     var chipGroupAddPeopleEmail: ChipGroup? = null
     var addPeopleEmailConfirmationOpenData = MutableLiveData<EmailData>()
     var dismissDialogData = MutableLiveData<Boolean>()
@@ -133,7 +134,7 @@ class ViewModelAddPeopleEmail @Inject constructor(val repository: Repository) : 
                 }
 
                 override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<AddEmailResponse> {
-                    return retrofitApi.addTeamMembersAPI(finalJsonObject)
+                    return retrofitApi.addTeamMembersAPI(userToken,finalJsonObject)
                 }
             })
     }

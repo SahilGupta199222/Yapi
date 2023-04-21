@@ -13,15 +13,18 @@ import com.yapi.R
 import com.yapi.common.Constants
 import com.yapi.databinding.SignupTeamLayoutBinding
 import com.yapi.pref.PreferenceFile
+import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
+
 class SignUpTeamFragment : Fragment() {
 
     private lateinit var rvUsersAdapter: RVUsersAdapter
     private lateinit var dataBinding: SignupTeamLayoutBinding
     private val viewModelSignUpViewModel: SignupViewModel by viewModels()
+
 
     @Inject
     lateinit var preferenceFile: PreferenceFile
@@ -46,8 +49,6 @@ class SignUpTeamFragment : Fragment() {
             addViewTeamInvitationObserver()
             viewModelSignUpViewModel.fetchViewInvitationMethod()
         }
-
-
     }
 
     private fun addViewTeamInvitationObserver() {
