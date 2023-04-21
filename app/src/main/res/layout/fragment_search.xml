@@ -13,6 +13,7 @@
 </data>
 
     <LinearLayout
+        android:id="@+id/layoutSearch"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:background="@color/transparent"
@@ -26,7 +27,6 @@
         android:layout_gravity="end"
         app:tint="@color/white"
         android:visibility="@{mViewModel.cancelshowField?mView.GONE:mView.VISIBLE}"
-
         android:onClick="@{mViewModel::onClick}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,6 +34,7 @@
         android:id="@+id/layoutCreateSearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:onClick="@{mViewModel::onClick}"
         android:paddingStart="@dimen/startMainMargin"
         android:paddingTop="@dimen/startMainMargin"
         android:backgroundTint="@color/white"
@@ -41,13 +42,22 @@
         android:paddingBottom="@dimen/startMainMargin"
         tools:context=".views.create_group.CreateGroupFragment">
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollViewSearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:onClick="@{mViewModel::onClick}"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:context=".views.search.SearchFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutSearchOptionsSearch"
+            android:onClick="@{mViewModel::onClick}"
+
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:background="@color/transparent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
