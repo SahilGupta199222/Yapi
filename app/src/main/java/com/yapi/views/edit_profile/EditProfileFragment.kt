@@ -505,11 +505,6 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
     }
 
     private fun requestPermissionsMedia(optionType:Int) {
-        // below line is use to request permission in the current activity.
-        // this method is use to handle error in runtime permissions
-
-        //if (Build.)
-
             Dexter.withContext(requireActivity())
                 .withPermissions(Manifest.permission.CAMERA,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -607,9 +602,9 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
 
     private fun selectImage() {
         try {
-            val pm: PackageManager = requireActivity().getPackageManager()
-            val hasPerm: Int = pm.checkPermission(Manifest.permission.CAMERA, requireActivity().getPackageName())
-            if (hasPerm == PackageManager.PERMISSION_GRANTED) {
+          //  val pm: PackageManager = requireActivity().getPackageManager()
+           // val hasPerm: Int = pm.checkPermission(Manifest.permission.CAMERA, requireActivity().getPackageName())
+            //if (hasPerm == PackageManager.PERMISSION_GRANTED) {
                 val options = arrayOf<CharSequence>("Take Photo", "Choose From Gallery", "Cancel")
                 val builder: AlertDialog.Builder =
                    AlertDialog.Builder(requireContext())
@@ -626,7 +621,7 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
                     }
                 })
                 builder.show()
-            } else Toast.makeText(requireActivity(), "Camera Permission error", Toast.LENGTH_SHORT).show()
+          //  }
         } catch (e: Exception) {
             Toast.makeText(requireActivity(), "Camera Permission error", Toast.LENGTH_SHORT).show()
             e.printStackTrace()

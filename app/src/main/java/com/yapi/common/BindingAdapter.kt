@@ -17,9 +17,9 @@ object BindingAdapter {
         recyclerView.adapter = adapter
     }
 
-    @BindingAdapter(value = ["setPhotoAdapter"], requireAll = false)
+    @BindingAdapter(value = ["setRoundRectImage"], requireAll = false)
     @JvmStatic
-    fun setPhotoAdapter(
+    fun setRoundRectImage(
         recyclerView: RoundRectCornerImageView,
        value:String,
     ) {

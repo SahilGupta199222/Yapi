@@ -102,7 +102,7 @@
                             android:scaleType="centerCrop"
                             android:src="@drawable/demo_photo"
                             app:riv_corner_radius="8dp"
-                            setPhotoAdapter="@{mViewmodel.userPhotoUrl}"
+                            setRoundRectImage="@{mViewmodel.userPhotoUrl}"
                             app:riv_mutate_background="true" />
 
                         <RelativeLayout

@@ -158,19 +158,17 @@ class ViewModelEditProfile @Inject constructor(
                             aboutRequest,photoBody!!)
                     }else
                     {
-                        return retrofitApi.editProfileAPI(userToken,
+                        return retrofitApi.editProfileForPhotoAPI(userToken,
                             nameRequest,
                             userNameRequest,
                             emailAddressRequest,
                             phoneNumberRequest,
                             countryCodeRequest,
-                            aboutRequest)
+                            aboutRequest,photoBody!!)
                     }
-
                 }
             })
     }
-
 
     fun AfterTextChanged(s: Editable) {
 

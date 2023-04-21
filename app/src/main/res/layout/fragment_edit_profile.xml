@@ -88,7 +88,7 @@
                         android:layout_marginTop="@dimen/_3sdp"
                         android:src="@drawable/demo_photo"
                         android:scaleType="fitXY"
-                        setPhotoAdapter="@{model.photoUrl}"/>
+                        setRoundRectImage="@{model.photoUrl}"/>
 
                     <RelativeLayout
                         android:id="@+id/relNameValue"

@@ -93,7 +93,7 @@
                             android:layout_height="@dimen/_30sdp"
                             android:layout_alignParentEnd="true"
                             android:layout_gravity="end"
-                            setPhotoAdapter="@{mViewmodel.userPhotoUrl}"
+                            setRoundRectImage="@{mViewmodel.userPhotoUrl}"
                             android:onClick="@{mViewmodel::onClick}"
                             android:scaleType="centerCrop"
                             android:visibility="@{mViewmodel.noImageOnlyNameVisible?mView.GONE:mView.VISIBLE}"

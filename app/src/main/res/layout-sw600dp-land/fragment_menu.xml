@@ -94,7 +94,7 @@
                             android:layout_alignParentEnd="true"
                             android:layout_gravity="end"
                             android:visibility="@{mViewmodel.noImageOnlyNameVisible?mView.GONE:mView.VISIBLE}"
-                            setPhotoAdapter="@{mViewmodel.userPhotoUrl}"
+                            setRoundRectImage="@{mViewmodel.userPhotoUrl}"
                             android:onClick="@{mViewmodel::onClick}"
                             android:scaleType="centerCrop"
                             android:src="@drawable/demo_photo"

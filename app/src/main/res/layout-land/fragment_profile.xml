@@ -93,7 +93,7 @@
                             android:layout_height="@dimen/_58sdp"
                             android:visibility="@{model.noImageOnlyNameVisible?mView.GONE:mView.VISIBLE}"
                             android:src="@drawable/demo_photo"
-                            setPhotoAdapter="@{model.photoUrl}"
+                            setRoundRectImage="@{model.photoUrl}"
                             android:scaleType="fitXY"
                             android:layout_marginTop="@dimen/_3sdp" />
                         <RelativeLayout

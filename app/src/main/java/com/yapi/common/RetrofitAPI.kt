@@ -57,13 +57,9 @@ interface RetrofitAPI {
         @Part photoBody: MultipartBody.Part,
     ): Response<EditProfileResponse>
 
-
-
-
     @GET(WebAPIKeys.USER_FETCH_PROFILE+"/{user_id}")
     suspend fun fetchProfileAPI(@Header ("Authorization") token:String,@Path("user_id") user_id:String)
             : Response<ProfileResponse>
-
 
     @Multipart
     @POST(WebAPIKeys.GROUP_CREATE_TEAM)
@@ -81,7 +77,6 @@ interface RetrofitAPI {
 
     @GET(WebAPIKeys.VIEW_TEAM_INVITATION)
     suspend fun viewTeamInvitationAPI(@Header ("Authorization") token:String): Response<ViewInvitationResponse>
-
 
     @POST(WebAPIKeys.ACCEPT_TEAM_INVITATION)
     suspend fun acceptTeamInvitationAPI(
