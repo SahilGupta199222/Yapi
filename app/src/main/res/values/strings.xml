@@ -320,11 +320,8 @@
     <string name="save_changes_text">Save Changes</string>
     <string name="add_workspace_text_values">Add workspace</string>
 
-<<<<<<< HEAD
     <string name="saved_items_text">Saved Items</string>
     <string name="unsave_message_text">Unsave Message</string>
 
     <string name="upload_your_background_text">upload your background</string>
-=======
->>>>>>> origin/master
 </resources>

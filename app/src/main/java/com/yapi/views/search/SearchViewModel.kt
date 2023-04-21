@@ -17,12 +17,9 @@ var dissmissDialogPopupData=MutableLiveData<Boolean>()
     fun onClick(view:View){
         when(view.id)
         {
-<<<<<<< HEAD
            R.id.layoutSearch, R.id.layoutCreateSearch->{
                 MainActivity.activity?.get()?.hideKeyboard()
             }
-=======
->>>>>>> origin/master
             R.id.imgCancelSearch,R.id.ivOutsideCloseSearch->{
                 if(checkDeviceType()){
                     dissmissDialogPopupData.value=true

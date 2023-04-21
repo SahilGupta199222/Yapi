@@ -1,19 +1,12 @@
 package com.yapi.views.signup_code
 
-<<<<<<< HEAD
-=======
-import android.os.Bundle
->>>>>>> origin/master
 import android.util.Log
 import android.view.View
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
-<<<<<<< HEAD
 import com.google.gson.Gson
-=======
->>>>>>> origin/master
 import com.google.gson.JsonObject
 import com.yapi.MainActivity
 import com.yapi.R
@@ -22,10 +15,7 @@ import com.yapi.pref.PreferenceFile
 import com.yapi.views.sign_in.SignInErrorData
 import com.yapi.views.sign_in.SignInResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
-<<<<<<< HEAD
 import org.greenrobot.eventbus.EventBus
-=======
->>>>>>> origin/master
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -45,7 +35,6 @@ var errorData=MutableLiveData<SignInErrorData>()
                         errorData.value=SignInErrorData(MainActivity.activity!!.get()!!.getString(R.string.enter_otp),0)
                     }else
                     if(otpValue.get().toString().length==6){
-<<<<<<< HEAD
                         if(Constants.API_CALL_DEMO) {
                             verifyOTPAPIMethod(view)
                         }else
@@ -54,13 +43,6 @@ var errorData=MutableLiveData<SignInErrorData>()
                             preferenceFile.saveStringValue("login_email",email.toString())
                             view.findNavController().navigate(R.id.action_signUpCodeFragment_to_signupTeam)
                         }
-=======
-                      //  verifyOTPAPIMethod(view)
-
-                        errorData.value= SignInErrorData("",0)
-                        preferenceFile.saveStringValue("login_email",email.toString())
-                        view.findNavController().navigate(R.id.action_signUpCodeFragment_to_signupTeam)
->>>>>>> origin/master
                     }else
                     {
                         errorData.value=SignInErrorData(MainActivity.activity!!.get()!!.getString(R.string.enter_correct_otp),0)
@@ -76,16 +58,12 @@ var errorData=MutableLiveData<SignInErrorData>()
         var jsonObject=JsonObject()
         jsonObject.addProperty("email",email.toString())
         jsonObject.addProperty("otp",otpValue.get().toString())
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
         repository.makeCall(true,
             requestProcessor = object : ApiProcessor<Response<VerifyOTPResponse>> {
                 override fun onSuccess(success: Response<VerifyOTPResponse>) {
                     Log.e("Resposne_Dataaaa===", success.body().toString())
 
-<<<<<<< HEAD
                     preferenceFile.saveStringValue(Constants.USER_TOKEN,"Bearer "+success.body()!!.token.toString())
                     Log.e("mflfldddff16666==",success.body()!!.token.toString())
                     preferenceFile.saveStringValue(Constants.LOGIN_USER_ID,success.body()!!.data._id.toString())
@@ -110,11 +88,6 @@ var errorData=MutableLiveData<SignInErrorData>()
                     {
                         view.findNavController().navigate(R.id.action_signUpCodeFragment_to_signupTeam)
                     }
-=======
-                    errorData.value= SignInErrorData("",0)
-                    preferenceFile.saveStringValue("login_email",email.toString())
-                    view.findNavController().navigate(R.id.action_signUpCodeFragment_to_signupTeam)
->>>>>>> origin/master
                 }
 
                 override fun onError(message: String) {

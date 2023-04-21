@@ -1,7 +1,6 @@
 package com.yapi.common
 
 import com.google.gson.JsonObject
-<<<<<<< HEAD
 import com.yapi.views.add_people_email.AddEmailResponse
 import com.yapi.views.create_team.second_step_create_team.CreateTeamResponse
 import com.yapi.views.edit_profile.EditProfileResponse
@@ -12,10 +11,6 @@ import com.yapi.views.signupTeam.ViewInvitationResponse
 import com.yapi.views.signup_code.VerifyOTPResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-=======
-import com.yapi.views.sign_in.SignInResponse
-import com.yapi.views.signup_code.VerifyOTPResponse
->>>>>>> origin/master
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -36,7 +31,6 @@ interface RetrofitAPI {
     @POST(WebAPIKeys.VERIFY_OTP_URL)
     suspend fun verifyOTPAPI(@Body emailData:JsonObject)
     : Response<VerifyOTPResponse>
-<<<<<<< HEAD
 
     @Multipart
     @POST(WebAPIKeys.USER_EDIT_PROFILE)
@@ -93,6 +87,4 @@ interface RetrofitAPI {
     suspend fun fetchAllGroupData(@Header ("Authorization") token:String): Response<GroupMenuResponse>
 
 
-=======
->>>>>>> origin/master
 }

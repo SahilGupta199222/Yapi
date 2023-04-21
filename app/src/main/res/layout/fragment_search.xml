@@ -13,10 +13,7 @@
 </data>
 
     <LinearLayout
-<<<<<<< HEAD
         android:id="@+id/layoutSearch"
-=======
->>>>>>> origin/master
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:background="@color/transparent"
@@ -30,10 +27,6 @@
         android:layout_gravity="end"
         app:tint="@color/white"
         android:visibility="@{mViewModel.cancelshowField?mView.GONE:mView.VISIBLE}"
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
         android:onClick="@{mViewModel::onClick}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,7 +42,6 @@
         android:paddingBottom="@dimen/startMainMargin"
         tools:context=".views.create_group.CreateGroupFragment">
     <androidx.core.widget.NestedScrollView
-<<<<<<< HEAD
         android:id="@+id/nestedScrollViewSearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -58,10 +50,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-=======
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
->>>>>>> origin/master
         tools:context=".views.search.SearchFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout

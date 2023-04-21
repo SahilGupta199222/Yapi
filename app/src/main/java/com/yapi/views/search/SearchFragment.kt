@@ -117,7 +117,6 @@ class SearchFragment : DialogFragment(){
             }
         })
     }
-<<<<<<< HEAD
     fun setTouchListenereForNested()
     {
         binding.nestedScrollViewSearch.setOnTouchListener(object : View.OnTouchListener {
@@ -127,8 +126,6 @@ class SearchFragment : DialogFragment(){
             }
         })
     }
-=======
->>>>>>> origin/master
 
     private fun init() {
         setBackgroundRectMethod()

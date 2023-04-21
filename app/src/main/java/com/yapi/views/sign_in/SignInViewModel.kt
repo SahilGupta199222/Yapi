@@ -34,7 +34,6 @@ class SignInViewModel @Inject constructor(val repository: Repository)  : ViewMod
                 if (checkValidation()) {
                     if(view.findNavController().currentDestination?.id==R.id.signInFragment) {
 
-<<<<<<< HEAD
                         if(Constants.API_CALL_DEMO) {
                             loginAPIMethod(view)
                         }else
@@ -43,15 +42,6 @@ class SignInViewModel @Inject constructor(val repository: Repository)  : ViewMod
                             bundle.putString("email",emailFieldValue.get())
                             view.findNavController().navigate(R.id.action_signInFragment_to_signUpCodeFragment,bundle)
                         }
-=======
-
-                      //  loginAPIMethod(view)
-                        var bundle= Bundle()
-                        bundle.putString("email",emailFieldValue.get())
-                        view.findNavController().navigate(R.id.action_signInFragment_to_signUpCodeFragment,bundle)
-
-
->>>>>>> origin/master
                     }
                 }
             }
@@ -67,26 +57,16 @@ class SignInViewModel @Inject constructor(val repository: Repository)  : ViewMod
         }
     }
 
-<<<<<<< HEAD
     private fun loginAPIMethod(view:View)
     {
         val jsonObject=JsonObject()
-=======
-    fun loginAPIMethod(view:View)
-    {
-        var jsonObject=JsonObject()
->>>>>>> origin/master
         jsonObject.addProperty("email",emailFieldValue.get().toString().trim())
         repository.makeCall(true,
             requestProcessor = object : ApiProcessor<Response<SignInResponse>> {
                 override fun onSuccess(success: Response<SignInResponse>) {
                     Log.e("Resposne_Dataaaa===", success.body().toString())
 
-<<<<<<< HEAD
                     val bundle= Bundle()
-=======
-                    var bundle= Bundle()
->>>>>>> origin/master
                     bundle.putString("email",emailFieldValue.get())
                     view.findNavController().navigate(R.id.action_signInFragment_to_signUpCodeFragment,bundle)
                 }

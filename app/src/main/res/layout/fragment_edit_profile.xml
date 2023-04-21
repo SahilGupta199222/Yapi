@@ -301,10 +301,7 @@
                         android:fontFamily="@font/larsseit_regular"
                         android:hint="@string/enter_name"
                         android:inputType="textPersonName"
-<<<<<<< HEAD
                         android:maxLength="25"
-=======
->>>>>>> origin/master
                         android:onTextChanged="@{model::nameTextChange}"
                         android:paddingStart="@dimen/etHorizontalPadding"
                         android:paddingTop="@dimen/etVerticalPadding"
@@ -353,10 +350,7 @@
                         android:fontFamily="@font/larsseit_regular"
                         android:hint="@string/enterUserName"
                         android:inputType="textPersonName"
-<<<<<<< HEAD
                         android:maxLength="25"
-=======
->>>>>>> origin/master
                         android:onTextChanged="@{model::userNameTextChange}"
                         android:paddingStart="@dimen/etHorizontalPadding"
                         android:paddingTop="@dimen/etVerticalPadding"
@@ -410,10 +404,7 @@
                         android:paddingTop="@dimen/etVerticalPadding"
                         android:paddingEnd="@dimen/etHorizontalPadding"
                         android:paddingBottom="@dimen/etVerticalPadding"
-<<<<<<< HEAD
                         android:enabled="false"
-=======
->>>>>>> origin/master
                         android:text="@={model.emailAddressValue}"
                         android:textColor="@color/darkGrey"
                         android:textSize="@dimen/normalTextSize"

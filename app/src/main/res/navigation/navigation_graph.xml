@@ -75,12 +75,9 @@
 
         <action android:id="@+id/action_menuFragment_to_workspacelist"
             app:destination="@id/workspacelist"/>
-<<<<<<< HEAD
 
         <action android:id="@+id/action_menuFragment_to_savedItemsFragment"
            app:destination="@id/savedItemsFragment" />
-=======
->>>>>>> origin/master
     </fragment>
 
     <fragment

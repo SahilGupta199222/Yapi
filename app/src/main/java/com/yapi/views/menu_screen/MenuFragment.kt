@@ -15,11 +15,7 @@ import com.google.gson.Gson
 import com.yapi.R
 import com.yapi.common.*
 import com.yapi.databinding.FragmentMenuBinding
-<<<<<<< HEAD
 import com.yapi.pref.PreferenceFile
-=======
-import com.yapi.views.add_people.AddPeopleFragment
->>>>>>> origin/master
 import com.yapi.views.profile.ProfileFragment
 import com.yapi.views.search.SearchFragment
 import com.yapi.views.signup_code.LoginUserData
@@ -380,7 +376,6 @@ class MenuFragment : Fragment() {
                             if (findNavController().currentDestination?.id == R.id.menuFragment)
                                 findNavController().navigate(R.id.action_menuFragment_to_userListFragment)
                         }
-<<<<<<< HEAD
                     } else {
                         if (checkDeviceType()) {
                             EventBus.getDefault()
@@ -390,19 +385,6 @@ class MenuFragment : Fragment() {
                             if (findNavController().currentDestination?.id == R.id.menuFragment) {
                                 findNavController().navigate(R.id.action_menuFragment_to_workspacelist)
                             }
-=======
-                    }else
-                    {
-                        if(checkDeviceType())
-                        {
-                            EventBus.getDefault()
-                                .post(MyMessageEvent(11, Constants.WORKSPACE_MANAGEMENT)) //post event
-                        }else
-                        {
-                            if (findNavController().currentDestination?.id == R.id.menuFragment){
-                            findNavController().navigate(R.id.action_menuFragment_to_workspacelist)
-                                }
->>>>>>> origin/master
                         }
                     }
                 }
@@ -627,7 +609,6 @@ class MenuFragment : Fragment() {
         binding.rvGroupListMenu.layoutParams.height = rvHeight
         Log.e("fknkwefwsfwfwaf===", rowHeight.toString())
         adapterGroupsList =
-<<<<<<< HEAD
             AdapterGroupsList(requireContext(),
                 true,
                 newGroupsList,
@@ -642,32 +623,6 @@ class MenuFragment : Fragment() {
                             } else {
                                 findNavController().navigate(R.id.action_menuFragment_to_createGroupFragment)
                             }
-=======
-            AdapterGroupsList(requireContext(), true, list, object : AdapterGroupsList.Click {
-                @SuppressLint("NotifyDataSetChanged")
-                override fun onSeletect(position: Int, userType: String) {
-
-                    if (adapterGroupsList?.getListt()?.get(position)!!.unSeenMsgCount == -1) {
-
-                        if (resources.getBoolean(R.bool.isTab)) {
-                            System.out.println("phone========tablet")
-                            EventBus.getDefault().post(GroupEvent(2, Constants.CREATEGOUP_KEY)) //post event
-                        } else {
-                            findNavController().navigate(R.id.action_menuFragment_to_createGroupFragment)
-                        }
-                    } else {
-                        for (i in 0 until adapterGroupsList?.getListt()?.size!!) {
-                            adapterGroupsList?.getListt()?.get(i)?.selected = position == i
-                        }
-                        Log.i("asdfjanskdf",
-                            "before notifiy list is\n${adapterGroupsList?.getListt()}")
-                        adapterGroupsList?.notifyDataSetChanged()
-
-                        if (resources.getBoolean(R.bool.isTab)) {
-                            System.out.println("phone========tablet")
-                            EventBus.getDefault()
-                                .post(MyMessageEvent(3, Constants.GROUPS_KEY)) //post event
->>>>>>> origin/master
                         } else {
                             for (i in 0 until adapterGroupsList?.getListt()?.size!!) {
                                 adapterGroupsList?.getListt()?.get(i)?.selected = position == i
@@ -748,17 +703,10 @@ class MenuFragment : Fragment() {
 
 
         viewModel.openSearchScreenData.observe(requireActivity(), Observer {
-<<<<<<< HEAD
             var data = it as Boolean
             if (data) {
                 SearchFragment.newInstanceSearch("")
                     .showNow(requireActivity().supportFragmentManager, "SimpleDialog.TAG")
-=======
-            var data=it as Boolean
-            if(data)
-            {
-                SearchFragment.newInstanceSearch("").showNow(requireActivity().supportFragmentManager,"SimpleDialog.TAG")
->>>>>>> origin/master
             }
         })
     }

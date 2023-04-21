@@ -56,11 +56,7 @@ class ProfileFragment : DialogFragment() {
         var second_frame_height= preferenceFile.fetchStringValue("second_frame_height")
         var second_frame_width=  preferenceFile.fetchStringValue("second_frame_width")
         Log.e("nefjkwnddfkewfwefe===",second_frame_height+"==="+second_frame_width)
-<<<<<<< HEAD
        window.setLayout(second_frame_width.toInt(),second_frame_height.toInt())
-=======
-        window.setLayout(second_frame_width.toInt(),second_frame_height.toInt())
->>>>>>> origin/master
         return dialog
     }
 

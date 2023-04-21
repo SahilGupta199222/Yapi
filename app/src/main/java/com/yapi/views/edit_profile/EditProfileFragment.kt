@@ -1,6 +1,5 @@
 package com.yapi.views.edit_profile
 
-<<<<<<< HEAD
 import android.Manifest
 import android.app.AlertDialog
 import android.app.Dialog
@@ -9,9 +8,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
-=======
-import android.app.Dialog
->>>>>>> origin/master
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -40,7 +36,6 @@ import com.yapi.R
 import com.yapi.common.*
 import com.yapi.databinding.FragmentEditProfileBinding
 import com.yapi.pref.PreferenceFile
-<<<<<<< HEAD
 import com.yapi.views.profile.ProfileData
 import com.yapi.views.sign_in.SignInErrorData
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,18 +55,6 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
     lateinit var preferenceFile: PreferenceFile
 
     val GALARYCode=123
-=======
-import com.yapi.views.sign_in.SignInErrorData
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
-
-@AndroidEntryPoint
-class EditProfileFragment : DialogFragment(), View.OnClickListener {
-
-    @Inject
-    lateinit var preferenceFile: PreferenceFile
-
->>>>>>> origin/master
     companion object {
         fun newInstanceEditProfileScreen(
             title: String,
@@ -99,16 +82,11 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
         val dialog: Dialog = super.onCreateDialog(savedInstanceState)
 
         // Get the window of the dialog
-<<<<<<< HEAD
         val window: Window = dialog.window!!
-=======
-        val window: Window = dialog.getWindow()!!
->>>>>>> origin/master
 
         // Set the dialog to be shown at the bottom of the screen
         window.setGravity(Gravity.RIGHT)
 
-<<<<<<< HEAD
         var second_frame_height = preferenceFile.fetchStringValue("second_frame_height")
         var second_frame_width = preferenceFile.fetchStringValue("second_frame_width")
         Log.e("nefjkwnddfkewfwefe===", second_frame_height + "===" + second_frame_width)
@@ -116,16 +94,6 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
         return dialog
     }
 
-=======
-        var second_frame_height= preferenceFile.fetchStringValue("second_frame_height")
-        var second_frame_width=  preferenceFile.fetchStringValue("second_frame_width")
-        Log.e("nefjkwnddfkewfwefe===",second_frame_height+"==="+second_frame_width)
-        window.setLayout(second_frame_width.toInt(),second_frame_height.toInt())
-        return dialog
-    }
-
-
->>>>>>> origin/master
     private lateinit var binding: FragmentEditProfileBinding
     private val viewModel: ViewModelEditProfile by viewModels()
     override fun onCreateView(

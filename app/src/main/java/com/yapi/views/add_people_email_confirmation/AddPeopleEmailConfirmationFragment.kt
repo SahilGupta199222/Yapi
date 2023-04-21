@@ -4,10 +4,6 @@ import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-<<<<<<< HEAD
-=======
-import androidx.fragment.app.Fragment
->>>>>>> origin/master
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.fragment.app.DialogFragment
@@ -19,12 +15,8 @@ import com.yapi.common.NumberToWordsConverter
 import com.yapi.common.checkDeviceType
 import com.yapi.databinding.FragmentAddPeopleEmailConfirmationBinding
 import com.yapi.pref.PreferenceFile
-<<<<<<< HEAD
 import com.yapi.views.add_people_email.EmailData
 import com.yapi.views.add_people_email.Invitaion
-=======
-import com.yapi.views.create_group.CreateGroupFragment
->>>>>>> origin/master
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

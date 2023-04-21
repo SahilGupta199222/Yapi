@@ -49,11 +49,7 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
     var loginUserData: LoginUserData?=null
     fun onClick(view: View) {
         when (view.id) {
-<<<<<<< HEAD
             R.id.layoutSearch,R.id.etSearchMenu->{
-=======
-            R.id.layoutSearch->{
->>>>>>> origin/master
                 if(checkDeviceType()){
                     openSearchScreenData.value=true
                     //SearchFragment.newInstanceSearch("").showNow(view.re, " SimpleDialog.TAG")

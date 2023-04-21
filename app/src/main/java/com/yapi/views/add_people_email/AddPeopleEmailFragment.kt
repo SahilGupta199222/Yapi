@@ -4,10 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
-<<<<<<< HEAD
 import android.provider.ContactsContract.CommonDataKinds.Email
-=======
->>>>>>> origin/master
 import android.util.Log
 import android.view.*
 import android.widget.LinearLayout

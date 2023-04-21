@@ -34,10 +34,7 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.lang.ref.WeakReference
 import javax.inject.Inject
-<<<<<<< HEAD
 import javax.inject.Named
-=======
->>>>>>> origin/master
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -182,16 +179,12 @@ class MainActivity : AppCompatActivity() {
                                     {
                                         var fragment = WorkSpacesListFragment()
                                         openUserMamangementScreen(fragment)
-<<<<<<< HEAD
                                     }else
                                         if(event.screenName==Constants.SAVED_ITEMS_KEY)
                                         {
                                             var fragment = SavedItemsFragment()
                                             openUserMamangementScreen(fragment)
                                         }
-=======
-                                    }
->>>>>>> origin/master
 
     }
 
