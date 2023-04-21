@@ -29,19 +29,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <androidx.constraintlayout.widget.ConstraintLayout
+
         android:id="@+id/layoutCreateSearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingStart="@dimen/startMainMargin"
+        android:onClick="@{mViewModel::onClick}"
         android:paddingTop="@dimen/startMainMargin"
         android:backgroundTint="@color/white"
         android:paddingEnd="@dimen/startMainMargin"
         android:paddingBottom="@dimen/startMainMargin"
         tools:context=".views.create_group.CreateGroupFragment">
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollViewSearchResult"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:context=".views.search_result.SearchResultFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout

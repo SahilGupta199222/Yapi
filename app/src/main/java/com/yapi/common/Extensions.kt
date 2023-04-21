@@ -6,6 +6,7 @@ import android.graphics.drawable.GradientDrawable
 import android.net.ConnectivityManager
 import android.text.TextUtils
 import android.util.Patterns
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatEditText

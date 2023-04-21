@@ -16,6 +16,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.yapi.R
 import com.yapi.common.checkDeviceType
+import com.yapi.common.hideKeyboard
 import com.yapi.databinding.FragmentSearchBinding
 import com.yapi.pref.PreferenceFile
 import com.yapi.views.search_result.AdapterSearch
@@ -116,11 +117,21 @@ class SearchFragment : DialogFragment(){
             }
         })
     }
+    fun setTouchListenereForNested()
+    {
+        binding.nestedScrollViewSearch.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                requireActivity().hideKeyboard()
+                return false
+            }
+        })
+    }
 
     private fun init() {
         setBackgroundRectMethod()
         binding.apply {
             recentList()
+            setTouchListenereForNested()
 
             etSearch.setOnEditorActionListener(object : TextView.OnEditorActionListener {
                 override fun onEditorAction(

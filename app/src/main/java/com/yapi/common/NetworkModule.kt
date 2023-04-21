@@ -42,7 +42,6 @@ object NetworkModule {
                 val original = chain.request()
                 val request = original.newBuilder()
                    // .header("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjNjZTIzMTFhNjdjNzA4NTc0MzlmNTQzIiwiaWF0IjoxNjc1MDYxMjUxfQ.-XFkdhmagEV-4V31HWuQ39nK2rsfmVaNUceoA5Zlyrw")
-
                     .header("Authorization", newToken)
                     .method(original.method, original.body)
                     .build()
