@@ -4,7 +4,6 @@ import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup.LayoutParams
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.cardview.widget.CardView
@@ -17,80 +16,77 @@ import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.*
 import com.yapi.pref.PreferenceFile
-import com.yapi.views.edit_profile.EditProfileResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody
-import okio.Buffer
 import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class ViewModelProfile @Inject constructor(val repository: Repository,val preferenceFile: PreferenceFile) : ViewModel() {
-    private  var profileData: ProfileData?=null
-    var openEditProfileData=MutableLiveData<ProfileData?>()
-var dismissDialogData=MutableLiveData<Boolean>()
+class ViewModelProfile @Inject constructor(
+    val repository: Repository,
+    val preferenceFile: PreferenceFile,
+) : ViewModel() {
+    private var profileData: ProfileData? = null
+    var openEditProfileData = MutableLiveData<ProfileData?>()
+    var dismissDialogData = MutableLiveData<Boolean>()
 
-    var nameValue=ObservableField("")
-    var userNameValue=ObservableField("")
-    var aboutValue=ObservableField("")
-    var emailValue=ObservableField("")
-    var phoneValue=ObservableField("")
-    var phoneCountryValue=ObservableField("")
+    var nameValue = ObservableField("")
+    var userNameValue = ObservableField("")
+    var aboutValue = ObservableField("")
+    var emailValue = ObservableField("")
+    var phoneValue = ObservableField("")
+    var phoneCountryValue = ObservableField("")
 
-    var topProfileVisibility=ObservableBoolean(false)
+    var topProfileVisibility = ObservableBoolean(false)
 
-    var screenWidth:Int?=0
+    var screenWidth: Int? = 0
     fun onClick(view: View) {
         when (view.id) {
             R.id.btnEditProfile -> {
-                var bundle= Bundle()
-                if(profileData!=null) {
+                var bundle = Bundle()
+                if (profileData != null) {
                     bundle.putSerializable("profile_data", profileData)
                 }
 
-                if(checkDeviceType()){
-                    openEditProfileData.value=profileData?:ProfileData()
-                }else
-                {
+                if (checkDeviceType()) {
+                    openEditProfileData.value = profileData ?: ProfileData()
+                } else {
                     if (view.findNavController().currentDestination?.id == R.id.profileFragment) {
 
                         view.findNavController()
-                            .navigate(R.id.action_profileFragment_to_editProfileFragment,bundle)
+                            .navigate(R.id.action_profileFragment_to_editProfileFragment, bundle)
                     }
                 }
             }
-            R.id.layoutDeleteAccountProfile->{
+            R.id.layoutDeleteAccountProfile -> {
                 deleteAccountDialog(view)
             }
-            R.id.layoutDeActiveProfile->{
+            R.id.layoutDeActiveProfile -> {
                 deActiveAccountDialog(view)
             }
-            R.id.imgCancelProfile,R.id.ivOutsideCloseProfile-> {
-                if(checkDeviceType()){
-                    dismissDialogData.value=true
-                }else
-                {
+            R.id.imgCancelProfile, R.id.ivOutsideCloseProfile -> {
+                if (checkDeviceType()) {
+                    dismissDialogData.value = true
+                } else {
                     if (view.findNavController().currentDestination?.id == R.id.profileFragment) {
                         view.findNavController().popBackStack()
                     }
                 }
             }
-            R.id.layoutProfile,R.id.layoutScrollViewProfile->{
+            R.id.layoutProfile, R.id.layoutScrollViewProfile -> {
                 //for hide keyboard
                 MainActivity.activity!!.get()!!.hideKeyboard()
             }
         }
     }
 
-    private fun deleteAccountDialog(view:View) {
+    private fun deleteAccountDialog(view: View) {
         val dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.delete_profile_popup)
 //        dialog.window?.setLayout(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT)
-        val cancelBtn=dialog.findViewById<AppCompatButton>(R.id.btnProfileCancel)
-        val deleteBtn=dialog.findViewById<AppCompatButton>(R.id.btnProfileDelete)
-        val ivCross=dialog.findViewById<AppCompatImageView>(R.id.ivCross)
+        val cancelBtn = dialog.findViewById<AppCompatButton>(R.id.btnProfileCancel)
+        val deleteBtn = dialog.findViewById<AppCompatButton>(R.id.btnProfileDelete)
+        val ivCross = dialog.findViewById<AppCompatImageView>(R.id.ivCross)
 
         ivCross.setOnClickListener {
             dialog.dismiss()
@@ -106,18 +102,19 @@ var dismissDialogData=MutableLiveData<Boolean>()
         dialog.setCancelable(false)
         dialog.show()
 
-        var cardviewDeleteProfile=dialog.findViewById<CardView>(R.id.cardviewDeleteProfile)
-        cardviewDeleteProfile.layoutParams.width=(screenWidth!!.toDouble()/1.1).toInt()
+        var cardviewDeleteProfile = dialog.findViewById<CardView>(R.id.cardviewDeleteProfile)
+        cardviewDeleteProfile.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
     }
-    private fun deActiveAccountDialog(view:View){
+
+    private fun deActiveAccountDialog(view: View) {
         val dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.dialog_de_activie_profile)
 //        dialog.window?.setLayout(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT)
-        val cancelBtn=dialog.findViewById<AppCompatButton>(R.id.btnCancelDeActiveDialog)
-        val deActivateBtn=dialog.findViewById<AppCompatButton>(R.id.btnDeActiveDialog)
+        val cancelBtn = dialog.findViewById<AppCompatButton>(R.id.btnCancelDeActiveDialog)
+        val deActivateBtn = dialog.findViewById<AppCompatButton>(R.id.btnDeActiveDialog)
 
-        val ivCrossDeactivate=dialog.findViewById<AppCompatImageView>(R.id.ivCrossDeactivate)
+        val ivCrossDeactivate = dialog.findViewById<AppCompatImageView>(R.id.ivCrossDeactivate)
 
         ivCrossDeactivate.setOnClickListener {
             dialog.dismiss()
@@ -133,30 +130,32 @@ var dismissDialogData=MutableLiveData<Boolean>()
         dialog.setCancelable(false)
         dialog.show()
 
-        var cardViewDeActiveProfile=dialog.findViewById<CardView>(R.id.cardViewDeActiveProfile)
-        cardViewDeActiveProfile.layoutParams.width=(screenWidth!!.toDouble()/1.1).toInt()
+        var cardViewDeActiveProfile = dialog.findViewById<CardView>(R.id.cardViewDeActiveProfile)
+        cardViewDeActiveProfile.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
     }
 
 
-
-    fun fetchProfileData()
-    {
+    fun fetchProfileData() {
         Log.e("Token111====", preferenceFile.fetchStringValue(Constants.USER_TOKEN))
         repository.makeCall(true,
             requestProcessor = object : ApiProcessor<Response<ProfileResponse>> {
                 override fun onSuccess(success: Response<ProfileResponse>) {
                     Log.e("Resposne_Dataaaa===", success.body().toString())
-                    profileData=success.body()!!.data
+                    profileData = success.body()!!.data
                     topProfileVisibility.set(true)
                     nameValue.set(success.body()!!.data.name)
                     userNameValue.set(success.body()!!.data.user_name)
                     emailValue.set(success.body()!!.data.email)
                     aboutValue.set(success.body()!!.data.about)
 
+                    if (!(success.body()!!.data.mobile_number.toString().equals(""))
+                        && success.body()!!.data.mobile_number.toString()!=null
+                        && !(success.body()!!.data.mobile_number.toString().equals("null"))) {
+                        var phoneNumber =
+                            addSpaceBetweenPhoneMethod(success.body()!!.data.mobile_number.toString())
+                        phoneValue.set(success.body()!!.data.country_code.toString() + " " + phoneNumber)
+                    }
 
-                  var phoneNumber=  addSpaceBetweenPhoneMethod(success.body()!!.data.mobile_number.toString())
-
-                    phoneValue.set(success.body()!!.data.country_code.toString()+" "+phoneNumber)
                     //phoneCountryValue.set(success.body()!!.data.country_code.toString())
                     /*   var bundle= Bundle()
                        bundle.putString("email",emailFieldValue.get())
@@ -168,7 +167,7 @@ var dismissDialogData=MutableLiveData<Boolean>()
                 }
 
                 override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<ProfileResponse> {
-                    Log.e("mflfldddff==",preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
+                    Log.e("mflfldddff==", preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
                     return retrofitApi.fetchProfileAPI(preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
                 }
             })

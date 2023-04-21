@@ -15,7 +15,6 @@
         android:layout_height="match_parent"
         android:background="@drawable/screen_background"
         android:orientation="vertical"
-
         android:weightSum="100">
 
         <RelativeLayout
@@ -189,7 +188,7 @@
                         android:gravity="center_horizontal"
                         android:letterSpacing="0.07"
                         android:lineSpacingExtra="@dimen/line_spacing_extra"
-                        android:text="@string/these_invitation_for"
+                        android:text="@{model.loginEmailMessage}"
                         android:textColor="@color/darkLiteGrey"
                         android:textSize="@dimen/_12ssp"
                         app:layout_constraintEnd_toEndOf="parent"

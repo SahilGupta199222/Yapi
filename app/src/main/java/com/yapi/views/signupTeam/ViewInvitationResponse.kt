@@ -1,25 +1,32 @@
-package com.yapi.views.create_team.second_step_create_team
+package com.yapi.views.signupTeam
 
-data class CreateTeamResponse(
-    val `data`: Data,
+data class ViewInvitationResponse(
+    val `data`: ArrayList<ViewInvitationData>,
     val message: String,
     val status: Int
 )
 
-data class Data(
+data class ViewInvitationData(
     val __v: Int,
     val _id: String,
     val createdAt: String,
     val description: String,
     val image: String,
     val image_url: String,
-    val invitaions: List<Any>,
+    val invitaions: ArrayList<Invitaion>,
     val is_private: Boolean,
+    val memberCount: Int,
     val name: String,
     val quick_join: Boolean,
     val role: String,
-    val channel_name: String,
     val updatedAt: String,
     val user_id: String,
     val working: String
+)
+
+data class Invitaion(
+    val _id: String,
+    val role: String,
+    val status: String,
+    val user_email: String
 )

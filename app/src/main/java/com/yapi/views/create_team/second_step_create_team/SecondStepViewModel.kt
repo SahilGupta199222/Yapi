@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.*
+import com.yapi.pref.PreferenceFile
 import com.yapi.views.edit_profile.EditProfileResponse
 import com.yapi.views.sign_in.SignInErrorData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +22,8 @@ import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
-class SecondStepViewModel @Inject constructor(val repository: Repository) : ViewModel() {
+class SecondStepViewModel @Inject constructor(val repository: Repository,
+val preferenceFile: PreferenceFile) : ViewModel() {
 
     private var fileImage: File?=null
     private var isPrivate: Boolean?=false
@@ -102,6 +104,7 @@ class SecondStepViewModel @Inject constructor(val repository: Repository) : View
                 override fun onSuccess(success: Response<CreateTeamResponse>) {
                     Log.e("Resposne_Dataaaa===", success.body().toString())
 
+                    preferenceFile.saveBooleanValue(Constants.USER_PROFILE_CREATED,true)
                     errorData.value= SignInErrorData("",0)
 
                     val bundle= Bundle()

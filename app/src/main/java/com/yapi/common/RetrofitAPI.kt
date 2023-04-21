@@ -4,8 +4,10 @@ import com.google.gson.JsonObject
 import com.yapi.views.add_people_email.AddEmailResponse
 import com.yapi.views.create_team.second_step_create_team.CreateTeamResponse
 import com.yapi.views.edit_profile.EditProfileResponse
+import com.yapi.views.menu_screen.GroupMenuResponse
 import com.yapi.views.profile.ProfileResponse
 import com.yapi.views.sign_in.SignInResponse
+import com.yapi.views.signupTeam.ViewInvitationResponse
 import com.yapi.views.signup_code.VerifyOTPResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -58,7 +60,18 @@ interface RetrofitAPI {
         @Part("quick_join") quick_join:RequestBody,
     ): Response<CreateTeamResponse>
 
-
     @POST(WebAPIKeys.ADD_TEAM_MEMBERS)
     suspend fun addTeamMembersAPI(@Body emailData:JsonObject): Response<AddEmailResponse>
+
+    @GET(WebAPIKeys.VIEW_TEAM_INVITATION)
+    suspend fun viewTeamInvitationAPI(): Response<ViewInvitationResponse>
+
+
+    @POST(WebAPIKeys.ACCEPT_TEAM_INVITATION)
+    suspend fun acceptTeamInvitationAPI(@Body jsonObject: JsonObject): Response<JsonObject>
+
+    @GET(WebAPIKeys.FETCH_ALL_MENU_DATA)
+    suspend fun fetchAllGroupData(): Response<GroupMenuResponse>
+
+
 }

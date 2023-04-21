@@ -47,7 +47,7 @@ class Repository @Inject constructor(val retrofit:RetrofitAPI,@ApplicationContex
                 Log.d("exception", "errorException$exception")
                 // activity.showProgress()
                 hideProgress()
-                //activity.showNegativeAlerter(exception.message ?: "")
+                showToastMessage(exception.message ?: "")
                 //showErrorDialog()
             }.collect {
                     response ->

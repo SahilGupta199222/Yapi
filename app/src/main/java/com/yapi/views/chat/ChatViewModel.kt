@@ -42,6 +42,11 @@ class ChatViewModel : ViewModel() {
   //  var screenHeight: Int? = 0
     var userType: String? = ""
     var sendDataValue = ObservableField("")
+
+    var titleName = ObservableField("")
+    var memberValue = ObservableField("")
+    var emptyGroupMessageTitle = ObservableField("")
+
     var backButtonVisible = ObservableBoolean(false)
     var groupImageVisible = ObservableBoolean(false)
     var groupIconVisible = ObservableBoolean(false)

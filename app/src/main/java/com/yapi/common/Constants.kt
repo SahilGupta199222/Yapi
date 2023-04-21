@@ -28,6 +28,7 @@ object Constants {
 
   var USER_TOKEN="token"
   var LOGIN_USER_ID="login_user_id"
+  var USER_PROFILE_CREATED="user_profile_created"
 
- var API_CALL_DEMO:Boolean=false
+  var API_CALL_DEMO:Boolean=true
 }

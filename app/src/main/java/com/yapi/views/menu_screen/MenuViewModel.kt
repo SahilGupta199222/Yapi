@@ -2,28 +2,34 @@ package com.yapi.views.menu_screen
 
 import android.app.Dialog
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import com.google.gson.JsonObject
 import com.yapi.MainActivity
 import com.yapi.R
-import com.yapi.common.Constants
-import com.yapi.common.checkDeviceType
+import com.yapi.common.*
 import com.yapi.pref.PreferenceFile
 import com.yapi.views.profile.ProfileFragment
+import com.yapi.views.profile.ProfileResponse
 import com.yapi.views.search.SearchFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : ViewModel() {
+class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile,
+val repository: Repository) : ViewModel() {
 
+    var groupData=MutableLiveData<AllData>()
     var screenWidth: Int? = 0
     var openProfileScreenData = MutableLiveData<Boolean>()
     var openSearchScreenData = MutableLiveData<Boolean>()
@@ -96,7 +102,8 @@ class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : Vi
                 var constraintsLogout = mView.findViewById<ConstraintLayout>(R.id.constraintsLogout)
                 constraintsLogout.setOnClickListener {
                     popUp.dismiss()
-                    preferenceFile.saveStringValue(Constants.USER_ID, "")
+                   // preferenceFile.saveStringValue(Constants.USER_ID, "")
+                    preferenceFile.clearAllPref()
                     if(checkDeviceType()){
                         var intent=Intent(MainActivity.activity!!.get(),MainActivity::class.java)
                         MainActivity.activity!!.get()!!.startActivity(intent)
@@ -165,5 +172,28 @@ class MenuViewModel @Inject constructor(val preferenceFile: PreferenceFile) : Vi
         dialog.show()
         var cardviewDeleteProfile = dialog.findViewById<CardView>(R.id.cardviewDeleteProfile)
         cardviewDeleteProfile.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
+    }
+
+
+    fun fetchGroupDataMethod():LiveData<AllData> {
+        Log.e("Token111====", preferenceFile.fetchStringValue(Constants.USER_TOKEN))
+        repository.makeCall(true,
+            requestProcessor = object : ApiProcessor<Response<GroupMenuResponse>> {
+                override fun onSuccess(success: Response<GroupMenuResponse>) {
+                    Log.e("Resposne_Dataaaa===", success.body().toString())
+
+                    groupData.value=success.body()!!.data
+
+                }
+
+                override fun onError(message: String) {
+                    MainActivity.activity!!.get()!!.showMessage(message)
+                }
+
+                override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<GroupMenuResponse> {
+                    return retrofitApi.fetchAllGroupData()
+                }
+            })
+        return groupData
     }
 }

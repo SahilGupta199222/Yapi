@@ -148,25 +148,44 @@
                         app:layout_constraintTop_toBottomOf="@+id/imgProfilePicEditProfile" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintUploadPhoto"
+                        android:layout_width="wrap_content"
+                        app:layout_constraintStart_toStartOf="@+id/txtTempProfileImageLiteGreyEditProfile"
+                        app:layout_constraintTop_toBottomOf="@+id/txtTempProfileImageLiteGreyEditProfile"
+                        android:layout_height="wrap_content">
+                    <RelativeLayout
                         android:id="@+id/layoutPickGalleryImgEditProfile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/topFiveMargin"
-                        android:background="@drawable/round_lite_gray"
-                        android:clipToOutline="true"
                         android:padding="@dimen/_15sdp"
-                        app:layout_constraintStart_toStartOf="@+id/txtTempProfileImageLiteGreyEditProfile"
-                        app:layout_constraintTop_toBottomOf="@+id/txtTempProfileImageLiteGreyEditProfile">
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:background="@drawable/round_lite_gray">
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/imgPicImageCreateGroup"
-                            android:layout_width="@dimen/_50sdp"
-                            android:layout_height="@dimen/_50sdp"
+                            android:layout_width="@dimen/_15sdp"
+                            android:layout_height="@dimen/_15sdp"
                             android:src="@drawable/image_drawable"
+                            android:layout_centerInParent="true"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+
+                    </RelativeLayout>
+
+                  <!--  <com.yapi.common.ProfileRoundImage
+                        android:id="@+id/imgPicImageCreateGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />-->
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -176,9 +195,9 @@
                         android:layout_marginStart="@dimen/topMargin"
                         android:background="@drawable/lite_blue_drawable"
                         android:padding="@dimen/_15sdp"
-                        app:layout_constraintBottom_toBottomOf="@+id/layoutPickGalleryImgEditProfile"
-                        app:layout_constraintStart_toEndOf="@+id/layoutPickGalleryImgEditProfile"
-                        app:layout_constraintTop_toTopOf="@+id/layoutPickGalleryImgEditProfile">
+                        app:layout_constraintBottom_toBottomOf="@+id/constraintUploadPhoto"
+                        app:layout_constraintStart_toEndOf="@+id/constraintUploadPhoto"
+                        app:layout_constraintTop_toTopOf="@+id/constraintUploadPhoto">
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/imgGalleryUploadEditProfile"
@@ -221,8 +240,8 @@
                         android:textColor="@color/darkLiteGrey"
                         android:textSize="@dimen/smallTextSize"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/layoutPickGalleryImgEditProfile"
-                        app:layout_constraintTop_toBottomOf="@+id/layoutPickGalleryImgEditProfile" />
+                        app:layout_constraintStart_toStartOf="@+id/constraintUploadPhoto"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintUploadPhoto" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtTempNameEditProfile"

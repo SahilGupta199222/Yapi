@@ -10,7 +10,6 @@ import androidx.navigation.findNavController
 import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.*
-import com.yapi.pref.A
 import com.yapi.pref.PreferenceFile
 import com.yapi.views.sign_in.SignInErrorData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +20,6 @@ import okio.Buffer
 import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Named
-
 
 @HiltViewModel
 class ViewModelEditProfile @Inject constructor(val repository: Repository, val preferenceFile: PreferenceFile, @Named("token") val stringValue:String):ViewModel() {

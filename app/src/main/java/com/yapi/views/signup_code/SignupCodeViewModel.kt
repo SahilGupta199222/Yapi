@@ -14,6 +14,7 @@ import com.yapi.pref.PreferenceFile
 import com.yapi.views.sign_in.SignInErrorData
 import com.yapi.views.sign_in.SignInResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
+import org.greenrobot.eventbus.EventBus
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -69,7 +70,21 @@ var errorData=MutableLiveData<SignInErrorData>()
                     Log.e("mflfldddff33==",preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
                     errorData.value= SignInErrorData("",0)
                     preferenceFile.saveStringValue("login_email",email.toString())
-                    view.findNavController().navigate(R.id.action_signUpCodeFragment_to_signupTeam)
+                    preferenceFile.saveBooleanValue(Constants.USER_PROFILE_CREATED,success.body()!!.data.profile_created!!)
+
+                    if(success.body()!!.data.profile_created!!){
+                        if(checkDeviceType())
+                        {
+                            EventBus.getDefault()
+                                .post(MyMessageEvent(1, Constants.MENU_KEY)) //post event
+                        }else
+                        {
+                            view.findNavController().navigate(R.id.action_signUpCodeFragment_to_menuFragment)
+                        }
+                    }else
+                    {
+                        view.findNavController().navigate(R.id.action_signUpCodeFragment_to_signupTeam)
+                    }
                 }
 
                 override fun onError(message: String) {

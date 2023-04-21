@@ -93,8 +93,12 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
             viewModel.emailAddressValue.set(profileData.email)
             viewModel.countryCodeValue.set(profileData.country_code.toString())
             viewModel.aboutValue.set(profileData.about.toString())
-            var phoneNumber=  addSpaceBetweenPhoneMethod(profileData.mobile_number.toString())
-            viewModel.phoneNumberValue.set(phoneNumber)
+            if (!(profileData.mobile_number.toString().equals(""))
+                && profileData.mobile_number.toString()!=null
+                && !(profileData.mobile_number.toString().equals("null"))) {
+                var phoneNumber = addSpaceBetweenPhoneMethod(profileData.mobile_number.toString())
+                viewModel.phoneNumberValue.set(phoneNumber)
+            }
         }}else
         {
             viewModel.nameValue.set("Testing")
@@ -428,8 +432,10 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
         //binding.imgGalleryUploadEditProfile.set
         Glide.with(requireActivity())
             .load(photoFile)
-           // .override(300, 200)
+           //.override(50, 50)
             .into(binding.imgPicImageCreateGroup)
+      /*  binding.imgPicImageCreateGroup.layoutParams.height=requireActivity().resources.getDimension(com.intuit.sdp.R.dimen._50sdp).toInt()
+        binding.imgPicImageCreateGroup.layoutParams.width=requireActivity().resources.getDimension(com.intuit.sdp.R.dimen._50sdp).toInt()*/
     }
     }
 

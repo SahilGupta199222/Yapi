@@ -79,12 +79,12 @@
                             android:backgroundTint="#FEFAE5"
                             android:visibility="@{mViewModel.noImageOnlyNameVisible?mView.VISIBLE:mView.GONE}"
                             android:orientation="horizontal"
-
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
 
                             <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvGroupImageText"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
@@ -140,7 +140,7 @@
                     android:layout_marginStart="@dimen/_10sdp"
                     android:fontFamily="@font/larsseit_medium"
                     android:onClick="@{mViewModel::onClick}"
-                    android:text="Human Resource"
+                    android:text="@{mViewModel.titleName}"
                     android:textColor="@color/darkGrey"
                     android:textSize="@dimen/_16ssp"
                     app:layout_constraintStart_toEndOf="@+id/linearChatArrow"
@@ -152,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:fontFamily="@font/larsseit_medium"
-                    android:text="35 Members"
+                    android:text="@{mViewModel.memberValue}"
                     android:textColor="@color/medium_grey_color"
                     android:textSize="@dimen/normalSmallTextSize"
                     app:layout_constraintStart_toEndOf="@+id/linearChatArrow"

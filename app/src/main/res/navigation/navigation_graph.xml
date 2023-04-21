@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_signUpCodeFragment_to_signupTeam"
             app:destination="@id/signupTeam" />
+
+        <action android:id="@+id/action_signUpCodeFragment_to_menuFragment"
+            app:destination="@id/menuFragment"/>
     </fragment>
     <fragment
         android:id="@+id/signInFragment"
@@ -147,7 +150,8 @@ android:name="com.yapi.views.workspaces.workspacesList.WorkSpacesListFragment"
         android:label="AddPeopleFragment">
         <action
             android:id="@+id/action_addPeopleFragment_to_addPeopleEmailFragment"
-            app:destination="@id/addPeopleEmailFragment" />
+            app:destination="@id/addPeopleEmailFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -171,7 +175,8 @@ android:name="com.yapi.views.workspaces.workspacesList.WorkSpacesListFragment"
         android:label="AddPeopleEmailFragment">
         <action
             android:id="@+id/action_addPeopleEmailFragment_to_addPeopleEmailConfirmationFragment"
-            app:destination="@id/addPeopleEmailConfirmationFragment" />
+            app:destination="@id/addPeopleEmailConfirmationFragment"
+            app:popUpTo="@id/menuFragment"/>
     </fragment>
     <fragment
         android:id="@+id/addPeopleEmailConfirmationFragment"
@@ -212,6 +217,9 @@ android:name="com.yapi.views.workspaces.workspacesList.WorkSpacesListFragment"
             app:destination="@+id/signInFragment"/>
         <action android:id="@+id/action_splashFragment_to_menuFragment"
             app:destination="@+id/menuFragment"/>
+
+        <action android:id="@+id/action_splashFragment_to_signupTeam"
+            app:destination="@+id/signupTeam"/>
     </fragment>
     <fragment
         android:id="@+id/groupInfoFragment"

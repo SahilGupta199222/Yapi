@@ -59,7 +59,6 @@ class ViewModelAddPeopleEmail @Inject constructor(val repository: Repository) : 
                 if (list.size == 0) {
                     errorData.value = SignInErrorData("Please enter email", 1)
                 } else {
-
                     if (checkDeviceType()) {
                         if (Constants.API_CALL_DEMO) {
                             callAddMemberAPIMethod(view, list)

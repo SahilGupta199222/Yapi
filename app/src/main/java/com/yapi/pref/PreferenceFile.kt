@@ -20,6 +20,11 @@ class PreferenceFile @Inject constructor(
         editor.putString(key, value).apply()
     }
 
+    fun clearAllPref()
+    {
+        editor.clear().apply()
+    }
+
     fun fetchStringValue(key:String):String
     {
         return pref.getString(key,"").toString()

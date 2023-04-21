@@ -1,7 +1,6 @@
 package com.yapi.views.menu_screen
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
@@ -16,7 +15,6 @@ import com.yapi.R
 import com.yapi.common.*
 import com.yapi.databinding.FragmentMenuBinding
 import com.yapi.pref.PreferenceFile
-import com.yapi.views.add_people.AddPeopleFragment
 import com.yapi.views.profile.ProfileFragment
 import com.yapi.views.search.SearchFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +23,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MenuFragment : Fragment() {
-    private var rowHeight: Int?=0
+    private var rowHeight: Int? = 0
     private lateinit var binding: FragmentMenuBinding
     private var groupListClicked = true
     private var jobListClicked = true
@@ -43,7 +41,7 @@ class MenuFragment : Fragment() {
     private var adapterSettingsList: AdapterSettingList? = null
 
     @Inject
-     lateinit var preferenceFile:PreferenceFile
+    lateinit var preferenceFile: PreferenceFile
 
     val viewModel: MenuViewModel by viewModels()
     override fun onCreateView(
@@ -58,25 +56,30 @@ class MenuFragment : Fragment() {
         viewModel.screenWidth = width
 
 
-        Log.e("mflfldddff22==",preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
-        Log.e("mflfldddff555==",preferenceFile.fetchStringValue(Constants.USER_TOKEN))
-        Log.e("mflfldddff8888==",NumberToWordsConverter.convert(47))
+        Log.e("mflfldddff22==", preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
+        Log.e("mflfldddff555==", preferenceFile.fetchStringValue(Constants.USER_TOKEN))
+        Log.e("mflfldddff8888==", NumberToWordsConverter.convert(47))
 
-
-
-       /* val vto: ViewTreeObserver = binding.constraintsTop!!.getViewTreeObserver()
-        vto.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-           override fun onGlobalLayout() {
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                    binding.constraintsTop!!.getViewTreeObserver().removeGlobalOnLayoutListener(this)
-                } else {
-                    binding.constraintsTop!!.getViewTreeObserver().removeOnGlobalLayoutListener(this)
-                }
-               // val width: Int = binding.constraintsTop!!.getMeasuredWidth()
-                rowHeight = binding.constraintsTop!!.getMeasuredHeight()
-
+        viewModel.fetchGroupDataMethod().observe(requireActivity(), Observer {
+            var data = it as AllData
+            if(data!=null) {
+                setGroupListAdapter(data.groups)
             }
-        })*/
+        })
+
+        /* val vto: ViewTreeObserver = binding.constraintsTop!!.getViewTreeObserver()
+         vto.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                     binding.constraintsTop!!.getViewTreeObserver().removeGlobalOnLayoutListener(this)
+                 } else {
+                     binding.constraintsTop!!.getViewTreeObserver().removeOnGlobalLayoutListener(this)
+                 }
+                // val width: Int = binding.constraintsTop!!.getMeasuredWidth()
+                 rowHeight = binding.constraintsTop!!.getMeasuredHeight()
+
+             }
+         })*/
 
         addNextToScreenObserver()
         init()
@@ -147,15 +150,13 @@ class MenuFragment : Fragment() {
                 //   Toast.makeText(requireContext(), "Add new member", Toast.LENGTH_SHORT).show()
             }
             layoutBookMarkMenu.setOnClickListener {
-                if(checkDeviceType()) {
+                if (checkDeviceType()) {
                     EventBus.getDefault()
                         .post(MyMessageEvent(15, Constants.SAVED_ITEMS_KEY)) //post event
-                }
-                else
-                {
+                } else {
                     findNavController().navigate(R.id.action_menuFragment_to_savedItemsFragment)
                 }
-                }
+            }
         }
     }
 
@@ -291,7 +292,7 @@ class MenuFragment : Fragment() {
                 )
             )
             binding.rvJobsListMenu.visibility = View.VISIBLE
-            setJobsListAdapter()
+            //    setJobsListAdapter()
         } else {
             binding.imgArrowJobsMenu.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -315,7 +316,9 @@ class MenuFragment : Fragment() {
                 )
             )
             binding.rvGroupListMenu.visibility = View.VISIBLE
-            setGroupListAdapter()
+
+
+
         } else {
             binding.imgArrowGroupMenu.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -344,7 +347,7 @@ class MenuFragment : Fragment() {
                     }
                     adapterSettingsList?.notifyDataSetChanged()
 
-                    if(position==0) {
+                    if (position == 0) {
                         if (checkDeviceType()) {
                             EventBus.getDefault()
                                 .post(MyMessageEvent(2, Constants.USER_MANAGEMENT)) //post event
@@ -352,17 +355,15 @@ class MenuFragment : Fragment() {
                             if (findNavController().currentDestination?.id == R.id.menuFragment)
                                 findNavController().navigate(R.id.action_menuFragment_to_userListFragment)
                         }
-                    }else
-                    {
-                        if(checkDeviceType())
-                        {
+                    } else {
+                        if (checkDeviceType()) {
                             EventBus.getDefault()
-                                .post(MyMessageEvent(11, Constants.WORKSPACE_MANAGEMENT)) //post event
-                        }else
-                        {
-                            if (findNavController().currentDestination?.id == R.id.menuFragment){
-                            findNavController().navigate(R.id.action_menuFragment_to_workspacelist)
-                                }
+                                .post(MyMessageEvent(11,
+                                    Constants.WORKSPACE_MANAGEMENT)) //post event
+                        } else {
+                            if (findNavController().currentDestination?.id == R.id.menuFragment) {
+                                findNavController().navigate(R.id.action_menuFragment_to_workspacelist)
+                            }
                         }
                     }
                 }
@@ -535,35 +536,51 @@ class MenuFragment : Fragment() {
         binding.rvTeamsListMenu.adapter = adapterTeamList
     }
 
-    private fun setGroupListAdapter() {
+    private fun setGroupListAdapter(groupsList: ArrayList<GroupData>) {
         val list = ArrayList<PojoGroupMembersList>()
-        /* for (i in 0 until 5) {
-             list.add(PojoGroupMembersList("Group ${i + 2}", i, false))
-         }*/
-        list.add(PojoGroupMembersList("Sales", 1, false))
-        list.add(PojoGroupMembersList("Human Resource", 2, false))
-        list.add(PojoGroupMembersList("Operations", 1, false))
-        list.add(PojoGroupMembersList("Reports", 2, false))
-        list.add(PojoGroupMembersList("Engineers", 2, false))
-        list.add(PojoGroupMembersList(requireActivity().getString(R.string.createGroups_text),
-            -1,
-            false))
-
+        val list2 = ArrayList<GroupInvitaion>()
+        var newGroupsList = ArrayList<GroupData>()
+        newGroupsList.clear()
+        if (groupsList.size > 0) {
+            for (idx in 0 until groupsList.size) {
+                newGroupsList.add(groupsList[idx])
+            }
+        }
+        newGroupsList.add(GroupData(-1, "-1", "", "", "", "", "", list2, false, requireActivity().getString(R.string.createGroups_text), false,
+            "", "", "", ""))
+        /*   if(groupsList.size>0)
+           {
+               for(idx in 0 until groupsList.size)
+               {
+                   list.add(PojoGroupMembersList(groupsList[idx].name,1,false))
+               }
+               list.add(PojoGroupMembersList(requireActivity().getString(R.string.createGroups_text),
+                   -1,
+                   false))
+           }else {
+               list.add(PojoGroupMembersList("Sales", 1, false))
+               list.add(PojoGroupMembersList("Human Resource", 2, false))
+               list.add(PojoGroupMembersList("Operations", 1, false))
+               list.add(PojoGroupMembersList("Reports", 2, false))
+               list.add(PojoGroupMembersList("Engineers", 2, false))
+               list.add(PojoGroupMembersList(requireActivity().getString(R.string.createGroups_text),
+                   -1,
+                   false))
+           }*/
         val fixImageHeight =
             requireContext().resources.getDimension(com.intuit.sdp.R.dimen._37sdp).toInt()
-        val rvHeight = fixImageHeight * list.size
+        val rvHeight = fixImageHeight * newGroupsList.size
         binding.rvGroupListMenu.layoutParams.height = rvHeight
-        Log.e("fknkwefwsfwfwaf===",rowHeight.toString())
+        Log.e("fknkwefwsfwfwaf===", rowHeight.toString())
         adapterGroupsList =
-            AdapterGroupsList(requireContext(), true, list, object : AdapterGroupsList.Click {
+            AdapterGroupsList(requireContext(), true, newGroupsList, object : AdapterGroupsList.Click {
                 @SuppressLint("NotifyDataSetChanged")
                 override fun onSeletect(position: Int, userType: String) {
-
-                    if (adapterGroupsList?.getListt()?.get(position)!!.unSeenMsgCount == -1) {
-
+                    if (adapterGroupsList?.getListt()?.get(position)!!.__v == -1) {
                         if (checkDeviceType()) {
                             System.out.println("phone========tablet")
-                            EventBus.getDefault().post(GroupEvent(2, Constants.CREATEGOUP_KEY)) //post event
+                            EventBus.getDefault()
+                                .post(GroupEvent(2, Constants.CREATEGOUP_KEY)) //post event
                         } else {
                             findNavController().navigate(R.id.action_menuFragment_to_createGroupFragment)
                         }
@@ -583,6 +600,8 @@ class MenuFragment : Fragment() {
                             if (findNavController().currentDestination?.id == R.id.menuFragment) {
                                 var bundle = Bundle()
                                 bundle.putString("userType", userType)
+                                bundle.putSerializable("group_data",
+                                    adapterGroupsList!!.getListt()[position])
                                 findNavController()
                                     .navigate(R.id.action_menuFragment_to_chatMessageFragment,
                                         bundle)
@@ -594,41 +613,41 @@ class MenuFragment : Fragment() {
         binding.rvGroupListMenu.adapter = adapterGroupsList
     }
 
-    private fun setJobsListAdapter() {
-        val list = ArrayList<PojoGroupMembersList>()
-        list.add(PojoGroupMembersList("Discount_SH1h73", 1, false))
-        list.add(PojoGroupMembersList("Palosi_39875", 2, false))
-        list.add(PojoGroupMembersList("Skiffington_h90", 1, false))
-        // list.add(PojoGroupMembersList(requireActivity().getString(R.string.createGroups_text), -2, false))
+    /* private fun setJobsListAdapter() {
+         val list = ArrayList<PojoGroupMembersList>()
+         list.add(PojoGroupMembersList("Discount_SH1h73", 1, false))
+         list.add(PojoGroupMembersList("Palosi_39875", 2, false))
+         list.add(PojoGroupMembersList("Skiffington_h90", 1, false))
+         // list.add(PojoGroupMembersList(requireActivity().getString(R.string.createGroups_text), -2, false))
 
-        val fixImageHeight =
-            requireContext().resources.getDimension(com.intuit.sdp.R.dimen._37sdp).toInt()
-        val rvHeight = fixImageHeight * list.size
-        binding.rvJobsListMenu.layoutParams.height = rvHeight
+         val fixImageHeight =
+             requireContext().resources.getDimension(com.intuit.sdp.R.dimen._37sdp).toInt()
+         val rvHeight = fixImageHeight * list.size
+         binding.rvJobsListMenu.layoutParams.height = rvHeight
 
-//        val adapter = AdapterJobsList(requireContext(), list)
-//        binding.rvJobsListMenu.adapter = adapter
+ //        val adapter = AdapterJobsList(requireContext(), list)
+ //        binding.rvJobsListMenu.adapter = adapter
 
-        adapterJobsList =
-            AdapterGroupsList(requireContext(), false, list, object : AdapterGroupsList.Click {
-                @SuppressLint("NotifyDataSetChanged")
-                override fun onSeletect(position: Int, userType: String) {
-                    for (i in 0 until adapterJobsList?.getListt()?.size!!) {
-                        adapterJobsList?.getListt()?.get(i)?.selected = position == i
-                    }
-                    Log.i("asdfjanskdf", "before notifiy list is\n${adapterJobsList?.getListt()}")
-                    adapterJobsList?.notifyDataSetChanged()
+         adapterJobsList =
+             AdapterGroupsList(requireContext(), false, list, object : AdapterGroupsList.Click {
+                 @SuppressLint("NotifyDataSetChanged")
+                 override fun onSeletect(position: Int, userType: String) {
+                     for (i in 0 until adapterJobsList?.getListt()?.size!!) {
+                         adapterJobsList?.getListt()?.get(i)?.selected = position == i
+                     }
+                     Log.i("asdfjanskdf", "before notifiy list is\n${adapterJobsList?.getListt()}")
+                     adapterJobsList?.notifyDataSetChanged()
 
-                    if (findNavController().currentDestination?.id == R.id.menuFragment) {
-                        var bundle = Bundle()
-                        bundle.putString("userType", userType)
-                        findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment,
-                            bundle)
-                    }
-                }
-            }, "")
-        binding.rvJobsListMenu.adapter = adapterJobsList
-    }
+                     if (findNavController().currentDestination?.id == R.id.menuFragment) {
+                         var bundle = Bundle()
+                         bundle.putString("userType", userType)
+                         findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment,
+                             bundle)
+                     }
+                 }
+             }, "")
+         binding.rvJobsListMenu.adapter = adapterJobsList
+     }*/
 
     private fun addNextToScreenObserver() {
 
@@ -642,10 +661,10 @@ class MenuFragment : Fragment() {
 
 
         viewModel.openSearchScreenData.observe(requireActivity(), Observer {
-            var data=it as Boolean
-            if(data)
-            {
-                SearchFragment.newInstanceSearch("").showNow(requireActivity().supportFragmentManager,"SimpleDialog.TAG")
+            var data = it as Boolean
+            if (data) {
+                SearchFragment.newInstanceSearch("")
+                    .showNow(requireActivity().supportFragmentManager, "SimpleDialog.TAG")
             }
         })
     }

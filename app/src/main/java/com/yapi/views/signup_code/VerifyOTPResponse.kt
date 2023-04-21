@@ -26,5 +26,6 @@ data class Data(
     val profile_pic: String,
     val profile_pic_url: String,
     val updatedAt: String,
-    val user_name: String
+    val user_name: String,
+    var profile_created: Boolean?=false,
 )

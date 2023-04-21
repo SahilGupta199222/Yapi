@@ -15,7 +15,7 @@ import com.yapi.R
 class AdapterGroupsList(
     val context: Context,
     var groupList: Boolean,
-    var list: ArrayList<PojoGroupMembersList>,
+    var list:  ArrayList<GroupData>,
     val click: Click,val userType:String
 ) : RecyclerView.Adapter<AdapterGroupsList.MyViewHolder>() {
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -29,7 +29,7 @@ class AdapterGroupsList(
             view.findViewById(R.id.imgAddIconNewGroupsMenu)
     }
 
-    fun getListt(): ArrayList<PojoGroupMembersList> {
+    fun getListt(): ArrayList<GroupData> {
         return list
     }
 
@@ -48,26 +48,25 @@ class AdapterGroupsList(
             holder.icon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.job_icon))
         }
         holder.title.text = list[holder.adapterPosition].name
-        if (list[position].unSeenMsgCount > 0) {
+        if (list[position].__v > 0) {
             holder.count.visibility = View.VISIBLE
-            holder.count.text = list[holder.adapterPosition].unSeenMsgCount.toString()
+            holder.count.text ="0".toString()
             holder.icon.setColorFilter(ContextCompat.getColor(context, R.color.darkGrey))
             holder.title.setTextColor(ContextCompat.getColor(context, R.color.darkGrey))
         } else {
             holder.count.visibility = View.GONE
             holder.icon.setColorFilter(ContextCompat.getColor(context, R.color.medium_grey_color))
             holder.title.setTextColor(ContextCompat.getColor(context, R.color.medium_grey_color))
-
         }
-        if (list[position].selected) {
+       /* if (list[position].selected!!) {
             holder.selectedLine.visibility = View.VISIBLE
             holder.icon.setColorFilter(ContextCompat.getColor(context, R.color.blueColor))
             holder.title.setTextColor(ContextCompat.getColor(context, R.color.blueColor))
         } else {
             holder.selectedLine.visibility = View.INVISIBLE
-        }
+        }*/
 
-        if (list[position].unSeenMsgCount == -1) {
+        if (list[position].__v == -1) {
             holder.constraintsTop.visibility = View.GONE
             holder.layoutAddData.visibility = View.VISIBLE
             holder.imgAddIconNewGroupsMenu.text = list[position].name

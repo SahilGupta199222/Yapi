@@ -32,16 +32,23 @@ class SplashFragment  : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         binding = SplashLayoutBinding.inflate(inflater)
-        var userId = preferenceFile!!.fetchStringValue(Constants.USER_ID)
+        var userId = preferenceFile!!.fetchStringValue(Constants.LOGIN_USER_ID)
+       var USER_PROFILE_CREATED= preferenceFile.fetchBooleanValue(Constants.USER_PROFILE_CREATED)
         Handler(Looper.myLooper()!!).postDelayed(object : Runnable {
             override fun run() {
                 if (userId == "") {
                     findNavController().navigate(R.id.action_splashFragment_to_signInFragment)
                 } else {
-                    if(checkDeviceType()){
-                        EventBus.getDefault().post(MyMessageEvent(1, Constants.MENU_KEY)) //post event
-                    }else{
-                        findNavController().navigate(R.id.action_splashFragment_to_menuFragment)
+                    if(USER_PROFILE_CREATED)
+                    {
+                        if(checkDeviceType()){
+                            EventBus.getDefault().post(MyMessageEvent(1, Constants.MENU_KEY)) //post event
+                        }else{
+                            findNavController().navigate(R.id.action_splashFragment_to_menuFragment)
+                        }
+                    }else
+                    {
+                        findNavController().navigate(R.id.action_splashFragment_to_signupTeam)
                     }
                 }
             }

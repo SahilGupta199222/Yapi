@@ -221,7 +221,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:gravity="center_horizontal"
-                            android:text="@string/these_invitation_for"
+                            android:text="@{model.loginEmailMessage}"
                             android:textColor="@color/darkLiteGrey"
                             android:textSize="@dimen/_12ssp"
                             android:letterSpacing="0.07"

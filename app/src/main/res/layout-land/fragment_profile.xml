@@ -303,7 +303,6 @@
                                 android:layout_marginTop="@dimen/_2sdp"
                                 android:fontFamily="@font/larsseit_medium"
 
-                                android:text="Workspace owner"
                                 android:textColor="@color/darkGrey"
                                 android:textSize="@dimen/normalTextSize"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -458,7 +457,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_2sdp"
                                 android:fontFamily="@font/larsseit_medium"
-                                android:text="(UTC-08:00) Pacific Time (US and Canada)"
                                 android:textColor="@color/darkGrey"
                                 android:textSize="@dimen/normalTextSize"
                                 app:layout_constraintEnd_toEndOf="parent"
