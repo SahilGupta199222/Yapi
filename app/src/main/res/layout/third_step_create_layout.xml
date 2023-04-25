@@ -191,6 +191,7 @@
                             android:clipToOutline="true"
                             android:gravity="center"
                             android:text="p"
+                            android:textAllCaps="true"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_18ssp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -386,7 +387,7 @@
                     android:paddingEnd="@dimen/etHorizontalPadding"
                     android:paddingBottom="@dimen/etVerticalPadding"
                     android:text="@string/add_teammates_text"
-                    android:textAllCaps="false"
+                    android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:textSize="@dimen/normalTextSize"
                     app:layout_constraintBottom_toTopOf="@+id/tvSkipStep" />

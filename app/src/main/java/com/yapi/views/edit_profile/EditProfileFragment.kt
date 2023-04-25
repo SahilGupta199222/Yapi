@@ -54,7 +54,9 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
     @Inject
     lateinit var preferenceFile: PreferenceFile
 
-    val GALARYCode=123
+    private val GALARYCode=123
+    private val REQUEST_CAPTURE_IMAGE = 400
+    var photoFile: File? = null
     companion object {
         fun newInstanceEditProfileScreen(
             title: String,
@@ -90,7 +92,7 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
         var second_frame_height = preferenceFile.fetchStringValue("second_frame_height")
         var second_frame_width = preferenceFile.fetchStringValue("second_frame_width")
         Log.e("nefjkwnddfkewfwefe===", second_frame_height + "===" + second_frame_width)
-        window.setLayout(second_frame_width.toInt(), second_frame_height.toInt())
+     //   window.setLayout(second_frame_width.toInt(), second_frame_height.toInt())
         return dialog
     }
 
@@ -110,7 +112,7 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
                 viewModel.userNameValue.set(profileData.user_name)
                 viewModel.emailAddressValue.set(profileData.email)
                 viewModel.countryCodeValue.set(profileData.country_code.toString())
-                viewModel.aboutValue.set(profileData.about.toString())
+                viewModel.aboutValue.set(profileData.about.toString().trim())
 
                 binding.txtUserNameEditProfile.text = profileData.user_name
                 if (!(profileData.mobile_number.toString().equals(""))
@@ -435,8 +437,7 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
             requireActivity().resources.getColor(R.color.liteGrey))
     }
 
-    private val REQUEST_CAPTURE_IMAGE = 200
-    var photoFile: File? = null
+
     private fun openCameraIntent() {
         val pictureIntent = Intent(
             MediaStore.ACTION_IMAGE_CAPTURE)
@@ -576,6 +577,34 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
         return cursor.getString(column_index)
     }
 
+    private fun selectImage() {
+        try {
+            //  val pm: PackageManager = requireActivity().getPackageManager()
+            // val hasPerm: Int = pm.checkPermission(Manifest.permission.CAMERA, requireActivity().getPackageName())
+            //if (hasPerm == PackageManager.PERMISSION_GRANTED) {
+            val options = arrayOf<CharSequence>("Take Photo", "Choose From Gallery", "Cancel")
+            val builder: AlertDialog.Builder =
+                AlertDialog.Builder(requireContext())
+            builder.setTitle("Select Option")
+            builder.setItems(options, DialogInterface.OnClickListener { dialog, item ->
+                if (options[item] == "Take Photo") {
+                    dialog.dismiss()
+                    requestPermissionsMedia(2)
+                } else if (options[item] == "Choose From Gallery") {
+                    dialog.dismiss()
+                    requestPermissionsMedia(1)
+                } else if (options[item] == "Cancel") {
+                    dialog.dismiss()
+                }
+            })
+            builder.show()
+            //  }
+        } catch (e: Exception) {
+            Toast.makeText(requireActivity(), "Camera Permission error", Toast.LENGTH_SHORT).show()
+            e.printStackTrace()
+        }
+    }
+
     private fun startDialog() {
         var myAlertDialog = AlertDialog.Builder(
             activity)
@@ -600,31 +629,5 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
     }
 
 
-    private fun selectImage() {
-        try {
-          //  val pm: PackageManager = requireActivity().getPackageManager()
-           // val hasPerm: Int = pm.checkPermission(Manifest.permission.CAMERA, requireActivity().getPackageName())
-            //if (hasPerm == PackageManager.PERMISSION_GRANTED) {
-                val options = arrayOf<CharSequence>("Take Photo", "Choose From Gallery", "Cancel")
-                val builder: AlertDialog.Builder =
-                   AlertDialog.Builder(requireContext())
-                builder.setTitle("Select Option")
-                builder.setItems(options, DialogInterface.OnClickListener { dialog, item ->
-                    if (options[item] == "Take Photo") {
-                        dialog.dismiss()
-                        requestPermissionsMedia(2)
-                    } else if (options[item] == "Choose From Gallery") {
-                        dialog.dismiss()
-                        requestPermissionsMedia(1)
-                    } else if (options[item] == "Cancel") {
-                        dialog.dismiss()
-                    }
-                })
-                builder.show()
-          //  }
-        } catch (e: Exception) {
-            Toast.makeText(requireActivity(), "Camera Permission error", Toast.LENGTH_SHORT).show()
-            e.printStackTrace()
-        }
-    }
+
 }

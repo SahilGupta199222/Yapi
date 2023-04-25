@@ -2,7 +2,7 @@ package com.yapi.common
 
 object WebAPIKeys {
     //Local Server
- //  const val BASEURL:String="http://192.168.1.113:3000/"
+  //const val BASEURL:String="http://192.168.1.113:3000/"
 
     //Live Server
     const val BASEURL:String="http://3.15.150.5:3000/"
@@ -15,7 +15,9 @@ object WebAPIKeys {
     const val VIEW_TEAM_INVITATION="group/view-team-invitation"
     const val ACCEPT_TEAM_INVITATION="group/update-team-invite"
 
-
-
     const val FETCH_ALL_MENU_DATA="group/view-all-user-data"
+    const val USER_CHECK_EMAIL="user/check-email"
+    const val DELETE_GROUP="group/delete-group"
+    const val DELETE_ACCOUNT="user/delete-account"
+    const val DEACTIVATE_ACCOUNT="user/deactivate-account"
 }

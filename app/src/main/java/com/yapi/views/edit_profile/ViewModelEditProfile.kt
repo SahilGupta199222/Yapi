@@ -104,8 +104,11 @@ class ViewModelEditProfile @Inject constructor(
             emailAddressValue.get().toString().toRequestBody("text/plain".toMediaTypeOrNull())
         val countryCodeRequest: RequestBody =
             countryCodeValue.get().toString().toRequestBody("text/plain".toMediaTypeOrNull())
-        val aboutRequest: RequestBody =
-            aboutValue.get().toString().toRequestBody("text/plain".toMediaTypeOrNull())
+
+        if(aboutValue.get().toString().isEmpty()){
+            aboutValue.set(" ")
+        }
+        val aboutRequest: RequestBody = aboutValue.get().toString().toRequestBody("text/plain".toMediaTypeOrNull())
 
         val number = phoneNumberValue.get().toString().replace(" ", "")
 
@@ -134,9 +137,15 @@ class ViewModelEditProfile @Inject constructor(
                 override fun onSuccess(success: Response<EditProfileResponse>) {
                     Log.e("Resposne_Dataaaa===", success.body().toString())
 
-                    if (view.findNavController().currentDestination?.id == R.id.editProfileFragment) {
-                        view.findNavController().popBackStack()
+                    if(checkDeviceType()){
+                        dismissDialogData.value = true
+                    }else
+                    {
+                        if (view.findNavController().currentDestination?.id == R.id.editProfileFragment) {
+                            view.findNavController().popBackStack()
+                        }
                     }
+
 
                     /*   var bundle= Bundle()
                        bundle.putString("email",emailFieldValue.get())
@@ -158,13 +167,13 @@ class ViewModelEditProfile @Inject constructor(
                             aboutRequest,photoBody!!)
                     }else
                     {
-                        return retrofitApi.editProfileForPhotoAPI(userToken,
+                        return retrofitApi.editProfileForAPI(userToken,
                             nameRequest,
                             userNameRequest,
                             emailAddressRequest,
                             phoneNumberRequest,
                             countryCodeRequest,
-                            aboutRequest,photoBody!!)
+                            aboutRequest)
                     }
                 }
             })

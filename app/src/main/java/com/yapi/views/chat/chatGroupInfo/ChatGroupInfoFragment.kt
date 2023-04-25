@@ -5,18 +5,11 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.appcompat.widget.AppCompatButton
-import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.yapi.MainActivity
-import com.yapi.R
 import com.yapi.databinding.ChatGroupInfoFragmentBinding
-import com.yapi.databinding.ChatUserInfoFragmentBinding
-import com.yapi.views.chat.chatUserInfo.ChatUserInfoViewModel
 import com.yapi.views.chat.chatUserInfo.RVLinksAdapter
 import com.yapi.views.chat.chatUserInfo.RVPhotoMediaAdapter
 
@@ -52,7 +45,19 @@ class ChatGroupInfoFragment():Fragment() {
     fun setPhotoAdapterMethod()
     {
         var finalPerPhoto=screenWidth!!.toFloat()/3.58f
-        mediaAdapter= RVPhotoMediaAdapter(requireActivity(),finalPerPhoto!!.toInt())
+        var photoList=ArrayList<String>()
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        mediaAdapter= RVPhotoMediaAdapter(requireActivity(),photoList,finalPerPhoto!!.toInt(),6)
         dataBinding.rvMediaView.layoutManager= GridLayoutManager(requireActivity(),3)
         dataBinding.rvMediaView.adapter=mediaAdapter
     }

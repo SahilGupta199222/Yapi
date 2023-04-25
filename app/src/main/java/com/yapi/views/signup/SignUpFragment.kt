@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.yapi.R
 import com.yapi.common.changeBackgroundForError
 import com.yapi.databinding.FragmentSignUpBinding
+import com.yapi.views.add_people_email.CheckEmailResponse
 import com.yapi.views.sign_in.SignInErrorData
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,6 +33,7 @@ class SignUpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
         showErrorUIObserver()
+        checkEmailErrorObserver()
     }
 
     private fun init() {
@@ -50,17 +52,33 @@ class SignUpFragment : Fragment() {
     {
         vModel.errorData.observe(requireActivity(), Observer {
             var data=it as SignInErrorData
-            if(data!=null && data.message.isNotEmpty())
+            showErrorMethod(data.message)
+        })
+    }
+
+    //For check Email Observer
+    private fun checkEmailErrorObserver() {
+        vModel.checkEmailResponseData.observe(requireActivity(), Observer {
+            var data=it as CheckEmailResponse
+            if(data.status==200)
             {
-                binding.txtErrorEmailSignup!!.setText(data.message)
-                changeBackgroundForError(binding.layoutEmailSignUp,requireActivity().resources.getColor(R.color.error_box_color),
-                    requireActivity().resources.getColor(R.color.error_border_color))
-            }else
-            {
-                binding.txtErrorEmailSignup!!.setText("")
-                changeBackgroundForError(binding.layoutEmailSignUp,requireActivity().resources.getColor(R.color.white),
-                    requireActivity().resources.getColor(R.color.liteGrey))
+                showErrorMethod(data.message)
             }
         })
+    }
+
+    fun showErrorMethod(message:String)
+    {
+        if(message!=null && message.isNotEmpty())
+        {
+            binding.txtErrorEmailSignup!!.setText(message)
+            changeBackgroundForError(binding.layoutEmailSignUp,requireActivity().resources.getColor(R.color.error_box_color),
+                requireActivity().resources.getColor(R.color.error_border_color))
+        }else
+        {
+            binding.txtErrorEmailSignup!!.setText("")
+            changeBackgroundForError(binding.layoutEmailSignUp,requireActivity().resources.getColor(R.color.white),
+                requireActivity().resources.getColor(R.color.liteGrey))
+        }
     }
 }

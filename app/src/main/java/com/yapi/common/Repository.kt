@@ -19,7 +19,7 @@ class Repository @Inject constructor(val retrofit:RetrofitAPI,@ApplicationContex
 
     //var aD: AlertDialog.Builder? = null
     fun <T : Any> makeCall(
-        loader: Boolean,
+        loader: Boolean,dismissDialog:Boolean?=true,
         requestProcessor: ApiProcessor<Response<T>>
     ) {
    //     val activity = MainActivity.context.get()!!
@@ -46,14 +46,18 @@ class Repository @Inject constructor(val retrofit:RetrofitAPI,@ApplicationContex
                 exception.printStackTrace()
                 Log.d("exception", "errorException$exception")
                 // activity.showProgress()
-                hideProgress()
+              //  if(dismissDialog!!) {
+                    hideProgress()
+              //  }
                 showToastMessage(exception.message ?: "")
                 //showErrorDialog()
             }.collect {
                     response ->
                 Log.d("resCodeIs", "====${response?.code()}")
               //  Timer().schedule(1000) {
+                if(response?.isSuccessful()== false || dismissDialog!!) {
                     hideProgress()
+                }
                 //}
                 when {
                     response?.isSuccessful == true -> {

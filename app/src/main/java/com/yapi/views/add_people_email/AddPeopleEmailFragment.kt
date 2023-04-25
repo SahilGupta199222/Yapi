@@ -132,11 +132,27 @@ class AddPeopleEmailFragment : DialogFragment() {
                 if (etChipAddPeopleEmail.text?.isNotEmpty() == true) {
                     val msg = requireActivity().isEmailValid(etChipAddPeopleEmail.text.toString())
                     if (msg.isEmpty()) {
-                        binding.txtErrorEmailAddPeople.setText("")
-                        addChipToGroup(requireContext(), etChipAddPeopleEmail.text.toString())
-                        layoutAddPeopleAddPeopleEmail.visibility = View.GONE
-                        etChipAddPeopleEmail.text?.clear()
-                        viewModelAddPeopleEmail.errorData.value = SignInErrorData("", 0)
+                        viewModelAddPeopleEmail.checkEmailAPIMethod(etChipAddPeopleEmail.text.toString()).observe(requireActivity(),
+                            Observer {
+                                var data=it as CheckEmailResponse
+                                if(data!=null)
+                                {
+                                    if(data.status==200) {
+                                        Log.e("dataaaaaa===", data.toString())
+                                        binding.txtErrorEmailAddPeople.setText("")
+                                        addChipToGroup(requireContext(),
+                                            etChipAddPeopleEmail.text.toString())
+                                        layoutAddPeopleAddPeopleEmail.visibility = View.GONE
+                                        etChipAddPeopleEmail.text?.clear()
+                                        viewModelAddPeopleEmail.errorData.value =
+                                            SignInErrorData("", 0)
+                                    }else
+                                    {
+                                      var data= SignInErrorData("Email doesn't exist", 1)
+                                        emailErrorMethod(data)
+                                    }
+                                }
+                            })
                     } else {
                         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
                     }
@@ -219,20 +235,25 @@ class AddPeopleEmailFragment : DialogFragment() {
     {
         viewModelAddPeopleEmail.errorData.observe(requireActivity(), Observer {
             var data=it as SignInErrorData
-            if(data!=null && data.message!="")
-            {
-                binding.txtErrorEmailAddPeople.setText(data.message)
-                changeBackgroundTintForError(binding.chipLayoutAddPeopleEmail!!,requireActivity().resources.getColor(
-                    R.color.error_box_color),
-                    requireActivity().resources.getColor(R.color.error_border_color),-1)
-            }else
-            {
-                binding.txtErrorEmailAddPeople.setText("")
-             //   binding.chipLayoutAddPeopleEmail!!.setbackg
-                changeBackgroundTintForError(binding.chipLayoutAddPeopleEmail!!, requireActivity().resources.getColor(
-                    R.color.white),
-                    requireActivity().resources.getColor(R.color.liteGrey),requireActivity().resources.getColor(R.color.information_profile_back_box))
-            }
+            emailErrorMethod(data)
         })
+    }
+
+    fun emailErrorMethod(data: SignInErrorData)
+    {
+        if(data!=null && data.message!="")
+        {
+            binding.txtErrorEmailAddPeople.setText(data.message)
+            changeBackgroundTintForError(binding.chipLayoutAddPeopleEmail!!,requireActivity().resources.getColor(
+                R.color.error_box_color),
+                requireActivity().resources.getColor(R.color.error_border_color),-1)
+        }else
+        {
+            binding.txtErrorEmailAddPeople.setText("")
+            //   binding.chipLayoutAddPeopleEmail!!.setbackg
+            changeBackgroundTintForError(binding.chipLayoutAddPeopleEmail!!, requireActivity().resources.getColor(
+                R.color.white),
+                requireActivity().resources.getColor(R.color.liteGrey),requireActivity().resources.getColor(R.color.information_profile_back_box))
+        }
     }
 }

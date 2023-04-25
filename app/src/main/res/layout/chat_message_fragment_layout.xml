@@ -21,7 +21,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/topConstraints"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/etHorizontalPadding"
             android:layout_marginEnd="@dimen/etHorizontalPadding"
@@ -33,7 +33,7 @@
                 android:id="@+id/leftChatConstraints"
                 android:layout_width="0dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/rightChatConstraints"
+                app:layout_constraintEnd_toStartOf="@id/rightChatConstraints"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
@@ -64,7 +64,8 @@
                             android:layout_width="@dimen/_45sdp"
                             android:layout_height="@dimen/_45sdp"
                             android:layout_gravity="center_vertical"
-                            android:src="@drawable/temp_group_image"
+                            setRoundRectImage="@{mViewModel.groupPhoto}"
+                            android:scaleType="fitXY"
                             android:visibility="@{mViewModel.groupImageVisible?mView.VISIBLE:mView.GONE}"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -72,9 +73,8 @@
 
                         <RelativeLayout
                             android:id="@+id/relNameValue"
-                            android:layout_width="@dimen/_50sdp"
-                            android:layout_height="@dimen/_50sdp"
-                            android:layout_marginTop="@dimen/_20sdp"
+                            android:layout_width="@dimen/_45sdp"
+                            android:layout_height="@dimen/_45sdp"
                             android:background="@drawable/et_drawable"
                             android:backgroundTint="#FEFAE5"
                             android:visibility="@{mViewModel.noImageOnlyNameVisible?mView.VISIBLE:mView.GONE}"
@@ -123,26 +123,28 @@
                             android:id="@+id/ivLiveUser"
                             android:layout_width="@dimen/_10sdp"
                             android:layout_height="@dimen/_10sdp"
-
                             android:visibility="@{mViewModel.liveUserVisible?mView.VISIBLE:mView.GONE}"
                             android:src="@drawable/green_circle_icon"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            />
+                            app:layout_constraintEnd_toEndOf="parent"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/tvName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:fontFamily="@font/larsseit_medium"
                     android:onClick="@{mViewModel::onClick}"
                     android:text="@{mViewModel.titleName}"
                     android:textColor="@color/darkGrey"
+                    android:singleLine="true"
+                    android:gravity="start"
+                    android:ellipsize="end"
                     android:textSize="@dimen/_16ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/linearChatArrow"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -161,7 +163,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/rightChatConstraints"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_height="wrap_content">
@@ -268,12 +270,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:paddingTop="@dimen/_5sdp"
                 android:paddingBottom="@dimen/_5sdp">
 
                 <include
                     android:id="@+id/createGroupUI"
                     layout="@layout/created_group_ui_chat"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     android:visibility="gone" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -286,7 +293,6 @@
                         android:id="@+id/rvChatList"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginTop="@dimen/_10sdp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -324,7 +330,6 @@
                 android:layout_marginStart="@dimen/startMainMargin"
                 android:layout_marginEnd="@dimen/startMainMargin"
                 android:background="@color/transparent"
-
                 app:layout_constraintBottom_toTopOf="@+id/layoutEditTextViewChatDemo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">

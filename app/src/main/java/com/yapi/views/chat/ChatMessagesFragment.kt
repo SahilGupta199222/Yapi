@@ -33,10 +33,7 @@ import com.masoudss.lib.SeekBarOnProgressChanged
 import com.masoudss.lib.WaveformSeekBar
 import com.yapi.MainActivity
 import com.yapi.R
-import com.yapi.common.Constants
-import com.yapi.common.GroupEvent
-import com.yapi.common.checkDeviceType
-import com.yapi.common.hideKeyboard
+import com.yapi.common.*
 import com.yapi.databinding.ChatMessageFragmentLayoutBinding
 import com.yapi.pref.PreferenceFile
 import com.yapi.views.create_group.CreateGroupFragment
@@ -100,84 +97,74 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
         viewModel.screenHeight = height
 
         //   var second_frame_height= preferenceFile.fetchStringValue("second_frame_height").toInt()
-        var second_frame_width = preferenceFile.fetchStringValue("second_frame_width").toInt()
-        viewModel.SECOND_FRAME_WIDTH = second_frame_width
+        // var second_frame_width = preferenceFile.fetchStringValue("second_frame_width").toInt()
+        // viewModel.SECOND_FRAME_WIDTH = second_frame_width
 
         viewModel.userType = requireArguments().getString("userType")
-        dataBinding.createGroupUI.mViewModel=viewModel
+        dataBinding.createGroupUI.mViewModel = viewModel
         if (requireArguments().getSerializable("group_data") != null && Constants.GROUPS_KEY == viewModel.userType) {
             var group_data = requireArguments().getSerializable("group_data") as GroupData
             if (group_data != null) {
                 viewModel.titleName.set(group_data.name)
-
-                if(group_data.invitaions.size>0)
-                {
-                   var list2= group_data.invitaions.filter { it.status.toLowerCase()!="pending" }
-                if ((list2.size + 1) > 1) {
-                    viewModel.memberValue.set((list2.size + 1).toString() + " Members")
+                viewModel.chatOwnerUserId.set(group_data.user_id)
+                viewModel.groupId.set(group_data._id)
+                if (group_data.invitaions.size > 0) {
+                    var list2 =
+                        group_data.invitaions.filter { it.status.lowercase(Locale.getDefault()) != "pending" }
+                    if ((list2.size + 1) > 1) {
+                        viewModel.memberValue.set((list2.size + 1).toString() + " Members")
+                    } else {
+                        viewModel.memberValue.set((list2.size + 1).toString() + " Member")
+                    }
                 } else {
-                    viewModel.memberValue.set((list2.size + 1).toString() + " Member")
-                }
-            }else
-                {
                     viewModel.memberValue.set("1 Member")
                 }
-                dataBinding.createGroupUI.groupScreenInfoEmpty!!.visibility=View.VISIBLE
-                dataBinding.rvChatList.visibility=View.GONE
-                dataBinding.chatListconstraints.visibility=View.GONE
+                dataBinding.createGroupUI.groupScreenInfoEmpty.visibility = View.VISIBLE
+                dataBinding.rvChatList.visibility = View.GONE
+                dataBinding.chatListconstraints.visibility = View.GONE
 
                 //group_data.invitaions
-                if(group_data.image_url!="")
-                {
-                    dataBinding.ivGroupImage.visibility=View.VISIBLE
-                    dataBinding.relNameValue.visibility=View.GONE
-                 //   viewModel.noImageOnlyNameVisible.set(false)
-                  //  viewModel.groupImageVisible.set(true)
-                }else
-                {
-               //     viewModel.noImageOnlyNameVisible.set(true)
-                    dataBinding.tvGroupImageText.setText(group_data.name.substring(0,1).toUpperCase())
-                    dataBinding.ivGroupImage.visibility=View.GONE
-                    dataBinding.relNameValue.visibility=View.VISIBLE
-                  //  viewModel.groupImageVisible.set(false)
+                if (group_data.image_url != "") {
+                    dataBinding.ivGroupImage.visibility = View.VISIBLE
+                    dataBinding.relNameValue.visibility = View.GONE
+                    viewModel.groupPhoto.set(group_data.image_url)
+                    //   viewModel.noImageOnlyNameVisible.set(false)
+                    //  viewModel.groupImageVisible.set(true)
+                } else {
+                    //     viewModel.noImageOnlyNameVisible.set(true)
+                    dataBinding.tvGroupImageText.text = convertFromFullNameToTwoString(group_data.name)
+                    dataBinding.ivGroupImage.visibility = View.GONE
+                    dataBinding.relNameValue.visibility = View.VISIBLE
                 }
 
-                if(checkDeviceType())
-                {
-                    if(group_data.image_url!="")
-                    {
+                if (checkDeviceType()) {
+                    if (group_data.image_url != "") {
                         viewModel.noImageOnlyNameVisible.set(false)
                         viewModel.groupImageVisible.set(true)
-                    }else
-                    {
+                    } else {
                         viewModel.noImageOnlyNameVisible.set(true)
                         viewModel.groupImageVisible.set(false)
                     }
-                }else
-                {
+                } else {
                     viewModel.noImageOnlyNameVisible.set(false)
                     viewModel.groupImageVisible.set(false)
                 }
 
-                if(group_data.user_id==preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
-                {
+                if (group_data.user_id == preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID)) {
                     viewModel.emptyGroupMessageTitle.set(requireActivity().resources.getString(R.string.created_group_title_chat))
-                }else
-                {
+                } else {
                     viewModel.emptyGroupMessageTitle.set(requireActivity().resources.getString(R.string.created_group_title_chat))
-
                 }
             }
-        }else
-        {
+        } else {
             viewModel.noImageOnlyNameVisible.set(false)
             viewModel.titleName.set("Group Name")
             viewModel.memberValue.set("5 Members")
-            dataBinding.createGroupUI.groupScreenInfoEmpty!!.visibility=View.GONE
-            dataBinding.rvChatList.visibility=View.VISIBLE
-            dataBinding.chatListconstraints.visibility=View.VISIBLE
-            dataBinding.ivGroupImage.visibility=View.VISIBLE
-            dataBinding.relNameValue.visibility=View.GONE
+            dataBinding.createGroupUI.groupScreenInfoEmpty.visibility = View.GONE
+            dataBinding.rvChatList.visibility = View.VISIBLE
+            dataBinding.chatListconstraints.visibility = View.VISIBLE
+            dataBinding.ivGroupImage.visibility = View.VISIBLE
+            dataBinding.relNameValue.visibility = View.GONE
 
             viewModel.noImageOnlyNameVisible.set(false)
             viewModel.groupImageVisible.set(false)
@@ -187,21 +174,21 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
         if (checkDeviceType()) {
             viewModel.backButtonVisible.set(false)
             if (viewModel.userType == Constants.CUSTOMERS_KEY || viewModel.userType == Constants.CONVERSATIONS_KEY) {
-              //  viewModel.groupImageVisible.set(true)
+                //  viewModel.groupImageVisible.set(true)
                 viewModel.groupIconVisible.set(false)
                 viewModel.liveUserVisible.set(true)
-               // viewModel.noImageOnlyNameVisible.set(true)
+                // viewModel.noImageOnlyNameVisible.set(true)
                 viewModel.groupAllPhotos.set(false)
             } else {
-               // viewModel.groupImageVisible.set(true)
+                // viewModel.groupImageVisible.set(true)
                 viewModel.groupIconVisible.set(true)
                 viewModel.liveUserVisible.set(false)
-              //  viewModel.noImageOnlyNameVisible.set(false)
+                //  viewModel.noImageOnlyNameVisible.set(false)
                 viewModel.groupAllPhotos.set(true)
             }
         } else {
             viewModel.backButtonVisible.set(true)
-         //   viewModel.groupImageVisible.set(false)
+            //   viewModel.groupImageVisible.set(false)
             viewModel.groupIconVisible.set(false)
             viewModel.liveUserVisible.set(false)
             viewModel.groupAllPhotos.set(false)

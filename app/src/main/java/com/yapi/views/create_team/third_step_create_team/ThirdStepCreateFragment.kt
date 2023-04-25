@@ -19,6 +19,7 @@ import com.yapi.R
 import com.yapi.common.*
 import com.yapi.databinding.SecondStepCreateTeamBinding
 import com.yapi.databinding.ThirdStepCreateLayoutBinding
+import com.yapi.views.add_people_email.CheckEmailResponse
 import com.yapi.views.create_team.second_step_create_team.SecondStepViewModel
 import com.yapi.views.sign_in.SignInErrorData
 import dagger.hilt.android.AndroidEntryPoint
@@ -67,10 +68,29 @@ class ThirdStepCreateFragment : Fragment() {
                 if (etMemberEmail!!.text?.isNotEmpty() == true) {
                     val msg = requireActivity().isEmailValid(etMemberEmail.text.toString())
                     if (msg.isEmpty()) {
-                        dataBinding.txtErrorEmailSignup.setText("")
-                        addChipToGroup(requireContext(), etMemberEmail.text.toString())
-                        layoutAddPeopleAddPeopleEmail!!.visibility = View.GONE
-                        etMemberEmail!!.text?.clear()
+                        viewModel.checkEmailAPIMethod(etMemberEmail.text.toString()).observe(requireActivity(),
+                            Observer {
+                                var data=it as CheckEmailResponse
+                                if(data!=null)
+                                {
+                                    if(data.status==200) {
+                                        dataBinding.txtErrorEmailSignup.setText("")
+                                        addChipToGroup(requireContext(), etMemberEmail.text.toString())
+                                        layoutAddPeopleAddPeopleEmail!!.visibility = View.GONE
+                                        etMemberEmail!!.text?.clear()
+
+                                        var data= SignInErrorData("", 0)
+                                        emailErrorMethod(data)
+                                    }else
+                                    {
+                                        var data= SignInErrorData("Email doesn't exist", 1)
+                                        emailErrorMethod(data)
+                                    }
+                                    }
+                            })
+
+
+
                        // viewModelAddPeopleEmail.errorData.value = SignInErrorData("", 0)
                     } else {
                         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
@@ -80,23 +100,28 @@ class ThirdStepCreateFragment : Fragment() {
         }
     }
 
+    fun emailErrorMethod(data:SignInErrorData)
+    {
+        if(data!=null && data.message.isNotEmpty())
+        {
+            dataBinding.txtErrorEmailSignup!!.setText(data.message)
+            changeBackgroundForEditError(dataBinding.etMemberEmail!!,requireActivity().resources.getColor(
+                R.color.error_box_color),
+                requireActivity().resources.getColor(R.color.error_border_color))
+        }else
+        {
+            dataBinding.txtErrorEmailSignup!!.setText("")
+            changeBackgroundForEditError(dataBinding.etMemberEmail!!,requireActivity().resources.getColor(
+                R.color.white),
+                requireActivity().resources.getColor(R.color.liteGrey))
+        }
+    }
+
     private fun showErrorUIObserver()
     {
         viewModel.errorData.observe(requireActivity(), Observer {
             var data=it as SignInErrorData
-            if(data!=null && data.message.isNotEmpty())
-            {
-                dataBinding.txtErrorEmailSignup!!.setText(data.message)
-                changeBackgroundForEditError(dataBinding.etMemberEmail!!,requireActivity().resources.getColor(
-                    R.color.error_box_color),
-                    requireActivity().resources.getColor(R.color.error_border_color))
-            }else
-            {
-                dataBinding.txtErrorEmailSignup!!.setText("")
-                changeBackgroundForEditError(dataBinding.etMemberEmail!!,requireActivity().resources.getColor(
-                    R.color.white),
-                    requireActivity().resources.getColor(R.color.liteGrey))
-            }
+            emailErrorMethod(data)
         })
     }
 

@@ -69,6 +69,26 @@ class MenuFragment : Fragment() {
                     setGroupListAdapter(data.groups)
                 }
             })
+        }else{
+            val list = ArrayList<GroupData>()
+            val list2 = ArrayList<GroupInvitaion>()
+           /* list.add(GroupData(1,
+                "-1",
+                "",
+                "",
+                "",
+                "",
+                "",
+                list2,
+                false,
+                requireActivity().getString(R.string.createGroups_text),
+                false,
+                "",
+                "",
+                "",
+                "",
+                false))*/
+            setGroupListAdapter(list)
         }
         /* val vto: ViewTreeObserver = binding.constraintsTop!!.getViewTreeObserver()
          vto.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {

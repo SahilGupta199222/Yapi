@@ -2,6 +2,8 @@ package com.yapi.views.chat
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -24,12 +26,25 @@ import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.*
 import com.yapi.databinding.ChatAttachementLayoutBinding
+import com.yapi.pref.PreferenceFile
 import com.yapi.views.chat.chatUserInfo.RVFilesAdapter
 import com.yapi.views.chat.chatUserInfo.RVLinksAdapter
 import com.yapi.views.chat.chatUserInfo.RVPhotoMediaAdapter
+import com.yapi.views.edit_profile.EditProfileResponse
+import dagger.hilt.android.lifecycle.HiltViewModel
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.greenrobot.eventbus.EventBus
+import retrofit2.Response
+import java.io.File
+import javax.inject.Inject
+import javax.inject.Named
 
-class ChatViewModel : ViewModel() {
+@HiltViewModel
+class ChatViewModel @Inject constructor(val preferenceFile: PreferenceFile,
+val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
 
     var chatValue = ObservableBoolean(true)
     var emailValue = ObservableBoolean(false)
@@ -38,8 +53,9 @@ class ChatViewModel : ViewModel() {
     var screenWidth: Int? = 0
     var screenHeight: Int? = 0
 
-    var SECOND_FRAME_WIDTH: Int? = 0
-  //  var screenHeight: Int? = 0
+    //  var SECOND_FRAME_WIDTH: Int? = 0
+
+    //  var screenHeight: Int? = 0
     var userType: String? = ""
     var sendDataValue = ObservableField("")
 
@@ -58,6 +74,10 @@ class ChatViewModel : ViewModel() {
     var leftAlignCStatus = ObservableBoolean(true)
     var centerAlignCStatus = ObservableBoolean(false)
     var rightAlignCStatus = ObservableBoolean(false)
+
+    var groupPhoto = ObservableField("")
+    var chatOwnerUserId = ObservableField("")
+    var groupId = ObservableField("")
 
     fun onClick(view: View) {
         when (view.id) {
@@ -215,25 +235,30 @@ class ChatViewModel : ViewModel() {
     private fun showChatMenuMethod(view: View) {
         val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
             .inflate(R.layout.chat_menu_options, null, false)
-        var newWidth=0.0
-        if(checkDeviceType()){
-            newWidth = SECOND_FRAME_WIDTH!! / 1.5
-        }else
-        {
-             newWidth = screenWidth!! / 1.5
+        var newWidth = 0.0
+        var popUp: PopupWindow? = null
+        if (checkDeviceType()) {
+            popUp =
+                PopupWindow(mView,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    false)
+            //    newWidth = SECOND_FRAME_WIDTH!! / 1.5
+        } else {
+            newWidth = screenWidth!! / 1.5
+            popUp =
+                PopupWindow(mView, newWidth.toInt(), LinearLayout.LayoutParams.WRAP_CONTENT, false)
         }
 
-
         //   val popUp = PopupWindow(mView, LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT, false)
-        val popUp =
-            PopupWindow(mView, newWidth.toInt(), LinearLayout.LayoutParams.WRAP_CONTENT, false)
+        //  val popUp = PopupWindow(mView, newWidth.toInt(), LinearLayout.LayoutParams.WRAP_CONTENT, false)
         // popUp.showAtLocation(mView, Gravity.RIGHT,0,0);
         popUp.isTouchable = true
         popUp.isFocusable = true
         popUp.isOutsideTouchable = true
-        val btnViewProfile =
 
-            popUp.showAsDropDown(view.findViewById(com.yapi.R.id.ivChat_more_icon))
+        popUp.showAsDropDown(view.findViewById(com.yapi.R.id.ivChat_more_icon))
+        popUp.showAtLocation(mView, Gravity.CENTER_HORIZONTAL, 0, 0)
 
         val constraintsProfileChat =
             mView.findViewById<ConstraintLayout>(R.id.constraintsProfileChat)
@@ -274,18 +299,24 @@ class ChatViewModel : ViewModel() {
         val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
             .inflate(com.yapi.R.layout.group_chat_menu_options, null, false)
         var newWidth = screenWidth!! / 1.5
-
-        if(checkDeviceType())
-        {
-           newWidth= SECOND_FRAME_WIDTH!!.toDouble()/ 3
+        var popUp: PopupWindow? = null
+        if (checkDeviceType()) {
+            popUp =
+                PopupWindow(mView,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    false)
+            //  newWidth = SECOND_FRAME_WIDTH!!.toDouble() / 3
+        } else {
+            popUp =
+                PopupWindow(mView, newWidth.toInt(), LinearLayout.LayoutParams.WRAP_CONTENT, false)
         }
-        val popUp =
-            PopupWindow(mView, newWidth.toInt(), LinearLayout.LayoutParams.WRAP_CONTENT, false)
+
         popUp.isTouchable = true
         popUp.isFocusable = true
         popUp.isOutsideTouchable = true
         popUp.showAsDropDown(view.findViewById(R.id.ivChat_more_icon))
-
+        popUp.showAtLocation(mView, Gravity.CENTER_HORIZONTAL, 0, 0)
         // val btnViewProfile = popUp.showAsDropDown(view.findViewById(com.yapi.R.id.ivChat_more_icon))
 
         val constraintsProfileChat =
@@ -303,24 +334,40 @@ class ChatViewModel : ViewModel() {
                         .navigate(R.id.action_chatMessageFragment_to_chatGroupProfileInfo, bundle)
                 }
             }
-
-
         }
         val constraintsMute = mView.findViewById<ConstraintLayout>(R.id.constraintsMute)
         constraintsMute.setOnClickListener {
             popUp.dismiss()
         }
         val constraintsLeaveGroup = mView.findViewById<ConstraintLayout>(R.id.constraintsLeaveGroup)
+        val viewMenu2 = mView.findViewById<View>(R.id.viewMenu2)
+
+        val constraintsDeleteGroup = mView.findViewById<ConstraintLayout>(R.id.constraintsDeleteGroup)
+        val viewMenu3 = mView.findViewById<View>(R.id.viewMenu3)
+
+        Log.e("fkmekmfkemfefef===",chatOwnerUserId.get().toString())
+        Log.e("fkmekmfkemfefef111===",preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
+        if (chatOwnerUserId.get() == preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID)) {
+            constraintsDeleteGroup.visibility = View.VISIBLE
+            viewMenu3.visibility = View.VISIBLE
+            constraintsLeaveGroup.visibility = View.GONE
+            viewMenu2.visibility = View.GONE
+        } else {
+            constraintsDeleteGroup.visibility = View.GONE
+            viewMenu3.visibility = View.GONE
+
+            constraintsLeaveGroup.visibility = View.VISIBLE
+            viewMenu2.visibility = View.VISIBLE
+        }
+
         constraintsLeaveGroup.setOnClickListener {
             popUp.dismiss()
             showLeaveGroupDialog()
         }
 
-        val constraintsDeleteGroup =
-            mView.findViewById<ConstraintLayout>(R.id.constraintsDeleteGroup)
         constraintsDeleteGroup.setOnClickListener {
             popUp.dismiss()
-            showDeleteGroupDialog()
+            showDeleteGroupDialog(view)
         }
     }
 
@@ -343,19 +390,25 @@ class ChatViewModel : ViewModel() {
         }
     }
 
-    private fun showDeleteGroupDialog() {
-        val dialog = Dialog(MainActivity.activity!!.get()!!)
+    private fun showDeleteGroupDialog(screenView:View) {
+        var dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.delete_group_popup)
 
         dialog.show()
         val cardviewDeleteProfile = dialog.findViewById<CardView>(R.id.cardviewDeleteProfile)
         val btnCancel = dialog.findViewById<AppCompatButton>(R.id.btnCancel)
+        val btnDelGroup = dialog.findViewById<AppCompatButton>(R.id.btnDelGroup)
         val ivCross = dialog.findViewById<ImageView>(R.id.ivCross)
         cardviewDeleteProfile.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
 
         btnCancel.setOnClickListener {
             dialog.dismiss()
+        }
+
+        btnDelGroup.setOnClickListener {
+            dialog.dismiss()
+            deleteGroupMethod(groupId.get().toString(),screenView)
         }
 
         ivCross.setOnClickListener {
@@ -442,9 +495,20 @@ class ChatViewModel : ViewModel() {
     }
 
     private fun setPhotoAdapterMethod(rvAllMedia: RecyclerView) {
+        var photoList = ArrayList<String>()
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+
         val finalPerPhoto = screenWidth!!.toFloat() / 3.8f
         val mediaAdapter =
-            RVPhotoMediaAdapter(MainActivity.activity!!.get()!!, finalPerPhoto.toInt())
+            RVPhotoMediaAdapter(MainActivity.activity!!.get()!!,
+                photoList,
+                finalPerPhoto.toInt(),
+                4)
         rvAllMedia.layoutManager = GridLayoutManager(MainActivity.activity!!.get()!!, 3)
         rvAllMedia.adapter = mediaAdapter
     }
@@ -459,5 +523,32 @@ class ChatViewModel : ViewModel() {
         val rvFilesAdapter = RVFilesAdapter(MainActivity.activity!!.get()!!)
         rvAllMedia.layoutManager = LinearLayoutManager(MainActivity.activity!!.get()!!)
         rvAllMedia.adapter = rvFilesAdapter
+    }
+
+    fun deleteGroupMethod(groupId:String,screenView:View) {
+
+        repository.makeCall(true,
+            requestProcessor = object : ApiProcessor<Response<GroupDeleteResponse>> {
+                override fun onSuccess(success: Response<GroupDeleteResponse>) {
+                    Log.e("Resposne_Dataaaa===", success.body().toString())
+
+                    if(checkDeviceType()){
+                    //    dismissDialogData.value = true
+                    }else
+                    {
+                        if (screenView.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
+                            screenView.findNavController().popBackStack()
+                        }
+                    }
+                }
+
+                override fun onError(message: String) {
+                    MainActivity.activity!!.get()!!.showMessage(message)
+                }
+
+                override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<GroupDeleteResponse> {
+                        return retrofitApi.deleteGroupAPI(userToken, groupId)
+                }
+            })
     }
 }

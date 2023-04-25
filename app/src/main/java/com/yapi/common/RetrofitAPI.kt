@@ -2,6 +2,8 @@ package com.yapi.common
 
 import com.google.gson.JsonObject
 import com.yapi.views.add_people_email.AddEmailResponse
+import com.yapi.views.add_people_email.CheckEmailResponse
+import com.yapi.views.chat.GroupDeleteResponse
 import com.yapi.views.create_team.second_step_create_team.CreateTeamResponse
 import com.yapi.views.edit_profile.EditProfileResponse
 import com.yapi.views.menu_screen.GroupMenuResponse
@@ -57,6 +59,20 @@ interface RetrofitAPI {
         @Part photoBody: MultipartBody.Part,
     ): Response<EditProfileResponse>
 
+
+    @Multipart
+    @POST(WebAPIKeys.USER_EDIT_PROFILE)
+    suspend fun editProfileForAPI(
+        @Header("Authorization") token: String,
+        @Part("name") name: RequestBody,
+        @Part("user_name") user_name: RequestBody,
+        @Part("email") email: RequestBody,
+        @Part("mobile_number") mobile_number: RequestBody,
+        @Part("country_code") country_code: RequestBody,
+        @Part("about") about: RequestBody
+    ): Response<EditProfileResponse>
+
+
     @GET(WebAPIKeys.USER_FETCH_PROFILE+"/{user_id}")
     suspend fun fetchProfileAPI(@Header ("Authorization") token:String,@Path("user_id") user_id:String)
             : Response<ProfileResponse>
@@ -72,6 +88,17 @@ interface RetrofitAPI {
         @Part("quick_join") quick_join:RequestBody,
     ): Response<CreateTeamResponse>
 
+    @Multipart
+    @POST(WebAPIKeys.GROUP_CREATE_TEAM)
+    suspend fun createTeamWithoutImageAPI(@Header ("Authorization") token:String,
+                              @Part("name") name:RequestBody,
+                              @Part("working") working:RequestBody,
+                              @Part("description") description:RequestBody,
+                              @Part("is_private") is_private:RequestBody,
+                              @Part("quick_join") quick_join:RequestBody,
+    ): Response<CreateTeamResponse>
+
+
     @POST(WebAPIKeys.ADD_TEAM_MEMBERS)
     suspend fun addTeamMembersAPI(@Header ("Authorization") token:String,@Body emailData:JsonObject): Response<AddEmailResponse>
 
@@ -84,7 +111,20 @@ interface RetrofitAPI {
         @Body jsonObject: JsonObject): Response<JsonObject>
 
     @GET(WebAPIKeys.FETCH_ALL_MENU_DATA)
-    suspend fun fetchAllGroupData(@Header ("Authorization") token:String): Response<GroupMenuResponse>
+    suspend fun fetchAllGroupData(@Header("Authorization") token:String): Response<GroupMenuResponse>
 
+    @POST(WebAPIKeys.USER_CHECK_EMAIL)
+    suspend fun checkUserEmailAPI(/*@Header ("Authorization") token:String,*/@Body emailData:JsonObject): Response<CheckEmailResponse>
+
+
+    @DELETE(WebAPIKeys.DELETE_GROUP+"/{team_id}")
+    suspend fun deleteGroupAPI(@Header("Authorization") token:String,@Path("team_id") team_id:String): Response<GroupDeleteResponse>
+
+    @DELETE(WebAPIKeys.DELETE_ACCOUNT)
+    suspend fun deleteAccountAPI(@Header("Authorization") token:String): Response<GroupDeleteResponse>
+
+
+    @POST(WebAPIKeys.DEACTIVATE_ACCOUNT)
+    suspend fun deactivateAccountAPI(@Header("Authorization") token:String): Response<GroupDeleteResponse>
 
 }

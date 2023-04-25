@@ -11,8 +11,8 @@
         android:visibility="invisible"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintsTop"
         android:layout_width="0dp"
@@ -41,6 +41,8 @@
         android:text="Sales"
         android:gravity="start"
         android:layout_weight="1"
+        android:singleLine="true"
+        android:ellipsize="end"
         android:layout_marginStart="@dimen/startPaddingNormal"
         android:layout_gravity="center"
         android:textColor="@color/medium_grey_color"

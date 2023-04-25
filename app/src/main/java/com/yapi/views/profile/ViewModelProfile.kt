@@ -1,6 +1,7 @@
 package com.yapi.views.profile
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,6 +17,7 @@ import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.*
 import com.yapi.pref.PreferenceFile
+import com.yapi.views.chat.GroupDeleteResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Response
 import java.util.*
@@ -25,7 +27,7 @@ import javax.inject.Named
 @HiltViewModel
 class ViewModelProfile @Inject constructor(
     val repository: Repository,
-    val preferenceFile: PreferenceFile,@Named("token") val userToken:String
+    val preferenceFile: PreferenceFile, @Named("token") val userToken: String,
 ) : ViewModel() {
     private var profileData: ProfileData? = null
     var openEditProfileData = MutableLiveData<ProfileData?>()
@@ -33,9 +35,18 @@ class ViewModelProfile @Inject constructor(
 
     var nameValue = ObservableField("")
     var userNameValue = ObservableField("")
+
     var aboutValue = ObservableField("")
+    var aboutVisiblityValue = ObservableBoolean(false)
+    var roleVisiblityValue = ObservableBoolean(false)
+    var regionVisiblityValue = ObservableBoolean(false)
+
     var emailValue = ObservableField("")
+    var emailVisiblityValue = ObservableBoolean(false)
+
     var phoneValue = ObservableField("")
+    var phoneVisiblityValue = ObservableBoolean(false)
+
     var phoneCountryValue = ObservableField("")
     var showTopNameTag = ObservableField("")
     var photoUrl = ObservableField("")
@@ -44,6 +55,7 @@ class ViewModelProfile @Inject constructor(
     var noImageOnlyNameVisible = ObservableBoolean(false)
 
     var screenWidth: Int? = 0
+
     fun onClick(view: View) {
         when (view.id) {
             R.id.btnEditProfile -> {
@@ -84,7 +96,7 @@ class ViewModelProfile @Inject constructor(
         }
     }
 
-    private fun deleteAccountDialog(view: View) {
+    private fun deleteAccountDialog(screenView: View) {
         val dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.delete_profile_popup)
@@ -103,20 +115,22 @@ class ViewModelProfile @Inject constructor(
 
         deleteBtn.setOnClickListener {
             dialog.dismiss()
+           deleteAccountMethod(screenView)
         }
         dialog.setCancelable(false)
         dialog.show()
 
         var cardviewDeleteProfile = dialog.findViewById<CardView>(R.id.cardviewDeleteProfile)
 
-        var second_frame_height= preferenceFile.fetchStringValue("second_frame_height")
-        var second_frame_width=  preferenceFile.fetchStringValue("second_frame_width")
+        var second_frame_height = preferenceFile.fetchStringValue("second_frame_height")
+        var second_frame_width = preferenceFile.fetchStringValue("second_frame_width")
 
-        if (checkDeviceType()){
-            cardviewDeleteProfile.layoutParams.width = (second_frame_width!!.toDouble() / 1.1).toInt()
-            cardviewDeleteProfile.layoutParams.height = (second_frame_height!!.toDouble() / 1.1).toInt()
-        }else
-        {
+        if (checkDeviceType()) {
+            cardviewDeleteProfile.layoutParams.width =
+                (second_frame_width.toDouble() / 1.1).toInt()
+            cardviewDeleteProfile.layoutParams.height =
+                (second_frame_height.toDouble() / 1.1).toInt()
+        } else {
             cardviewDeleteProfile.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
         }
     }
@@ -139,7 +153,7 @@ class ViewModelProfile @Inject constructor(
         }
         deActivateBtn.setOnClickListener {
             dialog.dismiss()
-
+            deactivateAccountMethod(view)
         }
 
         dialog.setCancelable(false)
@@ -151,9 +165,9 @@ class ViewModelProfile @Inject constructor(
 
         if (checkDeviceType()) {
             cardViewDeActiveProfile.layoutParams.width =
-                (second_frame_width!!.toDouble() / 1.1).toInt()
+                (second_frame_width.toDouble() / 1.1).toInt()
             cardViewDeActiveProfile.layoutParams.height =
-                (second_frame_height!!.toDouble() / 1.1).toInt()
+                (second_frame_height.toDouble() / 1.1).toInt()
         } else {
             cardViewDeActiveProfile.layoutParams.width =
                 (screenWidth!!.toDouble() / 1.1).toInt()
@@ -169,29 +183,47 @@ class ViewModelProfile @Inject constructor(
                     profileData = success.body()!!.data
                     topProfileVisibility.set(true)
                     nameValue.set(success.body()!!.data.name)
-                    userNameValue.set("@"+success.body()!!.data.user_name)
+                    userNameValue.set("@" + success.body()!!.data.user_name)
                     emailValue.set(success.body()!!.data.email)
-                    aboutValue.set(success.body()!!.data.about)
+
+if(emailValue.get().toString().isEmpty())
+{
+    emailVisiblityValue.set(false)
+}else
+{
+    emailVisiblityValue.set(true)
+}
+
                     //showTopNameTag.set(success.body()!!.data.name!!.substring(0, 1).uppercase(Locale.getDefault()))
                     showTopNameTag.set(convertFromFullNameToTwoString(success.body()!!.data.name!!))
 
-                    if(success!!.body()!!.data.profile_pic_url!="")
-                    {
+                    if (success.body()!!.data.profile_pic_url != "") {
                         noImageOnlyNameVisible.set(false)
-                        photoUrl.set(success!!.body()!!.data.profile_pic_url)
-                    }else
-                    {
+                        photoUrl.set(success.body()!!.data.profile_pic_url)
+                    } else {
                         noImageOnlyNameVisible.set(true)
                     }
 
+                    aboutValue.set(success.body()!!.data.about.toString().trim())
+                    if (success.body()!!.data.about!!.trim().isEmpty()) {
+                        aboutVisiblityValue.set(false)
+                    } else {
+                        aboutVisiblityValue.set(true)
+                    }
+
                     if (!(success.body()!!.data.mobile_number.toString().equals(""))
-                        && success.body()!!.data.mobile_number.toString()!=null
-                        && !(success.body()!!.data.mobile_number.toString().equals("null"))) {
+                        && success.body()!!.data.mobile_number.toString() != null
+                        && !(success.body()!!.data.mobile_number.toString().equals("null"))
+                    ) {
                         var phoneNumber =
                             addSpaceBetweenPhoneMethod(success.body()!!.data.mobile_number.toString())
                         phoneValue.set(success.body()!!.data.country_code.toString() + " " + phoneNumber)
+                        phoneVisiblityValue.set(true)
+                    } else {
+                        phoneVisiblityValue.set(false)
                     }
-
+                    roleVisiblityValue.set(false)
+                    regionVisiblityValue.set(false)
                     //phoneCountryValue.set(success.body()!!.data.country_code.toString())
                     /*   var bundle= Bundle()
                        bundle.putString("email",emailFieldValue.get())
@@ -204,7 +236,62 @@ class ViewModelProfile @Inject constructor(
 
                 override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<ProfileResponse> {
                     Log.e("mflfldddff==", preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
-                    return retrofitApi.fetchProfileAPI(userToken,preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
+                    return retrofitApi.fetchProfileAPI(userToken,
+                        preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
+                }
+            })
+    }
+
+
+    fun deleteAccountMethod(screenView:View) {
+
+        repository.makeCall(true,
+            requestProcessor = object : ApiProcessor<Response<GroupDeleteResponse>> {
+                override fun onSuccess(success: Response<GroupDeleteResponse>) {
+                    Log.e("Resposne_Dataaaa===", success.body().toString())
+                    clearAllDataMethod(screenView)
+                }
+
+                override fun onError(message: String) {
+                    MainActivity.activity!!.get()!!.showMessage(message)
+                }
+
+                override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<GroupDeleteResponse> {
+                    return retrofitApi.deleteAccountAPI(userToken)
+                }
+            })
+    }
+
+    fun clearAllDataMethod(screenView:View)
+    {
+        preferenceFile.clearAllPref()
+        if(checkDeviceType()){
+            var intent= Intent(MainActivity.activity!!.get(),MainActivity::class.java)
+            MainActivity.activity!!.get()!!.startActivity(intent)
+        }else
+        {
+            if (screenView.findNavController().currentDestination?.id == R.id.profileFragment) {
+                screenView.findNavController()
+                    .navigate(R.id.action_profileFragment_to_signInFragment)
+            }
+        }
+    }
+
+    fun deactivateAccountMethod(screenView:View) {
+
+        repository.makeCall(true,
+            requestProcessor = object : ApiProcessor<Response<GroupDeleteResponse>> {
+                override fun onSuccess(success: Response<GroupDeleteResponse>) {
+                    Log.e("Resposne_Dataaaa===", success.body().toString())
+                    clearAllDataMethod(screenView)
+                }
+
+                override fun onError(message: String) {
+                    MainActivity.activity!!.get()!!.showMessage(message)
+                }
+
+                override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<GroupDeleteResponse> {
+                    return retrofitApi.deactivateAccountAPI(userToken)
                 }
             })
     }

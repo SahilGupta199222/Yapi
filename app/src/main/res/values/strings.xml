@@ -324,4 +324,8 @@
     <string name="unsave_message_text">Unsave Message</string>
 
     <string name="upload_your_background_text">upload your background</string>
+
+    <string name="about_textt">About</string>
+    <string name="email_textt">EMAIL</string>
+    <string name="phone_texttt">PHONE</string>
 </resources>

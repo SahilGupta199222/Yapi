@@ -3,6 +3,7 @@ package com.yapi.views.add_people_email
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
@@ -137,5 +138,38 @@ class ViewModelAddPeopleEmail @Inject constructor(val repository: Repository,@Na
                     return retrofitApi.addTeamMembersAPI(userToken,finalJsonObject)
                 }
             })
+    }
+
+
+     fun checkEmailAPIMethod(email:String):LiveData<CheckEmailResponse> {
+
+        var finalJsonObject = JsonObject()
+        var responseData=MutableLiveData<CheckEmailResponse>()
+        finalJsonObject.addProperty("email", email)
+        Log.e("Add_members_data_Input===", finalJsonObject.toString())
+        repository.makeCall(true,
+            requestProcessor = object : ApiProcessor<Response<CheckEmailResponse>> {
+                override fun onSuccess(success: Response<CheckEmailResponse>) {
+                    Log.e("Resposne_Dataaaa===", success.body().toString())
+
+                    responseData.value=success.body()
+
+                    /*   var bundle= Bundle()
+                       bundle.putString("email",emailFieldValue.get())
+                       view.findNavController().navigate(R.id.action_signInFragment_to_signUpCodeFragment,bundle)*/
+                }
+
+                override fun onError(message: String) {
+                    var data=CheckEmailResponse(message,400)
+                    responseData.value=data
+                  //  MainActivity.activity!!.get()!!.showMessage(message)
+                }
+
+                override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<CheckEmailResponse> {
+                 //   return retrofitApi.checkUserEmailAPI(userToken,finalJsonObject)
+                    return retrofitApi.checkUserEmailAPI(finalJsonObject)
+                }
+            })
+         return responseData
     }
 }

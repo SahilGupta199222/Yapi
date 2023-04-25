@@ -78,7 +78,24 @@
                         android:orientation="horizontal"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent" >
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/iconSize"
+                            android:visibility="invisible"
+                            android:src="@drawable/upload_background_banner"
+                            android:layout_height="@dimen/iconSize"/>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/darkGrey"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:visibility="invisible"
+                            android:textSize="@dimen/normalTextSize"
+                            android:fontFamily="@font/larsseit_bold"
+                            android:textAllCaps="true"
+                            android:text="@string/upload_your_background_text"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/linearPicProfile"
@@ -86,21 +103,22 @@
                         app:layout_constraintTop_toBottomOf="@+id/imgCancelProfile"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_width="wrap_content"
+                        android:layout_marginTop="@dimen/_75sdp"
+                        android:layout_marginStart="@dimen/_20sdp"
                         android:layout_height="wrap_content">
                         <com.yapi.common.RoundRectCornerImageView
                             android:id="@+id/imgProfilePicProfile"
-                            android:layout_width="@dimen/_58sdp"
-                            android:layout_height="@dimen/_58sdp"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_100sdp"
                             android:visibility="@{model.noImageOnlyNameVisible?mView.GONE:mView.VISIBLE}"
                             android:src="@drawable/demo_photo"
                             setRoundRectImage="@{model.photoUrl}"
-                            android:scaleType="fitXY"
-                            android:layout_marginTop="@dimen/_3sdp" />
+                            android:scaleType="fitXY" />
+
                         <RelativeLayout
                             android:id="@+id/relNameValue"
-                            android:layout_width="@dimen/_58sdp"
-                            android:layout_height="@dimen/_58sdp"
-                            android:layout_marginTop="@dimen/_3sdp"
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_100sdp"
                             android:background="@drawable/et_drawable"
                             android:backgroundTint="#FEFAE5"
                             android:visibility="@{model.noImageOnlyNameVisible?mView.VISIBLE:mView.GONE}"
@@ -128,27 +146,28 @@
                         android:id="@+id/txtNameProfile"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/topFiveMargin"
-                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginStart="@dimen/_10ssp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/larsseit_bold"
                         android:text="@{model.nameValue}"
                         android:textColor="@color/darkGrey"
-                        android:textSize="@dimen/_15ssp"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        android:textSize="@dimen/_20ssp"
+                        app:layout_constraintEnd_toStartOf="@+id/btnEditProfile"
                         app:layout_constraintStart_toEndOf="@+id/linearPicProfile"
-                        app:layout_constraintTop_toBottomOf="@+id/linearTopBanner" />
+                        app:layout_constraintTop_toBottomOf="@id/linearTopBanner"
+                        app:layout_constraintBottom_toBottomOf="@id/linearPicProfile"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtUserNameProfile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/_6sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/larsseit_medium"
                         android:text="@{model.userNameValue}"
                         android:textColor="@color/darkLiteGrey"
                         android:textSize="@dimen/normalSmallTextSize"
-
-                        app:layout_constraintBottom_toBottomOf="@+id/linearPicProfile"
+                        app:layout_constraintTop_toBottomOf="@id/txtNameProfile"
                         app:layout_constraintStart_toStartOf="@+id/txtNameProfile" />
 
                     <!-- <androidx.appcompat.widget.AppCompatTextView
@@ -196,10 +215,11 @@
                         android:id="@+id/btnEditProfile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_20sdp"
                         android:background="@drawable/btn_drawable_blue"
                         android:backgroundTint="@color/darkBlueBtn"
                         android:fontFamily="@font/larsseit_bold"
+                        android:layout_marginTop="@dimen/topTwentyFiveMargin"
+                        android:layout_marginBottom="@dimen/_2sdp"
                         android:onClick="@{model::onClick}"
                         android:paddingStart="@dimen/_30sdp"
                         android:paddingTop="@dimen/etVerticalPadding"
@@ -225,6 +245,7 @@
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:layout_weight="1" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
@@ -236,112 +257,146 @@
                                 android:id="@+id/txtTempAboutProfile"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_10sdp"
                                 android:layout_marginTop="@dimen/_15sdp"
                                 android:fontFamily="@font/larsseit_bold"
-                                android:text="About"
+                                android:text="@string/about_textt"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/normalTextSize"
                                 app:layout_constraintStart_toStartOf="parent"
-
                                 app:layout_constraintTop_toTopOf="parent" />
 
                             <androidx.constraintlayout.widget.ConstraintLayout
-                                android:id="@+id/layoutImgPersonProfile"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/topFiveMargin"
-                                android:background="@drawable/round_lite_gray"
-                                app:layout_constraintStart_toStartOf="@id/txtTempAboutProfile"
-                                app:layout_constraintTop_toBottomOf="@id/txtTempAboutProfile">
-
-                                <androidx.appcompat.widget.AppCompatImageView
-                                    android:id="@+id/imgTempPersonProfile"
-                                    android:layout_width="@dimen/iconSize"
-                                    android:layout_height="@dimen/iconSize"
-                                    android:layout_margin="@dimen/_10sdp"
-                                    android:src="@drawable/person"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/txtTempAboutLiteGreyProfile"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/topMargin"
-                                android:fontFamily="@font/larsseit_medium"
-
-                                android:text="@string/about"
-                                android:textColor="@color/medium_grey_color"
-                                android:textSize="@dimen/smallTextSize"
-                                app:layout_constraintStart_toEndOf="@+id/layoutImgPersonProfile"
-                                app:layout_constraintTop_toTopOf="@+id/layoutImgPersonProfile" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/txtAboutDescriptionProfile"
+                                android:id="@+id/constarintsAbout"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:fontFamily="@font/larsseit_medium"
-                                android:text="@{model.aboutValue}"
-                                android:textColor="@color/darkGrey"
-                                android:textSize="@dimen/normalTextSize"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="@+id/txtTempAboutLiteGreyProfile"
-                                app:layout_constraintTop_toBottomOf="@+id/txtTempAboutLiteGreyProfile" />
+                                android:layout_marginTop="@dimen/topFiveMargin"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/txtTempAboutProfile">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/layoutImgPersonProfile"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/round_lite_gray"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        android:id="@+id/imgTempPersonProfile"
+                                        android:layout_width="@dimen/iconSize"
+                                        android:layout_height="@dimen/iconSize"
+                                        android:layout_margin="@dimen/_10sdp"
+                                        android:src="@drawable/person"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/linearAbout"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/topMargin"
+                                    android:orientation="vertical"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toEndOf="@id/layoutImgPersonProfile"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/txtTempAboutLiteGreyProfile"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/larsseit_medium"
+                                        android:text="@string/about"
+                                        android:textColor="@color/medium_grey_color"
+                                        android:textSize="@dimen/smallTextSize" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/txtAboutDescriptionProfile"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_2sdp"
+                                        android:fontFamily="@font/larsseit_medium"
+                                        android:text="@{model.aboutValue}"
+                                        android:textColor="@color/darkGrey"
+                                        android:textSize="@dimen/normalTextSize"
+                                        android:visibility="@{model.aboutVisiblityValue?mView.VISIBLE:mView.GONE}"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="@+id/txtTempAboutLiteGreyProfile"
+                                        app:layout_constraintTop_toBottomOf="@+id/txtTempAboutLiteGreyProfile" />
+                                </LinearLayout>
+                            </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <androidx.constraintlayout.widget.ConstraintLayout
-                                android:id="@+id/layoutImgRoleProfile"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_14ssp"
-                                android:background="@drawable/round_lite_gray"
-                                app:layout_constraintStart_toStartOf="@id/txtTempAboutProfile"
-                                app:layout_constraintTop_toBottomOf="@+id/txtAboutDescriptionProfile">
-
-                                <androidx.appcompat.widget.AppCompatImageView
-                                    android:id="@+id/imgTempRoleProfile"
-                                    android:layout_width="@dimen/iconSize"
-                                    android:layout_height="@dimen/iconSize"
-                                    android:layout_margin="@dimen/_10sdp"
-                                    android:src="@drawable/role"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/txtTempRoleLiteGreyProfile"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/topMargin"
-                                android:fontFamily="@font/larsseit_medium"
-
-                                android:text="@string/role"
-                                android:textColor="@color/medium_grey_color"
-                                android:textSize="@dimen/smallTextSize"
-                                app:layout_constraintStart_toEndOf="@+id/layoutImgRoleProfile"
-                                app:layout_constraintTop_toTopOf="@+id/layoutImgRoleProfile" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/txtRoleDescriptionProfile"
+                                android:id="@+id/constarintsRole"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:fontFamily="@font/larsseit_medium"
-
-                                android:textColor="@color/darkGrey"
-                                android:textSize="@dimen/normalTextSize"
+                                android:layout_marginTop="@dimen/margin_between_two_boxes"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="@+id/txtTempRoleLiteGreyProfile"
-                                app:layout_constraintTop_toBottomOf="@+id/txtTempRoleLiteGreyProfile" />
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/constarintsAbout">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/layoutImgRoleProfile"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/round_lite_gray"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        android:id="@+id/imgTempRoleProfile"
+                                        android:layout_width="@dimen/iconSize"
+                                        android:layout_height="@dimen/iconSize"
+                                        android:layout_margin="@dimen/_10sdp"
+                                        android:src="@drawable/role"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/linearRole"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/topMargin"
+                                    android:orientation="vertical"
+                                    app:layout_constraintBottom_toBottomOf="@+id/layoutImgRoleProfile"
+                                    app:layout_constraintStart_toEndOf="@+id/layoutImgRoleProfile"
+                                    app:layout_constraintTop_toTopOf="@+id/layoutImgRoleProfile">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/txtTempRoleLiteGreyProfile"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/larsseit_medium"
+                                        android:text="@string/role"
+                                        android:textColor="@color/medium_grey_color"
+                                        android:textSize="@dimen/smallTextSize" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/txtRoleDescriptionProfile"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_2sdp"
+                                        android:fontFamily="@font/larsseit_medium"
+                                        android:text=""
+                                        android:textColor="@color/darkGrey"
+                                        android:textSize="@dimen/normalTextSize"
+                                        android:visibility="@{model.roleVisiblityValue?mView.VISIBLE:mView.GONE}"
+
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="@+id/txtTempRoleLiteGreyProfile"
+                                        app:layout_constraintTop_toBottomOf="@+id/txtTempRoleLiteGreyProfile" />
+                                </LinearLayout>
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/txtTempContextInfoProfile"
@@ -353,149 +408,206 @@
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/normalTextSize"
                                 app:layout_constraintStart_toStartOf="@id/txtTempAboutProfile"
-                                app:layout_constraintTop_toBottomOf="@+id/layoutImgRoleProfile" />
+                                app:layout_constraintTop_toBottomOf="@+id/constarintsRole" />
 
                             <androidx.constraintlayout.widget.ConstraintLayout
-                                android:id="@+id/layoutImgEmailProfile"
-                                android:layout_width="wrap_content"
+                                android:id="@+id/constarintsEmail"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/topFiveMargin"
-                                android:background="@drawable/round_lite_gray"
-                                app:layout_constraintStart_toStartOf="@id/txtTempAboutProfile"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/txtTempContextInfoProfile">
 
-                                <androidx.appcompat.widget.AppCompatImageView
-                                    android:id="@+id/imgTempEmailProfile"
-                                    android:layout_width="@dimen/iconSize"
-                                    android:layout_height="@dimen/iconSize"
-                                    android:layout_margin="@dimen/_10sdp"
-                                    android:src="@drawable/ic_baseline_mail_outline_24"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/layoutImgEmailProfile"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/topFiveMargin"
+                                    android:background="@drawable/round_lite_gray"
                                     app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        android:id="@+id/imgTempEmailProfile"
+                                        android:layout_width="@dimen/iconSize"
+                                        android:layout_height="@dimen/iconSize"
+                                        android:layout_margin="@dimen/_10sdp"
+                                        android:src="@drawable/ic_baseline_mail_outline_24"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_marginStart="@dimen/topMargin"
+                                    app:layout_constraintBottom_toBottomOf="@id/layoutImgEmailProfile"
+                                    app:layout_constraintStart_toEndOf="@id/layoutImgEmailProfile"
+                                    app:layout_constraintTop_toTopOf="@id/layoutImgEmailProfile">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/txtTempEmailLiteGreyProfile"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/larsseit_medium"
+                                        android:text="@string/email_textt"
+                                        android:textColor="@color/medium_grey_color"
+                                        android:textSize="@dimen/smallTextSize" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/txtEmailProfile"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_2sdp"
+                                        android:fontFamily="@font/larsseit_medium"
+                                        android:text="@{model.emailValue}"
+                                        android:textColor="@color/darkGrey"
+                                        android:visibility="@{model.emailVisiblityValue?mView.VISIBLE:mView.GONE}"
+                                        android:textSize="@dimen/normalTextSize"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="@+id/txtTempEmailLiteGreyProfile"
+                                        app:layout_constraintTop_toBottomOf="@+id/txtTempEmailLiteGreyProfile" />
+                                </LinearLayout>
 
                             </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/txtTempEmailLiteGreyProfile"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/topMargin"
-                                android:fontFamily="@font/larsseit_medium"
-
-                                android:text="EMAIL"
-                                android:textColor="@color/medium_grey_color"
-                                android:textSize="@dimen/smallTextSize"
-                                app:layout_constraintStart_toEndOf="@+id/layoutImgEmailProfile"
-                                app:layout_constraintTop_toTopOf="@+id/layoutImgEmailProfile" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/txtEmailProfile"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:fontFamily="@font/larsseit_medium"
-
-                                android:text="@{model.emailValue}"
-                                android:textColor="@color/darkGrey"
-                                android:textSize="@dimen/normalTextSize"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="@+id/txtTempEmailLiteGreyProfile"
-                                app:layout_constraintTop_toBottomOf="@+id/txtTempEmailLiteGreyProfile" />
 
                             <androidx.constraintlayout.widget.ConstraintLayout
-                                android:id="@+id/layoutImgPhoneProfile"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/topFiveMargin"
-                                android:background="@drawable/round_lite_gray"
-                                app:layout_constraintStart_toStartOf="@id/txtTempAboutProfile"
-                                app:layout_constraintTop_toBottomOf="@+id/layoutImgEmailProfile">
-
-                                <androidx.appcompat.widget.AppCompatImageView
-                                    android:id="@+id/imgTempPhoneProfile"
-                                    android:layout_width="@dimen/iconSize"
-                                    android:layout_height="@dimen/iconSize"
-                                    android:layout_margin="@dimen/_10sdp"
-                                    android:src="@drawable/ic_baseline_phone_24"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/txtTempPhoneLiteGreyProfile"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/topMargin"
-                                android:fontFamily="@font/larsseit_medium"
-                                android:text="PHONE"
-                                android:textColor="@color/medium_grey_color"
-                                android:textSize="@dimen/smallTextSize"
-                                app:layout_constraintStart_toEndOf="@+id/layoutImgPhoneProfile"
-                                app:layout_constraintTop_toTopOf="@+id/layoutImgPhoneProfile" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/txtPhoneProfile"
+                                android:id="@+id/constarintsPhone"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:fontFamily="@font/larsseit_medium"
-                                android:text="@{model.phoneValue}"
-                                android:textColor="@color/darkGrey"
-                                android:textSize="@dimen/normalTextSize"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="@+id/txtTempPhoneLiteGreyProfile"
-                                app:layout_constraintTop_toBottomOf="@+id/txtTempPhoneLiteGreyProfile" />
+                                android:layout_marginTop="@dimen/margin_between_two_boxes"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/constarintsEmail">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/layoutImgPhoneProfile"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/round_lite_gray"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        android:id="@+id/imgTempPhoneProfile"
+                                        android:layout_width="@dimen/iconSize"
+                                        android:layout_height="@dimen/iconSize"
+                                        android:layout_margin="@dimen/_10sdp"
+                                        android:src="@drawable/ic_baseline_phone_24"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_marginStart="@dimen/topMargin"
+                                    app:layout_constraintBottom_toBottomOf="@id/layoutImgPhoneProfile"
+                                    app:layout_constraintStart_toEndOf="@id/layoutImgPhoneProfile"
+                                    app:layout_constraintTop_toTopOf="@id/layoutImgPhoneProfile">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/txtTempPhoneLiteGreyProfile"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textAllCaps="true"
+                                        android:fontFamily="@font/larsseit_medium"
+                                        android:text="@string/phone_textt"
+                                        android:textColor="@color/medium_grey_color"
+                                        android:textSize="@dimen/smallTextSize"
+                                        app:layout_constraintStart_toEndOf="@+id/layoutImgPhoneProfile"
+                                        app:layout_constraintTop_toTopOf="@+id/layoutImgPhoneProfile" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/txtPhoneProfile"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_2sdp"
+                                        android:fontFamily="@font/larsseit_medium"
+                                        android:text="@{model.phoneValue}"
+                                        android:textColor="@color/darkGrey"
+                                        android:visibility="@{model.phoneVisiblityValue?mView.VISIBLE:mView.GONE}"
+                                        android:textSize="@dimen/normalTextSize"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="@+id/txtTempPhoneLiteGreyProfile"
+                                        app:layout_constraintTop_toBottomOf="@+id/txtTempPhoneLiteGreyProfile" />
+                                </LinearLayout>
+                            </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <androidx.constraintlayout.widget.ConstraintLayout
-                                android:id="@+id/layoutImgRegionProfile"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/topFiveMargin"
-                                android:background="@drawable/round_lite_gray"
-                                app:layout_constraintStart_toStartOf="@id/txtTempAboutProfile"
-                                app:layout_constraintTop_toBottomOf="@+id/layoutImgPhoneProfile">
-
-                                <androidx.appcompat.widget.AppCompatImageView
-                                    android:id="@+id/imgTempRegionProfile"
-                                    android:layout_width="@dimen/iconSize"
-                                    android:layout_height="@dimen/iconSize"
-                                    android:layout_margin="@dimen/_10sdp"
-                                    android:src="@drawable/earth"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/txtTempRegionLiteGreyProfile"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/topMargin"
-                                android:fontFamily="@font/larsseit_medium"
-                                android:text="@string/region"
-                                android:textColor="@color/medium_grey_color"
-                                android:textSize="@dimen/smallTextSize"
-                                app:layout_constraintStart_toEndOf="@+id/layoutImgRegionProfile"
-                                app:layout_constraintTop_toTopOf="@+id/layoutImgRegionProfile" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/txtRegionProfile"
+                                android:id="@+id/constraintsRegion"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/_2sdp"
-                                android:fontFamily="@font/larsseit_medium"
-                                android:textColor="@color/darkGrey"
-                                android:textSize="@dimen/normalTextSize"
+                                app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="@+id/txtTempRegionLiteGreyProfile"
-                                app:layout_constraintTop_toBottomOf="@+id/txtTempRegionLiteGreyProfile" />
+                                android:layout_marginTop="@dimen/margin_between_two_boxes"
+                                app:layout_constraintTop_toBottomOf="@+id/constarintsPhone">
+
+                                <androidx.constraintlayout.widget.ConstraintLayout
+                                    android:id="@+id/layoutImgRegionProfile"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/round_lite_gray"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        android:id="@+id/imgTempRegionProfile"
+                                        android:layout_width="@dimen/iconSize"
+                                        android:layout_height="@dimen/iconSize"
+                                        android:layout_margin="@dimen/_10sdp"
+                                        android:src="@drawable/earth"
+                                        app:layout_constraintBottom_toBottomOf="parent"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="parent"
+                                        app:layout_constraintTop_toTopOf="parent" />
+
+                                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:layout_marginStart="@dimen/topMargin"
+                                    app:layout_constraintStart_toEndOf="@id/layoutImgRegionProfile"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/txtTempRegionLiteGreyProfile"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/larsseit_medium"
+                                        android:text="@string/region"
+                                        android:textColor="@color/medium_grey_color"
+                                        android:textSize="@dimen/smallTextSize"
+                                        android:textAllCaps="true"
+                                        app:layout_constraintStart_toEndOf="@+id/layoutImgRegionProfile"
+                                        app:layout_constraintTop_toTopOf="@+id/layoutImgRegionProfile" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="@dimen/_2sdp"
+                                        android:fontFamily="@font/larsseit_medium"
+                                        android:textColor="@color/darkGrey"
+                                        android:textSize="@dimen/normalTextSize"
+
+                                        android:visibility="@{model.regionVisiblityValue?mView.VISIBLE:mView.GONE}"
+                                        app:layout_constraintEnd_toEndOf="parent"
+                                        app:layout_constraintStart_toStartOf="@+id/txtTempRegionLiteGreyProfile"
+                                        app:layout_constraintTop_toBottomOf="@+id/txtTempRegionLiteGreyProfile" />
+                                </LinearLayout>
+                            </androidx.constraintlayout.widget.ConstraintLayout>
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/txtTempDeActiveAccountProfile"
@@ -505,10 +617,9 @@
                                 android:fontFamily="@font/larsseit_bold"
                                 android:text="@string/account_infor"
                                 android:textColor="@color/black"
-
                                 android:textSize="@dimen/normalTextSize"
                                 app:layout_constraintStart_toStartOf="@id/txtTempAboutProfile"
-                                app:layout_constraintTop_toBottomOf="@+id/layoutImgRegionProfile" />
+                                app:layout_constraintTop_toBottomOf="@+id/constraintsRegion" />
 
                             <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/layoutDeActiveProfile"
@@ -561,7 +672,7 @@
                                 android:id="@+id/layoutDeleteAccountProfile"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/topFiveMargin"
+                                android:layout_marginTop="@dimen/margin_between_two_boxes"
                                 android:onClick="@{model::onClick}"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="@id/txtTempAboutProfile"

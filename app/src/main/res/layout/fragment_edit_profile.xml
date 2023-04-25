@@ -192,10 +192,9 @@
                         android:layout_height="wrap_content">
                     <RelativeLayout
                         android:id="@+id/layoutPickGalleryImgEditProfile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/photo_upload_box_size"
+                        android:layout_height="@dimen/photo_upload_box_size"
                         android:layout_marginTop="@dimen/topFiveMargin"
-                        android:padding="@dimen/_15sdp"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -216,8 +215,8 @@
 
                     <com.yapi.common.RoundRectCornerImageView
                         android:id="@+id/imgPicImageCreateGroup"
-                        android:layout_width="@dimen/_50sdp"
-                        android:layout_height="@dimen/_50sdp"
+                        android:layout_width="@dimen/photo_upload_box_size"
+                        android:layout_height="@dimen/photo_upload_box_size"
                         android:scaleType="fitXY"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -229,7 +228,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/layoutUploadImageEditProfile"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/photo_upload_box_size"
                         android:layout_marginStart="@dimen/topMargin"
                         android:background="@drawable/lite_blue_drawable"
                         android:padding="@dimen/_15sdp"

@@ -84,4 +84,8 @@
     <dimen name="menu_left_margin">@dimen/_minus3sdp</dimen>
 
     <dimen name="common_menu_top_title">@dimen/_13ssp</dimen>
+
+    <dimen name="photo_upload_box_size">@dimen/_45sdp</dimen>
+
+    <dimen name="margin_between_two_boxes">@dimen/_10sdp</dimen>
 </resources>

@@ -54,7 +54,19 @@ class ChatUserInfoFragment : Fragment() {
 //        var finalPerPhoto=screenWidth!!.toFloat()/3.61f
 //        var finalPerPhoto=screenWidth!!.toFloat()/3.51f
         val finalPerPhoto = screenWidth!!.toFloat() / 3.58f
-        mediaAdapter = RVPhotoMediaAdapter(requireActivity(), finalPerPhoto.toInt())
+        var photoList=ArrayList<String>()
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        photoList.add("AA")
+        mediaAdapter = RVPhotoMediaAdapter(requireActivity(),photoList, finalPerPhoto.toInt(),6)
         dataBinding.rvMediaView.layoutManager = GridLayoutManager(requireActivity(), 3)
         dataBinding.rvMediaView.adapter = mediaAdapter
     }

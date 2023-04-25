@@ -40,7 +40,7 @@ class ViewModelCreateGroup @Inject constructor(val repository: Repository,@Named
 
     var errorData = MutableLiveData<SignInErrorData>()
     var hideKeyboardData = MutableLiveData<Boolean>()
-
+    var photoFile: File?=null
     fun onClick(view: View) {
         when (view.id) {
             R.id.btnCreateGroup -> {
@@ -130,6 +130,9 @@ class ViewModelCreateGroup @Inject constructor(val repository: Repository,@Named
 
 
     private fun callCreateGroupAPIMethod(view: View) {
+
+
+
         val nameRequest: RequestBody =
             groupNameValue.get().toString().toRequestBody("text/plain".toMediaTypeOrNull())
         val workingRequest: RequestBody =
@@ -142,11 +145,22 @@ class ViewModelCreateGroup @Inject constructor(val repository: Repository,@Named
         val quickJoinRequest: RequestBody =
             isQuickJoin.toString().toRequestBody("text/plain".toMediaTypeOrNull())
 
-        var imagePath =
-            if (fileImage!!.absolutePath.isEmpty()) null else MultipartBody.Part.createFormData(
-                "ImagePath",
-                fileImage!!.name,
-                fileImage!!.absolutePath.toRequestBody("image/*".toMediaTypeOrNull()))
+
+
+
+
+        var file:File?=null
+        var photoBody:MultipartBody.Part?=null
+        if(photoFile!=null) {
+            file = File(photoFile!!.getPath())
+            var reqFile = RequestBody.create("image/*".toMediaTypeOrNull(), file);
+            photoBody = MultipartBody.Part.createFormData("profile_pic",
+                file.getName(), reqFile);
+        }else
+        {
+            file = File("")
+        }
+
 
         repository.makeCall(true,
             requestProcessor = object : ApiProcessor<Response<CreateTeamResponse>> {
@@ -156,6 +170,7 @@ class ViewModelCreateGroup @Inject constructor(val repository: Repository,@Named
                     if (checkDeviceType()) {
                         addPeopleScreenOpenData.value = success.body()!!.data._id
                     } else {
+
                         var bundle = Bundle()
                         bundle.putString("team_id", success.body()!!.data._id)
                         view.findNavController()
@@ -168,12 +183,21 @@ class ViewModelCreateGroup @Inject constructor(val repository: Repository,@Named
                 }
 
                 override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<CreateTeamResponse> {
-                    return retrofitApi.createTeamAPI(userToken,nameRequest,
-                        workingRequest,
-                        descriptionRequest,
-                        isPrivateRequest,
-                        imagePath,
-                        quickJoinRequest)
+                    if(photoFile!=null) {
+                        return retrofitApi.createTeamAPI(userToken, nameRequest,
+                            workingRequest,
+                            descriptionRequest,
+                            isPrivateRequest,
+                            photoBody,
+                            quickJoinRequest)
+                    }else
+                    {
+                        return retrofitApi.createTeamWithoutImageAPI(userToken, nameRequest,
+                            workingRequest,
+                            descriptionRequest,
+                            isPrivateRequest,
+                            quickJoinRequest)
+                    }
                 }
             })
     }

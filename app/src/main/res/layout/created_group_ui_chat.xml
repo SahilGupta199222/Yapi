@@ -104,7 +104,7 @@
         android:layout_marginTop="@dimen/_30sdp"
         android:layout_marginEnd="@dimen/startMainMargin"
         android:layout_marginBottom="@dimen/topFiveMargin"
-       android:paddingTop="@dimen/_10sdp"
+        android:paddingTop="@dimen/_10sdp"
         android:paddingBottom="@dimen/_10sdp"
         android:textSize="@dimen/normalSmallTextSize"
         android:paddingEnd="@dimen/_20sdp"

@@ -96,7 +96,6 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
                 constraintsProfile.setOnClickListener {
                     popUp.dismiss()
                     if (checkDeviceType()) {
-
                         openProfileScreenData.value = true
                     } else {
                         if (view.findNavController().currentDestination?.id == R.id.menuFragment) {

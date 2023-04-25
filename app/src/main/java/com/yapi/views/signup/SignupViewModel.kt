@@ -13,6 +13,7 @@ import com.google.gson.JsonObject
 import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.*
+import com.yapi.views.add_people_email.CheckEmailResponse
 import com.yapi.views.sign_in.SignInErrorData
 import com.yapi.views.sign_in.SignInResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,7 +33,8 @@ class SignupViewModel @Inject constructor(val repository: Repository): ViewModel
                     if (checkValidation()) {
 
                         if(Constants.API_CALL_DEMO){
-                            signupAPIMethod(view)
+                            //signupAPIMethod(view)
+                            checkEmailAPIMethod(view,emailValueField.get().toString())
                         }else
                         {
                             var bundle = Bundle()
@@ -90,7 +92,7 @@ class SignupViewModel @Inject constructor(val repository: Repository): ViewModel
     {
         var jsonObject= JsonObject()
         jsonObject.addProperty("email",emailValueField.get().toString().trim())
-        repository.makeCall(true,
+        repository.makeCall(false,true,
             requestProcessor = object : ApiProcessor<Response<SignInResponse>> {
                 override fun onSuccess(success: Response<SignInResponse>) {
                     Log.e("Resposne_Dataaaa===", success.body().toString())
@@ -107,6 +109,37 @@ class SignupViewModel @Inject constructor(val repository: Repository): ViewModel
 
                 override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<SignInResponse> {
                     return retrofitApi.loginAPI(jsonObject)
+                }
+            })
+    }
+
+    var checkEmailResponseData=MutableLiveData<CheckEmailResponse>()
+    fun checkEmailAPIMethod(view:View,email:String) {
+        var finalJsonObject = JsonObject()
+        finalJsonObject.addProperty("email", email)
+        Log.e("Add_members_data_Input===", finalJsonObject.toString())
+        repository.makeCall(true,false,
+            requestProcessor = object : ApiProcessor<Response<CheckEmailResponse>> {
+                override fun onSuccess(success: Response<CheckEmailResponse>) {
+                    Log.e("Resposne_Dataaaa===", success.body().toString())
+                    if(success.body()!!.status!=200)
+                    {
+                        signupAPIMethod(view)
+                    }else
+                    {
+                        hideProgress()
+                        checkEmailResponseData.value=success.body()
+                    }
+                }
+
+                override fun onError(message: String) {
+                   // var data= CheckEmailResponse(message,400)
+                    //checkEmailResponseData.value=data
+                    signupAPIMethod(view)
+                }
+
+                override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<CheckEmailResponse> {
+                    return retrofitApi.checkUserEmailAPI(finalJsonObject)
                 }
             })
     }

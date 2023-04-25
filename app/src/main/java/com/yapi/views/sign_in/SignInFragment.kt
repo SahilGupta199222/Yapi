@@ -15,6 +15,7 @@ import com.yapi.R
 import com.yapi.common.changeBackgroundForError
 import com.yapi.databinding.FragmentSignInBinding
 import com.yapi.databinding.FragmentSignUpBinding
+import com.yapi.views.add_people_email.CheckEmailResponse
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,7 +29,19 @@ class SignInFragment : Fragment() {
         binding= FragmentSignInBinding.inflate(LayoutInflater.from(requireActivity()))
         binding.vModel=viewModel
         showErrorUIObserver()
+        checkEmailErrorObserver()
         return binding.root
+    }
+
+    //For check Email Observer
+    private fun checkEmailErrorObserver() {
+        viewModel.checkEmailResponseData.observe(requireActivity(), Observer {
+            var data=it as CheckEmailResponse
+            if(data.status==400)
+            {
+                showErrorMethod(data.message)
+            }
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,18 +67,23 @@ class SignInFragment : Fragment() {
     {
         viewModel.errorData.observe(requireActivity(), Observer {
             val data=it as SignInErrorData
-            if(data!=null && data.message.isNotEmpty())
-            {
-                binding.txtErrorEmailSignIn.setText(data.message)
-                changeBackgroundForError(binding.layoutEmailSignIn,requireActivity().resources.getColor(R.color.error_box_color),
-                    requireActivity().resources.getColor(R.color.error_border_color))
-            }else
-            {
-                binding.txtErrorEmailSignIn.setText("")
-                changeBackgroundForError(binding.layoutEmailSignIn,requireActivity().resources.getColor(R.color.white),
-                    requireActivity().resources.getColor(R.color.liteGrey))
-            }
+            showErrorMethod(data.message)
         })
+    }
+
+    fun showErrorMethod(message:String)
+    {
+        if(message!=null && message.isNotEmpty())
+        {
+            binding.txtErrorEmailSignIn.setText(message)
+            changeBackgroundForError(binding.layoutEmailSignIn,requireActivity().resources.getColor(R.color.error_box_color),
+                requireActivity().resources.getColor(R.color.error_border_color))
+        }else
+        {
+            binding.txtErrorEmailSignIn.setText("")
+            changeBackgroundForError(binding.layoutEmailSignIn,requireActivity().resources.getColor(R.color.white),
+                requireActivity().resources.getColor(R.color.liteGrey))
+        }
     }
 
 /*   fun changeBackgroundForError(layoutEmailSignIn:ConstraintLayout,boxColor:Int,borderColor:Int)

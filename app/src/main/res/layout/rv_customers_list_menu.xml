@@ -37,8 +37,7 @@
         app:riv_mutate_background="true"
         android:layout_marginStart="@dimen/_24sdp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/onlineStatusRvCustomerList"

@@ -156,7 +156,7 @@ class MainActivity : AppCompatActivity() {
 
                 var oldGroupData=event.allData as GroupData
 
-                createChatMethod(oldGroupData)
+                createChatMethod(oldGroupData,Constants.GROUPS_KEY)
             } else
                 if (event.screenName == Constants.USER_PROFILE) {
                     showTabsMethod(3, event.screenName)
@@ -194,10 +194,10 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().replace(R.id.secondFrame, fragment).commit()
     }
 
-    fun createChatMethod(groupData:GroupData) {
+    fun createChatMethod(groupData:GroupData,userType:String) {
         //   ChatMessagesFragment.newInstanceChatMethod("").show(supportFragmentManager," SimpleDialog.TAG")
         var bundle = Bundle()
-        bundle.putString("userType", "")
+        bundle.putString("userType", userType)
         bundle.putSerializable("group_data", groupData)
         var fragment = ChatMessagesFragment()
         fragment.arguments = bundle

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.cardview.widget.CardView
 import androidx.databinding.ObservableField
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
@@ -21,6 +22,7 @@ import com.yapi.common.*
 import com.yapi.databinding.CrmDialogLayoutBinding
 import com.yapi.pref.PreferenceFile
 import com.yapi.views.add_people_email.AddEmailResponse
+import com.yapi.views.add_people_email.CheckEmailResponse
 import com.yapi.views.add_people_email.EmailData
 import com.yapi.views.sign_in.SignInErrorData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -209,5 +211,32 @@ class ThirdStepViewModel @Inject constructor(val preferenceFile: PreferenceFile,
                     return retrofitApi.addTeamMembersAPI(userToken,finalJsonObject)
                 }
             })
+    }
+
+    fun checkEmailAPIMethod(email:String): LiveData<CheckEmailResponse> {
+
+        var finalJsonObject = JsonObject()
+        var responseData=MutableLiveData<CheckEmailResponse>()
+        finalJsonObject.addProperty("email", email)
+        Log.e("Add_members_data_Input===", finalJsonObject.toString())
+        repository.makeCall(true,
+            requestProcessor = object : ApiProcessor<Response<CheckEmailResponse>> {
+                override fun onSuccess(success: Response<CheckEmailResponse>) {
+                    Log.e("Resposne_Dataaaa===", success.body().toString())
+                    responseData.value=success.body()
+                }
+
+                override fun onError(message: String) {
+                    var data= CheckEmailResponse(message,400)
+                    responseData.value=data
+                    //  MainActivity.activity!!.get()!!.showMessage(message)
+                }
+
+                override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<CheckEmailResponse> {
+                    //   return retrofitApi.checkUserEmailAPI(userToken,finalJsonObject)
+                    return retrofitApi.checkUserEmailAPI(finalJsonObject)
+                }
+            })
+        return responseData
     }
 }

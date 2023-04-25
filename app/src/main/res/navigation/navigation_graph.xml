@@ -142,7 +142,8 @@ android:name="com.yapi.views.workspaces.workspacesList.WorkSpacesListFragment"
         android:label="CreateGroupFragment">
         <action
             android:id="@+id/action_createGroupFragment_to_addPeopleFragment"
-            app:destination="@id/addPeopleFragment" />
+            app:destination="@id/addPeopleFragment"
+            app:popUpTo="@id/menuFragment"/>
     </fragment>
     <fragment
         android:id="@+id/addPeopleFragment"
@@ -160,6 +161,9 @@ android:name="com.yapi.views.workspaces.workspacesList.WorkSpacesListFragment"
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action android:id="@+id/action_profileFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
