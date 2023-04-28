@@ -43,9 +43,11 @@ class ViewModelProfile @Inject constructor(
 
     var roleVisiblityValue = ObservableBoolean(false)
     var roleTitle = ObservableField("")
+    var roleValue = ObservableField("")
 
     var regionVisiblityValue = ObservableBoolean(false)
     var regionTitle = ObservableField("")
+    var regionValue = ObservableField("")
 
     var emailValue = ObservableField("")
     var emailVisiblityValue = ObservableBoolean(false)
@@ -146,7 +148,9 @@ class ViewModelProfile @Inject constructor(
 
         deleteBtn.setOnClickListener {
             dialog.dismiss()
-           deleteAccountMethod(screenView)
+            if(Constants.API_CALL_DEMO) {
+                deleteAccountMethod(screenView)
+            }
         }
         dialog.setCancelable(false)
         dialog.show()
@@ -184,7 +188,9 @@ class ViewModelProfile @Inject constructor(
         }
         deActivateBtn.setOnClickListener {
             dialog.dismiss()
-            deactivateAccountMethod(view)
+            if(Constants.API_CALL_DEMO) {
+                deactivateAccountMethod(view)
+            }
         }
 
         dialog.setCancelable(false)

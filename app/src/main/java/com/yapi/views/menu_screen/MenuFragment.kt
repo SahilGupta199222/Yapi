@@ -72,22 +72,22 @@ class MenuFragment : Fragment() {
         }else{
             val list = ArrayList<GroupData>()
             val list2 = ArrayList<GroupInvitaion>()
-           /* list.add(GroupData(1,
-                "-1",
-                "",
+            list.add(GroupData(1,
+                "3",
+                "Testing",
                 "",
                 "",
                 "",
                 "",
                 list2,
                 false,
-                requireActivity().getString(R.string.createGroups_text),
+               "Testing",
                 false,
                 "",
                 "",
                 "",
                 "",
-                false))*/
+                false))
             setGroupListAdapter(list)
         }
         /* val vto: ViewTreeObserver = binding.constraintsTop!!.getViewTreeObserver()
@@ -110,13 +110,17 @@ class MenuFragment : Fragment() {
         var loginUserData =preferenceFile.fetchUserData()
         viewModel.loginUserData = loginUserData
 
-        if(loginUserData.profile_pic_url!="")
-        {
-            viewModel.noImageOnlyNameVisible.set(false)
-            viewModel.userPhotoUrl.set(loginUserData.profile_pic_url)
+        if(Constants.API_CALL_DEMO) {
+            if (loginUserData.profile_pic_url != "") {
+                viewModel.noImageOnlyNameVisible.set(false)
+                viewModel.userPhotoUrl.set(loginUserData.profile_pic_url)
+            } else {
+                viewModel.showTopNameTag.set(convertFromFullNameToTwoString(loginUserData.name!!))
+                viewModel.noImageOnlyNameVisible.set(true)
+            }
         }else
         {
-            viewModel.showTopNameTag.set(convertFromFullNameToTwoString(loginUserData.name!!))
+            viewModel.showTopNameTag.set(convertFromFullNameToTwoString("Testing"))
             viewModel.noImageOnlyNameVisible.set(true)
         }
 
@@ -416,11 +420,11 @@ class MenuFragment : Fragment() {
              list.add(PojoCustomerList("ab", "Customer${i + 34}", tempOnlineList.random(), i))
          }*/
 
-        list.add(PojoCustomerList("ab", "Omar Press", tempOnlineList.random(), 1))
+       /* list.add(PojoCustomerList("ab", "Omar Press", tempOnlineList.random(), 1))
         list.add(PojoCustomerList("ab", "Adison Septim...", tempOnlineList.random(), 1))
         list.add(PojoCustomerList("ab", "Talan George", tempOnlineList.random(), 0))
         list.add(PojoCustomerList("ab", "Madelyn Levin", tempOnlineList.random(), 1))
-        list.add(PojoCustomerList("ab", "Zaire Stanton", tempOnlineList.random(), 0))
+        list.add(PojoCustomerList("ab", "Zaire Stanton", tempOnlineList.random(), 0))*/
         list.add(PojoCustomerList("ab",
             requireActivity().getString(R.string.add_customers),
             tempOnlineList.random(),
@@ -498,10 +502,10 @@ class MenuFragment : Fragment() {
              list.add(PojoCustomerList("ab", "Customer${i + 34}", tempOnlineList.random(), i))
          }*/
 
-        list.add(PojoCustomerList("ab", "Bardi", tempOnlineList.random(), 1))
+     /*   list.add(PojoCustomerList("ab", "Bardi", tempOnlineList.random(), 1))
         list.add(PojoCustomerList("ab", "Lincoln Rosser", tempOnlineList.random(), 2))
         list.add(PojoCustomerList("ab", "Jakob Vetrovs", tempOnlineList.random(), 2))
-        list.add(PojoCustomerList("ab", "John C Flood", tempOnlineList.random(), 0))
+        list.add(PojoCustomerList("ab", "John C Flood", tempOnlineList.random(), 0))*/
         list.add(PojoCustomerList("ab",
             requireActivity().getString(R.string.add_lead),
             tempOnlineList.random(),
@@ -539,11 +543,11 @@ class MenuFragment : Fragment() {
                 list.add(PojoCustomerList("ab", "Customer${i + 34}", tempOnlineList.random(), i))
             }*/
 
-        list.add(PojoCustomerList("ab", "Omar Press", tempOnlineList.random(), 1))
+      /*  list.add(PojoCustomerList("ab", "Omar Press", tempOnlineList.random(), 1))
         list.add(PojoCustomerList("ab", "Adison Septim...", tempOnlineList.random(), 2))
         list.add(PojoCustomerList("ab", "Talan George", tempOnlineList.random(), 1))
         list.add(PojoCustomerList("ab", "Madelyn Levin", tempOnlineList.random(), 0))
-        list.add(PojoCustomerList("ab", "Zaire Stanton", tempOnlineList.random(), 0))
+        list.add(PojoCustomerList("ab", "Zaire Stanton", tempOnlineList.random(), 0))*/
         list.add(PojoCustomerList("ab",
             requireActivity().getString(R.string.add_teammates),
             tempOnlineList.random(),

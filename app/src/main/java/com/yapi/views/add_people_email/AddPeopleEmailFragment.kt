@@ -143,30 +143,47 @@ class AddPeopleEmailFragment : DialogFragment() {
                                 }
                             }
                         }
-                        if(!alreadyExistEmail) {
-                            viewModelAddPeopleEmail.checkEmailAPIMethod(etChipAddPeopleEmail.text.toString())
-                                .observe(requireActivity(),
-                                    Observer {
-                                        var data = it as CheckEmailResponse
-                                        if (data != null) {
-                                            if (data.status == 200) {
-                                                Log.e("dataaaaaa===", data.toString())
-                                                binding.txtErrorEmailAddPeople.setText("")
-                                                addChipToGroup(requireContext(),
-                                                    etChipAddPeopleEmail.text.toString())
-                                                layoutAddPeopleAddPeopleEmail.visibility = View.GONE
-                                                etChipAddPeopleEmail.text?.clear()
-                                                viewModelAddPeopleEmail.errorData.value =
-                                                    SignInErrorData("", 0)
-                                            } else {
-                                                var data= SignInErrorData(requireActivity().resources.getString(R.string.email_doesnot_exits), 1)
-                                                emailErrorMethod(data)
+                        if(Constants.API_CALL_DEMO) {
+                            if (!alreadyExistEmail) {
+                                viewModelAddPeopleEmail.checkEmailAPIMethod(etChipAddPeopleEmail.text.toString())
+                                    .observe(requireActivity(),
+                                        Observer {
+                                            var data = it as CheckEmailResponse
+                                            if (data != null) {
+                                                if (data.status == 200) {
+                                                    Log.e("dataaaaaa===", data.toString())
+                                                    binding.txtErrorEmailAddPeople.setText("")
+                                                    addChipToGroup(requireContext(),
+                                                        etChipAddPeopleEmail.text.toString())
+                                                    layoutAddPeopleAddPeopleEmail.visibility =
+                                                        View.GONE
+                                                    etChipAddPeopleEmail.text?.clear()
+                                                    viewModelAddPeopleEmail.errorData.value =
+                                                        SignInErrorData("", 0)
+                                                } else {
+                                                    var data =
+                                                        SignInErrorData(requireActivity().resources.getString(
+                                                            R.string.email_doesnot_exits), 1)
+                                                    emailErrorMethod(data)
+                                                }
                                             }
-                                        }
-                                    })
-                        }else{
-                            var data = SignInErrorData(requireActivity().resources.getString(R.string.email_already_enter), 1)
-                            emailErrorMethod(data)
+                                        })
+                            } else {
+                                var data =
+                                    SignInErrorData(requireActivity().resources.getString(R.string.email_already_enter),
+                                        1)
+                                emailErrorMethod(data)
+                            }
+                        }
+                        else{
+                            binding.txtErrorEmailAddPeople.setText("")
+                            addChipToGroup(requireContext(),
+                                etChipAddPeopleEmail.text.toString())
+                            layoutAddPeopleAddPeopleEmail.visibility =
+                                View.GONE
+                            etChipAddPeopleEmail.text?.clear()
+                            viewModelAddPeopleEmail.errorData.value =
+                                SignInErrorData("", 0)
                         }
                     } else {
                         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()

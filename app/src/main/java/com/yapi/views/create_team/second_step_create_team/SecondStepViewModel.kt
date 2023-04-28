@@ -50,6 +50,7 @@ val preferenceFile: PreferenceFile,@Named("token") val userToken:String) : ViewM
                         else
                         {
                             errorData.value= SignInErrorData("",0)
+                            preferenceFile.saveBooleanValue(Constants.USER_PROFILE_CREATED,true)
                             view.findNavController()
                                 .navigate(R.id.action_secondStepCreateTeam_to_thirdStepCreateTeam)
                         }

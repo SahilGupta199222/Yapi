@@ -62,6 +62,7 @@
         android:fontFamily="@font/larsseit_bold"
         android:gravity="center"
         android:text="84"
+        android:visibility="gone"
         android:textColor="@color/white"
         android:textSize="@dimen/unSeenCountTextSize"
         app:layout_constraintTop_toTopOf="parent"

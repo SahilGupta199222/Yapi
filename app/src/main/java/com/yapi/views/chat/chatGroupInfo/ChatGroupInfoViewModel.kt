@@ -1,12 +1,16 @@
 package com.yapi.views.chat.chatGroupInfo
 
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
@@ -116,14 +120,14 @@ var screenDataVisibility=ObservableBoolean(false)
         var constraintsLeaveGroup = mView.findViewById<ConstraintLayout>(R.id.constraintsLeaveGroup)
         constraintsLeaveGroup.setOnClickListener {
             popUp.dismiss()
-//            showLeaveGroupDialog()
+            showLeaveGroupDialog(view)
         }
 
         var constraintsDeleteGroup =
             mView.findViewById<ConstraintLayout>(R.id.constraintsDeleteGroup)
         constraintsDeleteGroup.setOnClickListener {
             popUp.dismiss()
-//            showDeleteGroupDialog()
+            showDeleteGroupDialog(view)
         }
     }
 
@@ -179,5 +183,125 @@ var screenDataVisibility=ObservableBoolean(false)
                     return retrofitApi.fetchTeamOrGroupDetailAPI(userToken, teamId)
                 }
             })
+    }
+
+    private fun showLeaveGroupDialog(screenView:View) {
+        val dialog = Dialog(MainActivity.activity!!.get()!!)
+        dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setContentView(R.layout.leave_module_popup)
+
+        dialog.show()
+        val cardviewDeleteProfile = dialog.findViewById<CardView>(R.id.cardviewDeleteProfile)
+        val btnCancel = dialog.findViewById<AppCompatButton>(R.id.btnCancel)
+        val btnDelGroup = dialog.findViewById<AppCompatButton>(R.id.btnDelGroup)
+        val ivCross = dialog.findViewById<ImageView>(R.id.ivCross)
+        val ivCrossOutsideLeaveGroup = dialog.findViewById<ImageView>(R.id.ivCrossOutsideLeaveGroup)
+        val leaveGroupConstraints = dialog.findViewById<ConstraintLayout>(R.id.leaveGroupConstraints)
+        // cardviewDeleteProfile.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
+
+        var newWidth=0
+        var newHeight=0
+        if(checkDeviceType()){
+            newWidth =  ConstraintLayout.LayoutParams.WRAP_CONTENT
+            newHeight =  ConstraintLayout.LayoutParams.WRAP_CONTENT
+
+            Log.e("efmefkmefefef===",newWidth.toString())
+            Log.e("efmefkmefefef111===",newHeight.toString())
+            cardviewDeleteProfile.layoutParams.width = newWidth.toInt()
+            cardviewDeleteProfile.layoutParams.height = newHeight.toInt()
+        }else {
+            //    newWidth =  ConstraintLayout.LayoutParams.MATCH_PARENT
+            newWidth = (screenWidth!!.toDouble() / 1).toInt()
+            newHeight = ConstraintLayout.LayoutParams.WRAP_CONTENT
+            leaveGroupConstraints.layoutParams.width = newWidth.toInt()
+            leaveGroupConstraints.layoutParams.height = newHeight.toInt()
+        }
+
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+        ivCross.setOnClickListener {
+            dialog.dismiss()
+        }
+        ivCrossOutsideLeaveGroup.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        if(checkDeviceType())
+        {
+            ivCrossOutsideLeaveGroup.visibility=View.VISIBLE
+            ivCross.visibility=View.GONE
+        }else
+        {
+            ivCrossOutsideLeaveGroup.visibility=View.GONE
+            ivCross.visibility=View.VISIBLE
+        }
+
+        btnDelGroup.setOnClickListener {
+            dialog.dismiss()
+            if(Constants.API_CALL_DEMO){
+                //leaveGroupMethod(groupId.get().toString(),screenView)
+            }}
+    }
+
+    private fun showDeleteGroupDialog(screenView:View) {
+        var dialog = Dialog(MainActivity.activity!!.get()!!)
+        dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setContentView(R.layout.delete_group_popup)
+
+        dialog.show()
+        val cardviewDeleteProfile = dialog.findViewById<CardView>(R.id.cardviewDeleteProfile)
+        val deleteGroupConstraints = dialog.findViewById<ConstraintLayout>(R.id.deleteGroupConstraints)
+        val btnCancel = dialog.findViewById<AppCompatButton>(R.id.btnCancel)
+        val btnDelGroup = dialog.findViewById<AppCompatButton>(R.id.btnDelGroup)
+        val ivCross = dialog.findViewById<ImageView>(R.id.ivCross)
+        val ivCrossOutsideDeleteGroup = dialog.findViewById<ImageView>(R.id.ivCrossOutsideDeleteGroup)
+        cardviewDeleteProfile.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
+
+        var newWidth=0
+        var newHeight=0
+        if(checkDeviceType()){
+            newWidth =  ConstraintLayout.LayoutParams.WRAP_CONTENT
+            newHeight =  ConstraintLayout.LayoutParams.WRAP_CONTENT
+
+            Log.e("efmefkmefefef===",newWidth.toString())
+            Log.e("efmefkmefefef111===",newHeight.toString())
+            cardviewDeleteProfile.layoutParams.width = newWidth.toInt()
+            cardviewDeleteProfile.layoutParams.height = newHeight.toInt()
+        }else {
+            //    newWidth =  ConstraintLayout.LayoutParams.MATCH_PARENT
+            newWidth = (screenWidth!!.toDouble() / 1).toInt()
+            newHeight = ConstraintLayout.LayoutParams.WRAP_CONTENT
+            deleteGroupConstraints.layoutParams.width = newWidth.toInt()
+            deleteGroupConstraints.layoutParams.height = newHeight.toInt()
+        }
+
+        if(checkDeviceType())
+        {
+            ivCrossOutsideDeleteGroup.visibility=View.VISIBLE
+            ivCross.visibility=View.GONE
+        }else
+        {
+            ivCrossOutsideDeleteGroup.visibility=View.GONE
+            ivCross.visibility=View.VISIBLE
+        }
+
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+        ivCrossOutsideDeleteGroup.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        btnDelGroup.setOnClickListener {
+            dialog.dismiss()
+            if(Constants.API_CALL_DEMO) {
+              //  deleteGroupMethod(groupId.get().toString(), screenView)
+            }
+        }
+
+        ivCross.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 }

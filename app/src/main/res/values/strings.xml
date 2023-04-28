@@ -350,4 +350,9 @@
     <string name="region_manual_text">Region manual</string>
     <string name="yapi_webhook_text">yapi webhook</string>
     <string name="yapi_user_text">yapi user</string>
+
+    <string name="logout_popup_title">Do you want to Log out?</string>
+    <string name="logout_textt">Logout</string>
+
+    <string name="share_this_file">Share this file</string>
 </resources>

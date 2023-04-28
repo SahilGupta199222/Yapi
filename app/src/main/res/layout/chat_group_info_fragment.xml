@@ -738,7 +738,7 @@
                 android:fontFamily="@font/larsseit_bold"
                 android:letterSpacing="@dimen/text_letter_spacing"
                 android:lineSpacingExtra="@dimen/line_spacing_extra"
-                android:text="46"
+                android:text="11"
                 android:textColor="@color/darkLiteGrey"
                 android:textSize="@dimen/_8ssp"
                 app:layout_constraintBottom_toBottomOf="@id/tvMediaAllTitle"

@@ -1,24 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/deleteGroupConstraints"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent">
-
+        <ImageView
+            android:id="@+id/ivCrossOutsideDeleteGroup"
+            android:layout_width="@dimen/iconSize"
+            android:layout_height="@dimen/iconSize"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:padding="@dimen/_2sdp"
+            android:src="@drawable/ic_cross_icon"
+            app:tint="@color/white"
+            android:layout_gravity="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cardviewDeleteProfile" />
     <androidx.cardview.widget.CardView
         android:id="@+id/cardviewDeleteProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
         android:layout_marginBottom="@dimen/_10sdp"
         android:elevation="@dimen/_5sdp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/cardview_popup_back_radius"
         app:cardElevation="@dimen/_5sdp"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

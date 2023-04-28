@@ -5,8 +5,10 @@ import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.PopupWindow
+import androidx.appcompat.widget.AppCompatButton
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.ObservableBoolean
@@ -118,21 +120,7 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
                 var constraintsLogout = mView.findViewById<ConstraintLayout>(R.id.constraintsLogout)
                 constraintsLogout.setOnClickListener {
                     popUp.dismiss()
-                   // preferenceFile.saveStringValue(Constants.USER_ID, "")
-                    preferenceFile.clearAllPref()
-                    if(checkDeviceType()){
-                        var intent=Intent(MainActivity.activity!!.get(),MainActivity::class.java)
-                        MainActivity.activity!!.get()!!.startActivity(intent)
-                    }else
-                    {
-                        view.findNavController()
-                            .navigate(R.id.action_menuFragment_to_signInFragment)
-                    }
-
-                    /*  if (view.findNavController().currentDestination?.id == R.id.menuFragment) {
-                          view.findNavController()
-                              .navigate(R.id.action_menuFragment_to_chatMessageFragment)
-                      }*/
+                    showLogoutDialog(view)
                 }
 
 
@@ -169,6 +157,72 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
          }*/
         }
     }
+
+//For show Logout Popup
+    private fun showLogoutDialog(view:View) {
+        var dialog = Dialog(MainActivity.activity!!.get()!!)
+        dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setContentView(R.layout.logout_popup_layout)
+        dialog.show()
+
+        var cardviewLogoutProfile = dialog.findViewById<CardView>(R.id.cardviewLogoutProfile)
+        var ivCrossOutsideLogout = dialog.findViewById<ImageView>(R.id.ivCrossOutsideLogout)
+        var logoutConstraints = dialog.findViewById<ConstraintLayout>(R.id.logoutConstraints)
+        var newWidth=0
+        var newHeight=0
+        if(checkDeviceType()){
+            newWidth =  ConstraintLayout.LayoutParams.WRAP_CONTENT
+            newHeight =  ConstraintLayout.LayoutParams.WRAP_CONTENT
+
+            Log.e("efmefkmefefef===",newWidth.toString())
+            Log.e("efmefkmefefef111===",newHeight.toString())
+            cardviewLogoutProfile.layoutParams.width = newWidth.toInt()
+            cardviewLogoutProfile.layoutParams.height = newHeight.toInt()
+        }else {
+        //    newWidth =  ConstraintLayout.LayoutParams.MATCH_PARENT
+           newWidth = (screenWidth!!.toDouble() / 1).toInt()
+            newHeight = ConstraintLayout.LayoutParams.WRAP_CONTENT
+            logoutConstraints.layoutParams.width = newWidth.toInt()
+            logoutConstraints.layoutParams.height = newHeight.toInt()
+        }
+
+        var btnCancel=dialog.findViewById<AppCompatButton>(R.id.btnCancel)
+        var btnLogout=dialog.findViewById<AppCompatButton>(R.id.btnLogout)
+        var ivCrossLogout=dialog.findViewById<ImageView>(R.id.ivCrossLogout)
+
+    if(checkDeviceType())
+    {
+        ivCrossLogout.visibility=View.GONE
+        ivCrossOutsideLogout.visibility=View.VISIBLE
+    }else
+    {
+        ivCrossLogout.visibility=View.VISIBLE
+        ivCrossOutsideLogout.visibility=View.GONE
+    }
+
+        btnLogout.setOnClickListener {
+            dialog.dismiss()
+            preferenceFile.clearAllPref()
+            if(checkDeviceType()){
+                var intent=Intent(MainActivity.activity!!.get(),MainActivity::class.java)
+                MainActivity.activity!!.get()!!.startActivity(intent)
+            }else
+            {
+                view.findNavController()
+                    .navigate(R.id.action_menuFragment_to_signInFragment)
+            }
+        }
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+        ivCrossLogout.setOnClickListener {
+            dialog.dismiss()
+        }
+    ivCrossOutsideLogout.setOnClickListener {
+            dialog.dismiss()
+        }
+    }
+
 
     fun showLeaveGroupDialog() {
         var dialog = Dialog(MainActivity.activity!!.get()!!)

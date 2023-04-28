@@ -81,33 +81,48 @@ class ThirdStepCreateFragment : Fragment() {
                             }
                         }
 
-                        if(!alreadyExistEmail) {
-                        viewModel.checkEmailAPIMethod(etMemberEmail.text.toString()).observe(requireActivity(),
-                            Observer {
-                                var data=it as CheckEmailResponse
-                                if(data!=null)
-                                {
-                                    if(data.status==200) {
-                                        dataBinding.txtErrorEmailSignup.setText("")
-                                        addChipToGroup(requireContext(), etMemberEmail.text.toString())
-                                        layoutAddPeopleAddPeopleEmail!!.visibility = View.GONE
-                                        etMemberEmail!!.text?.clear()
+                        if(Constants.API_CALL_DEMO) {
+                            if (!alreadyExistEmail) {
+                                viewModel.checkEmailAPIMethod(etMemberEmail.text.toString())
+                                    .observe(requireActivity(),
+                                        Observer {
+                                            var data = it as CheckEmailResponse
+                                            if (data != null) {
+                                                if (data.status == 200) {
+                                                    dataBinding.txtErrorEmailSignup.setText("")
+                                                    addChipToGroup(requireContext(),
+                                                        etMemberEmail.text.toString())
+                                                    layoutAddPeopleAddPeopleEmail!!.visibility =
+                                                        View.GONE
+                                                    etMemberEmail!!.text?.clear()
 
-                                        var data= SignInErrorData("", 0)
-                                        emailErrorMethod(data)
-                                    }else
-                                    {
-                                        var data= SignInErrorData(requireActivity().resources.getString(R.string.email_doesnot_exits), 1)
-                                        emailErrorMethod(data)
-                                    }
-                                    }
-                            })
-                    }else
+                                                    var data = SignInErrorData("", 0)
+                                                    emailErrorMethod(data)
+                                                } else {
+                                                    var data =
+                                                        SignInErrorData(requireActivity().resources.getString(
+                                                            R.string.email_doesnot_exits), 1)
+                                                    emailErrorMethod(data)
+                                                }
+                                            }
+                                        })
+                            } else {
+                                var data =
+                                    SignInErrorData(requireActivity().resources.getString(R.string.email_already_enter),
+                                        1)
+                                emailErrorMethod(data)
+                            }
+                        }else
                         {
-                            var data = SignInErrorData(requireActivity().resources.getString(R.string.email_already_enter), 1)
+                            dataBinding.txtErrorEmailSignup.setText("")
+                            addChipToGroup(requireContext(),
+                                etMemberEmail.text.toString())
+                            layoutAddPeopleAddPeopleEmail!!.visibility =
+                                View.GONE
+                            etMemberEmail!!.text?.clear()
+                            var data = SignInErrorData("", 0)
                             emailErrorMethod(data)
                         }
-
 
                        // viewModelAddPeopleEmail.errorData.value = SignInErrorData("", 0)
                     } else {

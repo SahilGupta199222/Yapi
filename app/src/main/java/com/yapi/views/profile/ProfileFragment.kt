@@ -15,6 +15,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.chip.Chip
+import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.Constants
 import com.yapi.common.checkDeviceType
@@ -90,6 +91,26 @@ class ProfileFragment : DialogFragment() {
         }else
         {
             viewModel.topProfileVisibility.set(true)
+            viewModel.nameValue.set("test")
+            viewModel.userNameValue.set("@test")
+            viewModel.emailValue.set("test1@gmail.com")
+            viewModel.emailVisiblityValue.set(true)
+
+            viewModel.aboutVisiblityValue.set(true)
+            viewModel.aboutTitle.set(MainActivity.activity!!.get()!!.resources.getString(R.string.about))
+            viewModel.aboutValue.set("Dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu. Lobortis mattis aliquam faucibus purus in massa")
+
+            viewModel.phoneValue.set("+91 1234567890")
+            viewModel.phoneVisiblityValue.set(true)
+            viewModel.phoneTitle.set(MainActivity.activity!!.get()!!.resources.getString(R.string.phone_textt))
+
+            viewModel.roleVisiblityValue.set(true)
+            viewModel.roleTitle.set(MainActivity.activity!!.get()!!.resources.getString(R.string.role))
+            viewModel.roleValue.set("Workspace owner")
+
+            viewModel.regionVisiblityValue.set(true)
+            viewModel.regionTitle.set(MainActivity.activity!!.get()!!.resources.getString(R.string.region))
+            viewModel.regionValue.set("(UTC-08:00) Pacific Time (US and Canada)")
         }
         return binding.root
 

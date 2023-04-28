@@ -145,6 +145,7 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
         } else {
             viewModel.noImageOnlyNameVisible.set(false)
             viewModel.nameValue.set("Testing")
+            viewModel.setNameValue.set("Testing")
             viewModel.userNameValue.set("Demo")
             viewModel.emailAddressValue.set("Testing1@gmail.com")
             viewModel.aboutValue.set("About Data")

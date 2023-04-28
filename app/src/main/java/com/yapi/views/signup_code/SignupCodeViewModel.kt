@@ -41,6 +41,7 @@ var errorData=MutableLiveData<SignInErrorData>()
                         {
                             errorData.value= SignInErrorData("",0)
                             preferenceFile.saveStringValue("login_email",email.toString())
+                            preferenceFile.saveStringValue(Constants.LOGIN_USER_ID,"55")
                             view.findNavController().navigate(R.id.action_signUpCodeFragment_to_signupTeam)
                         }
                     }else

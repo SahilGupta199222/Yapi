@@ -386,7 +386,28 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
         val btnCancel = dialog.findViewById<AppCompatButton>(R.id.btnCancel)
         val btnDelGroup = dialog.findViewById<AppCompatButton>(R.id.btnDelGroup)
         val ivCross = dialog.findViewById<ImageView>(R.id.ivCross)
-        cardviewDeleteProfile.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
+        val ivCrossOutsideLeaveGroup = dialog.findViewById<ImageView>(R.id.ivCrossOutsideLeaveGroup)
+        val leaveGroupConstraints = dialog.findViewById<ConstraintLayout>(R.id.leaveGroupConstraints)
+       // cardviewDeleteProfile.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
+
+
+        var newWidth=0
+        var newHeight=0
+        if(checkDeviceType()){
+            newWidth =  ConstraintLayout.LayoutParams.WRAP_CONTENT
+            newHeight =  ConstraintLayout.LayoutParams.WRAP_CONTENT
+
+            Log.e("efmefkmefefef===",newWidth.toString())
+            Log.e("efmefkmefefef111===",newHeight.toString())
+            cardviewDeleteProfile.layoutParams.width = newWidth.toInt()
+            cardviewDeleteProfile.layoutParams.height = newHeight.toInt()
+        }else {
+            //    newWidth =  ConstraintLayout.LayoutParams.MATCH_PARENT
+            newWidth = (screenWidth!!.toDouble() / 1).toInt()
+            newHeight = ConstraintLayout.LayoutParams.WRAP_CONTENT
+            leaveGroupConstraints.layoutParams.width = newWidth.toInt()
+            leaveGroupConstraints.layoutParams.height = newHeight.toInt()
+        }
 
         btnCancel.setOnClickListener {
             dialog.dismiss()
@@ -394,11 +415,25 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
         ivCross.setOnClickListener {
             dialog.dismiss()
         }
+        ivCrossOutsideLeaveGroup.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        if(checkDeviceType())
+        {
+            ivCrossOutsideLeaveGroup.visibility=View.VISIBLE
+            ivCross.visibility=View.GONE
+        }else
+        {
+            ivCrossOutsideLeaveGroup.visibility=View.GONE
+            ivCross.visibility=View.VISIBLE
+        }
 
         btnDelGroup.setOnClickListener {
             dialog.dismiss()
+            if(Constants.API_CALL_DEMO){
             leaveGroupMethod(groupId.get().toString(),screenView)
-        }
+        }}
     }
 
     private fun showDeleteGroupDialog(screenView:View) {
@@ -419,7 +454,9 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
 
         btnDelGroup.setOnClickListener {
             dialog.dismiss()
-            deleteGroupMethod(groupId.get().toString(),screenView)
+            if(Constants.API_CALL_DEMO) {
+                deleteGroupMethod(groupId.get().toString(), screenView)
+            }
         }
 
         ivCross.setOnClickListener {
@@ -592,5 +629,14 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
                     return retrofitApi.leaveGroupAPI(userToken, jsonObject)
                 }
             })
+    }
+
+    fun shareFilePopupMethod()
+    {
+        var dialog = Dialog(MainActivity.activity!!.get()!!)
+        dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setContentView(R.layout.share_file_layout)
+
+        dialog.show()
     }
 }
