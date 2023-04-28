@@ -328,4 +328,26 @@
     <string name="about_textt">About</string>
     <string name="email_textt">EMAIL</string>
     <string name="phone_texttt">PHONE</string>
+    <string name="please_enter_correct_phone_text">Please enter correct phone number</string>
+
+    <string name="add_about_title_text">Add About</string>
+    <string name="add_phone_title_text">Add Phone</string>
+    <string name="add_region_title_text">Add Region</string>
+    <string name="add_role_title_text">Add Role</string>
+    <string name="title_activity_composite">CompositeActivity</string>
+
+    <string name="email_already_enter">Email already exist</string>
+    <string name="email_doesnot_exits">Email doesn\'t exist</string>
+
+    <string name="business_unit_text">Business units</string>
+    <string name="job_type_text">Job type</string>
+    <string name="users_text">users</string>
+    <string name="manager_text">Manager</string>
+    <string name="manager_two_text">Manager 2</string>
+    <string name="dispatcher_text">dispatcher</string>
+    <string name="dispatcher_first_text">dispatcher 1</string>
+    <string name="dispatcher_second_text">dispatcher 2</string>
+    <string name="region_manual_text">Region manual</string>
+    <string name="yapi_webhook_text">yapi webhook</string>
+    <string name="yapi_user_text">yapi user</string>
 </resources>

@@ -45,4 +45,7 @@
 
     <color name="saved_items_line_color">#EBEBEB</color>
     <color name="saved_title_message_type">#575757</color>
+
+    <color name="audio_progress_background">#3D98F3</color>
+    <color name="region_button_back">#E7EDFB</color>
 </resources>

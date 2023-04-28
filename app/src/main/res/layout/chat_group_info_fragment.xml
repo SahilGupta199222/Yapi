@@ -15,8 +15,10 @@
     </data>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedChatGroupInfo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="@{vModel.screenDataVisibility?mView.VISIBLE:mView.GONE}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -34,35 +36,57 @@
                 android:rotation="180"
                 android:src="@drawable/arrow_forward"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/relNameTitle"
+                app:layout_constraintTop_toTopOf="@id/constarintsTitleInfo"
                 app:tint="@color/medium_grey_color" />
 
-            <RelativeLayout
-                android:id="@+id/relNameTitle"
-                android:layout_width="@dimen/_50sdp"
-                android:layout_height="@dimen/_50sdp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constarintsTitleInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/profile_start_margin"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/profile_start_margin"
-                android:background="@drawable/et_drawable"
-                android:backgroundTint="#FEFAE5"
-                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_gravity="center_horizontal"
-                    android:fontFamily="@font/larsseit_bold"
-                    android:letterSpacing="@dimen/text_letter_spacing"
-                    android:lineSpacingExtra="@dimen/line_spacing_extra"
-                    android:text="LR"
-                    android:textColor="#F2CB00"
-                    android:textSize="@dimen/titleTextSize" />
-            </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/relNameTitle"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:background="@drawable/et_drawable"
+                    android:backgroundTint="#FEFAE5"
+                    android:orientation="horizontal"
+                    android:visibility="@{vModel.groupPhotoVisibility?mView.GONE:mView.VISIBLE}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/larsseit_bold"
+                        android:letterSpacing="@dimen/text_letter_spacing"
+                        android:lineSpacingExtra="@dimen/line_spacing_extra"
+                        android:text="@{vModel.groupNameTag}"
+                        android:textColor="#F2CB00"
+                        android:textSize="@dimen/titleTextSize" />
+                </RelativeLayout>
+
+                <com.yapi.common.RoundRectCornerImageView
+                    android:id="@+id/ivGroupInfoImage"
+                    setRoundRectImage="@{vModel.groupPhoto}"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitXY"
+                    android:visibility="@{vModel.groupPhotoVisibility?mView.VISIBLE:mView.GONE}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
                 android:id="@+id/ivmoreGroupInfo"
@@ -73,14 +97,13 @@
                 android:onClick="@{vModel::onClick}"
                 android:src="@drawable/chat_more_icon"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/relNameTitle" />
+                app:layout_constraintTop_toTopOf="@id/constarintsTitleInfo" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvUserName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="@dimen/profile_start_margin"
                 android:layout_marginEnd="@dimen/profile_start_margin"
@@ -88,12 +111,12 @@
                 android:gravity="center_horizontal"
                 android:letterSpacing="@dimen/text_letter_spacing"
                 android:lineSpacingExtra="@dimen/line_spacing_extra"
-                android:text="Lincoin Rosser"
+                android:text="@{vModel.groupName}"
                 android:textColor="@color/darkGrey"
                 android:textSize="@dimen/_16ssp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/relNameTitle" />
+                app:layout_constraintTop_toBottomOf="@id/constarintsTitleInfo" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvUserType"
@@ -121,7 +144,6 @@
                 android:layout_marginStart="@dimen/profile_start_margin"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/profile_start_margin"
-
                 android:orientation="horizontal"
                 android:padding="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -147,7 +169,6 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/_4sdp"
                         android:fontFamily="@font/larsseit_medium"
-
                         android:gravity="center"
                         android:letterSpacing="@dimen/text_letter_spacing"
                         android:lineSpacingExtra="@dimen/line_spacing_extra"
@@ -690,7 +711,6 @@
                    </androidx.constraintlayout.widget.ConstraintLayout>
                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvMediaAllTitle"
                 android:layout_width="wrap_content"
@@ -715,7 +735,6 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="@dimen/_2sdp"
                 android:layout_marginTop="@dimen/_5sdp"
-
                 android:fontFamily="@font/larsseit_bold"
                 android:letterSpacing="@dimen/text_letter_spacing"
                 android:lineSpacingExtra="@dimen/line_spacing_extra"
@@ -739,7 +758,6 @@
                 android:drawableTint="@color/blueColor"
                 android:fontFamily="@font/larsseit_bold"
                 android:gravity="center_vertical"
-
                 android:letterSpacing="@dimen/text_letter_spacing"
                 android:lineSpacingExtra="@dimen/line_spacing_extra"
                 android:text="@string/view_all"
@@ -764,7 +782,6 @@
                 app:layout_constraintTop_toBottomOf="@id/tvMediaAllTitle"
                 app:spanCount="3"
                 tools:listitem="@layout/rv_photo_media_adapter" />
-
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvLinkTitle"
@@ -833,7 +850,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvLinkTitle" />
 
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvFileTitle"
                 android:layout_width="wrap_content"
@@ -846,7 +862,6 @@
                 android:lineSpacingExtra="@dimen/line_spacing_extra"
                 android:text="@string/Files_text"
                 android:textColor="@color/darkGrey"
-
                 android:textSize="@dimen/normalTextSize"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rvLinksView" />
@@ -883,7 +898,6 @@
                 android:gravity="center_vertical"
                 android:letterSpacing="@dimen/text_letter_spacing"
                 android:lineSpacingExtra="@dimen/line_spacing_extra"
-
                 android:text="@string/view_all"
                 android:textAllCaps="true"
                 android:textColor="@color/blueColor"
@@ -898,7 +912,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/profile_start_margin"
-
                 android:layout_marginTop="@dimen/_7sdp"
                 android:layout_marginEnd="@dimen/profile_start_margin"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -930,7 +943,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-
                 android:layout_gravity="center_horizontal"
                 android:layout_marginEnd="@dimen/profile_start_margin"
                 android:drawableStart="@drawable/plus_icon"
@@ -956,7 +968,6 @@
                 android:layout_marginStart="@dimen/profile_start_margin"
                 android:layout_marginTop="@dimen/_7sdp"
                 android:layout_marginEnd="@dimen/profile_start_margin"
-
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

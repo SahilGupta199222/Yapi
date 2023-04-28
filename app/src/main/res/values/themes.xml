@@ -11,7 +11,8 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <item name="android:autofilledHighlight" tools:targetApi="o">@android:color/transparent</item>
+        <item name="android:autofilledHighlight" tools:targetApi="o">@android:color/transparent
+        </item>
         <item name="colorControlActivated">@color/blueColor</item>
         <!-- Customize your theme here. -->
     </style>

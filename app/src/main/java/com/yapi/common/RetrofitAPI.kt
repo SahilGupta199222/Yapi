@@ -4,6 +4,7 @@ import com.google.gson.JsonObject
 import com.yapi.views.add_people_email.AddEmailResponse
 import com.yapi.views.add_people_email.CheckEmailResponse
 import com.yapi.views.chat.GroupDeleteResponse
+import com.yapi.views.chat.chatGroupInfo.ChatGroupInfoResponse
 import com.yapi.views.create_team.second_step_create_team.CreateTeamResponse
 import com.yapi.views.edit_profile.EditProfileResponse
 import com.yapi.views.menu_screen.GroupMenuResponse
@@ -127,4 +128,11 @@ interface RetrofitAPI {
     @POST(WebAPIKeys.DEACTIVATE_ACCOUNT)
     suspend fun deactivateAccountAPI(@Header("Authorization") token:String): Response<GroupDeleteResponse>
 
+
+    @GET(WebAPIKeys.TEAM_DETAIL_API+"/{team_id}")
+    suspend fun fetchTeamOrGroupDetailAPI(@Header ("Authorization") token:String,@Path("team_id") team_id:String)
+            : Response<ChatGroupInfoResponse>
+
+    @POST(WebAPIKeys.LEAVE_GROUP_API)
+    suspend fun leaveGroupAPI(@Header("Authorization") token:String,@Body jsonObject: JsonObject): Response<JsonObject>
 }

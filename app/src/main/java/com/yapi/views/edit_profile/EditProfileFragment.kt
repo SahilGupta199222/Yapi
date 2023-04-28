@@ -1,6 +1,7 @@
 package com.yapi.views.edit_profile
 
 import android.Manifest
+import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
@@ -51,12 +52,16 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
 
     private var mediaDialog: AlertDialog?=null
 
+    private lateinit var binding: FragmentEditProfileBinding
+    private val viewModel: ViewModelEditProfile by viewModels()
+
     @Inject
     lateinit var preferenceFile: PreferenceFile
 
     private val GALARYCode=123
     private val REQUEST_CAPTURE_IMAGE = 400
     var photoFile: File? = null
+
     companion object {
         fun newInstanceEditProfileScreen(
             title: String,
@@ -96,8 +101,7 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
         return dialog
     }
 
-    private lateinit var binding: FragmentEditProfileBinding
-    private val viewModel: ViewModelEditProfile by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -109,9 +113,10 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
             var profileData = requireArguments().getSerializable("profile_data") as ProfileData
             if (profileData != null) {
                 viewModel.nameValue.set(profileData.name)
+                viewModel.setNameValue.set(profileData.name)
                 viewModel.userNameValue.set(profileData.user_name)
                 viewModel.emailAddressValue.set(profileData.email)
-                viewModel.countryCodeValue.set(profileData.country_code.toString())
+
                 viewModel.aboutValue.set(profileData.about.toString().trim())
 
                 binding.txtUserNameEditProfile.text = profileData.user_name
@@ -122,6 +127,7 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
                     var phoneNumber =
                         addSpaceBetweenPhoneMethod(profileData.mobile_number.toString())
                     viewModel.phoneNumberValue.set(phoneNumber)
+                    viewModel.countryCodeValue.set(profileData.country_code.toString())
                 }
 
                 if (profileData.profile_pic_url != "" && profileData.profile_pic_url != null) {
@@ -310,7 +316,7 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
     fun scrollEditTextMethod() {
         binding.etAboutYourSelfEditProfile.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View, event: MotionEvent): Boolean {
-                if (binding.etAboutYourSelfEditProfile.hasFocus()) {
+               // if (binding.etAboutYourSelfEditProfile.hasFocus()) {
                     v.parent.requestDisallowInterceptTouchEvent(true)
                     when (event.action and MotionEvent.ACTION_MASK) {
                         MotionEvent.ACTION_SCROLL -> {
@@ -318,7 +324,7 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
                             return true
                         }
                     }
-                }
+            //    }
                 return false
             }
         })
@@ -463,7 +469,7 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CAPTURE_IMAGE) {
+        if (requestCode == REQUEST_CAPTURE_IMAGE && resultCode==RESULT_OK) {
             //binding.imgGalleryUploadEditProfile.set
             Glide.with(requireActivity())
                 .load(photoFile)
@@ -474,7 +480,7 @@ class EditProfileFragment : DialogFragment(), View.OnClickListener {
             /*  binding.imgPicImageCreateGroup.layoutParams.height=requireActivity().resources.getDimension(com.intuit.sdp.R.dimen._50sdp).toInt()
               binding.imgPicImageCreateGroup.layoutParams.width=requireActivity().resources.getDimension(com.intuit.sdp.R.dimen._50sdp).toInt()*/
         }else
-            if(requestCode==GALARYCode)
+            if(requestCode==GALARYCode && resultCode==RESULT_OK)
             {
                 val selectedImage = data!!.data
                 val photoFile2 = File(getPath(selectedImage))

@@ -105,6 +105,7 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
         if (requireArguments().getSerializable("group_data") != null && Constants.GROUPS_KEY == viewModel.userType) {
             var group_data = requireArguments().getSerializable("group_data") as GroupData
             if (group_data != null) {
+                viewModel.allGroupData=group_data
                 viewModel.titleName.set(group_data.name)
                 viewModel.chatOwnerUserId.set(group_data.user_id)
                 viewModel.groupId.set(group_data._id)
@@ -123,7 +124,6 @@ class ChatMessagesFragment : Fragment(), MessageClickListener {
                 dataBinding.rvChatList.visibility = View.GONE
                 dataBinding.chatListconstraints.visibility = View.GONE
 
-                //group_data.invitaions
                 if (group_data.image_url != "") {
                     dataBinding.ivGroupImage.visibility = View.VISIBLE
                     dataBinding.relNameValue.visibility = View.GONE

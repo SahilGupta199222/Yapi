@@ -6,10 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import com.yapi.R
 import com.yapi.databinding.FragmentSignUpCodeBinding
 import com.yapi.views.sign_in.SignInErrorData
@@ -36,11 +34,9 @@ class SignUpCodeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
         addErrorObserverMethod()
-
     }
 
     private fun addErrorObserverMethod() {
-
         viewModel.errorData.observe(requireActivity(),Observer{
             var data=it as SignInErrorData
             if(data!=null)

@@ -104,14 +104,11 @@ class MenuFragment : Fragment() {
              }
          })*/
 
-        var user_all_data = preferenceFile.fetchStringValue("user_all_data")
-
-        /*  val token: Type = object : TypeToken<Collection<LoginUserData>>() {}.type
-          val result: Collection<LoginUserData> = Gson().fromJson(user_all_data, token)*/
-        var loginUserData = Gson().fromJson(user_all_data, LoginUserData::class.java)
+      /*  var user_all_data = preferenceFile.fetchStringValue(Constants.USER_ALL_DATA)
+        var loginUserData = Gson().fromJson(user_all_data, LoginUserData::class.java)*/
         // Log.e("efwekfefweff===",lstObject.toString())
+        var loginUserData =preferenceFile.fetchUserData()
         viewModel.loginUserData = loginUserData
-
 
         if(loginUserData.profile_pic_url!="")
         {
@@ -119,7 +116,7 @@ class MenuFragment : Fragment() {
             viewModel.userPhotoUrl.set(loginUserData.profile_pic_url)
         }else
         {
-            viewModel.showTopNameTag.set(convertFromFullNameToTwoString(loginUserData.name))
+            viewModel.showTopNameTag.set(convertFromFullNameToTwoString(loginUserData.name!!))
             viewModel.noImageOnlyNameVisible.set(true)
         }
 

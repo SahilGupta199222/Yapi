@@ -10,6 +10,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.yapi.R
 import com.yapi.common.changeBackgroundForEditError
@@ -189,6 +190,7 @@ class WorkSpacesListFragment : Fragment() {
 
                 override fun onOpenClickMethod(position: Int) {
                     //For Open workspace
+                    findNavController().navigate(R.id.action_workspaceList_to_openWorkspace)
                 }
             })
         dataBinding!!.rvWorkspaceList.layoutManager = LinearLayoutManager(requireActivity())

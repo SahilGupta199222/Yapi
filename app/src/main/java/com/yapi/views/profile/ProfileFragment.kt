@@ -92,6 +92,7 @@ class ProfileFragment : DialogFragment() {
             viewModel.topProfileVisibility.set(true)
         }
         return binding.root
+
     }
 
     private fun showProfileResponseObserver() {

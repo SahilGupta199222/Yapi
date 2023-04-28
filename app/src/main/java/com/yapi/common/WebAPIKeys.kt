@@ -20,4 +20,6 @@ object WebAPIKeys {
     const val DELETE_GROUP="group/delete-group"
     const val DELETE_ACCOUNT="user/delete-account"
     const val DEACTIVATE_ACCOUNT="user/deactivate-account"
+    const val TEAM_DETAIL_API="group/view-team-detail"
+    const val LEAVE_GROUP_API="group/leave-group"
 }

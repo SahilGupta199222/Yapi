@@ -36,6 +36,7 @@ class ViewModelEditProfile @Inject constructor(
     var constraintsMarginEnd: Int? = 0
 
     var nameValue = ObservableField<String>("")
+    var setNameValue = ObservableField<String>("")
     var userNameValue = ObservableField<String>("")
     var emailAddressValue = ObservableField<String>("")
     var aboutValue = ObservableField<String>("")
@@ -102,18 +103,28 @@ class ViewModelEditProfile @Inject constructor(
             userNameValue.get().toString().toRequestBody("text/plain".toMediaTypeOrNull())
         val emailAddressRequest: RequestBody =
             emailAddressValue.get().toString().toRequestBody("text/plain".toMediaTypeOrNull())
-        val countryCodeRequest: RequestBody =
-            countryCodeValue.get().toString().toRequestBody("text/plain".toMediaTypeOrNull())
-
-        if(aboutValue.get().toString().isEmpty()){
-            aboutValue.set(" ")
+        var sendAboutValue=""
+        if (aboutValue.get().toString().isEmpty()) {
+            sendAboutValue=" "
+        }else
+        {
+            sendAboutValue= aboutValue.get().toString()
         }
-        val aboutRequest: RequestBody = aboutValue.get().toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        val aboutRequest: RequestBody = sendAboutValue.toRequestBody("text/plain".toMediaTypeOrNull())
 
         val number = phoneNumberValue.get().toString().replace(" ", "")
-
-        val phoneNumberRequest: RequestBody =
-            number.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        var phoneNumberRequest: RequestBody? = null
+        var countryCodeRequest: RequestBody? = null
+        if (number.toString().trim().isNotEmpty()) {
+            countryCodeRequest =
+                countryCodeValue.get().toString().toRequestBody("text/plain".toMediaTypeOrNull())
+        } else
+        {
+            var countryLocalValue=""
+            countryCodeRequest =
+                countryLocalValue.toRequestBody("text/plain".toMediaTypeOrNull())
+        }
+        phoneNumberRequest = number.toString().toRequestBody("text/plain".toMediaTypeOrNull())
       /*  val buffer = Buffer()
         buffer.writeInt(number)
         val phoneNumberRequest: RequestBody =
@@ -162,8 +173,8 @@ class ViewModelEditProfile @Inject constructor(
                             nameRequest,
                             userNameRequest,
                             emailAddressRequest,
-                            phoneNumberRequest,
-                            countryCodeRequest,
+                            phoneNumberRequest!!,
+                            countryCodeRequest!!,
                             aboutRequest,photoBody!!)
                     }else
                     {
@@ -171,8 +182,8 @@ class ViewModelEditProfile @Inject constructor(
                             nameRequest,
                             userNameRequest,
                             emailAddressRequest,
-                            phoneNumberRequest,
-                            countryCodeRequest,
+                            phoneNumberRequest!!,
+                            countryCodeRequest!!,
                             aboutRequest)
                     }
                 }
@@ -220,9 +231,9 @@ class ViewModelEditProfile @Inject constructor(
                         // showToastMessage(MainActivity.activity!!.get()!!.getString(R.string.please_enter_valid_email_text))
                         return false
                     } else
-                        if (phoneNumberValue.get().toString().trim().length < 10) {
+                        if (phoneNumberValue.get().toString().trim().length in 1 ..9) {
                             phoneErrorData.value = SignInErrorData(MainActivity.activity!!.get()!!
-                                .getString(R.string.please_enter_phone_text), 4)
+                                .getString(R.string.please_enter_correct_phone_text), 4)
 
                             //   showToastMessage(MainActivity.activity!!.get()!!.getString(R.string.please_enter_phone_text))
                             return false

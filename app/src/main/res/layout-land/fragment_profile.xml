@@ -311,8 +311,11 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/larsseit_medium"
-                                        android:text="@string/about"
-                                        android:textColor="@color/medium_grey_color"
+                                        android:text="@{model.aboutTitle}"
+                                        android:onClick="@{model::onClick}"
+                                        android:textColor="@{model.aboutVisiblityValue?@color/medium_grey_color:@color/darkBlueBtn}"
+                                        android:textAllCaps="true"
+
                                         android:textSize="@dimen/smallTextSize" />
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -376,8 +379,11 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/larsseit_medium"
-                                        android:text="@string/role"
-                                        android:textColor="@color/medium_grey_color"
+                                        android:text="@{model.roleTitle}"
+                                        android:onClick="@{model::onClick}"
+                                        android:textAllCaps="true"
+                                        android:textColor="@{model.roleVisiblityValue?@color/medium_grey_color:@color/darkBlueBtn}"
+
                                         android:textSize="@dimen/smallTextSize" />
 
                                     <androidx.appcompat.widget.AppCompatTextView
@@ -518,11 +524,13 @@
                                         android:id="@+id/txtTempPhoneLiteGreyProfile"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:textAllCaps="true"
+
                                         android:fontFamily="@font/larsseit_medium"
-                                        android:text="@string/phone_textt"
-                                        android:textColor="@color/medium_grey_color"
+                                        android:text="@{model.phoneTitle}"
+                                        android:textAllCaps="true"
+                                        android:textColor="@{model.phoneVisiblityValue?@color/medium_grey_color:@color/darkBlueBtn}"
                                         android:textSize="@dimen/smallTextSize"
+                                        android:onClick="@{model::onClick}"
                                         app:layout_constraintStart_toEndOf="@+id/layoutImgPhoneProfile"
                                         app:layout_constraintTop_toTopOf="@+id/layoutImgPhoneProfile" />
 
@@ -587,10 +595,11 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/larsseit_medium"
-                                        android:text="@string/region"
-                                        android:textColor="@color/medium_grey_color"
+                                        android:text="@{model.regionTitle}"
+                                        android:textColor="@{model.regionVisiblityValue?@color/medium_grey_color:@color/darkBlueBtn}"
                                         android:textSize="@dimen/smallTextSize"
                                         android:textAllCaps="true"
+                                        android:onClick="@{model::onClick}"
                                         app:layout_constraintStart_toEndOf="@+id/layoutImgRegionProfile"
                                         app:layout_constraintTop_toTopOf="@+id/layoutImgRegionProfile" />
 

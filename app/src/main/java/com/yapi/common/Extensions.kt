@@ -16,14 +16,11 @@ import com.yapi.R
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 fun Activity.hideKeyboard() {
     this.currentFocus?.let { view ->
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
         imm?.hideSoftInputFromWindow(view.windowToken, 0)
     }
-
-
 }
 
 fun Activity.isEmailValid(email: String): String {
@@ -66,7 +63,6 @@ fun getTextSizeValue(text1: Float) {
     var newTextSize = "_$text$showText"
 //  MainActivity.activity.get().resources.getDimension(com.intuit.ssp.R.dimen._10ssp)
 }
-
 
 fun showToastMessage(message: String) {
     Toast.makeText(MainActivity.activity!!.get(), message, Toast.LENGTH_SHORT).show()
@@ -138,12 +134,12 @@ fun convertFromFullNameToTwoString(name:String):String
     if(name.contains(" "))
     {
         var splitValue=name.split(" ")
-        finalValue= splitValue[0].toCharArray()[0]+""+splitValue[0].toCharArray()[1]
+        finalValue= splitValue[0].toCharArray()[0]+""+splitValue[1].toCharArray()[0]
     }else
         if(name.length>1)
         {
             finalValue=name.substring(0,2)
-        }else
+        }else  if(name.length>0)
         {
             finalValue=name.substring(0,1)
         }

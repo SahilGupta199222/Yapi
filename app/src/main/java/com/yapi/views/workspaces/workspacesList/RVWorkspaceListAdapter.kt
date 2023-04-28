@@ -26,6 +26,7 @@ class RVWorkspaceListAdapter(
         var viewBottomLine = itemView.findViewById<View>(R.id.viewBottomLine)
         var tvEditWork = itemView.findViewById<AppCompatTextView>(R.id.tvEditWork)
         var tvNameValue = itemView.findViewById<AppCompatTextView>(R.id.tvNameValue)
+        var tvOpenWork = itemView.findViewById<AppCompatTextView>(R.id.tvOpenWork)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyWorkspaceViewHolder {
@@ -74,13 +75,16 @@ class RVWorkspaceListAdapter(
         holder.tvEditWork.setOnClickListener {
             clickListener.onEditClickMethod(position)
         }
+
+        holder.tvOpenWork.setOnClickListener {
+            //for open workspace
+            clickListener.onOpenClickMethod(position)
+        }
     }
 
     override fun getItemCount(): Int {
         return workspaceList.size
     }
-
-
 }
 
 interface WorkspaceClickListener {

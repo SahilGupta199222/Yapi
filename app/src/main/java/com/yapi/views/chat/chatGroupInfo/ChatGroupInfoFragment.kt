@@ -9,10 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.yapi.common.Constants
 import com.yapi.databinding.ChatGroupInfoFragmentBinding
 import com.yapi.views.chat.chatUserInfo.RVLinksAdapter
 import com.yapi.views.chat.chatUserInfo.RVPhotoMediaAdapter
+import com.yapi.views.menu_screen.GroupData
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChatGroupInfoFragment():Fragment() {
     private lateinit var rvLinkAdapter: RVLinksAdapter
     private lateinit var mediaAdapter: RVPhotoMediaAdapter
@@ -31,6 +35,31 @@ class ChatGroupInfoFragment():Fragment() {
         screenWidth = displayMetrics.widthPixels
         viewModel.screenWidth=screenWidth
         viewModel.screenHeight=displayMetrics.heightPixels
+
+      //  bundle.putSerializable("all_data_information", allGroupData)
+        if(Constants.API_CALL_DEMO) {
+            var userType = requireArguments().getString("userType")
+
+            if (userType == Constants.GROUPS_KEY) {
+                var team_id = requireArguments().getString("team_id")
+                viewModel.fetchGroupOrTeamData(team_id!!)
+            }
+        }else
+        {
+            viewModel.screenDataVisibility.set(true)
+        }
+     /*   if(userType==Constants.GROUPS_KEY) {
+            var groupData = requireArguments().getSerializable("all_data_information") as GroupData
+            viewModel.groupPhoto=groupData.image_url
+            if(groupData.image_url!!.isNotEmpty())
+            {
+                viewModel.groupPhotoVisibility=true
+            }else
+            {
+                viewModel.groupPhotoVisibility=true
+            }
+        }*/
+
         initUI()
         return dataBinding.root
     }

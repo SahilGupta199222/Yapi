@@ -73,7 +73,7 @@ var errorData=MutableLiveData<SignInErrorData>()
                     preferenceFile.saveStringValue("login_email",email.toString())
                     preferenceFile.saveBooleanValue(Constants.USER_PROFILE_CREATED,success.body()!!.data.profile_created!!)
 
-                    preferenceFile.saveStringValue("user_all_data",Gson().toJson(success.body()!!.data))
+                    preferenceFile.saveStringValue(Constants.USER_ALL_DATA,Gson().toJson(success.body()!!.data))
 
                     if(success.body()!!.data.profile_created!!){
                         if(checkDeviceType())
@@ -91,7 +91,8 @@ var errorData=MutableLiveData<SignInErrorData>()
                 }
 
                 override fun onError(message: String) {
-                    MainActivity.activity!!.get()!!.showMessage(message)
+                    //MainActivity.activity!!.get()!!.showMessage(message)
+                    errorData.value= SignInErrorData(message,0)
                 }
 
                 override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<VerifyOTPResponse> {

@@ -132,27 +132,42 @@ class AddPeopleEmailFragment : DialogFragment() {
                 if (etChipAddPeopleEmail.text?.isNotEmpty() == true) {
                     val msg = requireActivity().isEmailValid(etChipAddPeopleEmail.text.toString())
                     if (msg.isEmpty()) {
-                        viewModelAddPeopleEmail.checkEmailAPIMethod(etChipAddPeopleEmail.text.toString()).observe(requireActivity(),
-                            Observer {
-                                var data=it as CheckEmailResponse
-                                if(data!=null)
-                                {
-                                    if(data.status==200) {
-                                        Log.e("dataaaaaa===", data.toString())
-                                        binding.txtErrorEmailAddPeople.setText("")
-                                        addChipToGroup(requireContext(),
-                                            etChipAddPeopleEmail.text.toString())
-                                        layoutAddPeopleAddPeopleEmail.visibility = View.GONE
-                                        etChipAddPeopleEmail.text?.clear()
-                                        viewModelAddPeopleEmail.errorData.value =
-                                            SignInErrorData("", 0)
-                                    }else
-                                    {
-                                      var data= SignInErrorData("Email doesn't exist", 1)
-                                        emailErrorMethod(data)
-                                    }
+                        var alreadyExistEmail=false
+                        if(chipGroupAddPeopleEmail?.childCount!!>0) {
+                            for (i in 0 until chipGroupAddPeopleEmail?.childCount!!) {
+                                val chipView = chipGroupAddPeopleEmail?.getChildAt(i) as Chip
+                                val title = chipView.text.toString()
+                                if (title.equals(etChipAddPeopleEmail.text.toString())) {
+                                    alreadyExistEmail = true
+                                    break
                                 }
-                            })
+                            }
+                        }
+                        if(!alreadyExistEmail) {
+                            viewModelAddPeopleEmail.checkEmailAPIMethod(etChipAddPeopleEmail.text.toString())
+                                .observe(requireActivity(),
+                                    Observer {
+                                        var data = it as CheckEmailResponse
+                                        if (data != null) {
+                                            if (data.status == 200) {
+                                                Log.e("dataaaaaa===", data.toString())
+                                                binding.txtErrorEmailAddPeople.setText("")
+                                                addChipToGroup(requireContext(),
+                                                    etChipAddPeopleEmail.text.toString())
+                                                layoutAddPeopleAddPeopleEmail.visibility = View.GONE
+                                                etChipAddPeopleEmail.text?.clear()
+                                                viewModelAddPeopleEmail.errorData.value =
+                                                    SignInErrorData("", 0)
+                                            } else {
+                                                var data= SignInErrorData(requireActivity().resources.getString(R.string.email_doesnot_exits), 1)
+                                                emailErrorMethod(data)
+                                            }
+                                        }
+                                    })
+                        }else{
+                            var data = SignInErrorData(requireActivity().resources.getString(R.string.email_already_enter), 1)
+                            emailErrorMethod(data)
+                        }
                     } else {
                         Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
                     }

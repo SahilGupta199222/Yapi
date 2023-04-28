@@ -226,7 +226,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_gravity="end"
-            android:paddingTop="@dimen/_1sdp"
+            android:paddingTop="@dimen/_3sdp"
             android:paddingBottom="@dimen/_6sdp"
             android:paddingStart="@dimen/_10sdp"
             android:paddingEnd="@dimen/_10sdp"
@@ -256,7 +256,7 @@
                         android:layout_width="@dimen/bigIconSize"
                         android:layout_height="@dimen/bigIconSize"/>
 
-                    <androidx.appcompat.widget.AppCompatImageView
+                  <!--  <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ivPlaySeekBar"
                         app:layout_constraintTop_toTopOf="parent"
                         android:src="@drawable/equaliser_icon"
@@ -265,7 +265,24 @@
                         app:layout_constraintEnd_toStartOf="@id/tvAudioTime"
                         app:layout_constraintStart_toEndOf="@+id/ivPlayAudio"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"/>-->
+
+                    <androidx.appcompat.widget.AppCompatSeekBar
+                        android:id="@+id/ivPlaySeekBar"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:minHeight="15dp"
+                        android:minWidth="15dp"
+                        android:maxHeight="15dp"
+                        android:maxWidth="15dp"
+                        android:progress="30"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:focusableInTouchMode="false"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:thumb="@drawable/audio_thumb"
+                        app:layout_constraintEnd_toStartOf="@id/tvAudioTime"
+                        app:layout_constraintStart_toEndOf="@+id/ivPlayAudio"/>
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvAudioTime"

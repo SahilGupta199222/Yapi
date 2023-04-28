@@ -41,7 +41,13 @@ class RVUsersAdapter(
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.tvUserName.text = invitationList[position].name
-        holder.tvMembersCount.text = (invitationList[position].memberCount.toInt()+1).toString() + " members"
+        if(invitationList[position].memberCount.toInt()>1)
+        {
+            holder.tvMembersCount.text = (invitationList[position].memberCount.toInt()).toString() + " members"
+        }else
+        {
+            holder.tvMembersCount.text = (invitationList[position].memberCount.toInt()).toString() + " member"
+        }
 
         if(!(invitationList[position].image_url.equals(""))){
             Glide.with(context)

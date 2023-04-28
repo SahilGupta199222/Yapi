@@ -84,7 +84,16 @@
         android:id="@+id/workspacelist"
 android:name="com.yapi.views.workspaces.workspacesList.WorkSpacesListFragment"
         android:label="workspaceList"
-        ></fragment>
+        >
+        <action android:id="@+id/action_workspaceList_to_openWorkspace"
+            app:destination="@id/openWorkspace"/>
+
+    </fragment>
+
+    <fragment android:id="@+id/openWorkspace"
+        android:name="com.yapi.views.workspaces.openWorkspace.OpenWorkspaceFragment"
+        android:label="openWorkspace"></fragment>
+
     <fragment
         android:id="@+id/UserListFragment"
         android:label="userListFragment"

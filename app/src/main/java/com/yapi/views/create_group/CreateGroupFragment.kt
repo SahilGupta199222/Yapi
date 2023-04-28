@@ -1,6 +1,7 @@
 package com.yapi.views.create_group
 
 import android.Manifest
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.DialogInterface
@@ -395,7 +396,7 @@ class CreateGroupFragment : DialogFragment(), View.OnClickListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CAPTURE_IMAGE) {
+        if (requestCode == REQUEST_CAPTURE_IMAGE && resultCode== Activity.RESULT_OK) {
             //binding.imgGalleryUploadEditProfile.set
             Glide.with(requireActivity())
                 .load(photoFile)
@@ -406,7 +407,7 @@ class CreateGroupFragment : DialogFragment(), View.OnClickListener {
             /*  binding.imgPicImageCreateGroup.layoutParams.height=requireActivity().resources.getDimension(com.intuit.sdp.R.dimen._50sdp).toInt()
               binding.imgPicImageCreateGroup.layoutParams.width=requireActivity().resources.getDimension(com.intuit.sdp.R.dimen._50sdp).toInt()*/
         } else
-            if (requestCode == GALARYCode) {
+            if (requestCode == GALARYCode && resultCode== Activity.RESULT_OK) {
                 val selectedImage = data!!.data
                 val photoFile2 = File(getPath(selectedImage))
                 Glide.with(requireActivity())
@@ -417,5 +418,4 @@ class CreateGroupFragment : DialogFragment(), View.OnClickListener {
                 viewModel.photoFile = photoFile2
             }
     }
-
 }

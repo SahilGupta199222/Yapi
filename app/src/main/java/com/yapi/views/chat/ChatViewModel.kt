@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.gson.JsonObject
 import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.*
@@ -31,6 +32,7 @@ import com.yapi.views.chat.chatUserInfo.RVFilesAdapter
 import com.yapi.views.chat.chatUserInfo.RVLinksAdapter
 import com.yapi.views.chat.chatUserInfo.RVPhotoMediaAdapter
 import com.yapi.views.edit_profile.EditProfileResponse
+import com.yapi.views.menu_screen.GroupData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -78,6 +80,7 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
     var groupPhoto = ObservableField("")
     var chatOwnerUserId = ObservableField("")
     var groupId = ObservableField("")
+    var allGroupData:GroupData?=null
 
     fun onClick(view: View) {
         when (view.id) {
@@ -330,6 +333,8 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
                 if (view.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
                     val bundle = Bundle()
                     bundle.putString("userType", userType.toString())
+                    bundle.putString("team_id",allGroupData!!._id)
+                    bundle.putSerializable("all_data_information", allGroupData)
                     view.findNavController()
                         .navigate(R.id.action_chatMessageFragment_to_chatGroupProfileInfo, bundle)
                 }
@@ -362,7 +367,7 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
 
         constraintsLeaveGroup.setOnClickListener {
             popUp.dismiss()
-            showLeaveGroupDialog()
+            showLeaveGroupDialog(view)
         }
 
         constraintsDeleteGroup.setOnClickListener {
@@ -371,7 +376,7 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
         }
     }
 
-    private fun showLeaveGroupDialog() {
+    private fun showLeaveGroupDialog(screenView:View) {
         val dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.leave_module_popup)
@@ -379,6 +384,7 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
         dialog.show()
         val cardviewDeleteProfile = dialog.findViewById<CardView>(R.id.cardviewDeleteProfile)
         val btnCancel = dialog.findViewById<AppCompatButton>(R.id.btnCancel)
+        val btnDelGroup = dialog.findViewById<AppCompatButton>(R.id.btnDelGroup)
         val ivCross = dialog.findViewById<ImageView>(R.id.ivCross)
         cardviewDeleteProfile.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
 
@@ -387,6 +393,11 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
         }
         ivCross.setOnClickListener {
             dialog.dismiss()
+        }
+
+        btnDelGroup.setOnClickListener {
+            dialog.dismiss()
+            leaveGroupMethod(groupId.get().toString(),screenView)
         }
     }
 
@@ -548,6 +559,37 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
 
                 override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<GroupDeleteResponse> {
                         return retrofitApi.deleteGroupAPI(userToken, groupId)
+                }
+            })
+    }
+
+
+
+    fun leaveGroupMethod(groupId:String,screenView:View) {
+
+        var jsonObject=JsonObject()
+        jsonObject.addProperty("team_id",groupId)
+        repository.makeCall(true,
+            requestProcessor = object : ApiProcessor<Response<JsonObject>> {
+                override fun onSuccess(success: Response<JsonObject>) {
+                    Log.e("Resposne_Dataaaa===", success.body().toString())
+
+                    if(checkDeviceType()){
+                        //    dismissDialogData.value = true
+                    }else
+                    {
+                        if (screenView.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
+                            screenView.findNavController().popBackStack()
+                        }
+                    }
+                }
+
+                override fun onError(message: String) {
+                    MainActivity.activity!!.get()!!.showMessage(message)
+                }
+
+                override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<JsonObject> {
+                    return retrofitApi.leaveGroupAPI(userToken, jsonObject)
                 }
             })
     }

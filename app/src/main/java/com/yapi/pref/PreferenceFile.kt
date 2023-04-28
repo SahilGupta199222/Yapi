@@ -1,15 +1,10 @@
 package com.yapi.pref
 
 import android.content.SharedPreferences
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import java.util.concurrent.TimeUnit
+import com.google.gson.Gson
+import com.yapi.common.Constants
+import com.yapi.views.signup_code.LoginUserData
 import javax.inject.Inject
-import javax.inject.Named
 import javax.inject.Singleton
 
 class PreferenceFile @Inject constructor(
@@ -64,6 +59,16 @@ class PreferenceFile @Inject constructor(
     fun fetchFloatValue(key:String):Float
     {
         return pref.getFloat(key,0f)
+    }
+
+    fun fetchUserData(): LoginUserData {
+        var user_all_data = pref.getString(Constants.USER_ALL_DATA, "")
+        if(user_all_data.equals("")){
+            return LoginUserData()
+        }else
+        {
+            return Gson().fromJson(user_all_data, LoginUserData::class.java)
+        }
     }
 }
 

@@ -68,6 +68,20 @@ class ThirdStepCreateFragment : Fragment() {
                 if (etMemberEmail!!.text?.isNotEmpty() == true) {
                     val msg = requireActivity().isEmailValid(etMemberEmail.text.toString())
                     if (msg.isEmpty()) {
+
+                        var alreadyExistEmail=false
+                        if(chipGroupAddPeopleEmail?.childCount!!>0) {
+                            for (i in 0 until chipGroupAddPeopleEmail?.childCount!!) {
+                                val chipView = chipGroupAddPeopleEmail?.getChildAt(i) as Chip
+                                val title = chipView.text.toString()
+                                if (title.equals(etMemberEmail.text.toString())) {
+                                    alreadyExistEmail = true
+                                    break
+                                }
+                            }
+                        }
+
+                        if(!alreadyExistEmail) {
                         viewModel.checkEmailAPIMethod(etMemberEmail.text.toString()).observe(requireActivity(),
                             Observer {
                                 var data=it as CheckEmailResponse
@@ -83,12 +97,16 @@ class ThirdStepCreateFragment : Fragment() {
                                         emailErrorMethod(data)
                                     }else
                                     {
-                                        var data= SignInErrorData("Email doesn't exist", 1)
+                                        var data= SignInErrorData(requireActivity().resources.getString(R.string.email_doesnot_exits), 1)
                                         emailErrorMethod(data)
                                     }
                                     }
                             })
-
+                    }else
+                        {
+                            var data = SignInErrorData(requireActivity().resources.getString(R.string.email_already_enter), 1)
+                            emailErrorMethod(data)
+                        }
 
 
                        // viewModelAddPeopleEmail.errorData.value = SignInErrorData("", 0)

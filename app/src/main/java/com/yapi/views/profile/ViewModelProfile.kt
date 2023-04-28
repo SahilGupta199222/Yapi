@@ -13,6 +13,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import com.google.gson.Gson
 import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.*
@@ -37,14 +38,20 @@ class ViewModelProfile @Inject constructor(
     var userNameValue = ObservableField("")
 
     var aboutValue = ObservableField("")
+    var aboutTitle = ObservableField("")
     var aboutVisiblityValue = ObservableBoolean(false)
+
     var roleVisiblityValue = ObservableBoolean(false)
+    var roleTitle = ObservableField("")
+
     var regionVisiblityValue = ObservableBoolean(false)
+    var regionTitle = ObservableField("")
 
     var emailValue = ObservableField("")
     var emailVisiblityValue = ObservableBoolean(false)
 
     var phoneValue = ObservableField("")
+    var phoneTitle = ObservableField("")
     var phoneVisiblityValue = ObservableBoolean(false)
 
     var phoneCountryValue = ObservableField("")
@@ -59,20 +66,7 @@ class ViewModelProfile @Inject constructor(
     fun onClick(view: View) {
         when (view.id) {
             R.id.btnEditProfile -> {
-                var bundle = Bundle()
-                if (profileData != null) {
-                    bundle.putSerializable("profile_data", profileData)
-                }
-
-                if (checkDeviceType()) {
-                    openEditProfileData.value = profileData ?: ProfileData()
-                } else {
-                    if (view.findNavController().currentDestination?.id == R.id.profileFragment) {
-
-                        view.findNavController()
-                            .navigate(R.id.action_profileFragment_to_editProfileFragment, bundle)
-                    }
-                }
+                gotoEditProfileScreen(view)
             }
             R.id.layoutDeleteAccountProfile -> {
                 deleteAccountDialog(view)
@@ -92,6 +86,43 @@ class ViewModelProfile @Inject constructor(
             R.id.layoutProfile, R.id.layoutScrollViewProfile -> {
                 //for hide keyboard
                 MainActivity.activity!!.get()!!.hideKeyboard()
+            }
+            R.id.txtTempAboutLiteGreyProfile->{
+                if(!aboutVisiblityValue.get()) {
+                    gotoEditProfileScreen(view)
+                }
+            }
+            R.id.txtTempRoleLiteGreyProfile->{
+                if(!roleVisiblityValue.get()) {
+                    gotoEditProfileScreen(view)
+                }
+            }
+            R.id.txtTempPhoneLiteGreyProfile->{
+                if(!phoneVisiblityValue.get()) {
+                    gotoEditProfileScreen(view)
+                }
+            }
+            R.id.txtTempRegionLiteGreyProfile->{
+                if(!regionVisiblityValue.get()) {
+                    gotoEditProfileScreen(view)
+                }
+            }
+        }
+    }
+
+    private fun gotoEditProfileScreen(view:View)
+    {
+        var bundle = Bundle()
+        if (profileData != null) {
+            bundle.putSerializable("profile_data", profileData)
+        }
+
+        if (checkDeviceType()) {
+            openEditProfileData.value = profileData ?: ProfileData()
+        } else {
+            if (view.findNavController().currentDestination?.id == R.id.profileFragment) {
+                view.findNavController()
+                    .navigate(R.id.action_profileFragment_to_editProfileFragment, bundle)
             }
         }
     }
@@ -181,6 +212,8 @@ class ViewModelProfile @Inject constructor(
                 override fun onSuccess(success: Response<ProfileResponse>) {
                     Log.e("Resposne_Dataaaa===", success.body().toString())
                     profileData = success.body()!!.data
+                    preferenceFile.saveStringValue(Constants.USER_ALL_DATA, Gson().toJson(profileData))
+
                     topProfileVisibility.set(true)
                     nameValue.set(success.body()!!.data.name)
                     userNameValue.set("@" + success.body()!!.data.user_name)
@@ -207,8 +240,10 @@ if(emailValue.get().toString().isEmpty())
                     aboutValue.set(success.body()!!.data.about.toString().trim())
                     if (success.body()!!.data.about!!.trim().isEmpty()) {
                         aboutVisiblityValue.set(false)
+                        aboutTitle.set(MainActivity.activity!!.get()!!.resources.getString(R.string.add_about_title_text))
                     } else {
                         aboutVisiblityValue.set(true)
+                        aboutTitle.set(MainActivity.activity!!.get()!!.resources.getString(R.string.about))
                     }
 
                     if (!(success.body()!!.data.mobile_number.toString().equals(""))
@@ -219,11 +254,21 @@ if(emailValue.get().toString().isEmpty())
                             addSpaceBetweenPhoneMethod(success.body()!!.data.mobile_number.toString())
                         phoneValue.set(success.body()!!.data.country_code.toString() + " " + phoneNumber)
                         phoneVisiblityValue.set(true)
+                        phoneTitle.set(MainActivity.activity!!.get()!!.resources.getString(R.string.phone_textt))
                     } else {
+                        phoneTitle.set(MainActivity.activity!!.get()!!.resources.getString(R.string.add_phone_title_text))
                         phoneVisiblityValue.set(false)
                     }
                     roleVisiblityValue.set(false)
+                    roleTitle.set(MainActivity.activity!!.get()!!.resources.getString(R.string.add_role_title_text))
+                 //   roleTitle.set(MainActivity.activity!!.get()!!.resources.getString(R.string.role))
+
+
                     regionVisiblityValue.set(false)
+                    regionTitle.set(MainActivity.activity!!.get()!!.resources.getString(R.string.add_region_title_text))
+                    //regionTitle.set(MainActivity.activity!!.get()!!.resources.getString(R.string.region))
+
+
                     //phoneCountryValue.set(success.body()!!.data.country_code.toString())
                     /*   var bundle= Bundle()
                        bundle.putString("email",emailFieldValue.get())
