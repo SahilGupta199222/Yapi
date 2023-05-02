@@ -11,6 +11,8 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.ObservableBoolean
@@ -31,22 +33,18 @@ import com.yapi.pref.PreferenceFile
 import com.yapi.views.chat.chatUserInfo.RVFilesAdapter
 import com.yapi.views.chat.chatUserInfo.RVLinksAdapter
 import com.yapi.views.chat.chatUserInfo.RVPhotoMediaAdapter
-import com.yapi.views.edit_profile.EditProfileResponse
 import com.yapi.views.menu_screen.GroupData
 import dagger.hilt.android.lifecycle.HiltViewModel
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import org.greenrobot.eventbus.EventBus
 import retrofit2.Response
-import java.io.File
 import javax.inject.Inject
 import javax.inject.Named
 
 @HiltViewModel
-class ChatViewModel @Inject constructor(val preferenceFile: PreferenceFile,
-val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
+class ChatViewModel @Inject constructor(
+    val preferenceFile: PreferenceFile,
+    val repository: Repository, @Named("token") val userToken: String,
+) : ViewModel() {
 
     var chatValue = ObservableBoolean(true)
     var emailValue = ObservableBoolean(false)
@@ -80,7 +78,7 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
     var groupPhoto = ObservableField("")
     var chatOwnerUserId = ObservableField("")
     var groupId = ObservableField("")
-    var allGroupData:GroupData?=null
+    var allGroupData: GroupData? = null
 
     fun onClick(view: View) {
         when (view.id) {
@@ -116,12 +114,19 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
             }
             R.id.imgAttachmentIconChatDemo -> {
                 //For Attachment
-                attachmentPopupDialog()
+                if(checkDeviceType()){
+                    showTabletAttachmentDialog(view)
+                }else {
+                    attachmentPopupDialog()
+                }
             }
             R.id.imgLinkIconChatDemo -> {
                 //for Add Template
 //                showAddTemplateDialog()
-                addLinkDialog()
+
+                    addLinkDialog()
+
+
             }
 
             R.id.tvMessages -> {
@@ -216,6 +221,12 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
             ChatAttachementLayoutBinding.inflate(LayoutInflater.from(MainActivity.activity!!.get()!!))
         bottomSheetDialog.setContentView(chatAttachBinding.root)
         bottomSheetDialog.show()
+        chatAttachBinding.constraintsChatAttachment.layoutParams.width=ConstraintLayout.LayoutParams.WRAP_CONTENT
+        if (checkDeviceType()) {
+            chatAttachBinding.tvRecentFiles.visibility = View.GONE
+        } else {
+            chatAttachBinding.tvRecentFiles.visibility = View.VISIBLE
+        }
     }
 
     //For Add Link Dialog
@@ -226,10 +237,20 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
 
         dialog.show()
         val cardviewAddLink = dialog.findViewById<CardView>(R.id.cardviewAddLink)
-        cardviewAddLink.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
+        val constraintsAddLinkk = dialog.findViewById<ConstraintLayout>(R.id.constraintsAddLinkk)
+
+        if (checkDeviceType()) {
+            constraintsAddLinkk.layoutParams.width = ConstraintLayout.LayoutParams.WRAP_CONTENT
+        } else {
+            cardviewAddLink.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
+        }
 
         val btnCancelAddLink = dialog.findViewById<AppCompatButton>(R.id.btnCancelAddLink)
         btnCancelAddLink.setOnClickListener {
+            dialog.dismiss()
+        }
+        val btnAddLinkSave = dialog.findViewById<AppCompatButton>(R.id.btnAddLinkSave)
+        btnAddLinkSave.setOnClickListener {
             dialog.dismiss()
         }
     }
@@ -333,7 +354,7 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
                 if (view.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
                     val bundle = Bundle()
                     bundle.putString("userType", userType.toString())
-                    bundle.putString("team_id",allGroupData!!._id)
+                    bundle.putString("team_id", allGroupData!!._id)
                     bundle.putSerializable("all_data_information", allGroupData)
                     view.findNavController()
                         .navigate(R.id.action_chatMessageFragment_to_chatGroupProfileInfo, bundle)
@@ -347,11 +368,12 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
         val constraintsLeaveGroup = mView.findViewById<ConstraintLayout>(R.id.constraintsLeaveGroup)
         val viewMenu2 = mView.findViewById<View>(R.id.viewMenu2)
 
-        val constraintsDeleteGroup = mView.findViewById<ConstraintLayout>(R.id.constraintsDeleteGroup)
+        val constraintsDeleteGroup =
+            mView.findViewById<ConstraintLayout>(R.id.constraintsDeleteGroup)
         val viewMenu3 = mView.findViewById<View>(R.id.viewMenu3)
 
-        Log.e("fkmekmfkemfefef===",chatOwnerUserId.get().toString())
-        Log.e("fkmekmfkemfefef111===",preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
+        Log.e("fkmekmfkemfefef===", chatOwnerUserId.get().toString())
+        Log.e("fkmekmfkemfefef111===", preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID))
         if (chatOwnerUserId.get() == preferenceFile.fetchStringValue(Constants.LOGIN_USER_ID)) {
             constraintsDeleteGroup.visibility = View.VISIBLE
             viewMenu3.visibility = View.VISIBLE
@@ -376,7 +398,7 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
         }
     }
 
-    private fun showLeaveGroupDialog(screenView:View) {
+    private fun showLeaveGroupDialog(screenView: View) {
         val dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.leave_module_popup)
@@ -387,21 +409,22 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
         val btnDelGroup = dialog.findViewById<AppCompatButton>(R.id.btnDelGroup)
         val ivCross = dialog.findViewById<ImageView>(R.id.ivCross)
         val ivCrossOutsideLeaveGroup = dialog.findViewById<ImageView>(R.id.ivCrossOutsideLeaveGroup)
-        val leaveGroupConstraints = dialog.findViewById<ConstraintLayout>(R.id.leaveGroupConstraints)
-       // cardviewDeleteProfile.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
+        val leaveGroupConstraints =
+            dialog.findViewById<ConstraintLayout>(R.id.leaveGroupConstraints)
+        // cardviewDeleteProfile.layoutParams.width = (screenWidth!!.toDouble() / 1.1).toInt()
 
 
-        var newWidth=0
-        var newHeight=0
-        if(checkDeviceType()){
-            newWidth =  ConstraintLayout.LayoutParams.WRAP_CONTENT
-            newHeight =  ConstraintLayout.LayoutParams.WRAP_CONTENT
+        var newWidth = 0
+        var newHeight = 0
+        if (checkDeviceType()) {
+            newWidth = ConstraintLayout.LayoutParams.WRAP_CONTENT
+            newHeight = ConstraintLayout.LayoutParams.WRAP_CONTENT
 
-            Log.e("efmefkmefefef===",newWidth.toString())
-            Log.e("efmefkmefefef111===",newHeight.toString())
+            Log.e("efmefkmefefef===", newWidth.toString())
+            Log.e("efmefkmefefef111===", newHeight.toString())
             cardviewDeleteProfile.layoutParams.width = newWidth.toInt()
             cardviewDeleteProfile.layoutParams.height = newHeight.toInt()
-        }else {
+        } else {
             //    newWidth =  ConstraintLayout.LayoutParams.MATCH_PARENT
             newWidth = (screenWidth!!.toDouble() / 1).toInt()
             newHeight = ConstraintLayout.LayoutParams.WRAP_CONTENT
@@ -419,24 +442,23 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
             dialog.dismiss()
         }
 
-        if(checkDeviceType())
-        {
-            ivCrossOutsideLeaveGroup.visibility=View.VISIBLE
-            ivCross.visibility=View.GONE
-        }else
-        {
-            ivCrossOutsideLeaveGroup.visibility=View.GONE
-            ivCross.visibility=View.VISIBLE
+        if (checkDeviceType()) {
+            ivCrossOutsideLeaveGroup.visibility = View.VISIBLE
+            ivCross.visibility = View.GONE
+        } else {
+            ivCrossOutsideLeaveGroup.visibility = View.GONE
+            ivCross.visibility = View.VISIBLE
         }
 
         btnDelGroup.setOnClickListener {
             dialog.dismiss()
-            if(Constants.API_CALL_DEMO){
-            leaveGroupMethod(groupId.get().toString(),screenView)
-        }}
+            if (Constants.API_CALL_DEMO) {
+                leaveGroupMethod(groupId.get().toString(), screenView)
+            }
+        }
     }
 
-    private fun showDeleteGroupDialog(screenView:View) {
+    private fun showDeleteGroupDialog(screenView: View) {
         var dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.delete_group_popup)
@@ -454,7 +476,7 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
 
         btnDelGroup.setOnClickListener {
             dialog.dismiss()
-            if(Constants.API_CALL_DEMO) {
+            if (Constants.API_CALL_DEMO) {
                 deleteGroupMethod(groupId.get().toString(), screenView)
             }
         }
@@ -573,17 +595,16 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
         rvAllMedia.adapter = rvFilesAdapter
     }
 
-    fun deleteGroupMethod(groupId:String,screenView:View) {
+    fun deleteGroupMethod(groupId: String, screenView: View) {
 
         repository.makeCall(true,
             requestProcessor = object : ApiProcessor<Response<GroupDeleteResponse>> {
                 override fun onSuccess(success: Response<GroupDeleteResponse>) {
                     Log.e("Resposne_Dataaaa===", success.body().toString())
 
-                    if(checkDeviceType()){
-                    //    dismissDialogData.value = true
-                    }else
-                    {
+                    if (checkDeviceType()) {
+                        //    dismissDialogData.value = true
+                    } else {
                         if (screenView.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
                             screenView.findNavController().popBackStack()
                         }
@@ -595,26 +616,24 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
                 }
 
                 override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<GroupDeleteResponse> {
-                        return retrofitApi.deleteGroupAPI(userToken, groupId)
+                    return retrofitApi.deleteGroupAPI(userToken, groupId)
                 }
             })
     }
 
 
+    fun leaveGroupMethod(groupId: String, screenView: View) {
 
-    fun leaveGroupMethod(groupId:String,screenView:View) {
-
-        var jsonObject=JsonObject()
-        jsonObject.addProperty("team_id",groupId)
+        var jsonObject = JsonObject()
+        jsonObject.addProperty("team_id", groupId)
         repository.makeCall(true,
             requestProcessor = object : ApiProcessor<Response<JsonObject>> {
                 override fun onSuccess(success: Response<JsonObject>) {
                     Log.e("Resposne_Dataaaa===", success.body().toString())
 
-                    if(checkDeviceType()){
+                    if (checkDeviceType()) {
                         //    dismissDialogData.value = true
-                    }else
-                    {
+                    } else {
                         if (screenView.findNavController().currentDestination?.id == R.id.chatMessageFragment) {
                             screenView.findNavController().popBackStack()
                         }
@@ -631,12 +650,41 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
             })
     }
 
-    fun shareFilePopupMethod()
-    {
+    fun shareFilePopupMethod() {
         var dialog = Dialog(MainActivity.activity!!.get()!!)
         dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setContentView(R.layout.share_file_layout)
 
         dialog.show()
+    }
+
+    fun showTabletAttachmentDialog(screenView:View)
+    {
+        val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
+            .inflate(R.layout.chat_attachement_layout, null)
+        var newWidth = 0.0
+        var popUp: PopupWindow? = null
+        if (checkDeviceType()) {
+            popUp =
+                PopupWindow(mView,
+                    ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                    ConstraintLayout.LayoutParams.WRAP_CONTENT)
+            //    newWidth = SECOND_FRAME_WIDTH!! / 1.5
+        }
+
+        popUp!!.isTouchable = true
+        popUp.isFocusable = true
+        popUp.isOutsideTouchable = true
+        var imgAttachmentIconChatDemo=screenView.findViewById<AppCompatImageView>(R.id.imgAttachmentIconChatDemo)
+        var tvRecentFiles=mView.findViewById<AppCompatTextView>(R.id.tvRecentFiles)
+        val location = IntArray(2)
+        imgAttachmentIconChatDemo.getLocationOnScreen(location)
+        val x = location[0]
+        val y = location[1]
+        tvRecentFiles.visibility = View.GONE
+        popUp.showAsDropDown(screenView.findViewById(R.id.imgAttachmentIconChatDemo))
+      //  popUp.showAtLocation(mView, Gravity.TOP, 0, 0)
+        popUp.showAtLocation(imgAttachmentIconChatDemo, Gravity.NO_GRAVITY, x, y - popUp.getHeight());
+
     }
 }

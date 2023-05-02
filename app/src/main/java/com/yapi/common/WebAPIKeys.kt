@@ -5,7 +5,7 @@ object WebAPIKeys {
     const val BASEURL:String="http://192.168.1.113:3000/"
 
     //Live Server
-   // const val BASEURL:String="http://3.15.150.5:3000/"
+    // const val BASEURL:String="http://3.15.150.5:3000/"
     const val LOGIN_URL="user/sign-up"
     const val VERIFY_OTP_URL="user/verify-otp"
     const val USER_EDIT_PROFILE="user/edit-user"
@@ -22,4 +22,7 @@ object WebAPIKeys {
     const val DEACTIVATE_ACCOUNT="user/deactivate-account"
     const val TEAM_DETAIL_API="group/view-team-detail"
     const val LEAVE_GROUP_API="group/leave-group"
+    const val CREATE_WORKSPACE_API="workspace/create-workspace"
+    const val INVITE_TO_WORKSPACE_API="workspace/invite-to-workspace"
+    const val UPDATE_WORKSPACE_INVITE_API="workspace/update-workspace-invite"
 }

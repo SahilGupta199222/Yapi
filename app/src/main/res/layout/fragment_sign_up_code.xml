@@ -91,44 +91,45 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/txtTempTitleSignUpCode" />
+
                     <com.chaos.view.PinView
                         android:id="@+id/otp_view"
                         style="@style/PinWidget.PinView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_44sdp"
                         android:cursorVisible="false"
+                        android:digits="0123456789"
+                        android:elevation="0dp"
+                        android:focusable="true"
                         android:hint="------"
                         android:inputType="number"
-                        android:textColorHint="@color/darkGrey"
-                        android:focusable="true"
-                        android:layout_marginTop="@dimen/_44sdp"
-                        android:digits="0123456789"
                         android:itemBackground="@drawable/otp_background_box"
                         android:padding="0dp"
+                        android:text="@={vModel.otpValue}"
                         android:textColor="@color/darkGrey"
+                        android:textColorHint="@color/darkGrey"
                         android:textSize="@dimen/_12ssp"
-                        android:elevation="0dp"
                         app:hideLineWhenFilled="false"
                         app:itemCount="6"
-                        android:text="@={vModel.otpValue}"
                         app:itemHeight="@dimen/_42sdp"
                         app:itemRadius="@dimen/_6sdp"
                         app:itemSpacing="@dimen/_7sdp"
                         app:itemWidth="@dimen/_32sdp"
-                        app:lineColor="#F5F5F5"
-                        app:lineWidth="@dimen/_1sdp"
-                        app:viewType="rectangle"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/txtTempTitleDescriptionSignUpCode"
-                        />
+                        app:lineColor="#F5F5F5"
+                        app:lineWidth="@dimen/_1sdp"
+                        app:viewType="rectangle" />
+
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/txtErrorMessageTitle"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/error_margin_start"
                         android:fontFamily="@font/larsseit_regular"
                         android:text=""
-                        android:layout_marginStart="@dimen/error_margin_start"
                         android:textColor="@color/red"
                         android:textSize="@dimen/smallTextSize"
                         android:visibility="visible"
@@ -136,6 +137,44 @@
                         app:layout_constraintStart_toStartOf="@+id/otp_view"
                         app:layout_constraintTop_toBottomOf="@+id/otp_view" />
 
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintsResend"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="@+id/otp_view"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/txtErrorMessageTitle">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvEmailTimer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_1sdp"
+                            android:paddingStart="@dimen/_5sdp"
+                            android:paddingTop="@dimen/_5sdp"
+                            android:fontFamily="@font/larsseit_regular"
+                            android:paddingBottom="@dimen/_5sdp"
+                            android:text="@{vModel.timerCount}"
+                            android:textColor="@color/medium_grey_color"
+                            android:textSize="@dimen/normalTextSize"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/tvEmailResend" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvEmailResend"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="@dimen/_5sdp"
+                            android:paddingTop="@dimen/_5sdp"
+                            android:paddingBottom="@dimen/_5sdp"
+                            android:onClick="@{vModel::onClick}"
+                            android:text="@string/resend_text"
+                            android:fontFamily="@font/larsseit_regular"
+                            android:textColor="@color/blueColor"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:textSize="@dimen/normalTextSize"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.core.widget.NestedScrollView>
 
@@ -159,7 +198,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/topFiveMargin"
                 android:layout_marginBottom="@dimen/bottomMarggin"
-
                 android:fontFamily="@font/larsseit_regular"
                 android:gravity="center"
                 android:text="@string/cannot_find_code"

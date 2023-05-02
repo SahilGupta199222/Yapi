@@ -702,7 +702,6 @@
                         android:layout_marginEnd="@dimen/_18sdp"
                         android:layout_marginBottom="@dimen/_20sdp"
                         android:background="@null"
-
                         android:maxHeight="@dimen/_50sdp"
                         android:scrollbars="vertical"
                         android:textSize="@dimen/normalSmallTextSize"
@@ -806,6 +805,17 @@ android:id="@+id/tvCheckText"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/imgAttachmentIconChatDemo"
                         app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgTemplateIconChatDemo"
+                        android:layout_width="@dimen/iconSize"
+                        android:layout_height="@dimen/iconSize"
+                        android:layout_marginStart="@dimen/topMargin"
+                        android:src="@drawable/template_chat_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/imgMicIconChatDemo"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/imgDownArrowIconChatDemo"

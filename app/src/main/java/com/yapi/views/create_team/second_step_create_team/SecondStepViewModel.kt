@@ -7,6 +7,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import com.google.gson.JsonObject
 import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.*
@@ -42,10 +43,10 @@ val preferenceFile: PreferenceFile,@Named("token") val userToken:String) : ViewM
                 if (view.findNavController().currentDestination?.id == R.id.secondStepCreateTeam) {
                     if (workNameValue.get().toString().trim().isNotEmpty()) {
                         isPrivate=false
-                        fileImage= File("")
+                     //   fileImage= File("")
 
                         if(Constants.API_CALL_DEMO) {
-                            callCreateGroupAPIMethod(view)
+                            callCreateWorkspaceAPIMethod(view)
                         }
                         else
                         {
@@ -76,55 +77,35 @@ val preferenceFile: PreferenceFile,@Named("token") val userToken:String) : ViewM
         countFieldValue.set(s.length.toString() + "/50")
     }
 
-    fun callCreateGroupAPIMethod(view:View)
+    fun callCreateWorkspaceAPIMethod(view:View)
     {
-        val nameRequest: RequestBody =
-            RequestBody.Companion.create("text/plain".toMediaTypeOrNull(),
-                firstTeamName.toString())
-        val workingRequest: RequestBody = RequestBody.Companion.create("text/plain".toMediaTypeOrNull(), workNameValue.get().toString())
-        val descriptionRequest: RequestBody = RequestBody.Companion.create("text/plain".toMediaTypeOrNull(), "")
-
-        val isPrivateRequest: RequestBody = RequestBody.Companion.create("text/plain".toMediaTypeOrNull(),isPrivate.toString())
-        val quickJoinRequest: RequestBody = RequestBody.Companion.create("text/plain".toMediaTypeOrNull(), quickJoinTeam.toString())
-
-      //  val number = phoneNumberValue.get().toString().replace(" ","").toLong()
-
-       var imagePath = if (fileImage!!.absolutePath.isEmpty()) null else MultipartBody.Part.createFormData(
-            "ImagePath",
-            fileImage!!.name!!,
-            RequestBody.create("image/*".toMediaTypeOrNull(),fileImage!!.absolutePath))
-
-
-     /*   val buffer = Buffer()
-        buffer.writeLong(number)
-        val phoneNumberRequest: RequestBody = RequestBody.create(
-            "application/octet-stream".toMediaTypeOrNull(),
-            buffer.readByteString())*/
+        var jsonObject=JsonObject()
+        jsonObject.addProperty("workspace_name",firstTeamName.toString())
+        jsonObject.addProperty("working_on",workNameValue.get().toString())
+        jsonObject.addProperty("quick_join",quickJoinTeam.toString())
 
         repository.makeCall(true,
-            requestProcessor = object : ApiProcessor<Response<CreateTeamResponse>> {
-                override fun onSuccess(success: Response<CreateTeamResponse>) {
+            requestProcessor = object : ApiProcessor<Response<CreateWorkspaceResponse>> {
+                override fun onSuccess(success: Response<CreateWorkspaceResponse>) {
                     Log.e("Resposne_Dataaaa===", success.body().toString())
 
                     preferenceFile.saveBooleanValue(Constants.USER_PROFILE_CREATED,true)
                     errorData.value= SignInErrorData("",0)
 
+                    Log.e("WorkspaceId===",success.body()!!.data._id)
                     val bundle= Bundle()
                     bundle.putString("team_id", success.body()!!.data._id)
                     view.findNavController()
                         .navigate(R.id.action_secondStepCreateTeam_to_thirdStepCreateTeam,bundle)
 
-                    /*   var bundle= Bundle()
-                       bundle.putString("email",emailFieldValue.get())
-                       view.findNavController().navigate(R.id.action_signInFragment_to_signUpCodeFragment,bundle)*/
                 }
 
                 override fun onError(message: String) {
                     MainActivity.activity!!.get()!!.showMessage(message)
                 }
 
-                override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<CreateTeamResponse> {
-                    return retrofitApi.createTeamAPI(userToken,nameRequest, workingRequest,descriptionRequest,isPrivateRequest,imagePath,quickJoinRequest)
+                override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<CreateWorkspaceResponse> {
+                    return retrofitApi.createWorkspaceAPI(userToken,jsonObject)
                 }
             })
     }

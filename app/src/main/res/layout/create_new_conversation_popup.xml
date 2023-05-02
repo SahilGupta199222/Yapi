@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="mViewModel"
+            type="com.yapi.views.menu_screen.MenuViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CreateNewConversationsConstraints"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/_10sdp">
+
+        <ImageView
+            android:id="@+id/ivCrossOutsideConversation"
+            android:layout_width="@dimen/iconSize"
+            android:layout_height="@dimen/iconSize"
+            android:layout_gravity="end"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:padding="@dimen/_2sdp"
+            android:src="@drawable/ic_cross_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cardviewConversations"
+            app:tint="@color/white" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardviewConversations"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:background="@color/white"
+            android:elevation="@dimen/_5sdp"
+            app:cardBackgroundColor="#ffffff"
+            app:cardCornerRadius="@dimen/cardview_popup_back_radius"
+            app:cardElevation="@dimen/_5sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivCrossOutsideConversation">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/_15sdp"
+                    android:paddingBottom="@dimen/_15sdp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvConversationsTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/etHorizontalPadding"
+                        android:layout_marginEnd="@dimen/etHorizontalPadding"
+                        android:fontFamily="@font/larsseit_bold"
+                        android:text="@string/create_new_conversations"
+                        android:textColor="@color/darkGrey"
+                        android:textSize="@dimen/extraNormalTextSize"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_to_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/larsseit_bold"
+                        android:text="@string/to_text"
+                        android:textColor="@color/darkGrey"
+                        android:textSize="@dimen/extraNormalTextSize"
+                        app:layout_constraintStart_toStartOf="@id/tvConversationsTitle"
+                        app:layout_constraintTop_toBottomOf="@id/tvConversationsTitle" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constarintsEnterData"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        app:layout_constraintEnd_toEndOf="@id/tvConversationsTitle"
+                        app:layout_constraintStart_toStartOf="@+id/tvConversationsTitle"
+                        app:layout_constraintTop_toBottomOf="@id/tv_to_text">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/chipLayoutAddPeopleEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/topFiveMargin"
+                            android:background="@drawable/et_drawable"
+                            android:paddingStart="@dimen/_1sdp"
+                            android:paddingTop="@dimen/_1sdp"
+                            android:paddingEnd="@dimen/_1sdp"
+                            android:paddingBottom="@dimen/_1sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <com.google.android.material.chip.ChipGroup
+                                android:id="@+id/chipGroupAddPeopleEmail"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:textSize="@dimen/normalTextSize"
+                                app:chipSpacing="@dimen/_1sdp"
+                                app:chipSpacingVertical="@dimen/_minus10sdp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_chainStyle="spread_inside"></com.google.android.material.chip.ChipGroup>
+
+                            <androidx.appcompat.widget.AppCompatEditText
+                                android:id="@+id/etChipAddPeopleEmail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/et_drawable"
+                                android:backgroundTint="@color/information_profile_back_box"
+                                android:hint="@string/enter_email"
+                                android:paddingStart="@dimen/etHorizontalPadding"
+                                android:paddingTop="@dimen/etVerticalPadding"
+                                android:paddingEnd="@dimen/etHorizontalPadding"
+                                android:paddingBottom="@dimen/etVerticalPadding"
+                                android:textColor="@color/black"
+                                android:textColorHint="@color/darkLiteGrey"
+                                android:textSize="@dimen/normalTextSize"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/chipGroupAddPeopleEmail" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/txtErrorEmailAddPeople"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/error_margin_start"
+                            android:fontFamily="@font/larsseit_regular"
+                            android:text=""
+                            android:textColor="@color/red"
+                            android:textSize="@dimen/smallTextSize"
+                            android:visibility="visible"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/chipLayoutAddPeopleEmail"
+                            app:layout_constraintTop_toBottomOf="@+id/chipLayoutAddPeopleEmail" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/layoutAddPeopleAddPeopleEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/topFiveMargin"
+                            android:paddingStart="@dimen/etHorizontalPadding"
+                            android:paddingEnd="@dimen/etHorizontalPadding"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/txtErrorEmailAddPeople">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/txtUserNameAddPeopleEmail"
+                                android:layout_width="@dimen/_40sdp"
+                                android:layout_height="@dimen/_40sdp"
+                                android:background="@drawable/round_circle_blue"
+                                android:clipToOutline="true"
+                                android:gravity="center"
+                                android:text="p"
+                                android:textAllCaps="true"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_18ssp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/txtTempAddPeopleAddPeopleEmail"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/topMargin"
+                                android:layout_marginTop="@dimen/topFiveMargin"
+                                android:fontFamily="@font/larsseit_bold"
+                                android:text="Add People"
+                                android:textColor="@color/blueColor"
+                                android:textSize="@dimen/normalTextSize"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@+id/txtUserNameAddPeopleEmail"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/txtAddPeopleAddPeopleEmail"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/larsseit_medium"
+                                android:text="Damanpreet@gmail.com"
+                                android:textColor="@color/darkLiteGrey"
+                                android:textSize="@dimen/normalSmallTextSize"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/txtTempAddPeopleAddPeopleEmail"
+                                app:layout_constraintTop_toBottomOf="@+id/txtTempAddPeopleAddPeopleEmail" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constratintsEnterMessages"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/et_drawable"
+                        app:layout_constraintEnd_toEndOf="@id/tvConversationsTitle"
+                        app:layout_constraintStart_toStartOf="@id/tvConversationsTitle"
+                        app:layout_constraintTop_toBottomOf="@id/constarintsEnterData">
+
+                        <HorizontalScrollView
+                            android:id="@+id/layoutFontStylesOfEditTextDemoChat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_12sdp"
+                                android:layout_marginEnd="@dimen/startMainMargin"
+                                android:background="@color/transparent"
+                                android:paddingTop="@dimen/_8sdp"
+                                android:paddingBottom="@dimen/_8sdp">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/imgBoldTxtIconChatDemo"
+                                    android:layout_width="@dimen/iconSize"
+                                    android:layout_height="@dimen/iconSize"
+                                    android:src="@drawable/ic_baseline_format_bold_24"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/imgItalicTxtIconChatDemo"
+                                    android:layout_width="@dimen/iconSize"
+                                    android:layout_height="@dimen/iconSize"
+                                    android:layout_marginStart="@dimen/topMargin"
+                                    android:src="@drawable/info_chat_icon"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toEndOf="@id/imgBoldTxtIconChatDemo"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/imgUnderLineTxtIconChatDemo"
+                                    android:layout_width="@dimen/iconSize"
+                                    android:layout_height="@dimen/iconSize"
+                                    android:layout_marginStart="@dimen/topMargin"
+                                    android:src="@drawable/ic_baseline_format_underlined_24"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toEndOf="@id/imgItalicTxtIconChatDemo"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/imgStrikeTxtIconChatDemo"
+                                    android:layout_width="@dimen/iconSize"
+                                    android:layout_height="@dimen/iconSize"
+                                    android:layout_marginStart="@dimen/topMargin"
+                                    android:src="@drawable/ic_baseline_strikethrough_s_24"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toEndOf="@id/imgUnderLineTxtIconChatDemo"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/imgFormatListNumberTxtIconChatDemo"
+                                    android:layout_width="@dimen/iconSize"
+                                    android:layout_height="@dimen/iconSize"
+                                    android:layout_marginStart="@dimen/topMargin"
+                                    android:src="@drawable/ic_baseline_format_list_numbered_24"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toEndOf="@id/imgStrikeTxtIconChatDemo"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/imgFormatListBulletedTxtIconChatDemo"
+                                    android:layout_width="@dimen/iconSize"
+                                    android:layout_height="@dimen/iconSize"
+                                    android:layout_marginStart="@dimen/topMargin"
+                                    android:src="@drawable/ic_baseline_format_list_bulleted_24"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toEndOf="@id/imgFormatListNumberTxtIconChatDemo"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                                <!--
+                                           <androidx.appcompat.widget.AppCompatImageView
+                                               android:id="@+id/imgLeftAlignTxtIconChatDemo"
+                                               android:layout_width="@dimen/iconSize"
+                                               android:layout_height="@dimen/iconSize"
+                                               android:layout_marginStart="@dimen/topMargin"
+                                               android:visibility="gone"
+                                               android:src="@drawable/ic_baseline_format_align_left_24"
+                                               android:tint="@{mViewModel.leftAlignCStatus?@color/blueColor:@color/darkGrey}"
+                                               app:layout_constraintBottom_toBottomOf="parent"
+                                               app:layout_constraintStart_toEndOf="@id/imgFormatListBulletedTxtIconChatDemo"
+                                               app:layout_constraintTop_toTopOf="parent" />
+
+                                          <androidx.appcompat.widget.AppCompatImageView
+                                               android:id="@+id/imgCenterAlignTxtIconChatDemo"
+                                               android:layout_width="@dimen/iconSize"
+                                               android:layout_height="@dimen/iconSize"
+                                               android:layout_marginStart="@dimen/topMargin"
+                                               android:src="@drawable/ic_baseline_format_align_center_24"
+                                               android:visibility="gone"
+                                               android:tint="@{mViewModel.centerAlignCStatus?@color/blueColor:@color/darkGrey}"
+                                               app:layout_constraintBottom_toBottomOf="parent"
+                                               app:layout_constraintStart_toEndOf="@id/imgLeftAlignTxtIconChatDemo"
+                                               app:layout_constraintTop_toTopOf="parent" />
+
+                                           <androidx.appcompat.widget.AppCompatImageView
+                                               android:id="@+id/imgRightAlignTxtIconChatDemo"
+                                               android:layout_width="@dimen/iconSize"
+                                               android:layout_height="@dimen/iconSize"
+                                               android:layout_marginStart="@dimen/topMargin"
+                                               android:src="@drawable/ic_baseline_format_align_right_24"
+                                               android:visibility="gone"
+                                               android:tint="@{mViewModel.rightAlignCStatus?@color/blueColor:@color/darkGrey}"
+                                               app:layout_constraintBottom_toBottomOf="parent"
+                                               app:layout_constraintStart_toEndOf="@id/imgCenterAlignTxtIconChatDemo"
+                                               app:layout_constraintTop_toTopOf="parent" />-->
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </HorizontalScrollView>
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/etEnterNewMessage"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_80sdp"
+                            android:background="@android:color/transparent"
+                            android:fontFamily="@font/larsseit_regular"
+                            android:gravity="top"
+                            android:hint="@string/add_message_text"
+                            android:paddingStart="@dimen/_13ssp"
+                            android:paddingTop="@dimen/_8ssp"
+                            android:paddingEnd="@dimen/_13ssp"
+                            android:paddingBottom="@dimen/_13ssp"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/darkLiteGrey"
+                            android:textSize="@dimen/normalTextSize"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/layoutFontStylesOfEditTextDemoChat" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_13sdp"
+                        app:layout_constraintEnd_toEndOf="@id/tvConversationsTitle"
+                        app:layout_constraintTop_toBottomOf="@id/constratintsEnterMessages">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnCreateConversation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/et_drawable"
+                            android:backgroundTint="@color/blueColor"
+                            android:elevation="0dp"
+                            android:fontFamily="@font/larsseit_bold"
+                            android:stateListAnimator="@null"
+                            android:text="@string/create_text"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/normalTextSize"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnCancelConversation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:background="@drawable/round_lite_gray"
+                            android:backgroundTint="@color/liteGrey"
+                            android:elevation="0dp"
+                            android:fontFamily="@font/larsseit_bold"
+                            android:stateListAnimator="@null"
+                            android:text="@string/cancel_txt"
+                            android:textColor="@color/darkGrey"
+                            android:textSize="@dimen/normalTextSize"
+                            app:layout_constraintEnd_toStartOf="@id/btnCreateConversation"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

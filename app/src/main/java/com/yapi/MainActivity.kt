@@ -1,6 +1,7 @@
 package com.yapi
 
 import android.app.Activity
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -50,8 +51,14 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var testiing: A
 //    @Named("sahilDone")
+
     override fun onCreate(savedInstanceState: Bundle?) {
+      /*  val content = findViewById<View>(android.R.id.content)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            content.viewTreeObserver.addOnDrawListener { false }
+        }*/
         super.onCreate(savedInstanceState)
+
         Log.i("asdfjasdn","value a->${testing.a}b->${testing.d} e${testing===testiing}")
         dataBinding = ActivityMainBinding.inflate(LayoutInflater.from(this))
         setContentView(dataBinding.root)

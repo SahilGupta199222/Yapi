@@ -11,18 +11,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.google.gson.Gson
 import com.yapi.R
 import com.yapi.common.*
 import com.yapi.databinding.FragmentMenuBinding
 import com.yapi.pref.PreferenceFile
 import com.yapi.views.profile.ProfileFragment
 import com.yapi.views.search.SearchFragment
-import com.yapi.views.signup_code.LoginUserData
 import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class MenuFragment : Fragment() {
@@ -132,10 +129,9 @@ class MenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.e("gmwslgwrgwrg===", "grwegrweg")
     }
 
-    //for UI Intialization
+    //for UI Initialization
     private fun init() {
         setGroupDataMethod(0)
         setJobDataMethod(0)
@@ -152,6 +148,7 @@ class MenuFragment : Fragment() {
         clickListener()
     }
 
+    //For set All Click Listener
     private fun clickListener() {
 
         binding.apply {
@@ -372,6 +369,7 @@ class MenuFragment : Fragment() {
         }
     }
 
+    //For set Setting Adapter
     private fun setSettingListAdapter() {
         val list = ArrayList<PojoSettingList>()
         list.add(PojoSettingList("User Management", false))
@@ -413,6 +411,7 @@ class MenuFragment : Fragment() {
         binding.rvSettingsListMenu.adapter = adapterSettingsList
     }
 
+    //For set Customer Adapter
     private fun setCustomerListAdapter() {
         val list = ArrayList<PojoCustomerList>()
         val tempOnlineList = listOf(true, false)
@@ -420,11 +419,11 @@ class MenuFragment : Fragment() {
              list.add(PojoCustomerList("ab", "Customer${i + 34}", tempOnlineList.random(), i))
          }*/
 
-       /* list.add(PojoCustomerList("ab", "Omar Press", tempOnlineList.random(), 1))
+        list.add(PojoCustomerList("ab", "Omar Press", tempOnlineList.random(), 1))
         list.add(PojoCustomerList("ab", "Adison Septim...", tempOnlineList.random(), 1))
         list.add(PojoCustomerList("ab", "Talan George", tempOnlineList.random(), 0))
         list.add(PojoCustomerList("ab", "Madelyn Levin", tempOnlineList.random(), 1))
-        list.add(PojoCustomerList("ab", "Zaire Stanton", tempOnlineList.random(), 0))*/
+        list.add(PojoCustomerList("ab", "Zaire Stanton", tempOnlineList.random(), 0))
         list.add(PojoCustomerList("ab",
             requireActivity().getString(R.string.add_customers),
             tempOnlineList.random(),
@@ -454,6 +453,7 @@ class MenuFragment : Fragment() {
         binding.rvCustomersListMenu.adapter = adapterCustomerList
     }
 
+    //For set Conversation Menu
     private fun setConversationListAdapter() {
         val list = ArrayList<PojoCustomerList>()
         val tempOnlineList = listOf(true, false)
@@ -462,7 +462,6 @@ class MenuFragment : Fragment() {
          }*/
 
         list.add(PojoCustomerList("ab", "Daman", tempOnlineList.random(), 1))
-        list.add(PojoCustomerList("ab", "Sahil sir", tempOnlineList.random(), 1))
         list.add(PojoCustomerList("ab", "Amit sir", tempOnlineList.random(), 0))
         list.add(PojoCustomerList("ab", "Arundeep sir", tempOnlineList.random(), 1))
         list.add(PojoCustomerList("ab", "Khem sir", tempOnlineList.random(), 0))
@@ -484,17 +483,23 @@ class MenuFragment : Fragment() {
                         adapterConversationList?.getListt()?.get(i)?.selectedStatus = position == i
                     }
                     adapterConversationList?.notifyDataSetChanged()
+
+                    if (adapterConversationList?.getListt()?.get(position)!!.unSeenMsgCount == -1) {
+                        viewModel.showCreateConversationDialog()
+                    }else
+                    {
                     if (findNavController().currentDestination?.id == R.id.menuFragment) {
                         var bundle = Bundle()
                         bundle.putString("userType", userType)
                         findNavController().navigate(R.id.action_menuFragment_to_chatMessageFragment,
                             bundle)
                     }
-                }
+                }}
             }, Constants.CONVERSATIONS_KEY)
         binding.rvConversationListMenu.adapter = adapterConversationList
     }
 
+    //For set Lead Menu
     private fun rvLeadsListMenu() {
         val list = ArrayList<PojoCustomerList>()
         val tempOnlineList = listOf(true, false)
@@ -502,10 +507,10 @@ class MenuFragment : Fragment() {
              list.add(PojoCustomerList("ab", "Customer${i + 34}", tempOnlineList.random(), i))
          }*/
 
-     /*   list.add(PojoCustomerList("ab", "Bardi", tempOnlineList.random(), 1))
+        list.add(PojoCustomerList("ab", "Bardi", tempOnlineList.random(), 1))
         list.add(PojoCustomerList("ab", "Lincoln Rosser", tempOnlineList.random(), 2))
         list.add(PojoCustomerList("ab", "Jakob Vetrovs", tempOnlineList.random(), 2))
-        list.add(PojoCustomerList("ab", "John C Flood", tempOnlineList.random(), 0))*/
+        list.add(PojoCustomerList("ab", "John C Flood", tempOnlineList.random(), 0))
         list.add(PojoCustomerList("ab",
             requireActivity().getString(R.string.add_lead),
             tempOnlineList.random(),
@@ -536,6 +541,7 @@ class MenuFragment : Fragment() {
         binding.rvLeadsListMenu.adapter = adapterLeadsList
     }
 
+    //For Set Team Adapter
     private fun setTeamListAdapter() {
         val list = ArrayList<PojoCustomerList>()
         val tempOnlineList = listOf(true, false)
@@ -543,11 +549,11 @@ class MenuFragment : Fragment() {
                 list.add(PojoCustomerList("ab", "Customer${i + 34}", tempOnlineList.random(), i))
             }*/
 
-      /*  list.add(PojoCustomerList("ab", "Omar Press", tempOnlineList.random(), 1))
+        list.add(PojoCustomerList("ab", "Omar Press", tempOnlineList.random(), 1))
         list.add(PojoCustomerList("ab", "Adison Septim...", tempOnlineList.random(), 2))
         list.add(PojoCustomerList("ab", "Talan George", tempOnlineList.random(), 1))
         list.add(PojoCustomerList("ab", "Madelyn Levin", tempOnlineList.random(), 0))
-        list.add(PojoCustomerList("ab", "Zaire Stanton", tempOnlineList.random(), 0))*/
+        list.add(PojoCustomerList("ab", "Zaire Stanton", tempOnlineList.random(), 0))
         list.add(PojoCustomerList("ab",
             requireActivity().getString(R.string.add_teammates),
             tempOnlineList.random(),
@@ -578,6 +584,7 @@ class MenuFragment : Fragment() {
         binding.rvTeamsListMenu.adapter = adapterTeamList
     }
 
+    //For Group Adapter
     private fun setGroupListAdapter(groupsList: ArrayList<GroupData>) {
         val list = ArrayList<PojoGroupMembersList>()
         val list2 = ArrayList<GroupInvitaion>()
@@ -712,8 +719,8 @@ class MenuFragment : Fragment() {
          binding.rvJobsListMenu.adapter = adapterJobsList
      }*/
 
+    //For Next Screen Observer
     private fun addNextToScreenObserver() {
-
         viewModel.openProfileScreenData.observe(requireActivity(), Observer {
             var data = it as Boolean
             if (data) {
@@ -721,7 +728,6 @@ class MenuFragment : Fragment() {
                     .showNow(requireActivity().supportFragmentManager, "")
             }
         })
-
 
         viewModel.openSearchScreenData.observe(requireActivity(), Observer {
             var data = it as Boolean

@@ -111,6 +111,7 @@
         android:paddingStart="@dimen/_20sdp"
         android:letterSpacing="@dimen/text_letter_spacing"
         android:lineSpacingExtra="@dimen/line_spacing_extra"
+
         android:background="@drawable/btn_drawable_blue"
         android:fontFamily="@font/larsseit_bold"
         app:layout_constraintTop_toBottomOf="@+id/tvAdminManagers"

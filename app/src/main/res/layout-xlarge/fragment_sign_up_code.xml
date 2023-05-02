@@ -144,7 +144,44 @@
                 app:layout_constraintStart_toStartOf="@+id/otp_view"
                 app:layout_constraintTop_toBottomOf="@+id/otp_view" />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintsResend"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/otp_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtErrorMessageTitle">
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvEmailTimer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_1sdp"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:text="@{vModel.timerCount}"
+                    android:textColor="@color/medium_grey_color"
+                    android:textSize="@dimen/normalTextSize"
+                    android:fontFamily="@font/larsseit_regular"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tvEmailResend" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvEmailResend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:onClick="@{vModel::onClick}"
+                    android:text="@string/resend_text"
+                    android:fontFamily="@font/larsseit_regular"
+                    android:textColor="@color/blueColor"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textSize="@dimen/normalTextSize"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

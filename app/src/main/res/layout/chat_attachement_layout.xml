@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintsChatAttachment"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent">
@@ -70,7 +71,6 @@
                 android:fontFamily="@font/larsseit_medium"
                 android:letterSpacing="@dimen/text_letter_spacing"
                 android:lineSpacingExtra="@dimen/line_spacing_extra"
-
                 android:text="@string/attachments_text"
                 android:textColor="@color/medium_grey_color"
                 android:textSize="@dimen/normalTextSize"
@@ -108,7 +108,6 @@
                 android:textSize="@dimen/normalTextSize"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvUploadGoogleDrive" />
-
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvUploadFromComputer"

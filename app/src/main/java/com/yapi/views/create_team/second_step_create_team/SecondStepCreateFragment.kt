@@ -10,12 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.yapi.R
 import com.yapi.common.Constants
-import com.yapi.common.Repository
 import com.yapi.common.changeBackgroundForEditError
-import com.yapi.common.changeBackgroundForError
 import com.yapi.databinding.SecondStepCreateTeamBinding
 import com.yapi.pref.PreferenceFile
-import com.yapi.views.create_team.first_step_create_team.FirstStepViewModel
 import com.yapi.views.sign_in.SignInErrorData
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -45,11 +42,13 @@ class SecondStepCreateFragment : Fragment() {
         return dataBinding.root
     }
 
+    //For UI Initialization
     private fun initUI() {
         showErrorUIObserver()
     }
 
-    fun showErrorUIObserver()
+    //For show Error Observer
+    private fun showErrorUIObserver()
     {
         viewModel.errorData.observe(requireActivity(), Observer {
             var data=it as SignInErrorData

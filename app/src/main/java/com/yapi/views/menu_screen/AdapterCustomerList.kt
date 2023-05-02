@@ -59,9 +59,9 @@ val userType:String):RecyclerView.Adapter<AdapterCustomerList.MyViewHolder>() {
             holder.selectedLine.visibility = View.INVISIBLE
         }
         holder.itemView.setOnClickListener {
-            if(list[position].unSeenMsgCount!=-1) {
+          //  if(list[position].unSeenMsgCount!=-1) {
                 click.onSeletect(holder.adapterPosition,userType)
-            }
+           // }
         }
 
         if(list[position].unSeenMsgCount!=-1)

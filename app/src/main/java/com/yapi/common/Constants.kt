@@ -31,5 +31,5 @@ object Constants {
   var USER_PROFILE_CREATED="user_profile_created"
 
   var USER_ALL_DATA="user_all_data"
-  var API_CALL_DEMO:Boolean=false
+  var API_CALL_DEMO:Boolean=true
 }

@@ -181,17 +181,17 @@ class ThirdStepViewModel @Inject constructor(val preferenceFile: PreferenceFile,
         var emailArray = JsonArray()
         for (idx in 0 until list.size) {
             var jsonObject = JsonObject()
-            jsonObject.addProperty("user_email", list.get(idx).toString())
+            jsonObject.addProperty("email", list.get(idx).toString())
             jsonObject.addProperty("role", "employee")
             emailArray.add(jsonObject)
         }
 
-        finalJsonObject.addProperty("team_id", teamId.toString())
+        finalJsonObject.addProperty("workspace_id", teamId.toString())
         finalJsonObject.add("invitaions", emailArray)
         Log.e("Add_members_data_Input===", finalJsonObject.toString())
         repository.makeCall(true,
-            requestProcessor = object : ApiProcessor<Response<AddEmailResponse>> {
-                override fun onSuccess(success: Response<AddEmailResponse>) {
+            requestProcessor = object : ApiProcessor<Response<AddMemberResponse>> {
+                override fun onSuccess(success: Response<AddMemberResponse>) {
                     Log.e("Resposne_Dataaaa===", success.body().toString())
 
                     if (checkDeviceType())
@@ -207,8 +207,8 @@ class ThirdStepViewModel @Inject constructor(val preferenceFile: PreferenceFile,
                     MainActivity.activity!!.get()!!.showMessage(message)
                 }
 
-                override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<AddEmailResponse> {
-                    return retrofitApi.addTeamMembersAPI(userToken,finalJsonObject)
+                override suspend fun sendRequest(retrofitApi: RetrofitAPI): Response<AddMemberResponse> {
+                    return retrofitApi.inviteWorkspaceMembersAPI(userToken,finalJsonObject)
                 }
             })
     }

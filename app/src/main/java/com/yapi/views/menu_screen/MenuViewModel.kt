@@ -1,7 +1,10 @@
 package com.yapi.views.menu_screen
 
+import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,23 +12,24 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.databinding.ObservableBoolean
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
-import com.google.gson.JsonObject
+import com.google.android.material.chip.Chip
 import com.yapi.MainActivity
 import com.yapi.R
 import com.yapi.common.*
+import com.yapi.databinding.CreateNewConversationPopupBinding
 import com.yapi.pref.PreferenceFile
-import com.yapi.views.profile.ProfileData
-import com.yapi.views.profile.ProfileFragment
-import com.yapi.views.profile.ProfileResponse
-import com.yapi.views.search.SearchFragment
+import com.yapi.views.sign_in.SignInErrorData
 import com.yapi.views.signup_code.LoginUserData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Response
@@ -64,7 +68,7 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
             }
             }
 
-            com.yapi.R.id.imgProfilePicCustomerList,R.id.relNameValue -> {
+          R.id.imgProfilePicCustomerList,R.id.relNameValue -> {
                 val mView: View = LayoutInflater.from(MainActivity.activity!!.get())
                     .inflate(com.yapi.R.layout.menu_popup_options, null, false)
                 var newWidth=0.0
@@ -266,4 +270,203 @@ val repository: Repository,@Named("token") val userToken:String) : ViewModel() {
             })
         return groupData
     }
+
+
+    //For show Logout Popup
+     fun showCreateConversationDialog() {
+        var dialog = Dialog(MainActivity.activity!!.get()!!)
+        dialog.window!!.setBackgroundDrawableResource(android.R.color.transparent)
+        var createConversationBinding=CreateNewConversationPopupBinding.inflate(LayoutInflater.from(MainActivity.activity!!.get()))
+   //     dialog.setContentView(R.layout.create_new_conversation_popup)
+        dialog.setContentView(createConversationBinding.root)
+        dialog.show()
+
+        createConversationBinding.apply {
+        createConversationBinding.etChipAddPeopleEmail.doOnTextChanged { text, start, before, count ->
+            if (text?.isNotEmpty() == true) {
+                createConversationBinding.layoutAddPeopleAddPeopleEmail.visibility = View.VISIBLE
+                createConversationBinding.txtAddPeopleAddPeopleEmail.text = text
+                createConversationBinding.txtUserNameAddPeopleEmail.text = text[0].toString()
+            } else {
+                createConversationBinding.layoutAddPeopleAddPeopleEmail.visibility = View.GONE
+            }
+        }
+        createConversationBinding.layoutAddPeopleAddPeopleEmail.setOnClickListener {
+            if (etChipAddPeopleEmail.text?.isNotEmpty() == true) {
+                val msg = MainActivity.activity!!.get()!!.isEmailValid(etChipAddPeopleEmail.text.toString())
+                if (msg.isEmpty()) {
+                    var alreadyExistEmail=false
+                    if(chipGroupAddPeopleEmail?.childCount!!>0) {
+                        for (i in 0 until chipGroupAddPeopleEmail?.childCount!!) {
+                            val chipView = chipGroupAddPeopleEmail?.getChildAt(i) as Chip
+                         /*   val title = chipView.text.toString()
+                            if (title.equals(etChipAddPeopleEmail.text.toString())) {
+                                alreadyExistEmail = true
+                                break
+                            }*/
+                        }
+                    }
+                    txtErrorEmailAddPeople.setText("")
+                    addChipToGroup(MainActivity.activity!!.get()!!,
+                        etChipAddPeopleEmail.text.toString(),createConversationBinding)
+                    layoutAddPeopleAddPeopleEmail.visibility =
+                        View.GONE
+                    etChipAddPeopleEmail.text?.clear()
+                }else{
+                   var data= SignInErrorData("Please enter correct email", 1)
+
+                    emailErrorMethod(data,txtErrorEmailAddPeople,chipLayoutAddPeopleEmail,MainActivity.activity!!.get()!!)
+                    //errorData.value = SignInErrorData("Please enter correct email", 1)
+                }
+            }
+        }
+        }
+
+        var newWidth=0
+        var newHeight=0
+
+        if(checkDeviceType()){
+            newWidth = (screenWidth!!.toDouble() / 2).toInt()
+           // newWidth =  ConstraintLayout.LayoutParams.WRAP_CONTENT
+            newHeight =  ConstraintLayout.LayoutParams.WRAP_CONTENT
+
+            Log.e("efmefkmefefef===",newWidth.toString())
+            Log.e("efmefkmefefef111===",newHeight.toString())
+            createConversationBinding.cardviewConversations.layoutParams.width = newWidth.toInt()
+            createConversationBinding.cardviewConversations.layoutParams.height = newHeight.toInt()
+        }else {
+            //    newWidth =  ConstraintLayout.LayoutParams.MATCH_PARENT
+            newWidth = (screenWidth!!.toDouble() / 1).toInt()
+            newHeight = ConstraintLayout.LayoutParams.WRAP_CONTENT
+            createConversationBinding.CreateNewConversationsConstraints.layoutParams.width = newWidth.toInt()
+            createConversationBinding.CreateNewConversationsConstraints.layoutParams.height = newHeight.toInt()
+        }
+
+  /*      if(checkDeviceType()){
+            newWidth =  ConstraintLayout.LayoutParams.WRAP_CONTENT
+            newHeight =  ConstraintLayout.LayoutParams.WRAP_CONTENT
+
+            Log.e("efmefkmefefef===",newWidth.toString())
+            Log.e("efmefkmefefef111===",newHeight.toString())
+            createConversationBinding.cardviewLogoutProfile.layoutParams.width = newWidth.toInt()
+            createConversationBinding.cardviewLogoutProfile.layoutParams.height = newHeight.toInt()
+        }else {
+            //    newWidth =  ConstraintLayout.LayoutParams.MATCH_PARENT
+            newWidth = (screenWidth!!.toDouble() / 1).toInt()
+            newHeight = ConstraintLayout.LayoutParams.WRAP_CONTENT
+            logoutConstraints.layoutParams.width = newWidth.toInt()
+            logoutConstraints.layoutParams.height = newHeight.toInt()
+        }*/
+
+       /* var btnCancel=dialog.findViewById<AppCompatButton>(R.id.btnCancel)
+        var btnLogout=dialog.findViewById<AppCompatButton>(R.id.btnLogout)
+        var ivCrossLogout=dialog.findViewById<ImageView>(R.id.ivCrossLogout)
+*/
+        if(checkDeviceType())
+        {
+          //  ivCrossLogout.visibility=View.GONE
+            createConversationBinding.ivCrossOutsideConversation.visibility=View.VISIBLE
+        }else
+        {
+            createConversationBinding.ivCrossOutsideConversation.visibility=View.GONE
+        }
+
+        createConversationBinding.btnCreateConversation.setOnClickListener {
+            if(createConversationBinding.chipGroupAddPeopleEmail?.childCount==0)
+            {
+                var data= SignInErrorData("Please enter email", 1)
+                emailErrorMethod(data,createConversationBinding.txtErrorEmailAddPeople,createConversationBinding.chipLayoutAddPeopleEmail,MainActivity.activity!!.get()!!)
+            }else
+            {
+                dialog.dismiss()
+            }
+        }
+        createConversationBinding.btnCancelConversation.setOnClickListener {
+                dialog.dismiss()
+        }
+            createConversationBinding.ivCrossOutsideConversation.setOnClickListener {
+                dialog.dismiss()
+        }
+    }
+
+    fun addChipToGroup(context: Context, person: String,
+                       createConversationBinding: CreateNewConversationPopupBinding) {
+        val chip = Chip(context)
+        chip.text = person
+        chip.setTextColor(ContextCompat.getColor(context, R.color.blueColor))
+        chip.chipBackgroundColor =
+            ColorStateList.valueOf(ContextCompat.getColor(context, R.color.liteBlueForDrawable))
+        chip.chipCornerRadius = context.resources.getDimension(com.intuit.sdp.R.dimen._5sdp)
+        chip.isCloseIconVisible = true
+        chip.closeIcon =
+            ContextCompat.getDrawable(context, R.drawable.ic_cross_icon)
+        chip.closeIconSize=context.resources.getDimension(com.intuit.sdp.R.dimen._8sdp)
+        var paddingValue= context.resources.getDimension(com.intuit.sdp.R.dimen._5sdp).toInt()
+        chip.isCheckable = false
+        chip.closeIconTint =
+            ColorStateList.valueOf(ContextCompat.getColor(context, R.color.darkLiteGrey))
+        //.setTextSize(13f)
+        chip.setTextAppearanceResource(R.style.ChipTextStyle_Selected);
+        chip.setPadding(paddingValue,paddingValue,paddingValue,paddingValue)
+
+        createConversationBinding.chipGroupAddPeopleEmail.addView(chip as View)
+        chip.setOnCloseIconClickListener {
+            createConversationBinding.chipGroupAddPeopleEmail.removeView(chip as View)
+        }
+    }
+
+    fun emailErrorMethod(
+        data: SignInErrorData,
+        txtErrorEmailAddPeople: AppCompatTextView,
+        chipLayoutAddPeopleEmail: ConstraintLayout,
+        activity: Activity
+    )
+    {
+        if(data!=null && data.message!="")
+        {
+            txtErrorEmailAddPeople.setText(data.message)
+            changeBackgroundTintForError(chipLayoutAddPeopleEmail!!,activity.resources.getColor(
+                R.color.error_box_color),
+                activity.resources.getColor(R.color.error_border_color),-1)
+        }else
+        {
+            txtErrorEmailAddPeople.setText("")
+            //   binding.chipLayoutAddPeopleEmail!!.setbackg
+            changeBackgroundTintForError(chipLayoutAddPeopleEmail!!, activity.resources.getColor(
+                R.color.white),
+                activity.resources.getColor(R.color.liteGrey),activity.resources.getColor(R.color.information_profile_back_box))
+        }
+    }
+
+ /*   fun addChipToGroup(
+        context: Context,
+        person: String,
+        createConversationBinding: CreateNewConversationPopupBinding
+    ) {
+        val chip = ChipGroup(context)
+       // chip.text = person
+        var linearLayout=LinearLayout(MainActivity.activity!!.get())
+        linearLayout.orientation=LinearLayout.HORIZONTAL
+        var textView=TextView(MainActivity.activity!!.get())
+       // chip.setChipIconResource(R.drawable.demo_photo)
+        textView.setTextColor(ContextCompat.getColor(context, R.color.blueColor))
+        linearLayout.setBackgroundColor(MainActivity.activity!!.get()!!.resources.getColor(R.color.liteBlueForDrawable))
+       // chip.chipCornerRadius = context.resources.getDimension(com.intuit.sdp.R.dimen._5sdp)
+       // chip.isCloseIconVisible = true
+      //  chip.closeIcon = ContextCompat.getDrawable(context, R.drawable.ic_cross_icon)
+        //chip.closeIconSize=context.resources.getDimension(com.intuit.sdp.R.dimen._8sdp)
+        var paddingValue= context.resources.getDimension(com.intuit.sdp.R.dimen._5sdp).toInt()
+      //  chip.isCheckable = false
+        //chip.closeIconTint = ColorStateList.valueOf(ContextCompat.getColor(context, com.yapi.R.color.darkLiteGrey))
+        //.setTextSize(13f)
+      //  chip.setTextAppearanceResource(R.style.ChipTextStyle_Selected);
+        chip.setPadding(paddingValue,paddingValue,paddingValue,paddingValue)
+
+        linearLayout.addView(textView)
+        chip.addView(linearLayout)
+        createConversationBinding.chipGroupAddPeopleEmail.addView(chip as View)
+        *//*chip.setOnCloseIconClickListener {
+            createConversationBinding.chipGroupAddPeopleEmail.removeView(chip as View)
+        }*//*
+    }*/
 }

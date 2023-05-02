@@ -27,6 +27,7 @@ class SignUpCodeFragment : Fragment() {
         viewModel.email=email
         binding.txtTempTitleDescriptionSignUpCode.setText(Html.fromHtml(requireActivity().getString(R.string.code_first_part)+"<font color=\"#3d3d3d\"><b>"+email+"</b></font>"+requireActivity().getString(R.string.code_last_part)))
 
+        viewModel.timerStartMethod()
         return binding.root
     }
 

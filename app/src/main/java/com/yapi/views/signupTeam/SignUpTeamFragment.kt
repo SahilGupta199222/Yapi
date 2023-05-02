@@ -1,7 +1,6 @@
 package com.yapi.views.signupTeam
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,23 +12,19 @@ import com.yapi.R
 import com.yapi.common.Constants
 import com.yapi.databinding.SignupTeamLayoutBinding
 import com.yapi.pref.PreferenceFile
-import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-
 class SignUpTeamFragment : Fragment() {
 
     private lateinit var rvUsersAdapter: RVUsersAdapter
     private lateinit var dataBinding: SignupTeamLayoutBinding
     private val viewModelSignUpViewModel: SignupViewModel by viewModels()
 
-
     @Inject
     lateinit var preferenceFile: PreferenceFile
 
-    //private var vm:SignupViewModel by ViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,17 +36,19 @@ class SignUpTeamFragment : Fragment() {
         return dataBinding.root
     }
 
+    //For UI Initialization
     private fun initUI() {
         var loginEmail = preferenceFile.fetchStringValue("login_email")
         viewModelSignUpViewModel.loginEmailMessage.set(requireActivity().resources.getString(R.string.these_invitation_for) + "\n" + loginEmail)
 
         if (Constants.API_CALL_DEMO) {
-            addViewTeamInvitationObserver()
-            viewModelSignUpViewModel.fetchViewInvitationMethod()
+            addWorkspcaeInvitationObserver()
+            viewModelSignUpViewModel.fetchWorkspaceInvitationMethod()
         }
     }
 
-    private fun addViewTeamInvitationObserver() {
+    //For Workspace Invitation
+    private fun addWorkspcaeInvitationObserver() {
 
         viewModelSignUpViewModel.viewTemlListResponse.observe(requireActivity(), Observer {
             var dataResponse = it as ArrayList<ViewInvitationData>
@@ -59,7 +56,9 @@ class SignUpTeamFragment : Fragment() {
                 rvUsersAdapter =
                     RVUsersAdapter(requireActivity(), dataResponse, object : TeamClickListener {
                         override fun onClickJoin(position: Int, teamId: String) {
-                            acceptInvitationObserver(position, teamId)
+                            if (Constants.API_CALL_DEMO) {
+                                acceptInvitationObserver(position, teamId)
+                            }
                         }
                     })
                 dataBinding.rvUsers.layoutManager = LinearLayoutManager(requireActivity())
@@ -68,16 +67,14 @@ class SignUpTeamFragment : Fragment() {
         })
     }
 
+    //For Accept Invitation Observer
     fun acceptInvitationObserver(position: Int, teamId: String) {
         viewModelSignUpViewModel.acceptInvitationMethod(teamId)
             .observe(requireActivity(), Observer {
                 var data = it as Boolean
                 if (data) {
-                    Log.e("Success===", "Succeessss")
                     rvUsersAdapter.getInvitationList().removeAt(position)
                     rvUsersAdapter.notifyDataSetChanged()
-                } else {
-                    Log.e("Success===", "No Data")
                 }
             })
     }

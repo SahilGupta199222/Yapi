@@ -6,6 +6,8 @@ import com.yapi.views.add_people_email.CheckEmailResponse
 import com.yapi.views.chat.GroupDeleteResponse
 import com.yapi.views.chat.chatGroupInfo.ChatGroupInfoResponse
 import com.yapi.views.create_team.second_step_create_team.CreateTeamResponse
+import com.yapi.views.create_team.second_step_create_team.CreateWorkspaceResponse
+import com.yapi.views.create_team.third_step_create_team.AddMemberResponse
 import com.yapi.views.edit_profile.EditProfileResponse
 import com.yapi.views.menu_screen.GroupMenuResponse
 import com.yapi.views.profile.ProfileResponse
@@ -135,4 +137,20 @@ interface RetrofitAPI {
 
     @POST(WebAPIKeys.LEAVE_GROUP_API)
     suspend fun leaveGroupAPI(@Header("Authorization") token:String,@Body jsonObject: JsonObject): Response<JsonObject>
+
+
+
+    //Workspace API
+    @POST(WebAPIKeys.CREATE_WORKSPACE_API)
+    suspend fun createWorkspaceAPI(@Header ("Authorization") token:String,
+                             @Body jsonObject: JsonObject
+    ): Response<CreateWorkspaceResponse>
+
+    @POST(WebAPIKeys.INVITE_TO_WORKSPACE_API)
+    suspend fun inviteWorkspaceMembersAPI(@Header ("Authorization") token:String,@Body emailData:JsonObject): Response<AddMemberResponse>
+
+    @POST(WebAPIKeys.UPDATE_WORKSPACE_INVITE_API)
+    suspend fun acceptWorkspaceInvitationAPI(
+        @Header ("Authorization") token:String,
+        @Body jsonObject: JsonObject): Response<JsonObject>
 }
